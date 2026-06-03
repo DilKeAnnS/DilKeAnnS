@@ -93,8 +93,15 @@
             white-space: nowrap;
             cursor: pointer;
             transition: transform 0.2s;
+            animation: pulse 2s ease-in-out infinite;
         }
-
+        
+        @keyframes pluse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
         .ask-ai:hover {
             transform: scale(1.02);
         }
@@ -270,6 +277,9 @@
     </div>
     <div class="tagline">
         🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳
+    </div>
+    <div class="welcome" style="font-size: 13px; margin: 10px 0 0 0; opacity: 0.9;">
+        👋 Welcome back, Learner!
     </div>
     <div class="hero">
         <div class="search-bar">
