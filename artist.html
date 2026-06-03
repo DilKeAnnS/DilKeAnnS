@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Artist | Dil-Ke-AnnS Career Saathi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 45px; width: auto; border-radius: 12px; }
+        .logo h1 { font-size: 18px; font-weight: 700; }
+        .logo p { font-size: 9px; opacity: 0.85; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
+        .container { padding: 20px 16px; }
+        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
+        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
+        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .nav-item.active { background: #F0EADF; }
+        .nav-item.active span:last-child { color: #1B4D3E; }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="back-button" onclick="goBack()">← Back</div>
+    <div class="logo-section">
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div style="opacity:0;">🔔</div>
+    </div>
+    <div class="tagline">🎭 Artist & Performing Arts Careers</div>
+</div>
+<div class="container">
+    <div class="page-title">🎭 Artist (Performing & Fine Arts)</div>
+    <div class="section-card"><div class="section-title">🎭 Acting & Theatre</div><div class="list-item">• BA in Acting / Bachelor of Performing Arts (BPA) – Theatre, Film, TV</div><div class="list-item">• BA in Drama & Theatre Arts – Scriptwriting, Stagecraft, Direction</div><div class="list-item">• Diploma/Certificate in Acting – 3 to 12 months, practical training</div><div class="list-item">• Careers: Stage actor, Film/TV actor, Theatre director, Drama coach, Voice artist</div></div>
+    <div class="section-card"><div class="section-title">💃 Dance & Performing Arts</div><div class="list-item">• BPA / BA in Dance – Classical (Kathak, Bharatanatyam, Odissi), Contemporary, Bollywood, Hip-hop</div><div class="list-item">• Diploma in Classical / Contemporary Dance</div><div class="list-item">• Careers: Professional dancer, Choreographer, Dance teacher, Stage performer</div></div>
+    <div class="section-card"><div class="section-title">🎵 Music & Singing</div><div class="list-item">• BPA / BA in Music – Vocal, Instrumental (Guitar, Piano, Tabla, etc.)</div><div class="list-item">• Diploma in Singing / Music Performance, Music Technology / Sound Engineering</div><div class="list-item">• Certificates: Playback singing, Classical vocal, Instrument training</div><div class="list-item">• Careers: Singer, Music producer, Playback artist, Sound engineer, Music teacher</div></div>
+    <div class="section-card"><div class="section-title">🎬 Film & Media (Behind the Scenes)</div><div class="list-item">• B.Sc / BA in Film & Television Production</div><div class="list-item">• B.Des in Film & Video Communication, BFA in Cinema & Visual Arts</div><div class="list-item">• Diploma: Film editing, Cinematography, Screenwriting, Video production</div><div class="list-item">• Careers: Film director, Cinematographer, Editor, Screenwriter, Producer</div></div>
+    <div class="section-card"><div class="section-title">🎨 Bachelor of Performing Arts (BPA) – All-in-One</div><div class="list-item">• Combines acting, dance, music, theatre, stagecraft. Ideal for versatile performing artists.</div></div>
+    <div class="section-card"><div class="section-title">🎭 Fine Arts (BFA)</div><div class="list-item">• BFA Painting, Sculpture, Applied Arts, Printmaking, Digital Art</div><div class="list-item">• Careers: Fine artist, Illustrator, Art teacher, Gallery curator, Muralist</div></div>
+    <div class="section-card"><div class="section-title">📽️ Film Industry & OTT</div><div class="list-item">• Acting schools (FTII, NSD, Whistling Woods), Casting director training, Voice-over artist</div><div class="list-item">• YouTube/Instagram content creation, Short films, Web series</div></div>
+    <div class="section-card"><div class="section-title">🏛️ Top Institutes</div><div class="list-item">• NSD (National School of Drama), FTII (Film and Television Institute of India), Whistling Woods, L.S. Raheja School of Art, Kalakshetra, Prayag Sangeet Samiti</div></div>
+    <div class="section-card"><div class="section-title">💼 Career & Entrepreneurship</div><div class="list-item">• Freelance artist, Dance/Music academy owner, Event performer, Voice-over artist, YouTube creator, Theatre group founder</div><div class="list-item">• Portfolio and networking are key – practice, auditions, and workshops matter most.</div></div>
+</div>
+<div class="bottom-bar" id="bottomBar"></div>
+<script>
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" },{ name: "Search", icon: "🔍", link: "#" },{ name: "AnnS AI", icon: "🤖", link: "#" },{ name: "Alerts", icon: "🔔", link: "#" },{ name: "Profile", icon: "👤", link: "#" }];
+    function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); }); }); }
+    function goBack() { window.location.href = 'education.html'; }
+    renderBottomBar();
+</script>
+</body>
+</html>
