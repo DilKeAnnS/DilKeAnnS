@@ -426,19 +426,19 @@
 
 <script>
     const tiles = [
-        { name: "Education", icon: "🎓" },
-        { name: "Business", icon: "💼" },
-        { name: "Jobs & Exams", icon: "📝" },
-        { name: "Study Material", icon: "📚" },
-        { name: "Magazines", icon: "📰" },
-        { name: "E-newspapers", icon: "🗞️" },
-        { name: "Current Affairs", icon: "🌍" },
-        { name: "Mock test", icon: "✅" },
-        { name: "After 10th", icon: "📖" },
-        { name: "After 12th", icon: "🎯" },
-        { name: "Interesting", icon: "💡" },
-        { name: "Results", icon: "📊" },
-        { name: "App Forms", icon: "📋" }
+        { name: "Education", icon: "🎓", link: "education.html" },
+        { name: "Business", icon: "💼", link: "#" },
+        { name: "Jobs & Exams", icon: "📝", link: "#" },
+        { name: "Study Material", icon: "📚", link: "#" },
+        { name: "Magazines", icon: "📰", link: "#" },
+        { name: "E-newspapers", icon: "🗞️", link: "#" },
+        { name: "Current Affairs", icon: "🌍", link: "#" },
+        { name: "Mock test", icon: "✅", link: "#" },
+        { name: "After 10th", icon: "📖", link: "#" },
+        { name: "After 12th", icon: "🎯", link: "#" },
+        { name: "Interesting", icon: "💡", link: "#" },
+        { name: "Results", icon: "📊", link: "#" },
+        { name: "App Forms", icon: "📋", link: "#" }
     ];
 
     const bottomNav = [
@@ -452,14 +452,21 @@
     function renderTiles() {
         const grid = document.getElementById('tilesGrid');
         if (!grid) return;
-        grid.innerHTML = tiles.map(t => `
-            <div class="tile" data-name="${t.name}">
-                <span class="tile-icon">${t.icon}</span>
-                <div class="tile-name">${t.name}</div>
+        grid.innerHTML = tiles.map(tile => `
+            <div class="tile" data-name="${tile.name}" data-link="${tile.link}">
+                <span class="tile-icon">${tile.icon}</span>
+                <div class="tile-name">${tile.name}</div>
             </div>
         `).join('');
-        document.querySelectorAll('.tile').forEach(t => {
-            t.addEventListener('click', () => alert(`🚀 Opening: ${t.dataset.name}`));
+        document.querySelectorAll('.tile').forEach(tile => {
+            tile.addEventListener('click', () => {
+                const link = tile.getAttribute('data-link');
+                if (link && link !== '#') {
+                    window.location.href = link;
+                } else {
+                    alert(`🚀 Opening: ${tile.getAttribute('data-name')} (coming soon)`);
+                }
+            });
         });
     }
 
