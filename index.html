@@ -259,9 +259,10 @@
                 align-items: center;
                 min-height: 100vh;
                 padding: 24px;
+                margin: 0;
             }
 
-            /* Wrapper that looks like a phone */
+            /* The wrapper that looks like a phone */
             .phone-mock {
                 max-width: 380px;
                 width: 100%;
@@ -275,19 +276,14 @@
                 overflow-y: auto;
             }
 
-            /* Hide any stray body content outside the mock */
-            body > :not(.phone-mock) {
-                display: none;
-            }
-
-            /* Bottom bar becomes sticky inside the mock */
+            /* Make bottom bar sticky inside the mock */
             .bottom-bar {
                 position: sticky;
                 bottom: 0;
                 background: white;
             }
 
-            /* Optional: custom scrollbar */
+            /* Optional nice scrollbar */
             .phone-mock::-webkit-scrollbar {
                 width: 4px;
             }
