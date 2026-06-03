@@ -250,94 +250,179 @@
             border-radius: 50%;
         }
 
-        /* ========== DESKTOP: show as phone frame ========== */
+        /* ========== DESKTOP STYLES (normal website, not a phone frame) ========== */
         @media (min-width: 768px) {
             body {
-                background: #2c2c2c;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                padding: 24px;
-                margin: 0;
+                background: #F5F0E8;  /* normal background */
+                padding-bottom: 70px;
+                display: block;  /* remove flex centering */
             }
 
-            /* The wrapper that looks like a phone */
+            /* Remove any previous phone-mock styles */
             .phone-mock {
-                max-width: 380px;
-                width: 100%;
-                background: #F5F0E8;
-                border-radius: 48px;
-                box-shadow: 0 25px 45px rgba(0,0,0,0.3);
-                overflow: hidden;
-                position: relative;
-                height: auto;
-                max-height: 780px;
-                overflow-y: auto;
+                max-width: none;
+                border-radius: 0;
+                box-shadow: none;
+                overflow: visible;
             }
 
-            /* Make bottom bar sticky inside the mock */
+            /* Wider container */
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 30px 24px;
+            }
+
+            /* Larger section title */
+            .section-title {
+                font-size: 26px;
+                margin-bottom: 24px;
+            }
+
+            /* Tiles: 5 or 6 per row on desktop */
+            .tiles-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 20px;
+            }
+
+            .tile {
+                padding: 20px 12px;
+            }
+
+            .tile-icon {
+                font-size: 42px;
+                margin-bottom: 12px;
+            }
+
+            .tile-name {
+                font-size: 15px;
+            }
+
+            /* Header more spacious */
+            .header {
+                padding: 24px 5% 35px 5%;
+            }
+
+            .logo img {
+                height: 65px;
+            }
+
+            .logo h1 {
+                font-size: 28px;
+            }
+
+            .logo p {
+                font-size: 13px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            .welcome {
+                font-size: 16px;
+                padding: 8px 20px;
+            }
+
+            .search-bar {
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 12px 20px;
+            }
+
+            .search-bar input {
+                font-size: 18px;
+            }
+
+            .search-bar input::placeholder {
+                font-size: 16px;
+            }
+
+            .ask-ai {
+                padding: 10px 24px;
+                font-size: 16px;
+            }
+
+            .ask-ai img {
+                width: 24px;
+                height: 24px;
+            }
+
             .bottom-bar {
-                position: sticky;
-                bottom: 0;
-                background: white;
+                padding: 10px 5% 22px;
             }
 
-            /* Optional nice scrollbar */
-            .phone-mock::-webkit-scrollbar {
-                width: 4px;
+            .nav-item span:first-child {
+                font-size: 28px;
             }
-            .phone-mock::-webkit-scrollbar-track {
-                background: #e0dcd5;
+
+            .nav-item span:last-child {
+                font-size: 14px;
             }
-            .phone-mock::-webkit-scrollbar-thumb {
-                background: #1B4D3E;
-                border-radius: 10px;
+
+            .floating-ai {
+                width: 60px;
+                height: 60px;
+                bottom: 90px;
+                right: 24px;
+            }
+
+            .floating-ai img {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        /* For very large screens, keep tile count reasonable */
+        @media (min-width: 1400px) {
+            .tiles-grid {
+                grid-template-columns: repeat(7, 1fr);
+            }
+            .container {
+                max-width: 1400px;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="phone-mock">
-    <div class="header">
-        <div class="logo-section">
-            <div class="logo">
-                <img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'">
-                <div>
-                    <h1>दिल के अंश</h1>
-                    <p>Dil-Ke-AnnS Career Saathi</p>
-                </div>
+<div class="header">
+    <div class="logo-section">
+        <div class="logo">
+            <img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'">
+            <div>
+                <h1>दिल के अंश</h1>
+                <p>Dil-Ke-AnnS Career Saathi</p>
             </div>
-            <div class="notification-icon" id="alertBtn">🔔</div>
         </div>
-        <div style="text-align: center;">
-            <div class="tagline">🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳</div>
-            <div class="welcome" id="welcomeMsg">👋 Welcome back, Learner!</div>
-        </div>
-        <div class="hero">
-            <div class="search-bar">
-                <span>🔍</span>
-                <input type="text" id="searchInput" placeholder="Search courses, exams...">
-                <div class="ask-ai" id="askAiBtn">
-                    <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
-                    <span>Ask AI</span>
-                </div>
+        <div class="notification-icon" id="alertBtn">🔔</div>
+    </div>
+    <div style="text-align: center;">
+        <div class="tagline">🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳</div>
+        <div class="welcome" id="welcomeMsg">👋 Welcome back, Learner!</div>
+    </div>
+    <div class="hero">
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" id="searchInput" placeholder="Search courses, exams...">
+            <div class="ask-ai" id="askAiBtn">
+                <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
+                <span>Ask AI</span>
             </div>
         </div>
     </div>
-
-    <div class="container">
-        <div class="section-title">📚 Explore Career Pathways</div>
-        <div class="tiles-grid" id="tilesGrid"></div>
-    </div>
-
-    <div class="floating-ai" id="floatingAiBtn">
-        <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
-    </div>
-
-    <div class="bottom-bar" id="bottomBar"></div>
 </div>
+
+<div class="container">
+    <div class="section-title">📚 Explore Career Pathways</div>
+    <div class="tiles-grid" id="tilesGrid"></div>
+</div>
+
+<div class="floating-ai" id="floatingAiBtn">
+    <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
+</div>
+
+<div class="bottom-bar" id="bottomBar"></div>
 
 <script>
     const tiles = [
