@@ -5,396 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Dil-Ke-AnnS | Career Saathi</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Base styles (mobile first) */
-        body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #F5F0E8;
-            padding-bottom: 70px;
-            color: #2D2A24;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
-            padding: 16px 16px 22px 16px;
-            border-radius: 0 0 28px 28px;
-            color: white;
-        }
-
-        .logo-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo img {
-            height: 45px;
-            width: auto;
-            border-radius: 12px;
-        }
-
-        .logo h1 {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .logo p {
-            font-size: 9px;
-            opacity: 0.85;
-        }
-
-        .tagline {
-            font-size: 13px;
-            text-align: center;
-            margin: 8px 0 4px;
-        }
-
-        .welcome {
-            background: rgba(255,255,255,0.12);
-            padding: 5px 12px;
-            border-radius: 40px;
-            font-size: 12px;
-            display: inline-block;
-            width: auto;
-        }
-
-        .notification-icon {
-            font-size: 22px;
-            background: rgba(255,255,255,0.15);
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        /* Search */
-        .hero {
-            margin-top: 12px;
-        }
-
-        .search-bar {
-            background: white;
-            border-radius: 50px;
-            padding: 8px 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .search-bar span:first-child {
-            font-size: 18px;
-            color: #64748B;
-        }
-
-        .search-bar input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 14px;
-            background: transparent;
-        }
-
-        .search-bar input::placeholder {
-            font-size: 12px;
-            color: #94A3B8;
-        }
-
-        .ask-ai {
-            background: #E67E22;
-            padding: 6px 12px;
-            border-radius: 40px;
-            font-size: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: white;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .ask-ai img {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-        }
-
-        /* Main content */
-        .container {
-            padding: 18px 16px;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 14px;
-            border-left: 4px solid #E67E22;
-            padding-left: 12px;
-        }
-
-        /* Tiles: 3 per row on mobile */
-        .tiles-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .tile {
-            background: white;
-            border-radius: 16px;
-            padding: 12px 4px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-            border: 1px solid #E8E2D9;
-            transition: transform 0.1s ease;
-        }
-
-        .tile:active {
-            transform: scale(0.97);
-        }
-
-        .tile-icon {
-            font-size: 28px;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .tile-name {
-            font-size: 11px;
-            font-weight: 600;
-            color: #1a1a2e;
-        }
-
-        /* Bottom bar */
-        .bottom-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 6px 12px 18px;
-            border-top: 1px solid #E8E2D9;
-            z-index: 100;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            cursor: pointer;
-            padding: 4px 10px;
-            border-radius: 30px;
-        }
-
-        .nav-item span:first-child {
-            font-size: 22px;
-        }
-
-        .nav-item span:last-child {
-            font-size: 10px;
-            font-weight: 500;
-            color: #64748B;
-        }
-
-        .nav-item.active {
-            background: #F0EADF;
-        }
-
-        .nav-item.active span:last-child {
-            color: #1B4D3E;
-            font-weight: 600;
-        }
-
-        /* Floating AI */
-        .floating-ai {
-            position: fixed;
-            bottom: 75px;
-            right: 14px;
-            background: white;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-            cursor: pointer;
-            z-index: 99;
-            border: 2px solid #E67E22;
-        }
-
-        .floating-ai img {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-        }
-
-        /* ========== DESKTOP STYLES (normal website, not a phone frame) ========== */
-        @media (min-width: 768px) {
-            body {
-                background: #F5F0E8;  /* normal background */
-                padding-bottom: 70px;
-                display: block;  /* remove flex centering */
-            }
-
-            /* Remove any previous phone-mock styles */
-            .phone-mock {
-                max-width: none;
-                border-radius: 0;
-                box-shadow: none;
-                overflow: visible;
-            }
-
-            /* Wider container */
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 30px 24px;
-            }
-
-            /* Larger section title */
-            .section-title {
-                font-size: 26px;
-                margin-bottom: 24px;
-            }
-
-            /* Tiles: 5 or 6 per row on desktop */
-            .tiles-grid {
-                grid-template-columns: repeat(6, 1fr);
-                gap: 20px;
-            }
-
-            .tile {
-                padding: 20px 12px;
-            }
-
-            .tile-icon {
-                font-size: 42px;
-                margin-bottom: 12px;
-            }
-
-            .tile-name {
-                font-size: 15px;
-            }
-
-            /* Header more spacious */
-            .header {
-                padding: 24px 5% 35px 5%;
-            }
-
-            .logo img {
-                height: 65px;
-            }
-
-            .logo h1 {
-                font-size: 28px;
-            }
-
-            .logo p {
-                font-size: 13px;
-            }
-
-            .tagline {
-                font-size: 18px;
-            }
-
-            .welcome {
-                font-size: 16px;
-                padding: 8px 20px;
-            }
-
-            .search-bar {
-                max-width: 700px;
-                margin: 0 auto;
-                padding: 12px 20px;
-            }
-
-            .search-bar input {
-                font-size: 18px;
-            }
-
-            .search-bar input::placeholder {
-                font-size: 16px;
-            }
-
-            .ask-ai {
-                padding: 10px 24px;
-                font-size: 16px;
-            }
-
-            .ask-ai img {
-                width: 24px;
-                height: 24px;
-            }
-
-            .bottom-bar {
-                padding: 10px 5% 22px;
-            }
-
-            .nav-item span:first-child {
-                font-size: 28px;
-            }
-
-            .nav-item span:last-child {
-                font-size: 14px;
-            }
-
-            .floating-ai {
-                width: 60px;
-                height: 60px;
-                bottom: 90px;
-                right: 24px;
-            }
-
-            .floating-ai img {
-                width: 48px;
-                height: 48px;
-            }
-        }
-
-        /* For very large screens, keep tile count reasonable */
-        @media (min-width: 1400px) {
-            .tiles-grid {
-                grid-template-columns: repeat(7, 1fr);
-            }
-            .container {
-                max-width: 1400px;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 45px; width: auto; border-radius: 12px; }
+        .logo h1 { font-size: 18px; font-weight: 700; }
+        .logo p { font-size: 9px; opacity: 0.85; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
+        .welcome { background: rgba(255,255,255,0.12); padding: 5px 12px; border-radius: 40px; font-size: 12px; display: inline-block; width: auto; }
+        .notification-icon { font-size: 22px; background: rgba(255,255,255,0.15); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .hero { margin-top: 12px; }
+        .search-bar { background: white; border-radius: 50px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; }
+        .search-bar span:first-child { font-size: 18px; color: #64748B; }
+        .search-bar input { flex: 1; border: none; outline: none; font-size: 14px; background: transparent; }
+        .search-bar input::placeholder { font-size: 12px; color: #94A3B8; }
+        .ask-ai { background: #E67E22; padding: 6px 12px; border-radius: 40px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 5px; color: white; cursor: pointer; white-space: nowrap; }
+        .ask-ai img { width: 18px; height: 18px; border-radius: 50%; }
+        .container { padding: 18px 16px; }
+        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 14px; border-left: 4px solid #E67E22; padding-left: 12px; }
+        .tiles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+        .tile { background: white; border-radius: 16px; padding: 12px 4px; text-align: center; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; transition: transform 0.1s ease; }
+        .tile:active { transform: scale(0.97); }
+        .tile-icon { font-size: 28px; margin-bottom: 6px; display: block; }
+        .tile-name { font-size: 11px; font-weight: 600; color: #1a1a2e; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .nav-item.active { background: #F0EADF; }
+        .nav-item.active span:last-child { color: #1B4D3E; }
+        .floating-ai { position: fixed; bottom: 75px; right: 14px; background: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.15); cursor: pointer; z-index: 99; border: 2px solid #E67E22; }
+        .floating-ai img { width: 36px; height: 36px; border-radius: 50%; }
+        @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tiles-grid { grid-template-columns: repeat(6, 1fr); gap: 20px; } .tile { padding: 20px 12px; } .tile-icon { font-size: 42px; } .tile-name { font-size: 14px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+        @media (max-width: 480px) { .tile-name { font-size: 10px; } .tile-icon { font-size: 26px; } .ask-ai span { display: none; } .ask-ai { padding: 6px 10px; } }
     </style>
 </head>
 <body>
-
 <div class="header">
     <div class="logo-section">
-        <div class="logo">
-            <img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'">
-            <div>
-                <h1>दिल के अंश</h1>
-                <p>Dil-Ke-AnnS Career Saathi</p>
-            </div>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'"><div><h1>दिल के अंश</h1><p>Dil-Ke-AnnS Career Saathi</p></div></div>
         <div class="notification-icon" id="alertBtn">🔔</div>
     </div>
     <div style="text-align: center;">
@@ -405,117 +56,77 @@
         <div class="search-bar">
             <span>🔍</span>
             <input type="text" id="searchInput" placeholder="Search courses, exams...">
-            <div class="ask-ai" id="askAiBtn">
-                <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
-                <span>Ask AI</span>
-            </div>
+            <div class="ask-ai" id="askAiBtn"><img src="AnnS%20AI%20tool%20logo.png" alt="AI"><span>Ask AI</span></div>
         </div>
     </div>
 </div>
-
 <div class="container">
     <div class="section-title">📚 Explore Career Pathways</div>
     <div class="tiles-grid" id="tilesGrid"></div>
 </div>
-
-<div class="floating-ai" id="floatingAiBtn">
-    <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
-</div>
-
+<div class="floating-ai" id="floatingAiBtn"><img src="AnnS%20AI%20tool%20logo.png" alt="AI"></div>
 <div class="bottom-bar" id="bottomBar"></div>
-
 <script>
     const tiles = [
         { name: "Education", icon: "🎓", link: "education.html" },
-        { name: "Business", icon: "💼", link: "#" },
+        { name: "Business", icon: "💼", link: "business.html" },
         { name: "Jobs & Exams", icon: "📝", link: "#" },
         { name: "Study Material", icon: "📚", link: "#" },
         { name: "Magazines", icon: "📰", link: "#" },
         { name: "E-newspapers", icon: "🗞️", link: "#" },
         { name: "Current Affairs", icon: "🌍", link: "#" },
         { name: "Mock test", icon: "✅", link: "#" },
-        { name: "After 10th", icon: "📖", link: "#" },
-        { name: "After 12th", icon: "🎯", link: "#" },
+        { name: "After 10th", icon: "📖", link: "after_10th.html" },
+        { name: "After 12th", icon: "🎯", link: "after_12th.html" },
         { name: "Interesting", icon: "💡", link: "#" },
         { name: "Results", icon: "📊", link: "#" },
         { name: "App Forms", icon: "📋", link: "#" }
     ];
-
     const bottomNav = [
-        { name: "Home", icon: "🏠", active: true },
-        { name: "Search", icon: "🔍", active: false },
-        { name: "AnnS AI", icon: "🤖", active: false },
-        { name: "Alerts", icon: "🔔", active: false },
-        { name: "Profile", icon: "👤", active: false }
+        { name: "Home", icon: "🏠", link: "index.html" },
+        { name: "Search", icon: "🔍", link: "#" },
+        { name: "AnnS AI", icon: "🤖", link: "#" },
+        { name: "Alerts", icon: "🔔", link: "#" },
+        { name: "Profile", icon: "👤", link: "#" }
     ];
-
     function renderTiles() {
         const grid = document.getElementById('tilesGrid');
         if (!grid) return;
-        grid.innerHTML = tiles.map(tile => `
-            <div class="tile" data-name="${tile.name}" data-link="${tile.link}">
-                <span class="tile-icon">${tile.icon}</span>
-                <div class="tile-name">${tile.name}</div>
-            </div>
-        `).join('');
+        grid.innerHTML = tiles.map(tile => `<div class="tile" data-link="${tile.link}"><span class="tile-icon">${tile.icon}</span><div class="tile-name">${tile.name}</div></div>`).join('');
         document.querySelectorAll('.tile').forEach(tile => {
             tile.addEventListener('click', () => {
                 const link = tile.getAttribute('data-link');
-                if (link && link !== '#') {
-                    window.location.href = link;
-                } else {
-                    alert(`🚀 Opening: ${tile.getAttribute('data-name')} (coming soon)`);
-                }
+                if (link && link !== '#') window.location.href = link;
+                else alert(`🚀 ${tile.querySelector('.tile-name').innerText} section coming soon!`);
             });
         });
     }
-
     function renderBottomBar() {
         const bar = document.getElementById('bottomBar');
         if (!bar) return;
-        bar.innerHTML = bottomNav.map(item => `
-            <div class="nav-item ${item.active ? 'active' : ''}" data-nav="${item.name}">
-                <span>${item.icon}</span>
-                <span>${item.name}</span>
-            </div>
-        `).join('');
+        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
         document.querySelectorAll('.nav-item').forEach(nav => {
-            nav.addEventListener('click', function() {
-                const name = this.dataset.nav;
-                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                this.classList.add('active');
-                if (name === 'Home') window.scrollTo({ top: 0, behavior: 'smooth' });
-                else if (name === 'Search') document.getElementById('searchInput')?.focus();
-                else alert(`📱 ${name} section coming soon!`);
+            nav.addEventListener('click', () => {
+                const link = nav.getAttribute('data-link');
+                if (link && link !== '#') window.location.href = link;
+                else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`);
             });
         });
     }
-
     function setupSearch() {
         const input = document.getElementById('searchInput');
-        if (input) {
-            input.addEventListener('keypress', e => {
-                if (e.key === 'Enter') {
-                    const q = e.target.value.trim();
-                    alert(q ? `🔍 Searching: "${q}"` : 'Type something to search');
-                }
-            });
-        }
+        if (input) input.addEventListener('keypress', e => { if (e.key === 'Enter') alert(e.target.value.trim() ? `🔍 Searching: "${e.target.value.trim()}"` : 'Type something to search'); });
     }
-
     function setupAI() {
-        const ask = document.getElementById('askAiBtn');
-        const floating = document.getElementById('floatingAiBtn');
+        const ask = document.getElementById('askAiBtn'), floating = document.getElementById('floatingAiBtn');
         const open = () => alert('🤖 AnnS AI Mentor\n• Doubt Solver\n• Career Mentor\n• Exam Planner');
         if (ask) ask.addEventListener('click', open);
         if (floating) floating.addEventListener('click', open);
     }
-
     function setupNotify() {
         const btn = document.getElementById('alertBtn');
         if (btn) btn.addEventListener('click', () => alert('🔔 Alerts: Exams, Jobs, Schemes, Updates'));
     }
-
     function setWelcome() {
         const h = new Date().getHours();
         const el = document.getElementById('welcomeMsg');
@@ -524,13 +135,7 @@
             el.innerHTML = `👋 ${msg}`;
         }
     }
-
-    renderTiles();
-    renderBottomBar();
-    setupSearch();
-    setupAI();
-    setupNotify();
-    setWelcome();
+    renderTiles(); renderBottomBar(); setupSearch(); setupAI(); setupNotify(); setWelcome();
 </script>
 </body>
 </html>
