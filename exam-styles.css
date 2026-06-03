@@ -1,0 +1,174 @@
+/* exam-styles.css - Styling for exam updates module */
+
+.exam-section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1B4D3E;
+    border-left: 5px solid #E67E22;
+    padding-left: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.exam-section-title .refresh-note {
+    font-size: 11px;
+    font-weight: normal;
+    color: #64748B;
+    background: #F0EADF;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.exam-source-card {
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #E8E2D9;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.exam-source-header {
+    background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
+    padding: 14px 18px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.source-icon {
+    font-size: 22px;
+}
+
+.source-name {
+    font-weight: 700;
+    font-size: 16px;
+    flex: 1;
+}
+
+.update-count {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 40px;
+    font-size: 12px;
+}
+
+.exam-list {
+    padding: 8px 0;
+}
+
+.exam-item {
+    padding: 14px 18px;
+    border-bottom: 1px solid #F0EADF;
+    transition: background 0.2s;
+}
+
+.exam-item:hover {
+    background: #F8F4EF;
+}
+
+.exam-title a {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a2e;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.exam-title a:hover {
+    color: #E67E22;
+    text-decoration: underline;
+}
+
+.exam-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.exam-date {
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.exam-link {
+    color: #E67E22;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.exam-link:hover {
+    text-decoration: underline;
+}
+
+/* Last date & cutoff section */
+.exam-details-grid {
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    margin-top: 20px;
+    border: 1px solid #E8E2D9;
+}
+
+.exam-details-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1B4D3E;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cutoff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.cutoff-table th, .cutoff-table td {
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid #E8E2D9;
+}
+
+.cutoff-table th {
+    background: #F0EADF;
+    font-weight: 700;
+    color: #1B4D3E;
+}
+
+.cutoff-note {
+    font-size: 12px;
+    color: #64748B;
+    margin-top: 12px;
+    font-style: italic;
+}
+
+@media (max-width: 480px) {
+    .exam-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cutoff-table {
+        font-size: 11px;
+    }
+    .cutoff-table th, .cutoff-table td {
+        padding: 6px 4px;
+    }
+}
