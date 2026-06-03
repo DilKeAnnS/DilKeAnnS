@@ -1,417 +1,310 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Dil-Ke-AnnS | Career Saathi</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #F8FAFC;
-            padding-bottom: 70px;
-            color: #1E293B;
-            font-size: 16px;
-        }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        background: #F5F0E8;  /* Warm off-white - comfortable for eyes */
+        padding-bottom: 80px;
+        color: #2D2A24;
+        font-size: 18px;
+        line-height: 1.5;
+    }
 
-        .header {
-            background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
-            padding: 20px 16px 40px 16px;
-            border-radius: 0 0 24px 24px;
-            color: white;
-        }
+    /* Header */
+    .header {
+        background: #1B4D3E;  /* Dark green - calm, natural */
+        padding: 20px 20px 35px 20px;
+        border-radius: 0 0 30px 30px;
+        color: white;
+    }
 
-        .logo-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
+    .logo-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
 
-        .logo h1 {
-            font-size: 24px;
-            font-weight: bold;
-        }
+    .logo h1 {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
 
-        .logo p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
+    .logo p {
+        font-size: 14px;
+        opacity: 0.85;
+        margin-top: 4px;
+    }
 
-        .tagline {
-            font-size: 18px;
-            opacity: 0.95;
-            margin-top: 8px;
-            font-weight: 500;
-        }
+    .tagline {
+        font-size: 18px;
+        opacity: 0.95;
+        margin: 12px 0 8px 0;
+        font-weight: 500;
+        text-align: center;
+    }
 
-        .notification-icon {
-            font-size: 24px;
-            cursor: pointer;
-        }
+    .notification-icon {
+        font-size: 28px;
+        cursor: pointer;
+        background: rgba(255,255,255,0.2);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .hero {
-            margin-top: 8px;
-        }
+    /* Welcome message */
+    .welcome {
+        background: rgba(255,255,255,0.15);
+        padding: 8px 16px;
+        border-radius: 40px;
+        font-size: 16px;
+        display: inline-block;
+        margin: 8px 0;
+        text-align: center;
+        width: 100%;
+    }
 
-        .search-bar {
-            background: white;
-            border-radius: 50px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
+    /* Search Section */
+    .hero {
+        margin-top: 12px;
+    }
 
-        .search-bar span:first-child {
-            font-size: 20px;
-            color: #64748B;
-        }
+    .search-bar {
+        background: white;
+        border-radius: 60px;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
 
-        .search-bar input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 18px;
-            background: transparent;
-        }
+    .search-bar span:first-child {
+        font-size: 24px;
+        color: #64748B;
+    }
 
-        .search-bar input::placeholder {
-            color: #94A3B8;
-            font-size: 16px
-        }
+    .search-bar input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 18px;
+        background: transparent;
+        padding: 8px 0;
+    }
 
-        .ask-ai {
-            background: #10B981;
-            padding: 10px 18px;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 600;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: transform 0.2s;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pluse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-        
-        .ask-ai:hover {
-            transform: scale(1.02);
-        }
+    .search-bar input::placeholder {
+        color: #94A3B8;
+        font-size: 16px;
+    }
 
-        .container {
-            padding: 20px 16px;
-        }
+    .ask-ai {
+        background: #E67E22;  /* Warm orange - attention grabbing */
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 700;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: white;
+        animation: pulse 2s ease-in-out infinite;
+    }
 
-        .section-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #1E293B;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .ask-ai:hover {
+        transform: scale(1.02);
+        background: #D35400;
+    }
 
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
+
+    /* Main Container */
+    .container {
+        padding: 25px 16px 20px 16px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #2D2A24;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Tiles Grid */
+    .tiles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 30px;
+    }
+
+    .tile {
+        background: white;
+        border-radius: 20px;
+        padding: 18px 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        border: 1px solid #E8E2D9;
+    }
+
+    .tile:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(27, 77, 62, 0.15);
+        border-color: #1B4D3E;
+    }
+
+    .tile-icon {
+        font-size: 38px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .tile-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #2D2A24;
+        line-height: 1.3;
+    }
+
+    /* Bottom Bar */
+    .bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        padding: 12px 16px 22px;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+        border-top: 1px solid #E8E2D9;
+        z-index: 100;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+        padding: 8px 16px;
+        border-radius: 50px;
+    }
+
+    .nav-item span:first-child {
+        font-size: 28px;
+    }
+
+    .nav-item span:last-child {
+        font-size: 13px;
+        font-weight: 600;
+        color: #64748B;
+    }
+
+    .nav-item.active {
+        background: #F0EADF;
+    }
+
+    .nav-item.active span:last-child {
+        color: #1B4D3E;
+        font-weight: 700;
+    }
+
+    /* Floating AI Button */
+    .floating-ai {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        background: white;
+        width: 64px;
+        height: 64px;
+        border-radius: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        cursor: pointer;
+        z-index: 99;
+        transition: transform 0.2s;
+        border: 2px solid #E67E22;
+    }
+
+    .floating-ai:hover {
+        transform: scale(1.05);
+    }
+
+    .floating-ai img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    /* Tablet and Desktop */
+    @media (min-width: 768px) {
         .tiles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
-
-        .tile {
-            background: white;
-            border-radius: 18px;
-            padding: 16px 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #E2E8F0;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
-
-        .tile:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
-            border-color: #2563EB;
+        .tile-name {
+            font-size: 16px;
         }
+        .tile-icon {
+            font-size: 42px;
+        }
+    }
 
+    /* Small Mobile Adjustments */
+    @media (max-width: 480px) {
+        .tile-name {
+            font-size: 13px;
+        }
         .tile-icon {
             font-size: 32px;
-            margin-bottom: 8px;
-            display: block;
         }
-
-        .tile-name {
-            font-size: 15px;
-            font-weight: 500;
-            color: #1E293B;
+        .tile {
+            padding: 14px 6px;
         }
-
-        .bottom-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 16px 20px;
-            box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
-            border-top: 1px solid #E2E8F0;
-            z-index: 100;
+        .section-title {
+            font-size: 22px;
         }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            padding: 4px 12px;
-            border-radius: 40px;
+        .tagline {
+            font-size: 16px;
         }
-
+        .logo h1 {
+            font-size: 24px;
+        }
         .nav-item span:first-child {
             font-size: 26px;
         }
-
         .nav-item span:last-child {
-            font-size: 13px;
-            font-weight: 500;
-            color: #64748B;
+            font-size: 12px;
         }
-
-        .nav-item.active {
-            background: #EFF6FF;
-        }
-
-        .nav-item.active span:last-child {
-            color: #2563EB;
-            font-weight: 600;
-        }
-
-        .floating-ai {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: #7C3AED;
-            width: 56px;
-            height: 56px;
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
-            cursor: pointer;
-            z-index: 99;
-            transition: transform 0.2s;
-        }
-
-        .floating-ai:hover {
-            transform: scale(1.05);
-        }
-
-        .floating-ai span {
-            font-size: 28px;
-            color: white;
-        }
-
-        @media (max-width: 480px) {
-            .tiles-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 12px;
-            }
-            .tile {
-                padding: 12px 4px;
-            }
-            .tile-icon {
-                font-size: 32px;
-            }
-            .tile-name {
-                font-size: 14px;
-            }
-            .nav-item span:first-child {
-                font-size: 28px;
-            }
-            .nav-item span:last-child {
-                font-size: 12px;
-            }
-            .section-title {
-                font-size: 20px;
-            }
-            .tagline {
-                font-size: 16px;
-            }
-
-        @media (min-width: 768px) {
-            .tiles-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-    <div class="logo-section">
-        <div class="logo" style="display: flex; align-items: center; gap: 15px;">
-            <img src="App%20logo.png" alt="Dil-Ke-AnnS Career Saathi" style="height: 80px; width: auto; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-            <div>
-                <h1 style="font-size: 22px; margin: 0; letter-spacing: 1px;">दिल के अंश</h1>
-                <p style="font-size: 12px; margin: 0; opacity: 0.95;">Dil-Ke-AnnS Career Saathi</p>
-                <p style="font-size: 10px; margin: 0; opacity: 0.8;">10th se CEO Tak</p>
-            </div>
-        </div>
-        <div class="notification-icon" id="alertBtn">
-            🔔
-        </div>
-    </div>
-    <div class="tagline">
-        🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳
-    </div>
-    <div class="welcome" style="font-size: 16px; margin: 10px 0 0 0; opacity: 0.9;">
-        👋 Welcome back, Learner!
-    </div>
-    <div class="hero">
-        <div class="search-bar">
-            <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="Search courses, exams, jobs, schemes...">
-            <div class="ask-ai" id="askAiBtn" style="display: flex; align-items: center; gap: 8px;">
-                <img src="AnnS%20AI%20tool%20logo.png" alt="AnnS AI" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
-                <span>Ask AnnS AI</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div class="container">
-        <div class="section-title">
-            <span>📚</span> Explore Career Pathways
-        </div>
-        <div class="tiles-grid" id="tilesGrid">
-        </div>
-    </div>
-
-    <div class="floating-ai" id="floatingAiBtn">
-    <img src="AnnS%20AI%20tool%20logo.png" alt="AnnS AI" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-    </div>
-
-    <div class="bottom-bar" id="bottomBar">
-    </div>
-
-    <script>
-        const tiles = [
-            { id: 1, name: "Education", icon: "🎓" },
-            { id: 2, name: "Business", icon: "💼" },
-            { id: 3, name: "Jobs & Exams", icon: "📝" },
-            { id: 4, name: "Study Material", icon: "📚" },
-            { id: 5, name: "Magazines", icon: "📰" },
-            { id: 6, name: "E-newspapers", icon: "🗞️" },
-            { id: 7, name: "Daily Current Affairs", icon: "🌍" },
-            { id: 8, name: "Mock test", icon: "✅" },
-            { id: 9, name: "After 10th", icon: "📖" },
-            { id: 10, name: "After 12th", icon: "🎯" },
-            { id: 11, name: "Something Interesting", icon: "💡" },
-            { id: 12, name: "Results & Cutoffs", icon: "📊" },
-            { id: 13, name: "Application Forms", icon: "📋" }
-        ];
-
-        const bottomNav = [
-            { name: "Home", icon: "🏠", active: true },
-            { name: "Search", icon: "🔍", active: false },
-            { name: "AnnS AI", icon: "🤖", active: false },
-            { name: "Alerts", icon: "🔔", active: false },
-            { name: "Profile", icon: "👤", active: false }
-        ];
-
-        function renderTiles() {
-            const grid = document.getElementById('tilesGrid');
-            if (!grid) return;
-            grid.innerHTML = tiles.map(tile => `
-                <div class="tile" data-tile="${tile.name}">
-                    <span class="tile-icon">${tile.icon}</span>
-                    <div class="tile-name">${tile.name}</div>
-                </div>
-            `).join('');
-            document.querySelectorAll('.tile').forEach(tile => {
-                tile.addEventListener('click', function() {
-                    alert(`🚀 Opening: ${this.getAttribute('data-tile')}\n\n(Full page coming in next update)`);
-                });
-            });
-        }
-
-        function renderBottomBar() {
-            const bar = document.getElementById('bottomBar');
-            if (!bar) return;
-            bar.innerHTML = bottomNav.map((item) => `
-                <div class="nav-item ${item.active ? 'active' : ''}" data-nav="${item.name}">
-                    <span>${item.icon}</span>
-                    <span>${item.name}</span>
-                </div>
-            `).join('');
-            document.querySelectorAll('.nav-item').forEach(nav => {
-                nav.addEventListener('click', function() {
-                    const navName = this.getAttribute('data-nav');
-                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                    this.classList.add('active');
-                    if (navName === 'Home') window.scrollTo({ top: 0, behavior: 'smooth' });
-                    else if (navName === 'Search') document.getElementById('searchInput')?.focus();
-                    else alert(`📱 ${navName} section coming soon!`);
-                });
-            });
-        }
-
-        function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        const query = this.value.trim();
-                        alert(query ? `🔍 Searching for: "${query}"` : 'Please type something to search.');
-                    }
-                });
-            }
-        }
-
-        function setupAIButtons() {
-            const askAiBtn = document.getElementById('askAiBtn');
-            const floatingAiBtn = document.getElementById('floatingAiBtn');
-            const openAI = () => alert('🤖 AnnS AI Mentor\n\nModes: Doubt Solver, Career Mentor, Debate Judge, Exam Planner');
-            if (askAiBtn) askAiBtn.addEventListener('click', openAI);
-            if (floatingAiBtn) floatingAiBtn.addEventListener('click', openAI);
-        }
-
-        function setupNotifications() {
-            const alertBtn = document.getElementById('alertBtn');
-            if (alertBtn) {
-                alertBtn.addEventListener('click', () => {
-                    alert('🔔 Notification Center\n\n• Exam Alerts\n• Govt Schemes\n• Job Updates\n• Important Circulars');
-                });
-            }
-        }
-
-        renderTiles();
-        renderBottomBar();
-        setupSearch();
-        setupAIButtons();
-        setupNotifications();
-    </script>
-</body>
-</html>
+    }
+</style>
