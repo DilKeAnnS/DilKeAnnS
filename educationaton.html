@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Education Hub | Dil-Ke-AnnS Career Saathi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #F5F0E8;
+            padding-bottom: 70px;
+            color: #2D2A24;
+        }
+        .header {
+            background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
+            padding: 16px 16px 22px 16px;
+            border-radius: 0 0 28px 28px;
+            color: white;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+        .logo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo img {
+            height: 45px;
+            width: auto;
+            border-radius: 12px;
+        }
+        .logo h1 { font-size: 18px; font-weight: 700; }
+        .logo p { font-size: 9px; opacity: 0.85; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
+        .container { padding: 20px 16px; }
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1B4D3E;
+            border-left: 5px solid #E67E22;
+            padding-left: 14px;
+        }
+        .streams-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .stream-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #E8E2D9;
+        }
+        .stream-card:active { transform: scale(0.97); }
+        .stream-icon { font-size: 48px; margin-bottom: 12px; display: block; }
+        .stream-name { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 6px 12px 18px;
+            border-top: 1px solid #E8E2D9;
+            z-index: 100;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 30px;
+        }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .nav-item.active { background: #F0EADF; }
+        .nav-item.active span:last-child { color: #1B4D3E; font-weight: 600; }
+        @media (min-width: 768px) {
+            .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; }
+            .streams-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+            .stream-card { padding: 28px 16px; }
+            .stream-icon { font-size: 64px; }
+            .stream-name { font-size: 18px; }
+            .header { padding: 20px 5% 30px 5%; }
+            .logo img { height: 60px; }
+            .logo h1 { font-size: 26px; }
+            .bottom-bar { padding: 10px 5% 22px; }
+            .nav-item span:first-child { font-size: 28px; }
+            .nav-item span:last-child { font-size: 14px; }
+        }
+        @media (max-width: 480px) {
+            .stream-name { font-size: 14px; }
+            .stream-icon { font-size: 40px; }
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="back-button" onclick="goBack()">← Back</div>
+    <div class="logo-section">
+        <div class="logo">
+            <img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'">
+            <div><h1>दिल के अंश</h1><p>Career Saathi</p></div>
+        </div>
+        <div style="opacity:0;">🔔</div>
+    </div>
+    <div class="tagline">📖 Choose your stream</div>
+</div>
+<div class="container">
+    <div class="page-title">🎓 Education Streams</div>
+    <div class="streams-grid" id="streamsGrid"></div>
+</div>
+<div class="bottom-bar" id="bottomBar"></div>
+<script>
+    const streams = [
+        { name: "Medical", icon: "🩺", link: "#" },
+        { name: "Non-Medical", icon: "⚙️", link: "#" },
+        { name: "Commerce", icon: "📊", link: "#" },
+        { name: "Arts", icon: "🎨", link: "#" },
+        { name: "Sports", icon: "🏅", link: "#" },
+        { name: "Agriculture", icon: "🌾", link: "#" },
+        { name: "Artist", icon: "🎭", link: "#" },
+        { name: "Designing", icon: "✏️", link: "#" },
+        { name: "Skilled", icon: "🔧", link: "#" },
+        { name: "Abroad", icon: "🌏", link: "#" }
+    ];
+    const bottomNav = [
+        { name: "Home", icon: "🏠", link: "index.html" },
+        { name: "Search", icon: "🔍", link: "#" },
+        { name: "AnnS AI", icon: "🤖", link: "#" },
+        { name: "Alerts", icon: "🔔", link: "#" },
+        { name: "Profile", icon: "👤", link: "#" }
+    ];
+    function renderStreams() {
+        const grid = document.getElementById('streamsGrid');
+        if (!grid) return;
+        grid.innerHTML = streams.map(s => `<div class="stream-card" data-link="${s.link}"><span class="stream-icon">${s.icon}</span><div class="stream-name">${s.name}</div></div>`).join('');
+        document.querySelectorAll('.stream-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const link = card.getAttribute('data-link');
+                if (link && link !== '#') window.location.href = link;
+                else alert(`🚧 ${card.querySelector('.stream-name').innerText} page coming soon!`);
+            });
+        });
+    }
+    function renderBottomBar() {
+        const bar = document.getElementById('bottomBar');
+        if (!bar) return;
+        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+        document.querySelectorAll('.nav-item').forEach(nav => {
+            nav.addEventListener('click', () => {
+                const link = nav.getAttribute('data-link');
+                if (link && link !== '#') window.location.href = link;
+                else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`);
+            });
+        });
+    }
+    function goBack() { window.location.href = 'index.html'; }
+    renderStreams(); renderBottomBar();
+</script>
+</body>
+</html>
