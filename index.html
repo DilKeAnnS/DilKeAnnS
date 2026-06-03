@@ -11,21 +11,20 @@
             box-sizing: border-box;
         }
 
+        /* Base styles (mobile first) */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: #F5F0E8;
-            padding-bottom: 80px;
+            padding-bottom: 70px;
             color: #2D2A24;
-            line-height: 1.5;
         }
 
         /* Header */
         .header {
             background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
-            padding: 15px 16px 25px 16px;
-            border-radius: 0 0 30px 30px;
+            padding: 16px 16px 22px 16px;
+            border-radius: 0 0 28px 28px;
             color: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         .logo-section {
@@ -38,73 +37,68 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .logo img {
-            height: 55px;
+            height: 45px;
             width: auto;
-            border-radius: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 12px;
         }
 
         .logo h1 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
         }
 
         .logo p {
-            font-size: 10px;
+            font-size: 9px;
             opacity: 0.85;
-            margin-top: 2px;
         }
 
         .tagline {
             font-size: 13px;
-            opacity: 0.95;
-            margin: 8px 0 5px 0;
-            font-weight: 500;
             text-align: center;
+            margin: 8px 0 4px;
         }
 
         .welcome {
             background: rgba(255,255,255,0.12);
             padding: 5px 12px;
-            border-radius: 50px;
+            border-radius: 40px;
             font-size: 12px;
             display: inline-block;
-            margin: 5px 0;
-            text-align: center;
+            width: auto;
         }
 
         .notification-icon {
-            font-size: 24px;
-            cursor: pointer;
+            font-size: 22px;
             background: rgba(255,255,255,0.15);
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
+        /* Search */
         .hero {
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .search-bar {
             background: white;
             border-radius: 50px;
-            padding: 10px 16px;
+            padding: 8px 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            gap: 8px;
         }
 
         .search-bar span:first-child {
-            font-size: 20px;
+            font-size: 18px;
             color: #64748B;
         }
 
@@ -112,48 +106,49 @@
             flex: 1;
             border: none;
             outline: none;
-            font-size: 15px;
+            font-size: 14px;
             background: transparent;
-            padding: 6px 0;
         }
 
         .search-bar input::placeholder {
+            font-size: 12px;
             color: #94A3B8;
-            font-size: 13px;
         }
 
         .ask-ai {
             background: #E67E22;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 12px;
             font-weight: 600;
-            white-space: nowrap;
-            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             color: white;
+            cursor: pointer;
+            white-space: nowrap;
         }
 
+        .ask-ai img {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+        }
+
+        /* Main content */
         .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px 16px;
+            padding: 18px 16px;
         }
 
         .section-title {
             font-size: 18px;
             font-weight: 700;
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin-bottom: 14px;
             border-left: 4px solid #E67E22;
             padding-left: 12px;
         }
 
+        /* Tiles: 3 per row on mobile */
         .tiles-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -164,12 +159,12 @@
         .tile {
             background: white;
             border-radius: 16px;
-            padding: 14px 6px;
+            padding: 12px 4px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
             border: 1px solid #E8E2D9;
+            transition: transform 0.1s ease;
         }
 
         .tile:active {
@@ -177,7 +172,7 @@
         }
 
         .tile-icon {
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 6px;
             display: block;
         }
@@ -188,6 +183,7 @@
             color: #1a1a2e;
         }
 
+        /* Bottom bar */
         .bottom-bar {
             position: fixed;
             bottom: 0;
@@ -196,8 +192,7 @@
             background: white;
             display: flex;
             justify-content: space-around;
-            padding: 8px 12px 18px;
-            box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+            padding: 6px 12px 18px;
             border-top: 1px solid #E8E2D9;
             z-index: 100;
         }
@@ -206,10 +201,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
             cursor: pointer;
-            padding: 4px 12px;
-            border-radius: 40px;
+            padding: 4px 10px;
+            border-radius: 30px;
         }
 
         .nav-item span:first-child {
@@ -231,266 +226,223 @@
             font-weight: 600;
         }
 
+        /* Floating AI */
         .floating-ai {
             position: fixed;
             bottom: 75px;
-            right: 16px;
+            right: 14px;
             background: white;
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
             cursor: pointer;
             z-index: 99;
             border: 2px solid #E67E22;
         }
 
         .floating-ai img {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            object-fit: cover;
         }
 
-        /* Desktop styles - centers the app and makes it look like a phone */
+        /* ========== DESKTOP: show as phone frame ========== */
         @media (min-width: 768px) {
             body {
-                background: #E8E2D9;
+                background: #2c2c2c;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 min-height: 100vh;
-                padding: 20px;
+                padding: 24px;
             }
-            
-            /* App container - looks like a phone on desktop */
-            .app-container {
-                max-width: 420px;
+
+            /* Wrapper that looks like a phone */
+            .phone-mock {
+                max-width: 380px;
                 width: 100%;
                 background: #F5F0E8;
-                border-radius: 36px;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+                border-radius: 48px;
+                box-shadow: 0 25px 45px rgba(0,0,0,0.3);
                 overflow: hidden;
                 position: relative;
                 height: auto;
-                min-height: 700px;
+                max-height: 780px;
+                overflow-y: auto;
             }
-            
-            body > *:not(.app-container) {
+
+            /* Hide any stray body content outside the mock */
+            body > :not(.phone-mock) {
                 display: none;
             }
-            
-            .header, .container, .bottom-bar, .floating-ai {
-                max-width: 420px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
+
+            /* Bottom bar becomes sticky inside the mock */
             .bottom-bar {
-                max-width: 420px;
-                left: 50%;
-                transform: translateX(-50%);
-                right: auto;
+                position: sticky;
+                bottom: 0;
+                background: white;
             }
-            
-            .floating-ai {
-                left: auto;
-                right: calc(50% - 200px);
+
+            /* Optional: custom scrollbar */
+            .phone-mock::-webkit-scrollbar {
+                width: 4px;
             }
-        }
-        
-        /* Wrap everything in a container for desktop */
-        @media (min-width: 768px) {
-            .mobile-app {
-                max-width: 420px;
-                width: 100%;
-                background: #F5F0E8;
-                border-radius: 36px;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-                overflow: hidden;
-                position: relative;
+            .phone-mock::-webkit-scrollbar-track {
+                background: #e0dcd5;
+            }
+            .phone-mock::-webkit-scrollbar-thumb {
+                background: #1B4D3E;
+                border-radius: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Desktop wrapper - makes app look like a phone on desktop -->
-    <div class="mobile-app" style="max-width: 420px; width: 100%; background: #F5F0E8; border-radius: 36px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); overflow: hidden; margin: 0 auto;">
-    
+
+<div class="phone-mock">
     <div class="header">
         <div class="logo-section">
             <div class="logo">
-                <img src="App%20logo.png" alt="Dil-Ke-AnnS Logo" onerror="this.style.display='none'">
+                <img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'">
                 <div>
                     <h1>दिल के अंश</h1>
                     <p>Dil-Ke-AnnS Career Saathi</p>
                 </div>
             </div>
-            <div class="notification-icon" id="alertBtn">
-                🔔
-            </div>
+            <div class="notification-icon" id="alertBtn">🔔</div>
         </div>
         <div style="text-align: center;">
-            <div class="tagline">
-                🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳
-            </div>
-            <div class="welcome" id="welcomeMsg">
-                👋 Welcome back, Learner!
-            </div>
+            <div class="tagline">🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳</div>
+            <div class="welcome" id="welcomeMsg">👋 Welcome back, Learner!</div>
         </div>
         <div class="hero">
             <div class="search-bar">
                 <span>🔍</span>
-                <input type="text" id="searchInput" placeholder="Search courses, exams, jobs, schemes...">
+                <input type="text" id="searchInput" placeholder="Search courses, exams...">
                 <div class="ask-ai" id="askAiBtn">
-                    <img src="AnnS%20AI%20tool%20logo.png" alt="AnnS AI" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
-                    <span>Ask AnnS AI</span>
+                    <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
+                    <span>Ask AI</span>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div class="section-title">
-            <span>📚</span> Explore Career Pathways
-        </div>
+        <div class="section-title">📚 Explore Career Pathways</div>
         <div class="tiles-grid" id="tilesGrid"></div>
     </div>
 
     <div class="floating-ai" id="floatingAiBtn">
-        <img src="AnnS%20AI%20tool%20logo.png" alt="AnnS AI">
+        <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
     </div>
 
     <div class="bottom-bar" id="bottomBar"></div>
-    
-    </div>
+</div>
 
-    <script>
-        const tiles = [
-            { id: 1, name: "Education", icon: "🎓" },
-            { id: 2, name: "Business", icon: "💼" },
-            { id: 3, name: "Jobs & Exams", icon: "📝" },
-            { id: 4, name: "Study Material", icon: "📚" },
-            { id: 5, name: "Magazines", icon: "📰" },
-            { id: 6, name: "E-newspapers", icon: "🗞️" },
-            { id: 7, name: "Daily Current Affairs", icon: "🌍" },
-            { id: 8, name: "Mock test", icon: "✅" },
-            { id: 9, name: "After 10th", icon: "📖" },
-            { id: 10, name: "After 12th", icon: "🎯" },
-            { id: 11, name: "Something Interesting", icon: "💡" },
-            { id: 12, name: "Results & Cutoffs", icon: "📊" },
-            { id: 13, name: "Application Forms", icon: "📋" }
-        ];
+<script>
+    const tiles = [
+        { name: "Education", icon: "🎓" },
+        { name: "Business", icon: "💼" },
+        { name: "Jobs & Exams", icon: "📝" },
+        { name: "Study Material", icon: "📚" },
+        { name: "Magazines", icon: "📰" },
+        { name: "E-newspapers", icon: "🗞️" },
+        { name: "Current Affairs", icon: "🌍" },
+        { name: "Mock test", icon: "✅" },
+        { name: "After 10th", icon: "📖" },
+        { name: "After 12th", icon: "🎯" },
+        { name: "Interesting", icon: "💡" },
+        { name: "Results", icon: "📊" },
+        { name: "App Forms", icon: "📋" }
+    ];
 
-        const bottomNav = [
-            { name: "Home", icon: "🏠", active: true },
-            { name: "Search", icon: "🔍", active: false },
-            { name: "AnnS AI", icon: "🤖", active: false },
-            { name: "Alerts", icon: "🔔", active: false },
-            { name: "Profile", icon: "👤", active: false }
-        ];
+    const bottomNav = [
+        { name: "Home", icon: "🏠", active: true },
+        { name: "Search", icon: "🔍", active: false },
+        { name: "AnnS AI", icon: "🤖", active: false },
+        { name: "Alerts", icon: "🔔", active: false },
+        { name: "Profile", icon: "👤", active: false }
+    ];
 
-        function renderTiles() {
-            const grid = document.getElementById('tilesGrid');
-            if (!grid) return;
-            grid.innerHTML = tiles.map(tile => `
-                <div class="tile" data-tile="${tile.name}">
-                    <span class="tile-icon">${tile.icon}</span>
-                    <div class="tile-name">${tile.name}</div>
-                </div>
-            `).join('');
-            
-            document.querySelectorAll('.tile').forEach(tile => {
-                tile.addEventListener('click', function() {
-                    const tileName = this.getAttribute('data-tile');
-                    alert(`🚀 Opening: ${tileName}\n\n(Full page coming in next update)`);
-                });
+    function renderTiles() {
+        const grid = document.getElementById('tilesGrid');
+        if (!grid) return;
+        grid.innerHTML = tiles.map(t => `
+            <div class="tile" data-name="${t.name}">
+                <span class="tile-icon">${t.icon}</span>
+                <div class="tile-name">${t.name}</div>
+            </div>
+        `).join('');
+        document.querySelectorAll('.tile').forEach(t => {
+            t.addEventListener('click', () => alert(`🚀 Opening: ${t.dataset.name}`));
+        });
+    }
+
+    function renderBottomBar() {
+        const bar = document.getElementById('bottomBar');
+        if (!bar) return;
+        bar.innerHTML = bottomNav.map(item => `
+            <div class="nav-item ${item.active ? 'active' : ''}" data-nav="${item.name}">
+                <span>${item.icon}</span>
+                <span>${item.name}</span>
+            </div>
+        `).join('');
+        document.querySelectorAll('.nav-item').forEach(nav => {
+            nav.addEventListener('click', function() {
+                const name = this.dataset.nav;
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+                if (name === 'Home') window.scrollTo({ top: 0, behavior: 'smooth' });
+                else if (name === 'Search') document.getElementById('searchInput')?.focus();
+                else alert(`📱 ${name} section coming soon!`);
+            });
+        });
+    }
+
+    function setupSearch() {
+        const input = document.getElementById('searchInput');
+        if (input) {
+            input.addEventListener('keypress', e => {
+                if (e.key === 'Enter') {
+                    const q = e.target.value.trim();
+                    alert(q ? `🔍 Searching: "${q}"` : 'Type something to search');
+                }
             });
         }
+    }
 
-        function renderBottomBar() {
-            const bar = document.getElementById('bottomBar');
-            if (!bar) return;
-            bar.innerHTML = bottomNav.map((item) => `
-                <div class="nav-item ${item.active ? 'active' : ''}" data-nav="${item.name}">
-                    <span>${item.icon}</span>
-                    <span>${item.name}</span>
-                </div>
-            `).join('');
-            
-            document.querySelectorAll('.nav-item').forEach(nav => {
-                nav.addEventListener('click', function() {
-                    const navName = this.getAttribute('data-nav');
-                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    if (navName === 'Home') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else if (navName === 'Search') {
-                        document.getElementById('searchInput')?.focus();
-                    } else if (navName === 'AnnS AI') {
-                        alert('🤖 AnnS AI Mentor\n\nModes: Doubt Solver, Career Mentor, Debate Judge, Exam Planner');
-                    } else if (navName === 'Alerts') {
-                        alert('🔔 Notification Center\n\n• Exam Alerts\n• Govt Schemes\n• Job Updates\n• Important Circulars');
-                    } else if (navName === 'Profile') {
-                        alert('👤 Anonymous Profile\n\nYour saved notes, roadmaps, and progress (Anonymous Mode Active)');
-                    }
-                });
-            });
+    function setupAI() {
+        const ask = document.getElementById('askAiBtn');
+        const floating = document.getElementById('floatingAiBtn');
+        const open = () => alert('🤖 AnnS AI Mentor\n• Doubt Solver\n• Career Mentor\n• Exam Planner');
+        if (ask) ask.addEventListener('click', open);
+        if (floating) floating.addEventListener('click', open);
+    }
+
+    function setupNotify() {
+        const btn = document.getElementById('alertBtn');
+        if (btn) btn.addEventListener('click', () => alert('🔔 Alerts: Exams, Jobs, Schemes, Updates'));
+    }
+
+    function setWelcome() {
+        const h = new Date().getHours();
+        const el = document.getElementById('welcomeMsg');
+        if (el) {
+            let msg = h < 12 ? '🌅 Good morning, Learner!' : (h < 17 ? '☀️ Good afternoon, Learner!' : '🌙 Good evening, Learner!');
+            el.innerHTML = `👋 ${msg}`;
         }
+    }
 
-        function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        const query = this.value.trim();
-                        alert(query ? `🔍 Searching for: "${query}"` : 'Please type something to search.');
-                    }
-                });
-            }
-        }
-
-        function setupAIButtons() {
-            const askAiBtn = document.getElementById('askAiBtn');
-            const floatingAiBtn = document.getElementById('floatingAiBtn');
-            const openAI = () => {
-                alert('🤖 AnnS AI Mentor\n\nModes Available:\n• Doubt Solver\n• Career Mentor\n• Debate Judge\n• Exam Planner\n\n(Full AI integration coming soon!)');
-            };
-            if (askAiBtn) askAiBtn.addEventListener('click', openAI);
-            if (floatingAiBtn) floatingAiBtn.addEventListener('click', openAI);
-        }
-
-        function setupNotifications() {
-            const alertBtn = document.getElementById('alertBtn');
-            if (alertBtn) {
-                alertBtn.addEventListener('click', () => {
-                    alert('🔔 Notification Center\n\n• Exam Alerts\n• Govt Schemes Updates\n• Daily PDFs Ready\n• Job Updates\n• Important Circulars');
-                });
-            }
-        }
-
-        function setWelcomeMessage() {
-            const hours = new Date().getHours();
-            const welcomeDiv = document.getElementById('welcomeMsg');
-            if (welcomeDiv) {
-                let message = '';
-                if (hours < 12) message = '🌅 Good morning, Learner!';
-                else if (hours < 17) message = '☀️ Good afternoon, Learner!';
-                else message = '🌙 Good evening, Learner!';
-                welcomeDiv.innerHTML = `👋 ${message}`;
-            }
-        }
-
-        renderTiles();
-        renderBottomBar();
-        setupSearch();
-        setupAIButtons();
-        setupNotifications();
-        setWelcomeMessage();
-    </script>
+    renderTiles();
+    renderBottomBar();
+    setupSearch();
+    setupAI();
+    setupNotify();
+    setWelcome();
+</script>
 </body>
 </html>
