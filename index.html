@@ -13,9 +13,9 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: #F0F2F5;
+            background: #F5F0E8;  /* Warm off-white - base for all devices */
             padding-bottom: 80px;
-            color: #1a1a2e;
+            color: #2D2A24;
             font-size: 18px;
             line-height: 1.5;
         }
@@ -310,6 +310,7 @@
         /* ========== DESKTOP SPECIFIC STYLES ========== */
         @media (min-width: 1024px) {
             body {
+                background: #F5F0E8;
                 font-size: 18px;
             }
             
@@ -381,6 +382,10 @@
 
         /* ========== TABLET STYLES ========== */
         @media (min-width: 768px) and (max-width: 1023px) {
+            body {
+                background: #F5F0E8;
+            }
+            
             .tiles-grid {
                 gap: 24px;
             }
@@ -398,14 +403,27 @@
             }
         }
 
-        /* ========== MOBILE STYLES ========== */
-        @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 20px;
+        /* ========== MOBILE STYLES - FIXED BACKGROUND ========== */
+        @media (max-width: 767px) {
+            body {
+                background: #F5F0E8 !important;  /* Force warm background on mobile */
+                font-size: 16px;
+            }
+            
+            .header {
+                padding: 20px 4% 30px 4%;
             }
             
             .logo img {
                 height: 45px;
+            }
+            
+            .logo h1 {
+                font-size: 20px;
+            }
+            
+            .logo p {
+                font-size: 10px;
             }
             
             .tagline {
@@ -414,10 +432,45 @@
             
             .welcome {
                 font-size: 13px;
+                padding: 6px 15px;
+            }
+            
+            .notification-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+            }
+            
+            .search-bar {
+                padding: 10px 15px;
+                gap: 10px;
+            }
+            
+            .search-bar input {
+                font-size: 15px;
+            }
+            
+            .search-bar input::placeholder {
+                font-size: 13px;
+            }
+            
+            .ask-ai span {
+                display: none;
+            }
+            
+            .ask-ai {
+                padding: 8px 14px;
+            }
+            
+            .ask-ai img {
+                width: 22px !important;
+                height: 22px !important;
             }
             
             .section-title {
                 font-size: 20px;
+                margin-bottom: 15px;
+                padding-left: 12px;
             }
             
             .tiles-grid {
@@ -431,22 +484,19 @@
             
             .tile-icon {
                 font-size: 32px;
+                margin-bottom: 6px;
             }
             
             .tile-name {
                 font-size: 11px;
             }
             
-            .search-bar input {
-                font-size: 15px;
+            .bottom-bar {
+                padding: 10px 4% 20px;
             }
             
-            .ask-ai span {
-                display: none;
-            }
-            
-            .ask-ai {
-                padding: 10px 14px;
+            .nav-item {
+                padding: 6px 12px;
             }
             
             .nav-item span:first-child {
@@ -457,10 +507,6 @@
                 font-size: 10px;
             }
             
-            .nav-item {
-                padding: 6px 12px;
-            }
-            
             .floating-ai {
                 width: 55px;
                 height: 55px;
@@ -469,8 +515,12 @@
             }
             
             .floating-ai img {
-                width: 44px;
-                height: 44px;
+                width: 44px !important;
+                height: 44px !important;
+            }
+            
+            .container {
+                padding: 20px 4% 15px 4%;
             }
         }
     </style>
