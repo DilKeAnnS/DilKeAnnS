@@ -10,46 +10,53 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #F8FAFC;
             padding-bottom: 70px;
             color: #1E293B;
         }
-        /* Header Section */
+
         .header {
             background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
             padding: 20px 16px 40px 16px;
             border-radius: 0 0 24px 24px;
             color: white;
         }
+
         .logo-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
         }
+
         .logo h1 {
             font-size: 20px;
             font-weight: bold;
         }
+
         .logo p {
             font-size: 12px;
             opacity: 0.9;
         }
+
         .tagline {
             font-size: 14px;
             opacity: 0.95;
             margin-top: 8px;
         }
+
         .notification-icon {
             font-size: 24px;
             cursor: pointer;
         }
-        /* Hero / Search Section */
+
         .hero {
             margin-top: 8px;
         }
+
         .search-bar {
             background: white;
             border-radius: 50px;
@@ -59,10 +66,12 @@
             gap: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+
         .search-bar span:first-child {
             font-size: 20px;
             color: #64748B;
         }
+
         .search-bar input {
             flex: 1;
             border: none;
@@ -70,9 +79,11 @@
             font-size: 16px;
             background: transparent;
         }
+
         .search-bar input::placeholder {
             color: #94A3B8;
         }
+
         .ask-ai {
             background: #10B981;
             padding: 8px 16px;
@@ -83,13 +94,15 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
+
         .ask-ai:hover {
             transform: scale(1.02);
         }
-        /* Tiles Grid */
+
         .container {
             padding: 20px 16px;
         }
+
         .section-title {
             font-size: 18px;
             font-weight: 600;
@@ -99,12 +112,14 @@
             align-items: center;
             gap: 8px;
         }
+
         .tiles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 16px;
             margin-bottom: 24px;
         }
+
         .tile {
             background: white;
             border-radius: 18px;
@@ -115,22 +130,25 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #E2E8F0;
         }
+
         .tile:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
             border-color: #2563EB;
         }
+
         .tile-icon {
             font-size: 32px;
             margin-bottom: 8px;
             display: block;
         }
+
         .tile-name {
             font-size: 13px;
             font-weight: 500;
             color: #1E293B;
         }
-        /* Bottom Bar */
+
         .bottom-bar {
             position: fixed;
             bottom: 0;
@@ -144,6 +162,7 @@
             border-top: 1px solid #E2E8F0;
             z-index: 100;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -154,22 +173,26 @@
             padding: 4px 12px;
             border-radius: 40px;
         }
+
         .nav-item span:first-child {
             font-size: 22px;
         }
+
         .nav-item span:last-child {
             font-size: 11px;
             font-weight: 500;
             color: #64748B;
         }
+
         .nav-item.active {
             background: #EFF6FF;
         }
+
         .nav-item.active span:last-child {
             color: #2563EB;
             font-weight: 600;
         }
-        /* Floating AI Button (Optional, per your HOME_CONFIG) */
+
         .floating-ai {
             position: fixed;
             bottom: 80px;
@@ -186,37 +209,36 @@
             z-index: 99;
             transition: transform 0.2s;
         }
+
         .floating-ai:hover {
             transform: scale(1.05);
         }
+
         .floating-ai span {
             font-size: 28px;
             color: white;
         }
-        /* Responsive */
+
         @media (max-width: 480px) {
             .tiles-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 12px;
             }
-           
             .tile {
                 padding: 12px 4px;
             }
-           
             .tile-icon {
                 font-size: 28px;
             }
-           
             .tile-name {
                 font-size: 11px;
             }
         }
+
         @media (min-width: 768px) {
             .tiles-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
-           
             .container {
                 max-width: 1200px;
                 margin: 0 auto;
@@ -225,7 +247,7 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
+
     <div class="header">
         <div class="logo-section">
             <div class="logo">
@@ -249,41 +271,39 @@
             </div>
         </div>
     </div>
-    <!-- Main Content -->
+
     <div class="container">
         <div class="section-title">
             <span>📚</span> Explore Career Pathways
         </div>
         <div class="tiles-grid" id="tilesGrid">
-            <!-- Tiles will be injected here via JS -->
         </div>
     </div>
-    <!-- Floating AI Button (Optional, matches your HOME_CONFIG) -->
+
     <div class="floating-ai" id="floatingAiBtn">
         <span>🤖</span>
     </div>
-    <!-- Bottom Bar -->
+
     <div class="bottom-bar" id="bottomBar">
-        <!-- Bottom nav items injected via JS -->
     </div>
+
     <script>
-        // Tile Data (from your MAIN_TILES image)
         const tiles = [
-            { id: 1, name: "Education", icon: "🎓", link: "#" },
-            { id: 2, name: "Business", icon: "💼", link: "#" },
-            { id: 3, name: "Jobs & Exams", icon: "📝", link: "#" },
-            { id: 4, name: "Study Material", icon: "📚", link: "#" },
-            { id: 5, name: "Magazines", icon: "📰", link: "#" },
-            { id: 6, name: "E-newspapers", icon: "🗞️", link: "#" },
-            { id: 7, name: "Daily Current Affairs", icon: "🌍", link: "#" },
-            { id: 8, name: "Mock test", icon: "✅", link: "#" },
-            { id: 9, name: "After 10th", icon: "📖", link: "#" },
-            { id: 10, name: "After 12th", icon: "🎯", link: "#" },
-            { id: 11, name: "Something Interesting", icon: "💡", link: "#" },
-            { id: 12, name: "Results & Cutoffs", icon: "📊", link: "#" },
-            { id: 13, name: "Application Forms", icon: "📋", link: "#" }
+            { id: 1, name: "Education", icon: "🎓" },
+            { id: 2, name: "Business", icon: "💼" },
+            { id: 3, name: "Jobs & Exams", icon: "📝" },
+            { id: 4, name: "Study Material", icon: "📚" },
+            { id: 5, name: "Magazines", icon: "📰" },
+            { id: 6, name: "E-newspapers", icon: "🗞️" },
+            { id: 7, name: "Daily Current Affairs", icon: "🌍" },
+            { id: 8, name: "Mock test", icon: "✅" },
+            { id: 9, name: "After 10th", icon: "📖" },
+            { id: 10, name: "After 12th", icon: "🎯" },
+            { id: 11, name: "Something Interesting", icon: "💡" },
+            { id: 12, name: "Results & Cutoffs", icon: "📊" },
+            { id: 13, name: "Application Forms", icon: "📋" }
         ];
-        // Bottom Bar Data (from your BOTTOM_BAR image)
+
         const bottomNav = [
             { name: "Home", icon: "🏠", active: true },
             { name: "Search", icon: "🔍", active: false },
@@ -291,120 +311,78 @@
             { name: "Alerts", icon: "🔔", active: false },
             { name: "Profile", icon: "👤", active: false }
         ];
-        // Render Tiles
+
         function renderTiles() {
             const grid = document.getElementById('tilesGrid');
             if (!grid) return;
-           
             grid.innerHTML = tiles.map(tile => `
-                <div class="tile" data-tile="${tile.name}" data-link="${tile.link}">
+                <div class="tile" data-tile="${tile.name}">
                     <span class="tile-icon">${tile.icon}</span>
                     <div class="tile-name">${tile.name}</div>
                 </div>
             `).join('');
-           
-            // Add click listeners to tiles
             document.querySelectorAll('.tile').forEach(tile => {
                 tile.addEventListener('click', function() {
-                    const tileName = this.getAttribute('data-tile');
-                    alert(`🚀 Opening: ${tileName}\n\n(Link will be added in next phase)`);
-                    // You can later replace alert() with actual navigation
-                    // window.location.href = this.getAttribute('data-link');
+                    alert(`🚀 Opening: ${this.getAttribute('data-tile')}\n\n(Full page coming in next update)`);
                 });
             });
         }
-        // Render Bottom Bar
+
         function renderBottomBar() {
             const bar = document.getElementById('bottomBar');
             if (!bar) return;
-           
-            bar.innerHTML = bottomNav.map((item, idx) => `
+            bar.innerHTML = bottomNav.map((item) => `
                 <div class="nav-item ${item.active ? 'active' : ''}" data-nav="${item.name}">
                     <span>${item.icon}</span>
                     <span>${item.name}</span>
                 </div>
             `).join('');
-           
-            // Add click listeners for bottom nav
             document.querySelectorAll('.nav-item').forEach(nav => {
                 nav.addEventListener('click', function() {
                     const navName = this.getAttribute('data-nav');
-                   
-                    // Update active state visually
                     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
                     this.classList.add('active');
-                   
-                    // Handle navigation
-                    switch(navName) {
-                        case 'Home':
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                            break;
-                        case 'Search':
-                            document.getElementById('searchInput')?.focus();
-                            break;
-                        case 'AnnS AI':
-                            alert('🤖 AnnS AI Mentor coming soon!\n\nAsk anything about careers, exams, or studies.');
-                            break;
-                        case 'Alerts':
-                            alert('🔔 Notification Center coming soon!\n\nExam alerts, job updates, scheme notifications.');
-                            break;
-                        case 'Profile':
-                            alert('👤 Anonymous Profile\n\nYour saved notes, roadmaps, and progress (Anonymous Mode Active).');
-                            break;
-                        default:
-                            alert(`Navigating to: ${navName}`);
-                    }
+                    if (navName === 'Home') window.scrollTo({ top: 0, behavior: 'smooth' });
+                    else if (navName === 'Search') document.getElementById('searchInput')?.focus();
+                    else alert(`📱 ${navName} section coming soon!`);
                 });
             });
         }
-        // Search functionality
+
         function setupSearch() {
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
                 searchInput.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter') {
                         const query = this.value.trim();
-                        if (query) {
-                            alert(`🔍 Searching for: "${query}"\n\n(Global search across courses, exams, jobs, and schemes will work here.)`);
-                        } else {
-                            alert('Please type something to search.');
-                        }
+                        alert(query ? `🔍 Searching for: "${query}"` : 'Please type something to search.');
                     }
                 });
             }
         }
-        // AI Button handlers
+
         function setupAIButtons() {
             const askAiBtn = document.getElementById('askAiBtn');
             const floatingAiBtn = document.getElementById('floatingAiBtn');
-           
-            const openAIChat = () => {
-                alert(`🤖 AnnS AI Mentor\n\nModes available:\n• Doubt Solver\n• Career Mentor\n• Debate Judge\n• Exam Planner\n\n(Full AI integration coming soon. I remember your previous doubts!)`);
-            };
-           
-            if (askAiBtn) askAiBtn.addEventListener('click', openAIChat);
-            if (floatingAiBtn) floatingAiBtn.addEventListener('click', openAIChat);
+            const openAI = () => alert('🤖 AnnS AI Mentor\n\nModes: Doubt Solver, Career Mentor, Debate Judge, Exam Planner');
+            if (askAiBtn) askAiBtn.addEventListener('click', openAI);
+            if (floatingAiBtn) floatingAiBtn.addEventListener('click', openAI);
         }
-        // Notification button
+
         function setupNotifications() {
             const alertBtn = document.getElementById('alertBtn');
             if (alertBtn) {
                 alertBtn.addEventListener('click', () => {
-                    alert(`🔔 Notification Center\n\n• Exam Alerts\n• Govt Schemes Updates\n• Daily PDFs Ready\n• Job Updates\n• Important Circulars`);
+                    alert('🔔 Notification Center\n\n• Exam Alerts\n• Govt Schemes\n• Job Updates\n• Important Circulars');
                 });
             }
         }
-        // Initialize everything
-        function init() {
-            renderTiles();
-            renderBottomBar();
-            setupSearch();
-            setupAIButtons();
-            setupNotifications();
-        }
-       
-        // Run when page loads
-        init();
+
+        renderTiles();
+        renderBottomBar();
+        setupSearch();
+        setupAIButtons();
+        setupNotifications();
     </script>
 </body>
 </html>
