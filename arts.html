@@ -7,263 +7,499 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .language-selector select option { color: black; background: white; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">🎨 Arts & Humanities Careers</div>
+    <div class="tagline">🎨 Complete Arts & Humanities Career Guide - 10th to CEO | Live Exam Updates</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">🎨 Arts (Humanities) Stream</div>
-
-    <div class="section-card">
-        <div class="section-title" id="baTitle">🎓 Bachelor of Arts (BA)</div>
-        <div class="list-item" id="baSubjectsItem">• Political Science, History, Geography, Psychology, Sociology, English, Hindi, Sanskrit, Philosophy, Anthropology</div>
-        <div class="list-item" id="baCareersItem">• Careers: Civil Services, Teaching, Research, Journalism, Social Work</div>
+    <div class="page-title">🎨 Arts & Humanities Careers</div>
+    <div class="page-subtitle">50+ Courses | 150+ Colleges | UPSC/IAS Guide | Law/CLAT | Psychology | Journalism | Complete Roadmap</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="ba">🎓 <span class="door-label">Bachelor of Arts (BA)</span></button>
+        <button class="door-btn" data-door="law">⚖️ <span class="door-label">Law (LLB)</span></button>
+        <button class="door-btn" data-door="journalism">📰 <span class="door-label">Journalism & Mass Comm</span></button>
+        <button class="door-btn" data-door="finearts">🎭 <span class="door-label">Fine Arts (BFA)</span></button>
+        <button class="door-btn" data-door="psychology">🧠 <span class="door-label">Psychology</span></button>
+        <button class="door-btn" data-door="socialwork">🤝 <span class="door-label">Social Work (BSW)</span></button>
+        <button class="door-btn" data-door="hotel">🏨 <span class="door-label">Hotel Management</span></button>
+        <button class="door-btn" data-door="design">🎨 <span class="door-label">Design</span></button>
+        <button class="door-btn" data-door="languages">🌍 <span class="door-label">Foreign Languages</span></button>
+        <button class="door-btn" data-door="digital">📈 <span class="door-label">Digital Marketing</span></button>
+        <button class="door-btn" data-door="education">📚 <span class="door-label">Education (B.Ed)</span></button>
+        <button class="door-btn" data-door="govt">🏛️ <span class="door-label">Government Jobs</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Studies</span></button>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="lawTitle">⚖️ Law (LLB)</div>
-        <div class="list-item" id="baLlbItem">• BA + LLB (Integrated 5 years) through CLAT</div>
-        <div class="list-item" id="lawCareersItem">• Careers: Lawyer, Judge, Corporate Legal Advisor, Legal Consultant</div>
+    
+    <!-- ==================== DOOR 1: BACHELOR OF ARTS (BA) ==================== -->
+    <div id="door-ba" class="door-content active">
+        
+        <!-- BA - COMPLETE DETAIL -->
+        <div class="accordion-card active" id="baCard">
+            <div class="accordion-header" onclick="toggleCard('baCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎓</span> BA - Bachelor of Arts (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of humanities and social sciences - Political Science, History, Geography, Psychology, Sociology, Economics, English, Hindi, Sanskrit, Philosophy, Anthropology, Public Administration.<br><span class="salary-text">💰 Fresher Salary: ₹3-7 LPA | After MA: ₹6-12 LPA | After PhD: ₹10-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Foundation for UPSC Civil Services (IAS/IPS/IFS), teaching, law, journalism, social work, research, public policy.<br><span class="salary-text">💰 IAS Officer: ₹70k-2.5L/month</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th (Any stream - Science/Commerce/Arts). Minimum 45-50% marks depending on college.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.du.ac.in" target="_blank">University of Delhi</a> | <a class="live-link" href="https://www.jnu.ac.in" target="_blank">JNU</a> | <a class="live-link" href="https://www.bhu.ac.in" target="_blank">BHU</a> | <a class="live-link" href="https://www.jmi.ac.in" target="_blank">Jamia Millia Islamia</a> | <a class="live-link" href="https://www.hindu college.ac.in" target="_blank">Hindu College</a> | <a class="live-link" href="https://www.lsr.edu.in" target="_blank">LSR</a> | <a class="live-link" href="https://www.ststephens.edu.in" target="_blank">St. Stephen's</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">CUET (Common University Entrance Test)</a> | JNU Entrance | BHU UET | DUET</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in social sciences, reading, writing, critical thinking, debate, research, public service</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th → CUET → BA (3 years) → MA (2 years) → PhD (3-5 years) → Job/Research/Teaching</div></div>
+                </div>
+                <div class="section-title">📋 CUET EXAM - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">cuet.samarth.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Exam Dates</div><div class="info-text">May-June 2025</div></div>
+                    <div class="info-card"><div class="info-label">📊 Result</div><div class="info-text">June-July 2025</div></div>
+                </div>
+                <div class="section-title">🏛️ Top BA Colleges (NIRF Ranked - Arts/Humanities)</div>
+                <table class="college-table">
+                    <thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
+                    <tbody>
+                        <tr><td><a class="live-link" href="https://www.jnu.ac.in" target="_blank">JNU</a></td><td>Delhi</td><td>₹10,000</td><td>1</td><td><a class="live-link" href="https://www.jnu.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td><a class="live-link" href="https://www.du.ac.in" target="_blank">University of Delhi</a></td><td>Delhi</td><td>₹25,000</td><td>2</td><td><a class="live-link" href="https://www.du.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td><a class="live-link" href="https://www.bhu.ac.in" target="_blank">BHU</a></td><td>Varanasi</td><td>₹15,000</td><td>3</td><td><a class="live-link" href="https://www.bhu.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td><a class="live-link" href="https://www.jmi.ac.in" target="_blank">Jamia Millia Islamia</a></td><td>Delhi</td><td>₹20,000</td><td>4</td><td><a class="live-link" href="https://www.jmi.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td><a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Hindu College</a></td><td>Delhi</td><td>₹25,000</td><td>5</td><td><a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Visit</a></td></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Complete Career Roadmap (10th → IAS/Professor/Researcher)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text">Choose Arts/Humanities with your choice of subjects. Score 75%+ for top colleges.<br><span class="salary-text">💰 After 12th: CUET qualified</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">BA Degree with Honours (Specialization in Political Science, History, Economics, Geography, Psychology, Sociology, English)<br><span class="salary-text">💰 BA Graduate: ₹3-7 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MA Degree → Prepare for UPSC/State PSC/UGC NET (for PhD/Assistant Professor)<br><span class="salary-text">💰 MA Graduate: ₹6-12 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">PhD from JNU/DU/University of Hyderabad → Assistant Professor or Research Scientist<br><span class="salary-text">💰 Assistant Professor: ₹8-15 LPA | Research Scientist: ₹10-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Associate Professor → Professor → HOD → Dean<br><span class="salary-text">💰 Professor: ₹15-30 LPA | HOD: ₹20-40 LPA</span></div></div>
+                <div class="section-title">💰 Scholarships for Arts Students</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 NSP Scholarship</div><div class="info-text"><a class="live-link" href="https://scholarships.gov.in" target="_blank">National Scholarship Portal</a> - ₹5,000-50,000/year</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ University Scholarships</div><div class="info-text">Merit-based scholarships in DU, JNU, BHU</div></div>
+                    <div class="info-card"><div class="info-label">📚 UGC NET JRF</div><div class="info-text">₹31,000-37,000/month for PhD students</div></div>
+                </div>
+                <div class="section-title">⭐ Famous BA Graduates</div>
+                <div><span class="famous-badge">Dr. B. R. Ambedkar (Constitution Maker)</span> <span class="famous-badge">Dr. A. P. J. Abdul Kalam (BA in Economics)</span> <span class="famous-badge">Narendra Modi (BA in Political Science)</span> <span class="famous-badge">Manmohan Singh (Economist)</span> <span class="famous-badge">C. Rajagopalachari</span></div>
+            </div>
+        </div>
+        
+        <!-- BA Specializations -->
+        <div class="accordion-card" id="baSpecializationsCard">
+            <div class="accordion-header" onclick="toggleCard('baSpecializationsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📚</span> BA Specializations & Career Paths</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏛️ Political Science</div><div class="info-text">IAS/IPS/IFS, Political Analyst, Public Policy, Journalism, Law, Teaching, Research</div></div>
+                    <div class="info-card"><div class="info-label">📜 History</div><div class="info-text">Historian, Archaeologist (ASI), Museum Curator, Civil Services, Teaching, Archives</div></div>
+                    <div class="info-card"><div class="info-label">🗺️ Geography</div><div class="info-text">GIS Specialist, Urban Planner, Cartographer, Environmental Consultant, Civil Services, Remote Sensing</div></div>
+                    <div class="info-card"><div class="info-label">👥 Sociology</div><div class="info-text">Social Worker, NGO Manager, HR Specialist, Corporate Social Responsibility, Researcher</div></div>
+                    <div class="info-card"><div class="info-label">📊 Economics</div><div class="info-text">Economist, RBI Grade B, NABARD, SEBI, Banking, Research, Data Analyst, Teaching</div></div>
+                    <div class="info-card"><div class="info-label">📝 English Literature</div><div class="info-text">Content Writer, Copywriter, Editor, Journalist, Author, Teacher, Translator</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="managementTitle">📊 Management & Business</div>
-        <div class="list-item" id="bbaItem">• BBA, BMS (Bachelor of Management Studies)</div>
-        <div class="list-item" id="managementCareersItem">• Careers: Manager, HR, Marketing Executive, Entrepreneur</div>
+    
+    <!-- ==================== DOOR 2: LAW (LLB) ==================== -->
+    <div id="door-law" class="door-content">
+        <div class="accordion-card" id="llbArtsCard">
+            <div class="accordion-header" onclick="toggleCard('llbArtsCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚖️</span> LLB - Bachelor of Laws (5 years integrated | 3 years after graduation)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of legal systems, constitutional law, criminal law, corporate law, civil law, taxation law.<br><span class="salary-text">💰 Fresher Lawyer: ₹5-10 LPA | Corporate Lawyer: ₹15-30 LPA | Senior Advocate: ₹1-5 Cr</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Prestigious profession, high earning potential, advocacy, judiciary, corporate legal roles, public prosecutor, legal advisor, judge.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">5-year BA+LLB after 12th | 3-year LLB after graduation (any stream)</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.nls.ac.in" target="_blank">NLSIU Bangalore</a> | <a class="live-link" href="https://nalsar.ac.in" target="_blank">NALSAR Hyderabad</a> | <a class="live-link" href="https://nludelhi.ac.in" target="_blank">NLU Delhi</a> | <a class="live-link" href="https://gnlu.ac.in" target="_blank">GNLU Gandhinagar</a> | <a class="live-link" href="https://www.nujs.edu" target="_blank">NUJS Kolkata</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">CLAT (Common Law Admission Test)</a> | <a class="live-link" href="https://www.ailet.in" target="_blank">AILET</a> | <a class="live-link" href="https://www.lsatindia.in" target="_blank">LSAT</a></div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in justice, strong analytical skills, good communication, persuasive ability, logical reasoning, memory</div></div>
+                </div>
+                <div class="section-title">📋 CLAT EXAM - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">consortiumofnlus.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Exam Date</div><div class="info-text">December 2025</div></div>
+                    <div class="info-card"><div class="info-label">📊 Cutoff</div><div class="info-text">NLSIU: 120+ rank, NALSAR: 200+ rank, NLU Delhi: 300+ rank</div></div>
+                </div>
+                <div class="section-title">🏛️ Top NLUs (NIRF Ranked)</div>
+                <table><thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th></tr></thead>
+                <tbody><tr><td>NLSIU Bangalore</td><td>Bangalore</td><td>₹2,50,000</td><td>1</td></tr>
+                <tr><td>NALSAR Hyderabad</td><td>Hyderabad</td><td>₹2,00,000</td><td>2</td></tr>
+                <tr><td>NLU Delhi</td><td>Delhi</td><td>₹2,00,000</td><td>3</td></tr>
+                </tbody></table>
+                <div class="section-title">🗺️ Career Roadmap (Law)</div>
+                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">BA+LLB Integrated Degree<br><span class="salary-text">💰 Fresher: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Junior Advocate under Senior Advocate<br><span class="salary-text">💰 Junior: ₹3-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Corporate Lawyer → Legal Manager<br><span class="salary-text">💰 Corporate: ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8-12 Years</div><div class="roadmap-text">Partner → Legal Head → Judge<br><span class="salary-text">💰 Partner: ₹30-60 LPA | Judge: ₹2-2.5L/month</span></div></div>
+                <div class="section-title">⭐ Famous Lawyers</div>
+                <div><span class="famous-badge">Fali S. Nariman</span> <span class="famous-badge">Harish Salve</span> <span class="famous-badge">Ram Jethmalani</span> <span class="famous-badge">Mukul Rohatgi</span> <span class="famous-badge">Indira Jaising</span> <span class="famous-badge">Soli Sorabjee</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="journalismTitle">📰 Journalism & Mass Communication</div>
-        <div class="list-item" id="bjmcItem">• BJMC – Bachelor of Journalism & Mass Communication</div>
-        <div class="list-item" id="journalismCareersItem">• Careers: Journalist, News Anchor, Social Media Manager, Content Creator</div>
+    
+    <!-- ==================== DOOR 3: JOURNALISM & MASS COMMUNICATION ==================== -->
+    <div id="door-journalism" class="door-content">
+        <div class="accordion-card" id="journalismCard">
+            <div class="accordion-header" onclick="toggleCard('journalismCard')">
+                <div class="accordion-title"><span class="accordion-icon">📰</span> BJMC - Bachelor of Journalism & Mass Communication (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of journalism, news reporting, media ethics, advertising, public relations, digital media, broadcasting.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | Senior Journalist: ₹10-20 LPA | Editor: ₹15-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Exciting career, media industry growth, TV/News channels, digital media boom, public influence, celebrity status.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iimc.nic.in" target="_blank">IIMC Delhi</a> | <a class="live-link" href="https://www.jmi.ac.in" target="_blank">Jamia Millia Islamia</a> | <a class="live-link" href="https://www.symlaw.edu.in" target="_blank">Symbiosis Pune</a> | <a class="live-link" href="https://www.christuniversity.in" target="_blank">Christ University</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">CUET, IIMC Entrance Exam, JMI Entrance, Symbiosis SET</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Journalism)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">BJMC Degree + Internship at News Channel/Newspaper<br><span class="salary-text">💰 Trainee Journalist: ₹3-5 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Reporter → Sub-Editor → News Producer<br><span class="salary-text">💰 Journalist: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">Senior Correspondent → Principal Correspondent → News Editor<br><span class="salary-text">💰 Senior: ₹10-18 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8-12 Years</div><div class="roadmap-text">News Anchor → News Director → Editor-in-Chief<br><span class="salary-text">💰 Top Anchor: ₹30 LPA - ₹1 Cr | Editor: ₹20-40 LPA</span></div></div>
+                <div class="section-title">⭐ Famous Journalists</div>
+                <div><span class="famous-badge">Arnab Goswami</span> <span class="famous-badge">Ravish Kumar</span> <span class="famous-badge">Barkha Dutt</span> <span class="famous-badge">Rajdeep Sardesai</span> <span class="famous-badge">Nidhi Razdan</span> <span class="famous-badge">Shiv Aroor</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="fineArtsTitle">🎭 Fine Arts (BFA)</div>
-        <div class="list-item" id="bfaSubjectsItem">• Painting, Music, Dance, Photography, Sculpture</div>
-        <div class="list-item" id="bfaCareersItem">• Careers: Artist, Animator, Illustrator, Designer</div>
+    
+    <!-- ==================== DOOR 4: FINE ARTS (BFA) ==================== -->
+    <div id="door-finearts" class="door-content">
+        <div class="accordion-card" id="fineArtsCard">
+            <div class="accordion-header" onclick="toggleCard('fineArtsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎭</span> BFA - Bachelor of Fine Arts (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of painting, sculpture, applied arts, printmaking, digital art, photography, visual communication.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | Senior Artist: ₹10-20 LPA | Gallery Owner: ₹20-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Creative expression, growing art market, freelance opportunities, gallery exhibitions, art teaching, animation industry.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.collegeofart.in" target="_blank">College of Art Delhi</a> | <a class="live-link" href="https://www.kala-bhavana.org" target="_blank">Kala Bhavana Santiniketan</a> | <a class="live-link" href="https://www.jamiamilliaislamia.ac.in" target="_blank">Jamia Fine Arts</a> | <a class="live-link" href="https://www.sirjjcollegeofarchitecture.in" target="_blank">Sir JJ College of Arts</a></div></div>
+                </div>
+                <div class="section-title">⭐ Famous Fine Artists</div>
+                <div><span class="famous-badge">M. F. Husain</span> <span class="famous-badge">S. H. Raza</span> <span class="famous-badge">Tyeb Mehta</span> <span class="famous-badge">F. N. Souza</span> <span class="famous-badge">Anjolie Ela Menon</span> <span class="famous-badge">Raja Ravi Varma</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="socialWorkTitle">🤝 Social Work (BSW)</div>
-        <div class="list-item" id="bswItem">• Bachelor of Social Work</div>
-        <div class="list-item" id="socialWorkCareersItem">• Careers: Social Worker, NGO Manager, CSR Executive</div>
+        <!-- ==================== DOOR 5: PSYCHOLOGY ==================== -->
+    <div id="door-psychology" class="door-content">
+        <div class="accordion-card" id="psychologyCard">
+            <div class="accordion-header" onclick="toggleCard('psychologyCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧠</span> BA/B.Sc Psychology - Complete Career Guide (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Scientific study of mind, behavior, emotions, cognition, personality, mental processes, and human development.<br><span class="salary-text">💰 B.Sc: ₹3-6 LPA | M.Sc: ₹5-10 LPA | M.Phil Clinical Psychology: ₹8-15 LPA | PhD: ₹12-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing demand in healthcare, corporate HR, schools, defense, counselling centers, rehabilitation. Mental health awareness is increasing rapidly.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th (Any stream with minimum 50% marks). Mathematics not mandatory.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.du.ac.in" target="_blank">University of Delhi</a> | <a class="live-link" href="https://www.bhu.ac.in" target="_blank">BHU</a> | <a class="live-link" href="https://www.jmi.ac.in" target="_blank">Jamia Millia Islamia</a> | <a class="live-link" href="https://www.christuniversity.in" target="_blank">Christ University</a> | <a class="live-link" href="https://www.amity.edu" target="_blank">Amity University</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">CUET, JMI Entrance, BHU UET, University-specific entrance exams</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Empathetic, good listener, analytical mind, interest in human behavior, patience, non-judgmental</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th → BA/B.Sc Psychology (3 years) → MA/M.Sc Psychology (2 years) → M.Phil Clinical Psychology (2 years) → PhD (3-5 years)</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Psychology Colleges</div>
+                <table class="college-table">
+                    <thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>Specialization</th></tr></thead>
+                    <tbody>
+                        <tr><td><a class="live-link" href="https://www.du.ac.in" target="_blank">DU - Lady Shri Ram College</a> </th><td>Delhi</th><td>₹20,000</th><td>Clinical/Organizational</th></tr>
+                        <tr><td><a class="live-link" href="https://www.bhu.ac.in" target="_blank">BHU</a> </th><td>Varanasi</th><td>₹10,000</th><td>Clinical/Counselling</th></tr>
+                        <tr><td><a class="live-link" href="https://www.christuniversity.in" target="_blank">Christ University</a> </th><td>Bangalore</th><td>₹80,000</th>那样Applied Psychology</th></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Career Roadmap (Psychology)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">BA/B.Sc Psychology<br><span class="salary-text">💰 Psychology Assistant: ₹3-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MA/M.Sc Psychology (Specialization: Clinical, Organizational, Counselling, Educational)<br><span class="salary-text">💰 Psychologist: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Phil Clinical Psychology (RCI approved) - Mandatory for Clinical Psychologist license<br><span class="salary-text">💰 Clinical Psychologist: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">PhD Psychology → Senior Psychologist → Professor<br><span class="salary-text">💰 PhD Psychologist: ₹10-25 LPA | Professor: ₹12-20 LPA</span></div></div>
+                <div class="section-title">🏛️ Career Opportunities in Psychology</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏥 Clinical</div><div class="info-text">Hospital, Clinic, Private Practice, Rehabilitation Center - ₹8-15 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏢 Organizational</div><div class="info-text">Corporate HR, Recruitment, Training, Employee Wellness - ₹6-15 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏫 Educational</div><div class="info-text">School Counsellor, Child Psychologist - ₹5-10 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🧠 Research</div><div class="info-text">ICMR, NIMHANS, University Research - ₹6-12 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🛡️ Defence</div><div class="info-text">Armed Forces Psychological Selection Centre - ₹8-15 LPA</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Psychologists</div>
+                <div><span class="famous-badge">Sigmund Freud</span> <span class="famous-badge">Carl Jung</span> <span class="famous-badge">B. F. Skinner</span> <span class="famous-badge">Dr. Sudhir Kakar (Indian)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="hotelTitle">🏨 Hotel Management & Hospitality</div>
-        <div class="list-item" id="bhmItem">• BHM / B.Sc Hotel Management</div>
-        <div class="list-item" id="hotelCareersItem">• Careers: Hotel Manager, Chef, Event Planner, Airline Services</div>
+    
+    <!-- ==================== DOOR 6: SOCIAL WORK (BSW) ==================== -->
+    <div id="door-socialwork" class="door-content">
+        <div class="accordion-card" id="socialWorkCard">
+            <div class="accordion-header" onclick="toggleCard('socialWorkCard')">
+                <div class="accordion-title"><span class="accordion-icon">🤝</span> BSW - Bachelor of Social Work (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of social issues, community development, welfare programs, NGO management, counselling, social justice.<br><span class="salary-text">💰 BSW: ₹3-6 LPA | MSW: ₹6-12 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Government and NGO sector jobs, CSR roles, social impact, community service, job satisfaction.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.tiss.edu" target="_blank">TISS Mumbai</a> | <a class="live-link" href="https://www.du.ac.in" target="_blank">University of Delhi</a> | <a class="live-link" href="https://www.jmi.ac.in" target="_blank">Jamia Millia Islamia</a></div></div>
+                </div>
+                <div class="section-title">🏛️ Top Recruiters for Social Workers</div>
+                <div><span class="famous-badge">UNICEF</span> <span class="famous-badge">World Bank</span> <span class="famous-badge">CRY</span> <span class="famous-badge">Oxfam</span> <span class="famous-badge">Care India</span> <span class="famous-badge">TATA Trusts</span> <span class="famous-badge">Reliance Foundation</span> <span class="famous-badge">State Social Welfare Dept</span></div>
+                <div class="section-title">⭐ Famous Social Workers</div>
+                <div><span class="famous-badge">Mother Teresa</span> <span class="famous-badge">Baba Amte</span> <span class="famous-badge">Anna Hazare</span> <span class="famous-badge">Medha Patkar</span> <span class="famous-badge">Malala Yousafzai</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="designTitle">🎨 Design & Creative Fields</div>
-        <div class="list-item" id="designSubjectsItem">• Fashion Design, Interior Design, Graphic Design, Animation, Event Management, Travel & Tourism</div>
+    
+    <!-- ==================== DOOR 7: HOTEL MANAGEMENT ==================== -->
+    <div id="door-hotel" class="door-content">
+        <div class="accordion-card" id="hotelArtsCard">
+            <div class="accordion-header" onclick="toggleCard('hotelArtsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏨</span> BHM - Bachelor of Hotel Management (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Hospitality management, food production, front office, housekeeping, catering, event management.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | GM: ₹25-50 LPA | VP Operations: ₹40-80 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">NCHM JEE</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP IHMs</div><div class="info-text"><a class="live-link" href="https://www.ihmpusa.net" target="_blank">IHM Pusa Delhi</a> | <a class="live-link" href="https://www.ihmmumbai.net" target="_blank">IHM Mumbai</a> | <a class="live-link" href="https://www.ihmchennai.net" target="_blank">IHM Chennai</a> | <a class="live-link" href="https://www.ihmbangalore.net" target="_blank">IHM Bangalore</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Hotel Management)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">BHM Degree + Industrial Training<br><span class="salary-text">💰 Management Trainee: ₹4-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Assistant Manager → Department Head<br><span class="salary-text">💰 Department Head: ₹10-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">General Manager → Hotel Director<br><span class="salary-text">💰 GM: ₹25-50 LPA | Director: ₹40-80 LPA</span></div></div>
+                <div class="section-title">🌍 International Opportunities</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇦🇪 Dubai</div><div class="info-text">Tax-free salary: AED 10k-30k/month</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇭 Switzerland</div><div class="info-text">Luxury hotels, Salary: CHF 5k-10k/month</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">J-1 Visa, Salary: $3k-8k/month</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="psychologyTitle">🧠 Psychology</div>
-        <div class="list-item" id="psychologyItem">• BA Psychology / B.Sc Psychology</div>
-        <div class="list-item" id="psychologyCareersItem">• Careers: Clinical Psychologist, Counsellor, HR Specialist</div>
+    
+    <!-- ==================== DOOR 8: DESIGN ==================== -->
+    <div id="door-design" class="door-content">
+        <div class="accordion-card" id="designArtsCard">
+            <div class="accordion-header" onclick="toggleCard('designArtsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎨</span> B.Des - Bachelor of Design (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Fashion Design, Interior Design, Graphic Design, Communication Design, UI/UX Design, Animation.<br><span class="salary-text">💰 Fresher: ₹6-18 LPA | Senior: ₹15-30 LPA | Design Director: ₹30-60 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID DAT</a> | <a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT</a> | <a class="live-link" href="https://uceed.iitb.ac.in" target="_blank">UCEED</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID Ahmedabad</a> | <a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT Delhi</a> | <a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay IDC</a> | <a class="live-link" href="https://www.mitid.edu.in" target="_blank">MIT ID Pune</a></div></div>
+                </div>
+                <div class="section-title">⭐ Famous Designers</div>
+                <div><span class="famous-badge">Sabyasachi Mukherjee (Fashion)</span> <span class="famous-badge">Manish Malhotra</span> <span class="famous-badge">Ritu Beri</span> <span class="famous-badge">Tarun Tahiliani</span> <span class="famous-badge">Anita Dongre</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="educationTitle">📚 Education (B.Ed)</div>
-        <div class="list-item" id="bedItem">• B.Ed after graduation, Integrated BA+B.Ed (4 years)</div>
-        <div class="list-item" id="educationCareersItem">• Careers: School Teacher, Counsellor</div>
+    
+    <!-- ==================== DOOR 9: FOREIGN LANGUAGES ==================== -->
+    <div id="door-languages" class="door-content">
+        <div class="accordion-card" id="languagesCard">
+            <div class="accordion-header" onclick="toggleCard('languagesCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Foreign Languages - Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇫🇷 French</div><div class="info-text">Delivered: B1/B2/C1/C2 levels | Salary: ₹6-15 LPA | Jobs: Translator, Interpreter, MNCs, Embassy, Tourism, Teaching</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 German</div><div class="info-text">High demand in engineering, IT, and automotive sectors | Salary: ₹8-20 LPA | Study in Germany (free education)</div></div>
+                    <div class="info-card"><div class="info-label">🇪🇸 Spanish</div><div class="info-text">Fastest growing, US market, BPO/KPO, MNCs | Salary: ₹6-15 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🇯🇵 Japanese</div><div class="info-text">IT, Animation, Gaming, Manufacturing (Suzuki, Honda, Sony) | Salary: ₹8-25 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇳 Chinese</div><div class="info-text">Business, Trade, MNCs | Salary: ₹5-12 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🇷🇺 Russian</div><div class="info-text">Defence, Space (ISRO/NASA collaboration), Trade | Salary: ₹6-18 LPA</div></div>
+                </div>
+                <div class="section-title">📋 Certification Levels (Common European Framework)</div>
+                <div class="roadmap-step"><div class="roadmap-year">A1/A2</div><div class="roadmap-text">Beginner/Basic (3-6 months) - ₹3-5 LPA</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">B1/B2</div><div class="roadmap-text">Intermediate (6-12 months) - ₹5-10 LPA</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">C1/C2</div><div class="roadmap-text">Advanced/Fluent (1-2 years) - ₹10-25 LPA</div></div>
+                <div class="section-title">🏛️ Top Institutes for Foreign Languages</div>
+                <div><span class="famous-badge">JNU - School of Language Studies</span> <span class="famous-badge">University of Delhi</span> <span class="famous-badge">EFLU Hyderabad</span> <span class="famous-badge">Alliance Française (French)</span> <span class="famous-badge">Goethe Institut (German)</span> <span class="famous-badge">Instituto Cervantes (Spanish)</span> <span class="famous-badge">Japan Foundation (Japanese)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="languagesTitle">🌍 Foreign Languages</div>
-        <div class="list-item" id="languagesItem">• French, German, Spanish, Japanese – Translator, Interpreter, MNC/Embassy Jobs</div>
+    
+    <!-- ==================== DOOR 10: DIGITAL MARKETING ==================== -->
+    <div id="door-digital" class="door-content">
+        <div class="accordion-card" id="digitalArtsCard">
+            <div class="accordion-header" onclick="toggleCard('digitalArtsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📈</span> Digital Marketing (3-6 months courses)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">SEO, SMM, Google Ads, Email Marketing, Content Marketing, Analytics, Affiliate Marketing.<br><span class="salary-text">💰 Executive: ₹4-8 LPA | Manager: ₹10-20 LPA | Head: ₹20-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 CERTIFICATIONS</div><div class="info-text"><a class="live-link" href="https://skillshop.google.com" target="_blank">Google Digital Garage</a> | <a class="live-link" href="https://academy.hubspot.com" target="_blank">HubSpot Academy</a> | <a class="live-link" href="https://www.semrush.com/academy" target="_blank">SEMrush Academy</a> | <a class="live-link" href="https://www.facebook.com/business/learn" target="_blank">Facebook Blueprint</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Digital Marketing)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3-6 Months</div><div class="roadmap-text">Certification + Internship<br><span class="salary-text">💰 Executive: ₹3-5 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1-2 Years</div><div class="roadmap-text">SEO/SMM Specialist → Team Lead<br><span class="salary-text">💰 Specialist: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Digital Marketing Manager → Head of Digital<br><span class="salary-text">💰 Manager: ₹10-20 LPA | Head: ₹20-35 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Director → CMO (Chief Marketing Officer)<br><span class="salary-text">💰 CMO: ₹40 LPA - ₹1.5 Cr</span></div></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="digitalTitle">📈 Digital Marketing & Creative Media</div>
-        <div class="list-item" id="digitalItem">• SEO, Social Media Management, Content Strategy, Graphic Design, Animation, VFX</div>
+    
+    <!-- ==================== DOOR 11: EDUCATION (B.Ed) ==================== -->
+    <div id="door-education" class="door-content">
+        <div class="accordion-card" id="bEdCard">
+            <div class="accordion-header" onclick="toggleCard('bEdCard')">
+                <div class="accordion-title"><span class="accordion-icon">📚</span> B.Ed - Bachelor of Education (2 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Teacher training program for becoming a school teacher (Primary/Secondary/High School).<br><span class="salary-text">💰 Private School: ₹3-8 LPA | Government School: ₹5-10 LPA | Principal: ₹10-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.ctet.nic.in" target="_blank">CTET (Central Teacher Eligibility Test)</a> | State TETs | DU B.Ed Entrance | BHU B.Ed</div></div>
+                    <div class="info-card"><div class="info-label">🗺️ ROADMAP</div><div class="info-text">Graduation (Any stream) → B.Ed (2 years) → CTET/State TET → School Teacher → Vice Principal → Principal</div></div>
+                </div>
+                <div class="section-title">🏛️ Career Paths in Education</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏫 PRT</div><div class="info-text">Primary Teacher (Class 1-5) - ₹4-7 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏫 TGT</div><div class="info-text">Trained Graduate Teacher (Class 6-10) - ₹5-9 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏫 PGT</div><div class="info-text">Post Graduate Teacher (Class 11-12) - ₹6-12 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏫 Vice Principal</div><div class="info-text">Vice Principal - ₹10-18 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏫 Principal</div><div class="info-text">Principal - ₹15-25 LPA</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="govtJobsTitle">🏛️ Government Jobs (Best for Arts)</div>
-        <div class="list-item" id="upscItem">• UPSC (IAS/IPS/IFS)</div>
-        <div class="list-item" id="statePscItem">• State PCS</div>
-        <div class="list-item" id="sscItem">• SSC CHSL/CGL</div>
-        <div class="list-item" id="railwaysItem">• Railways</div>
-        <div class="list-item" id="bankingItem">• Banking (after degree)</div>
+    
+    <!-- ==================== DOOR 12: GOVERNMENT JOBS ==================== -->
+    <div id="door-govt" class="door-content">
+        <div class="accordion-card" id="govtArtsCard">
+            <div class="accordion-header" onclick="toggleCard('govtArtsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Government Jobs for Arts Students</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏛️ UPSC Civil Services</div><div class="info-text">IAS (District Collector), IPS (Police Commissioner), IFS (Foreign Service) - ₹70k-2.5L/month</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ State PSC</div><div class="info-text">State Civil Services, Deputy Collector, DSP, Block Development Officer - ₹60k-1.8L/month</div></div>
+                    <div class="info-card"><div class="info-label">📋 SSC</div><div class="info-text">SSC CGL (Income Tax, Customs, Auditor, Examiner) - ₹6-15 LPA | SSC CHSL (Junior Secretariat) - ₹4-8 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏦 Banking</div><div class="info-text">IBPS PO, SBI PO, RBI Grade B, NABARD - ₹8-20 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏫 Teaching</div><div class="info-text">CTET, State TET - KVS, NVS, State Government Schools - ₹5-12 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🛡️ Defence</div><div class="info-text">NDA, CDS, AFCAT - Army/Navy/Air Force - ₹70k-1.5L/month</div></div>
+                    <div class="info-card"><div class="info-label">🚂 Railways</div><div class="info-text">RRB NTPC - ₹4-12 LPA | RRB Group D - ₹3-6 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Other Govt</div><div class="info-text">ESI, EPFO, FCI, LIC, BHEL (HR/F&A roles)</div></div>
+                </div>
+                <div class="section-title">📋 UPSC Civil Services Exam Structure</div>
+                <div class="roadmap-step"><div class="roadmap-year">Prelims</div><div class="roadmap-text">GS Paper I (History, Geography, Polity, Economy, Science, Current Affairs) + CSAT (Qualifying)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Mains</div><div class="roadmap-text">9 papers (Essay, GS I-IV, Optional I-II, English, Indian Language) - 1750 marks</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Interview</div><div class="roadmap-text">Personality Test - 275 marks</div></div>
+                <div class="section-title">⭐ Famous IAS/IPS Officers from Arts Background</div>
+                <div><span class="famous-badge">Armstrong Pame (IAS - Manipur)</span> <span class="famous-badge">T. N. Seshan (IAS)</span> <span class="famous-badge">Dr. K. Sivan (ISRO - BA Economics)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 13: ABROAD STUDIES ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="abroadArtsCard">
+            <div class="accordion-header" onclick="toggleCard('abroadArtsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Studies for Arts Students</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">MA in English/Psychology/Sociology/Economics, MPA, MSW | GRE/TOEFL/IELTS | Salary: $50k-100k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">MA in Humanities, LLM, International Relations | IELTS 7.0 | Top Unis: LSE, Oxford, Cambridge, King's</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">MA in Sociology/Psychology, MSW | PGWP pathway | PR after 1-2 years</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">Master of Social Work (MSW) - PR pathway | Master of International Relations</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">MA in Political Science/Economics (low tuition/free) | DAAD Scholarship</div></div>
+                </div>
+                <div class="section-title">🎓 Scholarships for Arts Students Abroad</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 Fulbright</div><div class="info-text">Fully funded for master's/PhD</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 Chevening</div><div class="info-text">Fully funded (1 year master's in UK)</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia Awards</div><div class="info-text">Fully funded</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 DAAD</div><div class="info-text">Fully funded for master's/PhD</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Vanier</div><div class="info-text">CAD 50,000/year for doctoral students</div></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
-    en: {
-        app_tagline: "Career Saathi", tagline: "🎨 Arts & Humanities Careers", page_title: "🎨 Arts (Humanities) Stream",
-        ba_title: "🎓 Bachelor of Arts (BA)", ba_subjects: "• Political Science, History, Geography, Psychology, Sociology, English, Hindi, Sanskrit, Philosophy, Anthropology",
-        ba_careers: "• Careers: Civil Services, Teaching, Research, Journalism, Social Work",
-        law_title: "⚖️ Law (LLB)", ba_llb: "• BA + LLB (Integrated 5 years) through CLAT", law_careers: "• Careers: Lawyer, Judge, Corporate Legal Advisor, Legal Consultant",
-        management_title: "📊 Management & Business", bba: "• BBA, BMS (Bachelor of Management Studies)", management_careers: "• Careers: Manager, HR, Marketing Executive, Entrepreneur",
-        journalism_title: "📰 Journalism & Mass Communication", bjmc: "• BJMC – Bachelor of Journalism & Mass Communication", journalism_careers: "• Careers: Journalist, News Anchor, Social Media Manager, Content Creator",
-        fine_arts_title: "🎭 Fine Arts (BFA)", bfa_subjects: "• Painting, Music, Dance, Photography, Sculpture", bfa_careers: "• Careers: Artist, Animator, Illustrator, Designer",
-        social_work_title: "🤝 Social Work (BSW)", bsw: "• Bachelor of Social Work", social_work_careers: "• Careers: Social Worker, NGO Manager, CSR Executive",
-        hotel_title: "🏨 Hotel Management & Hospitality", bhm: "• BHM / B.Sc Hotel Management", hotel_careers: "• Careers: Hotel Manager, Chef, Event Planner, Airline Services",
-        design_title: "🎨 Design & Creative Fields", design_subjects: "• Fashion Design, Interior Design, Graphic Design, Animation, Event Management, Travel & Tourism",
-        psychology_title: "🧠 Psychology", psychology: "• BA Psychology / B.Sc Psychology", psychology_careers: "• Careers: Clinical Psychologist, Counsellor, HR Specialist",
-        education_title: "📚 Education (B.Ed)", bed: "• B.Ed after graduation, Integrated BA+B.Ed (4 years)", education_careers: "• Careers: School Teacher, Counsellor",
-        languages_title: "🌍 Foreign Languages", languages: "• French, German, Spanish, Japanese – Translator, Interpreter, MNC/Embassy Jobs",
-        digital_title: "📈 Digital Marketing & Creative Media", digital: "• SEO, Social Media Management, Content Strategy, Graphic Design, Animation, VFX",
-        govt_jobs_title: "🏛️ Government Jobs (Best for Arts)", upsc: "• UPSC (IAS/IPS/IFS)", state_psc: "• State PCS", ssc: "• SSC CHSL/CGL", railways: "• Railways", banking: "• Banking (after degree)",
-        bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
-    },
-    hi: {
-        app_tagline: "करियर साथी", tagline: "🎨 कला और मानविकी करियर", page_title: "🎨 कला (मानविकी) स्ट्रीम",
-        ba_title: "🎓 बैचलर ऑफ आर्ट्स (बीए)", ba_subjects: "• राजनीति विज्ञान, इतिहास, भूगोल, मनोविज्ञान, समाजशास्त्र, अंग्रेजी, हिंदी, संस्कृत, दर्शनशास्त्र, मानवशास्त्र",
-        ba_careers: "• करियर: सिविल सेवाएं, शिक्षण, अनुसंधान, पत्रकारिता, सामाजिक कार्य",
-        law_title: "⚖️ कानून (एलएलबी)", ba_llb: "• बीए + एलएलबी (एकीकृत 5 वर्ष) सीएलएटी के माध्यम से", law_careers: "• करियर: वकील, न्यायाधीश, कॉर्पोरेट कानूनी सलाहकार, कानूनी सलाहकार",
-        management_title: "📊 प्रबंधन और व्यवसाय", bba: "• बीबीए, बीएमएस", management_careers: "• करियर: प्रबंधक, एचआर, मार्केटिंग कार्यकारी, उद्यमी",
-        journalism_title: "📰 पत्रकारिता और जनसंचार", bjmc: "• बीजेएमसी – पत्रकारिता और जनसंचार में स्नातक", journalism_careers: "• करियर: पत्रकार, समाचार एंकर, सोशल मीडिया प्रबंधक, कंटेंट क्रिएटर",
-        fine_arts_title: "🎭 ललित कला (बीएफए)", bfa_subjects: "• चित्रकला, संगीत, नृत्य, फोटोग्राफी, मूर्तिकला", bfa_careers: "• करियर: कलाकार, एनिमेटर, इलस्ट्रेटर, डिजाइनर",
-        social_work_title: "🤝 सामाजिक कार्य (बीएसडब्ल्यू)", bsw: "• सामाजिक कार्य में स्नातक", social_work_careers: "• करियर: सामाजिक कार्यकर्ता, एनजीओ प्रबंधक, सीएसआर कार्यकारी",
-        hotel_title: "🏨 होटल प्रबंधन और आतिथ्य", bhm: "• बीएचएम / बी.एससी होटल प्रबंधन", hotel_careers: "• करियर: होटल प्रबंधक, शेफ, इवेंट प्लानर, एयरलाइन सेवाएं",
-        design_title: "🎨 डिजाइन और रचनात्मक क्षेत्र", design_subjects: "• फैशन डिजाइन, इंटीरियर डिजाइन, ग्राफिक डिजाइन, एनीमेशन, इवेंट प्रबंधन, यात्रा और पर्यटन",
-        psychology_title: "🧠 मनोविज्ञान", psychology: "• बीए मनोविज्ञान / बी.एससी मनोविज्ञान", psychology_careers: "• करियर: नैदानिक मनोवैज्ञानिक, परामर्शदाता, एचआर विशेषज्ञ",
-        education_title: "📚 शिक्षा (बी.एड)", bed: "• स्नातक के बाद बी.एड, एकीकृत बीए+बी.एड (4 वर्ष)", education_careers: "• करियर: स्कूल शिक्षक, परामर्शदाता",
-        languages_title: "🌍 विदेशी भाषाएं", languages: "• फ्रेंच, जर्मन, स्पेनिश, जापानी – अनुवादक, दुभाषिया, बहुराष्ट्रीय कंपनी/दूतावास नौकरियां",
-        digital_title: "📈 डिजिटल मार्केटिंग और क्रिएटिव मीडिया", digital: "• एसईओ, सोशल मीडिया प्रबंधन, कंटेंट रणनीति, ग्राफिक डिजाइन, एनीमेशन, वीएफएक्स",
-        govt_jobs_title: "🏛️ सरकारी नौकरियां (कला के लिए सर्वोत्तम)", upsc: "• यूपीएससी (आईएएस/आईपीएस/आईएफएस)", state_psc: "• राज्य पीएससी", ssc: "• एसएससी सीएचएसएल/सीजीएल", railways: "• रेलवे", banking: "• बैंकिंग (डिग्री के बाद)",
-        bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल"
-    }
-};
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
 </script>
 </body>
-<script>
-// Continue JavaScript for arts.html
-const bottomNav = [
-    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
-    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
-    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
-    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
-    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
-];
-
-let currentLang = 'en';
-
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-
-function updateAllText() {
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    
-    document.getElementById('baTitle').textContent = t('ba_title');
-    document.getElementById('baSubjectsItem').textContent = t('ba_subjects');
-    document.getElementById('baCareersItem').textContent = t('ba_careers');
-    
-    document.getElementById('lawTitle').textContent = t('law_title');
-    document.getElementById('baLlbItem').textContent = t('ba_llb');
-    document.getElementById('lawCareersItem').textContent = t('law_careers');
-    
-    document.getElementById('managementTitle').textContent = t('management_title');
-    document.getElementById('bbaItem').textContent = t('bba');
-    document.getElementById('managementCareersItem').textContent = t('management_careers');
-    
-    document.getElementById('journalismTitle').textContent = t('journalism_title');
-    document.getElementById('bjmcItem').textContent = t('bjmc');
-    document.getElementById('journalismCareersItem').textContent = t('journalism_careers');
-    
-    document.getElementById('fineArtsTitle').textContent = t('fine_arts_title');
-    document.getElementById('bfaSubjectsItem').textContent = t('bfa_subjects');
-    document.getElementById('bfaCareersItem').textContent = t('bfa_careers');
-    
-    document.getElementById('socialWorkTitle').textContent = t('social_work_title');
-    document.getElementById('bswItem').textContent = t('bsw');
-    document.getElementById('socialWorkCareersItem').textContent = t('social_work_careers');
-    
-    document.getElementById('hotelTitle').textContent = t('hotel_title');
-    document.getElementById('bhmItem').textContent = t('bhm');
-    document.getElementById('hotelCareersItem').textContent = t('hotel_careers');
-    
-    document.getElementById('designTitle').textContent = t('design_title');
-    document.getElementById('designSubjectsItem').textContent = t('design_subjects');
-    
-    document.getElementById('psychologyTitle').textContent = t('psychology_title');
-    document.getElementById('psychologyItem').textContent = t('psychology');
-    document.getElementById('psychologyCareersItem').textContent = t('psychology_careers');
-    
-    document.getElementById('educationTitle').textContent = t('education_title');
-    document.getElementById('bedItem').textContent = t('bed');
-    document.getElementById('educationCareersItem').textContent = t('education_careers');
-    
-    document.getElementById('languagesTitle').textContent = t('languages_title');
-    document.getElementById('languagesItem').textContent = t('languages');
-    
-    document.getElementById('digitalTitle').textContent = t('digital_title');
-    document.getElementById('digitalItem').textContent = t('digital');
-    
-    document.getElementById('govtJobsTitle').textContent = t('govt_jobs_title');
-    document.getElementById('upscItem').textContent = t('upsc');
-    document.getElementById('statePscItem').textContent = t('state_psc');
-    document.getElementById('sscItem').textContent = t('ssc');
-    document.getElementById('railwaysItem').textContent = t('railways');
-    document.getElementById('bankingItem').textContent = t('banking');
-    
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
-}
-
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'education.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-renderBottomBar();
-loadSavedLanguage();
-</script>
 </html>
