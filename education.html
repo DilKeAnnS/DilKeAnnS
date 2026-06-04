@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
@@ -22,6 +22,7 @@
         .stream-card:active { transform: scale(0.97); }
         .stream-icon { font-size: 48px; margin-bottom: 12px; display: block; }
         .stream-name { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+        .stream-desc { font-size: 11px; color: #64748B; margin-top: 6px; }
         .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
@@ -37,13 +38,11 @@
             .header { padding: 20px 5% 30px 5%; }
             .logo img { height: 60px; }
             .logo h1 { font-size: 26px; }
-            .bottom-bar { padding: 10px 5% 22px; }
-            .nav-item span:first-child { font-size: 28px; }
-            .nav-item span:last-child { font-size: 14px; }
         }
         @media (max-width: 480px) {
             .stream-name { font-size: 14px; }
             .stream-icon { font-size: 40px; }
+            .stream-desc { font-size: 9px; }
         }
     </style>
 </head>
@@ -54,25 +53,25 @@
         <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">📖 Choose your stream</div>
+    <div class="tagline">📖 Choose your career path</div>
 </div>
 <div class="container">
-    <div class="page-title">🎓 Education Streams</div>
+    <div class="page-title">🎓 Education Streams (10 Career Paths)</div>
     <div class="streams-grid" id="streamsGrid"></div>
 </div>
 <div class="bottom-bar" id="bottomBar"></div>
 <script>
     const streams = [
-        { name: "Medical", icon: "🩺", link: "medical.html" },
-        { name: "Non-Medical", icon: "⚙️", link: "non_medical.html" },
-        { name: "Commerce", icon: "📊", link: "commerce.html" },
-        { name: "Arts", icon: "🎨", link: "arts.html" },
-        { name: "Sports", icon: "🏅", link: "sports.html" },
-        { name: "Agriculture", icon: "🌾", link: "agriculture.html" },
-        { name: "Artist", icon: "🎭", link: "artist.html" },
-        { name: "Designing", icon: "✏️", link: "designing.html" },
-        { name: "Skilled", icon: "🔧", link: "skilled.html" },
-        { name: "Abroad", icon: "🌏", link: "abroad.html" }
+        { name: "Medical", icon: "🩺", desc: "Doctor, Dentist, Paramedical, Pharmacy", link: "medical.html" },
+        { name: "Non-Medical", icon: "⚙️", desc: "Engineering, BCA, B.Sc, Architecture", link: "non_medical.html" },
+        { name: "Commerce", icon: "📊", desc: "B.Com, BBA, CA, CS, CMA", link: "commerce.html" },
+        { name: "Arts", icon: "🎨", desc: "BA, Law, Journalism, Psychology", link: "arts.html" },
+        { name: "Sports", icon: "🏅", desc: "B.P.Ed, Sports Science, Coaching", link: "sports.html" },
+        { name: "Agriculture", icon: "🌾", desc: "B.Sc Agri, Horticulture, Forestry", link: "agriculture.html" },
+        { name: "Artist", icon: "🎭", desc: "Acting, Music, Dance, Fine Arts", link: "artist.html" },
+        { name: "Designing", icon: "✏️", desc: "Fashion, Interior, Graphic, UI/UX", link: "designing.html" },
+        { name: "Skilled", icon: "🔧", desc: "ITI, Vocational, Diploma, PMKVY", link: "skilled.html" },
+        { name: "Abroad", icon: "🌏", desc: "Study in USA, UK, Canada, Australia", link: "abroad.html" }
     ];
 
     const bottomNav = [
@@ -90,6 +89,7 @@
             <div class="stream-card" data-link="${s.link}">
                 <span class="stream-icon">${s.icon}</span>
                 <div class="stream-name">${s.name}</div>
+                <div class="stream-desc">${s.desc}</div>
             </div>
         `).join('');
         document.querySelectorAll('.stream-card').forEach(card => {
