@@ -43,7 +43,7 @@
         @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tiles-grid { grid-template-columns: repeat(6, 1fr); gap: 20px; } .tile { padding: 20px 12px; } .tile-icon { font-size: 42px; } .tile-name { font-size: 14px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } .welcome { font-size: 14px; } .tagline { font-size: 16px; } .search-bar input { font-size: 16px; } .ask-ai { font-size: 14px; padding: 8px 16px; } }
         @media (max-width: 480px) { .tile-name { font-size: 10px; } .tile-icon { font-size: 26px; } .ask-ai span { display: none; } .ask-ai { padding: 6px 10px; } .logo-section { flex-wrap: wrap; justify-content: center; } }
     </style>
-    <!-- Language System -->
+    <!-- Language System: Core + Loader -->
     <script src="languages-core.js"></script>
     <script src="languages-loader.js"></script>
 </head>
@@ -103,7 +103,7 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-    // Tile definitions
+    // Tile definitions with nameKey for language support
     const tiles = [
         { nameKey: "education", icon: "🎓", link: "education.html" },
         { nameKey: "business", icon: "💼", link: "business.html" },
@@ -129,9 +129,7 @@
         { nameKey: "bottom_profile", icon: "👤", link: "#" }
     ];
 
-    let currentLang = 'en';
-
-    // Default text fallback
+    // Default text fallback (used before language system loads)
     const defaultText = {
         app_tagline: "Dil-Ke-AnnS Career Saathi",
         tagline: "🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳",
@@ -151,6 +149,9 @@
         search_alert: "Please type something to search", searching: "Searching for"
     };
 
+    let currentLang = 'en';
+
+    // Translation function
     function t(key) {
         if (window.translations && window.translations[currentLang] && window.translations[currentLang][key]) {
             return window.translations[currentLang][key];
@@ -158,8 +159,9 @@
         return defaultText[key] || key;
     }
 
+    // Update all text on the page
     function updateAllText() {
-        // Update header elements
+        // Header elements
         const appTagline = document.getElementById('appTagline');
         if (appTagline) appTagline.textContent = t('app_tagline');
         
@@ -197,20 +199,22 @@
         });
     }
 
+    // Change language
     function changeLanguage(langCode) {
         currentLang = langCode;
         localStorage.setItem('career_saathi_language', langCode);
         
-        // Update dropdown
         const selector = document.getElementById('languageSelect');
         if (selector) selector.value = langCode;
         
         updateAllText();
     }
 
+    // Render tiles
     function renderTiles() {
         const grid = document.getElementById('tilesGrid');
         if (!grid) return;
+        
         grid.innerHTML = tiles.map(tile => `
             <div class="tile" data-link="${tile.link}" data-name-key="${tile.nameKey}">
                 <span class="tile-icon">${tile.icon}</span>
@@ -221,19 +225,23 @@
         document.querySelectorAll('.tile').forEach(tile => {
             tile.addEventListener('click', () => {
                 const link = tile.getAttribute('data-link');
-                if (link && link !== '#') window.location.href = link;
-                else {
-                    const nameKey = tile.getAttribute('data-name-key');
+                const nameKey = tile.getAttribute('data-name-key');
+                if (link && link !== '#') {
+                    window.location.href = link;
+                } else {
                     alert(`🚀 ${t(nameKey)} ${t('coming_soon')}`);
                 }
             });
         });
+        
         updateAllText();
     }
 
+    // Render bottom bar
     function renderBottomBar() {
         const bar = document.getElementById('bottomBar');
         if (!bar) return;
+        
         bar.innerHTML = bottomNav.map(item => `
             <div class="nav-item" data-link="${item.link}" data-name-key="${item.nameKey}">
                 <span>${item.icon}</span>
@@ -244,16 +252,19 @@
         document.querySelectorAll('.nav-item').forEach(nav => {
             nav.addEventListener('click', () => {
                 const link = nav.getAttribute('data-link');
-                if (link && link !== '#') window.location.href = link;
-                else {
-                    const nameKey = nav.getAttribute('data-name-key');
+                const nameKey = nav.getAttribute('data-name-key');
+                if (link && link !== '#') {
+                    window.location.href = link;
+                } else {
                     alert(`📱 ${t(nameKey)} ${t('coming_soon')}`);
                 }
             });
         });
+        
         updateAllText();
     }
 
+    // Setup search
     function setupSearch() {
         const input = document.getElementById('searchInput');
         if (input) {
@@ -266,6 +277,7 @@
         }
     }
 
+    // Setup AI buttons
     function setupAI() {
         const askBtn = document.getElementById('askAiBtn');
         const floatingBtn = document.getElementById('floatingAiBtn');
@@ -274,6 +286,7 @@
         if (floatingBtn) floatingBtn.addEventListener('click', openAI);
     }
 
+    // Setup notifications
     function setupNotifications() {
         const alertBtn = document.getElementById('alertBtn');
         if (alertBtn) {
@@ -281,9 +294,10 @@
         }
     }
 
+    // Load saved language
     function loadSavedLanguage() {
         const savedLang = localStorage.getItem('career_saathi_language');
-        if (savedLang) {
+        if (savedLang && (savedLang === 'en' || savedLang === 'hi' || savedLang === 'mr' || savedLang === 'ta' || savedLang === 'te' || savedLang === 'kn' || savedLang === 'ml' || savedLang === 'bn' || savedLang === 'gu' || savedLang === 'pa' || savedLang === 'or' || savedLang === 'as')) {
             currentLang = savedLang;
             const selector = document.getElementById('languageSelect');
             if (selector) selector.value = savedLang;
@@ -291,10 +305,10 @@
         updateAllText();
     }
 
-    // Make functions globally available for language switcher
+    // Make functions global
     window.changeLanguage = changeLanguage;
     window.t = t;
-    
+
     // Initialize
     renderTiles();
     renderBottomBar();
