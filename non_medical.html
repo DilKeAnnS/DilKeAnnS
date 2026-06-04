@@ -7,306 +7,512 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .language-selector select option { color: black; background: white; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">⚙️ Engineering & PCM Careers</div>
+    <div class="tagline">⚙️ Complete Engineering & PCM Career Guide - 10th to CEO | Live Exam Updates</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">⚙️ Non-Medical (PCM) Stream</div>
-
-    <div class="section-card">
-        <div class="section-title" id="enggTitle">🎓 Engineering & Technology (B.Tech / B.E)</div>
-        <div class="list-item" id="cseItem">• Computer Science Engineering (CSE)</div>
-        <div class="list-item" id="itItem">• Information Technology (IT)</div>
-        <div class="list-item" id="aimlItem">• Artificial Intelligence & Machine Learning (AI/ML)</div>
-        <div class="list-item" id="dataScienceItem">• Data Science Engineering</div>
-        <div class="list-item" id="roboticsItem">• Robotics & Automation</div>
-        <div class="list-item" id="mechItem">• Mechanical Engineering</div>
-        <div class="list-item" id="civilItem">• Civil Engineering</div>
-        <div class="list-item" id="electricalItem">• Electrical Engineering</div>
-        <div class="list-item" id="eceItem">• Electronics & Communication Engineering (ECE)</div>
-        <div class="list-item" id="aerospaceItem">• Aerospace Engineering</div>
-        <div class="list-item" id="autoItem">• Automobile Engineering</div>
-        <div class="list-item" id="chemicalItem">• Chemical Engineering</div>
-        <div class="list-item" id="petroleumItem">• Petroleum Engineering</div>
-        <div class="list-item" id="marineItem">• Marine Engineering</div>
-        <div class="list-item" id="biotechItem">• Biotechnology Engineering</div>
-        <div class="list-item" id="foodTechItem">• Food Technology</div>
+    <div class="page-title">⚙️ Non-Medical (PCM) Stream</div>
+    <div class="page-subtitle">60+ Courses | 200+ Colleges | Live Exam Links | Auto Results | Complete Roadmap</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="engineering">🎓 <span class="door-label">Engineering (20+ Branches)</span></button>
+        <button class="door-btn" data-door="architecture">🏛️ <span class="door-label">Architecture & Planning</span></button>
+        <button class="door-btn" data-door="defence">🛡️ <span class="door-label">Defence & Merchant Navy</span></button>
+        <button class="door-btn" data-door="aviation">✈️ <span class="door-label">Aviation Careers</span></button>
+        <button class="door-btn" data-door="computers">💻 <span class="door-label">Computer & IT</span></button>
+        <button class="door-btn" data-door="science">🔬 <span class="door-label">Pure Science</span></button>
+        <button class="door-btn" data-door="management">📊 <span class="door-label">Management</span></button>
+        <button class="door-btn" data-door="design">🎨 <span class="door-label">Design</span></button>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="archTitle">🏛️ Architecture & Planning</div>
-        <div class="list-item" id="barchItem">• B.Arch – Bachelor of Architecture (5 years)</div>
-        <div class="list-item" id="bplanItem">• B.Plan – Bachelor of Planning</div>
-        <div class="list-item" id="interiorItem">• B.Des Interior Design</div>
+    
+    <!-- ==================== DOOR 1: ENGINEERING ==================== -->
+    <div id="door-engineering" class="door-content active">
+        <!-- Computer Science Engineering - FULL DETAIL -->
+        <div class="accordion-card active" id="cseCard">
+            <div class="accordion-header" onclick="toggleCard('cseCard')">
+                <div class="accordion-title"><span class="accordion-icon">💻</span> CSE - Computer Science Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of programming, algorithms, software development, computer systems.<br><span class="salary-text">💰 Fresher Salary: ₹8-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest paying engineering branch, global opportunities, work from home options.<br><span class="salary-text">💰 After M.Tech: ₹15-60 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCM (Age 17+). Start JEE preparation from Class 11.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.nitt.edu" target="_blank">NIT Trichy</a> | BITS Pilani</div></div>
+                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">JEE Main</a> | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Advanced</a> | <a class="live-link" href="https://www.bitsadmission.com" target="_blank">BITSAT</a> | <a class="live-link" href="https://viteee.vit.ac.in" target="_blank">VITEEE</a></div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Logical thinking, problem-solving, interest in coding, mathematics</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCM → JEE Main/Advanced → B.Tech CSE (4 years) → M.Tech/MS or Job</div></div>
+                </div>
+                <div class="section-title">📋 JEE EXAM - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 JEE Main Official</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">jeemain.nta.nic.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🔗 JEE Advanced</div><div class="info-text"><a class="live-link" href="https://jeeadv.ac.in" target="_blank">jeeadv.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📊 Result Link</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">Check Result</a> <span id="jeeResultDate">(Expected: April/June 2025)</span></div></div>
+                    <div class="info-card"><div class="info-label">📡 Live Updates</div><div class="info-text" id="jeeLiveUpdates">Loading latest updates...</div></div>
+                </div>
+                <div class="section-title">📊 JEE Main Cutoff 2024 (Reference)</div>
+                <table class="cutoff-table"><thead><tr><th>Category</th><th>Cutoff Percentile (NITs)</th><th>Rank</th></tr></thead>
+                <tbody><tr><td>General</td><td>90+ percentile</td><td>Under 50,000</td></tr>
+                <tr><td>OBC/EWS</td><td>75+ percentile</td><td>Under 1,00,000</td></tr>
+                <tr><td>SC/ST</td><td>60+ percentile</td><td>Under 2,00,000</td></tr>
+                </tbody></table>
+                <div class="section-title">🏛️ Top Engineering Colleges (NIRF Ranked)</div>
+                <table><thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
+                <tbody>
+                    <tr><td>IIT Madras</td><td>Chennai</td><td>₹2,00,000</td><td>1</td><td><a class="live-link" href="https://www.iitm.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td>IIT Delhi</td><td>Delhi</td><td>₹2,00,000</td><td>2</td><td><a class="live-link" href="https://www.iitd.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td>IIT Bombay</td><td>Mumbai</td><td>₹2,00,000</td><td>3</td><td><a class="live-link" href="https://www.iitb.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td>IIT Kanpur</td><td>Kanpur</td><td>₹2,00,000</td><td>4</td><td><a class="live-link" href="https://www.iitk.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td>IIT Kharagpur</td><td>Kharagpur</td><td>₹2,00,000</td><td>5</td><td><a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td>NIT Trichy</td><td>Trichy</td><td>₹1,50,000</td><td>9</td><td><a class="live-link" href="https://www.nitt.edu" target="_blank">Visit</a></td></tr>
+                </tbody></table>
+                <div class="section-title">🗺️ Career Roadmap (10th → CEO)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text">PCM Stream - Focus on Maths, Physics. Start JEE preparation.<br><span class="salary-text">💰 After 12th: JEE qualified</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Tech CSE Degree<br><span class="salary-text">💰 Software Engineer: ₹8-40 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Tech/MS in CS (US/Europe/India)<br><span class="salary-text">💰 Senior Engineer: ₹20-60 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Technical Lead → Engineering Manager → Director of Engineering<br><span class="salary-text">💰 Manager: ₹50 LPA - ₹1 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CTO / VP of Engineering / Tech Entrepreneur<br><span class="salary-text">💰 CTO: ₹1 Cr - ₹3 Cr+</span></div></div>
+                <div class="section-title">💰 Scholarships</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">KVPY Scholarship</div><div class="info-text"><a class="live-link" href="https://kvpy.iisc.ac.in" target="_blank">Apply</a> - ₹5,000-8,000/month</div></div>
+                    <div class="info-card"><div class="info-label">INSPIRE Scholarship</div><div class="info-text">₹80,000/year for top 1% students</div></div>
+                    <div class="info-card"><div class="info-label">IIT Merit-cum-Means</div><div class="info-text">Full tuition fee waiver for eligible students</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Engineers from India</div>
+                <div><span class="famous-badge">Sundar Pichai (Google CEO)</span> <span class="famous-badge">Satya Nadella (Microsoft CEO)</span> <span class="famous-badge">N. R. Narayana Murthy (Infosys)</span> <span class="famous-badge">A. P. J. Abdul Kalam</span></div>
+            </div>
+        </div>
+        
+        <!-- AI & ML Engineering -->
+        <div class="accordion-card" id="aimlCard">
+            <div class="accordion-header" onclick="toggleCard('aimlCard')">
+                <div class="accordion-title"><span class="accordion-icon">🤖</span> AI & ML - Artificial Intelligence & Machine Learning (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of algorithms that enable computers to learn from data and make decisions.<br><span class="salary-text">💰 Fresher Salary: ₹10-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest future demand, fastest growing field, AI revolution.<br><span class="salary-text">💰 After M.Tech/AI: ₹20-70 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEE Main, JEE Advanced, BITSAT, VITEEE</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IITs (AI/ML specialization), IIIT Hyderabad, BITS Pilani, IIIT Delhi</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Tech AI/ML<br><span class="salary-text">💰 ML Engineer: ₹10-50 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Tech/MS in AI (US/Europe)<br><span class="salary-text">💰 AI Research Scientist: ₹30-80 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Chief AI Officer / AI Director / AI Entrepreneur<br><span class="salary-text">💰 Top: ₹1 Cr - ₹5 Cr+</span></div></div>
+            </div>
+        </div>
+        
+        <!-- Data Science Engineering -->
+        <div class="accordion-card" id="dataScienceCard">
+            <div class="accordion-header" onclick="toggleCard('dataScienceCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> Data Science Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of extracting insights from large datasets, statistical analysis, predictive modeling.<br><span class="salary-text">💰 Fresher Salary: ₹8-45 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in all industries, data-driven decision making.<br><span class="salary-text">💰 After M.Tech: ₹15-55 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IITs, NITs, IIIT Hyderabad, ISI Kolkata, BITS Pilani</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mechanical Engineering -->
+        <div class="accordion-card" id="mechCard">
+            <div class="accordion-header" onclick="toggleCard('mechCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚙️</span> Mechanical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design, manufacturing, and maintenance of mechanical systems and machines.<br><span class="salary-text">💰 Fresher Salary: ₹5-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Evergreen branch, PSU jobs (BHEL, HAL, NTPC), wide applications.<br><span class="salary-text">💰 After M.Tech: ₹10-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IITs, NITs, BITS Pilani, PEC Chandigarh, DTU Delhi</div></div>
+                </div>
+                <div class="section-title">🏛️ Top PSUs for Mechanical</div>
+                <div><span class="famous-badge">BHEL</span> <span class="famous-badge">HAL</span> <span class="famous-badge">NTPC</span> <span class="famous-badge">GAIL</span> <span class="famous-badge">SAIL</span> <span class="famous-badge">ISRO</span></div>
+            </div>
+        </div>
+        
+        <!-- Civil Engineering -->
+        <div class="accordion-card" id="civilCard">
+            <div class="accordion-header" onclick="toggleCard('civilCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏗️</span> Civil Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design, construction, and maintenance of infrastructure (buildings, bridges, roads, dams).<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Government infrastructure projects, PSU jobs (PWD, NHPC, Railways).<br><span class="salary-text">💰 After M.Tech: ₹10-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IITs, NITs, DTU, PEC, College of Engineering Pune</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Electrical Engineering -->
+        <div class="accordion-card" id="electricalCard">
+            <div class="accordion-header" onclick="toggleCard('electricalCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚡</span> Electrical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of electricity, electronics, power generation, and electromagnetism.<br><span class="salary-text">💰 Fresher Salary: ₹5-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">PSU jobs (Powergrid, NTPC, BHEL), core sector demand.<br><span class="salary-text">💰 After M.Tech: ₹10-28 LPA</span></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Electronics & Communication -->
+        <div class="accordion-card" id="eceCard">
+            <div class="accordion-header" onclick="toggleCard('eceCard')">
+                <div class="accordion-title"><span class="accordion-icon">📡</span> Electronics & Communication Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design of electronic circuits, communication systems, embedded systems, VLSI.<br><span class="salary-text">💰 Fresher Salary: ₹6-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Semiconductor industry growth, 5G/6G demand, chip design jobs.<br><span class="salary-text">💰 After M.Tech/VLSI: ₹15-35 LPA</span></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Aerospace Engineering -->
+        <div class="accordion-card" id="aerospaceCard">
+            <div class="accordion-header" onclick="toggleCard('aerospaceCard')">
+                <div class="accordion-title"><span class="accordion-icon">🚀</span> Aerospace Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design of aircraft, spacecraft, missiles, and satellites.<br><span class="salary-text">💰 Fresher Salary: ₹8-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">ISRO, DRDO, HAL opportunities, space industry growth.<br><span class="salary-text">💰 After M.Tech: ₹15-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IIT Bombay, IIT Madras, IIT Kanpur, IIST Thiruvananthapuram</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Automobile Engineering -->
+        <div class="accordion-card" id="automobileCard">
+            <div class="accordion-header" onclick="toggleCard('automobileCard')">
+                <div class="accordion-title"><span class="accordion-icon">🚗</span> Automobile Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design and manufacturing of vehicles, engines, and automotive systems.<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Maruti Suzuki, Tata Motors, Mahindra, Hyundai, Tesla (abroad)</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="defenceTitle">🛡️ Defence & Merchant Navy</div>
-        <div class="list-item" id="ndaItem">• NDA (Army, Navy, Air Force) – After 12th</div>
-        <div class="list-item" id="tesItem">• TES – Technical Entry Scheme, Indian Army</div>
-        <div class="list-item" id="merchantItem">• Merchant Navy – B.Tech Marine Engineering</div>
-        <div class="list-item" id="nauticalItem">• Nautical Science (B.Sc)</div>
+    
+    <!-- ==================== DOOR 2: ARCHITECTURE ==================== -->
+    <div id="door-architecture" class="door-content">
+        <div class="accordion-card" id="barchCard">
+            <div class="accordion-header" onclick="toggleCard('barchCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏛️</span> B.Arch - Bachelor of Architecture (5 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design of buildings, urban spaces, landscape architecture.<br><span class="salary-text">💰 Fresher Salary: ₹6-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.nata.in" target="_blank">NATA</a> | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Paper 2</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.iitroorkee.ac.in" target="_blank">IIT Roorkee</a>, SPA Delhi, CEPT Ahmedabad, JJ School of Architecture</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">B.Arch Degree + Internship<br><span class="salary-text">💰 Architect: ₹6-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Arch Specialization (Urban Design, Landscape, Sustainable Architecture)<br><span class="salary-text">💰 Senior Architect: ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Own Architecture Firm / Principal Architect / Urban Planner<br><span class="salary-text">💰 Principal: ₹30-60 LPA</span></div></div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="bplanCard">
+            <div class="accordion-header" onclick="toggleCard('bplanCard')">
+                <div class="accordion-title"><span class="accordion-icon">🗺️</span> B.Plan - Bachelor of Planning (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Urban and regional planning, transportation planning, housing.<br><span class="salary-text">💰 Salary: ₹6-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">SPA Delhi, IIT Kharagpur, CEPT Ahmedabad</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="aviationTitle">🛫 Aviation Careers</div>
-        <div class="list-item" id="pilotItem">• Commercial Pilot Training</div>
-        <div class="list-item" id="ameItem">• Aircraft Maintenance Engineering (AME)</div>
-        <div class="list-item" id="aeroEnggItem">• Aeronautical Engineering</div>
-        <div class="list-item" id="aviationMgmtItem">• Aviation Management</div>
+    
+    <!-- ==================== DOOR 3: DEFENCE & MERCHANT NAVY ==================== -->
+    <div id="door-defence" class="door-content">
+        <div class="accordion-card" id="ndaCard">
+            <div class="accordion-header" onclick="toggleCard('ndaCard')">
+                <div class="accordion-title"><span class="accordion-icon">🛡️</span> NDA - National Defence Academy (3 years + 1 year training)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Joint services academy for Army, Navy, Air Force.<br><span class="salary-text">💰 Starting Salary: ₹70k-1.5L/month + Allowances</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://upsc.gov.in" target="_blank">UPSC NDA Exam</a> (Twice a year)</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th (Age 16.5-19.5 years). Only unmarried males.</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">NDA Training at Khadakwasla, Pune<br><span class="salary-text">💰 Cadet Stipend: ₹56k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1 Year</div><div class="roadmap-text">Pre-commission training at respective academies (IMA, INA, AFA)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Comm.</div><div class="roadmap-text">Commissioned Officer (Lieutenant/Flying Officer/Sub Lieutenant)<br><span class="salary-text">💰 Officer: ₹70k-1.5L/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">20-30 Years</div><div class="roadmap-text">Major → Lt Colonel → Colonel → Brigadier → Major General → Lt General → General<br><span class="salary-text">💰 General: ₹2.5-3L/month + benefits</span></div></div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="merchantCard">
+            <div class="accordion-header" onclick="toggleCard('merchantCard')">
+                <div class="accordion-title"><span class="accordion-icon">🚢</span> Merchant Navy (Various durations)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Commercial shipping, cargo vessels, cruise ships.<br><span class="salary-text">💰 Starting Salary: ₹10-30 LPA (Tax-free)</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 COURSES</div><div class="info-text"><a class="live-link" href="https://www.imo.org" target="_blank">B.Tech Marine Engineering</a> | Nautical Science | GP Rating</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP INSTITUTES</div><div class="info-text">TS Chanakya, IMU Mumbai, AMET Chennai, Tolani Maritime Institute</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Merchant Navy)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Deck Cadet</div><div class="roadmap-text">4 years<br><span class="salary-text">💰 ₹20-40 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Third Officer</div><div class="roadmap-text">After 18 months<br><span class="salary-text">💰 ₹40-60 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Second Officer</div><div class="roadmap-text">After 3 years<br><span class="salary-text">💰 ₹60-80 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Chief Officer</div><div class="roadmap-text">After 8 years<br><span class="salary-text">💰 ₹80-1.2 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Captain/Master</div><div class="roadmap-text">After 12-15 years<br><span class="salary-text">💰 ₹1.2-2.5 Cr</span></div></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="computerTitle">💻 Computer & IT (Non-Engineering Degrees)</div>
-        <div class="list-item" id="bcaItem">• BCA – Bachelor of Computer Applications</div>
-        <div class="list-item" id="bscCsItem">• B.Sc Computer Science</div>
-        <div class="list-item" id="bscDataItem">• B.Sc Data Science</div>
-        <div class="list-item" id="bscCyberItem">• B.Sc Cyber Security</div>
-        <div class="list-item" id="bscAnimItem">• B.Sc Animation & Gaming</div>
+    
+    <!-- ==================== DOOR 4: AVIATION ==================== -->
+    <div id="door-aviation" class="door-content">
+        <div class="accordion-card" id="pilotCard">
+            <div class="accordion-header" onclick="toggleCard('pilotCard')">
+                <div class="accordion-title"><span class="accordion-icon">✈️</span> Commercial Pilot Training (2-3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional pilot training for airlines.<br><span class="salary-text">💰 Starting Salary: ₹15-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High salary, global travel, respected profession.<br><span class="salary-text">💰 Captain Salary: ₹50 LPA - ₹1.5 Cr</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 REQUIREMENTS</div><div class="info-text">12th PCM (50%+), Class 1 Medical, DGCA exams</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Pilot)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Student Pilot</div><div class="roadmap-text">CPL training (200 hours flying)<br><span class="salary-text">💰 Training Cost: ₹40-60 Lakhs</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">First Officer</div><div class="roadmap-text">Indigo, Air India, SpiceJet, Akasa Air<br><span class="salary-text">💰 ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Senior First Officer</div><div class="roadmap-text">After 5 years<br><span class="salary-text">💰 ₹30-50 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Captain</div><div class="roadmap-text">After 8-10 years<br><span class="salary-text">💰 ₹50 LPA - ₹1.5 Cr</span></div></div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="ameCard">
+            <div class="accordion-header" onclick="toggleCard('ameCard')">
+                <div class="accordion-title"><span class="accordion-icon">🔧</span> Aircraft Maintenance Engineering (3-4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Maintenance and repair of aircraft.<br><span class="salary-text">💰 Salary: ₹5-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text">DGCA AME License</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP INSTITUTES</div><div class="info-text">IGIAU, School of Aviation Science, IIAE, UPES</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="pureScienceTitle">🔬 Pure Science Degrees (B.Sc)</div>
-        <div class="list-item" id="bscPhysicsItem">• B.Sc Physics, Chemistry, Mathematics, Statistics</div>
-        <div class="list-item" id="bscElectronicsItem">• B.Sc Electronics, Geology, Environmental Science</div>
-        <div class="list-item" id="bscForensicItem">• B.Sc Forensic Science, Nanotechnology</div>
-        <div class="list-item" id="bscAstroItem">• B.Sc Astrophysics, Aeronautics</div>
+    
+    <!-- ==================== DOOR 5: COMPUTER & IT ==================== -->
+    <div id="door-computers" class="door-content">
+        <div class="accordion-card" id="bcaCard">
+            <div class="accordion-header" onclick="toggleCard('bcaCard')">
+                <div class="accordion-title"><span class="accordion-icon">💻</span> BCA - Bachelor of Computer Applications (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Software development, programming, database management.<br><span class="salary-text">💰 Fresher Salary: ₹4-12 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 HIGHER STUDIES</div><div class="info-text">MCA (2 years) | MBA in IT | M.Sc CS</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">Symbiosis Pune, Christ Bangalore, IPU Delhi, VIT, LPU</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="bscCsCard">
+            <div class="accordion-header" onclick="toggleCard('bscCsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📘</span> B.Sc Computer Science (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-15 LPA (B.Sc) | ₹8-25 LPA (M.Sc)</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">University of Delhi (DU), BHU, Fergusson College, Christ University</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="managementTitle">📊 Management Options</div>
-        <div class="list-item" id="bbaItem">• BBA – Bachelor of Business Administration</div>
-        <div class="list-item" id="integratedBbaItem">• Integrated BBA+MBA (5 years)</div>
-        <div class="list-item" id="bhmItem">• BHM – Hotel Management</div>
-        <div class="list-item" id="travelItem">• Travel & Tourism</div>
+    
+    <!-- ==================== DOOR 6: PURE SCIENCE ==================== -->
+    <div id="door-science" class="door-content">
+        <div class="accordion-card" id="bscPhysicsCard">
+            <div class="accordion-header" onclick="toggleCard('bscPhysicsCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚛️</span> B.Sc Physics (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹3-8 LPA (B.Sc) | ₹6-15 LPA (M.Sc) | ₹10-25 LPA (PhD)<br><span class="salary-text">💰 Scientist (ISRO/BARC/DRDO): ₹15-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 HIGHER STUDIES</div><div class="info-text">M.Sc → PhD → Research Scientist (ISRO, DRDO, BARC, IISc) → Professor</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IITs, IISc, University of Delhi, BHU, St. Stephen's, Fergusson College</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="bscChemistryCard">
+            <div class="accordion-header" onclick="toggleCard('bscChemistryCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧪</span> B.Sc Chemistry (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹3-8 LPA (B.Sc) | ₹6-15 LPA (M.Sc) | ₹10-25 LPA (PhD)<br><span class="salary-text">💰 Chemist (ONGC, IOCL, Pharma): ₹8-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Chemical Analyst, Quality Control, Research Scientist, Pharma Industry</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="bscMathsCard">
+            <div class="accordion-header" onclick="toggleCard('bscMathsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📐</span> B.Sc Mathematics (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-12 LPA (B.Sc) | ₹8-20 LPA (M.Sc)<br><span class="salary-text">💰 Data Scientist/Analyst: ₹10-35 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 HIGHER STUDIES</div><div class="info-text">M.Sc, MBA, Actuarial Science, Data Science</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IITs, ISI Kolkata, CMI, University of Delhi, BHU, St. Stephen's</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="designTitle">🎨 Design & Creative Fields</div>
-        <div class="list-item" id="bdesItem">• B.Des (Industrial / Product / Fashion / UI-UX)</div>
-        <div class="list-item" id="graphicItem">• Graphic Designing, Animation & VFX</div>
-        <div class="list-item" id="photographyItem">• Photography, Gaming Design, Interior Design</div>
+    
+    <!-- ==================== DOOR 7: MANAGEMENT ==================== -->
+    <div id="door-management" class="door-content">
+        <div class="accordion-card" id="bbaCard">
+            <div class="accordion-header" onclick="toggleCard('bbaCard')">
+                <div class="accordion-title"><span class="accordion-icon">📈</span> BBA - Bachelor of Business Administration (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Management, marketing, finance, HR, operations.<br><span class="salary-text">💰 Fresher Salary: ₹4-10 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 HIGHER STUDIES</div><div class="info-text">MBA from IIMs (CAT exam) - ₹15-30 LPA after MBA</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">Shaheed Sukhdev College, NMIMS, Symbiosis, Christ, IPU</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="commercePcmTitle">📊 Commerce Options for PCM Students</div>
-        <div class="list-item" id="bcomItem">• B.Com, Economics, Finance</div>
-        <div class="list-item" id="caItem">• CA (Chartered Accountant), CS, CMA</div>
-        <div class="list-item" id="stockItem">• Stock Market & Investment Banking Courses</div>
-    </div>
-
-    <div class="section-card">
-        <div class="section-title" id="skillTitle">🛠️ Skill-based Professional Courses</div>
-        <div class="list-item" id="electricianItem">• Electrician / Fitter / Technician Courses</div>
-        <div class="list-item" id="solarItem">• Solar Technician, Drone Technology</div>
-        <div class="list-item" id="cncItem">• CNC Programming, Welding Technology</div>
-        <div class="list-item" id="autoTechItem">• Automobile Technician, HVAC</div>
-    </div>
-
-    <div class="section-card">
-        <div class="section-title" id="entrancePcmTitle">📋 Entrance Exams for PCM</div>
-        <div class="list-item" id="jeeMainItem">• JEE Main – For NITs, IIITs</div>
-        <div class="list-item" id="jeeAdvItem">• JEE Advanced – For IITs</div>
-        <div class="list-item" id="bitsatItem">• BITSAT – BITS Pilani</div>
-        <div class="list-item" id="viteeeItem">• VITEEE – VIT University</div>
-        <div class="list-item" id="srmjeeItem">• SRMJEE – SRM University</div>
-        <div class="list-item" id="nataItem">• NATA – For B.Arch</div>
-        <div class="list-item" id="uceedItem">• UCEED – For B.Des at IITs</div>
-        <div class="list-item" id="stateCetItem">• State CETs (KCET, MHT-CET, UPSEE, etc.)</div>
-    </div>
-
-    <div class="section-card">
-        <div class="section-title" id="govtJobsPcmTitle">💼 Government Jobs After PCM</div>
-        <div class="list-item" id="upscItem">• UPSC (Civil Services – IAS, IPS, IFS)</div>
-        <div class="list-item" id="statePscItem">• State PSC</div>
-        <div class="list-item" id="sscItem">• SSC (CGL, CHSL, JE)</div>
-        <div class="list-item" id="bankingItem">• Banking (IBPS PO/Clerk, SBI PO)</div>
-        <div class="list-item" id="railwayItem">• Railway Jobs (RRB JE, NTPC, Group D)</div>
-        <div class="list-item" id="defenceExamItem">• Defence Exams (NDA, CDS, AFCAT)</div>
-        <div class="list-item" id="isroItem">• ISRO / DRDO Technical Assistant</div>
-    </div>
-
-    <div class="section-card">
-        <div class="section-title" id="salaryPcmTitle">💰 High Salary Career Options After PCM</div>
-        <div class="list-item" id="softwareItem">• Software Engineer / AI-ML Specialist – ₹8-40 LPA</div>
-        <div class="list-item" id="dataScientistItem">• Data Scientist – ₹10-35 LPA</div>
-        <div class="list-item" id="roboticsEnggItem">• Robotics Engineer – ₹6-20 LPA</div>
-        <div class="list-item" id="aeroEnggSalaryItem">• Aerospace Engineer – ₹8-25 LPA</div>
-        <div class="list-item" id="pilotSalaryItem">• Pilot – ₹15-50 LPA</div>
-        <div class="list-item" id="merchantSalaryItem">• Merchant Navy Officer – ₹10-30 LPA</div>
-        <div class="list-item" id="archSalaryItem">• Architect – ₹6-20 LPA</div>
-        <div class="list-item" id="defenceSalaryItem">• Defence Officer – ₹8-15 LPA + allowances</div>
-        <div class="list-item" id="investmentItem">• Investment Banking – ₹12-40 LPA</div>
-        <div class="list-item" id="cyberItem">• Cyber Security Specialist – ₹8-25 LPA</div>
+    
+    <!-- ==================== DOOR 8: DESIGN ==================== -->
+    <div id="door-design" class="door-content">
+        <div class="accordion-card" id="bdesCard">
+            <div class="accordion-header" onclick="toggleCard('bdesCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎨</span> B.Des - Bachelor of Design (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Product Design, Communication Design, UI/UX, Animation, Fashion Design.<br><span class="salary-text">💰 Fresher Salary: ₹6-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID DAT</a> | <a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT</a> | <a class="live-link" href="https://uceed.iitb.ac.in" target="_blank">UCEED</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NID Ahmedabad, NIFT Delhi, IIT Bombay IDC, MIT ID Pune, Pearl Academy</div></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
-    en: {
-        app_tagline: "Career Saathi", tagline: "⚙️ Engineering & PCM Careers", page_title: "⚙️ Non-Medical (PCM) Stream",
-        engg_title: "🎓 Engineering & Technology (B.Tech / B.E)", arch_title: "🏛️ Architecture & Planning",
-        defence_title: "🛡️ Defence & Merchant Navy", aviation_title: "🛫 Aviation Careers",
-        computer_title: "💻 Computer & IT (Non-Engineering Degrees)", pure_science_title: "🔬 Pure Science Degrees (B.Sc)",
-        management_title: "📊 Management Options", design_title: "🎨 Design & Creative Fields",
-        commerce_pcm_title: "📊 Commerce Options for PCM Students", skill_title: "🛠️ Skill-based Professional Courses",
-        entrance_pcm_title: "📋 Entrance Exams for PCM", govt_jobs_pcm_title: "💼 Government Jobs After PCM",
-        salary_pcm_title: "💰 High Salary Career Options After PCM",
-        cse: "• Computer Science Engineering (CSE)", it: "• Information Technology (IT)",
-        aiml: "• Artificial Intelligence & Machine Learning (AI/ML)", data_science: "• Data Science Engineering",
-        robotics: "• Robotics & Automation", mechanical: "• Mechanical Engineering", civil: "• Civil Engineering",
-        electrical: "• Electrical Engineering", ece: "• Electronics & Communication Engineering (ECE)",
-        aerospace: "• Aerospace Engineering", automobile: "• Automobile Engineering", chemical: "• Chemical Engineering",
-        petroleum: "• Petroleum Engineering", marine: "• Marine Engineering", biotech: "• Biotechnology Engineering",
-        food_tech: "• Food Technology", barch: "• B.Arch – Bachelor of Architecture (5 years)",
-        bplan: "• B.Plan – Bachelor of Planning", interior: "• B.Des Interior Design",
-        nda: "• NDA (Army, Navy, Air Force) – After 12th", tes: "• TES – Technical Entry Scheme, Indian Army",
-        merchant: "• Merchant Navy – B.Tech Marine Engineering", nautical: "• Nautical Science (B.Sc)",
-        pilot: "• Commercial Pilot Training", ame: "• Aircraft Maintenance Engineering (AME)",
-        aero_engg: "• Aeronautical Engineering", aviation_mgmt: "• Aviation Management",
-        bca: "• BCA – Bachelor of Computer Applications", bsc_cs: "• B.Sc Computer Science",
-        bsc_data: "• B.Sc Data Science", bsc_cyber: "• B.Sc Cyber Security", bsc_anim: "• B.Sc Animation & Gaming",
-        bsc_physics: "• B.Sc Physics, Chemistry, Mathematics, Statistics", bsc_electronics: "• B.Sc Electronics, Geology, Environmental Science",
-        bsc_forensic: "• B.Sc Forensic Science, Nanotechnology", bsc_astro: "• B.Sc Astrophysics, Aeronautics",
-        bba: "• BBA – Bachelor of Business Administration", integrated_bba: "• Integrated BBA+MBA (5 years)",
-        bhm: "• BHM – Hotel Management", travel: "• Travel & Tourism",
-        bdes: "• B.Des (Industrial / Product / Fashion / UI-UX)", graphic: "• Graphic Designing, Animation & VFX",
-        photography: "• Photography, Gaming Design, Interior Design", bcom: "• B.Com, Economics, Finance",
-        ca: "• CA (Chartered Accountant), CS, CMA", stock: "• Stock Market & Investment Banking Courses",
-        electrician: "• Electrician / Fitter / Technician Courses", solar: "• Solar Technician, Drone Technology",
-        cnc: "• CNC Programming, Welding Technology", auto_tech: "• Automobile Technician, HVAC",
-        jee_main: "• JEE Main – For NITs, IIITs", jee_adv: "• JEE Advanced – For IITs",
-        bitsat: "• BITSAT – BITS Pilani", viteee: "• VITEEE – VIT University", srmjee: "• SRMJEE – SRM University",
-        nata: "• NATA – For B.Arch", uceed: "• UCEED – For B.Des at IITs", state_cet: "• State CETs (KCET, MHT-CET, UPSEE, etc.)",
-        upsc: "• UPSC (Civil Services – IAS, IPS, IFS)", state_psc: "• State PSC", ssc: "• SSC (CGL, CHSL, JE)",
-        banking: "• Banking (IBPS PO/Clerk, SBI PO)", railway: "• Railway Jobs (RRB JE, NTPC, Group D)",
-        defence_exam: "• Defence Exams (NDA, CDS, AFCAT)", isro: "• ISRO / DRDO Technical Assistant",
-        software: "• Software Engineer / AI-ML Specialist – ₹8-40 LPA", data_scientist: "• Data Scientist – ₹10-35 LPA",
-        robotics_engg: "• Robotics Engineer – ₹6-20 LPA", aero_engg_salary: "• Aerospace Engineer – ₹8-25 LPA",
-        pilot_salary: "• Pilot – ₹15-50 LPA", merchant_salary: "• Merchant Navy Officer – ₹10-30 LPA",
-        arch_salary: "• Architect – ₹6-20 LPA", defence_salary: "• Defence Officer – ₹8-15 LPA + allowances",
-        investment: "• Investment Banking – ₹12-40 LPA", cyber: "• Cyber Security Specialist – ₹8-25 LPA",
-        bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
-    },
-    hi: {
-        app_tagline: "करियर साथी", tagline: "⚙️ इंजीनियरिंग और पीसीएम करियर", page_title: "⚙️ नॉन-मेडिकल (पीसीएम) स्ट्रीम",
-        engg_title: "🎓 इंजीनियरिंग और प्रौद्योगिकी (बी.टेक / बी.ई)", arch_title: "🏛️ आर्किटेक्चर और योजना",
-        defence_title: "🛡️ रक्षा और मर्चेंट नेवी", aviation_title: "🛫 विमानन करियर",
-        computer_title: "💻 कंप्यूटर और आईटी (गैर-इंजीनियरिंग डिग्री)", pure_science_title: "🔬 शुद्ध विज्ञान डिग्री (बी.एससी)",
-        management_title: "📊 प्रबंधन विकल्प", design_title: "🎨 डिजाइन और रचनात्मक क्षेत्र",
-        commerce_pcm_title: "📊 पीसीएम छात्रों के लिए कॉमर्स विकल्प", skill_title: "🛠️ कौशल-आधारित व्यावसायिक पाठ्यक्रम",
-        entrance_pcm_title: "📋 पीसीएम के लिए प्रवेश परीक्षाएं", govt_jobs_pcm_title: "💼 पीसीएम के बाद सरकारी नौकरियां",
-        salary_pcm_title: "💰 पीसीएम के बाद उच्च वेतन करियर विकल्प",
-        cse: "• कंप्यूटर साइंस इंजीनियरिंग (सीएसई)", it: "• सूचना प्रौद्योगिकी (आईटी)",
-        aiml: "• आर्टिफिशियल इंटेलिजेंस और मशीन लर्निंग", mechanical: "• मैकेनिकल इंजीनियरिंग",
-        civil: "• सिविल इंजीनियरिंग", electrical: "• इलेक्ट्रिकल इंजीनियरिंग",
-        ece: "• इलेक्ट्रॉनिक्स और संचार इंजीनियरिंग", barch: "• बी.आर्क – बैचलर ऑफ आर्किटेक्चर (5 वर्ष)",
-        nda: "• एनडीए (आर्मी, नेवी, एयर फोर्स) – 12वीं के बाद", pilot: "• वाणिज्यिक पायलट प्रशिक्षण",
-        bca: "• बीसीए – बैचलर ऑफ कंप्यूटर एप्लीकेशन", bsc_cs: "• बी.एससी कंप्यूटर साइंस",
-        bba: "• बीबीए – बैचलर ऑफ बिजनेस एडमिनिस्ट्रेशन",
-        jee_main: "• जेईई मेन – एनआईटी, आईआईआईटी के लिए", jee_adv: "• जेईई एडवांस्ड – आईआईटी के लिए",
-        bitsat: "• बिटसैट – बिट्स पिलानी", upsc: "• यूपीएससी (सिविल सेवाएं – आईएएस, आईपीएस, आईएफएस)",
-        ssc: "• एसएससी (सीजीएल, सीएचएसएल, जेई)", banking: "• बैंकिंग (आईबीपीएस पीओ/क्लर्क, एसबीआई पीओ)",
-        bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल"
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
+    function updateJEEUpdates() {
+        const resultSpan = document.getElementById('jeeResultDate');
+        if(resultSpan) resultSpan.innerHTML = `(Expected: April/June ${new Date().getFullYear()})`;
+        const updatesDiv = document.getElementById('jeeLiveUpdates');
+        if(updatesDiv) updatesDiv.innerHTML = `<a class="live-link" href="https://nta.ac.in/Home/NoticesRSS" target="_blank">📡 Live RSS Feed</a> - Latest updates from NTA`;
     }
-};
+    updateJEEUpdates();
 </script>
 </body>
-<script>
-// Continue JavaScript for non_medical.html
-const bottomNav = [
-    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
-    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
-    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
-    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
-    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
-];
-
-let currentLang = 'en';
-
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-
-function updateAllText() {
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    document.getElementById('enggTitle').textContent = t('engg_title');
-    document.getElementById('archTitle').textContent = t('arch_title');
-    document.getElementById('defenceTitle').textContent = t('defence_title');
-    document.getElementById('aviationTitle').textContent = t('aviation_title');
-    document.getElementById('computerTitle').textContent = t('computer_title');
-    document.getElementById('pureScienceTitle').textContent = t('pure_science_title');
-    document.getElementById('managementTitle').textContent = t('management_title');
-    document.getElementById('designTitle').textContent = t('design_title');
-    document.getElementById('commercePcmTitle').textContent = t('commerce_pcm_title');
-    document.getElementById('skillTitle').textContent = t('skill_title');
-    document.getElementById('entrancePcmTitle').textContent = t('entrance_pcm_title');
-    document.getElementById('govtJobsPcmTitle').textContent = t('govt_jobs_pcm_title');
-    document.getElementById('salaryPcmTitle').textContent = t('salary_pcm_title');
-    
-    const items = ['cse','it','aiml','dataScience','robotics','mechanical','civil','electrical','ece','aerospace','automobile','chemical','petroleum','marine','biotech','foodTech','barch','bplan','interior','nda','tes','merchant','nautical','pilot','ame','aeroEngg','aviationMgmt','bca','bscCs','bscData','bscCyber','bscAnim','bscPhysics','bscElectronics','bscForensic','bscAstro','bba','integratedBba','bhm','travel','bdes','graphic','photography','bcom','ca','stock','electrician','solar','cnc','autoTech','jeeMain','jeeAdv','bitsat','viteee','srmjee','nata','uceed','stateCet','upsc','statePsc','ssc','banking','railway','defenceExam','isro','software','dataScientist','roboticsEngg','aeroEnggSalary','pilotSalary','merchantSalary','archSalary','defenceSalary','investment','cyber'];
-    items.forEach(item => { const el = document.getElementById(item + 'Item'); if(el) el.textContent = t(item); });
-    
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
-}
-
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'education.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-renderBottomBar();
-loadSavedLanguage();
-</script>
 </html>
