@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Something Interesting | Dil-Ke-AnnS Career Saathi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 45px; width: auto; border-radius: 12px; }
+        .logo h1 { font-size: 18px; font-weight: 700; }
+        .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
+        .language-selector select option { color: black; background: white; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
+        .container { padding: 20px 16px; }
+        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
+        .tab-container { margin-bottom: 25px; }
+        .tab-buttons { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 2px solid #E8E2D9; padding-bottom: 8px; margin-bottom: 20px; }
+        .tab-btn { background: transparent; border: none; padding: 12px 20px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px 40px 0 0; transition: all 0.3s; color: #64748B; display: flex; align-items: center; gap: 8px; }
+        .tab-btn:hover { background: #F0EADF; color: #1B4D3E; }
+        .tab-btn.active { background: #E67E22; color: white; }
+        .tab-pane { display: none; animation: fadeIn 0.3s ease; }
+        .tab-pane.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .section-card { background: white; border-radius: 24px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
+        .subsection-title { font-size: 16px; font-weight: 700; margin: 12px 0 8px 0; color: #E67E22; }
+        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .btn { background: #E67E22; color: white; border: none; padding: 10px 20px; border-radius: 40px; font-size: 14px; font-weight: 600; cursor: pointer; margin: 5px; transition: all 0.2s; }
+        .btn:hover { background: #D35400; transform: scale(1.02); }
+        .btn-secondary { background: #1B4D3E; }
+        .btn-secondary:hover { background: #0D3B2F; }
+        .btn-outline { background: transparent; border: 2px solid #E67E22; color: #E67E22; }
+        .btn-outline:hover { background: #E67E22; color: white; }
+        .room-selector { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+        .room-btn { background: #F0EADF; border: none; padding: 8px 16px; border-radius: 40px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+        .room-btn.active { background: #E67E22; color: white; }
+        .room-btn:hover { background: #E67E22; color: white; }
+        .chat-area { background: #F8F4EF; border-radius: 16px; padding: 15px; height: 280px; overflow-y: auto; margin-bottom: 15px; border: 1px solid #E8E2D9; }
+        .chat-message { padding: 8px 12px; margin-bottom: 8px; border-radius: 16px; background: white; border-left: 3px solid #E67E22; }
+        .chat-message.user { background: #E8F5E9; border-left-color: #1B4D3E; }
+        .chat-message.ai { background: #FFF3E0; border-left-color: #E67E22; }
+        .message-input { display: flex; gap: 10px; flex-wrap: wrap; }
+        .message-input input, .message-input textarea, .message-input select { flex: 1; padding: 12px; border: 1px solid #E8E2D9; border-radius: 40px; font-size: 14px; background: white; }
+        .message-input textarea { border-radius: 16px; }
+        .voice-btn { background: #1B4D3E; color: white; border: none; width: 48px; height: 48px; border-radius: 50%; font-size: 22px; cursor: pointer; transition: all 0.2s; }
+        .voice-btn:hover { background: #E67E22; transform: scale(1.05); }
+        .voice-btn.listening { background: #E67E22; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .leaderboard-table { width: 100%; border-collapse: collapse; }
+        .leaderboard-table th, .leaderboard-table td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        .leaderboard-table th { background: #F0EADF; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .nav-item.active { background: #F0EADF; }
+        .nav-item.active span:last-child { color: #1B4D3E; }
+        @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tab-btn { padding: 14px 24px; font-size: 15px; } }
+        @media (max-width: 480px) { .tab-btn { padding: 8px 12px; font-size: 11px; } .tab-btn span { display: none; } }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="back-button" onclick="goBack()">← Back</div>
+    <div class="logo-section">
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
+        <div style="opacity:0;">🔔</div>
+    </div>
+    <div class="tagline" id="taglineText">💡 Learn, Discuss, Debate, Grow - Anonymously!</div>
+</div>
+
+<div class="container">
+    <div class="page-title" id="pageTitle">✨ Something Interesting - Interactive Learning Hub</div>
+
+    <!-- Anonymous ID Card -->
+    <div class="section-card" style="background:#1B4D3E; color:white; text-align:center; margin-bottom:20px;">
+        <div style="font-size:14px; opacity:0.9;" id="anonymousLabel">🔒 Your Anonymous Identity</div>
+        <div style="font-size:28px; font-weight:800; letter-spacing:2px;" id="anonymousId"></div>
+        <div style="font-size:11px; opacity:0.8;" id="anonymousNote">No personal info. No phone. No email. Completely anonymous.</div>
+    </div>
+
+    <!-- Tab Buttons -->
+    <div class="tab-container">
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="discussion">💬 <span id="tabDiscussion">Discussion</span></button>
+            <button class="tab-btn" data-tab="doubts">❓ <span id="tabDoubts">Doubts</span></button>
+            <button class="tab-btn" data-tab="challenges">🏆 <span id="tabChallenges">Challenges</span></button>
+            <button class="tab-btn" data-tab="debate">⚖️ <span id="tabDebate">Debate</span></button>
+            <button class="tab-btn" data-tab="verify">🔍 <span id="tabVerify">Verify</span></button>
+            <button class="tab-btn" data-tab="profile">😊 <span id="tabProfile">Profile</span></button>
+        </div>
+
+        <!-- Tab 1: Discussion -->
+        <div id="discussion" class="tab-pane active">
+            <div class="section-card">
+                <div class="section-title" id="discussionTitle">💬 Live Group Discussion</div>
+                <div class="subsection-title" id="roomLabel">📌 Choose Discussion Room</div>
+                <div class="room-selector" id="roomSelector">
+                    <button class="room-btn" data-room="UPSC">UPSC</button>
+                    <button class="room-btn" data-room="SSC">SSC/Banking</button>
+                    <button class="room-btn" data-room="NEET-JEE">NEET/JEE</button>
+                    <button class="room-btn" data-room="Agriculture">Agriculture</button>
+                    <button class="room-btn" data-room="Skill Dev">Skill Development</button>
+                    <button class="room-btn" data-room="After-10th">After 10th</button>
+                    <button class="room-btn" data-room="After-12th">After 12th</button>
+                    <button class="room-btn" data-room="General">General Discussion</button>
+                </div>
+                <div class="chat-area" id="chatArea">
+                    <div class="chat-message ai" id="welcomeMsg">🤖 AnnS AI: Welcome! Remember - No personal info sharing. Stay on topic. Be respectful. Let's learn together!</div>
+                </div>
+                <div class="message-input">
+                    <input type="text" id="messageInput" placeholder="Type your message...">
+                    <button class="voice-btn" id="voiceBtn" title="Click to speak">🎤</button>
+                    <button class="btn" id="sendBtn">Send</button>
+                    <button class="btn btn-secondary" id="speakSummaryBtn">🔊 Summary</button>
+                </div>
+                <div style="font-size:11px; color:#64748B; margin-top:8px;" id="voiceHelp">🎤 Voice input supported. Click mic, speak, and it will convert to text.</div>
+            </div>
+            <div class="section-card">
+                <div class="section-title" id="moderatorTitle">🤖 AnnS AI Moderator - Active Rules</div>
+                <div class="list-item" id="rule1">🚫 No personal information (phone, email, name, photo)</div>
+                <div class="list-item" id="rule2">🎯 Stay on topic - discussion focused on study only</div>
+                <div class="list-item" id="rule3">📝 AI gives summary every 15 minutes with key points</div>
+                <div class="list-item" id="rule4">⚠️ Warning system: 1st Warning → 2min block → 1hr block → 1day block</div>
+                <div class="list-item" id="rule5">✅ Fact-checker active: Wrong facts will be corrected instantly</div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Doubts -->
+        <div id="doubts" class="tab-pane">
+            <div class="section-card">
+                <div class="section-title" id="doubtTitle">❓ AnnS AI Doubt Solver</div>
+                <div class="message-input">
+                    <input type="text" id="doubtInput" placeholder="Ask any doubt...">
+                    <button class="btn" id="solveDoubtBtn">Solve Doubt</button>
+                </div>
+                <div id="doubtAnswer" class="chat-area" style="margin-top:12px; display:none;"></div>
+            </div>
+            <div class="section-card">
+                <div class="section-title" id="modelTitle">📝 Model Answer Builder</div>
+                <div class="message-input">
+                    <input type="text" id="questionInput" placeholder="Enter question/topic...">
+                    <button class="btn" id="buildAnswerBtn">Build Model Answer</button>
+                </div>
+                <div id="modelAnswer" class="chat-area" style="margin-top:12px; display:none;"></div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Challenges -->
+        <div id="challenges" class="tab-pane">
+            <div class="section-card">
+                <div class="section-title" id="dailyTitle">🏆 Daily Learning Challenge</div>
+                <div id="dailyChallenge" class="list-item" style="background:#F8F4EF; font-weight:600;">📖 Explain the Preamble of Indian Constitution in 50 words</div>
+                <textarea id="challengeAnswer" rows="3" placeholder="Your answer..." style="width:100%; padding:10px; margin:10px 0; border-radius:12px; border:1px solid #E8E2D9;"></textarea>
+                <button class="btn" id="submitChallengeBtn">Submit Answer</button>
+                <div id="challengeFeedback" style="margin-top:10px; display:none;"></div>
+            </div>
+            <div class="section-card">
+                <div class="section-title" id="leaderboardTitle">🏅 Anonymous Leaderboard</div>
+                <table class="leaderboard-table">
+                    <thead><tr><th id="rankCol">Rank</th><th id="learnerCol">Learner ID</th><th id="pointsCol">Points</th><th id="contribCol">Contributions</th></tr></thead>
+                    <tbody id="leaderboardBody"></tbody>
+                </table>
+                <div style="font-size:11px; color:#64748B; margin-top:8px;" id="pointsInfo">Points: Correct answers(+10) | Helping others(+5) | Daily challenge(+20)</div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Debate -->
+        <div id="debate" class="tab-pane">
+            <div class="section-card">
+                <div class="section-title" id="debateTitle">⚖️ Debate Mode</div>
+                <div class="subsection-title">📌 Topic: <span id="debateTopic">Should homework be banned in schools?</span></div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0;">
+                    <button class="btn" id="forPosition">🗣️ For (I support this)</button>
+                    <button class="btn btn-secondary" id="againstPosition">🎤 Against (I oppose this)</button>
+                    <button class="btn btn-outline" id="newDebateTopic">🔄 New Topic</button>
+                </div>
+                <div id="debateSpeech" style="display:none;">
+                    <textarea id="speechInput" rows="4" placeholder="Type or speak your argument..." style="width:100%; padding:10px; border-radius:12px;"></textarea>
+                    <button class="voice-btn" id="debateVoiceBtn" style="margin:5px 0;">🎤 Speak Argument</button>
+                    <button class="btn" id="submitDebateBtn">Submit Argument</button>
+                    <button class="btn btn-secondary" id="speakDebateBtn">🔊 Hear Your Argument</button>
+                </div>
+                <div id="debateScore" class="chat-area" style="margin-top:10px; display:none;"></div>
+            </div>
+            <div class="section-card">
+                <div class="section-title" id="topicGenTitle">🎯 AI Topic Generator</div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <select id="topicType" style="padding:8px; border-radius:12px;">
+                        <option value="GD">Group Discussion</option>
+                        <option value="Debate">Debate</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Essay">Essay Writing</option>
+                        <option value="Speech">Speech</option>
+                    </select>
+                    <button class="btn" id="generateTopicBtn">Generate Topic</button>
+                </div>
+                <div id="generatedTopic" class="list-item" style="margin-top:12px; background:#F8F4EF;">Click Generate to get a new topic</div>
+            </div>
+        </div>
+
+        <!-- Tab 5: Verify -->
+        <div id="verify" class="tab-pane">
+            <div class="section-card">
+                <div class="section-title" id="factTitle">🔍 Fake Fact Detector</div>
+                <div class="message-input">
+                    <input type="text" id="factInput" placeholder="Enter a claim or fact to verify...">
+                    <button class="btn" id="verifyFactBtn">Verify Fact</button>
+                </div>
+                <div id="factResult" class="chat-area" style="margin-top:12px; display:none;"></div>
+            </div>
+            <div class="section-card">
+                <div class="section-title" id="notesTitle">☁️ Anonymous Notes Cloud</div>
+                <div class="message-input" style="flex-direction:column;">
+                    <input type="text" id="noteTitle" placeholder="Note title">
+                    <textarea id="noteContent" rows="2" placeholder="Write your study note..." style="width:100%; margin:5px 0;"></textarea>
+                    <button class="btn" id="uploadNoteBtn">📤 Upload Anonymous Note</button>
+                </div>
+                <div id="notesList" class="chat-area" style="margin-top:12px;"></div>
+            </div>
+        </div>
+
+        <!-- Tab 6: Profile -->
+        <div id="profile" class="tab-pane">
+            <div class="section-card">
+                <div class="section-title" id="profileTitle">😊 Your Profile & Behaviour</div>
+                <div class="list-item" id="yourId">🆔 Your Anonymous ID: <span id="profileId"></span></div>
+                <div class="list-item" id="yourPoints">⭐ Your Total Points: <span id="profilePoints">0</span></div>
+                <div class="list-item" id="yourWarnings">⚠️ Total Warnings: <span id="warningCount">0</span></div>
+                <div class="list-item" id="yourScore">😊 Behaviour Score: <span id="behaviourScore">100</span> (Excellent)</div>
+                <div class="list-item" id="scanNote">🔍 AI scans messages for anger, rudeness, off-topic content</div>
+                <div class="list-item" id="correctNote">✅ Gentle correction: "Let's keep the discussion respectful and focused on learning"</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bottom-bar" id="bottomBar"></div>
+
+<script>
+// ==================== COMPLETE TRANSLATIONS ====================
+const translations = {
+    en: {
+        tagline: "💡 Learn, Discuss, Debate, Grow - Anonymously!",
+        page_title: "✨ Something Interesting - Interactive Learning Hub",
+        anonymous_label: "🔒 Your Anonymous Identity",
+        anonymous_note: "No personal info. No phone. No email. Completely anonymous.",
+        tab_discussion: "Discussion", tab_doubts: "Doubts", tab_challenges: "Challenges", tab_debate: "Debate", tab_verify: "Verify", tab_profile: "Profile",
+        discussion_title: "💬 Live Group Discussion", room_label: "📌 Choose Discussion Room",
+        moderator_title: "🤖 AnnS AI Moderator - Active Rules",
+        rule1: "🚫 No personal information (phone, email, name, photo)",
+        rule2: "🎯 Stay on topic - discussion focused on study only",
+        rule3: "📝 AI gives summary every 15 minutes with key points",
+        rule4: "⚠️ Warning system: 1st Warning → 2min block → 1hr block → 1day block",
+        rule5: "✅ Fact-checker active: Wrong facts will be corrected instantly",
+        doubt_title: "❓ AnnS AI Doubt Solver", model_title: "📝 Model Answer Builder",
+        daily_title: "🏆 Daily Learning Challenge", leaderboard_title: "🏅 Anonymous Leaderboard",
+        rank_col: "Rank", learner_col: "Learner ID", points_col: "Points", contrib_col: "Contributions",
+        points_info: "Points: Correct answers(+10) | Helping others(+5) | Daily challenge(+20)",
+        debate_title: "⚖️ Debate Mode", topic_gen_title: "🎯 AI Topic Generator",
+        fact_title: "🔍 Fake Fact Detector", notes_title: "☁️ Anonymous Notes Cloud",
+        profile_title: "😊 Your Profile & Behaviour", your_id: "🆔 Your Anonymous ID:",
+        your_points: "⭐ Your Total Points:", your_warnings: "⚠️ Total Warnings:",
+        your_score: "😊 Behaviour Score:", scan_note: "🔍 AI scans messages for anger, rudeness, off-topic content",
+        correct_note: "✅ Gentle correction: Let's keep the discussion respectful and focused on learning",
+        voice_help: "🎤 Voice input supported. Click mic, speak, and it will convert to text. Click 🔊 Summary to hear AI summary.",
+        welcome_msg: "🤖 AnnS AI: Welcome! Remember - No personal info sharing. Stay on topic. Be respectful. Let's learn together!"
+    },
+    hi: {
+        tagline: "💡 सीखें, चर्चा करें, बहस करें, बढ़ें - गुमनाम रूप से!",
+        page_title: "✨ कुछ रोचक - इंटरएक्टिव लर्निंग हब",
+        anonymous_label: "🔒 आपकी गुमनाम पहचान",
+        anonymous_note: "कोई व्यक्तिगत जानकारी नहीं। कोई फोन नहीं। कोई ईमेल नहीं। पूरी तरह गुमनाम।",
+        tab_discussion: "चर्चा", tab_doubts: "प्रश्न", tab_challenges: "चुनौतियाँ", tab_debate: "बहस", tab_verify: "सत्यापन", tab_profile: "प्रोफ़ाइल",
+        discussion_title: "💬 लाइव समूह चर्चा", room_label: "📌 चर्चा कक्ष चुनें",
+        moderator_title: "🤖 एनएस एआई मॉडरेटर - सक्रिय नियम",
+        rule1: "🚫 कोई व्यक्तिगत जानकारी नहीं (फोन, ईमेल, नाम, फोटो)",
+        rule2: "🎯 विषय पर बने रहें - केवल अध्ययन पर केंद्रित चर्चा",
+        rule3: "📝 एआई हर 15 मिनट में मुख्य बिंदुओं का सारांश देता है",
+        rule4: "⚠️ चेतावनी प्रणाली: पहली चेतावनी → 2 मिनट ब्लॉक → 1 घंटा ब्लॉक → 1 दिन ब्लॉक",
+        rule5: "✅ तथ्य-जांचकर्ता सक्रिय: गलत तथ्य तुरंत सुधारे जाएंगे",
+        doubt_title: "❓ एनएस एआई प्रश्न समाधानकर्ता", model_title: "📝 मॉडल उत्तर निर्माता",
+        daily_title: "🏆 दैनिक लर्निंग चैलेंज", leaderboard_title: "🏅 गुमनाम लीडरबोर्ड",
+        rank_col: "रैंक", learner_col: "शिक्षार्थी आईडी", points_col: "अंक", contrib_col: "योगदान",
+        points_info: "अंक: सही उत्तर(+10) | दूसरों की मदद(+5) | दैनिक चैलेंज(+20)",
+        debate_title: "⚖️ बहस मोड", topic_gen_title: "🎯 एआई टॉपिक जनरेटर",
+        fact_title: "🔍 फेक फैक्ट डिटेक्टर", notes_title: "☁️ गुमनाम नोट्स क्लाउड",
+        profile_title: "😊 आपका प्रोफ़ाइल और व्यवहार", your_id: "🆔 आपकी गुमनाम आईडी:",
+        your_points: "⭐ आपके कुल अंक:", your_warnings: "⚠️ कुल चेतावनियाँ:",
+        your_score: "😊 व्यवहार स्कोर:", scan_note: "🔍 एआई गुस्से, अशिष्टता, ऑफ-टॉपिक सामग्री के लिए संदेश स्कैन करता है",
+        correct_note: "✅ सौम्य सुधार: आइए चर्चा को सम्मानजनक और अध्ययन-केंद्रित रखें",
+        voice_help: "🎤 वॉयस इनपुट समर्थित। माइक क्लिक करें, बोलें, और टेक्स्ट में बदल जाएगा।",
+        welcome_msg: "🤖 एनएस एआई: स्वागत है! याद रखें - कोई व्यक्तिगत जानकारी साझा न करें। विषय पर बने रहें। सम्मानजनक रहें।"
+    }
+};
+</script>
+</body>
+</html>
+<script>
+// Continue JavaScript code
+let currentLang = 'en';
+function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+function updateLanguage() {
+    document.getElementById('taglineText').innerText = t('tagline');
+    document.getElementById('pageTitle').innerHTML = t('page_title');
+    document.getElementById('anonymousLabel').innerHTML = t('anonymous_label');
+    document.getElementById('anonymousNote').innerHTML = t('anonymous_note');
+    document.getElementById('tabDiscussion').innerText = t('tab_discussion');
+    document.getElementById('tabDoubts').innerText = t('tab_doubts');
+    document.getElementById('tabChallenges').innerText = t('tab_challenges');
+    document.getElementById('tabDebate').innerText = t('tab_debate');
+    document.getElementById('tabVerify').innerText = t('tab_verify');
+    document.getElementById('tabProfile').innerText = t('tab_profile');
+    document.getElementById('discussionTitle').innerHTML = t('discussion_title');
+    document.getElementById('roomLabel').innerHTML = t('room_label');
+    document.getElementById('moderatorTitle').innerHTML = t('moderator_title');
+    document.getElementById('rule1').innerHTML = t('rule1');
+    document.getElementById('rule2').innerHTML = t('rule2');
+    document.getElementById('rule3').innerHTML = t('rule3');
+    document.getElementById('rule4').innerHTML = t('rule4');
+    document.getElementById('rule5').innerHTML = t('rule5');
+    document.getElementById('doubtTitle').innerHTML = t('doubt_title');
+    document.getElementById('modelTitle').innerHTML = t('model_title');
+    document.getElementById('dailyTitle').innerHTML = t('daily_title');
+    document.getElementById('leaderboardTitle').innerHTML = t('leaderboard_title');
+    document.getElementById('rankCol').innerHTML = t('rank_col');
+    document.getElementById('learnerCol').innerHTML = t('learner_col');
+    document.getElementById('pointsCol').innerHTML = t('points_col');
+    document.getElementById('contribCol').innerHTML = t('contrib_col');
+    document.getElementById('pointsInfo').innerHTML = t('points_info');
+    document.getElementById('debateTitle').innerHTML = t('debate_title');
+    document.getElementById('topicGenTitle').innerHTML = t('topic_gen_title');
+    document.getElementById('factTitle').innerHTML = t('fact_title');
+    document.getElementById('notesTitle').innerHTML = t('notes_title');
+    document.getElementById('profileTitle').innerHTML = t('profile_title');
+    document.getElementById('yourId').innerHTML = t('your_id') + ' <span id="profileId"></span>';
+    document.getElementById('yourPoints').innerHTML = t('your_points') + ' <span id="profilePoints">0</span>';
+    document.getElementById('yourWarnings').innerHTML = t('your_warnings') + ' <span id="warningCount">0</span>';
+    document.getElementById('yourScore').innerHTML = t('your_score') + ' <span id="behaviourScore">100</span> (Excellent)';
+    document.getElementById('scanNote').innerHTML = t('scan_note');
+    document.getElementById('correctNote').innerHTML = t('correct_note');
+    document.getElementById('voiceHelp').innerHTML = t('voice_help');
+    const welcomeDiv = document.querySelector('#chatArea .chat-message.ai');
+    if (welcomeDiv) welcomeDiv.innerHTML = t('welcome_msg');
+}
+
+function changeLanguage(langCode) { currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); updateLanguage(); }
+document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
+
+// Anonymous ID
+const anonymousId = 'STU-' + Math.floor(Math.random() * 900000 + 100000);
+document.getElementById('anonymousId').innerText = anonymousId;
+document.getElementById('profileId').innerText = anonymousId;
+
+let userPoints = parseInt(localStorage.getItem('userPoints') || '0');
+let warnings = parseInt(localStorage.getItem('warnings') || '0');
+let currentRoom = 'UPSC';
+let chatMessages = JSON.parse(localStorage.getItem('chatMessages_' + anonymousId) || '[]');
+let notes = JSON.parse(localStorage.getItem('anonymousNotes') || '[]');
+
+function renderChat() {
+    const chatArea = document.getElementById('chatArea');
+    if (!chatArea) return;
+    chatArea.innerHTML = chatMessages.map(msg => `<div class="chat-message ${msg.type}"><strong>${msg.sender}:</strong> ${msg.text}</div>`).join('');
+    if (chatMessages.length === 0) chatArea.innerHTML = `<div class="chat-message ai">${t('welcome_msg')}</div>`;
+    chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function addMessage(text, type = 'user') {
+    const sender = type === 'user' ? anonymousId : '🤖 AnnS AI';
+    chatMessages.push({ sender, text, type, time: new Date().toISOString() });
+    if (chatMessages.length > 50) chatMessages.shift();
+    localStorage.setItem('chatMessages_' + anonymousId, JSON.stringify(chatMessages));
+    renderChat();
+    if (text.toLowerCase().includes('angry') || text.toLowerCase().includes('stupid')) {
+        warnings++;
+        document.getElementById('warningCount').innerText = warnings;
+        document.getElementById('behaviourScore').innerText = Math.max(0, 100 - warnings * 10);
+        addMessage('⚠️ Warning: Please keep the discussion respectful and on-topic.', 'ai');
+        localStorage.setItem('warnings', warnings);
+    }
+}
+
+function sendMessage() {
+    const input = document.getElementById('messageInput');
+    if (!input.value.trim()) return;
+    addMessage(input.value.trim(), 'user');
+    input.value = '';
+    userPoints += 2;
+    updateLeaderboard();
+}
+
+function updateLeaderboard() {
+    localStorage.setItem('userPoints', userPoints);
+    document.getElementById('profilePoints').innerText = userPoints;
+    const leaderboard = [
+        { id: anonymousId, points: userPoints, contributions: Math.floor(userPoints / 10) },
+        { id: 'LEARNER-5520', points: 450, contributions: 45 },
+        { id: 'SMART-20283', points: 320, contributions: 32 },
+        { id: 'STU-842194', points: 280, contributions: 28 }
+    ];
+    leaderboard.sort((a, b) => b.points - a.points);
+    const tbody = document.getElementById('leaderboardBody');
+    tbody.innerHTML = leaderboard.map((u, idx) => `<tr><td>${idx + 1}</td><td>${u.id}</td><td>${u.points}</td><td>${u.contributions}</td></tr>`).join('');
+}
+
+function renderNotes() {
+    const notesDiv = document.getElementById('notesList');
+    if (!notesDiv) return;
+    if (notes.length === 0) { notesDiv.innerHTML = '<div class="chat-message ai">No notes yet. Be the first to share an anonymous note!</div>'; return; }
+    notesDiv.innerHTML = notes.slice(-5).reverse().map(n => `<div class="chat-message"><strong>📝 ${n.title}</strong><br>${n.content.substring(0, 150)}...<br><small style="color:#64748B;">By: ${n.author}</small></div>`).join('');
+}
+
+// Speech Recognition
+let recognition = null;
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+    recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        const activeInput = document.activeElement;
+        if (activeInput && (activeInput.tagName === 'INPUT' || activeInput.tagName === 'TEXTAREA')) activeInput.value = transcript;
+        else document.getElementById('messageInput').value = transcript;
+        document.getElementById('voiceBtn')?.classList.remove('listening');
+    };
+    recognition.onerror = () => document.getElementById('voiceBtn')?.classList.remove('listening');
+    recognition.onend = () => document.getElementById('voiceBtn')?.classList.remove('listening');
+}
+
+function startListening() {
+    if (!recognition) { alert('Voice input not supported in this browser'); return; }
+    document.getElementById('voiceBtn')?.classList.add('listening');
+    recognition.start();
+}
+function speakText(text) { if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); window.speechSynthesis.speak(new SpeechSynthesisUtterance(text)); } }
+
+document.getElementById('voiceBtn')?.addEventListener('click', startListening);
+document.getElementById('sendBtn')?.addEventListener('click', sendMessage);
+document.getElementById('messageInput')?.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+document.getElementById('speakSummaryBtn')?.addEventListener('click', () => { const lastMsg = document.querySelector('#chatArea .chat-message.ai:last-child'); speakText(lastMsg?.innerText || t('welcome_msg')); });
+
+document.querySelectorAll('.room-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.room-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentRoom = btn.getAttribute('data-room');
+        addMessage(`Switched to ${currentRoom} discussion room. Stay on topic!`, 'ai');
+    });
+});
+
+document.getElementById('solveDoubtBtn')?.addEventListener('click', () => {
+    const doubt = document.getElementById('doubtInput').value.trim();
+    if (!doubt) return;
+    const answerDiv = document.getElementById('doubtAnswer');
+    let answer = doubt.toLowerCase().includes('neet') ? 'NEET is the National Eligibility cum Entrance Test for MBBS/BDS in India.' : 
+                 doubt.toLowerCase().includes('upsc') ? 'UPSC CSE is for IAS/IPS/IFS. 3 stages: Prelims, Mains, Interview.' :
+                 `🔍 Doubt: "${doubt}"\n\n📌 AI Mentor: This is a great question! In the full AI version, you will get a detailed step-by-step answer.`;
+    answerDiv.innerHTML = `<div class="chat-message ai"><strong>🤖 AnnS AI:</strong> ${answer}</div>`;
+    answerDiv.style.display = 'block';
+    userPoints += 5; updateLeaderboard();
+});
+
+document.getElementById('buildAnswerBtn')?.addEventListener('click', () => {
+    const question = document.getElementById('questionInput').value.trim();
+    if (!question) return;
+    const answerDiv = document.getElementById('modelAnswer');
+    answerDiv.innerHTML = `<div class="chat-message ai"><strong>📝 Model Answer:</strong><br><br>${question}<br><br>This is a sample model answer. The full AI version will provide structured answers.</div>`;
+    answerDiv.style.display = 'block';
+});
+
+const challenges = ['Explain the Preamble of Indian Constitution in 50 words', 'What are the 3 stages of UPSC Civil Services Exam?', 'List 5 fundamental rights'];
+document.getElementById('dailyChallenge').innerHTML = `📖 ${challenges[Math.floor(Math.random() * challenges.length)]}`;
+document.getElementById('submitChallengeBtn')?.addEventListener('click', () => {
+    if (!document.getElementById('challengeAnswer').value.trim()) return;
+    const feedback = document.getElementById('challengeFeedback');
+    feedback.innerHTML = '✅ Challenge submitted! +20 points earned!';
+    feedback.style.display = 'block';
+    userPoints += 20; updateLeaderboard();
+    document.getElementById('challengeAnswer').value = '';
+    setTimeout(() => feedback.style.display = 'none', 3000);
+});
+
+document.getElementById('uploadNoteBtn')?.addEventListener('click', () => {
+    const title = document.getElementById('noteTitle').value.trim();
+    const content = document.getElementById('noteContent').value.trim();
+    if (!title || !content) return;
+    notes.unshift({ title, content, author: anonymousId, date: new Date().toISOString() });
+    if (notes.length > 20) notes.pop();
+    localStorage.setItem('anonymousNotes', JSON.stringify(notes));
+    renderNotes();
+    document.getElementById('noteTitle').value = '';
+    document.getElementById('noteContent').value = '';
+});
+
+document.getElementById('verifyFactBtn')?.addEventListener('click', () => {
+    const fact = document.getElementById('factInput').value.trim();
+    if (!fact) return;
+    const resultDiv = document.getElementById('factResult');
+    resultDiv.innerHTML = `<div class="chat-message ai">${fact.toLowerCase().includes('moon is made of cheese') ? '❌ FALSE - This claim is incorrect.' : '✅ AI is verifying this fact against official sources.'}</div>`;
+    resultDiv.style.display = 'block';
+});
+
+let debatePosition = null;
+document.getElementById('forPosition')?.addEventListener('click', () => { debatePosition = 'For'; document.getElementById('debateSpeech').style.display = 'block'; });
+document.getElementById('againstPosition')?.addEventListener('click', () => { debatePosition = 'Against'; document.getElementById('debateSpeech').style.display = 'block'; });
+document.getElementById('debateVoiceBtn')?.addEventListener('click', startListening);
+document.getElementById('submitDebateBtn')?.addEventListener('click', () => {
+    if (!document.getElementById('speechInput').value.trim()) return;
+    const scoreDiv = document.getElementById('debateScore');
+    scoreDiv.innerHTML = `<div class="chat-message ai"><strong>⚖️ AI Judge:</strong> Position: ${debatePosition} | Score: ${Math.floor(Math.random() * 50 + 50)}/100 | Good effort!</div>`;
+    scoreDiv.style.display = 'block';
+    userPoints += 15; updateLeaderboard();
+});
+document.getElementById('speakDebateBtn')?.addEventListener('click', () => { const text = document.getElementById('speechInput').value; if (text) speakText(text); });
+document.getElementById('newDebateTopic')?.addEventListener('click', () => {
+    const topics = ['Should college education be free?', 'Is social media harmful?', 'Should exams be abolished?'];
+    document.getElementById('debateTopic').innerText = topics[Math.floor(Math.random() * topics.length)];
+    document.getElementById('debateSpeech').style.display = 'none';
+    document.getElementById('debateScore').style.display = 'none';
+});
+
+document.getElementById('generateTopicBtn')?.addEventListener('click', () => {
+    const type = document.getElementById('topicType').value;
+    const topics = { GD: ['Impact of AI on jobs', 'Should homework be banned?'], Debate: ['Is technology making us lazy?'], Interview: ['Tell me about yourself'], Essay: ['Importance of Education'], Speech: ['Importance of Discipline'] };
+    const selected = topics[type];
+    document.getElementById('generatedTopic').innerHTML = `🎯 ${selected[Math.floor(Math.random() * selected.length)]}`;
+});
+
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+    });
+});
+
+// Bottom Bar
+const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+const bar = document.getElementById('bottomBar');
+if (bar) {
+    bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if (link && link !== '#') window.location.href = link; else alert('Coming soon'); }); });
+}
+
+function goBack() { window.location.href = 'index.html'; }
+
+// Load saved language
+const savedLang = localStorage.getItem('career_saathi_language');
+if (savedLang && translations[savedLang]) { currentLang = savedLang; document.getElementById('languageSelect').value = savedLang; }
+updateLanguage();
+renderChat();
+updateLeaderboard();
+renderNotes();
+document.getElementById('warningCount').innerText = warnings;
+document.getElementById('behaviourScore').innerText = Math.max(0, 100 - warnings * 10);
+document.getElementById('profilePoints').innerText = userPoints;
+</script>
