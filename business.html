@@ -6,211 +6,530 @@
     <title>Business | Dil-Ke-AnnS Career Saathi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #F5F0E8 0%, #E8E2D9 100%); padding-bottom: 70px; color: #2D2A24; }
-        
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 30px 30px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; transition: all 0.2s; }
-        .back-button:hover { background: rgba(255,255,255,0.25); transform: translateX(-2px); }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; transition: all 0.2s; }
-        .language-selector select:hover { background: rgba(255,255,255,0.25); }
-        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; opacity: 0.9; }
-        
-        .container { padding: 20px 16px; max-width: 1200px; margin: 0 auto; }
-        .page-title { font-size: 28px; font-weight: 800; margin-bottom: 25px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; background: linear-gradient(135deg, #1B4D3E 20%, #E67E22 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        
-        /* Tab Styles */
-        .tab-container { margin-bottom: 30px; }
-        .tab-buttons { display: flex; flex-wrap: wrap; gap: 12px; border-bottom: 3px solid #E8E2D9; padding-bottom: 0; margin-bottom: 25px; }
-        .tab-btn { background: transparent; border: none; padding: 12px 24px; font-size: 15px; font-weight: 600; cursor: pointer; border-radius: 40px 40px 0 0; transition: all 0.3s; color: #64748B; display: flex; align-items: center; gap: 8px; position: relative; }
-        .tab-btn:hover { background: #F0EADF; color: #1B4D3E; transform: translateY(-2px); }
-        .tab-btn.active { background: #E67E22; color: white; box-shadow: 0 -4px 12px rgba(230,126,34,0.3); }
-        .tab-btn.active::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: #E67E22; }
-        
-        .tab-pane { display: none; animation: fadeInUp 0.4s ease; }
-        .tab-pane.active { display: block; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Card Styles */
-        .section-card { background: white; border-radius: 24px; padding: 22px; margin-bottom: 24px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid rgba(232,226,217,0.5); transition: all 0.3s; }
-        .section-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); }
-        .section-title { font-size: 22px; font-weight: 800; margin-bottom: 16px; color: #1B4D3E; display: flex; align-items: center; gap: 10px; border-left: 4px solid #E67E22; padding-left: 15px; }
-        .list-item { padding: 10px 0; border-bottom: 1px solid #F0EADF; font-size: 15px; line-height: 1.45; transition: all 0.2s; }
-        .list-item:hover { padding-left: 8px; color: #E67E22; }
-        .highlight { background: #1B4D3E; color: white; padding: 2px 8px; border-radius: 20px; display: inline-block; font-size: 11px; margin-left: 8px; }
-        .budget-note { background: #E8F5E9; padding: 12px; border-radius: 12px; margin-top: 10px; font-size: 13px; text-align: center; }
-        
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 8px 12px 20px; border-top: 1px solid #E8E2D9; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 6px 14px; border-radius: 30px; transition: all 0.2s; }
-        .nav-item:hover { background: #F0EADF; transform: translateY(-2px); }
-        .nav-item span:first-child { font-size: 24px; }
-        .nav-item span:last-child { font-size: 11px; font-weight: 500; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; font-weight: 700; }
-        
-        @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tab-btn { padding: 14px 28px; font-size: 16px; } .section-title { font-size: 24px; } .list-item { font-size: 16px; } }
-        @media (max-width: 550px) { .tab-btn span { display: none; } .tab-btn .emoji { display: inline; } .tab-btn { padding: 10px 14px; } }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option><option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option><option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option><option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option><option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option><option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">🚀 Business Roadmap & Government Schemes</div>
+    <div class="tagline">🚀 Complete Business & Entrepreneurship Guide - 10th to CEO | Government Schemes | Funding | Business Ideas</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">💼 Business & Entrepreneurship</div>
+    <div class="page-title">💼 Business & Entrepreneurship</div>
+    <div class="page-subtitle">7-Stage Roadmap | 50+ Govt Schemes | 100+ Business Ideas | Complete Funding Guide | Shark Tank India Success</div>
     
-    <div class="tab-container">
-        <div class="tab-buttons">
-            <button class="tab-btn active" data-tab="roadmap">🗺️ <span>7-Stage Roadmap</span></button>
-            <button class="tab-btn" data-tab="schemes">🇮🇳 <span>Govt Schemes</span></button>
-            <button class="tab-btn" data-tab="ideas">💡 <span>Business Ideas</span></button>
-            <button class="tab-btn" data-tab="finance">💰 <span>Finance & Loans</span></button>
+    <div class="door-nav">
+        <button class="door-btn active" data-door="roadmap">🗺️ <span class="door-label">7-Stage Roadmap</span></button>
+        <button class="door-btn" data-door="schemes">🇮🇳 <span class="door-label">Govt Schemes & Funding</span></button>
+        <button class="door-btn" data-door="ideas">💡 <span class="door-label">Business Ideas</span></button>
+        <button class="door-btn" data-door="funding">💰 <span class="door-label">Funding Sources</span></button>
+        <button class="door-btn" data-door="registration">📋 <span class="door-label">Registration & Legal</span></button>
+        <button class="door-btn" data-door="success">🏆 <span class="door-label">Success Stories</span></button>
+        <button class="door-btn" data-door="mistakes">⚠️ <span class="door-label">Common Mistakes</span></button>
+        <button class="door-btn" data-door="skills">🎯 <span class="door-label">Essential Skills</span></button>
+        <button class="door-btn" data-door="marketing">📢 <span class="door-label">Marketing Guide</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Global Business</span></button>
+    </div>
+    
+    <!-- ==================== DOOR 1: 7-STAGE ROADMAP ==================== -->
+    <div id="door-roadmap" class="door-content active">
+        <div class="accordion-card active" id="stage1Card">
+            <div class="accordion-header" onclick="toggleCard('stage1Card')">
+                <div class="accordion-title"><span class="accordion-icon">🌱</span> Stage 1: Foundation (0-1 Month)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Identify your strength, interest, and market opportunity. Choose ONE business category - don't try multiple.<br><span class="salary-text">💰 Investment: ₹0-1,000 (only for research)</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 CATEGORIES</div><div class="info-text">Service Business (skill-based) | Product Business (physical goods) | Digital Business (online) | Franchise/Brick & Mortar</div></div>
+                    <div class="info-card"><div class="info-label">📚 LEARN BASICS</div><div class="info-text">Marketing basics, sales skills, customer handling, basic finance, digital presence</div></div>
+                    <div class="info-card"><div class="info-label">🔗 FREE RESOURCES</div><div class="info-text">YouTube (Business tutorials), Google Digital Garage, SWAYAM (NPTEL), Coursera (free audit), Udemy (discounted courses)</div></div>
+                </div>
+                <div class="section-title">📋 Action Items for Stage 1</div>
+                <div class="roadmap-step"><div class="roadmap-year">Week 1</div><div class="roadmap-text">Self-assessment - List your skills, interests, and resources</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Week 2</div><div class="roadmap-text">Market research - Identify problem, target audience, competition</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Week 3</div><div class="roadmap-text">Business model selection - Choose one category to focus on</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Week 4</div><div class="roadmap-text">Basic learning - Complete 1-2 free courses on business basics</div></div>
+            </div>
         </div>
         
-        <!-- Tab 1: 7-Stage Roadmap -->
-        <div id="roadmap" class="tab-pane active">
-            <div class="section-card"><div class="section-title">🌱 Stage 1: Foundation (0–1 Month)</div>
-                <div class="list-item">• Identify your strength: Skills (design, coding, teaching) | Product (clothes, food) | Service (marketing, cleaning) | Digital (YouTube, freelancing)</div>
-                <div class="list-item">• Learn basics free via YouTube, MOOCs, blogs (marketing, sales, finance, customer handling)</div>
-                <div class="list-item">• Pick only ONE category to start, not many</div></div>
-            
-            <div class="section-card"><div class="section-title">🧪 Stage 2: Skill Building (1–3 Months)</div>
-                <div class="list-item">• Learn one high-income skill: Graphic design, Video editing, Web dev, Digital marketing, Content creation, Coding, Social media management</div>
-                <div class="list-item">• Practice & build portfolio: 5 sample works, 1 case study, basic Instagram page or website</div></div>
-            
-            <div class="section-card"><div class="section-title">🌿 Stage 3: Pick Your Business Model (1 Week)</div>
-                <div class="list-item">• <strong>Service business</strong> (fastest, zero investment): Graphic design, editing, teaching, social media handling, fitness training</div>
-                <div class="list-item">• <strong>Product business</strong> (low-medium investment): Clothing, accessories, handmade items, food, mobile accessories</div>
-                <div class="list-item">• <strong>Digital business</strong> (zero cost): YouTube, Instagram, affiliate marketing, dropshipping, blogging</div>
-                <div class="list-item">• <strong>Franchise/offline</strong> (₹30k-1L): Tea stall, food cart, juice centre, cloud kitchen, printing & stationery</div></div>
-            
-            <div class="section-card"><div class="section-title">🏗 Stage 4: Build the Business (1–2 Months)</div>
-                <div class="list-item">• Create identity: Name, logo, Instagram page, WhatsApp Business, Google Business Profile, visiting card</div>
-                <div class="list-item">• Start small: Sell from home, provide services locally, freelance, sell via WhatsApp/Instagram or Meesho/Amazon</div>
-                <div class="list-item">• Acquire first 10 customers through social media, school/college network, local shops, friends/relatives</div></div>
-            
-            <div class="section-card"><div class="section-title">🌾 Stage 5: Grow (3–6 Months)</div>
-                <div class="list-item">• Improve quality & speed: faster delivery, better packaging, customer experience, communication</div>
-                <div class="list-item">• Start marketing: Instagram reels, YouTube shorts, Google ads (small budget), local promotion</div>
-                <div class="list-item">• Build a team: Part-timers, interns, freelancers – delegate editing, social media, delivery, support</div></div>
-            
-            <div class="section-card"><div class="section-title">📈 Stage 6: Expand (6–12 Months)</div>
-                <div class="list-item">• Register business: GST, Udyam, Trademark (optional) when income becomes regular</div>
-                <div class="list-item">• Add new income streams: Clothing + accessories, Teaching + online courses, Photo/video + ads shooting</div></div>
-            
-            <div class="section-card"><div class="section-title">💪 Stage 7: Scale to Big Business (1–3 Years)</div>
-                <div class="list-item">• Automate: Marketing, sales, customer follow-up, inventory via WhatsApp automation, CRM, Fb/Insta ads</div>
-                <div class="list-item">• Build brand trust: Consistent quality, storytelling, reviews, partnerships, sponsorships</div>
-                <div class="list-item">• Long-term vision: Franchise model, large online brand, export, high-end services, agency, consultancy</div></div>
-            
-            <div class="section-card"><div class="section-title">🎯 Summary Roadmap</div>
-                <div class="list-item">• 0–1 month → Find interest + learn basics</div>
-                <div class="list-item">• 1–3 months → Build one high-income skill</div>
-                <div class="list-item">• 3–4 months → Start small business</div>
-                <div class="list-item">• First 6 months → Earn first ₹50k–1 lakh</div>
-                <div class="list-item">• 1 year → Build team + register business</div>
-                <div class="list-item">• 2–3 years → Scale to full business</div></div>
+        <div class="accordion-card" id="stage2Card">
+            <div class="accordion-header" onclick="toggleCard('stage2Card')">
+                <div class="accordion-title"><span class="accordion-icon">🧪</span> Stage 2: Skill Building (1-3 Months)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎯 HIGH-INCOME SKILLS</div><div class="info-text">Graphic Design | Video Editing | Web Development | Digital Marketing | Content Creation | Copywriting | Social Media Management | App Development | Data Analytics | UI/UX Design</div></div>
+                    <div class="info-card"><div class="info-label">📚 FREE LEARNING</div><div class="info-text">YouTube: FreeCodeCamp (Coding), HubSpot Academy (Marketing), Google Skillshop, Canva Design School, Coursera (free audit)</div></div>
+                    <div class="info-card"><div class="info-label">📁 PORTFOLIO</div><div class="info-text">Create 5 sample works, 1 case study, basic website or Instagram page showcasing your skills</div></div>
+                </div>
+                <div class="section-title">📋 Skill Building Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">Month 1</div><div class="roadmap-text">Learn fundamentals - complete one comprehensive online course</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Month 2</div><div class="roadmap-text">Practice - Create 5-10 sample projects/works for your portfolio</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Month 3</div><div class="roadmap-text">Get feedback - Share your work online, join communities, improve based on feedback</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">End of Stage</div><div class="roadmap-text">Portfolio ready with 5+ projects, basic website/Instagram page created</div></div>
+            </div>
         </div>
         
-        <!-- Tab 2: Government Schemes -->
-        <div id="schemes" class="tab-pane">
-            <div class="section-card"><div class="section-title">🇮🇳 Central Government Schemes</div>
-                <div class="list-item">• <strong>Startup India Initiative</strong> – Tax exemptions, compliance ease, funding access for DPIIT-registered startups</div>
-                <div class="list-item">• <strong>Startup India Seed Fund Scheme (SISFS)</strong> – ₹20–50 lakh seed funding for early-stage ideas</div>
-                <div class="list-item">• <strong>Fund of Funds for Startups (FFS)</strong> – ₹10,000 crore corpus via VC funds</div>
-                <div class="list-item">• <strong>Credit Guarantee Scheme for Startups (CGSS)</strong> – Collateral-free credit up to ₹10–20 crore</div>
-                <div class="list-item">• <strong>Atal Innovation Mission (AIM)</strong> – Grants & incubation via NITI Aayog</div>
-                <div class="list-item">• <strong>iDEX / Defence Innovation</strong> – Grants up to ₹1.5 crore for defence startups</div>
-                <div class="list-item">• <strong>BIRAC / BIO Grants</strong> – Up to ₹1 crore for biotech & life sciences</div></div>
-            
-            <div class="section-card"><div class="section-title">🏦 MSME & Finance Support</div>
-                <div class="list-item">• <strong>Pradhan Mantri Mudra Yojana (PMMY)</strong> – Collateral-free loans up to ₹20 lakh (Shishu, Kishor, Tarun)</div>
-                <div class="list-item">• <strong>PM Employment Generation Programme (PMEGP)</strong> – Subsidy 15-35% on bank loans</div>
-                <div class="list-item">• <strong>Stand-Up India Scheme</strong> – ₹10 lakh–1 crore for SC/ST and women entrepreneurs</div>
-                <div class="list-item">• <strong>CGTMSE</strong> – Guarantees up to ₹5 crore for MSME loans without collateral</div>
-                <div class="list-item">• <strong>Agriculture Infrastructure Fund (AIF)</strong> – Loans up to ₹7.5 crore with interest subvention</div>
-                <div class="list-item">• <strong>59-Minute Loan for MSME</strong> – Quick loan approval up to ₹5 crore via digital processing</div></div>
-            
-            <div class="section-card"><div class="section-title">🏙️ State Government Schemes (Examples)</div>
-                <div class="list-item">• <strong>Mukhyamantri Swarozgar Yojna</strong> (Uttarakhand) – ₹25 lakh (manufacturing), ₹10 lakh (services)</div>
-                <div class="list-item">• <strong>PM Vishwakarma Scheme</strong> – Subsidised loans for artisans & youth</div>
-                <div class="list-item">• <strong>StartupTN</strong> – Rural startup clusters with subsidies (Tamil Nadu)</div>
-                <div class="list-item">• Many more state schemes – check your state's industry/enterprise portal</div></div>
-            
-            <div class="budget-note" id="budgetNote">📅 Financial Year: <span id="budgetYear"></span> | <a href="https://www.indiabudget.gov.in" target="_blank" style="color:#E67E22;">🔗 Official Union Budget Website →</a></div>
+        <div class="accordion-card" id="stage3Card">
+            <div class="accordion-header" onclick="toggleCard('stage3Card')">
+                <div class="accordion-title"><span class="accordion-icon">🌿</span> Stage 3: Pick Your Business Model (1 Week)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💼 Service Business (Fastest, Zero Investment)</div><div class="info-text">Sell your skill - Graphic Design, Video Editing, Social Media Management, Freelance Writing, Virtual Assistant, Web Development, Digital Marketing, Teaching/Tutoring, Fitness Training, Makeup Artist</div></div>
+                    <div class="info-card"><div class="info-label">📦 Product Business (Low-Medium Investment)</div><div class="info-text">Clothing/Accessories, Handmade Crafts, Food Products, Mobile Accessories, Home Decor, Custom Gifts, Stationery, Eco-friendly products, Ayurvedic products, Organic food</div></div>
+                    <div class="info-card"><div class="info-label">💻 Digital Business (Zero Cost)</div><div class="info-text">YouTube Channel, Instagram Theme Pages, Affiliate Marketing, Dropshipping, Blogging, Digital Products (E-books, Templates, Courses), Print on Demand, NFTs</div></div>
+                    <div class="info-card"><div class="info-label">🏪 Franchise/Offline (₹30k-1L investment)</div><div class="info-text">Tea Stall, Food Cart, Juice Centre, Cloud Kitchen, Printing & Stationery, Mobile Repair Shop, Beauty Salon, Tiffin Service, Grocery Store, Laundry Service</div></div>
+                </div>
+            </div>
         </div>
         
-        <!-- Tab 3: Business Ideas -->
-        <div id="ideas" class="tab-pane">
-            <div class="section-card"><div class="section-title">💡 Low Investment Business Ideas</div>
-                <div class="list-item">• <strong>Tiffin/Food Delivery Service</strong> – Start from home kitchen (₹10k-20k)</div>
-                <div class="list-item">• <strong>Freelance Graphic Design / Video Editing</strong> – Zero investment, laptop + internet</div>
-                <div class="list-item">• <strong>Social Media Management</strong> – Manage Instagram/Facebook for local businesses</div>
-                <div class="list-item">• <strong>Tuition / Coaching Classes</strong> – For school students or competitive exams</div>
-                <div class="list-item">• <strong>Handmade Products / Crafts</strong> – Sell on Meesho, Amazon, Instagram</div>
-                <div class="list-item">• <strong>YouTube Channel / Blogging</strong> – Education, tech reviews, vlogging, cooking</div>
-                <div class="list-item">• <strong>Mobile Repair / Accessories Shop</strong> – Small shop or door-to-door service</div>
-                <div class="list-item">• <strong>Beauty Parlour / Salon at Home</strong> – Low investment, high demand</div></div>
-            
-            <div class="section-card"><div class="section-title">🚀 Online Business Ideas</div>
-                <div class="list-item">• <strong>Dropshipping / E-commerce</strong> – Sell without inventory</div>
-                <div class="list-item">• <strong>Affiliate Marketing</strong> – Promote products, earn commission</div>
-                <div class="list-item">• <strong>Online Coaching / Courses</strong> – Teach on Udemy, Unacademy, or own platform</div>
-                <div class="list-item">• <strong>Content Creation (Instagram/YouTube)</strong> – Monetize through ads and sponsorships</div>
-                <div class="list-item">• <strong>Web Development / App Development</strong> – Freelance or agency model</div></div>
-            
-            <div class="section-card"><div class="section-title">🏪 Offline Business Ideas</div>
-                <div class="list-item">• <strong>Tea Stall / Juice Center</strong> – Low investment, steady income</div>
-                <div class="list-item">• <strong>Printing & Stationery Shop</strong> – Near schools or colleges</div>
-                <div class="list-item">• <strong>Boutique / Tailoring Shop</strong> – For women's clothing</div>
-                <div class="list-item">• <strong>Grocery / Kirana Store</strong> – Essential items, regular customers</div>
-                <div class="list-item">• <strong>Mobile & Electronics Repair</strong> – High demand, good margins</div></div>
+        <div class="accordion-card" id="stage4Card">
+            <div class="accordion-header" onclick="toggleCard('stage4Card')">
+                <div class="accordion-title"><span class="accordion-icon">🏗</span> Stage 4: Build the Business (1-2 Months)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎨 CREATE IDENTITY</div><div class="info-text">Business Name, Logo (Canva), Instagram Page, WhatsApp Business, Google Business Profile, Visiting Card (online printing), Basic Website (optional - free on Google Sites/Carrd)</div></div>
+                    <div class="info-card"><div class="info-label">🚀 START SMALL</div><div class="info-text">Sell from home, provide services locally, freelance on Upwork/Fiverr, sell via WhatsApp/Instagram, list on Meesho/Amazon (for products)</div></div>
+                    <div class="info-card"><div class="info-label">🎯 FIRST 10 CUSTOMERS</div><div class="info-text">Social media (Instagram, Facebook, LinkedIn), School/College network, Local shops, Friends and relatives, Offer discounts, Provide value first (free samples/trials)</div></div>
+                </div>
+            </div>
         </div>
         
-        <!-- Tab 4: Finance & Loans -->
-        <div id="finance" class="tab-pane">
-            <div class="section-card"><div class="section-title">💰 How to Apply for Business Loans</div>
-                <div class="list-item">1. Register your business – Udyam (MSME) and GST</div>
-                <div class="list-item">2. Identify relevant schemes based on your sector (manufacturing, service, tech, startup)</div>
-                <div class="list-item">3. Prepare business plan – clear ₹ requirements & use of funds</div>
-                <div class="list-item">4. Apply via official portals (Mudra/UdyamiMitra, Startup India portal, state portals)</div>
-                <div class="list-item">5. Submit required docs – ID, business registration, bank account, project report</div></div>
-            
-            <div class="section-card"><div class="section-title">🏦 Bank Loan Options</div>
-                <div class="list-item">• <strong>Mudra Loan</strong> – Up to ₹20 lakh, no collateral (Shishu, Kishor, Tarun)</div>
-                <div class="list-item">• <strong>MSME Business Loan</strong> – Up to ₹5 crore, 59-minute approval</div>
-                <div class="list-item">• <strong>Women Entrepreneur Loan</strong> – Lower interest rates for women</div>
-                <div class="list-item">• <strong>Startup Loan</strong> – For registered startups with viable business models</div>
-                <div class="list-item">• <strong>Agriculture / Dairy Loan</strong> – For farming, dairy, poultry businesses</div></div>
-            
-            <div class="section-card"><div class="section-title">📝 Documents Required for Business Loan</div>
-                <div class="list-item">• Aadhaar Card, PAN Card, Voter ID / Passport</div>
-                <div class="list-item">• Business registration proof (Udyam, GST, Shop & Establishment)</div>
-                <div class="list-item">• Bank statements (last 6-12 months)</div>
-                <div class="list-item">• Business plan / Project report</div>
-                <div class="list-item">• Income tax returns (if applicable)</div></div>
-            
-            <div class="budget-note" style="background:#FFF3E0;">💡 Tip: Always compare interest rates across banks. Use government portals for lower interest rates and subsidies.</div>
+        <div class="accordion-card" id="stage5Card">
+            <div class="accordion-header" onclick="toggleCard('stage5Card')">
+                <div class="accordion-title"><span class="accordion-icon">🌾</span> Stage 5: Grow (3-6 Months)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📈 IMPROVE QUALITY</div><div class="info-text">Faster delivery, better packaging, customer experience, professional communication, after-sales service</div></div>
+                    <div class="info-card"><div class="info-label">📢 MARKETING</div><div class="info-text">Instagram Reels, YouTube Shorts, Google Ads (₹100-500/day), Facebook Ads, Local promotion, Posters in tuition/hostels/shops, Word of mouth referrals</div></div>
+                    <div class="info-card"><div class="info-label">🤝 BUILD TEAM</div><div class="info-text">Part-timers, School/College interns, Freelancers from Fiverr/Upwork - delegate editing, social media, delivery, customer support</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="stage6Card">
+            <div class="accordion-header" onclick="toggleCard('stage6Card')">
+                <div class="accordion-title"><span class="accordion-icon">📈</span> Stage 6: Expand (6-12 Months)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📝 REGISTER BUSINESS</div><div class="info-text">Udyam Registration (Free, MSME), GST Registration (if turnover >₹40L), Trade License, FSSAI (for food business), Shop & Establishment Act</div></div>
+                    <div class="info-card"><div class="info-label">➕ ADD INCOME STREAMS</div><div class="info-text">Clothing brand + accessories, Teaching + online courses, Photography + video shooting, Fitness training + online coaching</div></div>
+                    <div class="info-card"><div class="info-label">💰 APPLY FOR LOANS</div><div class="info-text">Mudra Loan (₹50k-20L), Stand-Up India (₹10L-1Cr), PMEGP Subsidy, CGTMSE (collateral-free)</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="stage7Card">
+            <div class="accordion-header" onclick="toggleCard('stage7Card')">
+                <div class="accordion-title"><span class="accordion-icon">💪</span> Stage 7: Scale to Big Business (1-3 Years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">⚙️ AUTOMATION</div><div class="info-text">WhatsApp Business API, CRM (HubSpot free), Fb/Insta Ads automation, Email marketing automation, Inventory management software</div></div>
+                    <div class="info-card"><div class="info-label">🏆 BRAND TRUST</div><div class="info-text">Consistent quality, Storytelling, Google Reviews collection, Partnerships with influencers, Sponsorships, Certifications</div></div>
+                    <div class="info-card"><div class="info-label">🚀 LONG-TERM VISION</div><div class="info-text">Franchise model, Large online brand, Export business, High-end services, Agency model, Consultancy, IPO</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="summaryCard">
+            <div class="accordion-header" onclick="toggleCard('summaryCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎯</span> Summary Roadmap - At a Glance</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="roadmap-step"><div class="roadmap-year">0-1 Month</div><div class="roadmap-text">Find interest + learn basics<br><span class="salary-text">💰 Investment: ₹0</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Months</div><div class="roadmap-text">Build one high-income skill<br><span class="salary-text">💰 Investment: ₹0-5,000 (courses)</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-4 Months</div><div class="roadmap-text">Start small business<br><span class="salary-text">💰 Investment: ₹0-50,000</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">First 6 Months</div><div class="roadmap-text">Earn first ₹50k-1 Lakh<br><span class="salary-text">💰 Revenue: ₹50k-1L</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1 Year</div><div class="roadmap-text">Build team + register business<br><span class="salary-text">💰 Revenue: ₹5-15 Lakhs</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Scale to full business<br><span class="salary-text">💰 Revenue: ₹25 Lakhs - ₹1 Cr+</span></div></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 2: GOVERNMENT SCHEMES & FUNDING ==================== -->
+    <div id="door-schemes" class="door-content">
+        <div class="accordion-card" id="centralSchemesCard">
+            <div class="accordion-header" onclick="toggleCard('centralSchemesCard')">
+                <div class="accordion-title"><span class="accordion-icon">🇮🇳</span> Central Government Schemes for Entrepreneurs</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🚀 Startup India Initiative</div><div class="info-text">Benefits: 3-year tax exemption, self-certification compliance, IPR fast-track, access to Fund of Funds, easier procurement<br>Eligibility: DPIIT-registered startup (less than 10 years old)<br>🔗 <a class="live-link" href="https://www.startupindia.gov.in" target="_blank">startupindia.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">💵 Startup India Seed Fund Scheme (SISFS)</div><div class="info-text">Funding: ₹20-50 Lakhs for early-stage startups (prototype, trials, market entry)<br>Eligibility: DPIIT-registered, proof of concept<br>🔗 <a class="live-link" href="https://www.startupindia.gov.in" target="_blank">startupindia.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">💰 Fund of Funds for Startups (FFS)</div><div class="info-text">Corpus: ₹10,000 Crore | Government backs SEBI-registered AIFs/VCFs which invest in startups<br>Investment: Up to ₹25 Crore per startup<br>🔗 <a class="live-link" href="https://www.startupindia.gov.in" target="_blank">startupindia.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🛡️ Credit Guarantee Scheme for Startups (CGSS)</div><div class="info-text">Collateral-free credit guarantee up to ₹10-20 Crore for startups sanctioned by banks/ NBFCs<br>🔗 <a class="live-link" href="https://www.nsdl.co.in" target="_blank">nsdl.co.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Atal Innovation Mission (AIM)</div><div class="info-text">By NITI Aayog - Grants and incubation support through Atal Incubation Centers (AICs), Atal Tinkering Labs (ATLs)<br>🔗 <a class="live-link" href="https://aim.gov.in" target="_blank">aim.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">💻 TIDE 2.0 (MeitY)</div><div class="info-text">For hardware, IoT, robotics, electronics startups - Grants up to ₹1 Cr + incubation support<br>🔗 <a class="live-link" href="https://tide.meity.gov.in" target="_blank">tide.meity.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📊 Samridh Scheme (MeitY)</div><div class="info-text">Funding up to ₹40 Lakhs + mentorship for software products and scalable solutions<br>🔗 <a class="live-link" href="https://meity.gov.in" target="_blank">meity.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🛡️ iDEX / Defence Innovation Scheme</div><div class="info-text">Grants up to ₹1.5 Crore for defence and aerospace startups + incubation + industry linkage<br>🔗 <a class="live-link" href="https://idex.gov.in" target="_blank">idex.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🧬 BIRAC / BIO Grants</div><div class="info-text">Non-dilutive funding up to ₹1 Crore for biotech & life sciences startups<br>🔗 <a class="live-link" href="https://birac.nic.in" target="_blank">birac.nic.in</a></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="msmeSchemesCard">
+            <div class="accordion-header" onclick="toggleCard('msmeSchemesCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏭</span> MSME & Finance Support Schemes</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏦 Pradhan Mantri Mudra Yojana (PMMY)</div><div class="info-text">Collateral-free loans up to ₹20 Lakhs<br>Shishu (₹50k), Kishor (₹5 Lakhs), Tarun (₹10 Lakhs), Tarun Plus (₹20 Lakhs)<br>🔗 <a class="live-link" href="https://www.mudra.org.in" target="_blank">mudra.org.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🇮🇳 PM Employment Generation Programme (PMEGP)</div><div class="info-text">Subsidy 15-35% on bank loans for new manufacturing and service units (₹10L-25L)<br>🔗 <a class="live-link" href="https://pmegp.kviconline.gov.in" target="_blank">pmegp.kviconline.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🎯 Stand-Up India Scheme</div><div class="info-text">Loans ₹10 Lakhs-1 Crore for SC/ST and women entrepreneurs (greenfield enterprises)<br>🔗 <a class="live-link" href="https://www.standupmitra.in" target="_blank">standupmitra.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🛡️ Credit Guarantee Fund Trust for Micro and Small Enterprises (CGTMSE)</div><div class="info-text">Guarantees up to ₹5 Crore for MSME loans without collateral, reducing lending risk for banks<br>🔗 <a class="live-link" href="https://www.cgtmse.in" target="_blank">cgtmse.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🌾 Agriculture Infrastructure Fund (AIF)</div><div class="info-text">Loans up to ₹7.5 Crore with 3% interest subvention for agriculture infrastructure projects<br>🔗 <a class="live-link" href="https://agriinfra.dac.gov.in" target="_blank">agriinfra.dac.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">⚡ 59-Minute Loan for MSME</div><div class="info-text">Quick loan approval in principle from banks up to ₹5 Crore via simplified digital processing on PSB Loans portal<br>🔗 <a class="live-link" href="https://www.psbloansin59minutes.com" target="_blank">psbloansin59minutes.com</a></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="stateSchemesCard">
+            <div class="accordion-header" onclick="toggleCard('stateSchemesCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏙️</span> State Government Schemes</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏔️ Uttarakhand - Mukhyamantri Swarozgar Yojna</div><div class="info-text">Loans up to ₹25 Lakhs (manufacturing), ₹10 Lakhs (services) + subsidy for entrepreneurs</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ PM Vishwakarma / Vishwakarma Yuva Udyami Protsahan Yojana</div><div class="info-text">Subsidised loans and support for artisans, craftspeople and youth entrepreneurs</div></div>
+                    <div class="info-card"><div class="info-label">🌾 StartupTN - Gramam Thorum Puthozhil (Tamil Nadu)</div><div class="info-text">State-level rural startup clusters with subsidies and mentoring support</div></div>
+                    <div class="info-card"><div class="info-label">📝 Note</div><div class="info-text">Many more state-specific schemes available (Maharashtra MSME, Karnataka Startup policy, Delhi MSME support, etc.) - check your state's industry/enterprise portal</div></div>
+                </div>
+            </div>
+        </div>
+            <!-- ==================== DOOR 3: BUSINESS IDEAS ==================== -->
+    <div id="door-ideas" class="door-content">
+        <div class="accordion-card" id="lowInvestmentCard">
+            <div class="accordion-header" onclick="toggleCard('lowInvestmentCard')">
+                <div class="accordion-title"><span class="accordion-icon">💡</span> Low Investment Business Ideas (₹0 - ₹50,000)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💻 Freelance Services</div><div class="info-text">Investment: ₹0 | Potential: ₹20k-1L/month | Platforms: Upwork, Fiverr, Freelancer, Toptal<br>Services: Graphic Design, Web Dev, Content Writing, Video Editing, Digital Marketing, Virtual Assistant, Data Entry, Social Media Management</div></div>
+                    <div class="info-card"><div class="info-label">📱 Social Media Management</div><div class="info-text">Investment: ₹0 | Potential: ₹20k-1.5L/month | Manage Instagram, Facebook, LinkedIn for local businesses. Charge ₹5k-50k/month per client.</div></div>
+                    <div class="info-card"><div class="info-label">🎬 YouTube Channel</div><div class="info-text">Investment: ₹0-5,000 (phone + basic editing) | Potential: ₹10k-10L/month | Monetization: Ads, Sponsorships, Affiliate Marketing, Merchandise</div></div>
+                    <div class="info-card"><div class="info-label">📝 Blogging/Affiliate Marketing</div><div class="info-text">Investment: ₹0-2,000 (domain+hosting) | Potential: ₹10k-5L/month | Earn through Amazon affiliate, Google Ads, sponsored posts</div></div>
+                    <div class="info-card"><div class="info-label">🎓 Online Tutoring/Coaching</div><div class="info-text">Investment: ₹0 | Potential: ₹20k-2L/month | Teach school subjects, competitive exams, skills like coding, music, art on platforms like Vedantu, Unacademy, or own platform</div></div>
+                    <div class="info-card"><div class="info-label">🛒 Dropshipping/E-commerce</div><div class="info-text">Investment: ₹0-10,000 | Potential: ₹30k-5L/month | Sell products via WooCommerce/Shopify without inventory. Supplier ships directly to customer.</div></div>
+                    <div class="info-card"><div class="info-label">🥡 Tiffin/Food Delivery Service</div><div class="info-text">Investment: ₹5k-20k | Potential: ₹20k-1L/month | Start from home kitchen, serve nearby offices/hostels. FSSAI registration required.</div></div>
+                    <div class="info-card"><div class="info-label">💅 Beauty Salon at Home</div><div class="info-text">Investment: ₹10k-30k | Potential: ₹30k-1.5L/month | Services: Hair, Makeup, Waxing, Facial, Nail Art. Can also offer home services.</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Mobile/Computer Repair</div><div class="info-text">Investment: ₹10k-30k (tools + spare parts) | Potential: ₹25k-80k/month | Doorstep service available, can start from home.</div></div>
+                    <div class="info-card"><div class="info-label">✂️ Tailoring/Boutique</div><div class="info-text">Investment: ₹10k-30k (sewing machine + fabric) | Potential: ₹15k-60k/month | Stitching, alterations, custom clothing, bridal wear.</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="mediumInvestmentCard">
+            <div class="accordion-header" onclick="toggleCard('mediumInvestmentCard')">
+                <div class="accordion-title"><span class="accordion-icon">💡</span> Medium Investment Business Ideas (₹50,000 - ₹5 Lakhs)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">☕ Tea Stall / Chai Tapri</div><div class="info-text">Investment: ₹50k-1L | Potential: ₹20k-60k/month | Location near college, office, bus stand. Add snacks for higher margin.</div></div>
+                    <div class="info-card"><div class="info-label">🧃 Juice Center / Small Cafe</div><div class="info-text">Investment: ₹1L-3L | Potential: ₹30k-1L/month | Fresh juices, smoothies, milkshakes. Minimal cooking required.</div></div>
+                    <div class="info-card"><div class="info-label">📱 Mobile Accessories Shop</div><div class="info-text">Investment: ₹1L-2L | Potential: ₹25k-70k/month | Covers, screen guards, chargers, power banks. High demand, repeat customers.</div></div>
+                    <div class="info-card"><div class="info-label">👗 Boutique / Readymade Garments</div><div class="info-text">Investment: ₹1.5L-3L | Potential: ₹40k-1.5L/month | Women's ethnic wear, ready-made suits, sarees, lehengas. Can also sell online.</div></div>
+                    <div class="info-card"><div class="info-label">🍔 Cloud Kitchen / Home Food Business</div><div class="info-text">Investment: ₹1L-2L | Potential: ₹40k-2L/month | Operate from home, deliver via Zomato/Swiggy. Cuisine: North Indian, Chinese, Biryani, Healthy food.</div></div>
+                    <div class="info-card"><div class="info-label">🖨️ Printing & Stationery Shop</div><div class="info-text">Investment: ₹1.5L-3L | Potential: ₹30k-80k/month | Near school or college - Xerox, printing, laminating, stationery items, book binding.</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="highInvestmentCard">
+            <div class="accordion-header" onclick="toggleCard('highInvestmentCard')">
+                <div class="accordion-title"><span class="accordion-icon">💡</span> High Investment Business Ideas (₹5 Lakhs+)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏪 Franchise Business</div><div class="info-text">Investment: ₹5L-50L | Brands: Amul Ice-cream, Giani's, KFC, McDonald's, Subway, FirstCry, Lakme Salon, Jio Point<br>Benefits: Brand recognition, proven business model, training support</div></div>
+                    <div class="info-card"><div class="info-label">🚗 Car Wash / Detailing Center</div><div class="info-text">Investment: ₹5L-10L | Potential: ₹50k-2L/month | High demand, recurring customers. Offer interior cleaning, polishing, ceramic coating.</div></div>
+                    <div class="info-card"><div class="info-label">🏥 Medical/Dental Clinic</div><div class="info-text">Investment: ₹10L-25L | Potential: ₹1L-5L/month | For doctors/dentists. Can start as single-specialty clinic, expand later.</div></div>
+                    <div class="info-card"><div class="info-label">🏫 Coaching Institute</div><div class="info-text">Investment: ₹5L-15L | Potential: ₹1L-10L/month | JEE, NEET, Foundation, Bank, SSC coaching. Hire qualified teachers, good location required.</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 4: FUNDING SOURCES ==================== -->
+    <div id="door-funding" class="door-content">
+        <div class="accordion-card" id="fundingCard">
+            <div class="accordion-header" onclick="toggleCard('fundingCard')">
+                <div class="accordion-title"><span class="accordion-icon">💰</span> Complete Funding Guide for Startups</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏦 Bootstrapping (Self-Funding)</div><div class="info-text">Investment: ₹0-5L | Best for: Service businesses, freelancing, small ventures | Use savings, personal income, credit cards to fund initial operations.</div></div>
+                    <div class="info-card"><div class="info-label">👨‍👩‍👧 Friends & Family</div><div class="info-text">Investment: ₹50k-10L | Best for: Early-stage startups | Borrow from friends/family. Keep clear terms, documentation, repayment schedule.</div></div>
+                    <div class="info-card"><div class="info-label">🏦 Mudra Loan (PMMY)</div><div class="info-text">Loan Amount: ₹50k-20L | Interest: 8-12% | Tenure: 1-5 years | Collateral: Not required | Best for: Micro enterprises, small businesses</div></div>
+                    <div class="info-card"><div class="info-label">🏦 Stand-Up India Loan</div><div class="info-text">Loan Amount: ₹10L-1Cr | Interest: 8-12% | Eligibility: SC/ST/Women entrepreneurs | Best for: Greenfield enterprises (new business)</div></div>
+                    <div class="info-card"><div class="info-label">🏦 PMEGP Subsidy Loan</div><div class="info-text">Loan Amount: ₹10L-25L | Subsidy: 15-35% | Best for: Manufacturing and service units | Government contributes subsidy portion directly.</div></div>
+                    <div class="info-card"><div class="info-label">💳 Business Credit Card</div><div class="info-text">Credit Limit: ₹50k-5L | Best for: Small expenses, building credit history | Useful for managing cash flow, tracking business expenses.</div></div>
+                    <div class="info-card"><div class="info-label">👼 Angel Investors</div><div class="info-text">Investment: ₹20L-2Cr | Equity: 10-30% | Best for: Scalable startups with MVP/traction | Examples: Indian Angel Network, Mumbai Angels, Chennai Angels</div></div>
+                    <div class="info-card"><div class="info-label">🚀 Venture Capital (VC)</div><div class="info-text">Investment: ₹2Cr-100Cr | Equity: 20-40% | Best for: High-growth startups | Stage: Series A, B, C | Examples: Sequoia, Accel, Lightspeed, Blume, Nexus</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Crowdfunding</div><div class="info-text">Platforms: Ketto, Milaap, Wishberry | Best for: Creative projects, social causes, product launches | Reward-based or donation-based (not equity)</div></div>
+                    <div class="info-card"><div class="info-label">📊 Bank Loans (MSME)</div><div class="info-text">Loan Amount: ₹5L-5Cr | Interest: 9-14% | Tenure: 1-10 years | Collateral: May be required for larger amounts | SBI, HDFC, ICICI, PNB, BOB</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Angel Networks & VCs in India</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">Indian Angel Network (IAN)</div><div class="info-text">Investment: ₹25L-3Cr | Stage: Seed | <a class="live-link" href="https://indianangelnetwork.com" target="_blank">indianangelnetwork.com</a></div></div>
+                    <div class="info-card"><div class="info-label">Mumbai Angels</div><div class="info-text">Investment: ₹30L-2Cr | Stage: Seed to Series A | <a class="live-link" href="https://mumbaiangels.com" target="_blank">mumbaiangels.com</a></div></div>
+                    <div class="info-card"><div class="info-label">Venture Catalysts</div><div class="info-text">Investment: ₹20L-5Cr | Stage: Seed to Series A | <a class="live-link" href="https://venturecatalysts.in" target="_blank">venturecatalysts.in</a></div></div>
+                    <div class="info-card"><div class="info-label">Sequoia Capital</div><div class="info-text">Investment: ₹1Cr-100Cr | Stage: Series A onwards | <a class="live-link" href="https://www.sequoiacap.com" target="_blank">sequoiacap.com</a></div></div>
+                    <div class="info-card"><div class="info-label">Accel India</div><div class="info-text">Investment: ₹50L-50Cr | Stage: Seed to Series C | <a class="live-link" href="https://www.accel.com" target="_blank">accel.com</a></div></div>
+                    <div class="info-card"><div class="info-label">Blume Ventures</div><div class="info-text">Investment: ₹25L-10Cr | Stage: Seed to Series B | <a class="live-link" href="https://blume.vc" target="_blank">blume.vc</a></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 5: REGISTRATION & LEGAL ==================== -->
+    <div id="door-registration" class="door-content">
+        <div class="accordion-card" id="registrationCard">
+            <div class="accordion-header" onclick="toggleCard('registrationCard')">
+                <div class="accordion-title"><span class="accordion-icon">📋</span> Business Registration & Legal Compliance</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🆔 Udyam Registration (MSME)</div><div class="info-text">Cost: FREE | Time: 5-10 minutes | Required For: Govt schemes, bank loans, subsidies<br>🔗 <a class="live-link" href="https://udyamregistration.gov.in" target="_blank">udyamregistration.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🔢 GST Registration</div><div class="info-text">Cost: FREE | Time: 5-7 days | Required For: Businesses with turnover >₹40L (goods) or >₹20L (services)<br>🔗 <a class="live-link" href="https://www.gst.gov.in" target="_blank">gst.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🏪 Shop & Establishment Act</div><div class="info-text">Cost: ₹500-2,000 | Time: 7-15 days | Required For: All local shops, offices, commercial establishments (state-specific)</div></div>
+                    <div class="info-card"><div class="info-label">🍽️ FSSAI License</div><div class="info-text">Cost: ₹1,000-7,500 | Time: 7-15 days | Required For: Food businesses (restaurants, tiffin, bakery, packaged food)<br>🔗 <a class="live-link" href="https://foscos.fssai.gov.in" target="_blank">foscos.fssai.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Company Registration (LLP/Private Limited)</div><div class="info-text">Cost: ₹5,000-15,000 | Time: 15-30 days | Best For: Scalable startups, raising funding, partnership<br>🔗 <a class="live-link" href="https://www.mca.gov.in" target="_blank">mca.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">™️ Trademark Registration</div><div class="info-text">Cost: ₹5,000-10,000 | Time: 6-12 months | Protects brand name, logo, slogan<br>🔗 <a class="live-link" href="https://ipindia.gov.in" target="_blank">ipindia.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🖼️ Import Export Code (IEC)</div><div class="info-text">Cost: ₹500 | Time: 5-7 days | Required For: Exporting/importing goods<br>🔗 <a class="live-link" href="https://dgft.gov.in" target="_blank">dgft.gov.in</a></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 6: SUCCESS STORIES ==================== -->
+    <div id="door-success" class="door-content">
+        <div class="accordion-card" id="successCard">
+            <div class="accordion-header" onclick="toggleCard('successCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏆</span> Inspiring Indian Entrepreneur Success Stories</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🦁 Ratan Tata</div><div class="info-text">Company: Tata Group | Started with: Family business (1868) | Built Tata into $100B+ conglomerate<br>Key lesson: Ethics, innovation (Tata Nano, Tata Indica), philanthropy</div></div>
+                    <div class="info-card"><div class="info-label">🛢️ Dhirubhai Ambani</div><div class="info-text">Company: Reliance Industries | Started with: ₹15,000 | Built India's largest private sector company ($200B+)<br>Key lesson: Vision, risk-taking, backward integration strategy</div></div>
+                    <div class="info-card"><div class="info-label">🚀 Narayana Murthy</div><div class="info-text">Company: Infosys | Started with: ₹10,000 (1981) | Built India's IT giant ($70B+ market cap)<br>Key lesson: Quality, transparency, employee-first culture</div></div>
+                    <div class="info-card"><div class="info-label">💊 Kiran Mazumdar-Shaw</div><div class="info-text">Company: Biocon | Started with: ₹10,000 in garage (1978) | Built India's largest biotech company<br>Key lesson: Perseverance, innovation in biotech, breaking gender barriers</div></div>
+                    <div class="info-card"><div class="info-label">📱 Vijay Shekhar Sharma</div><div class="info-text">Company: Paytm | Started with: Paytm in 2010 | Built India's leading digital payments platform<br>Key lesson: Timing (demonetization boosted growth), perseverance</div></div>
+                    <div class="info-card"><div class="info-label">🍔 Byju Raveendran</div><div class="info-text">Company: BYJU'S | Started with: Offline classes in Bangalore | Built India's largest edtech unicorn ($22B valuation)<br>Key lesson: Identifying market gap, product-market fit, scaling</div></div>
+                    <div class="info-card"><div class="info-label">🛍️ Falguni Nayar</div><div class="info-text">Company: Nykaa | Started at age 50 (2012) | Built India's largest beauty e-commerce platform<br>Key lesson: Age is just a number, understanding customer needs</div></div>
+                    <div class="info-card"><div class="info-label">🍕 Deepinder Goyal</div><div class="info-text">Company: Zomato | Started as Foodiebay (2008) | Built India's leading food delivery platform<br>Key lesson: Pivoting, adapting to market needs, global expansion</div></div>
+                    <div class="info-card"><div class="info-label">📈 Nithin Kamath</div><div class="info-text">Company: Zerodha | Started with: ₹40,000 (2010) | Built India's largest stock broker (10M+ customers)<br>Key lesson: Disrupting established industry, low-cost model, no external funding</div></div>
+                    <div class="info-card"><div class="info-label">👗 Sabyasachi Mukherjee</div><div class="info-text">Company: Sabyasachi | Started from: Kolkata, ₹1 lakh loan from father | Built global fashion brand loved by celebrities<br>Key lesson: Craftsmanship, brand identity, premium positioning</div></div>
+                </div>
+                <div class="section-title">🎬 Shark Tank India Success Stories</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">Boat (Aman Gupta)</div><div class="info-text">Audio brand, valuation ₹5,000 Cr+</div></div>
+                    <div class="info-card"><div class="info-label">The Man Company</div><div class="info-text">Men's grooming, acquired by Emami</div></div>
+                    <div class="info-card"><div class="info-label">Skippi Ice Pops</div><div class="info-text">Turned ₹20L investment into ₹1 Cr in a year</div></div>
+                    <div class="info-card"><div class="info-label">Beyond Snack</div><div class="info-text">Kerala banana chips brand, massive growth after Shark Tank</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 7: COMMON MISTAKES ==================== -->
+    <div id="door-mistakes" class="door-content">
+        <div class="accordion-card" id="mistakesCard">
+            <div class="accordion-header" onclick="toggleCard('mistakesCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚠️</span> 20 Common Mistakes New Entrepreneurs Make</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">1</div><div class="info-text">Starting without market research - Validate demand before investing money</div></div>
+                    <div class="info-card"><div class="info-label">2</div><div class="info-text">No business plan - Failing to plan is planning to fail. Write it down.</div></div>
+                    <div class="info-card"><div class="info-label">3</div><div class="info-text">Underestimating costs - Always add 30% buffer to initial budget</div></div>
+                    <div class="info-card"><div class="info-label">4</div><div class="info-text">Mixing personal and business finances - Get separate bank account immediately</div></div>
+                    <div class="info-card"><div class="info-label">5</div><div class="info-text">Trying to do everything yourself - Delegate, outsource, hire</div></div>
+                    <div class="info-card"><div class="info-label">6</div><div class="info-text">Ignoring competition - Study competitors, learn from their mistakes</div></div>
+                    <div class="info-card"><div class="info-label">7</div><div class="info-text">No marketing plan - Build audience before launch, not after</div></div>
+                    <div class="info-card"><div class="info-label">8</div><div class="info-text">Focusing only on profit initially - Build value first, profit follows</div></div>
+                    <div class="info-card"><div class="info-label">9</div><div class="info-text">Not understanding customers - Talk to customers regularly</div></div>
+                    <div class="info-card"><div class="info-label">10</div><div class="info-text">Giving up too early - Most successful businesses took 3-5 years</div></div>
+                    <div class="info-card"><div class="info-label">11</div><div class="info-text">No online presence - In 2025, digital presence is mandatory</div></div>
+                    <div class="info-card"><div class="info-label">12</div><div class="info-text">Neglecting legal compliance - Get GST, MSME, tax filings done</div></div>
+                    <div class="info-card"><div class="info-label">13</div><div class="info-text">Bad hiring decisions - Hire slow, fire fast</div></div>
+                    <div class="info-card"><div class="info-label">14</div><div class="info-text">No customer feedback system - Listen to complaints, improve</div></div>
+                    <div class="info-card"><div class="info-label">15</div><div class="info-text">Expanding too fast - Scale only when systems are ready</div></div>
+                    <div class="info-card"><div class="info-label">16</div><div class="info-text">Not tracking metrics - What gets measured, gets improved</div></div>
+                    <div class="info-card"><div class="info-label">17</div><div class="info-text">Fear of selling - Sales is serving, not manipulating</div></div>
+                    <div class="info-card"><div class="info-label">18</div><div class="info-text">No emergency fund - Always keep 3-6 months of expenses</div></div>
+                    <div class="info-card"><div class="info-label">19</div><div class="info-text">Not learning new skills - Business evolves, you must too</div></div>
+                    <div class="info-card"><div class="info-label">20</div><div class="info-text">Surrounding with negative people - Join entrepreneur communities, get mentors</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 8: ESSENTIAL SKILLS ==================== -->
+    <div id="door-skills" class="door-content">
+        <div class="accordion-card" id="skillsCard">
+            <div class="accordion-header" onclick="toggleCard('skillsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎯</span> Essential Skills Every Entrepreneur Must Learn</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💰 Financial Literacy</div><div class="info-text">Reading P&L, Balance Sheet, Cash Flow | Budgeting | Pricing | Profit margins | Break-even analysis</div></div>
+                    <div class="info-card"><div class="info-label">📢 Marketing & Sales</div><div class="info-text">Digital marketing (SEO, Social Media, Email, Content) | Copywriting | Cold calling | Closing deals | Negotiation</div></div>
+                    <div class="info-card"><div class="info-label">💻 Digital Skills</div><div class="info-text">Website basics, Analytics, CRM, Automation tools, Excel/Google Sheets, Presentation skills (PowerPoint/Canva)</div></div>
+                    <div class="info-card"><div class="info-label">🤝 Leadership & Management</div><div class="info-text">Team building, Delegation, Conflict resolution, Performance management, Motivation</div></div>
+                    <div class="info-card"><div class="info-label">🔄 Communication</div><div class="info-text">Public speaking, Networking, Email writing, Customer communication, Pitching investors</div></div>
+                    <div class="info-card"><div class="info-label">📊 Data Analysis</div><div class="info-text">Understanding metrics, customer data, market trends, using data for decisions</div></div>
+                    <div class="info-card"><div class="info-label">⚖️ Legal Basics</div><div class="info-text">Contracts, GST, Income Tax, Intellectual Property (Trademark, Copyright), Employment laws</div></div>
+                    <div class="info-card"><div class="info-label">🧠 Problem Solving</div><div class="info-text">Critical thinking, Creative solutions, Decision making under uncertainty, Adaptability</div></div>
+                </div>
+                <div class="section-title">📚 Free Resources to Learn These Skills</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">Google Digital Garage</div><div class="info-text">Free digital marketing certification - <a class="live-link" href="https://learndigital.withgoogle.com" target="_blank">learndigital.withgoogle.com</a></div></div>
+                    <div class="info-card"><div class="info-label">HubSpot Academy</div><div class="info-text">Free marketing, sales, CRM courses - <a class="live-link" href="https://academy.hubspot.com" target="_blank">academy.hubspot.com</a></div></div>
+                    <div class="info-card"><div class="info-label">Coursera (Audit)</div><div class="info-text">Free access to thousands of business courses - <a class="live-link" href="https://www.coursera.org" target="_blank">coursera.org</a></div></div>
+                    <div class="info-card"><div class="info-label">SWAYAM (NPTEL)</div><div class="info-text">Free government business courses - <a class="live-link" href="https://swayam.gov.in" target="_blank">swayam.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">YouTube</div><div class="info-text">Channels: Sandeep Maheshwari, Think School, Nitin Gupta, Your College (finance), CA Rachana Ranade</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 9: MARKETING GUIDE ==================== -->
+    <div id="door-marketing" class="door-content">
+        <div class="accordion-card" id="marketingCard">
+            <div class="accordion-header" onclick="toggleCard('marketingCard')">
+                <div class="accordion-title"><span class="accordion-icon">📢</span> Complete Marketing Guide for Small Businesses</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📱 Social Media Marketing (SMM)</div><div class="info-text">Platforms: Instagram, Facebook, LinkedIn, YouTube, Twitter<br>Content: Reels, posts, stories, live videos, testimonials<br>Tools: Canva (design), Meta Business Suite (scheduling), Hootsuite</div></div>
+                    <div class="info-card"><div class="info-label">🔍 Search Engine Optimization (SEO)</div><div class="info-text">On-page: Keywords, meta tags, content optimization<br>Off-page: Backlinks, guest posting<br>Local SEO: Google My Business profile, local citations</div></div>
+                    <div class="info-card"><div class="info-label">💰 Google Ads (PPC)</div><div class="info-text">Budget: ₹100/day to start<br>Types: Search ads, Display ads, Shopping ads<br>Target: Local customers, specific keywords</div></div>
+                    <div class="info-card"><div class="info-label">📧 Email Marketing</div><div class="info-text">Collect emails via website/landing pages<br>Tools: Mailchimp (free up to 500 contacts), Brevo (Sendinblue)<br>Send: Newsletters, offers, product updates</div></div>
+                    <div class="info-card"><div class="info-label">👥 WhatsApp Business</div><div class="info-text">Free business account | Broadcast lists up to 256 contacts | Catalog feature | Automated replies<br>Best for: Local businesses, service providers, small shops</div></div>
+                    <div class="info-card"><div class="info-label">📈 Content Marketing</div><div class="info-text">Blog posts, YouTube videos, Infographics, E-books, Podcasts<br>Strategy: Provide value, build authority, attract organic traffic</div></div>
+                    <div class="info-card"><div class="info-label">🤝 Influencer Marketing</div><div class="info-text">Micro-influencers (10k-100k followers) often work for free products<br>Platforms: Instagram, YouTube, LinkedIn<br>Best for: Fashion, beauty, food, lifestyle products</div></div>
+                    <div class="info-card"><div class="info-label">🏪 Offline Marketing</div><div class="info-text">Flyers, Posters, Banners, Local newspaper ads, Radio ads<br>Events: Trade shows, exhibitions, community events, school/college sponsorship</div></div>
+                </div>
+                <div class="section-title">📊 Marketing Budget Guide (First Year)</div>
+                <table class="college-table">
+                    <thead>
+                        <tr><th>Business Type</th><th>Recommended Budget</th><th>Allocation</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>那样Service Business</th>那样₹5k-15k/month</th>那样70% Social Media, 30% Google My Business</th></tr>
+                        <tr>那样Product Business (Online)</th>那样₹15k-50k/month</th>那样40% Social Media, 40% Google Ads, 20% Influencer</th></tr>
+                        <tr>那样Product Business (Offline)</th>那样₹10k-30k/month</th>那样50% Local SEO, 30% Flyers/Posters, 20% Events</th></tr>
+                        <tr>那样Local Store/Shop</th>那样₹5k-15k/month</th>那样60% WhatsApp Business, 20% Local SEO, 20% Flyers</th></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 10: GLOBAL BUSINESS ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="globalBusinessCard">
+            <div class="accordion-header" onclick="toggleCard('globalBusinessCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Global Business & Export Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🌏 Why Export from India?</div><div class="info-text">India has competitive advantage in: IT services, textiles, gems & jewellery, pharmaceuticals, auto components, spices, tea, coffee, organic products, handicrafts.</div></div>
+                    <div class="info-card"><div class="info-label">📋 Getting Started with Export</div><div class="info-text">Step 1: Obtain IEC (Import Export Code) - ₹500, online<br>Step 2: Choose product and target market<br>Step 3: Find buyers via trade fairs, B2B platforms (Alibaba, IndiaMART), government trade missions<br>Step 4: Understand documentation (invoice, packing list, Bill of Lading, shipping documents)</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Top Products India Exports</div><div class="info-text">#1 Petroleum products | #2 Gems & Jewellery | #3 Pharma & Drugs | #4 Iron & Steel | #5 Textiles & Garments | #6 Auto Components | #7 Electronics | #8 Spices | #9 Organic Chemicals | #10 Marine Products</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Government Support for Exporters</div><div class="info-text">FIEO (Federation of Indian Export Organisations) | DGFT (Directorate General of Foreign Trade) | Export Promotion Councils | MEIS/SEIS (Merchandise/Service Exports Incentive Schemes) | RoDTEP (Remission of Duties and Taxes on Exported Products)</div></div>
+                    <div class="info-card"><div class="info-label">💼 Freelancing for Global Clients</div><div class="info-text">Platforms: Upwork, Fiverr, Toptal, Freelancer, 99designs<br>Skills in demand: Web development, Mobile apps, AI/ML, Digital marketing, Content writing, Graphic design, Video editing, Virtual assistance<br>Payment: PayPal, Wise (TransferWise), Payoneer, Direct bank transfer</div></div>
+                </div>
+                <div class="section-title">📋 Top Global Marketplaces for Indian Sellers</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">Amazon Global Selling</div><div class="info-text">Sell in 10+ countries, including USA, UK, Canada, Germany, Japan, Australia</div></div>
+                    <div class="info-card"><div class="info-label">eBay International</div><div class="info-text">Sell in 190+ countries, easy setup, lower fees</div></div>
+                    <div class="info-card"><div class="info-label">Etsy</div><div class="info-text">Best for handmade products, crafts, vintage items, digital products</div></div>
+                    <div class="info-card"><div class="info-label">Alibaba</div><div class="info-text">For B2B (wholesale) - connect with international buyers</div></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -218,46 +537,19 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// Auto-update budget year (Indian Financial Year: April to March)
-function getIndianFinancialYear() {
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
-    if (currentMonth >= 0 && currentMonth <= 2) {
-        return (currentYear - 1) + '-' + (currentYear).toString().slice(-2);
-    } else {
-        return currentYear + '-' + (currentYear + 1).toString().slice(-2);
-    }
-}
-document.getElementById('budgetYear').innerText = getIndianFinancialYear();
-
-const translations = { 
-en: {
-    app_tagline: "Career Saathi", tagline: "🚀 Business Roadmap & Government Schemes", page_title: "💼 Business & Entrepreneurship",
-    bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
-},
-hi: {
-    app_tagline: "करियर साथी", tagline: "🚀 व्यवसाय रोडमैप और सरकारी योजनाएं", page_title: "💼 व्यवसाय और उद्यमिता",
-    bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल"
-}};
-</script>
-<script>
-const bottomNav = [{ nameKey: "bottom_home", icon: "🏠", link: "index.html" }, { nameKey: "bottom_search", icon: "🔍", link: "#" }, { nameKey: "bottom_ai", icon: "🤖", link: "#" }, { nameKey: "bottom_alerts", icon: "🔔", link: "#" }, { nameKey: "bottom_profile", icon: "👤", link: "#" }];
-let currentLang = 'en'; 
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-function updateAllText() { 
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if(idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); }); 
-}
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'index.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-document.querySelectorAll('.tab-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active')); document.getElementById(btn.getAttribute('data-tab')).classList.add('active'); }); });
-renderBottomBar(); loadSavedLanguage();
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
 </script>
 </body>
 </html>
