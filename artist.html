@@ -7,297 +7,404 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .language-selector select option { color: black; background: white; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">🎭 Artist & Performing Arts Careers</div>
+    <div class="tagline">🎭 Complete Artist & Performing Arts Career Guide - 10th to Superstar | Live Updates</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">🎭 Artist (Performing & Fine Arts)</div>
-
-    <div class="section-card">
-        <div class="section-title" id="actingTitle">🎭 Acting & Theatre</div>
-        <div class="list-item" id="baActing">• BA in Acting / Bachelor of Performing Arts (BPA) – Theatre, Film, TV</div>
-        <div class="list-item" id="baDrama">• BA in Drama & Theatre Arts – Scriptwriting, Stagecraft, Direction</div>
-        <div class="list-item" id="diplomaActing">• Diploma/Certificate in Acting – 3 to 12 months, practical training</div>
-        <div class="list-item" id="actingCareers">• Careers: Stage actor, Film/TV actor, Theatre director, Drama coach, Voice artist</div>
+    <div class="page-title">🎭 Artist & Performing Arts Careers</div>
+    <div class="page-subtitle">50+ Courses | 100+ Institutes | Acting | Dance | Music | Film | Fine Arts | Complete Roadmap</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="acting">🎭 <span class="door-label">Acting & Theatre</span></button>
+        <button class="door-btn" data-door="dance">💃 <span class="door-label">Dance & Performing Arts</span></button>
+        <button class="door-btn" data-door="music">🎵 <span class="door-label">Music & Singing</span></button>
+        <button class="door-btn" data-door="film">🎬 <span class="door-label">Film & Media (Behind the Scenes)</span></button>
+        <button class="door-btn" data-door="finearts">🎨 <span class="door-label">Fine Arts (BFA)</span></button>
+        <button class="door-btn" data-door="design">✏️ <span class="door-label">Design & Animation</span></button>
+        <button class="door-btn" data-door="institutes">🏛️ <span class="door-label">Top Institutes (NSD, FTII)</span></button>
+        <button class="door-btn" data-door="career">💼 <span class="door-label">Career & Entrepreneurship</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Opportunities</span></button>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="danceTitle">💃 Dance & Performing Arts</div>
-        <div class="list-item" id="bpaDance">• BPA / BA in Dance – Classical (Kathak, Bharatanatyam, Odissi), Contemporary, Bollywood, Hip-hop</div>
-        <div class="list-item" id="diplomaDance">• Diploma in Classical / Contemporary Dance</div>
-        <div class="list-item" id="danceCareers">• Careers: Professional dancer, Choreographer, Dance teacher, Stage performer</div>
+    
+    <!-- ==================== DOOR 1: ACTING & THEATRE ==================== -->
+    <div id="door-acting" class="door-content active">
+        <div class="accordion-card active" id="actingCard">
+            <div class="accordion-header" onclick="toggleCard('actingCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎭</span> Acting & Theatre - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of acting techniques, theatre production, voice modulation, body language, script analysis, character development, stagecraft, and film acting.<br><span class="salary-text">💰 Fresher Actor: ₹3-8 LPA | TV Actor: ₹10-30 LPA | Film Actor: ₹50 LPA - ₹100 Cr+</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Creative expression, fame, recognition, financial success, opportunity to tell important stories, work with talented artists, global recognition.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th (any stream). Start early with theatre workshops, school plays, drama clubs. Age 17+ for formal courses.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://nsd.gov.in" target="_blank">NSD Delhi (National School of Drama)</a> | <a class="live-link" href="https://www.ftii.ac.in" target="_blank">FTII Pune</a> | <a class="live-link" href="https://www.whistlingwoods.net" target="_blank">Whistling Woods Mumbai</a> | <a class="live-link" href="https://www.asianacademyoffilm.com" target="_blank">Asian Academy of Film & TV</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 COURSES</div><div class="info-text">BA in Acting (3 years), Diploma in Acting (1-2 years), Certificate in Acting (3-12 months), BPA (Bachelor of Performing Arts), PG Diploma in Acting</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Passion for performance, creativity, emotional range, confidence, good memory, physical fitness, ability to take direction</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th → Acting Entrance Exam (NSD/FTII/Whistling Woods) → Acting Course (1-4 years) → Theatre/Film/TV/Web Series → Audition → Role</div></div>
+                </div>
+                <div class="section-title">📋 Top Acting Entrance Exams</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎭 NSD Entrance</div><div class="info-text">National School of Drama - 3-year Diploma | Audition based | <a class="live-link" href="https://nsd.gov.in" target="_blank">nsd.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🎬 FTII Acting Course</div><div class="info-text">Film and Television Institute of India - PG Diploma | <a class="live-link" href="https://www.ftii.ac.in" target="_blank">ftii.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🎥 Whistling Woods</div><div class="info-text">Mumbai - BA in Acting | <a class="live-link" href="https://www.whistlingwoods.net" target="_blank">whistlingwoods.net</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ BHU Acting</div><div class="info-text">Banaras Hindu University - BPA | <a class="live-link" href="https://www.bhu.ac.in" target="_blank">bhu.ac.in</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Actor)</div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Acting Course + Theatre Experience<br><span class="salary-text">💰 Theatre Actor: ₹3-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-4 Years</div><div class="roadmap-text">TV Serials, Web Series, Supporting Roles in Films<br><span class="salary-text">💰 TV Actor: ₹10-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">Lead Roles in TV, Films, OTT Platforms (Netflix, Amazon, Hotstar)<br><span class="salary-text">💰 Film Actor: ₹50 LPA - ₹5 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">10+ Years</div><div class="roadmap-text">Superstar, National Award Winner, International Recognition<br><span class="salary-text">💰 Top Actor: ₹10 Cr - ₹100 Cr+</span></div></div>
+                <div class="section-title">⭐ Famous Actors from Acting Schools</div>
+                <div><span class="famous-badge">Naseeruddin Shah (NSD)</span> <span class="famous-badge">Om Puri (NSD)</span> <span class="famous-badge">Irrfan Khan (NSD)</span> <span class="famous-badge">Nawazuddin Siddiqui (NSD)</span> <span class="famous-badge">Rajkummar Rao (FTII)</span> <span class="famous-badge">Pankaj Kapur (NSD)</span> <span class="famous-badge">Manoj Bajpayee</span></div>
+            </div>
+        </div>
+        
+        <!-- Theatre Arts -->
+        <div class="accordion-card" id="theatreCard">
+            <div class="accordion-header" onclick="toggleCard('theatreCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎪</span> Theatre Arts - Direction, Playwriting, Stagecraft</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of theatre direction, playwriting, stage management, lighting, sound design, set design, costume design.<br><span class="salary-text">💰 Theatre Director: ₹5-15 LPA | Playwright: ₹3-10 LPA | Stage Manager: ₹4-8 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP INSTITUTES</div><div class="info-text">NSD Delhi, FTII Pune, University of Delhi (Department of Theatre), Punjab University (Department of Indian Theatre)</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Theatre Personalities</div>
+                <div><span class="famous-badge">Habib Tanvir</span> <span class="famous-badge">Vijay Tendulkar (Playwright)</span> <span class="famous-badge">Girish Karnad (Playwright)</span> <span class="famous-badge">Badal Sircar</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="musicTitle">🎵 Music & Singing</div>
-        <div class="list-item" id="baMusic">• BPA / BA in Music – Vocal, Instrumental (Guitar, Piano, Tabla, etc.)</div>
-        <div class="list-item" id="diplomaMusic">• Diploma in Singing / Music Performance, Music Technology / Sound Engineering</div>
-        <div class="list-item" id="certMusic">• Certificates: Playback singing, Classical vocal, Instrument training</div>
-        <div class="list-item" id="musicCareers">• Careers: Singer, Music producer, Playback artist, Sound engineer, Music teacher</div>
+    
+    <!-- ==================== DOOR 2: DANCE & PERFORMING ARTS ==================== -->
+    <div id="door-dance" class="door-content">
+        <div class="accordion-card" id="danceCard">
+            <div class="accordion-header" onclick="toggleCard('danceCard')">
+                <div class="accordion-title"><span class="accordion-icon">💃</span> Dance & Performing Arts - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of classical and contemporary dance forms, choreography, dance therapy, dance education, performance.<br><span class="salary-text">💰 Dance Teacher: ₹3-8 LPA | Choreographer: ₹5-20 LPA | Professional Dancer: ₹5-30 LPA | Bollywood Choreographer: ₹20 LPA - ₹1 Cr+</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Creative expression, fitness, cultural preservation, Bollywood opportunities, international dance festivals, YouTube/Instagram fame.</div></div>
+                    <div class="info-card"><div class="info-label">📋 DANCE FORMS</div><div class="info-text">Classical: Kathak, Bharatanatyam, Odissi, Kuchipudi, Manipuri, Mohiniyattam, Kathakali. Contemporary: Bollywood, Hip-hop, Jazz, Western, Freestyle, Salsa, Tango</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP INSTITUTES</div><div class="info-text"><a class="live-link" href="https://www.kalakshetra.in" target="_blank">Kalakshetra Foundation Chennai</a> | <a class="live-link" href="https://www.delhibharatanatyam.com" target="_blank">Kathak Kendra Delhi</a> | <a class="live-link" href="https://www.shiamak.com" target="_blank">Shiamak Davar Institute</a> | <a class="live-link" href="https://www.terencelewis.com" target="_blank">Terence Lewis Academy</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Dancer)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3-6 Years</div><div class="roadmap-text">Training in Dance form + Performances<br><span class="salary-text">💰 Dance Teacher: ₹3-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-4 Years</div><div class="roadmap-text">Background Dancer → Assistant Choreographer<br><span class="salary-text">💰 Background Dancer: ₹4-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">4-6 Years</div><div class="roadmap-text">Lead Choreographer → Dance Master<br><span class="salary-text">💰 Choreographer: ₹10-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8+ Years</div><div class="roadmap-text">Celebrity Choreographer → Dance Judge → Dance Academy Owner<br><span class="salary-text">💰 Top Choreographer: ₹30 LPA - ₹1 Cr+</span></div></div>
+                <div class="section-title">⭐ Famous Dancers & Choreographers</div>
+                <div><span class="famous-badge">Birju Maharaj (Kathak Legend)</span> <span class="famous-badge">Rukmini Devi Arundale (Bharatanatyam)</span> <span class="famous-badge">Saroj Khan (Bollywood Choreographer)</span> <span class="famous-badge">Farah Khan (Choreographer/Director)</span> <span class="famous-badge">Remo D'Souza</span> <span class="famous-badge">Shiamak Davar</span> <span class="famous-badge">Terence Lewis</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="filmTitle">🎬 Film & Media (Behind the Scenes)</div>
-        <div class="list-item" id="filmProduction">• B.Sc / BA in Film & Television Production</div>
-        <div class="list-item" id="bdesFilm">• B.Des in Film & Video Communication, BFA in Cinema & Visual Arts</div>
-        <div class="list-item" id="diplomaFilm">• Diploma: Film editing, Cinematography, Screenwriting, Video production</div>
-        <div class="list-item" id="filmCareers">• Careers: Film director, Cinematographer, Editor, Screenwriter, Producer</div>
+    
+    <!-- ==================== DOOR 3: MUSIC & SINGING ==================== -->
+    <div id="door-music" class="door-content">
+        <div class="accordion-card" id="musicCard">
+            <div class="accordion-header" onclick="toggleCard('musicCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎵</span> Music & Singing - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of vocal music, instrumental music, music composition, music production, sound engineering, music therapy.<br><span class="salary-text">💰 Singer (Local): ₹3-8 LPA | Playback Singer: ₹10 LPA - ₹1 Cr+ | Music Director: ₹20 LPA - ₹5 Cr+</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Creative expression, Bollywood and regional film industry opportunities, YouTube fame, live concerts, global recognition.</div></div>
+                    <div class="info-card"><div class="info-label">📋 MUSIC FORMS</div><div class="info-text">Hindustani Classical, Carnatic Classical, Bollywood, Western, Pop, Rock, Jazz, Sufi, Ghazal, Folk</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP INSTITUTES</div><div class="info-text"><a class="live-link" href="https://www.bhatkhandemusic.edu.in" target="_blank">Bhatkhande Music Institute Lucknow</a> | <a class="live-link" href="https://www.gandharvamahavidyalaya.com" target="_blank">Gandharva Mahavidyalaya Delhi</a> | <a class="live-link" href="https://www.kmcollegeofmusic.com" target="_blank">KM College of Music Chennai</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Singer/Musician)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3-6 Years</div><div class="roadmap-text">Music Training (Vocal/Instrumental)<br><span class="salary-text">💰 Music Teacher: ₹3-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-4 Years</div><div class="roadmap-text">Live Shows, Local Performances, YouTube Channel<br><span class="salary-text">💰 Performer: ₹4-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Playback Singing, Music Composition, Music Production<br><span class="salary-text">💰 Playback Singer: ₹10-50 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8+ Years</div><div class="roadmap-text">Music Director, National Award Winner, International Tours<br><span class="salary-text">💰 Top Artist: ₹1 Cr - ₹10 Cr+</span></div></div>
+                <div class="section-title">⭐ Famous Singers & Musicians</div>
+                <div><span class="famous-badge">Lata Mangeshkar (Nightingale of India)</span> <span class="famous-badge">Kishore Kumar</span> <span class="famous-badge">A. R. Rahman (Oscar Winner)</span> <span class="famous-badge">Shreya Ghoshal</span> <span class="famous-badge">Sonu Nigam</span> <span class="famous-badge">Pandit Ravi Shankar (Sitar Legend)</span> <span class="famous-badge">Zakir Hussain (Tabla)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="bpaTitle">🎭 Bachelor of Performing Arts (BPA) – All-in-One</div>
-        <div class="list-item" id="bpaDesc">• Combines acting, dance, music, theatre, stagecraft. Ideal for versatile performing artists.</div>
+    
+    <!-- ==================== DOOR 4: FILM & MEDIA (BEHIND THE SCENES) ==================== -->
+    <div id="door-film" class="door-content">
+        <div class="accordion-card" id="filmCard">
+            <div class="accordion-header" onclick="toggleCard('filmCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎬</span> Film & Media (Behind the Scenes) - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of film direction, cinematography, editing, screenwriting, production design, sound design, film producing.<br><span class="salary-text">💰 Assistant Director: ₹5-10 LPA | Film Director: ₹20 LPA - ₹10 Cr+ | Cinematographer: ₹10-50 LPA | Editor: ₹6-15 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Creative control over storytelling, high earning potential, global recognition (Oscars, National Awards), diverse opportunities in film, TV, OTT, advertising.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP INSTITUTES</div><div class="info-text"><a class="live-link" href="https://www.ftii.ac.in" target="_blank">FTII Pune</a> | <a class="live-link" href="https://www.srftii.ac.in" target="_blank">SRFTII Kolkata</a> | <a class="live-link" href="https://www.whistlingwoods.net" target="_blank">Whistling Woods Mumbai</a> | <a class="live-link" href="https://www.asianacademyoffilm.com" target="_blank">AAFT Noida</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 COURSES</div><div class="info-text">Diploma/Certificate in Film Direction, Cinematography, Editing, Screenwriting, Sound Design (1-3 years), PG Diploma (2 years), Bachelor in Film & TV (3 years)</div></div>
+                </div>
+                <div class="section-title">📋 Top Film Entrance Exams</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎬 FTII Entrance</div><div class="info-text">Film and Television Institute of India - PG Diploma | <a class="live-link" href="https://www.ftii.ac.in" target="_blank">ftii.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🎥 SRFTII Entrance</div><div class="info-text">Satyajit Ray Film & Television Institute - Kolkata</div></div>
+                    <div class="info-card"><div class="info-label">🎞️ Whistling Woods</div><div class="info-text">Mumbai - Multiple film courses</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Film Director)</div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Film Course + Short Films/Music Videos<br><span class="salary-text">💰 Assistant Director: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-4 Years</div><div class="roadmap-text">Associate Director, TV Serial Director<br><span class="salary-text">💰 TV Director: ₹10-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Independent Film Director, OTT Series Director<br><span class="salary-text">💰 Film Director: ₹20 LPA - ₹1 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8+ Years</div><div class="roadmap-text">Blockbuster Director, National/International Award Winner<br><span class="salary-text">💰 Top Director: ₹5 Cr - ₹50 Cr+</span></div></div>
+                <div class="section-title">⭐ Famous Film Directors from FTII/NSD</div>
+                <div><span class="famous-badge">Satyajit Ray (Oscar Winner)</span> <span class="famous-badge">Mira Nair (FTII)</span> <span class="famous-badge">Shyam Benegal (FTII)</span> <span class="famous-badge">Sooraj Barjatya</span> <span class="famous-badge">Sanjay Leela Bhansali</span> <span class="famous-badge">Rajkumar Hirani</span> <span class="famous-badge">Anurag Kashyap</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="bfaTitle">🎨 Fine Arts (BFA)</div>
-        <div class="list-item" id="bfaSubjects">• BFA Painting, Sculpture, Applied Arts, Printmaking, Digital Art</div>
-        <div class="list-item" id="bfaCareers">• Careers: Fine artist, Illustrator, Art teacher, Gallery curator, Muralist</div>
+        <!-- ==================== DOOR 5: FINE ARTS (BFA) ==================== -->
+    <div id="door-finearts" class="door-content">
+        <div class="accordion-card" id="fineartsCard">
+            <div class="accordion-header" onclick="toggleCard('fineartsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎨</span> BFA - Bachelor of Fine Arts (4 years) - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of painting, sculpture, printmaking, applied arts, digital art, ceramics, glass art, installation art, art history, and visual communication.<br><span class="salary-text">💰 BFA Fresher: ₹4-8 LPA | MFA: ₹8-15 LPA | Art Director: ₹15-30 LPA | Gallery Owner: ₹20-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Creative expression, art market growth (India's art market is ₹2,000+ crore), gallery exhibitions, art auctions (Saffronart, Christie's), freelance opportunities, art teaching.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.collegeofart.in" target="_blank">College of Art Delhi</a> | <a class="live-link" href="https://www.kala-bhavana.org" target="_blank">Kala Bhavana Santiniketan</a> | <a class="live-link" href="https://www.jmi.ac.in" target="_blank">Jamia Millia Islamia - Faculty of Fine Arts</a> | <a class="live-link" href="https://www.sirjjcollegeofarchitecture.in" target="_blank">Sir JJ College of Arts Mumbai</a> | <a class="live-link" href="https://www.msubaroda.ac.in" target="_blank">MS University Baroda - Faculty of Fine Arts</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">CUET, BFA Entrance Exam (College of Art Delhi), JMI Entrance, MSU Baroda Entrance</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Creativity, imagination, visual thinking, patience, attention to detail, passion for art, ability to express through visual medium</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th → BFA Entrance → BFA (4 years) → MFA (2 years) → PhD (3-5 years) → Artist/Professor</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Fine Arts Colleges in India</div>
+                <table class="college-table">
+                    <thead>
+                        <tr><th>College</th><th>City</th><th>Fees/Year</th><th>Specialization</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><a class="live-link" href="https://www.collegeofart.in" target="_blank">College of Art Delhi</a></td><td>Delhi</td><td>₹25,000</td><td>Painting, Applied Art, Sculpture, Printmaking</td></tr>
+                        <tr><td><a class="live-link" href="https://www.kala-bhavana.org" target="_blank">Kala Bhavana Santiniketan</a></td><td>Santiniketan</td><td>₹15,000</td><td>Painting, Mural, Sculpture, Graphics, Design</td></tr>
+                        <tr><td><a class="live-link" href="https://www.jmi.ac.in" target="_blank">Jamia Fine Arts</a></td><td>Delhi</td><td>₹30,000</td><td>Painting, Sculpture, Graphic Art</td></tr>
+                        <tr><td><a class="live-link" href="https://www.sirjjcollegeofarchitecture.in" target="_blank">Sir JJ College of Arts</a></td><td>Mumbai</td><td>₹20,000</td><td>Painting, Sculpture, Applied Art</td></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Career Roadmap (Fine Artist)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">BFA Degree + Portfolio Development<br><span class="salary-text">💰 Freelance Artist: ₹3-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MFA (Master of Fine Arts)<br><span class="salary-text">💰 Senior Artist: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Gallery Exhibitions → Art Auctions → Recognition<br><span class="salary-text">💰 Established Artist: ₹15-50 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">PhD</div><div class="roadmap-text">PhD → Professor of Fine Arts<br><span class="salary-text">💰 Professor: ₹10-20 LPA</span></div></div>
+                <div class="section-title">💰 Art Market & Earnings Potential</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🖼️ M. F. Husain</div><div class="info-text">Paintings sold for $1-2 million (₹8-16 Cr)</div></div>
+                    <div class="info-card"><div class="info-label">🎨 S. H. Raza</div><div class="info-text">'Bindu' series sold for ₹40 Cr+</div></div>
+                    <div class="info-card"><div class="info-label">🖌️ Tyeb Mehta</div><div class="info-text">'Mahishasura' sold for ₹15 Cr+</div></div>
+                    <div class="info-card"><div class="info-label">🎨 F. N. Souza</div><div class="info-text">Paintings sold for ₹10-20 Cr</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Indian Fine Artists</div>
+                <div><span class="famous-badge">M. F. Husain (Padma Shri)</span> <span class="famous-badge">S. H. Raza (Padma Shri)</span> <span class="famous-badge">Tyeb Mehta</span> <span class="famous-badge">F. N. Souza</span> <span class="famous-badge">Anjolie Ela Menon</span> <span class="famous-badge">Raja Ravi Varma</span> <span class="famous-badge">Amrita Sher-Gil</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="filmIndustryTitle">📽️ Film Industry & OTT</div>
-        <div class="list-item" id="filmSchools">• Acting schools (FTII, NSD, Whistling Woods), Casting director training, Voice-over artist</div>
-        <div class="list-item" id="contentCreation">• YouTube/Instagram content creation, Short films, Web series</div>
+    
+    <!-- ==================== DOOR 6: DESIGN & ANIMATION ==================== -->
+    <div id="door-design" class="door-content">
+        <div class="accordion-card" id="designCard">
+            <div class="accordion-header" onclick="toggleCard('designCard')">
+                <div class="accordion-title"><span class="accordion-icon">✏️</span> Design & Animation - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of graphic design, animation, VFX, game design, multimedia, UI/UX design, motion graphics, 3D modeling, visual effects.<br><span class="salary-text">💰 Fresher: ₹4-10 LPA | Senior Designer: ₹10-25 LPA | Art Director: ₹20-40 LPA | VFX Supervisor: ₹30-60 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in animation industry (₹15,000 crore market), gaming, film VFX, OTT platforms, advertising agencies, tech companies.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP INSTITUTES</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID Ahmedabad</a> | <a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT Delhi</a> | <a class="live-link" href="https://www.arena-multimedia.com" target="_blank">Arena Animation</a> | <a class="live-link" href="https://www.maacindia.com" target="_blank">MAAC</a> | <a class="live-link" href="https://www.frameboxx.in" target="_blank">Frameboxx</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 COURSES</div><div class="info-text">B.Des (4 years), Diploma in Animation (1-3 years), Certificate in Graphic Design (3-12 months), VFX Course, Game Design Course</div></div>
+                </div>
+                <div class="section-title">🎬 Indian Animation & VFX Industry</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎥 Bollywood VFX</div><div class="info-text">RRR, Baahubali, Brahmastra, 2.0 - ₹50-200 Cr VFX budgets</div></div>
+                    <div class="info-card"><div class="info-label">📺 Animation TV Series</div><div class="info-text">Chhota Bheem, Motu Patlu, Shin Chan (dubbed) - ₹5-20 Cr budgets</div></div>
+                    <div class="info-card"><div class="info-label">🎮 Gaming Industry</div><div class="info-text">Indian gaming market - ₹20,000 Cr by 2025 | Game designers in high demand</div></div>
+                    <div class="info-card"><div class="info-label">🌍 International Outsourcing</div><div class="info-text">India is a hub for international VFX/Animation outsourcing (Disney, DreamWorks, Netflix)</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Design & Animation)</div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Design Course + Portfolio Building<br><span class="salary-text">💰 Junior Designer: ₹3-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Senior Designer → Team Lead<br><span class="salary-text">💰 Senior Designer: ₹6-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">4-6 Years</div><div class="roadmap-text">Art Director → Creative Director<br><span class="salary-text">💰 Art Director: ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8+ Years</div><div class="roadmap-text">VFX Supervisor → Studio Head<br><span class="salary-text">💰 VFX Supervisor: ₹30-60 LPA | Studio Head: ₹50 LPA - ₹1 Cr</span></div></div>
+                <div class="section-title">⭐ Famous Indian Animation/VFX Professionals</div>
+                <div><span class="famous-badge">P. Jayakumar (Kerala's first animation film director)</span> <span class="famous-badge">Srinivas Mohan (VFX for Baahubali, 2.0)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="institutesTitle">🏛️ Top Institutes</div>
-        <div class="list-item" id="nsd">• NSD (National School of Drama)</div>
-        <div class="list-item" id="ftii">• FTII (Film and Television Institute of India)</div>
-        <div class="list-item" id="whistling">• Whistling Woods International</div>
-        <div class="list-item" id="kalakshetra">• Kalakshetra Foundation</div>
-        <div class="list-item" id="prayag">• Prayag Sangeet Samiti</div>
+    
+    <!-- ==================== DOOR 7: TOP INSTITUTES (NSD, FTII, NID) ==================== -->
+    <div id="door-institutes" class="door-content">
+        <div class="accordion-card" id="institutesCard">
+            <div class="accordion-header" onclick="toggleCard('institutesCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Top Performing Arts Institutes in India - Complete List</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <table class="college-table">
+                    <thead>
+                        <tr><th>Institute</th><th>City</th><th>Course</th><th>Duration</th><th>Fees/Year</th><th>Website</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>National School of Drama (NSD)</td><td>Delhi</td><td>Diploma in Acting</td><td>3 years</td><td>₹50,000</td><td><a class="live-link" href="https://nsd.gov.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>FTII Pune</td><td>Pune</td><td>PG Diploma in Film Direction/Cinematography/Editing/Sound</td><td>3 years</td><td>₹1,00,000</td><td><a class="live-link" href="https://www.ftii.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>Whistling Woods International</td><td>Mumbai</td><td>BA/B.Sc in Film/Animation/Acting</td><td>3 years</td><td>₹5-8 Lakhs</td><td><a class="live-link" href="https://www.whistlingwoods.net" target="_blank">Visit</a></td></tr>
+                        <tr><td>NID Ahmedabad</td><td>Ahmedabad</td><td>B.Des/GD</td><td>4 years</td><td>₹3,00,000</td><td><a class="live-link" href="https://www.nid.edu" target="_blank">Visit</a></td></tr>
+                        <tr><td>Kalakshetra Foundation</td><td>Chennai</td><td>Diploma in Bharatanatyam</td><td>5 years</td><td>₹30,000</td><td><a class="live-link" href="https://www.kalakshetra.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>College of Art Delhi</td><td>Delhi</td><td>BFA</td><td>4 years</td><td>₹25,000</td><td><a class="live-link" href="https://www.collegeofart.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>Kala Bhavana Santiniketan</td><td>Santiniketan</td><td>BFA/MFA</td><td>4/2 years</td><td>₹15,000</td><td><a class="live-link" href="https://www.kala-bhavana.org" target="_blank">Visit</a></td></tr>
+                        <tr><td>Jamia Millia Islamia - Fine Arts</td><td>Delhi</td><td>BFA/MFA</td><td>4/2 years</td><td>₹30,000</td><td><a class="live-link" href="https://www.jmi.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>Bhatkhande Music Institute</td><td>Lucknow</td><td>BPA/MPA (Music)</td><td>4/2 years</td><td>₹25,000</td><td><a class="live-link" href="https://www.bhatkhandemusic.edu.in" target="_blank">Visit</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="careerTitle">💼 Career & Entrepreneurship</div>
-        <div class="list-item" id="freelance">• Freelance artist, Dance/Music academy owner, Event performer, Voice-over artist, YouTube creator, Theatre group founder</div>
-        <div class="list-item" id="portfolioNote">• Portfolio and networking are key – practice, auditions, and workshops matter most.</div>
+    
+    <!-- ==================== DOOR 8: CAREER & ENTREPRENEURSHIP ==================== -->
+    <div id="door-career" class="door-content">
+        <div class="accordion-card" id="careerCard">
+            <div class="accordion-header" onclick="toggleCard('careerCard')">
+                <div class="accordion-title"><span class="accordion-icon">💼</span> Career & Entrepreneurship in Arts - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎭 Freelance Artist</div><div class="info-text">Work on commission, sell art online (Etsy, Amazon Handmade), Instagram marketing. ₹3-20 LPA depending on clientele</div></div>
+                    <div class="info-card"><div class="info-label">🎨 Gallery Owner</div><div class="info-text">Set up an art gallery. Initial investment ₹10-50 Lakhs. Potential ₹20 LPA - ₹1 Cr+</div></div>
+                    <div class="info-card"><div class="info-label">💃 Dance Academy Owner</div><div class="info-text">Open your own dance school. ₹5-30 LPA depending on location and reputation</div></div>
+                    <div class="info-card"><div class="info-label">🎵 Music Academy Owner</div><div class="info-text">Teach vocal/instrumental music. ₹5-20 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🎬 YouTube Creator</div><div class="info-text">Create art/dance/music/acting content. ₹5-50 LPA (monetization + brand deals)</div></div>
+                    <div class="info-card"><div class="info-label">📱 Instagram Influencer</div><div class="info-text">Build following in arts niche. ₹3-30 LPA from brand collaborations</div></div>
+                    <div class="info-card"><div class="info-label">🎭 Theatre Group Founder</div><div class="info-text">Start your own theatre production company. ₹10-50 LPA depending on shows</div></div>
+                    <div class="info-card"><div class="info-label">🖼️ Art Curator</div><div class="info-text">Curate art exhibitions for galleries, museums. ₹5-20 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Art Teacher/Professor</div><div class="info-text">Teach at schools, colleges, art institutes. ₹4-15 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🎬 Film Producer</div><div class="info-text">Independent film production. ₹10 LPA - ₹5 Cr+ (depending on success)</div></div>
+                </div>
+                <div class="section-title">🖥️ Online Platforms to Sell Art</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎨 Etsy</div><div class="info-text"><a class="live-link" href="https://www.etsy.com" target="_blank">etsy.com</a> - Global marketplace for handmade art</div></div>
+                    <div class="info-card"><div class="info-label">📦 Amazon Handmade</div><div class="info-text"><a class="live-link" href="https://www.amazon.in/handmade" target="_blank">Amazon Handmade</a> - India specific</div></div>
+                    <div class="info-card"><div class="info-label">🖌️ Instamojo</div><div class="info-text">Sell art prints, digital art, commissions</div></div>
+                    <div class="info-card"><div class="info-label">🎬 YouTube</div><div class="info-text">Monetize through AdSense + memberships</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 9: ABROAD OPPORTUNITIES ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="abroadCard">
+            <div class="accordion-header" onclick="toggleCard('abroadCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Opportunities for Artists</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">MFA in Acting/Dance/Music/Film | Top Unis: NYU Tisch, Juilliard, CalArts, UCLA | Salary: $50k-200k/year | O-1 Visa for extraordinary ability</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">MA in Acting, Royal Academy of Dramatic Art (RADA), London Academy of Music & Dramatic Art (LAMDA), Central Saint Martins | Salary: £30k-100k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">MFA programs, animation and VFX hubs (Vancouver, Montreal) | Salary: CAD 50k-100k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">National Institute of Dramatic Art (NIDA), Australian Ballet School | PR pathway</div></div>
+                </div>
+                <div class="section-title">🎓 Scholarships for Arts Abroad</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 Fulbright</div><div class="info-text">Fully funded for MFA/PhD in Arts</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 Chevening</div><div class="info-text">Fully funded for 1-year master's in UK</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia Awards</div><div class="info-text">Fully funded for master's in Arts</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Vanier</div><div class="info-text">CAD 50,000/year for doctoral arts students</div></div>
+                </div>
+                <div class="section-title">🌐 International Film Festivals for Indian Artists</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏆 Cannes Film Festival</div><div class="info-text">France - Submit short films, feature films</div></div>
+                    <div class="info-card"><div class="info-label">🏆 Berlin International Film Festival</div><div class="info-text">Germany - Berlinale</div></div>
+                    <div class="info-card"><div class="info-label">🏆 Venice Film Festival</div><div class="info-text">Italy - Oldest film festival</div></div>
+                    <div class="info-card"><div class="info-label">🏆 Sundance Film Festival</div><div class="info-text">USA - Independent films</div></div>
+                </div>
+                <div class="section-title">⭐ Indians Who Made it Big Internationally</div>
+                <div><span class="famous-badge">Mira Nair (Director - Oscar nominated, FTII alum)</span> <span class="famous-badge">Anish Kapoor (Sculptor - Turner Prize winner)</span> <span class="famous-badge">Bhupen Khakhar (Artist - documented at Tate Modern)</span> <span class="famous-badge">Zakir Hussain (Tabla - Grammy winner)</span> <span class="famous-badge">A. R. Rahman (Composer - Oscar winner)</span></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
-    en: {
-        app_tagline: "Career Saathi",
-        tagline: "🎭 Artist & Performing Arts Careers",
-        page_title: "🎭 Artist (Performing & Fine Arts)",
-        acting_title: "🎭 Acting & Theatre",
-        ba_acting: "• BA in Acting / Bachelor of Performing Arts (BPA) – Theatre, Film, TV",
-        ba_drama: "• BA in Drama & Theatre Arts – Scriptwriting, Stagecraft, Direction",
-        diploma_acting: "• Diploma/Certificate in Acting – 3 to 12 months, practical training",
-        acting_careers: "• Careers: Stage actor, Film/TV actor, Theatre director, Drama coach, Voice artist",
-        dance_title: "💃 Dance & Performing Arts",
-        bpa_dance: "• BPA / BA in Dance – Classical (Kathak, Bharatanatyam, Odissi), Contemporary, Bollywood, Hip-hop",
-        diploma_dance: "• Diploma in Classical / Contemporary Dance",
-        dance_careers: "• Careers: Professional dancer, Choreographer, Dance teacher, Stage performer",
-        music_title: "🎵 Music & Singing",
-        ba_music: "• BPA / BA in Music – Vocal, Instrumental (Guitar, Piano, Tabla, etc.)",
-        diploma_music: "• Diploma in Singing / Music Performance, Music Technology / Sound Engineering",
-        cert_music: "• Certificates: Playback singing, Classical vocal, Instrument training",
-        music_careers: "• Careers: Singer, Music producer, Playback artist, Sound engineer, Music teacher",
-        film_title: "🎬 Film & Media (Behind the Scenes)",
-        film_production: "• B.Sc / BA in Film & Television Production",
-        bdes_film: "• B.Des in Film & Video Communication, BFA in Cinema & Visual Arts",
-        diploma_film: "• Diploma: Film editing, Cinematography, Screenwriting, Video production",
-        film_careers: "• Careers: Film director, Cinematographer, Editor, Screenwriter, Producer",
-        bpa_title: "🎭 Bachelor of Performing Arts (BPA) – All-in-One",
-        bpa_desc: "• Combines acting, dance, music, theatre, stagecraft. Ideal for versatile performing artists.",
-        bfa_title: "🎨 Fine Arts (BFA)",
-        bfa_subjects: "• BFA Painting, Sculpture, Applied Arts, Printmaking, Digital Art",
-        bfa_careers: "• Careers: Fine artist, Illustrator, Art teacher, Gallery curator, Muralist",
-        film_industry_title: "📽️ Film Industry & OTT",
-        film_schools: "• Acting schools (FTII, NSD, Whistling Woods), Casting director training, Voice-over artist",
-        content_creation: "• YouTube/Instagram content creation, Short films, Web series",
-        institutes_title: "🏛️ Top Institutes",
-        nsd: "• NSD (National School of Drama)",
-        ftii: "• FTII (Film and Television Institute of India)",
-        whistling: "• Whistling Woods International",
-        kalakshetra: "• Kalakshetra Foundation",
-        prayag: "• Prayag Sangeet Samiti",
-        career_title: "💼 Career & Entrepreneurship",
-        freelance: "• Freelance artist, Dance/Music academy owner, Event performer, Voice-over artist, YouTube creator, Theatre group founder",
-        portfolio_note: "• Portfolio and networking are key – practice, auditions, and workshops matter most.",
-        bottom_home: "Home",
-        bottom_search: "Search",
-        bottom_ai: "AnnS AI",
-        bottom_alerts: "Alerts",
-        bottom_profile: "Profile"
-    },
-    hi: {
-        app_tagline: "करियर साथी",
-        tagline: "🎭 कलाकार और प्रदर्शन कला करियर",
-        page_title: "🎭 कलाकार (प्रदर्शन और ललित कला)",
-        acting_title: "🎭 अभिनय और रंगमंच",
-        ba_acting: "• बीए इन एक्टिंग / बैचलर ऑफ परफॉर्मिंग आर्ट्स (बीपीए)",
-        ba_drama: "• बीए इन ड्रामा एंड थिएटर आर्ट्स",
-        diploma_acting: "• एक्टिंग में डिप्लोमा/प्रमाणपत्र",
-        acting_careers: "• करियर: स्टेज अभिनेता, फिल्म/टीवी अभिनेता, थिएटर निर्देशक, ड्रामा कोच, वॉयस आर्टिस्ट",
-        dance_title: "💃 नृत्य और प्रदर्शन कला",
-        bpa_dance: "• बीपीए / बीए इन डांस – शास्त्रीय, समकालीन, बॉलीवुड, हिप-हॉप",
-        diploma_dance: "• शास्त्रीय / समकालीन नृत्य में डिप्लोमा",
-        dance_careers: "• करियर: पेशेवर नर्तक, कोरियोग्राफर, नृत्य शिक्षक",
-        music_title: "🎵 संगीत और गायन",
-        ba_music: "• बीपीए / बीए इन म्यूजिक – गायन, वाद्य",
-        diploma_music: "• गायन / संगीत प्रदर्शन में डिप्लोमा",
-        cert_music: "• प्रमाणपत्र: पार्श्व गायन, शास्त्रीय गायन, वाद्य प्रशिक्षण",
-        music_careers: "• करियर: गायक, संगीत निर्माता, पार्श्व गायक, ध्वनि इंजीनियर, संगीत शिक्षक",
-        film_title: "🎬 फिल्म और मीडिया (पर्दे के पीछे)",
-        film_production: "• बी.एससी / बीए इन फिल्म एंड टेलीविजन प्रोडक्शन",
-        bdes_film: "• बी.डेस इन फिल्म एंड वीडियो कम्युनिकेशन",
-        diploma_film: "• डिप्लोमा: फिल्म संपादन, सिनेमैटोग्राफी, पटकथा लेखन",
-        film_careers: "• करियर: फिल्म निर्देशक, सिनेमैटोग्राफर, संपादक, पटकथा लेखक, निर्माता",
-        bpa_title: "🎭 बैचलर ऑफ परफॉर्मिंग आर्ट्स (बीपीए)",
-        bpa_desc: "• अभिनय, नृत्य, संगीत, रंगमंच का संयोजन",
-        bfa_title: "🎨 ललित कला (बीएफए)",
-        bfa_subjects: "• बीएफए पेंटिंग, मूर्तिकला, एप्लाइड आर्ट्स, प्रिंटमेकिंग, डिजिटल आर्ट",
-        bfa_careers: "• करियर: ललित कलाकार, इलस्ट्रेटर, कला शिक्षक, गैलरी क्यूरेटर",
-        film_industry_title: "📽️ फिल्म उद्योग और ओटीटी",
-        film_schools: "• अभिनय स्कूल (एफटीआईआई, एनएसडी, व्हिसलिंग वुड्स)",
-        content_creation: "• यूट्यूब/इंस्टाग्राम कंटेंट क्रिएशन, लघु फिल्में, वेब सीरीज",
-        institutes_title: "🏛️ शीर्ष संस्थान",
-        nsd: "• एनएसडी (नेशनल स्कूल ऑफ ड्रामा)",
-        ftii: "• एफटीआईआई (फिल्म एंड टेलीविजन इंस्टीट्यूट ऑफ इंडिया)",
-        whistling: "• व्हिसलिंग वुड्स इंटरनेशनल",
-        kalakshetra: "• कलाक्षेत्र फाउंडेशन",
-        prayag: "• प्रयाग संगीत समिति",
-        career_title: "💼 करियर और उद्यमिता",
-        freelance: "• फ्रीलांस कलाकार, नृत्य/संगीत अकादमी मालिक, इवेंट कलाकार, यूट्यूब क्रिएटर",
-        portfolio_note: "• पोर्टफोलियो और नेटवर्किंग महत्वपूर्ण हैं",
-        bottom_home: "होम",
-        bottom_search: "खोजें",
-        bottom_ai: "एनएस एआई",
-        bottom_alerts: "सूचनाएं",
-        bottom_profile: "प्रोफ़ाइल"
-    }
-};
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
 </script>
 </body>
-<script>
-// Continue JavaScript for artist.html
-const bottomNav = [
-    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
-    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
-    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
-    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
-    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
-];
-
-let currentLang = 'en';
-
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-
-function updateAllText() {
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    
-    document.getElementById('actingTitle').textContent = t('acting_title');
-    document.getElementById('baActing').textContent = t('ba_acting');
-    document.getElementById('baDrama').textContent = t('ba_drama');
-    document.getElementById('diplomaActing').textContent = t('diploma_acting');
-    document.getElementById('actingCareers').textContent = t('acting_careers');
-    
-    document.getElementById('danceTitle').textContent = t('dance_title');
-    document.getElementById('bpaDance').textContent = t('bpa_dance');
-    document.getElementById('diplomaDance').textContent = t('diploma_dance');
-    document.getElementById('danceCareers').textContent = t('dance_careers');
-    
-    document.getElementById('musicTitle').textContent = t('music_title');
-    document.getElementById('baMusic').textContent = t('ba_music');
-    document.getElementById('diplomaMusic').textContent = t('diploma_music');
-    document.getElementById('certMusic').textContent = t('cert_music');
-    document.getElementById('musicCareers').textContent = t('music_careers');
-    
-    document.getElementById('filmTitle').textContent = t('film_title');
-    document.getElementById('filmProduction').textContent = t('film_production');
-    document.getElementById('bdesFilm').textContent = t('bdes_film');
-    document.getElementById('diplomaFilm').textContent = t('diploma_film');
-    document.getElementById('filmCareers').textContent = t('film_careers');
-    
-    document.getElementById('bpaTitle').textContent = t('bpa_title');
-    document.getElementById('bpaDesc').textContent = t('bpa_desc');
-    
-    document.getElementById('bfaTitle').textContent = t('bfa_title');
-    document.getElementById('bfaSubjects').textContent = t('bfa_subjects');
-    document.getElementById('bfaCareers').textContent = t('bfa_careers');
-    
-    document.getElementById('filmIndustryTitle').textContent = t('film_industry_title');
-    document.getElementById('filmSchools').textContent = t('film_schools');
-    document.getElementById('contentCreation').textContent = t('content_creation');
-    
-    document.getElementById('institutesTitle').textContent = t('institutes_title');
-    document.getElementById('nsd').textContent = t('nsd');
-    document.getElementById('ftii').textContent = t('ftii');
-    document.getElementById('whistling').textContent = t('whistling');
-    document.getElementById('kalakshetra').textContent = t('kalakshetra');
-    document.getElementById('prayag').textContent = t('prayag');
-    
-    document.getElementById('careerTitle').textContent = t('career_title');
-    document.getElementById('freelance').textContent = t('freelance');
-    document.getElementById('portfolioNote').textContent = t('portfolio_note');
-    
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
-}
-
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'education.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-renderBottomBar();
-loadSavedLanguage();
-</script>
 </html>
