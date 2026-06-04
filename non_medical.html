@@ -9,224 +9,304 @@
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
+        .language-selector select option { color: black; background: white; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         .container { padding: 20px 16px; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
+        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
         .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
         .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; font-weight: 600; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+        .nav-item.active span:last-child { color: #1B4D3E; }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
     </style>
-    <link rel="stylesheet" href="exam-styles.css">
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">⚙️ Engineering & PCM Careers</div>
+    <div class="tagline" id="taglineText">⚙️ Engineering & PCM Careers</div>
 </div>
 
 <div class="container">
-    <div class="page-title">⚙️ Non-Medical (PCM) Stream</div>
+    <div class="page-title" id="pageTitle">⚙️ Non-Medical (PCM) Stream</div>
 
     <div class="section-card">
-        <div class="section-title">🎓 Engineering & Technology (B.Tech / B.E)</div>
-        <div class="list-item">• Computer Science Engineering (CSE)</div>
-        <div class="list-item">• Information Technology (IT)</div>
-        <div class="list-item">• Artificial Intelligence & Machine Learning (AI/ML)</div>
-        <div class="list-item">• Data Science Engineering</div>
-        <div class="list-item">• Robotics & Automation</div>
-        <div class="list-item">• Mechanical Engineering</div>
-        <div class="list-item">• Civil Engineering</div>
-        <div class="list-item">• Electrical Engineering</div>
-        <div class="list-item">• Electronics & Communication Engineering (ECE)</div>
-        <div class="list-item">• Aerospace Engineering</div>
-        <div class="list-item">• Automobile Engineering</div>
-        <div class="list-item">• Chemical Engineering</div>
-        <div class="list-item">• Petroleum Engineering</div>
-        <div class="list-item">• Marine Engineering</div>
-        <div class="list-item">• Biotechnology Engineering</div>
-        <div class="list-item">• Food Technology</div>
-        <div class="list-item">• Mechatronics Engineering</div>
-    </div>
-
-    <div class="section-card">
-        <div class="section-title">🏛️ Architecture & Planning</div>
-        <div class="list-item">• B.Arch – Bachelor of Architecture (5 years)</div>
-        <div class="list-item">• B.Plan – Bachelor of Planning</div>
-        <div class="list-item">• B.Des Interior Design</div>
-        <div class="list-item">• Urban Planning</div>
+        <div class="section-title" id="enggTitle">🎓 Engineering & Technology (B.Tech / B.E)</div>
+        <div class="list-item" id="cseItem">• Computer Science Engineering (CSE)</div>
+        <div class="list-item" id="itItem">• Information Technology (IT)</div>
+        <div class="list-item" id="aimlItem">• Artificial Intelligence & Machine Learning (AI/ML)</div>
+        <div class="list-item" id="dataScienceItem">• Data Science Engineering</div>
+        <div class="list-item" id="roboticsItem">• Robotics & Automation</div>
+        <div class="list-item" id="mechItem">• Mechanical Engineering</div>
+        <div class="list-item" id="civilItem">• Civil Engineering</div>
+        <div class="list-item" id="electricalItem">• Electrical Engineering</div>
+        <div class="list-item" id="eceItem">• Electronics & Communication Engineering (ECE)</div>
+        <div class="list-item" id="aerospaceItem">• Aerospace Engineering</div>
+        <div class="list-item" id="autoItem">• Automobile Engineering</div>
+        <div class="list-item" id="chemicalItem">• Chemical Engineering</div>
+        <div class="list-item" id="petroleumItem">• Petroleum Engineering</div>
+        <div class="list-item" id="marineItem">• Marine Engineering</div>
+        <div class="list-item" id="biotechItem">• Biotechnology Engineering</div>
+        <div class="list-item" id="foodTechItem">• Food Technology</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">🛡️ Defence & Merchant Navy</div>
-        <div class="list-item">• NDA (Army, Navy, Air Force) – After 12th</div>
-        <div class="list-item">• TES – Technical Entry Scheme, Indian Army</div>
-        <div class="list-item">• Merchant Navy – B.Tech Marine Engineering</div>
-        <div class="list-item">• Nautical Science (B.Sc)</div>
-        <div class="list-item">• Diploma in Nautical Science</div>
+        <div class="section-title" id="archTitle">🏛️ Architecture & Planning</div>
+        <div class="list-item" id="barchItem">• B.Arch – Bachelor of Architecture (5 years)</div>
+        <div class="list-item" id="bplanItem">• B.Plan – Bachelor of Planning</div>
+        <div class="list-item" id="interiorItem">• B.Des Interior Design</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">🛫 Aviation Careers</div>
-        <div class="list-item">• Commercial Pilot Training</div>
-        <div class="list-item">• Aircraft Maintenance Engineering (AME)</div>
-        <div class="list-item">• Aeronautical Engineering</div>
-        <div class="list-item">• Aviation Management</div>
+        <div class="section-title" id="defenceTitle">🛡️ Defence & Merchant Navy</div>
+        <div class="list-item" id="ndaItem">• NDA (Army, Navy, Air Force) – After 12th</div>
+        <div class="list-item" id="tesItem">• TES – Technical Entry Scheme, Indian Army</div>
+        <div class="list-item" id="merchantItem">• Merchant Navy – B.Tech Marine Engineering</div>
+        <div class="list-item" id="nauticalItem">• Nautical Science (B.Sc)</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">💻 Computer & IT (Non-Engineering Degrees)</div>
-        <div class="list-item">• BCA – Bachelor of Computer Applications</div>
-        <div class="list-item">• B.Sc Computer Science</div>
-        <div class="list-item">• B.Sc Data Science</div>
-        <div class="list-item">• B.Sc Cyber Security</div>
-        <div class="list-item">• B.Sc Animation & Gaming</div>
-        <div class="list-item">• Cloud Computing & DevOps courses</div>
+        <div class="section-title" id="aviationTitle">🛫 Aviation Careers</div>
+        <div class="list-item" id="pilotItem">• Commercial Pilot Training</div>
+        <div class="list-item" id="ameItem">• Aircraft Maintenance Engineering (AME)</div>
+        <div class="list-item" id="aeroEnggItem">• Aeronautical Engineering</div>
+        <div class="list-item" id="aviationMgmtItem">• Aviation Management</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">🔬 Pure Science Degrees (B.Sc)</div>
-        <div class="list-item">• B.Sc Physics, Chemistry, Mathematics, Statistics</div>
-        <div class="list-item">• B.Sc Electronics, Geology, Environmental Science</div>
-        <div class="list-item">• B.Sc Forensic Science, Nanotechnology</div>
-        <div class="list-item">• B.Sc Astrophysics, Aeronautics</div>
+        <div class="section-title" id="computerTitle">💻 Computer & IT (Non-Engineering Degrees)</div>
+        <div class="list-item" id="bcaItem">• BCA – Bachelor of Computer Applications</div>
+        <div class="list-item" id="bscCsItem">• B.Sc Computer Science</div>
+        <div class="list-item" id="bscDataItem">• B.Sc Data Science</div>
+        <div class="list-item" id="bscCyberItem">• B.Sc Cyber Security</div>
+        <div class="list-item" id="bscAnimItem">• B.Sc Animation & Gaming</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">📊 Management (After 12th or After Graduation)</div>
-        <div class="list-item">• BBA – Bachelor of Business Administration</div>
-        <div class="list-item">• Integrated BBA+MBA (5 years)</div>
-        <div class="list-item">• BHM – Hotel Management</div>
-        <div class="list-item">• Travel & Tourism</div>
-        <div class="list-item">• After graduation: MBA (Marketing, Finance, HR, IT, Operations, Data Analytics)</div>
+        <div class="section-title" id="pureScienceTitle">🔬 Pure Science Degrees (B.Sc)</div>
+        <div class="list-item" id="bscPhysicsItem">• B.Sc Physics, Chemistry, Mathematics, Statistics</div>
+        <div class="list-item" id="bscElectronicsItem">• B.Sc Electronics, Geology, Environmental Science</div>
+        <div class="list-item" id="bscForensicItem">• B.Sc Forensic Science, Nanotechnology</div>
+        <div class="list-item" id="bscAstroItem">• B.Sc Astrophysics, Aeronautics</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">🎨 Design & Creative Fields</div>
-        <div class="list-item">• B.Des (Industrial / Product / Fashion / UI-UX)</div>
-        <div class="list-item">• Graphic Designing, Animation & VFX</div>
-        <div class="list-item">• Photography, Gaming Design, Interior Design</div>
+        <div class="section-title" id="managementTitle">📊 Management Options</div>
+        <div class="list-item" id="bbaItem">• BBA – Bachelor of Business Administration</div>
+        <div class="list-item" id="integratedBbaItem">• Integrated BBA+MBA (5 years)</div>
+        <div class="list-item" id="bhmItem">• BHM – Hotel Management</div>
+        <div class="list-item" id="travelItem">• Travel & Tourism</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">📊 Commerce Options for PCM Students</div>
-        <div class="list-item">• B.Com, Economics, Finance</div>
-        <div class="list-item">• CA (Chartered Accountant), CS, CMA</div>
-        <div class="list-item">• Stock Market & Investment Banking Courses</div>
+        <div class="section-title" id="designTitle">🎨 Design & Creative Fields</div>
+        <div class="list-item" id="bdesItem">• B.Des (Industrial / Product / Fashion / UI-UX)</div>
+        <div class="list-item" id="graphicItem">• Graphic Designing, Animation & VFX</div>
+        <div class="list-item" id="photographyItem">• Photography, Gaming Design, Interior Design</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">🛠️ Skill-based Professional Courses</div>
-        <div class="list-item">• Electrician / Fitter / Technician Courses</div>
-        <div class="list-item">• Solar Technician, Drone Technology</div>
-        <div class="list-item">• CNC Programming, Welding Technology</div>
-        <div class="list-item">• Automobile Technician, HVAC</div>
+        <div class="section-title" id="commercePcmTitle">📊 Commerce Options for PCM Students</div>
+        <div class="list-item" id="bcomItem">• B.Com, Economics, Finance</div>
+        <div class="list-item" id="caItem">• CA (Chartered Accountant), CS, CMA</div>
+        <div class="list-item" id="stockItem">• Stock Market & Investment Banking Courses</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">📋 Entrance Exams for PCM</div>
-        <div class="list-item">• JEE Main – For NITs, IIITs, and other engineering colleges</div>
-        <div class="list-item">• JEE Advanced – For IITs</div>
-        <div class="list-item">• BITSAT – BITS Pilani, Goa, Hyderabad</div>
-        <div class="list-item">• VITEEE – VIT University</div>
-        <div class="list-item">• SRMJEE – SRM University</div>
-        <div class="list-item">• NATA – For B.Arch</div>
-        <div class="list-item">• UCEED – For B.Des at IITs</div>
-        <div class="list-item">• State CETs (KCET, MHT-CET, UPSEE, etc.)</div>
+        <div class="section-title" id="skillTitle">🛠️ Skill-based Professional Courses</div>
+        <div class="list-item" id="electricianItem">• Electrician / Fitter / Technician Courses</div>
+        <div class="list-item" id="solarItem">• Solar Technician, Drone Technology</div>
+        <div class="list-item" id="cncItem">• CNC Programming, Welding Technology</div>
+        <div class="list-item" id="autoTechItem">• Automobile Technician, HVAC</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">💼 Government Jobs After PCM</div>
-        <div class="list-item">• UPSC (Civil Services – IAS, IPS, IFS)</div>
-        <div class="list-item">• State PSC</div>
-        <div class="list-item">• SSC (CGL, CHSL, JE)</div>
-        <div class="list-item">• Banking (IBPS PO/Clerk, SBI PO)</div>
-        <div class="list-item">• Railway Jobs (RRB JE, NTPC, Group D)</div>
-        <div class="list-item">• Defence Exams (NDA, CDS, AFCAT)</div>
-        <div class="list-item">• ISRO / DRDO Technical Assistant</div>
+        <div class="section-title" id="entrancePcmTitle">📋 Entrance Exams for PCM</div>
+        <div class="list-item" id="jeeMainItem">• JEE Main – For NITs, IIITs</div>
+        <div class="list-item" id="jeeAdvItem">• JEE Advanced – For IITs</div>
+        <div class="list-item" id="bitsatItem">• BITSAT – BITS Pilani</div>
+        <div class="list-item" id="viteeeItem">• VITEEE – VIT University</div>
+        <div class="list-item" id="srmjeeItem">• SRMJEE – SRM University</div>
+        <div class="list-item" id="nataItem">• NATA – For B.Arch</div>
+        <div class="list-item" id="uceedItem">• UCEED – For B.Des at IITs</div>
+        <div class="list-item" id="stateCetItem">• State CETs (KCET, MHT-CET, UPSEE, etc.)</div>
     </div>
 
     <div class="section-card">
-        <div class="section-title">💰 High Salary Career Options After PCM</div>
-        <div class="list-item">• Software Engineer / AI-ML Specialist – ₹8-40 LPA</div>
-        <div class="list-item">• Data Scientist – ₹10-35 LPA</div>
-        <div class="list-item">• Robotics Engineer – ₹6-20 LPA</div>
-        <div class="list-item">• Aerospace Engineer – ₹8-25 LPA</div>
-        <div class="list-item">• Pilot – ₹15-50 LPA</div>
-        <div class="list-item">• Merchant Navy Officer – ₹10-30 LPA</div>
-        <div class="list-item">• Architect – ₹6-20 LPA</div>
-        <div class="list-item">• Defence Officer – ₹8-15 LPA + allowances</div>
-        <div class="list-item">• Investment Banking – ₹12-40 LPA</div>
-        <div class="list-item">• Cyber Security Specialist – ₹8-25 LPA</div>
+        <div class="section-title" id="govtJobsPcmTitle">💼 Government Jobs After PCM</div>
+        <div class="list-item" id="upscItem">• UPSC (Civil Services – IAS, IPS, IFS)</div>
+        <div class="list-item" id="statePscItem">• State PSC</div>
+        <div class="list-item" id="sscItem">• SSC (CGL, CHSL, JE)</div>
+        <div class="list-item" id="bankingItem">• Banking (IBPS PO/Clerk, SBI PO)</div>
+        <div class="list-item" id="railwayItem">• Railway Jobs (RRB JE, NTPC, Group D)</div>
+        <div class="list-item" id="defenceExamItem">• Defence Exams (NDA, CDS, AFCAT)</div>
+        <div class="list-item" id="isroItem">• ISRO / DRDO Technical Assistant</div>
     </div>
-</div>
 
-<!-- EXAM UPDATES MODULE -->
-<div class="exam-updates-wrapper" style="padding: 0 16px 20px 16px;">
-    <div class="exam-section-title">
-        📢 Live Exam Updates & Notifications
-        <span class="refresh-note">🔄 Auto-refreshes every hour</span>
+    <div class="section-card">
+        <div class="section-title" id="salaryPcmTitle">💰 High Salary Career Options After PCM</div>
+        <div class="list-item" id="softwareItem">• Software Engineer / AI-ML Specialist – ₹8-40 LPA</div>
+        <div class="list-item" id="dataScientistItem">• Data Scientist – ₹10-35 LPA</div>
+        <div class="list-item" id="roboticsEnggItem">• Robotics Engineer – ₹6-20 LPA</div>
+        <div class="list-item" id="aeroEnggSalaryItem">• Aerospace Engineer – ₹8-25 LPA</div>
+        <div class="list-item" id="pilotSalaryItem">• Pilot – ₹15-50 LPA</div>
+        <div class="list-item" id="merchantSalaryItem">• Merchant Navy Officer – ₹10-30 LPA</div>
+        <div class="list-item" id="archSalaryItem">• Architect – ₹6-20 LPA</div>
+        <div class="list-item" id="defenceSalaryItem">• Defence Officer – ₹8-15 LPA + allowances</div>
+        <div class="list-item" id="investmentItem">• Investment Banking – ₹12-40 LPA</div>
+        <div class="list-item" id="cyberItem">• Cyber Security Specialist – ₹8-25 LPA</div>
     </div>
-    <div id="exam-updates-container"></div>
-</div>
-
-<div class="exam-details-grid" style="margin: 0 16px 20px 16px;">
-    <div class="exam-details-title">📊 JEE Main 2025 – Category-wise Cutoff (Expected)</div>
-    <table class="cutoff-table">
-        <thead>
-            <tr><th>Category</th><th>Cutoff (Percentile)</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>General/Economically Weaker Section (EWS)</td><td>90+ percentile</td></tr>
-            <tr><td>OBC (Non-Creamy Layer) (NCL)</td><td>75+ percentile</td></tr>
-            <tr><td>Scheduled Caste (SC)</td><td>60+ percentile</td></tr>
-            <tr><td>Scheduled Tribe (ST)</td><td>55+ percentile</td></tr>
-            <tr><td>General-PwD</td><td>45+ percentile</td></tr>
-        </tbody>
-    </table>
-    <div class="cutoff-note">📌 Cutoffs updated after official release. Last year's data shown for reference.</div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
-<script src="exam-updates.js"></script>
 <script>
-    const bottomNav = [
-        { name: "Home", icon: "🏠", link: "index.html" },
-        { name: "Search", icon: "🔍", link: "#" },
-        { name: "AnnS AI", icon: "🤖", link: "#" },
-        { name: "Alerts", icon: "🔔", link: "#" },
-        { name: "Profile", icon: "👤", link: "#" }
-    ];
-    function renderBottomBar() { 
-        const bar = document.getElementById('bottomBar'); 
-        if(!bar) return; 
-        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); 
-        document.querySelectorAll('.nav-item').forEach(nav => { 
-            nav.addEventListener('click', () => { 
-                const link = nav.getAttribute('data-link'); 
-                if(link && link !== '#') window.location.href = link; 
-                else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); 
-            }); 
-        }); 
+// ==================== TRANSLATIONS ====================
+const translations = {
+    en: {
+        app_tagline: "Career Saathi", tagline: "⚙️ Engineering & PCM Careers", page_title: "⚙️ Non-Medical (PCM) Stream",
+        engg_title: "🎓 Engineering & Technology (B.Tech / B.E)", arch_title: "🏛️ Architecture & Planning",
+        defence_title: "🛡️ Defence & Merchant Navy", aviation_title: "🛫 Aviation Careers",
+        computer_title: "💻 Computer & IT (Non-Engineering Degrees)", pure_science_title: "🔬 Pure Science Degrees (B.Sc)",
+        management_title: "📊 Management Options", design_title: "🎨 Design & Creative Fields",
+        commerce_pcm_title: "📊 Commerce Options for PCM Students", skill_title: "🛠️ Skill-based Professional Courses",
+        entrance_pcm_title: "📋 Entrance Exams for PCM", govt_jobs_pcm_title: "💼 Government Jobs After PCM",
+        salary_pcm_title: "💰 High Salary Career Options After PCM",
+        cse: "• Computer Science Engineering (CSE)", it: "• Information Technology (IT)",
+        aiml: "• Artificial Intelligence & Machine Learning (AI/ML)", data_science: "• Data Science Engineering",
+        robotics: "• Robotics & Automation", mechanical: "• Mechanical Engineering", civil: "• Civil Engineering",
+        electrical: "• Electrical Engineering", ece: "• Electronics & Communication Engineering (ECE)",
+        aerospace: "• Aerospace Engineering", automobile: "• Automobile Engineering", chemical: "• Chemical Engineering",
+        petroleum: "• Petroleum Engineering", marine: "• Marine Engineering", biotech: "• Biotechnology Engineering",
+        food_tech: "• Food Technology", barch: "• B.Arch – Bachelor of Architecture (5 years)",
+        bplan: "• B.Plan – Bachelor of Planning", interior: "• B.Des Interior Design",
+        nda: "• NDA (Army, Navy, Air Force) – After 12th", tes: "• TES – Technical Entry Scheme, Indian Army",
+        merchant: "• Merchant Navy – B.Tech Marine Engineering", nautical: "• Nautical Science (B.Sc)",
+        pilot: "• Commercial Pilot Training", ame: "• Aircraft Maintenance Engineering (AME)",
+        aero_engg: "• Aeronautical Engineering", aviation_mgmt: "• Aviation Management",
+        bca: "• BCA – Bachelor of Computer Applications", bsc_cs: "• B.Sc Computer Science",
+        bsc_data: "• B.Sc Data Science", bsc_cyber: "• B.Sc Cyber Security", bsc_anim: "• B.Sc Animation & Gaming",
+        bsc_physics: "• B.Sc Physics, Chemistry, Mathematics, Statistics", bsc_electronics: "• B.Sc Electronics, Geology, Environmental Science",
+        bsc_forensic: "• B.Sc Forensic Science, Nanotechnology", bsc_astro: "• B.Sc Astrophysics, Aeronautics",
+        bba: "• BBA – Bachelor of Business Administration", integrated_bba: "• Integrated BBA+MBA (5 years)",
+        bhm: "• BHM – Hotel Management", travel: "• Travel & Tourism",
+        bdes: "• B.Des (Industrial / Product / Fashion / UI-UX)", graphic: "• Graphic Designing, Animation & VFX",
+        photography: "• Photography, Gaming Design, Interior Design", bcom: "• B.Com, Economics, Finance",
+        ca: "• CA (Chartered Accountant), CS, CMA", stock: "• Stock Market & Investment Banking Courses",
+        electrician: "• Electrician / Fitter / Technician Courses", solar: "• Solar Technician, Drone Technology",
+        cnc: "• CNC Programming, Welding Technology", auto_tech: "• Automobile Technician, HVAC",
+        jee_main: "• JEE Main – For NITs, IIITs", jee_adv: "• JEE Advanced – For IITs",
+        bitsat: "• BITSAT – BITS Pilani", viteee: "• VITEEE – VIT University", srmjee: "• SRMJEE – SRM University",
+        nata: "• NATA – For B.Arch", uceed: "• UCEED – For B.Des at IITs", state_cet: "• State CETs (KCET, MHT-CET, UPSEE, etc.)",
+        upsc: "• UPSC (Civil Services – IAS, IPS, IFS)", state_psc: "• State PSC", ssc: "• SSC (CGL, CHSL, JE)",
+        banking: "• Banking (IBPS PO/Clerk, SBI PO)", railway: "• Railway Jobs (RRB JE, NTPC, Group D)",
+        defence_exam: "• Defence Exams (NDA, CDS, AFCAT)", isro: "• ISRO / DRDO Technical Assistant",
+        software: "• Software Engineer / AI-ML Specialist – ₹8-40 LPA", data_scientist: "• Data Scientist – ₹10-35 LPA",
+        robotics_engg: "• Robotics Engineer – ₹6-20 LPA", aero_engg_salary: "• Aerospace Engineer – ₹8-25 LPA",
+        pilot_salary: "• Pilot – ₹15-50 LPA", merchant_salary: "• Merchant Navy Officer – ₹10-30 LPA",
+        arch_salary: "• Architect – ₹6-20 LPA", defence_salary: "• Defence Officer – ₹8-15 LPA + allowances",
+        investment: "• Investment Banking – ₹12-40 LPA", cyber: "• Cyber Security Specialist – ₹8-25 LPA",
+        bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
+    },
+    hi: {
+        app_tagline: "करियर साथी", tagline: "⚙️ इंजीनियरिंग और पीसीएम करियर", page_title: "⚙️ नॉन-मेडिकल (पीसीएम) स्ट्रीम",
+        engg_title: "🎓 इंजीनियरिंग और प्रौद्योगिकी (बी.टेक / बी.ई)", arch_title: "🏛️ आर्किटेक्चर और योजना",
+        defence_title: "🛡️ रक्षा और मर्चेंट नेवी", aviation_title: "🛫 विमानन करियर",
+        computer_title: "💻 कंप्यूटर और आईटी (गैर-इंजीनियरिंग डिग्री)", pure_science_title: "🔬 शुद्ध विज्ञान डिग्री (बी.एससी)",
+        management_title: "📊 प्रबंधन विकल्प", design_title: "🎨 डिजाइन और रचनात्मक क्षेत्र",
+        commerce_pcm_title: "📊 पीसीएम छात्रों के लिए कॉमर्स विकल्प", skill_title: "🛠️ कौशल-आधारित व्यावसायिक पाठ्यक्रम",
+        entrance_pcm_title: "📋 पीसीएम के लिए प्रवेश परीक्षाएं", govt_jobs_pcm_title: "💼 पीसीएम के बाद सरकारी नौकरियां",
+        salary_pcm_title: "💰 पीसीएम के बाद उच्च वेतन करियर विकल्प",
+        cse: "• कंप्यूटर साइंस इंजीनियरिंग (सीएसई)", it: "• सूचना प्रौद्योगिकी (आईटी)",
+        aiml: "• आर्टिफिशियल इंटेलिजेंस और मशीन लर्निंग", mechanical: "• मैकेनिकल इंजीनियरिंग",
+        civil: "• सिविल इंजीनियरिंग", electrical: "• इलेक्ट्रिकल इंजीनियरिंग",
+        ece: "• इलेक्ट्रॉनिक्स और संचार इंजीनियरिंग", barch: "• बी.आर्क – बैचलर ऑफ आर्किटेक्चर (5 वर्ष)",
+        nda: "• एनडीए (आर्मी, नेवी, एयर फोर्स) – 12वीं के बाद", pilot: "• वाणिज्यिक पायलट प्रशिक्षण",
+        bca: "• बीसीए – बैचलर ऑफ कंप्यूटर एप्लीकेशन", bsc_cs: "• बी.एससी कंप्यूटर साइंस",
+        bba: "• बीबीए – बैचलर ऑफ बिजनेस एडमिनिस्ट्रेशन",
+        jee_main: "• जेईई मेन – एनआईटी, आईआईआईटी के लिए", jee_adv: "• जेईई एडवांस्ड – आईआईटी के लिए",
+        bitsat: "• बिटसैट – बिट्स पिलानी", upsc: "• यूपीएससी (सिविल सेवाएं – आईएएस, आईपीएस, आईएफएस)",
+        ssc: "• एसएससी (सीजीएल, सीएचएसएल, जेई)", banking: "• बैंकिंग (आईबीपीएस पीओ/क्लर्क, एसबीआई पीओ)",
+        bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल"
     }
-    function goBack() { window.location.href = 'education.html'; }
-    renderBottomBar();
+};
 </script>
 </body>
 </html>
+<script>
+// Continue JavaScript for non_medical.html
+const bottomNav = [
+    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
+    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
+    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
+    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
+    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
+];
+
+let currentLang = 'en';
+
+function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+
+function updateAllText() {
+    document.getElementById('appTagline').textContent = t('app_tagline');
+    document.getElementById('taglineText').textContent = t('tagline');
+    document.getElementById('pageTitle').textContent = t('page_title');
+    document.getElementById('enggTitle').textContent = t('engg_title');
+    document.getElementById('archTitle').textContent = t('arch_title');
+    document.getElementById('defenceTitle').textContent = t('defence_title');
+    document.getElementById('aviationTitle').textContent = t('aviation_title');
+    document.getElementById('computerTitle').textContent = t('computer_title');
+    document.getElementById('pureScienceTitle').textContent = t('pure_science_title');
+    document.getElementById('managementTitle').textContent = t('management_title');
+    document.getElementById('designTitle').textContent = t('design_title');
+    document.getElementById('commercePcmTitle').textContent = t('commerce_pcm_title');
+    document.getElementById('skillTitle').textContent = t('skill_title');
+    document.getElementById('entrancePcmTitle').textContent = t('entrance_pcm_title');
+    document.getElementById('govtJobsPcmTitle').textContent = t('govt_jobs_pcm_title');
+    document.getElementById('salaryPcmTitle').textContent = t('salary_pcm_title');
+    
+    const items = ['cse','it','aiml','dataScience','robotics','mechanical','civil','electrical','ece','aerospace','automobile','chemical','petroleum','marine','biotech','foodTech','barch','bplan','interior','nda','tes','merchant','nautical','pilot','ame','aeroEngg','aviationMgmt','bca','bscCs','bscData','bscCyber','bscAnim','bscPhysics','bscElectronics','bscForensic','bscAstro','bba','integratedBba','bhm','travel','bdes','graphic','photography','bcom','ca','stock','electrician','solar','cnc','autoTech','jeeMain','jeeAdv','bitsat','viteee','srmjee','nata','uceed','stateCet','upsc','statePsc','ssc','banking','railway','defenceExam','isro','software','dataScientist','roboticsEngg','aeroEnggSalary','pilotSalary','merchantSalary','archSalary','defenceSalary','investment','cyber'];
+    items.forEach(item => { const el = document.getElementById(item + 'Item'); if(el) el.textContent = t(item); });
+    
+    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
+}
+
+function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
+function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
+function goBack() { window.location.href = 'education.html'; }
+function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
+
+document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
+renderBottomBar();
+loadSavedLanguage();
+</script>
