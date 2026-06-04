@@ -8,58 +8,262 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
+        .language-selector select option { color: black; background: white; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         .container { padding: 20px 16px; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
+        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
         .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
         .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">🎨 Arts & Humanities Careers</div>
+    <div class="tagline" id="taglineText">🎨 Arts & Humanities Careers</div>
 </div>
+
 <div class="container">
-    <div class="page-title">🎨 Arts (Humanities) Stream</div>
-    <div class="section-card"><div class="section-title">🎓 Bachelor of Arts (BA)</div><div class="list-item">• Political Science, History, Geography, Psychology, Sociology, English, Hindi, Sanskrit, Philosophy, Anthropology</div><div class="list-item">• Careers: Civil Services, Teaching, Research, Journalism, Social Work</div></div>
-    <div class="section-card"><div class="section-title">⚖️ Law (LLB)</div><div class="list-item">• BA + LLB (Integrated 5 years) through CLAT</div><div class="list-item">• Careers: Lawyer, Judge, Corporate Legal Advisor, Legal Consultant</div></div>
-    <div class="section-card"><div class="section-title">📊 Management & Business</div><div class="list-item">• BBA, BMS (Bachelor of Management Studies)</div><div class="list-item">• Careers: Manager, HR, Marketing Executive, Entrepreneur</div></div>
-    <div class="section-card"><div class="section-title">📰 Journalism & Mass Communication</div><div class="list-item">• BJMC – Bachelor of Journalism & Mass Communication</div><div class="list-item">• Careers: Journalist, News Anchor, Social Media Manager, Content Creator</div></div>
-    <div class="section-card"><div class="section-title">🎭 Fine Arts (BFA)</div><div class="list-item">• Painting, Music, Dance, Photography, Sculpture</div><div class="list-item">• Careers: Artist, Animator, Illustrator, Designer</div></div>
-    <div class="section-card"><div class="section-title">🤝 Social Work (BSW)</div><div class="list-item">• Bachelor of Social Work</div><div class="list-item">• Careers: Social Worker, NGO Manager, CSR Executive</div></div>
-    <div class="section-card"><div class="section-title">🏨 Hotel Management & Hospitality</div><div class="list-item">• BHM / B.Sc Hotel Management</div><div class="list-item">• Careers: Hotel Manager, Chef, Event Planner, Airline Services</div></div>
-    <div class="section-card"><div class="section-title">🎨 Design & Creative Fields</div><div class="list-item">• Fashion Design, Interior Design, Graphic Design, Animation, Event Management, Travel & Tourism</div></div>
-    <div class="section-card"><div class="section-title">🧠 Psychology</div><div class="list-item">• BA Psychology / B.Sc Psychology</div><div class="list-item">• Careers: Clinical Psychologist, Counsellor, HR Specialist</div></div>
-    <div class="section-card"><div class="section-title">📚 Education (B.Ed)</div><div class="list-item">• B.Ed after graduation, Integrated BA+B.Ed (4 years)</div><div class="list-item">• Careers: School Teacher, Counsellor</div></div>
-    <div class="section-card"><div class="section-title">🌍 Foreign Languages</div><div class="list-item">• French, German, Spanish, Japanese – Translator, Interpreter, MNC/Embassy Jobs</div></div>
-    <div class="section-card"><div class="section-title">📈 Digital Marketing & Creative Media</div><div class="list-item">• SEO, Social Media Management, Content Strategy, Graphic Design, Animation, VFX</div></div>
-    <div class="section-card"><div class="section-title">🏛️ Government Jobs (Best for Arts)</div><div class="list-item">• UPSC (IAS/IPS/IRS/IFS), State PCS, SSC CHSL/CGL, Railways, Banking (after degree)</div></div>
+    <div class="page-title" id="pageTitle">🎨 Arts (Humanities) Stream</div>
+
+    <div class="section-card">
+        <div class="section-title" id="baTitle">🎓 Bachelor of Arts (BA)</div>
+        <div class="list-item" id="baSubjectsItem">• Political Science, History, Geography, Psychology, Sociology, English, Hindi, Sanskrit, Philosophy, Anthropology</div>
+        <div class="list-item" id="baCareersItem">• Careers: Civil Services, Teaching, Research, Journalism, Social Work</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="lawTitle">⚖️ Law (LLB)</div>
+        <div class="list-item" id="baLlbItem">• BA + LLB (Integrated 5 years) through CLAT</div>
+        <div class="list-item" id="lawCareersItem">• Careers: Lawyer, Judge, Corporate Legal Advisor, Legal Consultant</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="managementTitle">📊 Management & Business</div>
+        <div class="list-item" id="bbaItem">• BBA, BMS (Bachelor of Management Studies)</div>
+        <div class="list-item" id="managementCareersItem">• Careers: Manager, HR, Marketing Executive, Entrepreneur</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="journalismTitle">📰 Journalism & Mass Communication</div>
+        <div class="list-item" id="bjmcItem">• BJMC – Bachelor of Journalism & Mass Communication</div>
+        <div class="list-item" id="journalismCareersItem">• Careers: Journalist, News Anchor, Social Media Manager, Content Creator</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="fineArtsTitle">🎭 Fine Arts (BFA)</div>
+        <div class="list-item" id="bfaSubjectsItem">• Painting, Music, Dance, Photography, Sculpture</div>
+        <div class="list-item" id="bfaCareersItem">• Careers: Artist, Animator, Illustrator, Designer</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="socialWorkTitle">🤝 Social Work (BSW)</div>
+        <div class="list-item" id="bswItem">• Bachelor of Social Work</div>
+        <div class="list-item" id="socialWorkCareersItem">• Careers: Social Worker, NGO Manager, CSR Executive</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="hotelTitle">🏨 Hotel Management & Hospitality</div>
+        <div class="list-item" id="bhmItem">• BHM / B.Sc Hotel Management</div>
+        <div class="list-item" id="hotelCareersItem">• Careers: Hotel Manager, Chef, Event Planner, Airline Services</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="designTitle">🎨 Design & Creative Fields</div>
+        <div class="list-item" id="designSubjectsItem">• Fashion Design, Interior Design, Graphic Design, Animation, Event Management, Travel & Tourism</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="psychologyTitle">🧠 Psychology</div>
+        <div class="list-item" id="psychologyItem">• BA Psychology / B.Sc Psychology</div>
+        <div class="list-item" id="psychologyCareersItem">• Careers: Clinical Psychologist, Counsellor, HR Specialist</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="educationTitle">📚 Education (B.Ed)</div>
+        <div class="list-item" id="bedItem">• B.Ed after graduation, Integrated BA+B.Ed (4 years)</div>
+        <div class="list-item" id="educationCareersItem">• Careers: School Teacher, Counsellor</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="languagesTitle">🌍 Foreign Languages</div>
+        <div class="list-item" id="languagesItem">• French, German, Spanish, Japanese – Translator, Interpreter, MNC/Embassy Jobs</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="digitalTitle">📈 Digital Marketing & Creative Media</div>
+        <div class="list-item" id="digitalItem">• SEO, Social Media Management, Content Strategy, Graphic Design, Animation, VFX</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="govtJobsTitle">🏛️ Government Jobs (Best for Arts)</div>
+        <div class="list-item" id="upscItem">• UPSC (IAS/IPS/IFS)</div>
+        <div class="list-item" id="statePscItem">• State PCS</div>
+        <div class="list-item" id="sscItem">• SSC CHSL/CGL</div>
+        <div class="list-item" id="railwaysItem">• Railways</div>
+        <div class="list-item" id="bankingItem">• Banking (after degree)</div>
+    </div>
 </div>
+
 <div class="bottom-bar" id="bottomBar"></div>
+
 <script>
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" },{ name: "Search", icon: "🔍", link: "#" },{ name: "AnnS AI", icon: "🤖", link: "#" },{ name: "Alerts", icon: "🔔", link: "#" },{ name: "Profile", icon: "👤", link: "#" }];
-    function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); }); }); }
-    function goBack() { window.location.href = 'education.html'; }
-    renderBottomBar();
+// ==================== TRANSLATIONS ====================
+const translations = {
+    en: {
+        app_tagline: "Career Saathi", tagline: "🎨 Arts & Humanities Careers", page_title: "🎨 Arts (Humanities) Stream",
+        ba_title: "🎓 Bachelor of Arts (BA)", ba_subjects: "• Political Science, History, Geography, Psychology, Sociology, English, Hindi, Sanskrit, Philosophy, Anthropology",
+        ba_careers: "• Careers: Civil Services, Teaching, Research, Journalism, Social Work",
+        law_title: "⚖️ Law (LLB)", ba_llb: "• BA + LLB (Integrated 5 years) through CLAT", law_careers: "• Careers: Lawyer, Judge, Corporate Legal Advisor, Legal Consultant",
+        management_title: "📊 Management & Business", bba: "• BBA, BMS (Bachelor of Management Studies)", management_careers: "• Careers: Manager, HR, Marketing Executive, Entrepreneur",
+        journalism_title: "📰 Journalism & Mass Communication", bjmc: "• BJMC – Bachelor of Journalism & Mass Communication", journalism_careers: "• Careers: Journalist, News Anchor, Social Media Manager, Content Creator",
+        fine_arts_title: "🎭 Fine Arts (BFA)", bfa_subjects: "• Painting, Music, Dance, Photography, Sculpture", bfa_careers: "• Careers: Artist, Animator, Illustrator, Designer",
+        social_work_title: "🤝 Social Work (BSW)", bsw: "• Bachelor of Social Work", social_work_careers: "• Careers: Social Worker, NGO Manager, CSR Executive",
+        hotel_title: "🏨 Hotel Management & Hospitality", bhm: "• BHM / B.Sc Hotel Management", hotel_careers: "• Careers: Hotel Manager, Chef, Event Planner, Airline Services",
+        design_title: "🎨 Design & Creative Fields", design_subjects: "• Fashion Design, Interior Design, Graphic Design, Animation, Event Management, Travel & Tourism",
+        psychology_title: "🧠 Psychology", psychology: "• BA Psychology / B.Sc Psychology", psychology_careers: "• Careers: Clinical Psychologist, Counsellor, HR Specialist",
+        education_title: "📚 Education (B.Ed)", bed: "• B.Ed after graduation, Integrated BA+B.Ed (4 years)", education_careers: "• Careers: School Teacher, Counsellor",
+        languages_title: "🌍 Foreign Languages", languages: "• French, German, Spanish, Japanese – Translator, Interpreter, MNC/Embassy Jobs",
+        digital_title: "📈 Digital Marketing & Creative Media", digital: "• SEO, Social Media Management, Content Strategy, Graphic Design, Animation, VFX",
+        govt_jobs_title: "🏛️ Government Jobs (Best for Arts)", upsc: "• UPSC (IAS/IPS/IFS)", state_psc: "• State PCS", ssc: "• SSC CHSL/CGL", railways: "• Railways", banking: "• Banking (after degree)",
+        bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
+    },
+    hi: {
+        app_tagline: "करियर साथी", tagline: "🎨 कला और मानविकी करियर", page_title: "🎨 कला (मानविकी) स्ट्रीम",
+        ba_title: "🎓 बैचलर ऑफ आर्ट्स (बीए)", ba_subjects: "• राजनीति विज्ञान, इतिहास, भूगोल, मनोविज्ञान, समाजशास्त्र, अंग्रेजी, हिंदी, संस्कृत, दर्शनशास्त्र, मानवशास्त्र",
+        ba_careers: "• करियर: सिविल सेवाएं, शिक्षण, अनुसंधान, पत्रकारिता, सामाजिक कार्य",
+        law_title: "⚖️ कानून (एलएलबी)", ba_llb: "• बीए + एलएलबी (एकीकृत 5 वर्ष) सीएलएटी के माध्यम से", law_careers: "• करियर: वकील, न्यायाधीश, कॉर्पोरेट कानूनी सलाहकार, कानूनी सलाहकार",
+        management_title: "📊 प्रबंधन और व्यवसाय", bba: "• बीबीए, बीएमएस", management_careers: "• करियर: प्रबंधक, एचआर, मार्केटिंग कार्यकारी, उद्यमी",
+        journalism_title: "📰 पत्रकारिता और जनसंचार", bjmc: "• बीजेएमसी – पत्रकारिता और जनसंचार में स्नातक", journalism_careers: "• करियर: पत्रकार, समाचार एंकर, सोशल मीडिया प्रबंधक, कंटेंट क्रिएटर",
+        fine_arts_title: "🎭 ललित कला (बीएफए)", bfa_subjects: "• चित्रकला, संगीत, नृत्य, फोटोग्राफी, मूर्तिकला", bfa_careers: "• करियर: कलाकार, एनिमेटर, इलस्ट्रेटर, डिजाइनर",
+        social_work_title: "🤝 सामाजिक कार्य (बीएसडब्ल्यू)", bsw: "• सामाजिक कार्य में स्नातक", social_work_careers: "• करियर: सामाजिक कार्यकर्ता, एनजीओ प्रबंधक, सीएसआर कार्यकारी",
+        hotel_title: "🏨 होटल प्रबंधन और आतिथ्य", bhm: "• बीएचएम / बी.एससी होटल प्रबंधन", hotel_careers: "• करियर: होटल प्रबंधक, शेफ, इवेंट प्लानर, एयरलाइन सेवाएं",
+        design_title: "🎨 डिजाइन और रचनात्मक क्षेत्र", design_subjects: "• फैशन डिजाइन, इंटीरियर डिजाइन, ग्राफिक डिजाइन, एनीमेशन, इवेंट प्रबंधन, यात्रा और पर्यटन",
+        psychology_title: "🧠 मनोविज्ञान", psychology: "• बीए मनोविज्ञान / बी.एससी मनोविज्ञान", psychology_careers: "• करियर: नैदानिक मनोवैज्ञानिक, परामर्शदाता, एचआर विशेषज्ञ",
+        education_title: "📚 शिक्षा (बी.एड)", bed: "• स्नातक के बाद बी.एड, एकीकृत बीए+बी.एड (4 वर्ष)", education_careers: "• करियर: स्कूल शिक्षक, परामर्शदाता",
+        languages_title: "🌍 विदेशी भाषाएं", languages: "• फ्रेंच, जर्मन, स्पेनिश, जापानी – अनुवादक, दुभाषिया, बहुराष्ट्रीय कंपनी/दूतावास नौकरियां",
+        digital_title: "📈 डिजिटल मार्केटिंग और क्रिएटिव मीडिया", digital: "• एसईओ, सोशल मीडिया प्रबंधन, कंटेंट रणनीति, ग्राफिक डिजाइन, एनीमेशन, वीएफएक्स",
+        govt_jobs_title: "🏛️ सरकारी नौकरियां (कला के लिए सर्वोत्तम)", upsc: "• यूपीएससी (आईएएस/आईपीएस/आईएफएस)", state_psc: "• राज्य पीएससी", ssc: "• एसएससी सीएचएसएल/सीजीएल", railways: "• रेलवे", banking: "• बैंकिंग (डिग्री के बाद)",
+        bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल"
+    }
+};
 </script>
 </body>
 </html>
+<script>
+// Continue JavaScript for arts.html
+const bottomNav = [
+    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
+    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
+    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
+    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
+    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
+];
+
+let currentLang = 'en';
+
+function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+
+function updateAllText() {
+    document.getElementById('appTagline').textContent = t('app_tagline');
+    document.getElementById('taglineText').textContent = t('tagline');
+    document.getElementById('pageTitle').textContent = t('page_title');
+    
+    document.getElementById('baTitle').textContent = t('ba_title');
+    document.getElementById('baSubjectsItem').textContent = t('ba_subjects');
+    document.getElementById('baCareersItem').textContent = t('ba_careers');
+    
+    document.getElementById('lawTitle').textContent = t('law_title');
+    document.getElementById('baLlbItem').textContent = t('ba_llb');
+    document.getElementById('lawCareersItem').textContent = t('law_careers');
+    
+    document.getElementById('managementTitle').textContent = t('management_title');
+    document.getElementById('bbaItem').textContent = t('bba');
+    document.getElementById('managementCareersItem').textContent = t('management_careers');
+    
+    document.getElementById('journalismTitle').textContent = t('journalism_title');
+    document.getElementById('bjmcItem').textContent = t('bjmc');
+    document.getElementById('journalismCareersItem').textContent = t('journalism_careers');
+    
+    document.getElementById('fineArtsTitle').textContent = t('fine_arts_title');
+    document.getElementById('bfaSubjectsItem').textContent = t('bfa_subjects');
+    document.getElementById('bfaCareersItem').textContent = t('bfa_careers');
+    
+    document.getElementById('socialWorkTitle').textContent = t('social_work_title');
+    document.getElementById('bswItem').textContent = t('bsw');
+    document.getElementById('socialWorkCareersItem').textContent = t('social_work_careers');
+    
+    document.getElementById('hotelTitle').textContent = t('hotel_title');
+    document.getElementById('bhmItem').textContent = t('bhm');
+    document.getElementById('hotelCareersItem').textContent = t('hotel_careers');
+    
+    document.getElementById('designTitle').textContent = t('design_title');
+    document.getElementById('designSubjectsItem').textContent = t('design_subjects');
+    
+    document.getElementById('psychologyTitle').textContent = t('psychology_title');
+    document.getElementById('psychologyItem').textContent = t('psychology');
+    document.getElementById('psychologyCareersItem').textContent = t('psychology_careers');
+    
+    document.getElementById('educationTitle').textContent = t('education_title');
+    document.getElementById('bedItem').textContent = t('bed');
+    document.getElementById('educationCareersItem').textContent = t('education_careers');
+    
+    document.getElementById('languagesTitle').textContent = t('languages_title');
+    document.getElementById('languagesItem').textContent = t('languages');
+    
+    document.getElementById('digitalTitle').textContent = t('digital_title');
+    document.getElementById('digitalItem').textContent = t('digital');
+    
+    document.getElementById('govtJobsTitle').textContent = t('govt_jobs_title');
+    document.getElementById('upscItem').textContent = t('upsc');
+    document.getElementById('statePscItem').textContent = t('state_psc');
+    document.getElementById('sscItem').textContent = t('ssc');
+    document.getElementById('railwaysItem').textContent = t('railways');
+    document.getElementById('bankingItem').textContent = t('banking');
+    
+    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
+}
+
+function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
+function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
+function goBack() { window.location.href = 'education.html'; }
+function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
+
+document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
+renderBottomBar();
+loadSavedLanguage();
+</script>
