@@ -6,58 +6,217 @@
     <title>After 10th | Dil-Ke-AnnS Career Saathi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #F5F0E8 0%, #E8E2D9 100%); padding-bottom: 70px; color: #2D2A24; }
+        
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 30px 30px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; transition: all 0.2s; }
+        .back-button:hover { background: rgba(255,255,255,0.25); transform: translateX(-2px); }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
-        .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; transition: all 0.2s; }
+        .language-selector select:hover { background: rgba(255,255,255,0.25); }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; opacity: 0.9; }
+        
+        .container { padding: 20px 16px; max-width: 1200px; margin: 0 auto; }
+        .page-title { font-size: 28px; font-weight: 800; margin-bottom: 25px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; background: linear-gradient(135deg, #1B4D3E 20%, #E67E22 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        
+        /* Tab Styles - Beautiful Doors */
+        .tab-container { margin-bottom: 30px; }
+        .tab-buttons { display: flex; flex-wrap: wrap; gap: 12px; border-bottom: 3px solid #E8E2D9; padding-bottom: 0; margin-bottom: 25px; }
+        .tab-btn { background: transparent; border: none; padding: 12px 24px; font-size: 15px; font-weight: 600; cursor: pointer; border-radius: 40px 40px 0 0; transition: all 0.3s; color: #64748B; display: flex; align-items: center; gap: 8px; position: relative; }
+        .tab-btn:hover { background: #F0EADF; color: #1B4D3E; transform: translateY(-2px); }
+        .tab-btn.active { background: #E67E22; color: white; box-shadow: 0 -4px 12px rgba(230,126,34,0.3); }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: #E67E22; }
+        
+        .tab-pane { display: none; animation: fadeInUp 0.4s ease; }
+        .tab-pane.active { display: block; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Card Styles */
+        .section-card { background: white; border-radius: 24px; padding: 22px; margin-bottom: 24px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid rgba(232,226,217,0.5); transition: all 0.3s; }
+        .section-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); }
+        .section-title { font-size: 22px; font-weight: 800; margin-bottom: 16px; color: #1B4D3E; display: flex; align-items: center; gap: 10px; border-left: 4px solid #E67E22; padding-left: 15px; }
+        .list-item { padding: 10px 0; border-bottom: 1px solid #F0EADF; font-size: 15px; line-height: 1.45; transition: all 0.2s; }
+        .list-item:hover { padding-left: 8px; color: #E67E22; }
+        
+        .badge { display: inline-block; background: #E67E22; color: white; font-size: 11px; padding: 2px 8px; border-radius: 20px; margin-left: 10px; }
+        
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 8px 12px 20px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 6px 14px; border-radius: 30px; transition: all 0.2s; }
+        .nav-item:hover { background: #F0EADF; transform: translateY(-2px); }
+        .nav-item span:first-child { font-size: 24px; }
+        .nav-item span:last-child { font-size: 11px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+        .nav-item.active span:last-child { color: #1B4D3E; font-weight: 700; }
+        
+        @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tab-btn { padding: 14px 28px; font-size: 16px; } .section-title { font-size: 24px; } .list-item { font-size: 16px; } }
+        @media (max-width: 550px) { .tab-btn span { display: none; } .tab-btn .emoji { display: inline; } .tab-btn { padding: 10px 14px; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option><option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option><option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option><option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option><option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option><option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">📖 Complete Guide After 10th Class</div>
+    <div class="tagline" id="taglineText">📖 Complete Guide After 10th Class</div>
 </div>
+
 <div class="container">
-    <div class="page-title">🎓 Options After 10th – Full Roadmap</div>
-    <div class="section-card"><div class="section-title">🔬 1. Science Stream (PCM / PCB)</div><div class="list-item">• Best for: Engineering, Medical, Navy, Defence, IT, Research, Architecture, Aviation</div><div class="list-item">• PCM (Physics, Chemistry, Maths) → Engineering, Defence, Architecture, BCA, B.Sc, Pilot</div><div class="list-item">• PCB (Physics, Chemistry, Biology) → Medical, Paramedical, Nursing, Pharmacy, Biotechnology, Veterinary</div><div class="list-item">• After 12th Science → JEE, NEET, BITSAT, NDA, etc.</div></div>
-    <div class="section-card"><div class="section-title">📊 2. Commerce Stream</div><div class="list-item">• Best for: Business, Banking, Finance, Accounting, Management, Startup, Economics</div><div class="list-item">• Subjects: Accountancy, Business Studies, Economics, Maths/IT</div><div class="list-item">• After 12th Commerce → B.Com, BBA, CA, CS, CMA, CFA, LLB, Hotel Management, Digital Marketing</div></div>
-    <div class="section-card"><div class="section-title">🎨 3. Arts / Humanities Stream</div><div class="list-item">• Best for: UPSC, Teaching, Law, Media, Social services, Creativity, Psychology</div><div class="list-item">• Subjects: History, Geography, Political Science, Sociology, Psychology, Economics, English</div><div class="list-item">• After 12th Arts → BA, LLB, BJMC, BSW, BFA, Hotel Management, Design, Psychology, Social Work, Civil Services</div></div>
-    <div class="section-card"><div class="section-title">🔧 4. 3-Year Diploma (Polytechnic) – Direct Career Path</div><div class="list-item">• If you don't want 11-12th, join diploma after 10th</div><div class="list-item">• Popular branches: Mechanical, Electrical, Civil, Computer, Automobile, Electronics, Chemical, Marine</div><div class="list-item">• After diploma: Get job directly OR join B.Tech directly in 2nd year (lateral entry)</div></div>
-    <div class="section-card"><div class="section-title">🛠️ 5. ITI – Skill-Based Jobs (1-2 years)</div><div class="list-item">• Perfect for early working: Electrician, Fitter, Welder, Diesel Mechanic, AC Technician, Plumber, Carpenter, Automobile mechanic, CCTV technician, Computer operator</div><div class="list-item">• Fast jobs in private & government sector</div></div>
-    <div class="section-card"><div class="section-title">🩺 6. Paramedical & Healthcare Courses (After 10th)</div><div class="list-item">• ANM Nursing, GNM Nursing (after 12th), Medical Lab Assistant, X-Ray Technician, Home health aide, Emergency Medical Technician (EMT)</div></div>
-    <div class="section-card"><div class="section-title">💻 7. Vocational Courses (Skill India)</div><div class="list-item">• Short courses (3-12 months): Graphic design, Animation & VFX, Digital marketing, Photography, App development, Beauty & wellness, Retail management</div><div class="list-item">• Quick part-time or full-time jobs</div></div>
-    <div class="section-card"><div class="section-title">🏅 8. Sports Pathway</div><div class="list-item">• If good in sports: Sports School / Academy, Fitness trainer, Physiotherapy assistant, Sports management, Government sports quota jobs</div><div class="list-item">• Choose 11th/12th with Physical Education</div></div>
-    <div class="section-card"><div class="section-title">🏛️ 9. Government Jobs After 10th</div><div class="list-item">• SSC MTS, Railway Group D, Police Home Guard, Army GD (17.5 years age), Navy MR, Post Office jobs, State govt jobs</div></div>
-    <div class="section-card"><div class="section-title">🌍 10. Abroad Study Path (After 12th)</div><div class="list-item">• Choose Science/Commerce/Arts → later go abroad for Nursing, IT, Engineering, Management, Hotel Management, Healthcare, Vocational skill programs</div><div class="list-item">• Countries: USA, Canada, UK, Australia, Germany, New Zealand, Ireland, Japan, Korea</div></div>
-    <div class="section-card"><div class="section-title">📝 Key Tips for After 10th</div><div class="list-item">• Choose stream based on your interest and strengths, not peer pressure</div><div class="list-item">• Vocational/Diploma/ITI are excellent for early employment and entrepreneurship</div><div class="list-item">• You can switch streams later – many options exist (e.g., PCM to Commerce, Arts to Law, etc.)</div><div class="list-item">• Keep a backup plan – skill courses alongside regular studies</div></div>
+    <div class="page-title" id="pageTitle">🎓 After 10th Career Roadmap</div>
+    
+    <div class="tab-container">
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="streams">📚 <span>Streams</span></button>
+            <button class="tab-btn" data-tab="vocational">🛠️ <span>Vocational & ITI</span></button>
+            <button class="tab-btn" data-tab="jobs">💼 <span>Jobs & Abroad</span></button>
+            <button class="tab-btn" data-tab="tips">💡 <span>Tips & Guidance</span></button>
+        </div>
+        
+        <!-- Tab 1: Streams -->
+        <div id="streams" class="tab-pane active">
+            <div class="section-card"><div class="section-title" id="scienceTitle">🔬 Science Stream (PCM / PCB)</div>
+                <div class="list-item" id="scienceBest">• Best for: Engineering, Medical, Defence, IT, Research, Aviation</div>
+                <div class="list-item" id="pcm">• PCM (Physics, Chemistry, Maths) → Engineering, Defence, BCA, B.Sc, Pilot</div>
+                <div class="list-item" id="pcb">• PCB (Physics, Chemistry, Biology) → Medical, Nursing, Pharmacy, Veterinary</div></div>
+            
+            <div class="section-card"><div class="section-title" id="commerceTitle">📊 Commerce Stream</div>
+                <div class="list-item" id="commerceBest">• Best for: Business, Banking, Finance, CA, CS, Economics</div>
+                <div class="list-item" id="commerceAfter">• After 12th → B.Com, BBA, CA, CS, CMA, CFA, LLB, Hotel Management</div></div>
+            
+            <div class="section-card"><div class="section-title" id="artsTitle">🎨 Arts / Humanities Stream</div>
+                <div class="list-item" id="artsBest">• Best for: UPSC, Law, Journalism, Psychology, Social Work</div>
+                <div class="list-item" id="artsAfter">• After 12th → BA, LLB, BJMC, BSW, BFA, Civil Services</div></div>
+            
+            <div class="section-card"><div class="section-title" id="diplomaTitle">🔧 Polytechnic Diploma (3 Years)</div>
+                <div class="list-item" id="diplomaNote">• Direct career path after 10th – skip 11th/12th</div>
+                <div class="list-item" id="diplomaBranches">• Branches: Mechanical, Electrical, Civil, Computer, Automobile, Electronics</div>
+                <div class="list-item" id="diplomaAfter">• After diploma: Direct job OR lateral entry to B.Tech 2nd year</div></div>
+        </div>
+        
+        <!-- Tab 2: Vocational & ITI -->
+        <div id="vocational" class="tab-pane">
+            <div class="section-card"><div class="section-title" id="itiTitle">🛠️ ITI – Skill Based Jobs (1-2 Years)</div>
+                <div class="list-item" id="itiTrades">• Electrician, Fitter, Welder, Diesel Mechanic, AC Technician, Plumber</div>
+                <div class="list-item" id="itiTrades2">• Carpenter, Automobile Mechanic, CCTV Technician, Computer Operator</div>
+                <div class="list-item" id="itiJobs">• Fast jobs in Private & Government sector</div></div>
+            
+            <div class="section-card"><div class="section-title" id="paramedicalTitle">🩺 Paramedical & Healthcare</div>
+                <div class="list-item" id="paramedicalCourses">• ANM Nursing, GNM Nursing, Medical Lab Assistant, X-Ray Technician</div>
+                <div class="list-item" id="paramedicalCourses2">• Home Health Aide, Emergency Medical Technician (EMT)</div></div>
+            
+            <div class="section-card"><div class="section-title" id="vocationalTitle">💻 Vocational Courses (Skill India)</div>
+                <div class="list-item" id="vocationalCourses">• Graphic Design, Animation & VFX, Digital Marketing, Photography</div>
+                <div class="list-item" id="vocationalCourses2">• App Development, Beauty & Wellness, Retail Management</div>
+                <div class="list-item" id="vocationalJobs">• Quick part-time or full-time jobs after 3-12 months</div></div>
+            
+            <div class="section-card"><div class="section-title" id="sportsPathTitle">🏅 Sports Pathway</div>
+                <div class="list-item" id="sportsPath">• Sports School / Academy, Fitness Trainer, Physiotherapy Assistant</div>
+                <div class="list-item" id="sportsPath2">• Sports Management, Government Sports Quota Jobs</div>
+                <div class="list-item" id="sportsEducation">• Choose 11th/12th with Physical Education</div></div>
+        </div>
+        
+        <!-- Tab 3: Jobs & Abroad -->
+        <div id="jobs" class="tab-pane">
+            <div class="section-card"><div class="section-title" id="govt10thTitle">🏛️ Government Jobs After 10th</div>
+                <div class="list-item" id="govt10thJobs">• SSC MTS, Railway Group D, Police Home Guard</div>
+                <div class="list-item" id="govt10thJobs2">• Army GD (17.5 years), Navy MR, Post Office Jobs, State Govt Jobs</div></div>
+            
+            <div class="section-card"><div class="section-title" id="abroad10thTitle">🌍 Abroad Study Path</div>
+                <div class="list-item" id="abroad10thPath">• Choose Science/Commerce/Arts → Study Abroad after 12th</div>
+                <div class="list-item" id="abroad10thFields">• Fields: Nursing, IT, Engineering, Management, Hotel Management</div>
+                <div class="list-item" id="abroad10thCountries">• Countries: USA, Canada, UK, Australia, Germany, Japan, Korea</div></div>
+        </div>
+        
+        <!-- Tab 4: Tips -->
+        <div id="tips" class="tab-pane">
+            <div class="section-card"><div class="section-title" id="tipsTitle">💡 Key Tips for After 10th</div>
+                <div class="list-item" id="tip1">✅ Choose stream based on YOUR interest and strengths, not peer pressure</div>
+                <div class="list-item" id="tip2">✅ Vocational/Diploma/ITI are excellent for early employment</div>
+                <div class="list-item" id="tip3">✅ You can switch streams later – many options exist</div>
+                <div class="list-item" id="tip4">✅ Keep a backup plan – skill courses alongside regular studies</div>
+                <div class="list-item" id="tip5">✅ Start exploring career options from Class 9 itself</div>
+                <div class="list-item" id="tip6">✅ Don't compare your journey with others – everyone has their own path</div></div>
+        </div>
+    </div>
 </div>
+
 <div class="bottom-bar" id="bottomBar"></div>
+
 <script>
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" },{ name: "Search", icon: "🔍", link: "#" },{ name: "AnnS AI", icon: "🤖", link: "#" },{ name: "Alerts", icon: "🔔", link: "#" },{ name: "Profile", icon: "👤", link: "#" }];
-    function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); }); }); }
-    function goBack() { window.location.href = 'index.html'; }
-    renderBottomBar();
+const translations = { en: {
+    app_tagline: "Career Saathi", tagline: "📖 Complete Guide After 10th Class", page_title: "🎓 After 10th Career Roadmap",
+    science_title: "🔬 Science Stream (PCM / PCB)", science_best: "• Best for: Engineering, Medical, Defence, IT, Research, Aviation",
+    pcm: "• PCM (Physics, Chemistry, Maths) → Engineering, Defence, BCA, B.Sc, Pilot",
+    pcb: "• PCB (Physics, Chemistry, Biology) → Medical, Nursing, Pharmacy, Veterinary",
+    commerce_title: "📊 Commerce Stream", commerce_best: "• Best for: Business, Banking, Finance, CA, CS, Economics",
+    commerce_after: "• After 12th → B.Com, BBA, CA, CS, CMA, CFA, LLB, Hotel Management",
+    arts_title: "🎨 Arts / Humanities Stream", arts_best: "• Best for: UPSC, Law, Journalism, Psychology, Social Work",
+    arts_after: "• After 12th → BA, LLB, BJMC, BSW, BFA, Civil Services",
+    diploma_title: "🔧 Polytechnic Diploma (3 Years)", diploma_note: "• Direct career path after 10th – skip 11th/12th",
+    diploma_branches: "• Branches: Mechanical, Electrical, Civil, Computer, Automobile, Electronics",
+    diploma_after: "• After diploma: Direct job OR lateral entry to B.Tech 2nd year",
+    iti_title: "🛠️ ITI – Skill Based Jobs (1-2 Years)", iti_trades: "• Electrician, Fitter, Welder, Diesel Mechanic, AC Technician, Plumber",
+    iti_trades2: "• Carpenter, Automobile Mechanic, CCTV Technician, Computer Operator", iti_jobs: "• Fast jobs in Private & Government sector",
+    paramedical_title: "🩺 Paramedical & Healthcare", paramedical_courses: "• ANM Nursing, GNM Nursing, Medical Lab Assistant, X-Ray Technician",
+    paramedical_courses2: "• Home Health Aide, Emergency Medical Technician (EMT)",
+    vocational_title: "💻 Vocational Courses (Skill India)", vocational_courses: "• Graphic Design, Animation & VFX, Digital Marketing, Photography",
+    vocational_courses2: "• App Development, Beauty & Wellness, Retail Management", vocational_jobs: "• Quick part-time or full-time jobs after 3-12 months",
+    sports_path_title: "🏅 Sports Pathway", sports_path: "• Sports School / Academy, Fitness Trainer, Physiotherapy Assistant",
+    sports_path2: "• Sports Management, Government Sports Quota Jobs", sports_education: "• Choose 11th/12th with Physical Education",
+    govt_10th_title: "🏛️ Government Jobs After 10th", govt_10th_jobs: "• SSC MTS, Railway Group D, Police Home Guard",
+    govt_10th_jobs2: "• Army GD (17.5 years), Navy MR, Post Office Jobs, State Govt Jobs",
+    abroad_10th_title: "🌍 Abroad Study Path", abroad_10th_path: "• Choose Science/Commerce/Arts → Study Abroad after 12th",
+    abroad_10th_fields: "• Fields: Nursing, IT, Engineering, Management, Hotel Management",
+    abroad_10th_countries: "• Countries: USA, Canada, UK, Australia, Germany, Japan, Korea",
+    tips_title: "💡 Key Tips for After 10th", tip1: "✅ Choose stream based on YOUR interest and strengths, not peer pressure",
+    tip2: "✅ Vocational/Diploma/ITI are excellent for early employment", tip3: "✅ You can switch streams later – many options exist",
+    tip4: "✅ Keep a backup plan – skill courses alongside regular studies", tip5: "✅ Start exploring career options from Class 9 itself",
+    tip6: "✅ Don't compare your journey with others – everyone has their own path",
+    bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
+}, hi: {
+    app_tagline: "करियर साथी", tagline: "📖 10वीं कक्षा के बाद संपूर्ण गाइड", page_title: "🎓 10वीं के बाद करियर रोडमैप",
+    science_title: "🔬 विज्ञान स्ट्रीम (पीसीएम / पीसीबी)", science_best: "• इसके लिए सर्वोत्तम: इंजीनियरिंग, मेडिकल, रक्षा, आईटी, अनुसंधान",
+    pcm: "• पीसीएम → इंजीनियरिंग, रक्षा, बीसीए, बी.एससी, पायलट", pcb: "• पीसीबी → मेडिकल, नर्सिंग, फार्मेसी, पशु चिकित्सा",
+    commerce_title: "📊 कॉमर्स स्ट्रीम", commerce_best: "• इसके लिए सर्वोत्तम: व्यवसाय, बैंकिंग, वित्त, सीए, सीएस",
+    commerce_after: "• 12वीं के बाद → बी.कॉम, बीबीए, सीए, सीएस, सीएमए, सीएफए, एलएलबी",
+    arts_title: "🎨 कला / मानविकी स्ट्रीम", arts_best: "• इसके लिए सर्वोत्तम: यूपीएससी, कानून, पत्रकारिता, मनोविज्ञान",
+    arts_after: "• 12वीं के बाद → बीए, एलएलबी, बीजेएमसी, बीएसडब्ल्यू, बीएफए",
+    diploma_title: "🔧 पॉलिटेक्निक डिप्लोमा (3 वर्ष)", diploma_note: "• 10वीं के बाद सीधा करियर पथ",
+    iti_title: "🛠️ आईटीआई – कौशल आधारित नौकरियां", iti_trades: "• इलेक्ट्रीशियन, फिटर, वेल्डर, डीजल मैकेनिक, एसी टेक्नीशियन",
+    govt_10th_title: "🏛️ 10वीं के बाद सरकारी नौकरियां", govt_10th_jobs: "• एसएससी एमटीएस, रेलवे ग्रुप डी, पुलिस होमगार्ड",
+    tips_title: "💡 10वीं के बाद महत्वपूर्ण सुझाव", tip1: "✅ अपनी रुचि और ताकत के आधार पर स्ट्रीम चुनें",
+    tip2: "✅ व्यावसायिक/डिप्लोमा/आईटीआई प्रारंभिक रोजगार के लिए उत्कृष्ट हैं",
+    bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल"
+}};
+</script>
+<script>
+const bottomNav = [{ nameKey: "bottom_home", icon: "🏠", link: "index.html" }, { nameKey: "bottom_search", icon: "🔍", link: "#" }, { nameKey: "bottom_ai", icon: "🤖", link: "#" }, { nameKey: "bottom_alerts", icon: "🔔", link: "#" }, { nameKey: "bottom_profile", icon: "👤", link: "#" }];
+let currentLang = 'en'; function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+function updateAllText() { for(let id of ['appTagline','taglineText','pageTitle']) document.getElementById(id).textContent = t(id === 'appTagline' ? 'app_tagline' : id === 'taglineText' ? 'tagline' : 'page_title');
+    ['scienceTitle','scienceBest','pcm','pcb','commerceTitle','commerceBest','commerceAfter','artsTitle','artsBest','artsAfter','diplomaTitle','diplomaNote','diplomaBranches','diplomaAfter','itiTitle','itiTrades','itiTrades2','itiJobs','paramedicalTitle','paramedicalCourses','paramedicalCourses2','vocationalTitle','vocationalCourses','vocationalCourses2','vocationalJobs','sportsPathTitle','sportsPath','sportsPath2','sportsEducation','govt10thTitle','govt10thJobs','govt10thJobs2','abroad10thTitle','abroad10thPath','abroad10thFields','abroad10thCountries','tipsTitle','tip1','tip2','tip3','tip4','tip5','tip6'].forEach(id => { let el = document.getElementById(id); if(el) el.textContent = t(id); });
+    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if(idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); }); }
+function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
+function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
+function goBack() { window.location.href = 'index.html'; }
+function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
+document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
+document.querySelectorAll('.tab-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active')); document.getElementById(btn.getAttribute('data-tab')).classList.add('active'); }); });
+renderBottomBar(); loadSavedLanguage();
 </script>
 </body>
 </html>
