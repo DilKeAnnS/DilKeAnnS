@@ -7,249 +7,446 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .language-selector select option { color: black; background: white; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">🌾 Agriculture & Allied Sciences</div>
+    <div class="tagline">🌾 Complete Agriculture Career Guide - 10th to CEO | Live Exam Updates</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">🌾 Agriculture Stream</div>
-
-    <div class="section-card">
-        <div class="section-title" id="after10thTitle">🎓 After 10th – Diploma & ITI Options</div>
-        <div class="list-item" id="diplomaAgri">• Diploma in Agriculture, Horticulture, Organic Farming, Food Processing, Seed Technology, Animal Husbandry, Poultry, Farm Management</div>
-        <div class="list-item" id="itiAgri">• ITI Courses: Crop Production, Fruit & Vegetable Processing, Dairying, Food Technology, Horticulture, Soil Testing, Agricultural Machinery</div>
-        <div class="list-item" id="certAgri">• Certificate Courses: Organic Farming, Nursery Management, Beekeeping, Vermicomposting, Mushroom Cultivation, Dairy Management</div>
-        <div class="list-item" id="careerAfter10th">• Career after Diploma: Agriculture Supervisor, Farm Manager, Agri-Technician, Irrigation Technician, Fertilizer/Pesticide Company jobs</div>
+    <div class="page-title">🌾 Agriculture & Allied Sciences</div>
+    <div class="page-subtitle">60+ Courses | 100+ Colleges | B.Sc Agriculture | M.Sc | PhD | Government Jobs | Complete Roadmap</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="after10th">🎓 <span class="door-label">After 10th Agriculture</span></button>
+        <button class="door-btn" data-door="diploma">📜 <span class="door-label">Diploma in Agriculture</span></button>
+        <button class="door-btn" data-door="iti">🛠️ <span class="door-label">ITI Agriculture Trades</span></button>
+        <button class="door-btn" data-door="bsc">🎓 <span class="door-label">B.Sc Agriculture (4 years)</span></button>
+        <button class="door-btn" data-door="btech">🔧 <span class="door-label">B.Tech Agricultural Engineering</span></button>
+        <button class="door-btn" data-door="horticulture">🌱 <span class="door-label">Horticulture & Forestry</span></button>
+        <button class="door-btn" data-door="veterinary">🐄 <span class="door-label">Veterinary & Animal Husbandry</span></button>
+        <button class="door-btn" data-door="foodtech">🍽️ <span class="door-label">Food Technology</span></button>
+        <button class="door-btn" data-door="govt">🏛️ <span class="door-label">Government Jobs (AFO/NABARD)</span></button>
+        <button class="door-btn" data-door="entrepreneurship">🚀 <span class="door-label">Agri-Entrepreneurship</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Studies</span></button>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="after12thTitle">🎓 After 12th – Bachelor Degrees</div>
-        <div class="list-item" id="bscAgri">• B.Sc Agriculture (4 years) – most preferred for govt jobs</div>
-        <div class="list-item" id="bscHorticulture">• B.Sc Horticulture, Forestry, Food Technology, Animal Husbandry, Fisheries (B.FSc), Dairy Science, Sericulture, Seed Technology, Plant Pathology, Soil Science, Agricultural Economics</div>
-        <div class="list-item" id="btechAgri">• B.Tech Agricultural Engineering, Food Technology, Dairy Technology, Biotechnology, Agricultural IT</div>
+    
+    <!-- ==================== DOOR 1: AFTER 10th AGRICULTURE ==================== -->
+    <div id="door-after10th" class="door-content active">
+        <div class="accordion-card active" id="after10thAgriCard">
+            <div class="accordion-header" onclick="toggleCard('after10thAgriCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎓</span> Agriculture Pathways After 10th - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Start your career in agriculture after 10th through Diploma, ITI, Vocational courses, or 11th-12th with Agriculture stream.<br><span class="salary-text">💰 Early Start: Get job-ready in 2-3 years</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Agriculture is India's backbone. Huge demand for skilled professionals, government jobs, entrepreneurship opportunities.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 10th results (Age 15-16). Multiple entry points available.</div></div>
+                </div>
+                <div class="section-title">📌 Option 1: 11th/12th with Agriculture Stream</div>
+                <div class="roadmap-step"><div class="roadmap-year">Class 11-12</div><div class="roadmap-text">Choose Agriculture as vocational subject. Subjects: Crop Production, Horticulture, Animal Husbandry, Agricultural Economics, Plant Protection, Soil Science.<br><span class="salary-text">💰 After 12th: Eligible for B.Sc Agriculture, B.Sc Horticulture, Diploma in Agriculture</span></div></div>
+                <div class="section-title">📌 Option 2: Agriculture Diploma (3 years) after 10th</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🌾 Diploma in Agriculture</div><div class="info-text">3 years | Eligibility: 10th pass | Government and private polytechnics</div></div>
+                    <div class="info-card"><div class="info-label">🌱 Diploma in Horticulture</div><div class="info-text">3 years | Focus on fruits, vegetables, flowers, spices, plantation crops</div></div>
+                    <div class="info-card"><div class="info-label">🌿 Diploma in Organic Farming</div><div class="info-text">2-3 years | Growing demand for organic agriculture professionals</div></div>
+                    <div class="info-card"><div class="info-label">🏭 Diploma in Food Processing</div><div class="info-text">3 years | Food preservation, processing, quality control</div></div>
+                    <div class="info-card"><div class="info-label">🌾 Diploma in Seed Technology</div><div class="info-text">2 years | Seed production, testing, certification</div></div>
+                    <div class="info-card"><div class="info-label">🐄 Diploma in Animal Husbandry</div><div class="info-text">2 years | Dairy farming, animal health, livestock management</div></div>
+                </div>
+                <div class="section-title">📌 Option 3: ITI Agriculture Trades (1-2 years)</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🌾 ITI Crop Production</div><div class="info-text">1 year | Crop cultivation techniques, pest management, irrigation</div></div>
+                    <div class="info-card"><div class="info-label">🍓 ITI Fruit & Vegetable Processing</div><div class="info-text">1 year | Food preservation, canning, jam/juice production</div></div>
+                    <div class="info-card"><div class="info-label">🥛 ITI Dairying</div><div class="info-text">1 year | Milk production, processing, dairy products</div></div>
+                    <div class="info-card"><div class="info-label">🍽️ ITI Food Technology</div><div class="info-text">2 years | Food processing and quality control</div></div>
+                    <div class="info-card"><div class="info-label">🌱 ITI Horticulture</div><div class="info-text">1 year | Nursery management, vegetable cultivation, floriculture</div></div>
+                    <div class="info-card"><div class="info-label">🔬 ITI Soil Testing</div><div class="info-text">6 months - 1 year | Soil analysis, fertilizer recommendations</div></div>
+                </div>
+                <div class="section-title">📌 Option 4: Short-term Certificate Courses (3-12 months)</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🍄 Mushroom Cultivation</div><div class="info-text">3 months | Self-employment opportunity, high income potential</div></div>
+                    <div class="info-card"><div class="info-label">🐝 Beekeeping (Apiculture)</div><div class="info-text">3 months | Honey production, pollination services, high demand</div></div>
+                    <div class="info-card"><div class="info-label">🌿 Vermicomposting</div><div class="info-text">2 months | Organic manure production from agricultural waste</div></div>
+                    <div class="info-card"><div class="info-label">🌱 Nursery Management</div><div class="info-text">6 months | Plant propagation, nursery business, landscaping</div></div>
+                    <div class="info-card"><div class="info-label">🥛 Dairy Management</div><div class="info-text">6 months | Dairy farm management, milk processing, marketing</div></div>
+                    <div class="info-card"><div class="info-label">🌾 Organic Farming</div><div class="info-text">6 months | Chemical-free farming techniques, certification process</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Agricultural Scientists/Entrepreneurs</div>
+                <div><span class="famous-badge">Dr. M. S. Swaminathan (Father of Green Revolution in India)</span> <span class="famous-badge">Dr. Verghese Kurien (Father of White Revolution - Amul)</span> <span class="famous-badge">Dr. Norman Borlaug (Nobel Prize for Green Revolution)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="veterinaryTitle">🐄 Veterinary & Allied</div>
-        <div class="list-item" id="bvsc">• Bachelor of Veterinary Science (BVSc & AH)</div>
-        <div class="list-item" id="animalHusbandry">• B.Sc Animal Husbandry, Poultry Science, Dairy Technology</div>
+    
+    <!-- ==================== DOOR 2: DIPLOMA IN AGRICULTURE ==================== -->
+    <div id="door-diploma" class="door-content">
+        <div class="accordion-card" id="diplomaCard">
+            <div class="accordion-header" onclick="toggleCard('diplomaCard')">
+                <div class="accordion-title"><span class="accordion-icon">📜</span> Diploma in Agriculture (3 years) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional diploma covering crop production, soil science, plant protection, agricultural engineering, agribusiness management.<br><span class="salary-text">💰 Starting Salary: ₹3-6 LPA | Experienced: ₹6-10 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Quick entry into agriculture sector. Lateral entry to B.Sc Agriculture (2nd year). Direct job opportunities in government and private sector.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text">Government Agricultural Polytechnics, ICAR-affiliated institutes, Private Agricultural Colleges</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Institutes for Diploma in Agriculture</div>
+                <table class="college-table">
+                    <thead><tr><th>Institute</th><th>City</th><th>Fees/Year</th></tr></thead>
+                    <tbody>
+                        <tr>那样Govt Agricultural Polytechnic, Banka</th>那样Bihar</th>那样₹15,000</th></tr>
+                        <tr>那样Govt Agricultural Polytechnic, Warangal</th>那样Telangana</th>那样₹20,000</th></tr>
+                        <tr>那样GB Pant University (Diploma)</th>那样Pantnagar</th>那样₹25,000</th></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Career Roadmap (Diploma in Agriculture)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">Diploma in Agriculture<br><span class="salary-text">💰 Agriculture Supervisor: ₹3-5 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Job Options</div><div class="roadmap-text">Agriculture Field Officer, Farm Manager, Seed Production Officer, Pesticide/Fertilizer Company Executive, Agri-entrepreneur</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Lateral Entry</div><div class="roadmap-text">Direct admission to 2nd year of B.Sc Agriculture after diploma</div></div>
+                <div class="section-title">💼 Job Opportunities after Diploma</div>
+                <div><span class="famous-badge">Agriculture Supervisor (Govt)</span> <span class="famous-badge">Farm Manager</span> <span class="famous-badge">Agri-Technician</span> <span class="famous-badge">Seed Production Officer</span> <span class="famous-badge">Fertilizer/Pesticide Company Executive</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="agribusinessTitle">📊 Agribusiness & Management</div>
-        <div class="list-item" id="bbaAgri">• BBA in Agribusiness Management, B.Com Agriculture Business, B.Sc Agricultural Business Management</div>
+    
+    <!-- ==================== DOOR 3: ITI AGRICULTURE TRADES ==================== -->
+    <div id="door-iti" class="door-content">
+        <div class="accordion-card" id="itiCard">
+            <div class="accordion-header" onclick="toggleCard('itiCard')">
+                <div class="accordion-title"><span class="accordion-icon">🛠️</span> ITI Agriculture Trades (1-2 years) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Skill-based vocational training for immediate employment in agriculture sector.<br><span class="salary-text">💰 Starting Salary: ₹2-4 LPA | Experienced: ₹4-7 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 Available Trades</div><div class="info-text">Crop Production, Fruit & Vegetable Processing, Dairying, Food Technology, Horticulture, Soil Testing, Agricultural Machinery</div></div>
+                </div>
+                <div class="section-title">🏛️ Top ITI Institutes</div>
+                <div><span class="famous-badge">Government ITI (across all districts)</span> <span class="famous-badge">Private ITIs recognized by NCVT</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="skillTitle">🛠️ Skill-Based Short Courses</div>
-        <div class="list-item" id="skillCourses">• Beekeeping, Mushroom Cultivation, Nursery Management, Vermicomposting, Organic Farming, Soil Testing, Fertilizer Technology, Dairy Farming</div>
+    
+    <!-- ==================== DOOR 4: B.Sc AGRICULTURE ==================== -->
+    <div id="door-bsc" class="door-content">
+        <div class="accordion-card" id="bscAgriCard">
+            <div class="accordion-header" onclick="toggleCard('bscAgriCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎓</span> B.Sc Agriculture (4 years) - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of agricultural sciences - crop production, soil science, plant breeding, entomology, plant pathology, agricultural economics, extension education, agricultural engineering.<br><span class="salary-text">💰 Fresher: ₹5-10 LPA | M.Sc: ₹8-15 LPA | PhD: ₹12-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Best course for government jobs in agriculture. ICAR scholarships available. High demand for Agriculture Officers, NABARD, FCI, IFFCO, State Agriculture Departments.<br><span class="salary-text">💰 AFO (Agriculture Field Officer): ₹10-18 LPA | NABARD Grade A: ₹12-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th with PCM/PCB/Agriculture (minimum 50% marks). Age 17+.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iari.res.in" target="_blank">IARI Delhi (Pusa Institute)</a> | <a class="live-link" href="https://www.gbpuat.ac.in" target="_blank">GB Pant University Pantnagar</a> | <a class="live-link" href="https://www.tnau.ac.in" target="_blank">TNAU Coimbatore</a> | <a class="live-link" href="https://www.uasbangalore.edu.in" target="_blank">UAS Bangalore</a> | <a class="live-link" href="https://www.pau.edu" target="_blank">PAU Ludhiana</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://icar.nta.nic.in" target="_blank">ICAR AIEEA (UG)</a> | State Agriculture Entrance Exams (KEAM Agriculture, MHT-CET Agriculture, AP EAMCET Agriculture, UPCATET, BCECE)</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in agriculture, plants, soil, research, fieldwork, problem-solving, analytical thinking</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCM/PCB/Agriculture → ICAR AIEEA/State Exam → B.Sc Agriculture (4 years) → M.Sc (2 years) → PhD (3-5 years)</div></div>
+                </div>
+                <div class="section-title">📋 ICAR AIEEA EXAM - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://icar.nta.nic.in" target="_blank">icar.nta.nic.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Exam Date</div><div class="info-text">July 2025</div></div>
+                    <div class="info-card"><div class="info-label">📅 Application</div><div class="info-text">April-May 2025</div></div>
+                    <div class="info-card"><div class="info-label">📊 Result</div><div class="info-text">August 2025</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Agricultural Universities (ICAR Ranked)</div>
+                <table class="college-table">
+                    <thead><tr><th>University</th><th>City</th><th>Fees/Year</th><th>ICAR Rank</th></tr></thead>
+                    <tbody>
+                        <tr>那样<a class="live-link" href="https://www.iari.res.in" target="_blank">IARI Delhi</a></th>那样Delhi</th>那样₹30,000</th>那样1</th></tr>
+                        <tr>那样<a class="live-link" href="https://www.gbpuat.ac.in" target="_blank">GB Pant University</a></th>那样Pantnagar</th>那样₹50,000</th>那样2</th></tr>
+                        <tr>那样<a class="live-link" href="https://www.tnau.ac.in" target="_blank">TNAU Coimbatore</a></th>那样Coimbatore</th>那样₹40,000</th>那样3</th></tr>
+                        <tr>那样<a class="live-link" href="https://www.pau.edu" target="_blank">PAU Ludhiana</a></th>那样Ludhiana</th>那样₹45,000</th>那样4</th></tr>
+                        <tr>那样<a class="live-link" href="https://www.uasbangalore.edu.in" target="_blank">UAS Bangalore</a></th>那样Bangalore</th>那样₹35,000</th>那样5</th></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">💰 ICAR Scholarships for B.Sc Agriculture</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 ICAR Merit-cum-Means</div><div class="info-text">₹10,000-15,000/month for meritorious students</div></div>
+                    <div class="info-card"><div class="info-label">🎓 ICAR-NTS</div><div class="info-text">National Talent Scholarship - ₹5,000/month for top rankers</div></div>
+                    <div class="info-card"><div class="info-label">🎓 State Scholarships</div><div class="info-text">Various state government scholarships for agriculture students</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="govtJobsTitle">🏛️ Government Jobs (Best for B.Sc Agriculture)</div>
-        <div class="list-item" id="agriOfficer">• Agriculture Officer, Rural Development Officer, Food Safety Officer, Agriculture Field Officer (AFO – Banks), NABARD, IFFCO, FCI, ICAR, State Agriculture Dept, Gram Sevak, Horticulture Assistant</div>
+        <!-- ==================== DOOR 5: B.Tech AGRICULTURAL ENGINEERING ==================== -->
+    <div id="door-btech" class="door-content">
+        <div class="accordion-card" id="btechAgriCard">
+            <div class="accordion-header" onclick="toggleCard('btechAgriCard')">
+                <div class="accordion-title"><span class="accordion-icon">🔧</span> B.Tech Agricultural Engineering (4 years) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of farm machinery, irrigation systems, soil conservation, post-harvest technology, renewable energy in agriculture, food processing equipment.<br><span class="salary-text">💰 Fresher: ₹5-12 LPA | M.Tech: ₹10-20 LPA | PSU: ₹12-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in government sector (Ground Water Board, Irrigation Dept, Agricultural Engineering Dept), private companies (John Deere, Mahindra, TAFE, Escorts), and research organizations (CIAE, CRIJAF).</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.gbpuat.ac.in" target="_blank">GB Pant University</a> | <a class="live-link" href="https://www.pau.edu" target="_blank">PAU Ludhiana</a> | <a class="live-link" href="https://www.tnau.ac.in" target="_blank">TNAU Coimbatore</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEE Main, ICAR AIEEA, State Engineering Entrance Exams</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Agricultural Engineering)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Tech Agricultural Engineering<br><span class="salary-text">💰 Agricultural Engineer: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Tech in Soil & Water Engineering/Farm Machinery/PFE<br><span class="salary-text">💰 Specialist Engineer: ₹10-18 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">GATE/ICAR</div><div class="roadmap-text">Clear GATE for PSUs (BHEL, NTPC, NPCIL, Irrigation Dept) or ICAR for Research<br><span class="salary-text">💰 PSU Engineer: ₹12-25 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">PhD</div><div class="roadmap-text">PhD → Scientist at ICAR institutes or Professor<br><span class="salary-text">💰 Scientist/Professor: ₹15-30 LPA</span></div></div>
+                <div class="section-title">🏛️ Top Recruiters for Agricultural Engineers</div>
+                <div><span class="famous-badge">John Deere</span> <span class="famous-badge">Mahindra & Mahindra</span> <span class="famous-badge">TAFE (Tractors and Farm Equipment)</span> <span class="famous-badge">Escorts</span> <span class="famous-badge">CIAE Bhopal</span> <span class="famous-badge">Central Ground Water Board</span> <span class="famous-badge">State Agricultural Engineering Departments</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="privateTitle">🏢 Private Sector & Entrepreneurship</div>
-        <div class="list-item" id="privateJobs">• Seed, fertilizer, pesticide companies, Agri-tech startups, Dairy plants, Food processing units, Organic farming business, Mushroom farming, Dairy/Poultry/Fish farming, Plant nursery, Beekeeping, Food processing (pickles, chips, fruit pulp)</div>
+    
+    <!-- ==================== DOOR 6: HORTICULTURE & FORESTRY ==================== -->
+    <div id="door-horticulture" class="door-content">
+        <div class="accordion-card" id="horticultureCard">
+            <div class="accordion-header" onclick="toggleCard('horticultureCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌱</span> B.Sc Horticulture / B.Sc Forestry (4 years) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Horticulture: Study of fruits, vegetables, flowers, spices, plantation crops, medicinal plants, landscaping. Forestry: Study of forest management, wildlife conservation, agroforestry, forest products.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | M.Sc: ₹8-15 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Government jobs in Horticulture Dept, Agriculture Dept, Forest Dept (IFS, Forest Ranger), National Horticulture Mission, NHB, APEDA.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.drpyau.ac.in" target="_blank">Dr. YSP UHF Solan</a> | <a class="live-link" href="https://www.iihr.res.in" target="_blank">IIHR Bangalore</a> | <a class="live-link" href="https://www.fridu.edu.in" target="_blank">Forest Research Institute Dehradun</a></div></div>
+                </div>
+                <div class="section-title">🏛️ Career Opportunities in Horticulture & Forestry</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🌱 Horticulture Officer</div><div class="info-text">State Horticulture Dept - ₹50k-80k/month</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Forest Ranger</div><div class="info-text">State Forest Dept - ₹50k-1L/month</div></div>
+                    <div class="info-card"><div class="info-label">🌳 IFS Officer</div><div class="info-text">Indian Forest Service (UPSC) - ₹70k-2L/month</div></div>
+                    <div class="info-card"><div class="info-label">🏢 NHB/NHM</div><div class="info-text">National Horticulture Board/Mission - ₹40k-80k/month</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Horticulturists/Forestry Experts</div>
+                <div><span class="famous-badge">Dr. M. S. Swaminathan (Father of Green Revolution - also contributed to horticulture)</span> <span class="famous-badge">Dr. K. L. Chadha (Padma Shri, Horticulture)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="abroadTitle">🌍 Abroad Options</div>
-        <div class="list-item" id="abroadOptions">• Diploma in Agriculture (Canada, Australia, New Zealand), Bachelors in Horticulture/Forestry/Agri-Business, Farm worker → PR pathways</div>
+    
+    <!-- ==================== DOOR 7: VETERINARY & ANIMAL HUSBANDRY ==================== -->
+    <div id="door-veterinary" class="door-content">
+        <div class="accordion-card" id="veterinaryCard">
+            <div class="accordion-header" onclick="toggleCard('veterinaryCard')">
+                <div class="accordion-title"><span class="accordion-icon">🐄</span> BVSc & AH - Veterinary Science (5.5 years) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Bachelor of Veterinary Science & Animal Husbandry - Treatment of animals, livestock management, animal breeding, veterinary surgery, public health.<br><span class="salary-text">💰 Fresher: ₹6-12 LPA | MVSc: ₹10-20 LPA | Govt Vet Officer: ₹60k-1.2L/month</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Government veterinary officer jobs, animal husbandry department, dairy industry, poultry industry, wildlife department, pet clinics, pharmaceutical companies.</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">NEET (for BVSc), ICAR AIEEA, State Veterinary Entrance Exams</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.ivri.nic.in" target="_blank">IVRI Bareilly</a> | <a class="live-link" href="https://www.gadvasu.edu.in" target="_blank">GADVASU Ludhiana</a> | <a class="live-link" href="https://www.bvc.edu.in" target="_blank">Bombay Veterinary College</a> | <a class="live-link" href="https://www.mvc.edu.in" target="_blank">Madras Veterinary College</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Veterinary Science)</div>
+                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">BVSc & AH Degree (4.5 years academic + 1 year internship)<br><span class="salary-text">💰 Veterinary Officer: ₹6-12 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MVSc Specializations (Surgery, Medicine, Animal Reproduction, Public Health)<br><span class="salary-text">💰 Specialist Veterinarian: ₹10-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">PhD</div><div class="roadmap-text">PhD → Scientist at IVRI/NDDB or Professor in Veterinary College<br><span class="salary-text">💰 Scientist/Professor: ₹15-25 LPA</span></div></div>
+                <div class="section-title">🏛️ Top Recruiters for Veterinarians</div>
+                <div><span class="famous-badge">Animal Husbandry Department (State Govt)</span> <span class="famous-badge">Amul (Dairy)</span> <span class="famous-badge">Mother Dairy</span> <span class="famous-badge">NDDB</span> <span class="famous-badge">Poultry Industry (Venky's, Suguna)</span> <span class="famous-badge">Pet Clinics</span> <span class="famous-badge">Wildlife Institute of India</span></div>
+                <div class="section-title">⭐ Famous Veterinarians</div>
+                <div><span class="famous-badge">Dr. Verghese Kurien (Father of White Revolution - Amul)</span> <span class="famous-badge">Dr. R. S. Chauhan</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="entranceTitle">📋 Entrance Exams & Scholarships</div>
-        <div class="list-item" id="icaiExam">• ICAR AIEEA (for B.Sc Agriculture), State Agriculture Entrance Exams, ICAR Scholarships</div>
+    
+    <!-- ==================== DOOR 8: FOOD TECHNOLOGY ==================== -->
+    <div id="door-foodtech" class="door-content">
+        <div class="accordion-card" id="foodtechCard">
+            <div class="accordion-header" onclick="toggleCard('foodtechCard')">
+                <div class="accordion-title"><span class="accordion-icon">🍽️</span> B.Tech/B.Sc Food Technology (4 years) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of food processing, preservation, quality control, food safety, packaging, product development.<br><span class="salary-text">💰 Fresher: ₹4-10 LPA | M.Tech: ₹8-18 LPA | Food Safety Officer: ₹6-12 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing food processing industry in India (Mega Food Parks), FSSAI jobs, export houses, multinational companies.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.niftem.ac.in" target="_blank">NIFTEM Sonipat</a> | <a class="live-link" href="https://www.cftri.res.in" target="_blank">CFTRI Mysore</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a></div></div>
+                </div>
+                <div class="section-title">🏛️ Career Opportunities in Food Technology</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📋 Food Safety Officer</div><div class="info-text">FSSAI, State Food Safety Dept - ₹6-12 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏭 Quality Control</div><div class="info-text">Food Processing Industries - ₹4-10 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🔬 Research</div><div class="info-text">CFTRI, NIFTEM - ₹5-12 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🌍 Export Houses</div><div class="info-text">Quality assurance for exports - ₹6-15 LPA</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Food Technologists</div>
+                <div><span class="famous-badge">Dr. V. Prakash (Former Director, CFTRI)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 9: GOVERNMENT JOBS IN AGRICULTURE ==================== -->
+    <div id="door-govt" class="door-content">
+        <div class="accordion-card" id="govtAgriCard">
+            <div class="accordion-header" onclick="toggleCard('govtAgriCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Government Jobs in Agriculture - Complete List</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🌾 Agriculture Officer</div><div class="info-text">State Agriculture Department - ₹50k-80k/month | Eligibility: B.Sc Agriculture</div></div>
+                    <div class="info-card"><div class="info-label">🏦 AFO (Agriculture Field Officer)</div><div class="info-text">RBI Grade B, NABARD, State Cooperative Banks - ₹10-18 LPA | Exam: NABARD/IBPS AFO</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ FCI Manager</div><div class="info-text">Food Corporation of India - ₹12-20 LPA | Exam: FCI AGM/Various posts</div></div>
+                    <div class="info-card"><div class="info-label">🏭 IFFCO/KRIBHCO</div><div class="info-text">Fertilizer companies - ₹8-15 LPA | Exam: IFFCO Assistant/Executive</div></div>
+                    <div class="info-card"><div class="info-label">🔬 ICAR Scientist</div><div class="info-text">Indian Council of Agricultural Research - ₹15-25 LPA | Exam: ASRB NET/ARS</div></div>
+                    <div class="info-card"><div class="info-label">🌱 Horticulture Officer</div><div class="info-text">State Horticulture Dept - ₹50k-80k/month</div></div>
+                    <div class="info-card"><div class="info-label">🌳 Forest Ranger/IFS</div><div class="info-text">UPSC IFS, State Forest Services - ₹70k-2L/month</div></div>
+                    <div class="info-card"><div class="info-label">🥛 NDDB/Amul</div><div class="info-text">Dairy development organizations - ₹8-15 LPA</div></div>
+                </div>
+                <div class="section-title">📋 Major Agriculture Exams - LIVE LINKS</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 NABARD Grade A/B</div><div class="info-text"><a class="live-link" href="https://www.nabard.org" target="_blank">nabard.org</a></div></div>
+                    <div class="info-card"><div class="info-label">🔗 IBPS AFO</div><div class="info-text"><a class="live-link" href="https://www.ibps.in" target="_blank">ibps.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🔗 FCI Recruitment</div><div class="info-text"><a class="live-link" href="https://fci.gov.in" target="_blank">fci.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🔗 ICAR - ARS/NET</div><div class="info-text"><a class="live-link" href="https://www.asrb.org.in" target="_blank">asrb.org.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🔗 UPSC IFS</div><div class="info-text"><a class="live-link" href="https://upsc.gov.in" target="_blank">upsc.gov.in</a></div></div>
+                </div>
+                <div class="section-title">⭐ Famous Agriculture Officers</div>
+                <div><span class="famous-badge">Dr. M. S. Swaminathan</span> <span class="famous-badge">Dr. S. Ayyappan (Former DG ICAR)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 10: AGRI-ENTREPRENEURSHIP ==================== -->
+    <div id="door-entrepreneurship" class="door-content">
+        <div class="accordion-card" id="entrepreneurshipCard">
+            <div class="accordion-header" onclick="toggleCard('entrepreneurshipCard')">
+                <div class="accordion-title"><span class="accordion-icon">🚀</span> Agri-Entrepreneurship & Business Opportunities</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🍄 Mushroom Farming</div><div class="info-text">Low investment, high returns (₹50k-2L/month). Government subsidy available.</div></div>
+                    <div class="info-card"><div class="info-label">🐝 Beekeeping (Apiculture)</div><div class="info-text">Honey production, pollination services. ₹30k-1L/month potential.</div></div>
+                    <div class="info-card"><div class="info-label">🌿 Vermicomposting</div><div class="info-text">Organic manure from agricultural waste. ₹20k-80k/month.</div></div>
+                    <div class="info-card"><div class="info-label">🌱 Nursery Business</div><div class="info-text">Plants, saplings, landscaping. ₹30k-2L/month.</div></div>
+                    <div class="info-card"><div class="info-label">🥛 Dairy Farming</div><div class="info-text">Cow/buffalo dairy, milk products. ₹40k-3L/month (scalable).</div></div>
+                    <div class="info-card"><div class="info-label">🐔 Poultry Farming</div><div class="info-text">Layer/Broiler poultry. ₹50k-5L/month.</div></div>
+                    <div class="info-card"><div class="info-label">🍓 Food Processing</div><div class="info-text">Pickles, juices, jams, papad, spices. ₹30k-2L/month.</div></div>
+                    <div class="info-card"><div class="info-label">🌾 Organic Farming</div><div class="info-text">Premium prices for organic products. Government certification available.</div></div>
+                </div>
+                <div class="section-title">💰 Government Schemes for Agri-Entrepreneurs</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏦 Mudra Loan</div><div class="info-text">₹50k-20L for micro enterprises - <a class="live-link" href="https://www.mudra.org.in" target="_blank">Apply</a></div></div>
+                    <div class="info-card"><div class="info-label">🌾 PMFME Scheme</div><div class="info-text">Pradhan Mantri Formalisation of Micro Food Processing Enterprises - Subsidy up to ₹10L</div></div>
+                    <div class="info-card"><div class="info-label">🌱 SFAC</div><div class="info-text">Small Farmers Agri-Business Consortium - Venture capital assistance</div></div>
+                    <div class="info-card"><div class="info-label">🎓 Agri-Clinic Scheme</div><div class="info-text">For agriculture graduates to set up agri-clinics - Subsidy up to ₹4L</div></div>
+                </div>
+                <div class="section-title">⭐ Successful Agri-Entrepreneurs</div>
+                <div><span class="famous-badge">Dr. Verghese Kurien (Amul)</span> <span class="famous-badge">Kishore Biyani (Food Bazaar)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 11: ABROAD STUDIES ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="abroadAgriCard">
+            <div class="accordion-header" onclick="toggleCard('abroadAgriCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Studies in Agriculture - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">M.Sc Agriculture, Agribusiness, Food Science | PGWP (3 years) | Easy PR | Top Unis: University of Guelph, University of Saskatchewan, McGill University</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">M.Sc Agriculture, Agribusiness, Agricultural Economics | Salary: AUD 70k-120k/year | Top Unis: University of Melbourne, University of Queensland, University of Western Australia</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">MS Agriculture, Plant Sciences, Food Science | GRE/TOEFL | Top Unis: Cornell University, UC Davis, Texas A&M, Purdue University</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">M.Sc Agricultural Sciences (Low tuition/free) | DAAD Scholarship | Top Unis: University of Hohenheim, University of Göttingen</div></div>
+                    <div class="info-card"><div class="info-label">🇳🇿 New Zealand</div><div class="info-text">M.Sc Agriculture, Horticulture | PR pathway | Top Unis: Massey University, Lincoln University</div></div>
+                </div>
+                <div class="section-title">🎓 Scholarships for Agriculture Studies Abroad</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia Awards</div><div class="info-text">Fully funded for master's in Agriculture</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 DAAD</div><div class="info-text">Fully funded for master's/PhD in Agricultural Sciences</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Vanier</div><div class="info-text">CAD 50,000/year for doctoral students</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 Fulbright</div><div class="info-text">Fully funded for master's/PhD in Agriculture</div></div>
+                </div>
+                <div class="section-title">📋 English Proficiency Requirements</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">IELTS</div><div class="info-text">Minimum 6.5 overall (7.0 for top unis)</div></div>
+                    <div class="info-card"><div class="info-label">TOEFL</div><div class="info-text">Minimum 90-100 iBT</div></div>
+                    <div class="info-card"><div class="info-label">PTE</div><div class="info-text">Minimum 65-70</div></div>
+                </div>
+                <div class="section-title">⭐ Indians Who Studied Agriculture Abroad</div>
+                <div><span class="famous-badge">Dr. M. S. Swaminathan (Studied at Cambridge University, UK)</span> <span class="famous-badge">Dr. Norman Borlaug (Nobel Peace Prize, worked in India)</span></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
-    en: {
-        app_tagline: "Career Saathi",
-        tagline: "🌾 Agriculture & Allied Sciences",
-        page_title: "🌾 Agriculture Stream",
-        after10th_title: "🎓 After 10th – Diploma & ITI Options",
-        diploma_agri: "• Diploma in Agriculture, Horticulture, Organic Farming, Food Processing, Seed Technology, Animal Husbandry, Poultry, Farm Management",
-        iti_agri: "• ITI Courses: Crop Production, Fruit & Vegetable Processing, Dairying, Food Technology, Horticulture, Soil Testing, Agricultural Machinery",
-        cert_agri: "• Certificate Courses: Organic Farming, Nursery Management, Beekeeping, Vermicomposting, Mushroom Cultivation, Dairy Management",
-        career_after10th: "• Career after Diploma: Agriculture Supervisor, Farm Manager, Agri-Technician, Irrigation Technician, Fertilizer/Pesticide Company jobs",
-        after12th_title: "🎓 After 12th – Bachelor Degrees",
-        bsc_agri: "• B.Sc Agriculture (4 years) – most preferred for govt jobs",
-        bsc_horticulture: "• B.Sc Horticulture, Forestry, Food Technology, Animal Husbandry, Fisheries (B.FSc), Dairy Science, Sericulture, Seed Technology, Plant Pathology, Soil Science, Agricultural Economics",
-        btech_agri: "• B.Tech Agricultural Engineering, Food Technology, Dairy Technology, Biotechnology, Agricultural IT",
-        veterinary_title: "🐄 Veterinary & Allied",
-        bvsc: "• Bachelor of Veterinary Science (BVSc & AH)",
-        animal_husbandry: "• B.Sc Animal Husbandry, Poultry Science, Dairy Technology",
-        agribusiness_title: "📊 Agribusiness & Management",
-        bba_agri: "• BBA in Agribusiness Management, B.Com Agriculture Business, B.Sc Agricultural Business Management",
-        skill_title: "🛠️ Skill-Based Short Courses",
-        skill_courses: "• Beekeeping, Mushroom Cultivation, Nursery Management, Vermicomposting, Organic Farming, Soil Testing, Fertilizer Technology, Dairy Farming",
-        govt_jobs_title: "🏛️ Government Jobs (Best for B.Sc Agriculture)",
-        agri_officer: "• Agriculture Officer, Rural Development Officer, Food Safety Officer, Agriculture Field Officer (AFO – Banks), NABARD, IFFCO, FCI, ICAR, State Agriculture Dept, Gram Sevak, Horticulture Assistant",
-        private_title: "🏢 Private Sector & Entrepreneurship",
-        private_jobs: "• Seed, fertilizer, pesticide companies, Agri-tech startups, Dairy plants, Food processing units, Organic farming business, Mushroom farming, Dairy/Poultry/Fish farming, Plant nursery, Beekeeping, Food processing (pickles, chips, fruit pulp)",
-        abroad_title: "🌍 Abroad Options",
-        abroad_options: "• Diploma in Agriculture (Canada, Australia, New Zealand), Bachelors in Horticulture/Forestry/Agri-Business, Farm worker → PR pathways",
-        entrance_title: "📋 Entrance Exams & Scholarships",
-        icai_exam: "• ICAR AIEEA (for B.Sc Agriculture), State Agriculture Entrance Exams, ICAR Scholarships",
-        bottom_home: "Home",
-        bottom_search: "Search",
-        bottom_ai: "AnnS AI",
-        bottom_alerts: "Alerts",
-        bottom_profile: "Profile"
-    },
-    hi: {
-        app_tagline: "करियर साथी",
-        tagline: "🌾 कृषि और संबद्ध विज्ञान",
-        page_title: "🌾 कृषि स्ट्रीम",
-        after10th_title: "🎓 10वीं के बाद – डिप्लोमा और आईटीआई विकल्प",
-        diploma_agri: "• कृषि, बागवानी, जैविक खेती, खाद्य प्रसंस्करण, बीज प्रौद्योगिकी, पशुपालन, मुर्गीपालन में डिप्लोमा",
-        iti_agri: "• आईटीआई पाठ्यक्रम: फसल उत्पादन, फल और सब्जी प्रसंस्करण, डेयरी, खाद्य प्रौद्योगिकी, बागवानी, मृदा परीक्षण, कृषि मशीनरी",
-        cert_agri: "• प्रमाणपत्र पाठ्यक्रम: जैविक खेती, नर्सरी प्रबंधन, मधुमक्खी पालन, वर्मीकम्पोस्टिंग, मशरूम की खेती, डेयरी प्रबंधन",
-        career_after10th: "• डिप्लोमा के बाद करियर: कृषि पर्यवेक्षक, फार्म प्रबंधक, कृषि-तकनीशियन, सिंचाई तकनीशियन",
-        after12th_title: "🎓 12वीं के बाद – स्नातक डिग्री",
-        bsc_agri: "• बी.एससी कृषि (4 वर्ष) – सरकारी नौकरियों के लिए सर्वाधिक पसंदीदा",
-        bsc_horticulture: "• बी.एससी बागवानी, वानिकी, खाद्य प्रौद्योगिकी, पशुपालन, मत्स्य पालन, डेयरी विज्ञान",
-        btech_agri: "• बी.टेक कृषि इंजीनियरिंग, खाद्य प्रौद्योगिकी, डेयरी प्रौद्योगिकी, जैव प्रौद्योगिकी",
-        veterinary_title: "🐄 पशु चिकित्सा और संबद्ध",
-        bvsc: "• पशु चिकित्सा विज्ञान स्नातक (बीवीएससी एंड एएच)",
-        animal_husbandry: "• बी.एससी पशुपालन, मुर्गीपालन विज्ञान, डेयरी प्रौद्योगिकी",
-        agribusiness_title: "📊 कृषि व्यवसाय और प्रबंधन",
-        bba_agri: "• बीबीए इन एग्रीबिजनेस मैनेजमेंट",
-        skill_title: "🛠️ कौशल-आधारित लघु पाठ्यक्रम",
-        skill_courses: "• मधुमक्खी पालन, मशरूम की खेती, नर्सरी प्रबंधन, वर्मीकम्पोस्टिंग, जैविक खेती",
-        govt_jobs_title: "🏛️ सरकारी नौकरियां (बी.एससी कृषि के लिए सर्वोत्तम)",
-        agri_officer: "• कृषि अधिकारी, ग्रामीण विकास अधिकारी, खाद्य सुरक्षा अधिकारी, कृषि क्षेत्र अधिकारी (एएफओ), नाबार्ड, इफको, एफसीआई, आईसीएआर",
-        private_title: "🏢 निजी क्षेत्र और उद्यमिता",
-        private_jobs: "• बीज, उर्वरक, कीटनाशक कंपनियां, कृषि-तक स्टार्टअप, डेयरी संयंत्र, खाद्य प्रसंस्करण इकाइयां",
-        abroad_title: "🌍 विदेश विकल्प",
-        abroad_options: "• कृषि में डिप्लोमा (कनाडा, ऑस्ट्रेलिया, न्यूजीलैंड)",
-        entrance_title: "📋 प्रवेश परीक्षाएं और छात्रवृत्तियां",
-        icai_exam: "• आईसीएआर एआईईईए (बी.एससी कृषि के लिए), राज्य कृषि प्रवेश परीक्षाएं",
-        bottom_home: "होम",
-        bottom_search: "खोजें",
-        bottom_ai: "एनएस एआई",
-        bottom_alerts: "सूचनाएं",
-        bottom_profile: "प्रोफ़ाइल"
-    }
-};
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
 </script>
 </body>
-<script>
-// Continue JavaScript for agriculture.html
-const bottomNav = [
-    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
-    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
-    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
-    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
-    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
-];
-
-let currentLang = 'en';
-
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-
-function updateAllText() {
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    
-    document.getElementById('after10thTitle').textContent = t('after10th_title');
-    document.getElementById('diplomaAgri').textContent = t('diploma_agri');
-    document.getElementById('itiAgri').textContent = t('iti_agri');
-    document.getElementById('certAgri').textContent = t('cert_agri');
-    document.getElementById('careerAfter10th').textContent = t('career_after10th');
-    
-    document.getElementById('after12thTitle').textContent = t('after12th_title');
-    document.getElementById('bscAgri').textContent = t('bsc_agri');
-    document.getElementById('bscHorticulture').textContent = t('bsc_horticulture');
-    document.getElementById('btechAgri').textContent = t('btech_agri');
-    
-    document.getElementById('veterinaryTitle').textContent = t('veterinary_title');
-    document.getElementById('bvsc').textContent = t('bvsc');
-    document.getElementById('animalHusbandry').textContent = t('animal_husbandry');
-    
-    document.getElementById('agribusinessTitle').textContent = t('agribusiness_title');
-    document.getElementById('bbaAgri').textContent = t('bba_agri');
-    
-    document.getElementById('skillTitle').textContent = t('skill_title');
-    document.getElementById('skillCourses').textContent = t('skill_courses');
-    
-    document.getElementById('govtJobsTitle').textContent = t('govt_jobs_title');
-    document.getElementById('agriOfficer').textContent = t('agri_officer');
-    
-    document.getElementById('privateTitle').textContent = t('private_title');
-    document.getElementById('privateJobs').textContent = t('private_jobs');
-    
-    document.getElementById('abroadTitle').textContent = t('abroad_title');
-    document.getElementById('abroadOptions').textContent = t('abroad_options');
-    
-    document.getElementById('entranceTitle').textContent = t('entrance_title');
-    document.getElementById('icaiExam').textContent = t('icai_exam');
-    
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
-}
-
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'education.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-renderBottomBar();
-loadSavedLanguage();
-</script>
 </html>
