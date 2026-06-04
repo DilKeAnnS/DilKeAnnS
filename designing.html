@@ -8,53 +8,284 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
+        .language-selector select option { color: black; background: white; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         .container { padding: 20px 16px; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
+        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
         .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
         .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">✏️ Design & Creative Careers</div>
+    <div class="tagline" id="taglineText">✏️ Design & Creative Careers</div>
 </div>
+
 <div class="container">
-    <div class="page-title">✏️ Designing Stream</div>
-    <div class="section-card"><div class="section-title">🎓 Bachelor Degree Courses (B.Des / B.Sc)</div><div class="list-item">• B.Des Fashion Design / Textile Design / Accessory Design / Knitwear Design – NIFT, Pearl Academy</div><div class="list-item">• B.Des Interior Design / B.Sc Interior Design – Space planning, furniture design</div><div class="list-item">• B.Des Graphic Design / Communication Design – Branding, UI/UX, illustration</div><div class="list-item">• B.Des Animation / Game Design / Multimedia – VFX, 3D, gaming</div><div class="list-item">• B.Des Industrial / Product Design – Furniture, consumer products, automotive</div><div class="list-item">• B.Des User Experience (UX) / Interaction Design – App & web design, user research</div><div class="list-item">• B.Arch (5 years) – Architecture, spatial design (requires NATA/JEE Paper 2)</div></div>
-    <div class="section-card"><div class="section-title">📜 Diploma & Certificate Courses (1-2 years)</div><div class="list-item">• Diploma in Fashion Design, Graphic Design, Interior Design, Jewellery Design, UI/UX Design, Web Design, Animation & VFX</div><div class="list-item">• Certificate in Photoshop, Illustrator, Video Editing, 3D Modeling (Blender, Maya), AutoCAD, SketchUp, Digital Illustration</div></div>
-    <div class="section-card"><div class="section-title">🎥 Designing in Media & Film</div><div class="list-item">• B.Des Film & Video Communication, B.Sc Media Design, BA Visual Communication – for cinema, OTT, advertising</div></div>
-    <div class="section-card"><div class="section-title">🚀 Entrepreneurship in Design</div><div class="list-item">• Fashion boutique, Interior design studio, Graphics studio, Social media design business, Animation/Freelance video editing, Jewellery design brand, Digital marketing design services, Game art studio</div></div>
-    <div class="section-card"><div class="section-title">📋 Top Entrance Exams for Design</div><div class="list-item">• NIFT Entrance Exam – for Fashion & Textile</div><div class="list-item">• NID DAT – for all design disciplines (National Institute of Design)</div><div class="list-item">• UCEED – IIT design entrance (B.Des)</div><div class="list-item">• CEED – for M.Des (future)</div><div class="list-item">• AIEED – Pearl Academy entrance</div></div>
-    <div class="section-card"><div class="section-title">🏆 Top Institutes</div><div class="list-item">• NIFT (Fashion), NID (All Design), IIT Bombay/Delhi/Guwahati (B.Des), Pearl Academy, MIT Institute of Design, Symbiosis Institute of Design, Srishti Manipal Institute</div></div>
-    <div class="section-card"><div class="section-title">💼 Career Paths & Salary</div><div class="list-item">• Fashion Designer, Interior Designer, Graphic Designer, UI/UX Designer, Animator, VFX Artist, Game Designer, Product Designer, Architect (B.Arch), Jewellery Designer, Web Designer</div><div class="list-item">• High demand in startups, e-commerce, film, gaming, advertising, and tech companies. Freelancing & international opportunities also strong.</div></div>
-    <div class="section-card"><div class="section-title">⭐ Recommended Path for High Growth</div><div class="list-item">• 12th → B.Des (Fashion/Interior/UX/Product/Animation) → Internship → Job/Business. B.Des offers high job demand, high salary, international opportunities, and strong portfolio building.</div></div>
+    <div class="page-title" id="pageTitle">✏️ Designing Stream</div>
+
+    <div class="section-card">
+        <div class="section-title" id="bachelorTitle">🎓 Bachelor Degree Courses (B.Des / B.Sc)</div>
+        <div class="list-item" id="bdesFashion">• B.Des Fashion Design / Textile Design / Accessory Design / Knitwear Design – NIFT, Pearl Academy</div>
+        <div class="list-item" id="bdesInterior">• B.Des Interior Design / B.Sc Interior Design – Space planning, furniture design</div>
+        <div class="list-item" id="bdesGraphic">• B.Des Graphic Design / Communication Design – Branding, UI/UX, illustration</div>
+        <div class="list-item" id="bdesAnimation">• B.Des Animation / Game Design / Multimedia – VFX, 3D, gaming</div>
+        <div class="list-item" id="bdesProduct">• B.Des Industrial / Product Design – Furniture, consumer products, automotive</div>
+        <div class="list-item" id="bdesUx">• B.Des User Experience (UX) / Interaction Design – App & web design, user research</div>
+        <div class="list-item" id="barch">• B.Arch (5 years) – Architecture, spatial design (requires NATA/JEE Paper 2)</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="diplomaTitle">📜 Diploma & Certificate Courses (1-2 years)</div>
+        <div class="list-item" id="diplomaCourses">• Diploma in Fashion Design, Graphic Design, Interior Design, Jewellery Design, UI/UX Design, Web Design, Animation & VFX</div>
+        <div class="list-item" id="certCourses">• Certificate in Photoshop, Illustrator, Video Editing, 3D Modeling (Blender, Maya), AutoCAD, SketchUp, Digital Illustration</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="mediaTitle">🎥 Designing in Media & Film</div>
+        <div class="list-item" id="mediaCourses">• B.Des Film & Video Communication, B.Sc Media Design, BA Visual Communication – for cinema, OTT, advertising</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="entrepreneurshipTitle">🚀 Entrepreneurship in Design</div>
+        <div class="list-item" id="entrepreneurshipIdeas">• Fashion boutique, Interior design studio, Graphics studio, Social media design business, Animation/Freelance video editing, Jewellery design brand, Digital marketing design services, Game art studio</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="entranceTitle">📋 Top Entrance Exams for Design</div>
+        <div class="list-item" id="nift">• NIFT Entrance Exam – for Fashion & Textile</div>
+        <div class="list-item" id="nid">• NID DAT – for all design disciplines (National Institute of Design)</div>
+        <div class="list-item" id="uceed">• UCEED – IIT design entrance (B.Des)</div>
+        <div class="list-item" id="ceed">• CEED – for M.Des (future)</div>
+        <div class="list-item" id="aieed">• AIEED – Pearl Academy entrance</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="institutesTitle">🏆 Top Institutes</div>
+        <div class="list-item" id="niftInst">• NIFT (Fashion)</div>
+        <div class="list-item" id="nidInst">• NID (All Design)</div>
+        <div class="list-item" id="iitDesign">• IIT Bombay/Delhi/Guwahati (B.Des)</div>
+        <div class="list-item" id="pearl">• Pearl Academy</div>
+        <div class="list-item" id="mit">• MIT Institute of Design</div>
+        <div class="list-item" id="symbiosis">• Symbiosis Institute of Design</div>
+        <div class="list-item" id="srishti">• Srishti Manipal Institute</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="careerTitle">💼 Career Paths & Salary</div>
+        <div class="list-item" id="careerRoles">• Fashion Designer, Interior Designer, Graphic Designer, UI/UX Designer, Animator, VFX Artist, Game Designer, Product Designer, Architect, Jewellery Designer, Web Designer</div>
+        <div class="list-item" id="careerNote">• High demand in startups, e-commerce, film, gaming, advertising, and tech companies. Freelancing & international opportunities also strong.</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="recommendationTitle">⭐ Recommended Path for High Growth</div>
+        <div class="list-item" id="recommendation">• 12th → B.Des (Fashion/Interior/UX/Product/Animation) → Internship → Job/Business. B.Des offers high job demand, high salary, international opportunities, and strong portfolio building.</div>
+    </div>
 </div>
+
 <div class="bottom-bar" id="bottomBar"></div>
+
 <script>
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" },{ name: "Search", icon: "🔍", link: "#" },{ name: "AnnS AI", icon: "🤖", link: "#" },{ name: "Alerts", icon: "🔔", link: "#" },{ name: "Profile", icon: "👤", link: "#" }];
-    function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); }); }); }
-    function goBack() { window.location.href = 'education.html'; }
-    renderBottomBar();
+// ==================== TRANSLATIONS ====================
+const translations = {
+    en: {
+        app_tagline: "Career Saathi",
+        tagline: "✏️ Design & Creative Careers",
+        page_title: "✏️ Designing Stream",
+        bachelor_title: "🎓 Bachelor Degree Courses (B.Des / B.Sc)",
+        bdes_fashion: "• B.Des Fashion Design / Textile Design / Accessory Design / Knitwear Design – NIFT, Pearl Academy",
+        bdes_interior: "• B.Des Interior Design / B.Sc Interior Design – Space planning, furniture design",
+        bdes_graphic: "• B.Des Graphic Design / Communication Design – Branding, UI/UX, illustration",
+        bdes_animation: "• B.Des Animation / Game Design / Multimedia – VFX, 3D, gaming",
+        bdes_product: "• B.Des Industrial / Product Design – Furniture, consumer products, automotive",
+        bdes_ux: "• B.Des User Experience (UX) / Interaction Design – App & web design, user research",
+        barch: "• B.Arch (5 years) – Architecture, spatial design (requires NATA/JEE Paper 2)",
+        diploma_title: "📜 Diploma & Certificate Courses (1-2 years)",
+        diploma_courses: "• Diploma in Fashion Design, Graphic Design, Interior Design, Jewellery Design, UI/UX Design, Web Design, Animation & VFX",
+        cert_courses: "• Certificate in Photoshop, Illustrator, Video Editing, 3D Modeling (Blender, Maya), AutoCAD, SketchUp, Digital Illustration",
+        media_title: "🎥 Designing in Media & Film",
+        media_courses: "• B.Des Film & Video Communication, B.Sc Media Design, BA Visual Communication – for cinema, OTT, advertising",
+        entrepreneurship_title: "🚀 Entrepreneurship in Design",
+        entrepreneurship_ideas: "• Fashion boutique, Interior design studio, Graphics studio, Social media design business, Animation/Freelance video editing, Jewellery design brand, Digital marketing design services, Game art studio",
+        entrance_title: "📋 Top Entrance Exams for Design",
+        nift: "• NIFT Entrance Exam – for Fashion & Textile",
+        nid: "• NID DAT – for all design disciplines (National Institute of Design)",
+        uceed: "• UCEED – IIT design entrance (B.Des)",
+        ceed: "• CEED – for M.Des (future)",
+        aieed: "• AIEED – Pearl Academy entrance",
+        institutes_title: "🏆 Top Institutes",
+        nift_inst: "• NIFT (Fashion)",
+        nid_inst: "• NID (All Design)",
+        iit_design: "• IIT Bombay/Delhi/Guwahati (B.Des)",
+        pearl: "• Pearl Academy",
+        mit: "• MIT Institute of Design",
+        symbiosis: "• Symbiosis Institute of Design",
+        srishti: "• Srishti Manipal Institute",
+        career_title: "💼 Career Paths & Salary",
+        career_roles: "• Fashion Designer, Interior Designer, Graphic Designer, UI/UX Designer, Animator, VFX Artist, Game Designer, Product Designer, Architect, Jewellery Designer, Web Designer",
+        career_note: "• High demand in startups, e-commerce, film, gaming, advertising, and tech companies. Freelancing & international opportunities also strong.",
+        recommendation_title: "⭐ Recommended Path for High Growth",
+        recommendation: "• 12th → B.Des (Fashion/Interior/UX/Product/Animation) → Internship → Job/Business. B.Des offers high job demand, high salary, international opportunities, and strong portfolio building.",
+        bottom_home: "Home",
+        bottom_search: "Search",
+        bottom_ai: "AnnS AI",
+        bottom_alerts: "Alerts",
+        bottom_profile: "Profile"
+    },
+    hi: {
+        app_tagline: "करियर साथी",
+        tagline: "✏️ डिजाइन और रचनात्मक करियर",
+        page_title: "✏️ डिजाइनिंग स्ट्रीम",
+        bachelor_title: "🎓 स्नातक डिग्री पाठ्यक्रम (बी.डेस / बी.एससी)",
+        bdes_fashion: "• बी.डेस फैशन डिजाइन / टेक्सटाइल डिजाइन – निफ्ट, पर्ल अकादमी",
+        bdes_interior: "• बी.डेस इंटीरियर डिजाइन / बी.एससी इंटीरियर डिजाइन",
+        bdes_graphic: "• बी.डेस ग्राफिक डिजाइन / कम्युनिकेशन डिजाइन",
+        bdes_animation: "• बी.डेस एनीमेशन / गेम डिजाइन / मल्टीमीडिया",
+        bdes_product: "• बी.डेस इंडस्ट्रियल / प्रोडक्ट डिजाइन",
+        bdes_ux: "• बी.डेस यूजर एक्सपीरियंस (यूएक्स) / इंटरैक्शन डिजाइन",
+        barch: "• बी.आर्क (5 वर्ष) – आर्किटेक्चर",
+        diploma_title: "📜 डिप्लोमा और प्रमाणपत्र पाठ्यक्रम",
+        diploma_courses: "• फैशन डिजाइन, ग्राफिक डिजाइन, इंटीरियर डिजाइन, ज्वैलरी डिजाइन में डिप्लोमा",
+        cert_courses: "• फोटोशॉप, इलस्ट्रेटर, वीडियो एडिटिंग, ऑटोकैड में प्रमाणपत्र",
+        media_title: "🎥 मीडिया और फिल्म में डिजाइनिंग",
+        media_courses: "• बी.डेस फिल्म एंड वीडियो कम्युनिकेशन",
+        entrepreneurship_title: "🚀 डिजाइन में उद्यमिता",
+        entrepreneurship_ideas: "• फैशन बुटीक, इंटीरियर डिजाइन स्टूडियो, ग्राफिक्स स्टूडियो, एनीमेशन स्टूडियो",
+        entrance_title: "📋 डिजाइन के लिए शीर्ष प्रवेश परीक्षाएं",
+        nift: "• निफ्ट प्रवेश परीक्षा – फैशन के लिए",
+        nid: "• एनआईडी डीएटी – सभी डिजाइन के लिए",
+        uceed: "• यूसीईईडी – आईआईटी डिजाइन प्रवेश",
+        ceed: "• सीईईडी – एम.डेस के लिए",
+        aieed: "• एआईईईडी – पर्ल अकादमी प्रवेश",
+        institutes_title: "🏆 शीर्ष संस्थान",
+        nift_inst: "• निफ्ट (फैशन)",
+        nid_inst: "• एनआईडी (सभी डिजाइन)",
+        iit_design: "• आईआईटी बॉम्बे/दिल्ली/गुवाहाटी (बी.डेस)",
+        pearl: "• पर्ल अकादमी",
+        mit: "• एमआईटी इंस्टीट्यूट ऑफ डिजाइन",
+        symbiosis: "• सिम्बायोसिस इंस्टीट्यूट ऑफ डिजाइन",
+        srishti: "• श्रीष्टि मणिपाल इंस्टीट्यूट",
+        career_title: "💼 करियर पथ और वेतन",
+        career_roles: "• फैशन डिजाइनर, इंटीरियर डिजाइनर, ग्राफिक डिजाइनर, यूआई/यूएक्स डिजाइनर, एनिमेटर, गेम डिजाइनर",
+        career_note: "• स्टार्टअप, ई-कॉमर्स, फिल्म, गेमिंग, विज्ञापन में उच्च मांग",
+        recommendation_title: "⭐ उच्च विकास के लिए अनुशंसित पथ",
+        recommendation: "• 12वीं → बी.डेस → इंटर्नशिप → नौकरी/व्यवसाय",
+        bottom_home: "होम",
+        bottom_search: "खोजें",
+        bottom_ai: "एनएस एआई",
+        bottom_alerts: "सूचनाएं",
+        bottom_profile: "प्रोफ़ाइल"
+    }
+};
 </script>
 </body>
+<script>
+// Continue JavaScript for designing.html
+const bottomNav = [
+    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
+    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
+    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
+    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
+    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
+];
+
+let currentLang = 'en';
+
+function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+
+function updateAllText() {
+    document.getElementById('appTagline').textContent = t('app_tagline');
+    document.getElementById('taglineText').textContent = t('tagline');
+    document.getElementById('pageTitle').textContent = t('page_title');
+    
+    document.getElementById('bachelorTitle').textContent = t('bachelor_title');
+    document.getElementById('bdesFashion').textContent = t('bdes_fashion');
+    document.getElementById('bdesInterior').textContent = t('bdes_interior');
+    document.getElementById('bdesGraphic').textContent = t('bdes_graphic');
+    document.getElementById('bdesAnimation').textContent = t('bdes_animation');
+    document.getElementById('bdesProduct').textContent = t('bdes_product');
+    document.getElementById('bdesUx').textContent = t('bdes_ux');
+    document.getElementById('barch').textContent = t('barch');
+    
+    document.getElementById('diplomaTitle').textContent = t('diploma_title');
+    document.getElementById('diplomaCourses').textContent = t('diploma_courses');
+    document.getElementById('certCourses').textContent = t('cert_courses');
+    
+    document.getElementById('mediaTitle').textContent = t('media_title');
+    document.getElementById('mediaCourses').textContent = t('media_courses');
+    
+    document.getElementById('entrepreneurshipTitle').textContent = t('entrepreneurship_title');
+    document.getElementById('entrepreneurshipIdeas').textContent = t('entrepreneurship_ideas');
+    
+    document.getElementById('entranceTitle').textContent = t('entrance_title');
+    document.getElementById('nift').textContent = t('nift');
+    document.getElementById('nid').textContent = t('nid');
+    document.getElementById('uceed').textContent = t('uceed');
+    document.getElementById('ceed').textContent = t('ceed');
+    document.getElementById('aieed').textContent = t('aieed');
+    
+    document.getElementById('institutesTitle').textContent = t('institutes_title');
+    document.getElementById('niftInst').textContent = t('nift_inst');
+    document.getElementById('nidInst').textContent = t('nid_inst');
+    document.getElementById('iitDesign').textContent = t('iit_design');
+    document.getElementById('pearl').textContent = t('pearl');
+    document.getElementById('mit').textContent = t('mit');
+    document.getElementById('symbiosis').textContent = t('symbiosis');
+    document.getElementById('srishti').textContent = t('srishti');
+    
+    document.getElementById('careerTitle').textContent = t('career_title');
+    document.getElementById('careerRoles').textContent = t('career_roles');
+    document.getElementById('careerNote').textContent = t('career_note');
+    
+    document.getElementById('recommendationTitle').textContent = t('recommendation_title');
+    document.getElementById('recommendation').textContent = t('recommendation');
+    
+    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
+}
+
+function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
+function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
+function goBack() { window.location.href = 'education.html'; }
+function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
+
+document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
+renderBottomBar();
+loadSavedLanguage();
+</script>
 </html>
