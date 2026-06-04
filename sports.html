@@ -8,52 +8,284 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
+        .language-selector select option { color: black; background: white; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         .container { padding: 20px 16px; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
+        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
         .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
         .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">🏅 Sports & Physical Education Careers</div>
+    <div class="tagline" id="taglineText">🏅 Sports & Physical Education Careers</div>
 </div>
+
 <div class="container">
-    <div class="page-title">🏅 Sports Stream</div>
-    <div class="section-card"><div class="section-title">🎓 After 10th – Start Early</div><div class="list-item">• Choose 11th/12th with Physical Education (any stream)</div><div class="list-item">• Join Sports School / Academy (Cricket, Football, Hockey, Boxing, Wrestling, Athletics, etc.)</div><div class="list-item">• Diploma Courses after 10th: Sports Coaching, Fitness Training, Yoga, Gym Instructor</div><div class="list-item">• SAI (Sports Authority of India) Academies, Khelo India Programs</div></div>
-    <div class="section-card"><div class="section-title">🎓 After 12th – Degree Courses</div><div class="list-item">• B.P.Ed – Bachelor of Physical Education (3 years) → Physical Education Teacher, Coach</div><div class="list-item">• B.Sc Sports Science → Sports Scientist, Performance Analyst, Strength & Conditioning Coach</div><div class="list-item">• Diploma in Sports Coaching (NSNIS) – Cricket, Football, Boxing, Wrestling, Athletics, etc.</div><div class="list-item">• B.Sc / Diploma in Physiotherapy (Sports Physio) – High demand in teams & academies</div><div class="list-item">• BBA in Sports Management / B.Sc Sports Management – Team Manager, Event Manager, Marketing</div><div class="list-item">• B.A / B.Sc Yoga Science – Yoga Teacher, Therapist</div><div class="list-item">• B.Sc Nutrition / Sports Nutrition – Sports Nutritionist for athletes & gyms</div></div>
-    <div class="section-card"><div class="section-title">🏃 Professional Athlete Path</div><div class="list-item">• Train at Sports Academy after 12th for: Cricket, Football, Kabaddi, Hockey, Athletics, Shooting, Archery, Badminton, Swimming, Gymnastics</div><div class="list-item">• Aim for State Level → National Level → Khelo India → International</div><div class="list-item">• Alongside, pursue open degree (BA/B.Com) for backup</div></div>
-    <div class="section-card"><div class="section-title">💪 Fitness Industry Certifications</div><div class="list-item">• Certified Fitness Trainer, Personal Trainer, Strength & Conditioning Coach, Gym Instructor, Zumba Trainer</div><div class="list-item">• Quick jobs in gyms, hotels, cruise ships, personal training</div></div>
-    <div class="section-card"><div class="section-title">🛡️ Defence & Government Jobs via Sports Quota</div><div class="list-item">• Army, Navy, Air Force Sports Quota – direct entry for State/National level players</div><div class="list-item">• Government Jobs: Railways, Income Tax, Police, Excise, Forest, SSC, Banking – relaxed cutoffs for sportspersons</div></div>
-    <div class="section-card"><div class="section-title">🏆 Top Career Options Summary</div><div class="list-item">• Professional Athlete – Play for state/nation</div><div class="list-item">• Sports Coach / Physical Education Teacher – B.P.Ed / Diploma</div><div class="list-item">• Sports Physiotherapist – Work with teams</div><div class="list-item">• Sports Nutritionist – B.Sc Nutrition</div><div class="list-item">• Sports Manager – BBA Sports Management</div><div class="list-item">• Sports Analyst / Commentator – B.Sc Sports Science / BJMC</div><div class="list-item">• Yoga Instructor / Fitness Trainer – Certifications</div></div>
-    <div class="section-card"><div class="section-title">📋 Entrance & Preparation</div><div class="list-item">• B.P.Ed entrance exams (Physical fitness test, written)</div><div class="list-item">• NSNIS Coaching Diploma – selection trials</div><div class="list-item">• State & National level sports participation required for quota jobs</div></div>
+    <div class="page-title" id="pageTitle">🏅 Sports Stream</div>
+
+    <div class="section-card">
+        <div class="section-title" id="after10thTitle">🎓 After 10th – Start Early</div>
+        <div class="list-item" id="after10thItem1">• Choose 11th/12th with Physical Education (any stream)</div>
+        <div class="list-item" id="after10thItem2">• Join Sports School / Academy (Cricket, Football, Hockey, Boxing, Wrestling, Athletics, etc.)</div>
+        <div class="list-item" id="after10thItem3">• Diploma Courses after 10th: Sports Coaching, Fitness Training, Yoga, Gym Instructor</div>
+        <div class="list-item" id="after10thItem4">• SAI (Sports Authority of India) Academies, Khelo India Programs</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="after12thTitle">🎓 After 12th – Degree Courses</div>
+        <div class="list-item" id="bpedItem">• B.P.Ed – Bachelor of Physical Education (3 years) → Physical Education Teacher, Coach</div>
+        <div class="list-item" id="sportsScienceItem">• B.Sc Sports Science → Sports Scientist, Performance Analyst, Strength & Conditioning Coach</div>
+        <div class="list-item" id="coachingItem">• Diploma in Sports Coaching (NSNIS) – Cricket, Football, Boxing, Wrestling, Athletics, etc.</div>
+        <div class="list-item" id="physioItem">• B.Sc / Diploma in Physiotherapy (Sports Physio) – High demand in teams & academies</div>
+        <div class="list-item" id="sportsMgmtItem">• BBA in Sports Management / B.Sc Sports Management – Team Manager, Event Manager, Marketing</div>
+        <div class="list-item" id="yogaItem">• B.A / B.Sc Yoga Science – Yoga Teacher, Therapist</div>
+        <div class="list-item" id="nutritionItem">• B.Sc Nutrition / Sports Nutrition – Sports Nutritionist for athletes & gyms</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="athleteTitle">🏃 Professional Athlete Path</div>
+        <div class="list-item" id="athleteItem1">• Train at Sports Academy after 12th for: Cricket, Football, Kabaddi, Hockey, Athletics, Shooting, Archery, Badminton, Swimming, Gymnastics</div>
+        <div class="list-item" id="athleteItem2">• Aim for State Level → National Level → Khelo India → International</div>
+        <div class="list-item" id="athleteItem3">• Alongside, pursue open degree (BA/B.Com) for backup</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="fitnessTitle">💪 Fitness Industry Certifications</div>
+        <div class="list-item" id="fitnessItem1">• Certified Fitness Trainer, Personal Trainer, Strength & Conditioning Coach, Gym Instructor, Zumba Trainer</div>
+        <div class="list-item" id="fitnessItem2">• Quick jobs in gyms, hotels, cruise ships, personal training</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="defenceTitle">🛡️ Defence & Government Jobs via Sports Quota</div>
+        <div class="list-item" id="defenceItem1">• Army, Navy, Air Force Sports Quota – direct entry for State/National level players</div>
+        <div class="list-item" id="defenceItem2">• Government Jobs: Railways, Income Tax, Police, Excise, Forest, SSC, Banking – relaxed cutoffs for sportspersons</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="careersTitle">🏆 Top Career Options Summary</div>
+        <div class="list-item" id="career1">• Professional Athlete – Play for state/nation</div>
+        <div class="list-item" id="career2">• Sports Coach / Physical Education Teacher – B.P.Ed / Diploma</div>
+        <div class="list-item" id="career3">• Sports Physiotherapist – Work with teams</div>
+        <div class="list-item" id="career4">• Sports Nutritionist – B.Sc Nutrition</div>
+        <div class="list-item" id="career5">• Sports Manager – BBA Sports Management</div>
+        <div class="list-item" id="career6">• Sports Analyst / Commentator – B.Sc Sports Science / BJMC</div>
+        <div class="list-item" id="career7">• Yoga Instructor / Fitness Trainer – Certifications</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="entranceTitle">📋 Entrance & Preparation</div>
+        <div class="list-item" id="entranceItem1">• B.P.Ed entrance exams (Physical fitness test, written)</div>
+        <div class="list-item" id="entranceItem2">• NSNIS Coaching Diploma – selection trials</div>
+        <div class="list-item" id="entranceItem3">• State & National level sports participation required for quota jobs</div>
+    </div>
 </div>
+
 <div class="bottom-bar" id="bottomBar"></div>
+
 <script>
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" },{ name: "Search", icon: "🔍", link: "#" },{ name: "AnnS AI", icon: "🤖", link: "#" },{ name: "Alerts", icon: "🔔", link: "#" },{ name: "Profile", icon: "👤", link: "#" }];
-    function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); }); }); }
-    function goBack() { window.location.href = 'education.html'; }
-    renderBottomBar();
+// ==================== TRANSLATIONS ====================
+const translations = {
+    en: {
+        app_tagline: "Career Saathi",
+        tagline: "🏅 Sports & Physical Education Careers",
+        page_title: "🏅 Sports Stream",
+        after10th_title: "🎓 After 10th – Start Early",
+        after10th_item1: "• Choose 11th/12th with Physical Education (any stream)",
+        after10th_item2: "• Join Sports School / Academy (Cricket, Football, Hockey, Boxing, Wrestling, Athletics, etc.)",
+        after10th_item3: "• Diploma Courses after 10th: Sports Coaching, Fitness Training, Yoga, Gym Instructor",
+        after10th_item4: "• SAI (Sports Authority of India) Academies, Khelo India Programs",
+        after12th_title: "🎓 After 12th – Degree Courses",
+        bped: "• B.P.Ed – Bachelor of Physical Education (3 years) → Physical Education Teacher, Coach",
+        sports_science: "• B.Sc Sports Science → Sports Scientist, Performance Analyst, Strength & Conditioning Coach",
+        coaching: "• Diploma in Sports Coaching (NSNIS) – Cricket, Football, Boxing, Wrestling, Athletics, etc.",
+        physio: "• B.Sc / Diploma in Physiotherapy (Sports Physio) – High demand in teams & academies",
+        sports_mgmt: "• BBA in Sports Management / B.Sc Sports Management – Team Manager, Event Manager, Marketing",
+        yoga: "• B.A / B.Sc Yoga Science – Yoga Teacher, Therapist",
+        nutrition: "• B.Sc Nutrition / Sports Nutrition – Sports Nutritionist for athletes & gyms",
+        athlete_title: "🏃 Professional Athlete Path",
+        athlete_item1: "• Train at Sports Academy after 12th for: Cricket, Football, Kabaddi, Hockey, Athletics, Shooting, Archery, Badminton, Swimming, Gymnastics",
+        athlete_item2: "• Aim for State Level → National Level → Khelo India → International",
+        athlete_item3: "• Alongside, pursue open degree (BA/B.Com) for backup",
+        fitness_title: "💪 Fitness Industry Certifications",
+        fitness_item1: "• Certified Fitness Trainer, Personal Trainer, Strength & Conditioning Coach, Gym Instructor, Zumba Trainer",
+        fitness_item2: "• Quick jobs in gyms, hotels, cruise ships, personal training",
+        defence_title: "🛡️ Defence & Government Jobs via Sports Quota",
+        defence_item1: "• Army, Navy, Air Force Sports Quota – direct entry for State/National level players",
+        defence_item2: "• Government Jobs: Railways, Income Tax, Police, Excise, Forest, SSC, Banking – relaxed cutoffs for sportspersons",
+        careers_title: "🏆 Top Career Options Summary",
+        career1: "• Professional Athlete – Play for state/nation",
+        career2: "• Sports Coach / Physical Education Teacher – B.P.Ed / Diploma",
+        career3: "• Sports Physiotherapist – Work with teams",
+        career4: "• Sports Nutritionist – B.Sc Nutrition",
+        career5: "• Sports Manager – BBA Sports Management",
+        career6: "• Sports Analyst / Commentator – B.Sc Sports Science / BJMC",
+        career7: "• Yoga Instructor / Fitness Trainer – Certifications",
+        entrance_title: "📋 Entrance & Preparation",
+        entrance_item1: "• B.P.Ed entrance exams (Physical fitness test, written)",
+        entrance_item2: "• NSNIS Coaching Diploma – selection trials",
+        entrance_item3: "• State & National level sports participation required for quota jobs",
+        bottom_home: "Home",
+        bottom_search: "Search",
+        bottom_ai: "AnnS AI",
+        bottom_alerts: "Alerts",
+        bottom_profile: "Profile"
+    },
+    hi: {
+        app_tagline: "करियर साथी",
+        tagline: "🏅 खेल और शारीरिक शिक्षा करियर",
+        page_title: "🏅 खेल स्ट्रीम",
+        after10th_title: "🎓 10वीं के बाद – जल्दी शुरू करें",
+        after10th_item1: "• 11वीं/12वीं में शारीरिक शिक्षा चुनें (कोई भी स्ट्रीम)",
+        after10th_item2: "• खेल स्कूल / अकादमी में शामिल हों (क्रिकेट, फुटबॉल, हॉकी, बॉक्सिंग, कुश्ती, एथलेटिक्स)",
+        after10th_item3: "• 10वीं के बाद डिप्लोमा पाठ्यक्रम: खेल कोचिंग, फिटनेस प्रशिक्षण, योग, जिम इंस्ट्रक्टर",
+        after10th_item4: "• एसएआई अकादमियां, खेलो इंडिया कार्यक्रम",
+        after12th_title: "🎓 12वीं के बाद – डिग्री पाठ्यक्रम",
+        bped: "• बी.पी.एड – शारीरिक शिक्षा स्नातक → शारीरिक शिक्षा शिक्षक, कोच",
+        sports_science: "• बी.एससी खेल विज्ञान → खेल वैज्ञानिक, प्रदर्शन विश्लेषक",
+        coaching: "• खेल कोचिंग में डिप्लोमा (एनएसएनआईएस)",
+        physio: "• बी.एससी / डिप्लोमा इन फिजियोथेरेपी (खेल फिजियो)",
+        sports_mgmt: "• बीबीए इन स्पोर्ट्स मैनेजमेंट",
+        yoga: "• बी.ए / बी.एससी योग विज्ञान",
+        nutrition: "• बी.एससी पोषण / खेल पोषण",
+        athlete_title: "🏃 पेशेवर एथलीट पथ",
+        athlete_item1: "• 12वीं के बाद खेल अकादमी में प्रशिक्षण लें",
+        athlete_item2: "• राज्य स्तर → राष्ट्रीय स्तर → खेलो इंडिया → अंतर्राष्ट्रीय",
+        athlete_item3: "• साथ में बैकअप के लिए ओपन डिग्री (बीए/बी.कॉम) करें",
+        fitness_title: "💪 फिटनेस उद्योग प्रमाणपत्र",
+        fitness_item1: "• प्रमाणित फिटनेस ट्रेनर, पर्सनल ट्रेनर, जिम इंस्ट्रक्टर, ज़ुम्बा ट्रेनर",
+        fitness_item2: "• जिम, होटल, क्रूज जहाजों में त्वरित नौकरियां",
+        defence_title: "🛡️ रक्षा और सरकारी नौकरियां (खेल कोटा)",
+        defence_item1: "• सेना, नौसेना, वायुसेना खेल कोटा",
+        defence_item2: "• सरकारी नौकरियां: रेलवे, आयकर, पुलिस, उत्पादन शुल्क, वन, एसएससी, बैंकिंग",
+        careers_title: "🏆 शीर्ष करियर विकल्प सारांश",
+        career1: "• पेशेवर एथलीट",
+        career2: "• खेल कोच / शारीरिक शिक्षा शिक्षक",
+        career3: "• खेल फिजियोथेरेपिस्ट",
+        career4: "• खेल पोषण विशेषज्ञ",
+        career5: "• खेल प्रबंधक",
+        career6: "• खेल विश्लेषक / कमेंटेटर",
+        career7: "• योग प्रशिक्षक / फिटनेस ट्रेनर",
+        entrance_title: "📋 प्रवेश और तैयारी",
+        entrance_item1: "• बी.पी.एड प्रवेश परीक्षा",
+        entrance_item2: "• एनएसएनआईएस कोचिंग डिप्लोमा – चयन परीक्षण",
+        entrance_item3: "• कोटा नौकरियों के लिए राज्य और राष्ट्रीय स्तर की खेल भागीदारी आवश्यक",
+        bottom_home: "होम",
+        bottom_search: "खोजें",
+        bottom_ai: "एनएस एआई",
+        bottom_alerts: "सूचनाएं",
+        bottom_profile: "प्रोफ़ाइल"
+    }
+};
 </script>
 </body>
 </html>
+<script>
+// Continue JavaScript for sports.html
+const bottomNav = [
+    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
+    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
+    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
+    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
+    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
+];
+
+let currentLang = 'en';
+
+function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+
+function updateAllText() {
+    document.getElementById('appTagline').textContent = t('app_tagline');
+    document.getElementById('taglineText').textContent = t('tagline');
+    document.getElementById('pageTitle').textContent = t('page_title');
+    
+    document.getElementById('after10thTitle').textContent = t('after10th_title');
+    document.getElementById('after10thItem1').textContent = t('after10th_item1');
+    document.getElementById('after10thItem2').textContent = t('after10th_item2');
+    document.getElementById('after10thItem3').textContent = t('after10th_item3');
+    document.getElementById('after10thItem4').textContent = t('after10th_item4');
+    
+    document.getElementById('after12thTitle').textContent = t('after12th_title');
+    document.getElementById('bpedItem').textContent = t('bped');
+    document.getElementById('sportsScienceItem').textContent = t('sports_science');
+    document.getElementById('coachingItem').textContent = t('coaching');
+    document.getElementById('physioItem').textContent = t('physio');
+    document.getElementById('sportsMgmtItem').textContent = t('sports_mgmt');
+    document.getElementById('yogaItem').textContent = t('yoga');
+    document.getElementById('nutritionItem').textContent = t('nutrition');
+    
+    document.getElementById('athleteTitle').textContent = t('athlete_title');
+    document.getElementById('athleteItem1').textContent = t('athlete_item1');
+    document.getElementById('athleteItem2').textContent = t('athlete_item2');
+    document.getElementById('athleteItem3').textContent = t('athlete_item3');
+    
+    document.getElementById('fitnessTitle').textContent = t('fitness_title');
+    document.getElementById('fitnessItem1').textContent = t('fitness_item1');
+    document.getElementById('fitnessItem2').textContent = t('fitness_item2');
+    
+    document.getElementById('defenceTitle').textContent = t('defence_title');
+    document.getElementById('defenceItem1').textContent = t('defence_item1');
+    document.getElementById('defenceItem2').textContent = t('defence_item2');
+    
+    document.getElementById('careersTitle').textContent = t('careers_title');
+    document.getElementById('career1').textContent = t('career1');
+    document.getElementById('career2').textContent = t('career2');
+    document.getElementById('career3').textContent = t('career3');
+    document.getElementById('career4').textContent = t('career4');
+    document.getElementById('career5').textContent = t('career5');
+    document.getElementById('career6').textContent = t('career6');
+    document.getElementById('career7').textContent = t('career7');
+    
+    document.getElementById('entranceTitle').textContent = t('entrance_title');
+    document.getElementById('entranceItem1').textContent = t('entrance_item1');
+    document.getElementById('entranceItem2').textContent = t('entrance_item2');
+    document.getElementById('entranceItem3').textContent = t('entrance_item3');
+    
+    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
+}
+
+function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
+function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
+function goBack() { window.location.href = 'education.html'; }
+function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
+
+document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
+renderBottomBar();
+loadSavedLanguage();
+</script>
