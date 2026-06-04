@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>BHARAT - Know Your Country | Dil-Ke-AnnS Career Saathi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 45px; width: auto; border-radius: 12px; }
+        .logo h1 { font-size: 18px; font-weight: 700; }
+        .logo p { font-size: 9px; opacity: 0.85; }
+        .container { padding: 20px 16px; }
+        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
+        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
+        .subsection-title { font-size: 17px; font-weight: 700; margin: 12px 0 8px 0; color: #E67E22; }
+        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .expense-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 12px; }
+        .expense-card { background: #F8F4EF; border-radius: 12px; padding: 10px; text-align: center; }
+        .expense-amount { font-size: 18px; font-weight: 800; color: #1B4D3E; }
+        .expense-label { font-size: 12px; color: #64748B; }
+        .highlight { background: #E67E22; color: white; padding: 2px 8px; border-radius: 20px; display: inline-block; font-size: 12px; }
+        .budget-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+        .budget-table th, .budget-table td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        .budget-table th { background: #F0EADF; font-weight: 700; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .nav-item.active { background: #F0EADF; }
+        .nav-item.active span:last-child { color: #1B4D3E; }
+        @media (min-width: 768px) { .container { max-width: 900px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="back-button" onclick="goBack()">← Back</div>
+    <div class="logo-section">
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div style="opacity:0;">🔔</div>
+    </div>
+</div>
+<div class="container">
+    <div class="page-title">🇮🇳 BHARAT – Know Your Country</div>
+
+    <!-- Section 1: Constitution -->
+    <div class="section-card">
+        <div class="section-title">📜 Constitution of India</div>
+        <div class="list-item"><strong>Adopted:</strong> 26 November 1949 | <strong>Effective:</strong> 26 January 1950</div>
+        <div class="list-item"><strong>Length:</strong> Longest written constitution in the world (448 Articles, 25 Parts, 12 Schedules)</div>
+        <div class="list-item"><strong>Preamble:</strong> "WE, THE PEOPLE OF INDIA... give to ourselves this Constitution"</div>
+        <div class="subsection-title">🇮🇳 Fundamental Rights (Articles 12-35)</div>
+        <div class="list-item">• Right to Equality (Article 14-18)</div>
+        <div class="list-item">• Right to Freedom (Article 19-22)</div>
+        <div class="list-item">• Right against Exploitation (Article 23-24)</div>
+        <div class="list-item">• Right to Freedom of Religion (Article 25-28)</div>
+        <div class="list-item">• Cultural and Educational Rights (Article 29-30)</div>
+        <div class="list-item">• Right to Constitutional Remedies (Article 32)</div>
+        <div class="subsection-title">🇮🇳 Fundamental Duties (Article 51A)</div>
+        <div class="list-item">• Respect National Flag and Anthem</div>
+        <div class="list-item">• Protect environment, public property</div>
+        <div class="list-item">• Pay taxes honestly</div>
+        <div class="list-item">• Vote in elections</div>
+    </div>
+
+    <!-- Section 2: Important IPC Sections -->
+    <div class="section-card">
+        <div class="section-title">⚖️ Important IPC Sections (Indian Penal Code)</div>
+        <div class="list-item"><strong>Section 302:</strong> Punishment for Murder – Life Imprisonment or Death</div>
+        <div class="list-item"><strong>Section 376:</strong> Punishment for Rape – 10 years to Life Imprisonment</div>
+        <div class="list-item"><strong>Section 498A:</strong> Dowry Harassment – Up to 3 years imprisonment</div>
+        <div class="list-item"><strong>Section 354:</strong> Outraging Women's Modesty – 1 to 5 years imprisonment</div>
+        <div class="list-item"><strong>Section 420:</strong> Cheating – Up to 7 years imprisonment + Fine</div>
+        <div class="list-item"><strong>Section 509:</strong> Word/gesture insulting modesty of woman</div>
+        <div class="list-item"><strong>Section 124A:</strong> Sedition (controversial, being reviewed)</div>
+        <div class="list-item"><strong>Section 153A:</strong> Promoting enmity between groups</div>
+        <div class="list-item"><strong>Section 295A:</strong> Insulting religious beliefs</div>
+        <div class="list-item"><strong>Section 323:</strong> Voluntarily causing hurt – Up to 1 year imprisonment</div>
+    </div>
+
+    <!-- Section 3: Legal Rights & Police Dealing -->
+    <div class="section-card">
+        <div class="section-title">🛡️ Legal Rights Every Citizen Must Know</div>
+        <div class="list-item"><strong>RTI (Right to Information) Act 2005:</strong> You can ask any government department for information. Reply within 30 days.</div>
+        <div class="list-item"><strong>RTE (Right to Education) Act 2009:</strong> Free compulsory education for children 6-14 years</div>
+        <div class="list-item"><strong>Right to Legal Aid (Article 39A):</strong> Free lawyer for those who cannot afford</div>
+        <div class="list-item"><strong>Right to be arrested with warrant:</strong> Police must show warrant (except in specific cases)</div>
+        <div class="list-item"><strong>Right to know arrest grounds (Article 22):</strong> Police must inform reason for arrest immediately</div>
+        
+        <div class="subsection-title">👮 How to Deal with Police</div>
+        <div class="list-item">• Always ask for <strong>warrant</strong> before allowing home search</div>
+        <div class="list-item">• You have right to <strong>one phone call</strong> after arrest</div>
+        <div class="list-item">• You have right to <strong>lawyer presence</strong> during interrogation</div>
+        <div class="list-item">• Police cannot torture or beat you (Article 21 – Right to Life)</div>
+        <div class="list-item">• <strong>FIR process:</strong> Zero FIR can be filed in any police station</div>
+        <div class="list-item">• If police refuses FIR, approach <strong>Superintendent of Police (SP)</strong> or court</div>
+        
+        <div class="subsection-title">📝 How to File Complaint Against Police</div>
+        <div class="list-item">• Write to <strong>Superintendent of Police (SP)</strong> of the district</div>
+        <div class="list-item">• Approach <strong>State Human Rights Commission</strong></div>
+        <div class="list-item">• File complaint in <strong>Magistrate Court</strong> under Section 156(3) CrPC</div>
+    </div>
+
+    <!-- Section 4: Emergency Helplines -->
+    <div class="section-card">
+        <div class="section-title">🚨 Emergency Helplines</div>
+        <div class="expense-grid">
+            <div class="expense-card"><div class="expense-amount">100</div><div class="expense-label">Police</div></div>
+            <div class="expense-card"><div class="expense-amount">101</div><div class="expense-label">Fire</div></div>
+            <div class="expense-card"><div class="expense-amount">108</div><div class="expense-label">Ambulance</div></div>
+            <div class="expense-card"><div class="expense-amount">1091</div><div class="expense-label">Women Helpline</div></div>
+            <div class="expense-card"><div class="expense-amount">1098</div><div class="expense-label">Child Helpline</div></div>
+            <div class="expense-card"><div class="expense-amount">181</div><div class="expense-label">Women Helpline</div></div>
+            <div class="expense-card"><div class="expense-amount">112</div><div class="expense-label">Emergency (All in One)</div></div>
+            <div class="expense-card"><div class="expense-amount">1930</div><div class="expense-label">Cyber Crime</div></div>
+        </div>
+        <div class="list-item"><strong>Cyber Crime Reporting:</strong> <a href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a></div>
+    </div>
+
+    <!-- Section 5: GOVERNMENT BUDGET & EXPENSES (NEW) -->
+    <div class="section-card">
+        <div class="section-title">💰 Central Government Budget 2025-26</div>
+        <div class="list-item"><strong>Total Budget:</strong> ₹47.66 lakh crore (approx)</div>
+        <div class="list-item"><strong>Fiscal Deficit Target:</strong> 4.5% of GDP</div>
+        <table class="budget-table">
+            <thead><tr><th>Sector</th><th>Allocation (₹ Crore)</th><th>% of Budget</th></tr></thead>
+            <tbody>
+                <tr><td>Defence</td><td>6,81,000</td><td>14.3%</td></tr>
+                <tr><td>Interest Payments</td><td>11,00,000</td><td>23.1%</td></tr>
+                <tr><td>Education</td><td>1,12,000</td><td>2.4%</td></tr>
+                <tr><td>Health</td><td>86,000</td><td>1.8%</td></tr>
+                <tr><td>Agriculture & Allied</td><td>1,25,000</td><td>2.6%</td></tr>
+                <tr><td>Rural Development (MGNREGA)</td><td>60,000</td><td>1.3%</td></tr>
+                <tr><td>Roads & Highways</td><td>1,20,000</td><td>2.5%</td></tr>
+                <tr><td>Railways</td><td>2,40,000</td><td>5.0%</td></tr>
+                <tr><td>Subsidies (Food, Fertilizer, Fuel)</td><td>3,70,000</td><td>7.8%</td></tr>
+                <tr><td>Police & Internal Security</td><td>85,000</td><td>1.8%</td></tr>
+            </tbody>
+        </table>
+        <div class="list-item"><span class="highlight">💡 Note:</span> Amounts are approximate for reference. Exact figures vary annually.</div>
+    </div>
+
+    <!-- Section 6: MLA / MP Expense Breakdown -->
+    <div class="section-card">
+        <div class="section-title">🏛️ MLA / MP – Full Expense Breakdown</div>
+        <div class="list-item"><strong>MLA Salary (State Legislative Assembly):</strong> ₹2.5 Lakh to ₹4 Lakh per month (varies by state)</div>
+        <div class="list-item"><strong>MP Salary (Lok Sabha / Rajya Sabha):</strong> ₹1,00,000 per month + Allowances</div>
+        
+        <div class="subsection-title">💰 Total Monthly Perks & Allowances (Approx)</div>
+        <table class="budget-table">
+            <thead><tr><th>Allowance</th><th>MLA (Approx)</th><th>MP (Approx)</th></tr></thead>
+            <tbody>
+                <tr><td>Constituency Allowance</td><td>₹50,000</td><td>₹70,000</td></tr>
+                <tr><td>Office Allowance</td><td>₹40,000</td><td>₹60,000</td></tr>
+                <tr><td>Staff Allowance</td><td>₹50,000 - 1,00,000</td><td>₹1,00,000 - 2,00,000</td></tr>
+                <tr><td>Housing (Free Bungalow)</td><td>Govt Quarters</td><td>Type IV to Type VIII</td></tr>
+                <tr><td>Electricity (Free)</td><td>Unlimited (varies by state)</td><td>50,000 units/year</td></tr>
+                <tr><td>Water (Free)</td><td>Unlimited</td><td>Unlimited</td></tr>
+                <tr><td>Phone & Internet</td><td>₹5,000 - 10,000</td><td>₹15,000</td></tr>
+                <tr><td>Travel (Free by Air/Train)</td><td>State-funded</td><td>Free Rajdhani/Shatabdi + Air</td></tr>
+                <tr><td>Vehicle & Driver</td><td>Free vehicle + driver</td><td>Free vehicle + driver</td></tr>
+                <tr><td>Security (Free)</td><td>1-2 personnel</td><td>2-4 personnel</td></tr>
+                <tr><td>Medical (Free)</td><td>Government hospitals</td><td>Top hospitals + family covered</td></tr>
+                <tr><td>Pension (After 5 years)</td><td>₹20,000 - 30,000/month</td><td>₹20,000 - 50,000/month</td></tr>
+                <tr><td>Foreign Tours (Official)</td><td>Limited</td><td>₹5-10 lakh per international trip</td></tr>
+            </tbody>
+        </table>
+        <div class="list-item"><span class="highlight">📌 Estimated Total Cost per MLA per year:</span> ₹50 lakh - ₹1 crore (including all perks)</div>
+        <div class="list-item"><span class="highlight">📌 Estimated Total Cost per MP per year:</span> ₹1.5 crore - ₹3 crore</div>
+    </div>
+
+    <!-- Section 7: Judge Expense Breakdown -->
+    <div class="section-card">
+        <div class="section-title">⚖️ Judge – Salary & Expense Breakdown</div>
+        <div class="list-item"><strong>Supreme Court Judge:</strong> ₹2,80,000 per month</div>
+        <div class="list-item"><strong>Chief Justice of India (CJI):</strong> ₹2,80,000 per month (special allowances)</div>
+        <div class="list-item"><strong>High Court Judge:</strong> ₹2,25,000 per month</div>
+        <div class="list-item"><strong>District Judge:</strong> ₹1,50,000 - 1,80,000 per month</div>
+        
+        <div class="subsection-title">💰 Perks & Allowances</div>
+        <div class="list-item">• Free government bungalow (type VI to VIII for SC/HC)</div>
+        <div class="list-item">• Free electricity, water, phone, internet</div>
+        <div class="list-item">• Free vehicle + driver</div>
+        <div class="list-item">• Free medical for self + family</div>
+        <div class="list-item">• Free domestic travel (air/train 1st class)</div>
+        <div class="list-item">• Staff (secretary, clerks, peons) – fully paid by govt</div>
+        <div class="list-item">• Security personnel (2-4)</div>
+        <div class="list-item"><strong>Pension:</strong> 50% of last drawn salary + allowances (for life)</div>
+        <div class="list-item"><strong>Post-retirement:</strong> Free housing, vehicle, medical for lifetime</div>
+    </div>
+
+    <!-- Section 8: Where Your Tax Money Goes -->
+    <div class="section-card">
+        <div class="section-title">📊 Where Your Tax Money Goes</div>
+        <div class="list-item">Every rupee you pay as tax (Income Tax, GST, etc.) is used for:</div>
+        <table class="budget-table">
+            <thead><tr><th>Expense Head</th><th>₹ per ₹100</th></tr></thead>
+            <tbody>
+                <tr><td>Interest Payments (Old Loans)</td><td>₹23</td></tr>
+                <tr><td>Defence & Security</td><td>₹14</td></tr>
+                <tr><td>Subsidies (Food, Fuel, Fertilizer)</td><td>₹8</td></tr>
+                <tr><td>State Transfers (Tax devolution)</td><td>₹30</td></tr>
+                <tr><td>Education & Health</td><td>₹4</td></tr>
+                <tr><td>Pensions (Govt Employees)</td><td>₹5</td></tr>
+                <tr><td>Police & Internal Security</td><td>₹3</td></tr>
+                <tr><td>Roads, Railways, Infrastructure</td><td>₹7</td></tr>
+                <tr><td>Administration (MLA/MP/Judge salaries)</td><td>₹3</td></tr>
+                <tr><td>Other expenses</td><td>₹3</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 9: How to Deal with Public Servants -->
+    <div class="section-card">
+        <div class="section-title">📋 How to Deal with Public Servants</div>
+        <div class="list-item"><strong>If asked for bribe (Government officer):</strong> Record conversation, note name/designation, file complaint with State Anti-Corruption Bureau or CBI</div>
+        <div class="list-item"><strong>If file is stuck:</strong> File RTI (Right to Information) – response within 30 days mandatory</div>
+        <div class="list-item"><strong>If service not provided:</strong> Write to <strong>Public Grievance Portal (CPGRAMS)</strong> – govt. grievance system</div>
+        <div class="list-item"><strong>If police officer misbehaves:</strong> Note badge number, record incident, file complaint with Superintendent of Police (SP)</div>
+    </div>
+</div>
+
+<div class="bottom-bar" id="bottomBar"></div>
+<script>
+    const bottomNav = [
+        { name: "Home", icon: "🏠", link: "index.html" },
+        { name: "Search", icon: "🔍", link: "#" },
+        { name: "AnnS AI", icon: "🤖", link: "#" },
+        { name: "Alerts", icon: "🔔", link: "#" },
+        { name: "Profile", icon: "👤", link: "#" }
+    ];
+    function renderBottomBar() { 
+        const bar = document.getElementById('bottomBar'); 
+        if(!bar) return; 
+        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); 
+        document.querySelectorAll('.nav-item').forEach(nav => { 
+            nav.addEventListener('click', () => { 
+                const link = nav.getAttribute('data-link'); 
+                if(link && link !== '#') window.location.href = link; 
+                else alert(`Coming soon`); 
+            }); 
+        }); 
+    }
+    function goBack() { window.location.href = 'index.html'; }
+    renderBottomBar();
+</script>
+</body>
+</html>
