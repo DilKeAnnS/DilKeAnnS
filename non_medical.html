@@ -155,4 +155,78 @@
         <div class="list-item">• UPSC (Civil Services – IAS, IPS, IFS)</div>
         <div class="list-item">• State PSC</div>
         <div class="list-item">• SSC (CGL, CHSL, JE)</div>
-        <div
+        <div class="list-item">• Banking (IBPS PO/Clerk, SBI PO)</div>
+        <div class="list-item">• Railway Jobs (RRB JE, NTPC, Group D)</div>
+        <div class="list-item">• Defence Exams (NDA, CDS, AFCAT)</div>
+        <div class="list-item">• ISRO / DRDO Technical Assistant</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">💰 High Salary Career Options After PCM</div>
+        <div class="list-item">• Software Engineer / AI-ML Specialist – ₹8-40 LPA</div>
+        <div class="list-item">• Data Scientist – ₹10-35 LPA</div>
+        <div class="list-item">• Robotics Engineer – ₹6-20 LPA</div>
+        <div class="list-item">• Aerospace Engineer – ₹8-25 LPA</div>
+        <div class="list-item">• Pilot – ₹15-50 LPA</div>
+        <div class="list-item">• Merchant Navy Officer – ₹10-30 LPA</div>
+        <div class="list-item">• Architect – ₹6-20 LPA</div>
+        <div class="list-item">• Defence Officer – ₹8-15 LPA + allowances</div>
+        <div class="list-item">• Investment Banking – ₹12-40 LPA</div>
+        <div class="list-item">• Cyber Security Specialist – ₹8-25 LPA</div>
+    </div>
+</div>
+
+<!-- EXAM UPDATES MODULE -->
+<div class="exam-updates-wrapper" style="padding: 0 16px 20px 16px;">
+    <div class="exam-section-title">
+        📢 Live Exam Updates & Notifications
+        <span class="refresh-note">🔄 Auto-refreshes every hour</span>
+    </div>
+    <div id="exam-updates-container"></div>
+</div>
+
+<div class="exam-details-grid" style="margin: 0 16px 20px 16px;">
+    <div class="exam-details-title">📊 JEE Main 2025 – Category-wise Cutoff (Expected)</div>
+    <table class="cutoff-table">
+        <thead>
+            <tr><th>Category</th><th>Cutoff (Percentile)</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>General/Economically Weaker Section (EWS)</td><td>90+ percentile</td></tr>
+            <tr><td>OBC (Non-Creamy Layer) (NCL)</td><td>75+ percentile</td></tr>
+            <tr><td>Scheduled Caste (SC)</td><td>60+ percentile</td></tr>
+            <tr><td>Scheduled Tribe (ST)</td><td>55+ percentile</td></tr>
+            <tr><td>General-PwD</td><td>45+ percentile</td></tr>
+        </tbody>
+    </table>
+    <div class="cutoff-note">📌 Cutoffs updated after official release. Last year's data shown for reference.</div>
+</div>
+
+<div class="bottom-bar" id="bottomBar"></div>
+
+<script src="exam-updates.js"></script>
+<script>
+    const bottomNav = [
+        { name: "Home", icon: "🏠", link: "index.html" },
+        { name: "Search", icon: "🔍", link: "#" },
+        { name: "AnnS AI", icon: "🤖", link: "#" },
+        { name: "Alerts", icon: "🔔", link: "#" },
+        { name: "Profile", icon: "👤", link: "#" }
+    ];
+    function renderBottomBar() { 
+        const bar = document.getElementById('bottomBar'); 
+        if(!bar) return; 
+        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); 
+        document.querySelectorAll('.nav-item').forEach(nav => { 
+            nav.addEventListener('click', () => { 
+                const link = nav.getAttribute('data-link'); 
+                if(link && link !== '#') window.location.href = link; 
+                else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); 
+            }); 
+        }); 
+    }
+    function goBack() { window.location.href = 'education.html'; }
+    renderBottomBar();
+</script>
+</body>
+</html>
