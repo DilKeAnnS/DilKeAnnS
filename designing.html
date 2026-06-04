@@ -7,285 +7,382 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .language-selector select option { color: black; background: white; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">✏️ Design & Creative Careers</div>
+    <div class="tagline">✏️ Complete Design Career Guide - 10th to Creative Director | Live Exam Updates</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">✏️ Designing Stream</div>
-
-    <div class="section-card">
-        <div class="section-title" id="bachelorTitle">🎓 Bachelor Degree Courses (B.Des / B.Sc)</div>
-        <div class="list-item" id="bdesFashion">• B.Des Fashion Design / Textile Design / Accessory Design / Knitwear Design – NIFT, Pearl Academy</div>
-        <div class="list-item" id="bdesInterior">• B.Des Interior Design / B.Sc Interior Design – Space planning, furniture design</div>
-        <div class="list-item" id="bdesGraphic">• B.Des Graphic Design / Communication Design – Branding, UI/UX, illustration</div>
-        <div class="list-item" id="bdesAnimation">• B.Des Animation / Game Design / Multimedia – VFX, 3D, gaming</div>
-        <div class="list-item" id="bdesProduct">• B.Des Industrial / Product Design – Furniture, consumer products, automotive</div>
-        <div class="list-item" id="bdesUx">• B.Des User Experience (UX) / Interaction Design – App & web design, user research</div>
-        <div class="list-item" id="barch">• B.Arch (5 years) – Architecture, spatial design (requires NATA/JEE Paper 2)</div>
+    <div class="page-title">✏️ Design & Creative Careers</div>
+    <div class="page-subtitle">60+ Courses | 100+ Colleges | Fashion | Interior | Graphic | UI/UX | Animation | VFX | Complete Roadmap</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="fashion">👗 <span class="door-label">Fashion Design</span></button>
+        <button class="door-btn" data-door="interior">🏠 <span class="door-label">Interior Design</span></button>
+        <button class="door-btn" data-door="graphic">🎨 <span class="door-label">Graphic Design</span></button>
+        <button class="door-btn" data-door="uiux">📱 <span class="door-label">UI/UX Design</span></button>
+        <button class="door-btn" data-door="animation">🎬 <span class="door-label">Animation & VFX</span></button>
+        <button class="door-btn" data-door="product">🏭 <span class="door-label">Product Design</span></button>
+        <button class="door-btn" data-door="exams">📋 <span class="door-label">Entrance Exams (NIFT/NID/UCEED)</span></button>
+        <button class="door-btn" data-door="career">💼 <span class="door-label">Career & Entrepreneurship</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Studies</span></button>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="diplomaTitle">📜 Diploma & Certificate Courses (1-2 years)</div>
-        <div class="list-item" id="diplomaCourses">• Diploma in Fashion Design, Graphic Design, Interior Design, Jewellery Design, UI/UX Design, Web Design, Animation & VFX</div>
-        <div class="list-item" id="certCourses">• Certificate in Photoshop, Illustrator, Video Editing, 3D Modeling (Blender, Maya), AutoCAD, SketchUp, Digital Illustration</div>
+    
+    <!-- ==================== DOOR 1: FASHION DESIGN ==================== -->
+    <div id="door-fashion" class="door-content active">
+        <div class="accordion-card active" id="fashionCard">
+            <div class="accordion-header" onclick="toggleCard('fashionCard')">
+                <div class="accordion-title"><span class="accordion-icon">👗</span> Fashion Design - Complete Career Guide (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of clothing design, textile science, fashion illustration, pattern making, garment construction, fashion marketing, merchandising, fashion forecasting.<br><span class="salary-text">💰 Fresher: ₹4-10 LPA | Senior Designer: ₹10-25 LPA | Fashion Director: ₹20-50 LPA | Celebrity Designer: ₹50 LPA - ₹5 Cr+</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Indian fashion industry is ₹1,00,000+ crore. Global recognition, celebrity styling, export houses, luxury brands, own label opportunities.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th (any stream). Minimum 50% marks. Age 17+.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT Delhi, Mumbai, Bangalore, Chennai, Kolkata</a> | <a class="live-link" href="https://www.pearlacademy.com" target="_blank">Pearl Academy Delhi, Mumbai, Jaipur</a> | <a class="live-link" href="https://www.nid.edu" target="_blank">NID Ahmedabad</a> | <a class="live-link" href="https://www.symbiosis.ac.in" target="_blank">Symbiosis Pune</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT Entrance Exam</a> | <a class="live-link" href="https://www.nid.edu" target="_blank">NID DAT</a> | <a class="live-link" href="https://www.pearlacademy.com" target="_blank">Pearl Academy Entrance</a> | <a class="live-link" href="https://www.symbiosis.ac.in" target="_blank">SEED (Symbiosis Entrance)</a></div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Creativity, fashion awareness, sketching ability, attention to detail, trend forecasting, sewing skills, color sense</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th → NIFT/NID Entrance → B.Des/B.Sc Fashion Design (4 years) → Internship → Job/Own Label → Fashion Director/CEO</div></div>
+                </div>
+                <div class="section-title">📋 NIFT ENTRANCE EXAM - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://www.nift.ac.in" target="_blank">nift.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Exam Date</div><div class="info-text">February 2025</div></div>
+                    <div class="info-card"><div class="info-label">📅 Application</div><div class="info-text">October-November 2024</div></div>
+                    <div class="info-card"><div class="info-label">📊 Result</div><div class="info-text">March-April 2025</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Fashion Design Colleges (NIFT Ranked)</div>
+                <table class="college-table">
+                    <thead>
+                        <tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT Delhi</a></td><td>Delhi</td><td>₹2,50,000</td><td>1</td><td><a class="live-link" href="https://www.nift.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td><a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT Mumbai</a></td><td>Mumbai</td><td>₹2,50,000</td><td>2</td><td><a class="live-link" href="https://www.nift.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td><a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT Bangalore</a></td><td>Bangalore</td><td>₹2,50,000</td><td>3</td><td><a class="live-link" href="https://www.nift.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td><a class="live-link" href="https://www.pearlacademy.com" target="_blank">Pearl Academy</a></td><td>Delhi</td><td>₹4,00,000</td><td>4</td><td><a class="live-link" href="https://www.pearlacademy.com" target="_blank">Visit</a></td></tr>
+                        <tr><td><a class="live-link" href="https://www.nid.edu" target="_blank">NID Ahmedabad</a></td><td>Ahmedabad</td><td>₹3,00,000</td><td>5</td><td><a class="live-link" href="https://www.nid.edu" target="_blank">Visit</a></td></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Career Roadmap (Fashion Designer)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Des/B.Sc Fashion Design + Internship<br><span class="salary-text">💰 Assistant Designer: ₹3-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Junior Designer → Fashion Designer<br><span class="salary-text">💰 Fashion Designer: ₹6-12 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">4-6 Years</div><div class="roadmap-text">Senior Designer → Head of Design<br><span class="salary-text">💰 Senior Designer: ₹12-25 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8+ Years</div><div class="roadmap-text">Creative Director → Fashion Director → Own Label<br><span class="salary-text">💰 Creative Director: ₹25-50 LPA | Celebrity Designer: ₹50 LPA - ₹5 Cr+</span></div></div>
+                <div class="section-title">🏛️ Top Recruiters for Fashion Designers</div>
+                <div><span class="famous-badge">Sabyasachi</span> <span class="famous-badge">Manish Malhotra</span> <span class="famous-badge">Ritu Kumar</span> <span class="famous-badge">Tarun Tahiliani</span> <span class="famous-badge">Anita Dongre</span> <span class="famous-badge">Raymond</span> <span class="famous-badge">Aditya Birla Fashion</span> <span class="famous-badge">Arvind Mills</span> <span class="famous-badge">Myntra</span> <span class="famous-badge">Amazon Fashion</span></div>
+                <div class="section-title">⭐ Famous Fashion Designers</div>
+                <div><span class="famous-badge">Sabyasachi Mukherjee (NIFT Kolkata)</span> <span class="famous-badge">Manish Malhotra</span> <span class="famous-badge">Ritu Kumar (First female designer)</span> <span class="famous-badge">Tarun Tahiliani</span> <span class="famous-badge">Anita Dongre</span> <span class="famous-badge">Masaba Gupta</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="mediaTitle">🎥 Designing in Media & Film</div>
-        <div class="list-item" id="mediaCourses">• B.Des Film & Video Communication, B.Sc Media Design, BA Visual Communication – for cinema, OTT, advertising</div>
+    
+    <!-- ==================== DOOR 2: INTERIOR DESIGN ==================== -->
+    <div id="door-interior" class="door-content">
+        <div class="accordion-card" id="interiorCard">
+            <div class="accordion-header" onclick="toggleCard('interiorCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏠</span> Interior Design - Complete Career Guide (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of space planning, furniture design, color theory, lighting design, materials, construction documentation, building codes, sustainable design.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | Interior Designer: ₹8-15 LPA | Senior Designer: ₹15-30 LPA | Principal Designer: ₹30-60 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Real estate boom, growing demand for luxury interiors, commercial spaces, hospitality design, healthcare design, exhibition design.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT (Furniture & Interior Design)</a> | <a class="live-link" href="https://www.nid.edu" target="_blank">NID Ahmedabad</a> | <a class="live-link" href="https://www.pearlacademy.com" target="_blank">Pearl Academy</a> | <a class="live-link" href="https://www.iift.edu" target="_blank">IIFT Bangalore</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 SOFTWARE</div><div class="info-text">AutoCAD, 3ds Max, SketchUp, Revit, V-Ray, Adobe Creative Suite, Blender</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Interior Designer)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Des Interior Design + Internship<br><span class="salary-text">💰 Junior Designer: ₹3-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Interior Designer → Project Manager<br><span class="salary-text">💰 Interior Designer: ₹6-12 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">4-6 Years</div><div class="roadmap-text">Senior Designer → Design Manager<br><span class="salary-text">💰 Senior Designer: ₹12-25 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8+ Years</div><div class="roadmap-text">Creative Director → Own Studio<br><span class="salary-text">💰 Principal Designer: ₹25-60 LPA</span></div></div>
+                <div class="section-title">⭐ Famous Interior Designers</div>
+                <div><span class="famous-badge">Sunita Kohli</span> <span class="famous-badge">Gauri Khan</span> <span class="famous-badge">Twinkle Khanna</span> <span class="famous-badge">Shabnam Gupta</span> <span class="famous-badge">Sussanne Khan</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="entrepreneurshipTitle">🚀 Entrepreneurship in Design</div>
-        <div class="list-item" id="entrepreneurshipIdeas">• Fashion boutique, Interior design studio, Graphics studio, Social media design business, Animation/Freelance video editing, Jewellery design brand, Digital marketing design services, Game art studio</div>
+    
+    <!-- ==================== DOOR 3: GRAPHIC DESIGN ==================== -->
+    <div id="door-graphic" class="door-content">
+        <div class="accordion-card" id="graphicCard">
+            <div class="accordion-header" onclick="toggleCard('graphicCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎨</span> Graphic Design - Complete Career Guide (3-4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of visual communication, branding, typography, illustration, packaging design, advertising, digital media, print design.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | Graphic Designer: ₹6-12 LPA | Art Director: ₹12-25 LPA | Creative Director: ₹25-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in advertising agencies, tech companies, startups, media houses, freelance opportunities, global remote work.</div></div>
+                    <div class="info-card"><div class="info-label">📋 SOFTWARE</div><div class="info-text">Adobe Photoshop, Illustrator, InDesign, After Effects, Figma, CorelDRAW, Canva</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Recruiters for Graphic Designers</div>
+                <div><span class="famous-badge">Ogilvy</span> <span class="famous-badge">McCann</span> <span class="famous-badge">Leo Burnett</span> <span class="famous-badge">WPP</span> <span class="famous-badge">Google</span> <span class="famous-badge">Amazon</span> <span class="famous-badge">Flipkart</span> <span class="famous-badge">Zomato</span> <span class="famous-badge">Swiggy</span> <span class="famous-badge">Uber</span></div>
+                <div class="section-title">⭐ Famous Graphic Designers</div>
+                <div><span class="famous-badge">M. F. Husain (Painter with graphic design influence)</span> <span class="famous-badge">Dashrath Patel (Designer, Sculptor)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="entranceTitle">📋 Top Entrance Exams for Design</div>
-        <div class="list-item" id="nift">• NIFT Entrance Exam – for Fashion & Textile</div>
-        <div class="list-item" id="nid">• NID DAT – for all design disciplines (National Institute of Design)</div>
-        <div class="list-item" id="uceed">• UCEED – IIT design entrance (B.Des)</div>
-        <div class="list-item" id="ceed">• CEED – for M.Des (future)</div>
-        <div class="list-item" id="aieed">• AIEED – Pearl Academy entrance</div>
+    
+    <!-- ==================== DOOR 4: UI/UX DESIGN ==================== -->
+    <div id="door-uiux" class="door-content">
+        <div class="accordion-card" id="uiuxCard">
+            <div class="accordion-header" onclick="toggleCard('uiuxCard')">
+                <div class="accordion-title"><span class="accordion-icon">📱</span> UI/UX Design - Complete Career Guide (3-4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">User Interface (UI) design focuses on visual appearance, buttons, icons, spacing. User Experience (UX) design focuses on user research, wireframing, prototyping, user testing, information architecture.<br><span class="salary-text">💰 Fresher: ₹5-10 LPA | UI/UX Designer: ₹8-18 LPA | Senior UX Designer: ₹15-30 LPA | Product Design Lead: ₹25-50 LPA | UX Director: ₹40-80 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest paying design specialization. High demand in tech industry, startups, product-based companies, remote work opportunities, global market.</div></div>
+                    <div class="info-card"><div class="info-label">📋 SOFTWARE</div><div class="info-text">Figma, Adobe XD, Sketch, InVision, Miro, Balsamiq, Axure, Zeplin</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (UI/UX Designer)</div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">UI/UX Course + Portfolio<br><span class="salary-text">💰 Junior UI/UX Designer: ₹4-7 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">UI/UX Designer → Product Designer<br><span class="salary-text">💰 UI/UX Designer: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Senior UX Designer → UX Lead<br><span class="salary-text">💰 Senior UX Designer: ₹15-25 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">6-8 Years</div><div class="roadmap-text">Product Design Lead → Design Manager<br><span class="salary-text">💰 Design Manager: ₹25-40 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">10+ Years</div><div class="roadmap-text">UX Director → Head of Design → VP of Product<br><span class="salary-text">💰 UX Director: ₹40-80 LPA | Head of Design: ₹60 LPA - ₹1.5 Cr</span></div></div>
+                <div class="section-title">🏛️ Top Recruiters for UI/UX Designers</div>
+                <div><span class="famous-badge">Google</span> <span class="famous-badge">Microsoft</span> <span class="famous-badge">Amazon</span> <span class="famous-badge">Flipkart</span> <span class="famous-badge">Paytm</span> <span class="famous-badge">Zomato</span> <span class="famous-badge">Swiggy</span> <span class="famous-badge">Uber</span> <span class="famous-badge">Ola</span> <span class="famous-badge">BYJU'S</span> <span class="famous-badge">Unacademy</span> <span class="famous-badge">Cure.fit</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="institutesTitle">🏆 Top Institutes</div>
-        <div class="list-item" id="niftInst">• NIFT (Fashion)</div>
-        <div class="list-item" id="nidInst">• NID (All Design)</div>
-        <div class="list-item" id="iitDesign">• IIT Bombay/Delhi/Guwahati (B.Des)</div>
-        <div class="list-item" id="pearl">• Pearl Academy</div>
-        <div class="list-item" id="mit">• MIT Institute of Design</div>
-        <div class="list-item" id="symbiosis">• Symbiosis Institute of Design</div>
-        <div class="list-item" id="srishti">• Srishti Manipal Institute</div>
+        <!-- ==================== DOOR 5: ANIMATION & VFX ==================== -->
+    <div id="door-animation" class="door-content">
+        <div class="accordion-card" id="animationCard">
+            <div class="accordion-header" onclick="toggleCard('animationCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎬</span> Animation & VFX - Complete Career Guide (3-4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of 2D animation, 3D animation, visual effects (VFX), motion graphics, character design, storyboarding, rendering, compositing, game design.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | Animator: ₹6-12 LPA | VFX Artist: ₹8-15 LPA | Senior Animator: ₹12-25 LPA | VFX Supervisor: ₹25-50 LPA | Animation Director: ₹30-60 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Indian animation industry is growing at 20% CAGR, ₹15,000+ crore market. Bollywood VFX budgets ₹50-200 Cr. International outsourcing hub for Disney, DreamWorks, Netflix, Amazon.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID Ahmedabad</a> | <a class="live-link" href="https://www.ftii.ac.in" target="_blank">FTII Pune</a> | <a class="live-link" href="https://www.whistlingwoods.net" target="_blank">Whistling Woods Mumbai</a> | <a class="live-link" href="https://www.arena-multimedia.com" target="_blank">Arena Animation</a> | <a class="live-link" href="https://www.maacindia.com" target="_blank">MAAC</a> | <a class="live-link" href="https://www.frameboxx.in" target="_blank">Frameboxx</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 SOFTWARE</div><div class="info-text">Maya, 3ds Max, Blender, Adobe After Effects, Premiere Pro, Nuke, Houdini, Cinema 4D, ZBrush, Unreal Engine</div></div>
+                </div>
+                <div class="section-title">🎬 Indian VFX Industry - Major Movies</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎥 Baahubali</div><div class="info-text">VFX budget: ₹120 Cr | VFX Studio: Makuta VFX</div></div>
+                    <div class="info-card"><div class="info-label">🎥 2.0 (Rajinikanth)</div><div class="info-text">VFX budget: ₹200 Cr | VFX Studio: Red Chillies VFX</div></div>
+                    <div class="info-card"><div class="info-label">🎥 RRR</div><div class="info-text">VFX budget: ₹150 Cr | Oscar for Best Song</div></div>
+                    <div class="info-card"><div class="info-label">🎥 Brahmastra</div><div class="info-text">VFX budget: ₹100 Cr | VFX Studio: DNEG (Oscar winning)</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Animation & VFX Studios in India</div>
+                <div><span class="famous-badge">Red Chillies VFX (SRK's studio)</span> <span class="famous-badge">Makuta VFX (Baahubali)</span> <span class="famous-badge">DNEG (Oscar winner, Brahmastra)</span> <span class="famous-badge">Prime Focus</span> <span class="famous-badge">Pixion</span> <span class="famous-badge">Tata Elxsi</span> <span class="famous-badge">Technicolor</span></div>
+                <div class="section-title">🗺️ Career Roadmap (Animation & VFX)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3-4 Years</div><div class="roadmap-text">Animation/VFX Course + Demo Reel<br><span class="salary-text">💰 Junior Animator: ₹3-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Animator → VFX Artist<br><span class="salary-text">💰 Animator: ₹6-12 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Senior Animator → Lead Animator<br><span class="salary-text">💰 Senior Animator: ₹12-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">VFX Supervisor → Animation Director<br><span class="salary-text">💰 VFX Supervisor: ₹20-40 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">10+ Years</div><div class="roadmap-text">Creative Director → Studio Head<br><span class="salary-text">💰 Studio Head: ₹40 LPA - ₹1 Cr</span></div></div>
+                <div class="section-title">⭐ Famous Animation/VFX Professionals</div>
+                <div><span class="famous-badge">Keitan Yadav (VFX Supervisor, Baahubali)</span> <span class="famous-badge">Harry Hingorani (Red Chillies VFX)</span> <span class="famous-badge">P. Jayakumar (Animation director)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="careerTitle">💼 Career Paths & Salary</div>
-        <div class="list-item" id="careerRoles">• Fashion Designer, Interior Designer, Graphic Designer, UI/UX Designer, Animator, VFX Artist, Game Designer, Product Designer, Architect, Jewellery Designer, Web Designer</div>
-        <div class="list-item" id="careerNote">• High demand in startups, e-commerce, film, gaming, advertising, and tech companies. Freelancing & international opportunities also strong.</div>
+    
+    <!-- ==================== DOOR 6: PRODUCT DESIGN ==================== -->
+    <div id="door-product" class="door-content">
+        <div class="accordion-card" id="productCard">
+            <div class="accordion-header" onclick="toggleCard('productCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏭</span> Product Design - Complete Career Guide (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of industrial design, product development, ergonomics, materials, manufacturing processes, product prototyping, design thinking, user-centered design.<br><span class="salary-text">💰 Fresher: ₹5-10 LPA | Product Designer: ₹8-18 LPA | Senior Product Designer: ₹15-30 LPA | Design Lead: ₹25-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in consumer electronics, automotive, furniture, medical devices, toys, packaging industries. Make in India initiative increasing opportunities.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID Ahmedabad</a> | <a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay - IDC</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi - DOD</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a> | <a class="live-link" href="https://www.dtu.ac.in" target="_blank">DTU Delhi</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID DAT</a> | <a class="live-link" href="https://uceed.iitb.ac.in" target="_blank">UCEED (IIT Design Entrance)</a> | <a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT (for certain specializations)</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 SOFTWARE</div><div class="info-text">SolidWorks, AutoCAD, Rhino 3D, KeyShot, Adobe Illustrator, Fusion 360, CATIA, Pro/ENGINEER</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Product Designer)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Des Product Design + Internship<br><span class="salary-text">💰 Junior Designer: ₹4-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Product Designer → Industrial Designer<br><span class="salary-text">💰 Product Designer: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Senior Designer → Design Manager<br><span class="salary-text">💰 Senior Designer: ₹15-25 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8+ Years</div><div class="roadmap-text">Design Director → Head of Product<br><span class="salary-text">💰 Design Director: ₹25-50 LPA | Head of Product: ₹40-80 LPA</span></div></div>
+                <div class="section-title">🏛️ Top Recruiters for Product Designers</div>
+                <div><span class="famous-badge">Tata Elxsi</span> <span class="famous-badge">Mahindra & Mahindra</span> <span class="famous-badge">Bajaj Auto</span> <span class="famous-badge">Godrej</span> <span class="famous-badge">Whirlpool</span> <span class="famous-badge">Philips</span> <span class="famous-badge">Samsung</span> <span class="famous-badge">LG</span> <span class="famous-badge">Havells</span> <span class="famous-badge">Bose</span></div>
+                <div class="section-title">⭐ Famous Product Designers</div>
+                <div><span class="famous-badge">Sir M. Visvesvaraya</span> <span class="famous-badge">Prof. M. P. Ranjan (NID faculty)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="recommendationTitle">⭐ Recommended Path for High Growth</div>
-        <div class="list-item" id="recommendation">• 12th → B.Des (Fashion/Interior/UX/Product/Animation) → Internship → Job/Business. B.Des offers high job demand, high salary, international opportunities, and strong portfolio building.</div>
+    
+    <!-- ==================== DOOR 7: ENTRANCE EXAMS (NIFT/NID/UCEED) ==================== -->
+    <div id="door-exams" class="door-content">
+        <div class="accordion-card" id="examsCard">
+            <div class="accordion-header" onclick="toggleCard('examsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📋</span> Design Entrance Exams - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 NIFT Entrance Exam</div><div class="info-text">For Fashion Design, Textile Design, Accessory Design, Fashion Communication, Fashion Management<br><span class="salary-text">📅 Date: Feb 2025 | 🎯 Pattern: GAT + CAT + Situation Test</span><br><a class="live-link" href="https://www.nift.ac.in" target="_blank">nift.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🎨 NID DAT</div><div class="info-text">For All Design disciplines - Product, Communication, Animation, UI/UX, Ceramic, Textile, etc.<br><span class="salary-text">📅 Date: Jan 2025 | 🎯 Pattern: Prelims (MCQ) + Mains (Studio Test/Interview)</span><br><a class="live-link" href="https://www.nid.edu" target="_blank">nid.edu</a></div></div>
+                    <div class="info-card"><div class="info-label">📐 UCEED</div><div class="info-text">For B.Des at IIT Bombay, IIT Delhi, IIT Guwahati, IIT Hyderabad, IIT Kanpur<br><span class="salary-text">📅 Date: Jan 2025 | 🎯 Pattern: Numerical + MCQ + Drawing</span><br><a class="live-link" href="https://uceed.iitb.ac.in" target="_blank">uceed.iitb.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">💎 CEED</div><div class="info-text">For M.Des at IITs - Postgraduate design entrance<br><span class="salary-text">📅 Date: Jan 2025</span><br><a class="live-link" href="https://ceed.iitb.ac.in" target="_blank">ceed.iitb.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🦚 Pearl Academy Entrance</div><div class="info-text">For Fashion, Design, Media, Business courses<br><span class="salary-text">📅 Date: Multiple cycles</span><br><a class="live-link" href="https://www.pearlacademy.com" target="_blank">pearlacademy.com</a></div></div>
+                    <div class="info-card"><div class="info-label">🌿 SEED (Symbiosis)</div><div class="info-text">For B.Des at Symbiosis Institute of Design, Pune<br><span class="salary-text">📅 Date: May 2025</span><br><a class="live-link" href="https://www.sid.edu.in" target="_blank">sid.edu.in</a></div></div>
+                </div>
+                <div class="section-title">📊 NIFT Cutoff (Previous Year Reference)</div>
+                <table class="cutoff-table">
+                    <thead>
+                        <tr><th>Category</th><th>NIFT Delhi (Rank)</th><th>NIFT Mumbai (Rank)</th><th>NIFT Bangalore (Rank)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>General</th>那样200-500</th>那样500-1000</th>那样1000-1500</th></tr>
+                        <tr>那样OBC</th>那样500-1000</th>那样1000-1500</th>那样1500-2000</th></tr>
+                        <tr>那样SC/ST</th>那样1000-2000</th>那样2000-3000</th>那样3000-4000</th></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 8: CAREER & ENTREPRENEURSHIP ==================== -->
+    <div id="door-career" class="door-content">
+        <div class="accordion-card" id="careerDesignCard">
+            <div class="accordion-header" onclick="toggleCard('careerDesignCard')">
+                <div class="accordion-title"><span class="accordion-icon">💼</span> Career & Entrepreneurship in Design - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">👗 Fashion Label</div><div class="info-text">Start your own fashion brand. Initial investment: ₹5-20 Lakhs. Potential: ₹20 LPA - ₹5 Cr+</div></div>
+                    <div class="info-card"><div class="info-label">🏠 Interior Studio</div><div class="info-text">Open interior design consultancy. Initial investment: ₹2-10 Lakhs. Potential: ₹10-30 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🎨 Freelance Graphic Designer</div><div class="info-text">Remote work for global clients. Earnings: ₹5-25 LPA (from India)</div></div>
+                    <div class="info-card"><div class="info-label">📱 UI/UX Freelancer</div><div class="info-text">Design apps and websites. Earnings: ₹8-30 LPA | International clients pay $50-150/hour</div></div>
+                    <div class="info-card"><div class="info-label">🎬 Animation Studio</div><div class="info-text">Start your own animation/VFX studio. Investment: ₹10-50 Lakhs. Potential: ₹30 LPA - ₹2 Cr</div></div>
+                    <div class="info-card"><div class="info-label">🖼️ Online Art Store</div><div class="info-text">Sell prints, digital art on Etsy, Amazon. ₹3-15 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🎓 Design Academy</div><div class="info-text">Teach design courses. Investment: ₹5-20 Lakhs. Potential: ₹10-40 LPA</div></div>
+                    <div class="info-card"><div class="info-label">📱 Social Media Content Creator</div><div class="info-text">Design tutorials, art content. ₹5-30 LPA from YouTube, Instagram</div></div>
+                </div>
+                <div class="section-title">🖥️ Online Platforms for Designers</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎨 Behance</div><div class="info-text"><a class="live-link" href="https://www.behance.net" target="_blank">behance.net</a> - Portfolio showcase</div></div>
+                    <div class="info-card"><div class="info-label">📦 Dribbble</div><div class="info-text"><a class="live-link" href="https://www.dribbble.com" target="_blank">dribbble.com</a> - Design community</div></div>
+                    <div class="info-card"><div class="info-label">🛒 Etsy</div><div class="info-text"><a class="live-link" href="https://www.etsy.com" target="_blank">etsy.com</a> - Sell art/design products</div></div>
+                    <div class="info-card"><div class="info-label">💼 Upwork/Fiverr</div><div class="info-text">Freelance design work globally</div></div>
+                    <div class="info-card"><div class="info-label">🎓 Coursera/Udemy</div><div class="info-text">Create and sell design courses</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 9: ABROAD STUDIES ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="abroadDesignCard">
+            <div class="accordion-header" onclick="toggleCard('abroadDesignCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Studies for Design Students</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">MFA in Design, M.Sc in UI/UX, M.Des | Top Unis: Rhode Island School of Design (RISD), Savannah College of Art and Design (SCAD), Parsons, Pratt Institute, California College of the Arts (CCA)<br>GRE/TOEFL/IELTS | Salary: $60k-120k/year | OPT: 1-3 years</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">MA in Design, M.Sc in UX Design | Top Unis: Royal College of Art (RCA), Central Saint Martins, London College of Communication, University of the Arts London (UAL)<br>IELTS 7.0 | Salary: £30k-70k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">M.Des, PG Diploma in Interactive Design | Top Unis: OCAD University, Emily Carr University of Art and Design, Simon Fraser University<br>IELTS 6.5-7.0 | PGWP pathway | Salary: CAD 50k-90k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">M.Des, Product Design (Low tuition/free) | Top Unis: Bauhaus University Weimar, Berlin University of the Arts, Muthesius University of Fine Arts and Design<br>IELTS 6.5 | DAAD Scholarship</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">M.Des, Master of Interaction Design | Top Unis: University of Melbourne, University of Technology Sydney (UTS), RMIT University<br>IELTS 6.5-7.0 | Salary: AUD 60k-100k/year</div></div>
+                </div>
+                <div class="section-title">🎓 Scholarships for Design Abroad</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 Fulbright</div><div class="info-text">Fully funded for MFA/PhD in Design</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 Chevening</div><div class="info-text">Fully funded for 1-year master's in UK</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia Awards</div><div class="info-text">Fully funded for master's in Design</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 DAAD</div><div class="info-text">Fully funded for master's/PhD in Design</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Vanier</div><div class="info-text">CAD 50,000/year for doctoral design students</div></div>
+                </div>
+                <div class="section-title">📋 Portfolio Requirements for Abroad</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📁 Portfolio</div><div class="info-text">12-20 projects demonstrating your design process, sketching, final renders, problem-solving</div></div>
+                    <div class="info-card"><div class="info-label">📝 Statement of Purpose</div><div class="info-text">Why this course? Your goals, design philosophy</div></div>
+                    <div class="info-card"><div class="info-label">🎓 LORs</div><div class="info-text">2-3 Letters of Recommendation from design professors</div></div>
+                    <div class="info-card"><div class="info-label">📋 English Test</div><div class="info-text">IELTS (6.5-7.0), TOEFL (90-100), PTE (65-70)</div></div>
+                </div>
+                <div class="section-title">⭐ Indians Who Studied Design Abroad</div>
+                <div><span class="famous-badge">Sabyasachi Mukherjee (NIFT Kolkata, studied at London)</span> <span class="famous-badge">Manish Malhotra</span></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
-    en: {
-        app_tagline: "Career Saathi",
-        tagline: "✏️ Design & Creative Careers",
-        page_title: "✏️ Designing Stream",
-        bachelor_title: "🎓 Bachelor Degree Courses (B.Des / B.Sc)",
-        bdes_fashion: "• B.Des Fashion Design / Textile Design / Accessory Design / Knitwear Design – NIFT, Pearl Academy",
-        bdes_interior: "• B.Des Interior Design / B.Sc Interior Design – Space planning, furniture design",
-        bdes_graphic: "• B.Des Graphic Design / Communication Design – Branding, UI/UX, illustration",
-        bdes_animation: "• B.Des Animation / Game Design / Multimedia – VFX, 3D, gaming",
-        bdes_product: "• B.Des Industrial / Product Design – Furniture, consumer products, automotive",
-        bdes_ux: "• B.Des User Experience (UX) / Interaction Design – App & web design, user research",
-        barch: "• B.Arch (5 years) – Architecture, spatial design (requires NATA/JEE Paper 2)",
-        diploma_title: "📜 Diploma & Certificate Courses (1-2 years)",
-        diploma_courses: "• Diploma in Fashion Design, Graphic Design, Interior Design, Jewellery Design, UI/UX Design, Web Design, Animation & VFX",
-        cert_courses: "• Certificate in Photoshop, Illustrator, Video Editing, 3D Modeling (Blender, Maya), AutoCAD, SketchUp, Digital Illustration",
-        media_title: "🎥 Designing in Media & Film",
-        media_courses: "• B.Des Film & Video Communication, B.Sc Media Design, BA Visual Communication – for cinema, OTT, advertising",
-        entrepreneurship_title: "🚀 Entrepreneurship in Design",
-        entrepreneurship_ideas: "• Fashion boutique, Interior design studio, Graphics studio, Social media design business, Animation/Freelance video editing, Jewellery design brand, Digital marketing design services, Game art studio",
-        entrance_title: "📋 Top Entrance Exams for Design",
-        nift: "• NIFT Entrance Exam – for Fashion & Textile",
-        nid: "• NID DAT – for all design disciplines (National Institute of Design)",
-        uceed: "• UCEED – IIT design entrance (B.Des)",
-        ceed: "• CEED – for M.Des (future)",
-        aieed: "• AIEED – Pearl Academy entrance",
-        institutes_title: "🏆 Top Institutes",
-        nift_inst: "• NIFT (Fashion)",
-        nid_inst: "• NID (All Design)",
-        iit_design: "• IIT Bombay/Delhi/Guwahati (B.Des)",
-        pearl: "• Pearl Academy",
-        mit: "• MIT Institute of Design",
-        symbiosis: "• Symbiosis Institute of Design",
-        srishti: "• Srishti Manipal Institute",
-        career_title: "💼 Career Paths & Salary",
-        career_roles: "• Fashion Designer, Interior Designer, Graphic Designer, UI/UX Designer, Animator, VFX Artist, Game Designer, Product Designer, Architect, Jewellery Designer, Web Designer",
-        career_note: "• High demand in startups, e-commerce, film, gaming, advertising, and tech companies. Freelancing & international opportunities also strong.",
-        recommendation_title: "⭐ Recommended Path for High Growth",
-        recommendation: "• 12th → B.Des (Fashion/Interior/UX/Product/Animation) → Internship → Job/Business. B.Des offers high job demand, high salary, international opportunities, and strong portfolio building.",
-        bottom_home: "Home",
-        bottom_search: "Search",
-        bottom_ai: "AnnS AI",
-        bottom_alerts: "Alerts",
-        bottom_profile: "Profile"
-    },
-    hi: {
-        app_tagline: "करियर साथी",
-        tagline: "✏️ डिजाइन और रचनात्मक करियर",
-        page_title: "✏️ डिजाइनिंग स्ट्रीम",
-        bachelor_title: "🎓 स्नातक डिग्री पाठ्यक्रम (बी.डेस / बी.एससी)",
-        bdes_fashion: "• बी.डेस फैशन डिजाइन / टेक्सटाइल डिजाइन – निफ्ट, पर्ल अकादमी",
-        bdes_interior: "• बी.डेस इंटीरियर डिजाइन / बी.एससी इंटीरियर डिजाइन",
-        bdes_graphic: "• बी.डेस ग्राफिक डिजाइन / कम्युनिकेशन डिजाइन",
-        bdes_animation: "• बी.डेस एनीमेशन / गेम डिजाइन / मल्टीमीडिया",
-        bdes_product: "• बी.डेस इंडस्ट्रियल / प्रोडक्ट डिजाइन",
-        bdes_ux: "• बी.डेस यूजर एक्सपीरियंस (यूएक्स) / इंटरैक्शन डिजाइन",
-        barch: "• बी.आर्क (5 वर्ष) – आर्किटेक्चर",
-        diploma_title: "📜 डिप्लोमा और प्रमाणपत्र पाठ्यक्रम",
-        diploma_courses: "• फैशन डिजाइन, ग्राफिक डिजाइन, इंटीरियर डिजाइन, ज्वैलरी डिजाइन में डिप्लोमा",
-        cert_courses: "• फोटोशॉप, इलस्ट्रेटर, वीडियो एडिटिंग, ऑटोकैड में प्रमाणपत्र",
-        media_title: "🎥 मीडिया और फिल्म में डिजाइनिंग",
-        media_courses: "• बी.डेस फिल्म एंड वीडियो कम्युनिकेशन",
-        entrepreneurship_title: "🚀 डिजाइन में उद्यमिता",
-        entrepreneurship_ideas: "• फैशन बुटीक, इंटीरियर डिजाइन स्टूडियो, ग्राफिक्स स्टूडियो, एनीमेशन स्टूडियो",
-        entrance_title: "📋 डिजाइन के लिए शीर्ष प्रवेश परीक्षाएं",
-        nift: "• निफ्ट प्रवेश परीक्षा – फैशन के लिए",
-        nid: "• एनआईडी डीएटी – सभी डिजाइन के लिए",
-        uceed: "• यूसीईईडी – आईआईटी डिजाइन प्रवेश",
-        ceed: "• सीईईडी – एम.डेस के लिए",
-        aieed: "• एआईईईडी – पर्ल अकादमी प्रवेश",
-        institutes_title: "🏆 शीर्ष संस्थान",
-        nift_inst: "• निफ्ट (फैशन)",
-        nid_inst: "• एनआईडी (सभी डिजाइन)",
-        iit_design: "• आईआईटी बॉम्बे/दिल्ली/गुवाहाटी (बी.डेस)",
-        pearl: "• पर्ल अकादमी",
-        mit: "• एमआईटी इंस्टीट्यूट ऑफ डिजाइन",
-        symbiosis: "• सिम्बायोसिस इंस्टीट्यूट ऑफ डिजाइन",
-        srishti: "• श्रीष्टि मणिपाल इंस्टीट्यूट",
-        career_title: "💼 करियर पथ और वेतन",
-        career_roles: "• फैशन डिजाइनर, इंटीरियर डिजाइनर, ग्राफिक डिजाइनर, यूआई/यूएक्स डिजाइनर, एनिमेटर, गेम डिजाइनर",
-        career_note: "• स्टार्टअप, ई-कॉमर्स, फिल्म, गेमिंग, विज्ञापन में उच्च मांग",
-        recommendation_title: "⭐ उच्च विकास के लिए अनुशंसित पथ",
-        recommendation: "• 12वीं → बी.डेस → इंटर्नशिप → नौकरी/व्यवसाय",
-        bottom_home: "होम",
-        bottom_search: "खोजें",
-        bottom_ai: "एनएस एआई",
-        bottom_alerts: "सूचनाएं",
-        bottom_profile: "प्रोफ़ाइल"
-    }
-};
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
 </script>
 </body>
-<script>
-// Continue JavaScript for designing.html
-const bottomNav = [
-    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
-    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
-    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
-    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
-    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
-];
-
-let currentLang = 'en';
-
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-
-function updateAllText() {
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    
-    document.getElementById('bachelorTitle').textContent = t('bachelor_title');
-    document.getElementById('bdesFashion').textContent = t('bdes_fashion');
-    document.getElementById('bdesInterior').textContent = t('bdes_interior');
-    document.getElementById('bdesGraphic').textContent = t('bdes_graphic');
-    document.getElementById('bdesAnimation').textContent = t('bdes_animation');
-    document.getElementById('bdesProduct').textContent = t('bdes_product');
-    document.getElementById('bdesUx').textContent = t('bdes_ux');
-    document.getElementById('barch').textContent = t('barch');
-    
-    document.getElementById('diplomaTitle').textContent = t('diploma_title');
-    document.getElementById('diplomaCourses').textContent = t('diploma_courses');
-    document.getElementById('certCourses').textContent = t('cert_courses');
-    
-    document.getElementById('mediaTitle').textContent = t('media_title');
-    document.getElementById('mediaCourses').textContent = t('media_courses');
-    
-    document.getElementById('entrepreneurshipTitle').textContent = t('entrepreneurship_title');
-    document.getElementById('entrepreneurshipIdeas').textContent = t('entrepreneurship_ideas');
-    
-    document.getElementById('entranceTitle').textContent = t('entrance_title');
-    document.getElementById('nift').textContent = t('nift');
-    document.getElementById('nid').textContent = t('nid');
-    document.getElementById('uceed').textContent = t('uceed');
-    document.getElementById('ceed').textContent = t('ceed');
-    document.getElementById('aieed').textContent = t('aieed');
-    
-    document.getElementById('institutesTitle').textContent = t('institutes_title');
-    document.getElementById('niftInst').textContent = t('nift_inst');
-    document.getElementById('nidInst').textContent = t('nid_inst');
-    document.getElementById('iitDesign').textContent = t('iit_design');
-    document.getElementById('pearl').textContent = t('pearl');
-    document.getElementById('mit').textContent = t('mit');
-    document.getElementById('symbiosis').textContent = t('symbiosis');
-    document.getElementById('srishti').textContent = t('srishti');
-    
-    document.getElementById('careerTitle').textContent = t('career_title');
-    document.getElementById('careerRoles').textContent = t('career_roles');
-    document.getElementById('careerNote').textContent = t('career_note');
-    
-    document.getElementById('recommendationTitle').textContent = t('recommendation_title');
-    document.getElementById('recommendation').textContent = t('recommendation');
-    
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
-}
-
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'education.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-renderBottomBar();
-loadSavedLanguage();
-</script>
 </html>
