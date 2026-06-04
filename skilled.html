@@ -8,54 +8,252 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
+        .language-selector select option { color: black; background: white; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         .container { padding: 20px 16px; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
+        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
         .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
         .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">🔧 Skilled & Vocational Careers</div>
+    <div class="tagline" id="taglineText">🔧 Skilled & Vocational Careers</div>
 </div>
+
 <div class="container">
-    <div class="page-title">🔧 Skilled (Vocational) Stream</div>
-    <div class="section-card"><div class="section-title">🇮🇳 Government Skill Development Programs</div><div class="list-item">• Skill India / PMKVY – Free training in Electrician, Fitter, Welder, Automotive, Plumber, Solar technician, CCTV, Beauty & wellness, Computer operator, Retail & sales</div><div class="list-item">• ITI (Industrial Training Institute) – 1-2 years trades: Electrician, Fitter, Welder, Machinist, Motor Mechanic, Wireman, AC & Refrigeration, Diesel Mechanic, Electronics Mechanic, CNC Operator</div><div class="list-item">• Apprenticeship Program (NAPS) – Paid training in Railways, Metro, Airports, Manufacturing, Shipyards, Power plants</div></div>
-    <div class="section-card"><div class="section-title">⚙️ Engineering & Technical Skill Diplomas (1-2 years)</div><div class="list-item">• Diploma in Electrical Technician, Mechanical Technician, Fire & Safety, Welding Technology, Tool & Die Making, Draftsmanship (Civil/Mechanical), Automotive Technician, Robotics Technician</div><div class="list-item">• Short certifications: AutoCAD, SolidWorks, PLC Automation, HVAC, Building Electrician, Solar Installation</div></div>
-    <div class="section-card"><div class="section-title">🛫 International Skilled Jobs (Gulf / Europe / Canada)</div><div class="list-item">• Prepare through certifications: Electrician Licence, Welder (3G/6G), Scaffolding, Fire & Safety (NEBOSH), HVAC Technician, Plumbing Technician, Logistics & Supply Chain Technician</div></div>
-    <div class="section-card"><div class="section-title">🧪 Skilled Courses in Medical & Allied Fields</div><div class="list-item">• Medical Lab Technician (MLT), X-ray Technician, Operation Theatre Technician, Dialysis Technician, Pharmacy Assistant, Emergency Technician</div></div>
-    <div class="section-card"><div class="section-title">🧵 Skilled Trades in Non-Technical Sectors</div><div class="list-item">• Beauty & Grooming: Hair stylist, Makeup artist, Spa/beauty therapist</div><div class="list-item">• Culinary & Hospitality: Chef course, Bakery & confectionary, Housekeeping, Hotel operations</div><div class="list-item">• Fashion Skills: Tailoring, Pattern making, Boutique management</div><div class="list-item">• Computer Skills: Data entry, Office management, Graphic design, Web design, Digital marketing</div></div>
-    <div class="section-card"><div class="section-title">🎨 Creative Skilled Courses</div><div class="list-item">• Photography, Video editing, Animation (2D/3D), Sound engineering, Jewellery design, Interior design (short-term)</div></div>
-    <div class="section-card"><div class="section-title">🚗 Automotive & Transport</div><div class="list-item">• Automobile mechanic, Two-wheeler mechanic, Diesel engine technician, Heavy vehicle operator, Logistics & warehousing technician</div></div>
-    <div class="section-card"><div class="section-title">🔥 High-Income Skilled Courses (Quick Jobs + Abroad)</div><div class="list-item">• CNC Operator, Industrial Electrician, Pipe Fitter (Oil & Gas), Welding Specialist (TIG/MIG/ARC), Fire & Safety (International – NEBOSH / IOSH), Marine Technician (Shipping)</div></div>
-    <div class="section-card"><div class="section-title">💼 Job Opportunities After Skilled Training</div><div class="list-item">• Government departments (Railways, Police, Army, Navy, Air Force, State Govts), Private companies, Factories, Workshops, Self-employment (repair shops, salon, boutique, catering, etc.)</div><div class="list-item">• High demand in Gulf countries, Canada, Australia for skilled trades with good salaries and PR pathways.</div></div>
+    <div class="page-title" id="pageTitle">🔧 Skilled (Vocational) Stream</div>
+
+    <div class="section-card">
+        <div class="section-title" id="govtTitle">🇮🇳 Government Skill Development Programs</div>
+        <div class="list-item" id="pmkvy">• Skill India / PMKVY – Free training in Electrician, Fitter, Welder, Automotive, Plumber, Solar technician, CCTV, Beauty & wellness, Computer operator, Retail & sales</div>
+        <div class="list-item" id="iti">• ITI (Industrial Training Institute) – 1-2 years trades: Electrician, Fitter, Welder, Machinist, Motor Mechanic, Wireman, AC & Refrigeration, Diesel Mechanic, Electronics Mechanic, CNC Operator</div>
+        <div class="list-item" id="apprenticeship">• Apprenticeship Program (NAPS) – Paid training in Railways, Metro, Airports, Manufacturing, Shipyards, Power plants</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="techTitle">⚙️ Engineering & Technical Skill Diplomas (1-2 years)</div>
+        <div class="list-item" id="techDiploma">• Diploma in Electrical Technician, Mechanical Technician, Fire & Safety, Welding Technology, Tool & Die Making, Draftsmanship (Civil/Mechanical), Automotive Technician, Robotics Technician</div>
+        <div class="list-item" id="shortCerts">• Short certifications: AutoCAD, SolidWorks, PLC Automation, HVAC, Building Electrician, Solar Installation</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="internationalTitle">🛫 International Skilled Jobs (Gulf / Europe / Canada)</div>
+        <div class="list-item" id="internationalCerts">• Prepare through certifications: Electrician Licence, Welder (3G/6G), Scaffolding, Fire & Safety (NEBOSH), HVAC Technician, Plumbing Technician, Logistics & Supply Chain Technician</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="medicalTitle">🧪 Skilled Courses in Medical & Allied Fields</div>
+        <div class="list-item" id="medicalSkills">• Medical Lab Technician (MLT), X-ray Technician, Operation Theatre Technician, Dialysis Technician, Pharmacy Assistant, Emergency Technician</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="nonTechTitle">🧵 Skilled Trades in Non-Technical Sectors</div>
+        <div class="list-item" id="beauty">• Beauty & Grooming: Hair stylist, Makeup artist, Spa/beauty therapist</div>
+        <div class="list-item" id="culinary">• Culinary & Hospitality: Chef course, Bakery & confectionary, Housekeeping, Hotel operations</div>
+        <div class="list-item" id="fashion">• Fashion Skills: Tailoring, Pattern making, Boutique management</div>
+        <div class="list-item" id="computer">• Computer Skills: Data entry, Office management, Graphic design, Web design, Digital marketing</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="creativeTitle">🎨 Creative Skilled Courses</div>
+        <div class="list-item" id="creativeSkills">• Photography, Video editing, Animation (2D/3D), Sound engineering, Jewellery design, Interior design (short-term)</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="automotiveTitle">🚗 Automotive & Transport</div>
+        <div class="list-item" id="automotiveSkills">• Automobile mechanic, Two-wheeler mechanic, Diesel engine technician, Heavy vehicle operator, Logistics & warehousing technician</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="highIncomeTitle">🔥 High-Income Skilled Courses (Quick Jobs + Abroad)</div>
+        <div class="list-item" id="highIncomeSkills">• CNC Operator, Industrial Electrician, Pipe Fitter (Oil & Gas), Welding Specialist (TIG/MIG/ARC), Fire & Safety (International – NEBOSH / IOSH), Marine Technician (Shipping)</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="jobsTitle">💼 Job Opportunities After Skilled Training</div>
+        <div class="list-item" id="jobsIndia">• Government departments (Railways, Police, Army, Navy, Air Force, State Govts), Private companies, Factories, Workshops, Self-employment (repair shops, salon, boutique, catering, etc.)</div>
+        <div class="list-item" id="jobsAbroad">• High demand in Gulf countries, Canada, Australia for skilled trades with good salaries and PR pathways.</div>
+    </div>
 </div>
+
 <div class="bottom-bar" id="bottomBar"></div>
+
 <script>
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" },{ name: "Search", icon: "🔍", link: "#" },{ name: "AnnS AI", icon: "🤖", link: "#" },{ name: "Alerts", icon: "🔔", link: "#" },{ name: "Profile", icon: "👤", link: "#" }];
-    function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); }); }); }
-    function goBack() { window.location.href = 'education.html'; }
-    renderBottomBar();
+// ==================== TRANSLATIONS ====================
+const translations = {
+    en: {
+        app_tagline: "Career Saathi",
+        tagline: "🔧 Skilled & Vocational Careers",
+        page_title: "🔧 Skilled (Vocational) Stream",
+        govt_title: "🇮🇳 Government Skill Development Programs",
+        pmkvy: "• Skill India / PMKVY – Free training in Electrician, Fitter, Welder, Automotive, Plumber, Solar technician, CCTV, Beauty & wellness, Computer operator, Retail & sales",
+        iti: "• ITI (Industrial Training Institute) – 1-2 years trades: Electrician, Fitter, Welder, Machinist, Motor Mechanic, Wireman, AC & Refrigeration, Diesel Mechanic, Electronics Mechanic, CNC Operator",
+        apprenticeship: "• Apprenticeship Program (NAPS) – Paid training in Railways, Metro, Airports, Manufacturing, Shipyards, Power plants",
+        tech_title: "⚙️ Engineering & Technical Skill Diplomas (1-2 years)",
+        tech_diploma: "• Diploma in Electrical Technician, Mechanical Technician, Fire & Safety, Welding Technology, Tool & Die Making, Draftsmanship (Civil/Mechanical), Automotive Technician, Robotics Technician",
+        short_certs: "• Short certifications: AutoCAD, SolidWorks, PLC Automation, HVAC, Building Electrician, Solar Installation",
+        international_title: "🛫 International Skilled Jobs (Gulf / Europe / Canada)",
+        international_certs: "• Prepare through certifications: Electrician Licence, Welder (3G/6G), Scaffolding, Fire & Safety (NEBOSH), HVAC Technician, Plumbing Technician, Logistics & Supply Chain Technician",
+        medical_title: "🧪 Skilled Courses in Medical & Allied Fields",
+        medical_skills: "• Medical Lab Technician (MLT), X-ray Technician, Operation Theatre Technician, Dialysis Technician, Pharmacy Assistant, Emergency Technician",
+        non_tech_title: "🧵 Skilled Trades in Non-Technical Sectors",
+        beauty: "• Beauty & Grooming: Hair stylist, Makeup artist, Spa/beauty therapist",
+        culinary: "• Culinary & Hospitality: Chef course, Bakery & confectionary, Housekeeping, Hotel operations",
+        fashion: "• Fashion Skills: Tailoring, Pattern making, Boutique management",
+        computer: "• Computer Skills: Data entry, Office management, Graphic design, Web design, Digital marketing",
+        creative_title: "🎨 Creative Skilled Courses",
+        creative_skills: "• Photography, Video editing, Animation (2D/3D), Sound engineering, Jewellery design, Interior design (short-term)",
+        automotive_title: "🚗 Automotive & Transport",
+        automotive_skills: "• Automobile mechanic, Two-wheeler mechanic, Diesel engine technician, Heavy vehicle operator, Logistics & warehousing technician",
+        high_income_title: "🔥 High-Income Skilled Courses (Quick Jobs + Abroad)",
+        high_income_skills: "• CNC Operator, Industrial Electrician, Pipe Fitter (Oil & Gas), Welding Specialist (TIG/MIG/ARC), Fire & Safety (International – NEBOSH / IOSH), Marine Technician (Shipping)",
+        jobs_title: "💼 Job Opportunities After Skilled Training",
+        jobs_india: "• Government departments (Railways, Police, Army, Navy, Air Force, State Govts), Private companies, Factories, Workshops, Self-employment (repair shops, salon, boutique, catering, etc.)",
+        jobs_abroad: "• High demand in Gulf countries, Canada, Australia for skilled trades with good salaries and PR pathways.",
+        bottom_home: "Home",
+        bottom_search: "Search",
+        bottom_ai: "AnnS AI",
+        bottom_alerts: "Alerts",
+        bottom_profile: "Profile"
+    },
+    hi: {
+        app_tagline: "करियर साथी",
+        tagline: "🔧 कुशल और व्यावसायिक करियर",
+        page_title: "🔧 कुशल (व्यावसायिक) स्ट्रीम",
+        govt_title: "🇮🇳 सरकारी कौशल विकास कार्यक्रम",
+        pmkvy: "• स्किल इंडिया / पीएमकेवीवाई – इलेक्ट्रीशियन, फिटर, वेल्डर, प्लंबर, सोलर टेक्नीशियन में मुफ्त प्रशिक्षण",
+        iti: "• आईटीआई – 1-2 वर्ष: इलेक्ट्रीशियन, फिटर, वेल्डर, मशीनिस्ट, एसी और रेफ्रिजरेशन, डीजल मैकेनिक",
+        apprenticeship: "• अप्रेंटिसशिप कार्यक्रम (एनएपीएस) – रेलवे, मेट्रो, एयरपोर्ट में भुगतान प्रशिक्षण",
+        tech_title: "⚙️ इंजीनियरिंग और तकनीकी कौशल डिप्लोमा",
+        tech_diploma: "• इलेक्ट्रिकल टेक्नीशियन, मैकेनिकल टेक्नीशियन, फायर एंड सेफ्टी, वेल्डिंग टेक्नोलॉजी में डिप्लोमा",
+        short_certs: "• ऑटोकैड, सॉलिडवर्क्स, पीएलसी ऑटोमेशन, एचवीएसी में प्रमाणपत्र",
+        international_title: "🛫 अंतर्राष्ट्रीय कुशल नौकरियां",
+        international_certs: "• इलेक्ट्रीशियन लाइसेंस, वेल्डर, स्कैफोल्डिंग, फायर एंड सेफ्टी (नेबोश) में प्रमाणपत्र",
+        medical_title: "🧪 चिकित्सा और संबद्ध क्षेत्रों में कुशल पाठ्यक्रम",
+        medical_skills: "• मेडिकल लैब टेक्नीशियन, एक्स-रे टेक्नीशियन, ओटी टेक्नीशियन, फार्मेसी सहायक",
+        non_tech_title: "🧵 गैर-तकनीकी क्षेत्रों में कुशल व्यापार",
+        beauty: "• सौंदर्य और ग्रूमिंग: हेयर स्टाइलिस्ट, मेकअप आर्टिस्ट",
+        culinary: "• पाक कला और आतिथ्य: शेफ कोर्स, बेकरी, हाउसकीपिंग",
+        fashion: "• फैशन कौशल: सिलाई, पैटर्न मेकिंग, बुटीक प्रबंधन",
+        computer: "• कंप्यूटर कौशल: डेटा एंट्री, ऑफिस प्रबंधन, ग्राफिक डिजाइन, वेब डिजाइन",
+        creative_title: "🎨 रचनात्मक कुशल पाठ्यक्रम",
+        creative_skills: "• फोटोग्राफी, वीडियो एडिटिंग, एनीमेशन, साउंड इंजीनियरिंग",
+        automotive_title: "🚗 ऑटोमोटिव और परिवहन",
+        automotive_skills: "• ऑटोमोबाइल मैकेनिक, डीजल इंजन टेक्नीशियन, लॉजिस्टिक्स टेक्नीशियन",
+        high_income_title: "🔥 उच्च आय वाले कुशल पाठ्यक्रम",
+        high_income_skills: "• सीएनसी ऑपरेटर, इंडस्ट्रियल इलेक्ट्रीशियन, पाइप फिटर, वेल्डिंग विशेषज्ञ",
+        jobs_title: "💼 कुशल प्रशिक्षण के बाद नौकरी के अवसर",
+        jobs_india: "• सरकारी विभाग, प्राइवेट कंपनियां, फैक्ट्रियां, स्वरोजगार",
+        jobs_abroad: "• खाड़ी देशों, कनाडा, ऑस्ट्रेलिया में कुशल व्यापार की उच्च मांग",
+        bottom_home: "होम",
+        bottom_search: "खोजें",
+        bottom_ai: "एनएस एआई",
+        bottom_alerts: "सूचनाएं",
+        bottom_profile: "प्रोफ़ाइल"
+    }
+};
 </script>
 </body>
+<script>
+// Continue JavaScript for skilled.html
+const bottomNav = [
+    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
+    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
+    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
+    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
+    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
+];
+
+let currentLang = 'en';
+
+function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+
+function updateAllText() {
+    document.getElementById('appTagline').textContent = t('app_tagline');
+    document.getElementById('taglineText').textContent = t('tagline');
+    document.getElementById('pageTitle').textContent = t('page_title');
+    
+    document.getElementById('govtTitle').textContent = t('govt_title');
+    document.getElementById('pmkvy').textContent = t('pmkvy');
+    document.getElementById('iti').textContent = t('iti');
+    document.getElementById('apprenticeship').textContent = t('apprenticeship');
+    
+    document.getElementById('techTitle').textContent = t('tech_title');
+    document.getElementById('techDiploma').textContent = t('tech_diploma');
+    document.getElementById('shortCerts').textContent = t('short_certs');
+    
+    document.getElementById('internationalTitle').textContent = t('international_title');
+    document.getElementById('internationalCerts').textContent = t('international_certs');
+    
+    document.getElementById('medicalTitle').textContent = t('medical_title');
+    document.getElementById('medicalSkills').textContent = t('medical_skills');
+    
+    document.getElementById('nonTechTitle').textContent = t('non_tech_title');
+    document.getElementById('beauty').textContent = t('beauty');
+    document.getElementById('culinary').textContent = t('culinary');
+    document.getElementById('fashion').textContent = t('fashion');
+    document.getElementById('computer').textContent = t('computer');
+    
+    document.getElementById('creativeTitle').textContent = t('creative_title');
+    document.getElementById('creativeSkills').textContent = t('creative_skills');
+    
+    document.getElementById('automotiveTitle').textContent = t('automotive_title');
+    document.getElementById('automotiveSkills').textContent = t('automotive_skills');
+    
+    document.getElementById('highIncomeTitle').textContent = t('high_income_title');
+    document.getElementById('highIncomeSkills').textContent = t('high_income_skills');
+    
+    document.getElementById('jobsTitle').textContent = t('jobs_title');
+    document.getElementById('jobsIndia').textContent = t('jobs_india');
+    document.getElementById('jobsAbroad').textContent = t('jobs_abroad');
+    
+    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
+}
+
+function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
+function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
+function goBack() { window.location.href = 'education.html'; }
+function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
+
+document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
+renderBottomBar();
+loadSavedLanguage();
+</script>
 </html>
