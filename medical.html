@@ -21,19 +21,15 @@
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
         .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
         .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; cursor: pointer; transition: background 0.2s; }
-        .list-item:hover { background: #F8F4EF; padding-left: 8px; }
+        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
         .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
         .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
-        @media (max-width: 480px) { .section-title { font-size: 18px; } .list-item { font-size: 13px; } }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
     </style>
-    <script src="languages-core.js"></script>
-    <script src="languages-loader.js"></script>
 </head>
 <body>
 <div class="header">
@@ -41,7 +37,7 @@
     <div class="logo-section">
         <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
         <div class="language-selector">
-            <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <select id="languageSelect">
                 <option value="en">🇬🇧 English</option>
                 <option value="hi">🇮🇳 हिंदी</option>
                 <option value="mr">🇮🇳 मराठी</option>
@@ -64,10 +60,9 @@
 <div class="container">
     <div class="page-title" id="pageTitle">🩺 Medical Stream</div>
 
-    <!-- Section 1: NEET-Based Professional Courses -->
     <div class="section-card">
         <div class="section-title" id="neetTitle">🎓 NEET-Based Professional Courses</div>
-        <div class="list-item" id="mbbsItem" onclick="window.location.href='mbbs_career_ladder.html'">• MBBS – Bachelor of Medicine & Surgery (Click for full career ladder)</div>
+        <div class="list-item" id="mbbsItem">• MBBS – Bachelor of Medicine & Surgery</div>
         <div class="list-item" id="bdsItem">• BDS – Dental Surgery</div>
         <div class="list-item" id="bamsItem">• BAMS – Ayurvedic Doctor</div>
         <div class="list-item" id="bhmsItem">• BHMS – Homeopathic Doctor</div>
@@ -75,101 +70,87 @@
         <div class="list-item" id="bnysItem">• BNYS – Naturopathy & Yoga</div>
     </div>
 
-    <!-- Section 2: Paramedical Courses -->
     <div class="section-card">
         <div class="section-title" id="paramedicalTitle">🩺 Paramedical Courses</div>
         <div class="list-item" id="nursingItem">• B.Sc Nursing (4 years)</div>
         <div class="list-item" id="bptItem">• BPT – Bachelor of Physiotherapy</div>
-        <div class="list-item" id="botItem">• BOT – Occupational Therapy</div>
         <div class="list-item" id="radiologyItem">• B.Sc Radiology / Medical Imaging Technology</div>
         <div class="list-item" id="mltItem">• B.Sc Medical Lab Technology (MLT)</div>
-        <div class="list-item" id="otTechItem">• B.Sc Operation Theatre Technology</div>
-        <div class="list-item" id="dialysisItem">• B.Sc Dialysis Technology</div>
-        <div class="list-item" id="cardiacItem">• B.Sc Cardiac Care Technology</div>
-        <div class="list-item" id="optometryItem">• B.Sc Optometry</div>
-        <div class="list-item" id="diplomaParamItem">• Diploma in Lab Technician, Radiography, X-Ray, Nursing, ECG/EEG, OT Technician</div>
     </div>
 
-    <!-- Section 3: Pharmacy & Medical Sciences -->
     <div class="section-card">
         <div class="section-title" id="pharmacyTitle">💊 Pharmacy & Medical Sciences</div>
         <div class="list-item" id="bpharmItem">• B.Pharm (4 years)</div>
-        <div class="list-item" id="pharmdItem">• Pharm.D (Doctor of Pharmacy)</div>
-        <div class="list-item" id="dpharmItem">• D.Pharm (Diploma in Pharmacy)</div>
         <div class="list-item" id="biotechItem">• B.Sc Biotechnology</div>
-        <div class="list-item" id="microbioItem">• B.Sc Microbiology</div>
-        <div class="list-item" id="biochemItem">• B.Sc Biochemistry</div>
-        <div class="list-item" id="geneticsItem">• B.Sc Genetics</div>
-        <div class="list-item" id="foodTechItem">• B.Sc Food Technology</div>
     </div>
 
-    <!-- Section 4: Veterinary & Allied -->
-    <div class="section-card">
-        <div class="section-title" id="veterinaryTitle">🐄 Veterinary & Allied</div>
-        <div class="list-item" id="bvscItem">• BVSc & AH – Veterinary Science (5 years)</div>
-        <div class="list-item" id="fisheryItem">• B.FSc – Fishery Science</div>
-        <div class="list-item" id="dairyItem">• Dairy Technology</div>
-        <div class="list-item" id="poultryItem">• Poultry Science</div>
-    </div>
-
-    <!-- Section 5: Research & Pure Science -->
-    <div class="section-card">
-        <div class="section-title" id="researchTitle">🔬 Research & Pure Science</div>
-        <div class="list-item" id="bioScienceItem">• B.Sc Biology, Zoology, Botany</div>
-        <div class="list-item" id="physiologyItem">• B.Sc Physiology, Environmental Science</div>
-        <div class="list-item" id="forensicItem">• B.Sc Clinical Research, Forensic Science</div>
-        <div class="list-item" id="neuroscienceItem">• B.Sc Neuroscience, Psychology</div>
-    </div>
-
-    <!-- Section 6: Entrance Exams -->
     <div class="section-card">
         <div class="section-title" id="entranceTitle">📋 Entrance Exams</div>
-        <div class="list-item" id="neetItem">• NEET (National Eligibility cum Entrance Test) – Mandatory for MBBS/BDS</div>
-        <div class="list-item" id="aiimsItem">• AIIMS MBBS (now under NEET)</div>
-        <div class="list-item" id="jipmerItem">• JIPMER (now under NEET)</div>
-        <div class="list-item" id="stateExamItem">• State Medical Entrance Exams</div>
-    </div>
-
-    <!-- Section 7: Government Jobs -->
-    <div class="section-card">
-        <div class="section-title" id="govtJobsTitle">💼 Government Jobs After Medical</div>
-        <div class="list-item" id="upscItem">• UPSC (IAS/IPS/IFS through CSE)</div>
-        <div class="list-item" id="statePscItem">• State PSC – Medical Officer</div>
-        <div class="list-item" id="sscItem">• SSC (CGL, CHSL)</div>
-        <div class="list-item" id="railwaysItem">• Railways – Medical Department</div>
-        <div class="list-item" id="defenceItem">• Defence – Army/Navy/Air Force Medical Corps</div>
-        <div class="list-item" id="govtHospitalItem">• Government Hospital Jobs (DH, PHC, CHC)</div>
-        <div class="list-item" id="pharmacyGovtItem">• Pharmacy Government Exams</div>
-    </div>
-
-    <!-- Section 8: Abroad Options -->
-    <div class="section-card">
-        <div class="section-title" id="abroadTitle">🌍 Abroad Options for Medical</div>
-        <div class="list-item" id="usmleItem">• USA – USMLE (United States Medical Licensing Exam)</div>
-        <div class="list-item" id="plabItem">• UK – PLAB (Professional and Linguistic Assessments Board)</div>
-        <div class="list-item" id="mccqeItem">• Canada – MCCQE (Medical Council of Canada Qualifying Exam)</div>
-        <div class="list-item" id="amcItem">• Australia – AMC (Australian Medical Council)</div>
-        <div class="list-item" id="germanyItem">• Germany – Knowledge of German + Approbation</div>
-        <div class="list-item" id="nzrexItem">• New Zealand – NZREX</div>
-    </div>
-
-    <!-- Section 9: Top Institutes -->
-    <div class="section-card">
-        <div class="section-title" id="institutesTitle">🏆 Top Medical Institutes in India</div>
-        <div class="list-item" id="aiimsInstItem">• AIIMS (All India Institute of Medical Sciences) – Delhi, Bhopal, Jodhpur, etc.</div>
-        <div class="list-item" id="cmcItem">• CMC Vellore – Christian Medical College</div>
-        <div class="list-item" id="jipmerInstItem">• JIPMER – Jawaharlal Institute of Postgraduate Medical Education</div>
-        <div class="list-item" id="afmcItem">• AFMC – Armed Forces Medical College, Pune</div>
-        <div class="list-item" id="mamcItem">• Maulana Azad Medical College, Delhi</div>
-        <div class="list-item" id="grantItem">• Grant Medical College, Mumbai</div>
-        <div class="list-item" id="kgmuItem">• King George's Medical University, Lucknow</div>
-        <div class="list-item" id="bhuItem">• Institute of Medical Sciences, BHU</div>
+        <div class="list-item" id="neetItem">• NEET – National Eligibility cum Entrance Test</div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
+    // ==================== TRANSLATIONS ====================
+    const translations = {
+        en: {
+            app_tagline: "Career Saathi",
+            tagline: "🩺 Medical & Healthcare Careers",
+            page_title: "🩺 Medical Stream",
+            neet_title: "🎓 NEET-Based Professional Courses",
+            paramedical_title: "🩺 Paramedical Courses",
+            pharmacy_title: "💊 Pharmacy & Medical Sciences",
+            entrance_title: "📋 Entrance Exams",
+            mbbs: "• MBBS – Bachelor of Medicine & Surgery",
+            bds: "• BDS – Dental Surgery",
+            bams: "• BAMS – Ayurvedic Doctor",
+            bhms: "• BHMS – Homeopathic Doctor",
+            bums: "• BUMS – Unani Medicine",
+            bnys: "• BNYS – Naturopathy & Yoga",
+            nursing: "• B.Sc Nursing (4 years)",
+            bpt: "• BPT – Bachelor of Physiotherapy",
+            radiology: "• B.Sc Radiology / Medical Imaging Technology",
+            mlt: "• B.Sc Medical Lab Technology (MLT)",
+            bpharm: "• B.Pharm (4 years)",
+            biotech: "• B.Sc Biotechnology",
+            neet: "• NEET – National Eligibility cum Entrance Test",
+            bottom_home: "Home",
+            bottom_search: "Search",
+            bottom_ai: "AnnS AI",
+            bottom_alerts: "Alerts",
+            bottom_profile: "Profile"
+        },
+        hi: {
+            app_tagline: "करियर साथी",
+            tagline: "🩺 मेडिकल और हेल्थकेयर करियर",
+            page_title: "🩺 मेडिकल स्ट्रीम",
+            neet_title: "🎓 नीट-आधारित व्यावसायिक पाठ्यक्रम",
+            paramedical_title: "🩺 पैरामेडिकल पाठ्यक्रम",
+            pharmacy_title: "💊 फार्मेसी और मेडिकल साइंसेज",
+            entrance_title: "📋 प्रवेश परीक्षाएं",
+            mbbs: "• एमबीबीएस – बैचलर ऑफ मेडिसिन एंड सर्जरी",
+            bds: "• बीडीएस – डेंटल सर्जरी",
+            bams: "• बीएएमएस – आयुर्वेदिक डॉक्टर",
+            bhms: "• बीएचएमएस – होम्योपैथिक डॉक्टर",
+            bums: "• बीयूएमएस – यूनानी मेडिसिन",
+            bnys: "• बीएनवाईएस – नेचुरोपैथी और योग",
+            nursing: "• बी.एससी नर्सिंग (4 वर्ष)",
+            bpt: "• बीपीटी – फिजियोथेरेपी",
+            radiology: "• बी.एससी रेडियोलॉजी",
+            mlt: "• बी.एससी मेडिकल लैब टेक्नोलॉजी",
+            bpharm: "• बी.फार्म (4 वर्ष)",
+            biotech: "• बी.एससी बायोटेक्नोलॉजी",
+            neet: "• नीट – राष्ट्रीय पात्रता सह प्रवेश परीक्षा",
+            bottom_home: "होम",
+            bottom_search: "खोजें",
+            bottom_ai: "एनएस एआई",
+            bottom_alerts: "सूचनाएं",
+            bottom_profile: "प्रोफ़ाइल"
+        }
+    };
+
     const bottomNav = [
         { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
         { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
@@ -180,88 +161,10 @@
 
     let currentLang = 'en';
 
-    const defaultText = {
-        app_tagline: "Career Saathi",
-        tagline: "🩺 Medical & Healthcare Careers",
-        page_title: "🩺 Medical Stream",
-        neet_title: "🎓 NEET-Based Professional Courses",
-        paramedical_title: "🩺 Paramedical Courses",
-        pharmacy_title: "💊 Pharmacy & Medical Sciences",
-        veterinary_title: "🐄 Veterinary & Allied",
-        research_title: "🔬 Research & Pure Science",
-        entrance_title: "📋 Entrance Exams",
-        govt_jobs_title: "💼 Government Jobs After Medical",
-        abroad_title: "🌍 Abroad Options for Medical",
-        institutes_title: "🏆 Top Medical Institutes in India",
-        mbbs: "• MBBS – Bachelor of Medicine & Surgery (Click for full career ladder)",
-        bds: "• BDS – Dental Surgery",
-        bams: "• BAMS – Ayurvedic Doctor",
-        bhms: "• BHMS – Homeopathic Doctor",
-        bums: "• BUMS – Unani Medicine",
-        bnys: "• BNYS – Naturopathy & Yoga",
-        nursing: "• B.Sc Nursing (4 years)",
-        bpt: "• BPT – Bachelor of Physiotherapy",
-        bot: "• BOT – Occupational Therapy",
-        radiology: "• B.Sc Radiology / Medical Imaging Technology",
-        mlt: "• B.Sc Medical Lab Technology (MLT)",
-        ot_tech: "• B.Sc Operation Theatre Technology",
-        dialysis: "• B.Sc Dialysis Technology",
-        cardiac: "• B.Sc Cardiac Care Technology",
-        optometry: "• B.Sc Optometry",
-        diploma_param: "• Diploma in Lab Technician, Radiography, X-Ray, Nursing, ECG/EEG, OT Technician",
-        bpharm: "• B.Pharm (4 years)",
-        pharmd: "• Pharm.D (Doctor of Pharmacy)",
-        dpharm: "• D.Pharm (Diploma in Pharmacy)",
-        biotech: "• B.Sc Biotechnology",
-        microbio: "• B.Sc Microbiology",
-        biochem: "• B.Sc Biochemistry",
-        genetics: "• B.Sc Genetics",
-        food_tech: "• B.Sc Food Technology",
-        bvsc: "• BVSc & AH – Veterinary Science (5 years)",
-        fishery: "• B.FSc – Fishery Science",
-        dairy: "• Dairy Technology",
-        poultry: "• Poultry Science",
-        bio_science: "• B.Sc Biology, Zoology, Botany",
-        physiology: "• B.Sc Physiology, Environmental Science",
-        forensic: "• B.Sc Clinical Research, Forensic Science",
-        neuroscience: "• B.Sc Neuroscience, Psychology",
-        neet: "• NEET (National Eligibility cum Entrance Test) – Mandatory for MBBS/BDS",
-        aiims: "• AIIMS MBBS (now under NEET)",
-        jipmer: "• JIPMER (now under NEET)",
-        state_exam: "• State Medical Entrance Exams",
-        upsc: "• UPSC (IAS/IPS/IFS through CSE)",
-        state_psc: "• State PSC – Medical Officer",
-        ssc: "• SSC (CGL, CHSL)",
-        railways: "• Railways – Medical Department",
-        defence: "• Defence – Army/Navy/Air Force Medical Corps",
-        govt_hospital: "• Government Hospital Jobs (DH, PHC, CHC)",
-        pharmacy_govt: "• Pharmacy Government Exams",
-        usmle: "• USA – USMLE (United States Medical Licensing Exam)",
-        plab: "• UK – PLAB (Professional and Linguistic Assessments Board)",
-        mccqe: "• Canada – MCCQE (Medical Council of Canada Qualifying Exam)",
-        amc: "• Australia – AMC (Australian Medical Council)",
-        germany: "• Germany – Knowledge of German + Approbation",
-        nzrex: "• New Zealand – NZREX",
-        aiims_inst: "• AIIMS – Delhi, Bhopal, Jodhpur, etc.",
-        cmc: "• CMC Vellore – Christian Medical College",
-        jipmer_inst: "• JIPMER – Jawaharlal Institute of Postgraduate Medical Education",
-        afmc: "• AFMC – Armed Forces Medical College, Pune",
-        mamc: "• Maulana Azad Medical College, Delhi",
-        grant: "• Grant Medical College, Mumbai",
-        kgmu: "• King George's Medical University, Lucknow",
-        bhu: "• Institute of Medical Sciences, BHU",
-        bottom_home: "Home",
-        bottom_search: "Search",
-        bottom_ai: "AnnS AI",
-        bottom_alerts: "Alerts",
-        bottom_profile: "Profile"
-    };
-
     function t(key) {
-        if (window.translations && window.translations[currentLang] && window.translations[currentLang][key]) {
-            return window.translations[currentLang][key];
-        }
-        return defaultText[key] || key;
+        return translations[currentLang] && translations[currentLang][key] !== undefined 
+            ? translations[currentLang][key] 
+            : (translations.en[key] || key);
     }
 
     function updateAllText() {
@@ -271,12 +174,7 @@
         document.getElementById('neetTitle').textContent = t('neet_title');
         document.getElementById('paramedicalTitle').textContent = t('paramedical_title');
         document.getElementById('pharmacyTitle').textContent = t('pharmacy_title');
-        document.getElementById('veterinaryTitle').textContent = t('veterinary_title');
-        document.getElementById('researchTitle').textContent = t('research_title');
         document.getElementById('entranceTitle').textContent = t('entrance_title');
-        document.getElementById('govtJobsTitle').textContent = t('govt_jobs_title');
-        document.getElementById('abroadTitle').textContent = t('abroad_title');
-        document.getElementById('institutesTitle').textContent = t('institutes_title');
         
         document.getElementById('mbbsItem').textContent = t('mbbs');
         document.getElementById('bdsItem').textContent = t('bds');
@@ -286,55 +184,11 @@
         document.getElementById('bnysItem').textContent = t('bnys');
         document.getElementById('nursingItem').textContent = t('nursing');
         document.getElementById('bptItem').textContent = t('bpt');
-        document.getElementById('botItem').textContent = t('bot');
         document.getElementById('radiologyItem').textContent = t('radiology');
         document.getElementById('mltItem').textContent = t('mlt');
-        document.getElementById('otTechItem').textContent = t('ot_tech');
-        document.getElementById('dialysisItem').textContent = t('dialysis');
-        document.getElementById('cardiacItem').textContent = t('cardiac');
-        document.getElementById('optometryItem').textContent = t('optometry');
-        document.getElementById('diplomaParamItem').textContent = t('diploma_param');
         document.getElementById('bpharmItem').textContent = t('bpharm');
-        document.getElementById('pharmdItem').textContent = t('pharmd');
-        document.getElementById('dpharmItem').textContent = t('dpharm');
         document.getElementById('biotechItem').textContent = t('biotech');
-        document.getElementById('microbioItem').textContent = t('microbio');
-        document.getElementById('biochemItem').textContent = t('biochem');
-        document.getElementById('geneticsItem').textContent = t('genetics');
-        document.getElementById('foodTechItem').textContent = t('food_tech');
-        document.getElementById('bvscItem').textContent = t('bvsc');
-        document.getElementById('fisheryItem').textContent = t('fishery');
-        document.getElementById('dairyItem').textContent = t('dairy');
-        document.getElementById('poultryItem').textContent = t('poultry');
-        document.getElementById('bioScienceItem').textContent = t('bio_science');
-        document.getElementById('physiologyItem').textContent = t('physiology');
-        document.getElementById('forensicItem').textContent = t('forensic');
-        document.getElementById('neuroscienceItem').textContent = t('neuroscience');
         document.getElementById('neetItem').textContent = t('neet');
-        document.getElementById('aiimsItem').textContent = t('aiims');
-        document.getElementById('jipmerItem').textContent = t('jipmer');
-        document.getElementById('stateExamItem').textContent = t('state_exam');
-        document.getElementById('upscItem').textContent = t('upsc');
-        document.getElementById('statePscItem').textContent = t('state_psc');
-        document.getElementById('sscItem').textContent = t('ssc');
-        document.getElementById('railwaysItem').textContent = t('railways');
-        document.getElementById('defenceItem').textContent = t('defence');
-        document.getElementById('govtHospitalItem').textContent = t('govt_hospital');
-        document.getElementById('pharmacyGovtItem').textContent = t('pharmacy_govt');
-        document.getElementById('usmleItem').textContent = t('usmle');
-        document.getElementById('plabItem').textContent = t('plab');
-        document.getElementById('mccqeItem').textContent = t('mccqe');
-        document.getElementById('amcItem').textContent = t('amc');
-        document.getElementById('germanyItem').textContent = t('germany');
-        document.getElementById('nzrexItem').textContent = t('nzrex');
-        document.getElementById('aiimsInstItem').textContent = t('aiims_inst');
-        document.getElementById('cmcItem').textContent = t('cmc');
-        document.getElementById('jipmerInstItem').textContent = t('jipmer_inst');
-        document.getElementById('afmcItem').textContent = t('afmc');
-        document.getElementById('mamcItem').textContent = t('mamc');
-        document.getElementById('grantItem').textContent = t('grant');
-        document.getElementById('kgmuItem').textContent = t('kgmu');
-        document.getElementById('bhuItem').textContent = t('bhu');
         
         document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => {
             if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey);
@@ -342,6 +196,7 @@
     }
 
     function changeLanguage(langCode) {
+        if (!translations[langCode]) return;
         currentLang = langCode;
         localStorage.setItem('career_saathi_language', langCode);
         document.getElementById('languageSelect').value = langCode;
@@ -351,7 +206,7 @@
     function renderBottomBar() {
         const bar = document.getElementById('bottomBar');
         if (!bar) return;
-        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${defaultText[item.nameKey]}</span></div>`).join('');
+        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join('');
         document.querySelectorAll('.nav-item').forEach(nav => {
             nav.addEventListener('click', () => {
                 const link = nav.getAttribute('data-link');
@@ -359,16 +214,15 @@
                 else alert('Coming soon');
             });
         });
-        updateAllText();
     }
 
     function goBack() { window.location.href = 'education.html'; }
     function loadSavedLanguage() {
         const saved = localStorage.getItem('career_saathi_language');
-        if (saved) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); }
+        if (saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); }
     }
 
-    window.changeLanguage = changeLanguage;
+    document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
     renderBottomBar();
     loadSavedLanguage();
 </script>
