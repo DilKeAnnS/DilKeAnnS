@@ -7,253 +7,428 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .language-selector select option { color: black; background: white; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">🔧 Skilled & Vocational Careers</div>
+    <div class="tagline">🔧 Complete Skilled & Vocational Career Guide - 10th to Master Craftsman | Government Schemes</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">🔧 Skilled (Vocational) Stream</div>
-
-    <div class="section-card">
-        <div class="section-title" id="govtTitle">🇮🇳 Government Skill Development Programs</div>
-        <div class="list-item" id="pmkvy">• Skill India / PMKVY – Free training in Electrician, Fitter, Welder, Automotive, Plumber, Solar technician, CCTV, Beauty & wellness, Computer operator, Retail & sales</div>
-        <div class="list-item" id="iti">• ITI (Industrial Training Institute) – 1-2 years trades: Electrician, Fitter, Welder, Machinist, Motor Mechanic, Wireman, AC & Refrigeration, Diesel Mechanic, Electronics Mechanic, CNC Operator</div>
-        <div class="list-item" id="apprenticeship">• Apprenticeship Program (NAPS) – Paid training in Railways, Metro, Airports, Manufacturing, Shipyards, Power plants</div>
+    <div class="page-title">🔧 Skilled & Vocational Careers</div>
+    <div class="page-subtitle">100+ Trades | 500+ ITIs | Government Schemes (PMKVY, NAPS) | High-Income Skills | Complete Roadmap</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="govt">🇮🇳 <span class="door-label">Government Skill Programs</span></button>
+        <button class="door-btn" data-door="iti">🛠️ <span class="door-label">ITI Trades (1-2 years)</span></button>
+        <button class="door-btn" data-door="apprenticeship">📋 <span class="door-label">Apprenticeship (NAPS)</span></button>
+        <button class="door-btn" data-door="technical">⚙️ <span class="door-label">Technical Diplomas</span></button>
+        <button class="door-btn" data-door="medical">🩺 <span class="door-label">Medical Skilled Courses</span></button>
+        <button class="door-btn" data-door="nontech">🧵 <span class="door-label">Non-Technical Skills</span></button>
+        <button class="door-btn" data-door="creative">🎨 <span class="door-label">Creative Skilled Courses</span></button>
+        <button class="door-btn" data-door="international">🌍 <span class="door-label">International Skilled Jobs</span></button>
+        <button class="door-btn" data-door="highincome">🔥 <span class="door-label">High-Income Skills</span></button>
+        <button class="door-btn" data-door="career">💼 <span class="door-label">Jobs & Entrepreneurship</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Opportunities</span></button>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="techTitle">⚙️ Engineering & Technical Skill Diplomas (1-2 years)</div>
-        <div class="list-item" id="techDiploma">• Diploma in Electrical Technician, Mechanical Technician, Fire & Safety, Welding Technology, Tool & Die Making, Draftsmanship (Civil/Mechanical), Automotive Technician, Robotics Technician</div>
-        <div class="list-item" id="shortCerts">• Short certifications: AutoCAD, SolidWorks, PLC Automation, HVAC, Building Electrician, Solar Installation</div>
+    
+    <!-- ==================== DOOR 1: GOVERNMENT SKILL PROGRAMS ==================== -->
+    <div id="door-govt" class="door-content active">
+        <div class="accordion-card active" id="pmkvyCard">
+            <div class="accordion-header" onclick="toggleCard('pmkvyCard')">
+                <div class="accordion-title"><span class="accordion-icon">🇮🇳</span> PMKVY - Pradhan Mantri Kaushal Vikas Yojana (Skill India)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Government of India's flagship skill development program for free vocational training to youth.<br><span class="salary-text">💰 Training: FREE | Certification: Government recognized | Stipend: ₹500-2,000/month (for some courses)</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">No fees, government certification, placement assistance, recognition across India, direct industry linkage.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 8th, 10th, or 12th. Age 14-35 years. Multiple batches throughout the year.</div></div>
+                    <div class="info-card"><div class="info-label">🔗 WEBSITE</div><div class="info-text"><a class="live-link" href="https://www.pmkvyofficial.org" target="_blank">pmkvyofficial.org</a> | <a class="live-link" href="https://www.nsdcindia.org" target="_blank">nsdcindia.org</a></div></div>
+                </div>
+                <div class="section-title">📋 Available Trades under PMKVY</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔧 Electrician</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-30k/month</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Fitter</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-25k/month</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Welder</div><div class="info-text">Duration: 3-6 months | Salary: ₹12k-25k/month</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Plumber</div><div class="info-text">Duration: 3-6 months | Salary: ₹12k-30k/month</div></div>
+                    <div class="info-card"><div class="info-label">🔧 AC Technician</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-35k/month</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Solar Technician</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-30k/month</div></div>
+                    <div class="info-card"><div class="info-label">💻 Computer Operator</div><div class="info-text">Duration: 3-6 months | Salary: ₹10k-20k/month</div></div>
+                    <div class="info-card"><div class="info-label">💻 Digital Marketing</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-40k/month</div></div>
+                    <div class="info-card"><div class="info-label">🏥 Medical Lab Assistant</div><div class="info-text">Duration: 6-12 months | Salary: ₹15k-25k/month</div></div>
+                    <div class="info-card"><div class="info-label">💅 Beauty & Wellness</div><div class="info-text">Duration: 3-6 months | Salary: ₹10k-25k/month</div></div>
+                    <div class="info-card"><div class="info-label">🛒 Retail Sales</div><div class="info-text">Duration: 3 months | Salary: ₹10k-20k/month</div></div>
+                    <div class="info-card"><div class="info-label">📞 BPO/Customer Care</div><div class="info-text">Duration: 2-3 months | Salary: ₹12k-25k/month</div></div>
+                </div>
+                <div class="section-title">🗺️ How to Apply for PMKVY</div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 1</div><div class="roadmap-text">Visit <a class="live-link" href="https://www.pmkvyofficial.org" target="_blank">pmkvyofficial.org</a> or nearest PMKVY Training Center</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 2</div><div class="roadmap-text">Register with Aadhaar card, choose your trade</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 3</div><div class="roadmap-text">Complete training (3-12 months depending on trade)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 4</div><div class="roadmap-text">Pass assessment and get NSDC certification</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 5</div><div class="roadmap-text">Receive placement assistance through PMKVY</div></div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="nsdcCard">
+            <div class="accordion-header" onclick="toggleCard('nsdcCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏛️</span> NSDC - National Skill Development Corporation</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Public-private partnership organization under Ministry of Skill Development, promoting skill development across sectors.<br><span class="salary-text">💰 300+ job roles certified | 40+ Sector Skill Councils</span></div></div>
+                    <div class="info-card"><div class="info-label">🔗 WEBSITE</div><div class="info-text"><a class="live-link" href="https://www.nsdcindia.org" target="_blank">nsdcindia.org</a></div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="internationalTitle">🛫 International Skilled Jobs (Gulf / Europe / Canada)</div>
-        <div class="list-item" id="internationalCerts">• Prepare through certifications: Electrician Licence, Welder (3G/6G), Scaffolding, Fire & Safety (NEBOSH), HVAC Technician, Plumbing Technician, Logistics & Supply Chain Technician</div>
+    
+    <!-- ==================== DOOR 2: ITI TRADES ==================== -->
+    <div id="door-iti" class="door-content">
+        <div class="accordion-card" id="itiCard">
+            <div class="accordion-header" onclick="toggleCard('itiCard')">
+                <div class="accordion-title"><span class="accordion-icon">🛠️</span> ITI - Industrial Training Institute (1-2 years) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Post-secondary vocational training for technical and non-technical trades. Government and private ITIs across India.<br><span class="salary-text">💰 Fresher: ₹12k-25k/month | Experienced: ₹20k-50k/month | Govt ITI: ₹30k-60k/month</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Quick job placement, government jobs (Railways, Defence, PSUs), high demand for skilled workers, opportunity to start own business, NCVT certification recognized nationwide.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 8th, 10th, or 12th. Age 14-40 years. Admission through state-level CET.</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">State ITI Entrance Exam (CET), Direct admission in private ITIs</div></div>
+                    <div class="info-card"><div class="info-label">🔗 OFFICIAL</div><div class="info-text"><a class="live-link" href="https://www.dgt.gov.in" target="_blank">dgt.gov.in</a> (Directorate General of Training)</div></div>
+                </div>
+                <div class="section-title">🛠️ Engineering Trades (60+ trades)</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">⚡ Electrician</div><div class="info-text">Duration: 2 years | Salary: ₹15k-40k/month | Govt Jobs: Railways, Power Dept, PSUs</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Fitter</div><div class="info-text">Duration: 2 years | Salary: ₹15k-35k/month | Govt Jobs: Railways, Defence, PSUs</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ Welder</div><div class="info-text">Duration: 1-2 years | Salary: ₹12k-30k/month | High demand in Gulf countries</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Turner</div><div class="info-text">Duration: 2 years | Salary: ₹15k-35k/month | Machine shop jobs</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Machinist</div><div class="info-text">Duration: 2 years | Salary: ₹15k-40k/month | CNC machine operator</div></div>
+                    <div class="info-card"><div class="info-label">📐 Draftsman (Civil/Mechanical)</div><div class="info-text">Duration: 2 years | Salary: ₹15k-40k/month | AutoCAD jobs</div></div>
+                    <div class="info-card"><div class="info-label">❄️ AC & Refrigeration</div><div class="info-text">Duration: 2 years | Salary: ₹15k-35k/month | Self-employment potential</div></div>
+                    <div class="info-card"><div class="info-label">🔧 Wireman</div><div class="info-text">Duration: 2 years | Salary: ₹12k-30k/month | House wiring, industrial wiring</div></div>
+                    <div class="info-card"><div class="info-label">⚙️ Diesel Mechanic</div><div class="info-text">Duration: 2 years | Salary: ₹15k-35k/month | Transport, agriculture sector</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ Motor Mechanic</div><div class="info-text">Duration: 2 years | Salary: ₹15k-40k/month | Automobile industry</div></div>
+                    <div class="info-card"><div class="info-label">💻 Computer Operator & Programming Assistant (COPA)</div><div class="info-text">Duration: 1-2 years | Salary: ₹10k-25k/month | Data entry, office jobs</div></div>
+                    <div class="info-card"><div class="info-label">🔧 CNC Operator</div><div class="info-text">Duration: 2 years | Salary: ₹20k-50k/month | High demand in manufacturing</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ Tool & Die Maker</div><div class="info-text">Duration: 3 years | Salary: ₹25k-60k/month | High skilled, high salary</div></div>
+                    <div class="info-card"><div class="info-label">⚡ Instrument Mechanic</div><div class="info-text">Duration: 2 years | Salary: ₹15k-40k/month | Process industries</div></div>
+                </div>
+                <div class="section-title">🏛️ Non-Engineering Trades</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💄 Hair & Beauty</div><div class="info-text">Duration: 1 year | Salary: ₹10k-30k/month | Salon work, self-employment</div></div>
+                    <div class="info-card"><div class="info-label">🍳 Food Production (Chef)</div><div class="info-text">Duration: 1-2 years | Salary: ₹12k-40k/month | Hotels, restaurants, cruise ships</div></div>
+                    <div class="info-card"><div class="info-label">🧵 Fashion Design & Technology</div><div class="info-text">Duration: 1-2 years | Salary: ₹10k-30k/month | Garment industry, boutique</div></div>
+                    <div class="info-card"><div class="info-label">📱 Digital Photography</div><div class="info-text">Duration: 1 year | Salary: ₹10k-30k/month | Event photography, studio</div></div>
+                    <div class="info-card"><div class="info-label">🛒 Retail Management</div><div class="info-text">Duration: 1 year | Salary: ₹12k-25k/month | Stores, malls, showrooms</div></div>
+                    <div class="info-card"><div class="info-label">🏨 Front Office Assistant</div><div class="info-text">Duration: 1 year | Salary: ₹12k-25k/month | Hotels, corporate offices</div></div>
+                </div>
+                <div class="section-title">🏛️ Top ITI Colleges in India</div>
+                <table class="college-table">
+                    <thead>
+                        <tr><th>ITI Name</th><th>City</th><th>Type</th><th>Trades Offered</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>那样Govt ITI, K K Nagar</th>那样Chennai</th>那样Government</th>那样30+ trades</th></tr>
+                        <tr>那样Govt ITI, Aliganj</th>那样Lucknow</th>那样Government</th>那样25+ trades</th></tr>
+                        <tr>那样Industrial Training Institute, Worli</th>那样Mumbai</th>那样Government</th>那样20+ trades</th></tr>
+                        <tr>那样Govt ITI, Jodhpur</th>那样Jodhpur</th>那样Government</th>那样15+ trades</th></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Career Roadmap (ITI)</div>
+                <div class="roadmap-step"><div class="roadmap-year">1-2 Years</div><div class="roadmap-text">ITI Training + NCVT Certification<br><span class="salary-text">💰 Technician: ₹12k-25k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Apprenticeship/Junior Technician<br><span class="salary-text">💰 Senior Technician: ₹20k-40k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Supervisor → Foreman<br><span class="salary-text">💰 Foreman: ₹30k-60k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Workshop Manager → Own Business<br><span class="salary-text">💰 Business Owner: ₹5 Lakh - ₹50 Lakh/year</span></div></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="medicalTitle">🧪 Skilled Courses in Medical & Allied Fields</div>
-        <div class="list-item" id="medicalSkills">• Medical Lab Technician (MLT), X-ray Technician, Operation Theatre Technician, Dialysis Technician, Pharmacy Assistant, Emergency Technician</div>
+    
+    <!-- ==================== DOOR 3: APPRENTICESHIP (NAPS) ==================== -->
+    <div id="door-apprenticeship" class="door-content">
+        <div class="accordion-card" id="apprenticeshipCard">
+            <div class="accordion-header" onclick="toggleCard('apprenticeshipCard')">
+                <div class="accordion-title"><span class="accordion-icon">📋</span> NAPS - National Apprenticeship Promotion Scheme</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Government scheme providing on-the-job training with stipend. 75% of stipend paid by government.<br><span class="salary-text">💰 Stipend: ₹6,000-10,000/month | Government covers 75%</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Earn while learning, direct industry exposure, high chance of permanent absorption, government support, recognized certificate.</div></div>
+                    <div class="info-card"><div class="info-label">🔗 WEBSITE</div><div class="info-text"><a class="live-link" href="https://www.apprenticeshipindia.gov.in" target="_blank">apprenticeshipindia.gov.in</a></div></div>
+                </div>
+                <div class="section-title">🏛️ Top Companies Offering Apprenticeship</div>
+                <div><span class="famous-badge">Indian Railways</span> <span class="famous-badge">BHEL</span> <span class="famous-badge">NTPC</span> <span class="famous-badge">ONGC</span> <span class="famous-badge">Maruti Suzuki</span> <span class="famous-badge">Tata Motors</span> <span class="famous-badge">L&T</span> <span class="famous-badge">Mahindra</span> <span class="famous-badge">Airports Authority of India</span> <span class="famous-badge">Metro Rail Corporations</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="nonTechTitle">🧵 Skilled Trades in Non-Technical Sectors</div>
-        <div class="list-item" id="beauty">• Beauty & Grooming: Hair stylist, Makeup artist, Spa/beauty therapist</div>
-        <div class="list-item" id="culinary">• Culinary & Hospitality: Chef course, Bakery & confectionary, Housekeeping, Hotel operations</div>
-        <div class="list-item" id="fashion">• Fashion Skills: Tailoring, Pattern making, Boutique management</div>
-        <div class="list-item" id="computer">• Computer Skills: Data entry, Office management, Graphic design, Web design, Digital marketing</div>
+    
+    <!-- ==================== DOOR 4: TECHNICAL DIPLOMAS ==================== -->
+    <div id="door-technical" class="door-content">
+        <div class="accordion-card" id="technicalDiplomaCard">
+            <div class="accordion-header" onclick="toggleCard('technicalDiplomaCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚙️</span> Polytechnic Diploma (3 years) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">3-year technical diploma after 10th. Lateral entry to B.Tech 2nd year possible.<br><span class="salary-text">💰 Fresher: ₹15k-30k/month | Experienced: ₹25k-60k/month | PSU: ₹40k-80k/month</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 BRANCHES</div><div class="info-text">Mechanical, Civil, Electrical, Computer Science, Electronics, Automobile, Chemical, Marine, Mining, Metallurgy, Instrumentation, Textile, Production, Ceramic, Food Technology</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEECUP (UP), DCET (Karnataka), TS POLYCET, AP POLYCET, Punjab PET, JEXPO (West Bengal)</div></div>
+                    <div class="info-card"><div class="info-label">🗺️ ROADMAP</div><div class="info-text">10th → Polytechnic (3 years) → Job → Lateral Entry to B.Tech (2 years) → B.Tech Degree → PSU/Govt Jobs</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="creativeTitle">🎨 Creative Skilled Courses</div>
-        <div class="list-item" id="creativeSkills">• Photography, Video editing, Animation (2D/3D), Sound engineering, Jewellery design, Interior design (short-term)</div>
+        <!-- ==================== DOOR 5: MEDICAL SKILLED COURSES ==================== -->
+    <div id="door-medical" class="door-content">
+        <div class="accordion-card" id="medicalSkilledCard">
+            <div class="accordion-header" onclick="toggleCard('medicalSkilledCard')">
+                <div class="accordion-title"><span class="accordion-icon">🩺</span> Medical Skilled Courses - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏥 Medical Lab Technician (MLT)</div><div class="info-text">Duration: 1-2 years | Eligibility: 10+2 (PCB) | Salary: ₹15k-30k/month<br>Jobs: Hospital Lab, Path Lab, Blood Bank, Research Lab</div></div>
+                    <div class="info-card"><div class="info-label">📷 X-Ray Technician (Radiography)</div><div class="info-text">Duration: 1-2 years | Eligibility: 10+2 (PCB) | Salary: ₹15k-35k/month<br>Jobs: X-ray Dept, Diagnostic Centers, Hospital Radiology Dept</div></div>
+                    <div class="info-card"><div class="info-label">🏥 Operation Theatre (OT) Technician</div><div class="info-text">Duration: 1-2 years | Eligibility: 10+2 (PCB) | Salary: ₹15k-30k/month<br>Jobs: OT Dept, Surgical Centers, Multi-specialty Hospitals</div></div>
+                    <div class="info-card"><div class="info-label">💧 Dialysis Technician</div><div class="info-text">Duration: 1-2 years | Eligibility: 10+2 (PCB) | Salary: ₹15k-30k/month<br>Jobs: Dialysis Centers, Nephrology Dept, Hospitals</div></div>
+                    <div class="info-card"><div class="info-label">💊 Pharmacy Assistant</div><div class="info-text">Duration: 1-2 years | Eligibility: 10+2 (PCB/PCM) | Salary: ₹10k-25k/month<br>Jobs: Medical Stores, Hospital Pharmacy, Pharma Companies</div></div>
+                    <div class="info-card"><div class="info-label">🚑 Emergency Medical Technician (EMT)</div><div class="info-text">Duration: 1-2 years | Eligibility: 10+2 | Salary: ₹12k-30k/month<br>Jobs: Ambulance Services (108), Hospital Emergency Dept, Disaster Management</div></div>
+                    <div class="info-card"><div class="info-label">❤️ ECG Technician</div><div class="info-text">Duration: 6-12 months | Eligibility: 10+2 | Salary: ₹12k-25k/month<br>Jobs: Cardiology Dept, Hospital, Diagnostic Centers</div></div>
+                    <div class="info-card"><div class="info-label">🦷 Dental Assistant</div><div class="info-text">Duration: 1 year | Eligibility: 10+2 | Salary: ₹10k-20k/month<br>Jobs: Dental Clinics, Dental Hospitals</div></div>
+                    <div class="info-card"><div class="info-label">👁️ Optometry Assistant</div><div class="info-text">Duration: 1-2 years | Eligibility: 10+2 | Salary: ₹12k-25k/month<br>Jobs: Eye Hospitals, Optical Chains (Lenskart, Titan Eye+)</div></div>
+                    <div class="info-card"><div class="info-label">🩺 Physiotherapy Assistant</div><div class="info-text">Duration: 1-2 years | Eligibility: 10+2 | Salary: ₹12k-25k/month<br>Jobs: Physiotherapy Centers, Hospitals, Sports Clinics</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Institutes for Medical Skilled Courses</div>
+                <div><span class="famous-badge">AIIMS - Various Certificate Courses</span> <span class="famous-badge">Govt Medical Colleges - Paramedical Courses</span> <span class="famous-badge">IGNOU - Diploma in Medical Lab Technology</span> <span class="famous-badge">St. John's Ambulance - EMT Training</span></div>
+                <div class="section-title">🗺️ Career Roadmap (Medical Skilled)</div>
+                <div class="roadmap-step"><div class="roadmap-year">1-2 Years</div><div class="roadmap-text">Certificate/Diploma Course<br><span class="salary-text">💰 Technician: ₹12k-25k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Junior Technician → Senior Technician<br><span class="salary-text">💰 Senior Technician: ₹20k-35k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Lab Supervisor → Department In-charge<br><span class="salary-text">💰 Supervisor: ₹30k-50k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5+ Years</div><div class="roadmap-text">Lab Manager → Hospital Administration<br><span class="salary-text">💰 Manager: ₹40k-80k/month</span></div></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="automotiveTitle">🚗 Automotive & Transport</div>
-        <div class="list-item" id="automotiveSkills">• Automobile mechanic, Two-wheeler mechanic, Diesel engine technician, Heavy vehicle operator, Logistics & warehousing technician</div>
+    
+    <!-- ==================== DOOR 6: NON-TECHNICAL SKILLS ==================== -->
+    <div id="door-nontech" class="door-content">
+        <div class="accordion-card" id="nontechCard">
+            <div class="accordion-header" onclick="toggleCard('nontechCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧵</span> Non-Technical Skilled Courses - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💄 Beauty & Wellness</div><div class="info-text">Duration: 3-12 months | Eligibility: 8th/10th pass | Salary: ₹10k-25k/month<br>Courses: Hair Styling, Makeup Artistry, Skin Care, Nail Art, Spa Therapy<br>Jobs: Salon, Spa, Freelance Makeup Artist, Beauty Brand Executive</div></div>
+                    <div class="info-card"><div class="info-label">🍳 Culinary Arts (Chef)</div><div class="info-text">Duration: 1-2 years | Eligibility: 10th/12th pass | Salary: ₹15k-40k/month (India), ₹30k-1L (Abroad)<br>Courses: Chef Training, Bakery & Confectionery, Continental Cuisine, Indian Cuisine<br>Jobs: Hotels (Oberoi, Taj, ITC, Marriott), Restaurants, Cruise Ships, Own Restaurant</div></div>
+                    <div class="info-card"><div class="info-label">🧵 Tailoring & Fashion Design</div><div class="info-text">Duration: 6-12 months | Eligibility: 8th/10th pass | Salary: ₹10k-30k/month<br>Courses: Basic Tailoring, Advanced Stitching, Pattern Making, Boutique Management<br>Jobs: Boutique Owner, Garment Factory, Freelance Tailor, Fashion Assistant</div></div>
+                    <div class="info-card"><div class="info-label">🛒 Retail Management</div><div class="info-text">Duration: 6-12 months | Eligibility: 10th/12th pass | Salary: ₹12k-30k/month<br>Courses: Retail Sales, Store Management, Customer Service, Visual Merchandising<br>Jobs: Store Manager, Sales Executive, Showroom In-charge, Mall Management</div></div>
+                    <div class="info-card"><div class="info-label">🏨 Hotel Management (Certificate)</div><div class="info-text">Duration: 1-2 years | Eligibility: 10th/12th pass | Salary: ₹12k-35k/month<br>Courses: Front Office, Housekeeping, Food & Beverage Service<br>Jobs: Hotels, Resorts, Cruise Ships, Airlines</div></div>
+                    <div class="info-card"><div class="info-label">💻 Digital Marketing</div><div class="info-text">Duration: 3-12 months | Eligibility: 10th/12th pass | Salary: ₹15k-50k/month<br>Courses: SEO, Social Media Marketing, Google Ads, Email Marketing, Content Marketing<br>Jobs: Digital Marketing Executive, SEO Specialist, Social Media Manager, Freelancer</div></div>
+                    <div class="info-card"><div class="info-label">📞 BPO/Customer Service</div><div class="info-text">Duration: 2-3 months | Eligibility: 10th/12th pass | Salary: ₹12k-25k/month<br>Courses: Communication Skills, Customer Handling, Call Center Operations<br>Jobs: Customer Support Executive, Telecaller, BPO Associate</div></div>
+                    <div class="info-card"><div class="info-label">📊 Tally & Accounting</div><div class="info-text">Duration: 3-6 months | Eligibility: 10th/12th pass | Salary: ₹12k-30k/month<br>Courses: Tally ERP 9, GST, Income Tax, Payroll, Basic Accounting<br>Jobs: Accountant, Data Entry Operator, Office Assistant, Accounts Executive</div></div>
+                    <div class="info-card"><div class="info-label">🗣️ Spoken English & Soft Skills</div><div class="info-text">Duration: 2-6 months | Eligibility: 8th/10th pass | Salary: ₹15k-40k/month<br>Courses: Communication Skills, Personality Development, Interview Preparation<br>Jobs: BPO, Customer Service, Front Office, Sales, Freelance English Trainer</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="highIncomeTitle">🔥 High-Income Skilled Courses (Quick Jobs + Abroad)</div>
-        <div class="list-item" id="highIncomeSkills">• CNC Operator, Industrial Electrician, Pipe Fitter (Oil & Gas), Welding Specialist (TIG/MIG/ARC), Fire & Safety (International – NEBOSH / IOSH), Marine Technician (Shipping)</div>
+    
+    <!-- ==================== DOOR 7: CREATIVE SKILLED COURSES ==================== -->
+    <div id="door-creative" class="door-content">
+        <div class="accordion-card" id="creativeCard">
+            <div class="accordion-header" onclick="toggleCard('creativeCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎨</span> Creative Skilled Courses - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📸 Photography</div><div class="info-text">Duration: 3-12 months | Eligibility: 10th pass | Salary: ₹15k-50k/month<br>Courses: Wedding Photography, Fashion Photography, Product Photography, Wildlife Photography, Photo Editing<br>Jobs: Wedding Photographer, Freelance Photographer, Studio Owner, Photojournalist</div></div>
+                    <div class="info-card"><div class="info-label">🎬 Video Editing & Production</div><div class="info-text">Duration: 6-12 months | Eligibility: 10th/12th pass | Salary: ₹15k-50k/month<br>Software: Adobe Premiere Pro, Final Cut Pro, DaVinci Resolve, After Effects<br>Jobs: Video Editor, YouTube Editor, Film Editor, Content Creator</div></div>
+                    <div class="info-card"><div class="info-label">🎨 Graphic Design</div><div class="info-text">Duration: 6-12 months | Eligibility: 10th/12th pass | Salary: ₹15k-40k/month<br>Software: Adobe Photoshop, Illustrator, InDesign, CorelDRAW, Canva<br>Jobs: Graphic Designer, Social Media Designer, Logo Designer, Packaging Designer, Freelancer</div></div>
+                    <div class="info-card"><div class="info-label">🖌️ Animation & VFX</div><div class="info-text">Duration: 1-2 years | Eligibility: 10th/12th pass | Salary: ₹20k-60k/month<br>Software: Maya, 3ds Max, Blender, After Effects, Nuke<br>Jobs: 2D/3D Animator, VFX Artist, Motion Graphics Designer, Game Designer</div></div>
+                    <div class="info-card"><div class="info-label">💍 Jewellery Design</div><div class="info-text">Duration: 6-12 months | Eligibility: 10th pass | Salary: ₹15k-40k/month<br>Courses: CAD Jewellery Design, Handmade Jewellery, Gemology<br>Jobs: Jewellery Designer, CAD Designer, Jewellery Store Consultant, Own Brand</div></div>
+                    <div class="info-card"><div class="info-label">🎵 Music Production & Sound Engineering</div><div class="info-text">Duration: 1-2 years | Eligibility: 10th/12th pass | Salary: ₹20k-60k/month<br>Software: Logic Pro, Ableton Live, FL Studio, Pro Tools<br>Jobs: Music Producer, Sound Engineer, Studio Recording Artist, Live Sound Engineer</div></div>
+                    <div class="info-card"><div class="info-label">📱 Mobile App Development</div><div class="info-text">Duration: 6-12 months | Eligibility: 10th/12th pass | Salary: ₹20k-60k/month<br>Courses: Android Development (Java/Kotlin), iOS Development (Swift), Flutter, React Native<br>Jobs: Mobile App Developer, Freelance App Developer, Startup Founder</div></div>
+                    <div class="info-card"><div class="info-label">🌐 Web Development</div><div class="info-text">Duration: 6-12 months | Eligibility: 10th/12th pass | Salary: ₹20k-60k/month<br>Courses: HTML, CSS, JavaScript, React, Node.js, PHP, Python, WordPress<br>Jobs: Frontend Developer, Backend Developer, Full Stack Developer, Freelancer</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="jobsTitle">💼 Job Opportunities After Skilled Training</div>
-        <div class="list-item" id="jobsIndia">• Government departments (Railways, Police, Army, Navy, Air Force, State Govts), Private companies, Factories, Workshops, Self-employment (repair shops, salon, boutique, catering, etc.)</div>
-        <div class="list-item" id="jobsAbroad">• High demand in Gulf countries, Canada, Australia for skilled trades with good salaries and PR pathways.</div>
+    
+    <!-- ==================== DOOR 8: INTERNATIONAL SKILLED JOBS ==================== -->
+    <div id="door-international" class="door-content">
+        <div class="accordion-card" id="internationalCard">
+            <div class="accordion-header" onclick="toggleCard('internationalCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> International Skilled Jobs - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇦🇪 Gulf Countries (UAE, Saudi, Qatar, Kuwait, Oman, Bahrain)</div><div class="info-text">High demand: Electrician, Plumber, Welder, AC Technician, Driver, Construction Worker, Nurse, Beautician<br>Salary: ₹30k-80k/month (Tax-free) | Benefits: Free accommodation, food, medical, air tickets</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">High demand: Electrician, Plumber, Welder, Carpenter, Chef, Truck Driver, Nurse, IT Professional<br>Salary: CAD 40k-80k/year | PR pathway through Express Entry | IELTS required (5.5-6.5)</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">High demand: Electrician, Plumber, Chef, Motor Mechanic, Welder, Bricklayer, Nurse, Aged Care<br>Salary: AUD 50k-90k/year | SkillSelect PR pathway | IELTS 6.0 required</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">High demand: Electrician, Mechanic, Welder, Chef, Nurse, IT Professional<br>Salary: €30k-60k/year | German language A2/B1 required | Free training available</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">High demand: Chef, Nurse, Electrician, Plumber, Construction Worker, IT Professional<br>Salary: £25k-50k/year | Health & Care Worker visa, Skilled Worker visa</div></div>
+                    <div class="info-card"><div class="info-label">🇳🇿 New Zealand</div><div class="info-text">High demand: Electrician, Plumber, Chef, Carpenter, Welder, Nurse<br>Salary: NZD 50k-80k/year | PR pathway</div></div>
+                </div>
+                <div class="section-title">📋 Required Certifications for International Jobs</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔧 Electrician License</div><div class="info-text">Required for Gulf, Canada, Australia. NCVT certification + trade test</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ Welding Certification</div><div class="info-text">6G, TIG, MIG, ARC certification - higher salary abroad</div></div>
+                    <div class="info-card"><div class="info-label">🔥 NEBOSH / IOSH</div><div class="info-text">Safety certification for Gulf and Europe - ₹8 LPA+ starting</div></div>
+                    <div class="info-card"><div class="info-label">🔧 HVAC Certification</div><div class="info-text">AC technician certification - high demand in Gulf</div></div>
+                    <div class="info-card"><div class="info-label">🗣️ English Proficiency</div><div class="info-text">IELTS, TOEFL, PTE required for Canada, Australia, UK, NZ</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 9: HIGH-INCOME SKILLS ==================== -->
+    <div id="door-highincome" class="door-content">
+        <div class="accordion-card" id="highincomeCard">
+            <div class="accordion-header" onclick="toggleCard('highincomeCard')">
+                <div class="accordion-title"><span class="accordion-icon">🔥</span> High-Income Skilled Courses - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💻 Full Stack Web Development</div><div class="info-text">Duration: 6-12 months | Starting Salary: ₹5-12 LPA | Experienced: ₹15-30 LPA<br>Skills: HTML, CSS, JavaScript, React, Node.js, MongoDB, Python<br>Jobs: Full Stack Developer, Frontend Developer, Backend Developer, Freelancer</div></div>
+                    <div class="info-card"><div class="info-label">📱 Mobile App Development</div><div class="info-text">Duration: 6-12 months | Starting Salary: ₹5-12 LPA | Experienced: ₹15-30 LPA<br>Skills: Flutter, React Native, Kotlin (Android), Swift (iOS)<br>Jobs: Mobile App Developer, App Architect, Freelance Developer</div></div>
+                    <div class="info-card"><div class="info-label">🤖 Data Science & AI</div><div class="info-text">Duration: 6-12 months | Starting Salary: ₹8-15 LPA | Experienced: ₹20-50 LPA<br>Skills: Python, SQL, Machine Learning, Deep Learning, Tableau, Power BI<br>Jobs: Data Scientist, Data Analyst, ML Engineer, AI Specialist</div></div>
+                    <div class="info-card"><div class="info-label">📊 Digital Marketing Specialist</div><div class="info-text">Duration: 3-6 months | Starting Salary: ₹4-8 LPA | Experienced: ₹10-25 LPA<br>Skills: SEO, Google Ads, Social Media Marketing, Email Marketing, Analytics<br>Jobs: Digital Marketing Manager, SEO Specialist, Social Media Manager</div></div>
+                    <div class="info-card"><div class="info-label">💼 Amazon FBA & E-commerce</div><div class="info-text">Duration: 2-3 months | Earnings: ₹20k-2 Lakhs/month<br>Skills: Product Research, Sourcing, Amazon Seller Central, PPC Ads<br>Jobs: Amazon Seller, E-commerce Entrepreneur, Dropshipper</div></div>
+                    <div class="info-card"><div class="info-label">🧾 Tally & GST Expert</div><div class="info-text">Duration: 3-6 months | Salary: ₹20k-50k/month<br>Skills: Tally ERP 9, Tally Prime, GST Filing, Income Tax, Payroll<br>Jobs: Accountant, GST Consultant, Accounts Manager</div></div>
+                    <div class="info-card"><div class="info-label">🔧 CNC Machinist/Operator</div><div class="info-text">Duration: 6-12 months | Salary: ₹20k-60k/month (India), ₹50k-1.5L (Abroad)<br>Skills: CNC Programming, G-Code, Machine Operation, Quality Control<br>Jobs: CNC Operator, CNC Programmer, Manufacturing Supervisor</div></div>
+                    <div class="info-card"><div class="info-label">🔥 NEBOSH/IOSH Safety Officer</div><div class="info-text">Duration: 3-6 months | Salary: ₹30k-80k/month (India), ₹50k-1.5L (Abroad)<br>Skills: Industrial Safety, Fire Safety, Risk Assessment, HSE Management<br>Jobs: Safety Officer, HSE Officer, Industrial Safety Manager</div></div>
+                    <div class="info-card"><div class="info-label">⚡ Solar Panel Installation</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-40k/month<br>Skills: Solar PV Installation, Solar Panel Maintenance, Inverter Handling<br>Jobs: Solar Technician, Solar Installation Supervisor, Renewable Energy Consultant</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 10: JOBS & ENTREPRENEURSHIP ==================== -->
+    <div id="door-career" class="door-content">
+        <div class="accordion-card" id="careerSkilledCard">
+            <div class="accordion-header" onclick="toggleCard('careerSkilledCard')">
+                <div class="accordion-title"><span class="accordion-icon">💼</span> Jobs & Entrepreneurship for Skilled Professionals</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏛️ Government Jobs for ITI/Diploma</div><div class="info-text">Indian Railways (RRB JE, Technician), Defence (Army, Navy, Air Force), PSUs (BHEL, NTPC, GAIL), State Govt (Electrical, PWD, Water Supply), Police Department (Technical wing)</div></div>
+                    <div class="info-card"><div class="info-label">🏢 Private Sector Jobs</div><div class="info-text">Manufacturing, Construction, Automotive, IT, Retail, Hospitality, Healthcare, Pharma, E-commerce, Logistics, BPOs</div></div>
+                    <div class="info-card"><div class="info-label">🚀 Entrepreneurship Ideas</div><div class="info-text">Electrical Repair Shop, AC Service Center, Plumbing Service, Welding Workshop, Tailoring Boutique, Beauty Parlor, Mobile Repair Shop, Computer Center, Photography Studio, Catering Service, Tiffin Service, Grocery Store, E-commerce Store, Freelancing Services</div></div>
+                </div>
+                <div class="section-title">💰 Government Schemes for Skilled Entrepreneurs</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏦 Mudra Loan</div><div class="info-text">₹50k-20L for micro enterprises - <a class="live-link" href="https://www.mudra.org.in" target="_blank">Apply</a></div></div>
+                    <div class="info-card"><div class="info-label">🇮🇳 PM Employment Generation Programme (PMEGP)</div><div class="info-text">Subsidy 15-35% for setting up new manufacturing/service units</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ Skill India Loans</div><div class="info-text">Special loans for skilled professionals to start their own business</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 11: ABROAD OPPORTUNITIES ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="abroadSkilledCard">
+            <div class="accordion-header" onclick="toggleCard('abroadSkilledCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Study & Work for Skilled Professionals</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">Trade courses (1-2 years) in: Automotive, Carpentry, Plumbing, Electrical, Chef, Nursing, Aged Care<br>Eligibility: 10+2 | IELTS 5.5-6.0 | Fees: AUD 10k-20k/year | PR pathway after 2 years</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">PG Diploma courses (1-2 years) in: IT, Healthcare, Trades, Hospitality, Engineering Technician<br>Eligibility: 10+2 | IELTS 6.0 | Fees: CAD 15k-25k/year | PGWP (3 years) | PR pathway</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">Vocational training (3 years) in: Electrician, Mechanic, IT, Nursing, Hospitality<br>Eligibility: 10+2 | German A2/B1 | No tuition fees | Work visa after training</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">BTEC/Diploma courses in: Business, IT, Engineering, Healthcare, Hospitality<br>Eligibility: 10+2 | IELTS 6.0 | Fees: £10k-20k/year</div></div>
+                </div>
+                <div class="section-title">📋 Language Requirements for Abroad</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">IELTS</div><div class="info-text">Canada (6.0), Australia (5.5-6.0), UK (6.0), New Zealand (5.5-6.0)</div></div>
+                    <div class="info-card"><div class="info-label">PTE</div><div class="info-text">Accepted in Australia, New Zealand, Canada, UK</div></div>
+                    <div class="info-card"><div class="info-label">German</div><div class="info-text">A2/B1 required for Germany vocational training</div></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
-    en: {
-        app_tagline: "Career Saathi",
-        tagline: "🔧 Skilled & Vocational Careers",
-        page_title: "🔧 Skilled (Vocational) Stream",
-        govt_title: "🇮🇳 Government Skill Development Programs",
-        pmkvy: "• Skill India / PMKVY – Free training in Electrician, Fitter, Welder, Automotive, Plumber, Solar technician, CCTV, Beauty & wellness, Computer operator, Retail & sales",
-        iti: "• ITI (Industrial Training Institute) – 1-2 years trades: Electrician, Fitter, Welder, Machinist, Motor Mechanic, Wireman, AC & Refrigeration, Diesel Mechanic, Electronics Mechanic, CNC Operator",
-        apprenticeship: "• Apprenticeship Program (NAPS) – Paid training in Railways, Metro, Airports, Manufacturing, Shipyards, Power plants",
-        tech_title: "⚙️ Engineering & Technical Skill Diplomas (1-2 years)",
-        tech_diploma: "• Diploma in Electrical Technician, Mechanical Technician, Fire & Safety, Welding Technology, Tool & Die Making, Draftsmanship (Civil/Mechanical), Automotive Technician, Robotics Technician",
-        short_certs: "• Short certifications: AutoCAD, SolidWorks, PLC Automation, HVAC, Building Electrician, Solar Installation",
-        international_title: "🛫 International Skilled Jobs (Gulf / Europe / Canada)",
-        international_certs: "• Prepare through certifications: Electrician Licence, Welder (3G/6G), Scaffolding, Fire & Safety (NEBOSH), HVAC Technician, Plumbing Technician, Logistics & Supply Chain Technician",
-        medical_title: "🧪 Skilled Courses in Medical & Allied Fields",
-        medical_skills: "• Medical Lab Technician (MLT), X-ray Technician, Operation Theatre Technician, Dialysis Technician, Pharmacy Assistant, Emergency Technician",
-        non_tech_title: "🧵 Skilled Trades in Non-Technical Sectors",
-        beauty: "• Beauty & Grooming: Hair stylist, Makeup artist, Spa/beauty therapist",
-        culinary: "• Culinary & Hospitality: Chef course, Bakery & confectionary, Housekeeping, Hotel operations",
-        fashion: "• Fashion Skills: Tailoring, Pattern making, Boutique management",
-        computer: "• Computer Skills: Data entry, Office management, Graphic design, Web design, Digital marketing",
-        creative_title: "🎨 Creative Skilled Courses",
-        creative_skills: "• Photography, Video editing, Animation (2D/3D), Sound engineering, Jewellery design, Interior design (short-term)",
-        automotive_title: "🚗 Automotive & Transport",
-        automotive_skills: "• Automobile mechanic, Two-wheeler mechanic, Diesel engine technician, Heavy vehicle operator, Logistics & warehousing technician",
-        high_income_title: "🔥 High-Income Skilled Courses (Quick Jobs + Abroad)",
-        high_income_skills: "• CNC Operator, Industrial Electrician, Pipe Fitter (Oil & Gas), Welding Specialist (TIG/MIG/ARC), Fire & Safety (International – NEBOSH / IOSH), Marine Technician (Shipping)",
-        jobs_title: "💼 Job Opportunities After Skilled Training",
-        jobs_india: "• Government departments (Railways, Police, Army, Navy, Air Force, State Govts), Private companies, Factories, Workshops, Self-employment (repair shops, salon, boutique, catering, etc.)",
-        jobs_abroad: "• High demand in Gulf countries, Canada, Australia for skilled trades with good salaries and PR pathways.",
-        bottom_home: "Home",
-        bottom_search: "Search",
-        bottom_ai: "AnnS AI",
-        bottom_alerts: "Alerts",
-        bottom_profile: "Profile"
-    },
-    hi: {
-        app_tagline: "करियर साथी",
-        tagline: "🔧 कुशल और व्यावसायिक करियर",
-        page_title: "🔧 कुशल (व्यावसायिक) स्ट्रीम",
-        govt_title: "🇮🇳 सरकारी कौशल विकास कार्यक्रम",
-        pmkvy: "• स्किल इंडिया / पीएमकेवीवाई – इलेक्ट्रीशियन, फिटर, वेल्डर, प्लंबर, सोलर टेक्नीशियन में मुफ्त प्रशिक्षण",
-        iti: "• आईटीआई – 1-2 वर्ष: इलेक्ट्रीशियन, फिटर, वेल्डर, मशीनिस्ट, एसी और रेफ्रिजरेशन, डीजल मैकेनिक",
-        apprenticeship: "• अप्रेंटिसशिप कार्यक्रम (एनएपीएस) – रेलवे, मेट्रो, एयरपोर्ट में भुगतान प्रशिक्षण",
-        tech_title: "⚙️ इंजीनियरिंग और तकनीकी कौशल डिप्लोमा",
-        tech_diploma: "• इलेक्ट्रिकल टेक्नीशियन, मैकेनिकल टेक्नीशियन, फायर एंड सेफ्टी, वेल्डिंग टेक्नोलॉजी में डिप्लोमा",
-        short_certs: "• ऑटोकैड, सॉलिडवर्क्स, पीएलसी ऑटोमेशन, एचवीएसी में प्रमाणपत्र",
-        international_title: "🛫 अंतर्राष्ट्रीय कुशल नौकरियां",
-        international_certs: "• इलेक्ट्रीशियन लाइसेंस, वेल्डर, स्कैफोल्डिंग, फायर एंड सेफ्टी (नेबोश) में प्रमाणपत्र",
-        medical_title: "🧪 चिकित्सा और संबद्ध क्षेत्रों में कुशल पाठ्यक्रम",
-        medical_skills: "• मेडिकल लैब टेक्नीशियन, एक्स-रे टेक्नीशियन, ओटी टेक्नीशियन, फार्मेसी सहायक",
-        non_tech_title: "🧵 गैर-तकनीकी क्षेत्रों में कुशल व्यापार",
-        beauty: "• सौंदर्य और ग्रूमिंग: हेयर स्टाइलिस्ट, मेकअप आर्टिस्ट",
-        culinary: "• पाक कला और आतिथ्य: शेफ कोर्स, बेकरी, हाउसकीपिंग",
-        fashion: "• फैशन कौशल: सिलाई, पैटर्न मेकिंग, बुटीक प्रबंधन",
-        computer: "• कंप्यूटर कौशल: डेटा एंट्री, ऑफिस प्रबंधन, ग्राफिक डिजाइन, वेब डिजाइन",
-        creative_title: "🎨 रचनात्मक कुशल पाठ्यक्रम",
-        creative_skills: "• फोटोग्राफी, वीडियो एडिटिंग, एनीमेशन, साउंड इंजीनियरिंग",
-        automotive_title: "🚗 ऑटोमोटिव और परिवहन",
-        automotive_skills: "• ऑटोमोबाइल मैकेनिक, डीजल इंजन टेक्नीशियन, लॉजिस्टिक्स टेक्नीशियन",
-        high_income_title: "🔥 उच्च आय वाले कुशल पाठ्यक्रम",
-        high_income_skills: "• सीएनसी ऑपरेटर, इंडस्ट्रियल इलेक्ट्रीशियन, पाइप फिटर, वेल्डिंग विशेषज्ञ",
-        jobs_title: "💼 कुशल प्रशिक्षण के बाद नौकरी के अवसर",
-        jobs_india: "• सरकारी विभाग, प्राइवेट कंपनियां, फैक्ट्रियां, स्वरोजगार",
-        jobs_abroad: "• खाड़ी देशों, कनाडा, ऑस्ट्रेलिया में कुशल व्यापार की उच्च मांग",
-        bottom_home: "होम",
-        bottom_search: "खोजें",
-        bottom_ai: "एनएस एआई",
-        bottom_alerts: "सूचनाएं",
-        bottom_profile: "प्रोफ़ाइल"
-    }
-};
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
 </script>
 </body>
-<script>
-// Continue JavaScript for skilled.html
-const bottomNav = [
-    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
-    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
-    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
-    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
-    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
-];
-
-let currentLang = 'en';
-
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-
-function updateAllText() {
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    
-    document.getElementById('govtTitle').textContent = t('govt_title');
-    document.getElementById('pmkvy').textContent = t('pmkvy');
-    document.getElementById('iti').textContent = t('iti');
-    document.getElementById('apprenticeship').textContent = t('apprenticeship');
-    
-    document.getElementById('techTitle').textContent = t('tech_title');
-    document.getElementById('techDiploma').textContent = t('tech_diploma');
-    document.getElementById('shortCerts').textContent = t('short_certs');
-    
-    document.getElementById('internationalTitle').textContent = t('international_title');
-    document.getElementById('internationalCerts').textContent = t('international_certs');
-    
-    document.getElementById('medicalTitle').textContent = t('medical_title');
-    document.getElementById('medicalSkills').textContent = t('medical_skills');
-    
-    document.getElementById('nonTechTitle').textContent = t('non_tech_title');
-    document.getElementById('beauty').textContent = t('beauty');
-    document.getElementById('culinary').textContent = t('culinary');
-    document.getElementById('fashion').textContent = t('fashion');
-    document.getElementById('computer').textContent = t('computer');
-    
-    document.getElementById('creativeTitle').textContent = t('creative_title');
-    document.getElementById('creativeSkills').textContent = t('creative_skills');
-    
-    document.getElementById('automotiveTitle').textContent = t('automotive_title');
-    document.getElementById('automotiveSkills').textContent = t('automotive_skills');
-    
-    document.getElementById('highIncomeTitle').textContent = t('high_income_title');
-    document.getElementById('highIncomeSkills').textContent = t('high_income_skills');
-    
-    document.getElementById('jobsTitle').textContent = t('jobs_title');
-    document.getElementById('jobsIndia').textContent = t('jobs_india');
-    document.getElementById('jobsAbroad').textContent = t('jobs_abroad');
-    
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
-}
-
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'education.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-renderBottomBar();
-loadSavedLanguage();
-</script>
 </html>
