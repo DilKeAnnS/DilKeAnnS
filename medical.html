@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
@@ -19,15 +19,17 @@
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
         .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
         .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+        .list-item:hover { background: #F8F4EF; padding-left: 8px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
+        .nav-item.active span:last-child { color: #1B4D3E; font-weight: 600; }
         @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
     </style>
+    <link rel="stylesheet" href="exam-styles.css">
 </head>
 <body>
 <div class="header">
@@ -38,22 +40,166 @@
     </div>
     <div class="tagline">🩺 Medical & Healthcare Careers</div>
 </div>
+
 <div class="container">
     <div class="page-title">🩺 Medical Stream</div>
-    <div class="section-card"><div class="section-title">🎓 NEET-Based Professional Courses</div><div class="list-item">• MBBS – Bachelor of Medicine & Surgery</div><div class="list-item">• BDS – Dental Surgery</div><div class="list-item">• BAMS – Ayurvedic Doctor</div><div class="list-item">• BHMS – Homeopathic Doctor</div><div class="list-item">• BUMS – Unani Medicine</div><div class="list-item">• BNYS – Naturopathy & Yoga</div></div>
-    <div class="section-card"><div class="section-title">🩺 Paramedical Courses (High Scope)</div><div class="list-item">• B.Sc Nursing, BPT (Physiotherapy), BOT (Occupational Therapy)</div><div class="list-item">• B.Sc Radiology, MLT, OT Technology, Dialysis Technology</div><div class="list-item">• Diploma in Lab Technician, Radiography, X-Ray, Nursing</div></div>
-    <div class="section-card"><div class="section-title">💊 Pharmacy & Medical Sciences</div><div class="list-item">• B.Pharm, Pharm.D, D.Pharm</div><div class="list-item">• B.Sc Biotechnology, Microbiology, Biochemistry, Genetics</div></div>
-    <div class="section-card"><div class="section-title">🐄 Veterinary & Allied</div><div class="list-item">• BVSc & AH – Veterinary Science</div><div class="list-item">• B.FSc Fishery Science, Dairy Technology, Poultry Science</div></div>
-    <div class="section-card"><div class="section-title">🔬 Research & Pure Science</div><div class="list-item">• B.Sc Biology, Zoology, Botany, Environmental Science, Forensic Science, Neuroscience, Psychology</div></div>
-    <div class="section-card"><div class="section-title">📋 Entrance Exams</div><div class="list-item">• NEET, AIIMS, JIPMER, State Medical Exams</div></div>
-    <div class="section-card"><div class="section-title">💼 Government Jobs</div><div class="list-item">• UPSC (IAS/IPS/IFS), State PSC, SSC, Railways, Defence, Govt Hospitals</div></div>
-    <div class="section-card"><div class="section-title">🌍 Abroad Options</div><div class="list-item">• USA (USMLE), UK (PLAB), Canada, Australia, Germany, New Zealand</div></div>
-    <div class="section-card"><div class="section-title">🏆 Top Institutes</div><div class="list-item">• AIIMS, CMC Vellore, JIPMER, AFMC, Maulana Azad Medical College</div></div>
+    
+    <div class="section-card">
+        <div class="section-title">🎓 NEET-Based Professional Courses</div>
+        <div class="list-item" onclick="window.location.href='mbbs_career_ladder.html'">• MBBS – Bachelor of Medicine & Surgery (Click for full career ladder)</div>
+        <div class="list-item">• BDS – Dental Surgery</div>
+        <div class="list-item">• BAMS – Ayurvedic Doctor</div>
+        <div class="list-item">• BHMS – Homeopathic Doctor</div>
+        <div class="list-item">• BUMS – Unani Medicine</div>
+        <div class="list-item">• BNYS – Naturopathy & Yoga</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🩺 Paramedical Courses</div>
+        <div class="list-item">• B.Sc Nursing (4 years)</div>
+        <div class="list-item">• BPT – Bachelor of Physiotherapy</div>
+        <div class="list-item">• BOT – Occupational Therapy</div>
+        <div class="list-item">• B.Sc Radiology / Medical Imaging Technology</div>
+        <div class="list-item">• B.Sc Medical Lab Technology (MLT)</div>
+        <div class="list-item">• B.Sc Operation Theatre Technology</div>
+        <div class="list-item">• B.Sc Dialysis Technology</div>
+        <div class="list-item">• B.Sc Cardiac Care Technology</div>
+        <div class="list-item">• B.Sc Optometry</div>
+        <div class="list-item">• Diploma in Lab Technician, Radiography, X-Ray, Nursing, ECG/EEG, OT Technician</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">💊 Pharmacy & Medical Sciences</div>
+        <div class="list-item">• B.Pharm (4 years)</div>
+        <div class="list-item">• Pharm.D (Doctor of Pharmacy)</div>
+        <div class="list-item">• D.Pharm (Diploma in Pharmacy)</div>
+        <div class="list-item">• B.Sc Biotechnology</div>
+        <div class="list-item">• B.Sc Microbiology</div>
+        <div class="list-item">• B.Sc Biochemistry</div>
+        <div class="list-item">• B.Sc Genetics</div>
+        <div class="list-item">• B.Sc Food Technology</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🐄 Veterinary & Allied</div>
+        <div class="list-item">• BVSc & AH – Veterinary Science (5 years)</div>
+        <div class="list-item">• B.FSc – Fishery Science</div>
+        <div class="list-item">• Dairy Technology</div>
+        <div class="list-item">• Poultry Science</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🔬 Research & Pure Science</div>
+        <div class="list-item">• B.Sc Biology, Zoology, Botany</div>
+        <div class="list-item">• B.Sc Physiology, Environmental Science</div>
+        <div class="list-item">• B.Sc Clinical Research, Forensic Science</div>
+        <div class="list-item">• B.Sc Neuroscience, Psychology</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">📋 Entrance Exams</div>
+        <div class="list-item">• NEET (National Eligibility cum Entrance Test) – Mandatory for MBBS/BDS</div>
+        <div class="list-item">• AIIMS MBBS (now under NEET)</div>
+        <div class="list-item">• JIPMER (now under NEET)</div>
+        <div class="list-item">• State Medical Entrance Exams</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">💼 Government Jobs After Medical</div>
+        <div class="list-item">• UPSC (IAS/IPS/IFS through CSE)</div>
+        <div class="list-item">• State PSC – Medical Officer</div>
+        <div class="list-item">• SSC (CGL, CHSL)</div>
+        <div class="list-item">• Railways – Medical Department</div>
+        <div class="list-item">• Defence – Army/Navy/Air Force Medical Corps</div>
+        <div class="list-item">• Government Hospital Jobs (DH, PHC, CHC)</div>
+        <div class="list-item">• Pharmacy Government Exams</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🌍 Abroad Options for Medical</div>
+        <div class="list-item">• USA – USMLE (United States Medical Licensing Exam)</div>
+        <div class="list-item">• UK – PLAB (Professional and Linguistic Assessments Board)</div>
+        <div class="list-item">• Canada – MCCQE (Medical Council of Canada Qualifying Exam)</div>
+        <div class="list-item">• Australia – AMC (Australian Medical Council)</div>
+        <div class="list-item">• Germany – Knowledge of German + Approbation</div>
+        <div class="list-item">• New Zealand – NZREX</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🏆 Top Medical Institutes in India</div>
+        <div class="list-item">• AIIMS (All India Institute of Medical Sciences) – Delhi, Bhopal, Jodhpur, etc.</div>
+        <div class="list-item">• CMC Vellore – Christian Medical College</div>
+        <div class="list-item">• JIPMER – Jawaharlal Institute of Postgraduate Medical Education & Research</div>
+        <div class="list-item">• AFMC – Armed Forces Medical College, Pune</div>
+        <div class="list-item">• Maulana Azad Medical College, Delhi</div>
+        <div class="list-item">• Grant Medical College, Mumbai</div>
+        <div class="list-item">• King George's Medical University, Lucknow</div>
+        <div class="list-item">• Institute of Medical Sciences, BHU</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">💰 High Salary Career Paths for PCB Students</div>
+        <div class="list-item">• Doctor (MBBS/BDS) – ₹8 LPA to ₹2 Cr+</div>
+        <div class="list-item">• Pharma Industry (R&D, Quality, Production) – ₹5-20 LPA</div>
+        <div class="list-item">• Genetic Engineering – ₹6-15 LPA</div>
+        <div class="list-item">• Biotechnology Scientist – ₹8-25 LPA</div>
+        <div class="list-item">• Medical Coding (International) – ₹4-12 LPA</div>
+        <div class="list-item">• Physiotherapist – ₹4-10 LPA</div>
+        <div class="list-item">• Radiologist Assistant – ₹6-15 LPA</div>
+        <div class="list-item">• Forensic Scientist – ₹5-12 LPA</div>
+        <div class="list-item">• Psychologist – ₹4-10 LPA</div>
+        <div class="list-item">• Nutritionist & Dietician – ₹4-8 LPA</div>
+        <div class="list-item">• Public Health Officer – ₹6-12 LPA</div>
+    </div>
 </div>
+
+<!-- EXAM UPDATES MODULE -->
+<div class="exam-updates-wrapper" style="padding: 0 16px 20px 16px;">
+    <div class="exam-section-title">
+        📢 Live Exam Updates & Notifications
+        <span class="refresh-note">🔄 Auto-refreshes every hour</span>
+    </div>
+    <div id="exam-updates-container"></div>
+</div>
+
+<div class="exam-details-grid" style="margin: 0 16px 20px 16px;">
+    <div class="exam-details-title">📊 NEET UG 2025 – Category-wise Cutoff</div>
+    <table class="cutoff-table">
+        <thead>
+            <tr><th>Category</th><th>Cutoff (Out of 720)</th><th>Qualifying Percentile</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>General</td><td>720-137</td><td>50th Percentile</td></tr>
+            <tr><td>OBC/SC/ST</td><td>136-107</td><td>40th Percentile</td></tr>
+            <tr><td>General-PwD</td><td>136-121</td><td>45th Percentile</td></tr>
+        </tbody>
+    </table>
+    <div class="cutoff-note">📌 Note: Cutoffs are updated when official results are released. Last year's data shown for reference.</div>
+</div>
+
 <div class="bottom-bar" id="bottomBar"></div>
+
+<script src="exam-updates.js"></script>
 <script>
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" },{ name: "Search", icon: "🔍", link: "#" },{ name: "AnnS AI", icon: "🤖", link: "#" },{ name: "Alerts", icon: "🔔", link: "#" },{ name: "Profile", icon: "👤", link: "#" }];
-    function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); }); }); }
+    const bottomNav = [
+        { name: "Home", icon: "🏠", link: "index.html" },
+        { name: "Search", icon: "🔍", link: "#" },
+        { name: "AnnS AI", icon: "🤖", link: "#" },
+        { name: "Alerts", icon: "🔔", link: "#" },
+        { name: "Profile", icon: "👤", link: "#" }
+    ];
+    function renderBottomBar() { 
+        const bar = document.getElementById('bottomBar'); 
+        if(!bar) return; 
+        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); 
+        document.querySelectorAll('.nav-item').forEach(nav => { 
+            nav.addEventListener('click', () => { 
+                const link = nav.getAttribute('data-link'); 
+                if(link && link !== '#') window.location.href = link; 
+                else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); 
+            }); 
+        }); 
+    }
     function goBack() { window.location.href = 'education.html'; }
     renderBottomBar();
 </script>
