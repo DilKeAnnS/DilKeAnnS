@@ -43,7 +43,9 @@
         @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tiles-grid { grid-template-columns: repeat(6, 1fr); gap: 20px; } .tile { padding: 20px 12px; } .tile-icon { font-size: 42px; } .tile-name { font-size: 14px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } .welcome { font-size: 14px; } .tagline { font-size: 16px; } .search-bar input { font-size: 16px; } .ask-ai { font-size: 14px; padding: 8px 16px; } }
         @media (max-width: 480px) { .tile-name { font-size: 10px; } .tile-icon { font-size: 26px; } .ask-ai span { display: none; } .ask-ai { padding: 6px 10px; } .logo-section { flex-wrap: wrap; justify-content: center; } }
     </style>
-    <script src="languages.js"></script>
+    <!-- Language System: Core + Loader -->
+    <script src="languages-core.js"></script>
+    <script src="languages-loader.js"></script>
 </head>
 <body>
 <div class="header">
@@ -62,6 +64,13 @@
                 <option value="mr">🇮🇳 मराठी</option>
                 <option value="ta">🇮🇳 தமிழ்</option>
                 <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
             </select>
         </div>
         <div class="notification-icon" id="alertBtn">🔔</div>
@@ -109,7 +118,7 @@
         { nameKey: "something_interesting", icon: "💡", link: "#" },
         { nameKey: "results", icon: "📊", link: "#" },
         { nameKey: "application_forms", icon: "📋", link: "#" },
-        { nameKey: "bharat", icon: "🇮🇳", link: "#" }
+        { nameKey: "bharat", icon: "🇮🇳", link: "bharat.html" }
     ];
 
     const bottomNav = [
@@ -119,6 +128,18 @@
         { nameKey: "bottom_alerts", icon: "🔔", link: "#" },
         { nameKey: "bottom_profile", icon: "👤", link: "#" }
     ];
+
+    function getDefaultText(key) {
+        const defaults = {
+            education: "Education", business: "Business", jobs_exams: "Jobs & Exams",
+            study_material: "Study Material", magazines: "Magazines", enewspapers: "E-newspapers",
+            current_affairs: "Current Affairs", mock_test: "Mock test", after_10th: "After 10th",
+            after_12th: "After 12th", something_interesting: "Something Interesting", results: "Results",
+            application_forms: "App Forms", bharat: "🇮🇳 BHARAT", bottom_home: "Home",
+            bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
+        };
+        return defaults[key] || key;
+    }
 
     function renderTiles() {
         const grid = document.getElementById('tilesGrid');
@@ -136,7 +157,7 @@
                 if (link && link !== '#') window.location.href = link;
                 else {
                     const nameKey = tile.getAttribute('data-name-key');
-                    alert(`🚀 ${t(nameKey)} ${t('coming_soon')}`);
+                    alert(`🚀 ${window.t ? t(nameKey) : getDefaultText(nameKey)} ${window.t ? t('coming_soon') : 'coming soon'}`);
                 }
             });
         });
@@ -158,104 +179,79 @@
                 if (link && link !== '#') window.location.href = link;
                 else {
                     const nameKey = nav.getAttribute('data-name-key');
-                    alert(`📱 ${t(nameKey)} ${t('coming_soon')}`);
+                    alert(`📱 ${window.t ? t(nameKey) : getDefaultText(nameKey)} ${window.t ? t('coming_soon') : 'coming soon'}`);
                 }
             });
         });
     }
 
-    function getDefaultText(key) {
-        const defaults = {
-            education: "Education",
-            business: "Business",
-            jobs_exams: "Jobs & Exams",
-            study_material: "Study Material",
-            magazines: "Magazines",
-            enewspapers: "E-newspapers",
-            current_affairs: "Current Affairs",
-            mock_test: "Mock test",
-            after_10th: "After 10th",
-            after_12th: "After 12th",
-            something_interesting: "Something Interesting",
-            results: "Results",
-            application_forms: "App Forms",
-            bharat: "🇮🇳 BHARAT",
-            bottom_home: "Home",
-            bottom_search: "Search",
-            bottom_ai: "AnnS AI",
-            bottom_alerts: "Alerts",
-            bottom_profile: "Profile"
-        };
-        return defaults[key] || key;
-    }
-
     function updateTileAndNavLanguages() {
-        document.querySelectorAll('.tile [data-i18n]').forEach(el => {
+        document.querySelectorAll('.tile .tile-name[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (key && window.t) el.textContent = t(key);
+            if (window.t) el.textContent = t(key);
         });
-        document.querySelectorAll('.nav-item [data-i18n]').forEach(el => {
+        document.querySelectorAll('.nav-item span:last-child[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (key && window.t) el.textContent = t(key);
+            if (window.t) el.textContent = t(key);
         });
     }
 
-    // Setup search functionality
     function setupSearch() {
         const input = document.getElementById('searchInput');
         if (input) {
             input.addEventListener('keypress', e => {
                 if (e.key === 'Enter') {
                     const query = e.target.value.trim();
-                    alert(query ? `${t('searching')}: "${query}"` : t('search_alert'));
+                    alert(query ? `${window.t ? t('searching') : 'Searching for'}: "${query}"` : (window.t ? t('search_alert') : 'Please type something to search'));
                 }
             });
         }
     }
 
-    // Setup AI buttons
     function setupAI() {
         const askBtn = document.getElementById('askAiBtn');
         const floatingBtn = document.getElementById('floatingAiBtn');
-        const openAI = () => alert(`🤖 ${t('ai_mentor')}\n\n${t('ai_modes')}`);
+        const openAI = () => alert(`🤖 ${window.t ? t('ai_mentor') : 'AnnS AI Mentor'}\n\n${window.t ? t('ai_modes') : 'Doubt Solver • Career Mentor • Debate Judge • Exam Planner'}`);
         if (askBtn) askBtn.addEventListener('click', openAI);
         if (floatingBtn) floatingBtn.addEventListener('click', openAI);
     }
 
-    // Setup notifications
     function setupNotifications() {
         const alertBtn = document.getElementById('alertBtn');
         if (alertBtn) {
-            alertBtn.addEventListener('click', () => alert(`🔔 ${t('notification_center')}\n\n${t('notifications')}`));
+            alertBtn.addEventListener('click', () => alert(`🔔 ${window.t ? t('notification_center') : 'Notification Center'}\n\n${window.t ? t('notifications') : 'Exam Alerts • Govt Schemes • Job Updates • Important Circulars'}`));
         }
     }
 
-    // Set welcome message
     function setWelcomeMessage() {
         const hours = new Date().getHours();
         const welcomeDiv = document.getElementById('welcomeMsg');
         if (welcomeDiv) {
             let greeting = '';
-            if (hours < 12) greeting = '🌅 ' + t('welcome');
-            else if (hours < 17) greeting = '☀️ ' + t('welcome');
-            else greeting = '🌙 ' + t('welcome');
+            if (hours < 12) greeting = '🌅 ' + (window.t ? t('welcome') : 'Welcome back, Learner!');
+            else if (hours < 17) greeting = '☀️ ' + (window.t ? t('welcome') : 'Welcome back, Learner!');
+            else greeting = '🌙 ' + (window.t ? t('welcome') : 'Welcome back, Learner!');
             welcomeDiv.innerHTML = greeting;
         }
     }
 
     // Override updatePageLanguage to also update tiles and bottom bar
-    if (typeof window !== 'undefined' && window.updatePageLanguage) {
+    if (typeof window !== 'undefined') {
         const originalUpdate = window.updatePageLanguage;
-        window.updatePageLanguage = function() {
-            originalUpdate();
-            updateTileAndNavLanguages();
-            setWelcomeMessage();
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) searchInput.placeholder = t('search_placeholder');
-        };
+        if (originalUpdate) {
+            window.updatePageLanguage = function() {
+                originalUpdate();
+                updateTileAndNavLanguages();
+                setWelcomeMessage();
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput && window.t) searchInput.placeholder = t('search_placeholder');
+                const askAiSpan = document.querySelector('.ask-ai span');
+                if (askAiSpan && window.t) askAiSpan.textContent = t('ask_ai');
+            };
+        }
     }
 
-    // Initialize
+    // Initialize everything
     renderTiles();
     renderBottomBar();
     setupSearch();
