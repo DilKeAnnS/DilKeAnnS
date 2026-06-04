@@ -45,9 +45,6 @@
         .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
         .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
         .live-link:hover { text-decoration: underline; }
-        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
-        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
         .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
         .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
         .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
@@ -56,7 +53,7 @@
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; color: #64748B; }
-        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } }
     </style>
 </head>
 <body>
@@ -67,29 +64,24 @@
         <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">⚙️ Complete Engineering & PCM Career Guide - 10th to CEO | Live Exam Updates</div>
+    <div class="tagline">⚙️ Complete Engineering & PCM Career Guide - 10th to CEO | 100+ Branches | All Scholarships</div>
 </div>
 
 <div class="container">
     <div class="page-title">⚙️ Non-Medical (PCM) Stream</div>
-    <div class="page-subtitle">60+ Courses | 200+ Colleges | Live Exam Links | Abroad Options | Complete Roadmap</div>
+    <div class="page-subtitle">100+ Courses | 300+ Colleges | All Engineering Branches | All Pure Science | Complete Scholarships</div>
     
     <div class="door-nav">
-        <button class="door-btn active" data-door="engineering">🎓 <span class="door-label">Engineering (20+ Branches)</span></button>
-        <button class="door-btn" data-door="architecture">🏛️ <span class="door-label">Architecture</span></button>
-        <button class="door-btn" data-door="defence">🛡️ <span class="door-label">Defence & NDA</span></button>
-        <button class="door-btn" data-door="merchant">🚢 <span class="door-label">Merchant Navy</span></button>
-        <button class="door-btn" data-door="aviation">✈️ <span class="door-label">Aviation</span></button>
-        <button class="door-btn" data-door="computers">💻 <span class="door-label">Computer & IT</span></button>
-        <button class="door-btn" data-door="science">🔬 <span class="door-label">Pure Science</span></button>
-        <button class="door-btn" data-door="management">📊 <span class="door-label">Management</span></button>
-        <button class="door-btn" data-door="design">🎨 <span class="door-label">Design</span></button>
+        <button class="door-btn active" data-door="engineering">🎓 <span class="door-label">Engineering (35+ Branches)</span></button>
+        <button class="door-btn" data-door="science">🔬 <span class="door-label">Pure Science (15+ Branches)</span></button>
+        <button class="door-btn" data-door="scholarships">💰 <span class="door-label">Scholarships</span></button>
         <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Studies</span></button>
         <button class="door-btn" data-door="psu">🏭 <span class="door-label">PSU & Govt Jobs</span></button>
     </div>
     
-    <!-- ==================== DOOR 1: ENGINEERING ==================== -->
+    <!-- ==================== DOOR 1: ENGINEERING (35+ BRANCHES) ==================== -->
     <div id="door-engineering" class="door-content active">
+        
         <!-- CSE -->
         <div class="accordion-card active" id="cseCard">
             <div class="accordion-header" onclick="toggleCard('cseCard')">
@@ -98,28 +90,48 @@
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of programming, algorithms, software development.<br><span class="salary-text">💰 Fresher: ₹8-40 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">JEE Main</a> | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Advanced</a> | <a class="live-link" href="https://www.bitsadmission.com" target="_blank">BITSAT</a> | <a class="live-link" href="https://viteee.vit.ac.in" target="_blank">VITEEE</a> | <a class="live-link" href="https://www.srmist.edu.in" target="_blank">SRMJEE</a></div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.bits-pilani.ac.in" target="_blank">BITS Pilani</a> | <a class="live-link" href="https://www.nitt.edu" target="_blank">NIT Trichy</a></div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of programming, algorithms, software development, computer systems.<br><span class="salary-text">💰 Fresher: ₹8-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">JEE Main</a> | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Advanced</a> | <a class="live-link" href="https://www.bitsadmission.com" target="_blank">BITSAT</a></div></div>
                 </div>
-                <div class="section-title">⭐ Famous Engineers</div>
+                <div class="section-title">⭐ Famous Computer Engineers</div>
                 <div><span class="famous-badge">Sundar Pichai (Google CEO)</span> <span class="famous-badge">Satya Nadella (Microsoft CEO)</span> <span class="famous-badge">N. R. Narayana Murthy (Infosys)</span></div>
             </div>
         </div>
         
-        <!-- Mechanical -->
-        <div class="accordion-card" id="mechCard">
-            <div class="accordion-header" onclick="toggleCard('mechCard')">
-                <div class="accordion-title"><span class="accordion-icon">⚙️</span> Mechanical Engineering (4 years)</div>
+        <!-- AI & ML -->
+        <div class="accordion-card" id="aimlCard">
+            <div class="accordion-header" onclick="toggleCard('aimlCard')">
+                <div class="accordion-title"><span class="accordion-icon">🤖</span> AI & ML - Artificial Intelligence & Machine Learning (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-20 LPA | PSU: ₹12-25 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.bhel.com" target="_blank">BHEL</a> | <a class="live-link" href="https://hal-india.co.in" target="_blank">HAL</a> | <a class="live-link" href="https://www.ntpc.co.in" target="_blank">NTPC</a> | <a class="live-link" href="https://www.gailonline.com" target="_blank">GAIL</a> | <a class="live-link" href="https://www.isro.gov.in" target="_blank">ISRO</a></div></div>
-                </div>
-                <div class="section-title">⭐ Famous Mechanical Engineers</div>
-                <div><span class="famous-badge">Elon Musk (Tesla, SpaceX)</span> <span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Henry Ford</span></div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹10-50 LPA | After M.Tech: ₹20-70 LPA</div></div></div>
+                <div class="section-title">⭐ Famous AI Experts</div>
+                <div><span class="famous-badge">Andrew Ng</span> <span class="famous-badge">Fei-Fei Li</span> <span class="famous-badge">Geoffrey Hinton</span></div>
+            </div>
+        </div>
+        
+        <!-- Data Science -->
+        <div class="accordion-card" id="dataScienceCard">
+            <div class="accordion-header" onclick="toggleCard('dataScienceCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> Data Science Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹8-45 LPA | ₹15-55 LPA (M.Tech)</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Robotics Engineering (NEW) -->
+        <div class="accordion-card" id="roboticsCard">
+            <div class="accordion-header" onclick="toggleCard('roboticsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🤖</span> Robotics Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-25 LPA | After M.Tech: ₹15-40 LPA</div></div></div>
+                <div class="section-title">⭐ Famous Robotics Engineers</div>
+                <div><span class="famous-badge">Dr. Vijay Kumar</span> <span class="famous-badge">Dr. Rodney Brooks</span></div>
             </div>
         </div>
         
@@ -130,10 +142,20 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-18 LPA | PSU: ₹10-22 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="http://www.nhpcindia.com" target="_blank">NHPC</a> | <a class="live-link" href="https://www.nbccindia.com" target="_blank">NBCC</a> | <a class="live-link" href="https://www.sjvn.nic.in" target="_blank">SJVN</a> | State PWDs</div></div>
-                </div>
+                <div class="section-title">⭐ Famous Civil Engineers</div>
+                <div><span class="famous-badge">Sir M. Visvesvaraya (Bharat Ratna)</span> <span class="famous-badge">M. S. Ramaiah</span> <span class="famous-badge">Dr. B. C. Punmia</span></div>
+            </div>
+        </div>
+        
+        <!-- Mechanical -->
+        <div class="accordion-card" id="mechanicalCard">
+            <div class="accordion-header" onclick="toggleCard('mechanicalCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚙️</span> Mechanical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="section-title">⭐ Famous Mechanical Engineers</div>
+                <div><span class="famous-badge">Elon Musk</span> <span class="famous-badge">Henry Ford</span> <span class="famous-badge">James Watt</span></div>
             </div>
         </div>
         
@@ -144,24 +166,20 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-22 LPA | PSU: ₹12-28 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.powergridindia.com" target="_blank">Powergrid</a> | <a class="live-link" href="https://www.ntpc.co.in" target="_blank">NTPC</a> | <a class="live-link" href="https://www.bhel.com" target="_blank">BHEL</a></div></div>
-                </div>
+                <div class="section-title">⭐ Famous Electrical Engineers</div>
+                <div><span class="famous-badge">Nikola Tesla</span> <span class="famous-badge">Thomas Edison</span> <span class="famous-badge">Michael Faraday</span></div>
             </div>
         </div>
         
-        <!-- Electronics -->
+        <!-- Electronics & Communication -->
         <div class="accordion-card" id="eceCard">
             <div class="accordion-header" onclick="toggleCard('eceCard')">
                 <div class="accordion-title"><span class="accordion-icon">📡</span> Electronics & Communication (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-25 LPA | Semiconductor: ₹10-35 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COMPANIES</div><div class="info-text">Intel, Qualcomm, Texas Instruments, Samsung, ISRO, DRDO</div></div>
-                </div>
+                <div class="section-title">⭐ Famous Electronics Engineers</div>
+                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Sam Pitroda</span></div>
             </div>
         </div>
         
@@ -172,311 +190,395 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹8-25 LPA | ₹15-40 LPA (M.Tech)</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP RECRUITERS</div><div class="info-text"><a class="live-link" href="https://www.isro.gov.in" target="_blank">ISRO</a> | <a class="live-link" href="https://www.drdo.gov.in" target="_blank">DRDO</a> | <a class="live-link" href="https://hal-india.co.in" target="_blank">HAL</a> | Boeing, Airbus, SpaceX</div></div>
-                </div>
                 <div class="section-title">⭐ Famous Aerospace Engineers</div>
-                <div><span class="famous-badge">Dr. Vikram Sarabhai (ISRO Founder)</span> <span class="famous-badge">Dr. K. Sivan</span> <span class="famous-badge">Elon Musk</span></div>
+                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Dr. K. Sivan</span> <span class="famous-badge">Dr. Vikram Sarabhai</span></div>
             </div>
         </div>
         
-        <!-- AI/ML -->
-        <div class="accordion-card" id="aimlCard">
-            <div class="accordion-header" onclick="toggleCard('aimlCard')">
-                <div class="accordion-title"><span class="accordion-icon">🤖</span> AI & Machine Learning (4 years)</div>
+        <!-- Biotechnology Engineering (NEW) -->
+        <div class="accordion-card" id="biotechEnggCard">
+            <div class="accordion-header" onclick="toggleCard('biotechEnggCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧬</span> Biotechnology Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹10-50 LPA | After M.Tech: ₹20-70 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iiit.ac.in" target="_blank">IIIT Hyderabad</a> | <a class="live-link" href="https://www.bits-pilani.ac.in" target="_blank">BITS Pilani</a></div></div>
-                </div>
-                <div class="section-title">⭐ Famous AI Experts</div>
-                <div><span class="famous-badge">Andrew Ng</span> <span class="famous-badge">Fei-Fei Li (Stanford AI Lab)</span> <span class="famous-badge">Geoffrey Hinton (Godfather of AI)</span></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 2: ARCHITECTURE ==================== -->
-    <div id="door-architecture" class="door-content">
-        <div class="accordion-card" id="barchCard">
-            <div class="accordion-header" onclick="toggleCard('barchCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏛️</span> B.Arch - Bachelor of Architecture (5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.nata.in" target="_blank">NATA</a> | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Paper 2</a></div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.iitr.ac.in" target="_blank">IIT Roorkee</a> | <a class="live-link" href="http://spa.ac.in" target="_blank">SPA Delhi</a> | <a class="live-link" href="https://cept.ac.in" target="_blank">CEPT Ahmedabad</a></div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-20 LPA | Senior: ₹15-30 LPA</div></div>
-                </div>
-                <div class="section-title">⭐ Famous Architects</div>
-                <div><span class="famous-badge">Balkrishna Doshi (Pritzker Prize)</span> <span class="famous-badge">Charles Correa</span> <span class="famous-badge">Zaha Hadid</span></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 3: DEFENCE & NDA ==================== -->
-    <div id="door-defence" class="door-content">
-        <div class="accordion-card" id="ndaCard">
-            <div class="accordion-header" onclick="toggleCard('ndaCard')">
-                <div class="accordion-title"><span class="accordion-icon">🛡️</span> NDA - National Defence Academy</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://upsc.gov.in" target="_blank">UPSC NDA Exam</a> (Twice a year - April & September)</div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹70k-1.5L/month + Allowances | Lieutenant: ₹80k-1.2L | Captain: ₹1.2-1.8L</div></div>
-                    <div class="info-card"><div class="info-label">⏰ ELIGIBILITY</div><div class="info-text">12th pass (PCM), Age 16.5-19.5 years, Unmarried males</div></div>
-                </div>
-                <div class="section-title">⭐ Famous NDA Officers</div>
-                <div><span class="famous-badge">Field Marshal Sam Manekshaw</span> <span class="famous-badge">Lt Gen J. F. R. Jacob</span> <span class="famous-badge">Capt Vikram Batra (PVC)</span></div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-15 LPA | After M.Tech: ₹10-25 LPA</div></div></div>
+                <div class="section-title">⭐ Famous Biotech Engineers</div>
+                <div><span class="famous-badge">Kiran Mazumdar-Shaw</span> <span class="famous-badge">Dr. R. A. Mashelkar</span></div>
             </div>
         </div>
         
-        <!-- TES Entry -->
-        <div class="accordion-card" id="tesCard">
-            <div class="accordion-header" onclick="toggleCard('tesCard')">
-                <div class="accordion-title"><span class="accordion-icon">🎖️</span> TES - Technical Entry Scheme (Army)</div>
+        <!-- Biomedical Engineering (NEW) -->
+        <div class="accordion-card" id="biomedicalCard">
+            <div class="accordion-header" onclick="toggleCard('biomedicalCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏥</span> Biomedical Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 DETAILS</div><div class="info-text">10+2 PCM with 70%+ | Age 16.5-19.5 | <a class="live-link" href="https://joinindianarmy.nic.in" target="_blank">joinindianarmy.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">Training stipend: ₹56k/month | After commission: ₹80k-1.5L/month</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 4: MERCHANT NAVY (COMPLETE) ==================== -->
-    <div id="door-merchant" class="door-content">
-        <div class="accordion-card" id="merchantCourseCard">
-            <div class="accordion-header" onclick="toggleCard('merchantCourseCard')">
-                <div class="accordion-title"><span class="accordion-icon">🚢</span> Merchant Navy - Courses & Institutes</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🎓 B.Tech Marine Engineering</div><div class="info-text">4 years | Eligibility: 12th PCM 60%+ | <a class="live-link" href="https://www.imo.gov.in" target="_blank">Apply via IMU CET</a></div></div>
-                    <div class="info-card"><div class="info-label">🌊 B.Sc Nautical Science</div><div class="info-text">3 years | Eligibility: 12th PCM 60%+ | <a class="live-link" href="https://www.imo.gov.in" target="_blank">Apply via IMU CET</a></div></div>
-                    <div class="info-card"><div class="info-label">⚓ GP Rating Course</div><div class="info-text">6 months + 6 months sea training | Eligibility: 12th PCM/PCB 40%+</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP INSTITUTES</div><div class="info-text"><a class="live-link" href="https://www.tschanakya.in" target="_blank">TS Chanakya Mumbai</a> | <a class="live-link" href="https://imu.edu.in" target="_blank">IMU Mumbai</a> | <a class="live-link" href="https://www.amet.ac.in" target="_blank">AMET Chennai</a> | <a class="live-link" href="https://www.tolani.edu" target="_blank">Tolani Maritime Institute</a></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.imo.gov.in" target="_blank">IMU CET</a> (Indian Maritime University Common Entrance Test)</div></div>
-                </div>
-                <div class="section-title">🗺️ Merchant Navy Career Progression & Salary</div>
-                <div class="roadmap-step"><div class="roadmap-year">Cadet</div><div class="roadmap-text">6-12 months training<br><span class="salary-text">💰 Stipend: ₹10-20k/month</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Deck Cadet</div><div class="roadmap-text">After training<br><span class="salary-text">💰 ₹20-40 LPA (Tax-free)</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Third Officer</div><div class="roadmap-text">After 18 months experience<br><span class="salary-text">💰 ₹40-60 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Second Officer</div><div class="roadmap-text">After 3 years<br><span class="salary-text">💰 ₹60-80 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Chief Officer</div><div class="roadmap-text">After 8 years<br><span class="salary-text">💰 ₹80 LPA - ₹1.2 Cr</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Captain/Master</div><div class="roadmap-text">After 12-15 years<br><span class="salary-text">💰 ₹1.2 - 2.5 Cr (Tax-free)</span></div></div>
-                <div class="section-title">📋 Required Certifications</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📜 STCW Certification</div><div class="info-text">Basic safety, fire fighting, survival craft, first aid</div></div>
-                    <div class="info-card"><div class="info-label">🩺 Medical Fitness</div><div class="info-text">DG Shipping Medical Certificate (Class 1/2)</div></div>
-                    <div class="info-card"><div class="info-label">🌐 English Proficiency</div><div class="info-text">IELTS/TOEFL (for international placements)</div></div>
-                </div>
-                <div class="section-title">⭐ Famous Merchant Navy Officers</div>
-                <div><span class="famous-badge">Capt. Radhika Menon (First Indian woman captain)</span> <span class="famous-badge">Capt. Divya Ajith</span></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 5: AVIATION ==================== -->
-    <div id="door-aviation" class="door-content">
-        <div class="accordion-card" id="pilotCard">
-            <div class="accordion-header" onclick="toggleCard('pilotCard')">
-                <div class="accordion-title"><span class="accordion-icon">✈️</span> Commercial Pilot Training (2-3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 REQUIREMENTS</div><div class="info-text">12th PCM (50%+), Class 1 Medical, <a class="live-link" href="https://www.dgca.gov.in" target="_blank">DGCA</a> exams</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP FLYING SCHOOLS</div><div class="info-text"><a class="live-link" href="https://www.igrua.edu.in" target="_blank">IGRUA</a> | <a class="live-link" href="https://www.cae.com" target="_blank">CAE Oxford</a> | <a class="live-link" href="https://www.flyfpa.in" target="_blank">FPA India</a></div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">First Officer: ₹15-30 LPA | Captain: ₹50 LPA - ₹1.5 Cr</div></div>
-                </div>
-                <div class="section-title">⭐ Famous Pilots</div>
-                <div><span class="famous-badge">Capt. Zoya Agarwal (Air India Commander)</span> <span class="famous-badge">Wg Cdr Abhinandan Varthaman</span></div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-18 LPA | Medical devices, hospitals, research</div></div></div>
             </div>
         </div>
         
-        <div class="accordion-card" id="ameCard">
-            <div class="accordion-header" onclick="toggleCard('ameCard')">
-                <div class="accordion-title"><span class="accordion-icon">🔧</span> AME - Aircraft Maintenance Engineering (3-4 years)</div>
+        <!-- Chemical Engineering (NEW) -->
+        <div class="accordion-card" id="chemicalEnggCard">
+            <div class="accordion-header" onclick="toggleCard('chemicalEnggCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧪</span> Chemical Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-15 LPA (Fresher) | ₹12-25 LPA (Senior)</div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.dgca.gov.in" target="_blank">DGCA AME License</a></div></div>
-                </div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-22 LPA | PSU: ONGC, IOCL, BPCL, HPCL</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Metallurgical Engineering (NEW) -->
+        <div class="accordion-card" id="metallurgyCard">
+            <div class="accordion-header" onclick="toggleCard('metallurgyCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏭</span> Metallurgical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-18 LPA | PSU: SAIL, Tata Steel, JSW</div></div></div>
+                <div class="section-title">⭐ Famous Metallurgists</div>
+                <div><span class="famous-badge">Sir M. Visvesvaraya</span></div>
+            </div>
+        </div>
+        
+        <!-- Mining Engineering (NEW) -->
+        <div class="accordion-card" id="miningCard">
+            <div class="accordion-header" onclick="toggleCard('miningCard')">
+                <div class="accordion-title"><span class="accordion-icon">⛏️</span> Mining Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-20 LPA | PSU: Coal India, NMDC, ONGC</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Petroleum Engineering (NEW) -->
+        <div class="accordion-card" id="petroleumCard">
+            <div class="accordion-header" onclick="toggleCard('petroleumCard')">
+                <div class="accordion-title"><span class="accordion-icon">🛢️</span> Petroleum Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹8-30 LPA | PSU: ONGC, Oil India, Reliance</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Instrumentation Engineering (NEW) -->
+        <div class="accordion-card" id="instrumentationCard">
+            <div class="accordion-header" onclick="toggleCard('instrumentationCard')">
+                <div class="accordion-title"><span class="accordion-icon">📟</span> Instrumentation Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-18 LPA | Automation, control systems, PSUs</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Textile Engineering (NEW) -->
+        <div class="accordion-card" id="textileCard">
+            <div class="accordion-header" onclick="toggleCard('textileCard')">
+                <div class="accordion-title"><span class="accordion-icon">👕</span> Textile Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-12 LPA | Textile mills, fashion industry</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Production Engineering (NEW) -->
+        <div class="accordion-card" id="productionCard">
+            <div class="accordion-header" onclick="toggleCard('productionCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏭</span> Production Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-16 LPA | Manufacturing industries</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Ceramic Engineering (NEW) -->
+        <div class="accordion-card" id="ceramicCard">
+            <div class="accordion-header" onclick="toggleCard('ceramicCard')">
+                <div class="accordion-title"><span class="accordion-icon">🍶</span> Ceramic Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-14 LPA | Glass, cement, ceramic industries</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Marine Engineering (NEW) -->
+        <div class="accordion-card" id="marineEnggCard">
+            <div class="accordion-header" onclick="toggleCard('marineEnggCard')">
+                <div class="accordion-title"><span class="accordion-icon">🚢</span> Marine Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹8-25 LPA | Merchant Navy, Shipyards</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Naval Architecture (NEW) -->
+        <div class="accordion-card" id="navalCard">
+            <div class="accordion-header" onclick="toggleCard('navalCard')">
+                <div class="accordion-title"><span class="accordion-icon">⛴️</span> Naval Architecture (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-20 LPA | Ship design, Shipyards, Navy</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Fire & Safety Engineering (NEW) -->
+        <div class="accordion-card" id="fireSafetyCard">
+            <div class="accordion-header" onclick="toggleCard('fireSafetyCard')">
+                <div class="accordion-title"><span class="accordion-icon">🔥</span> Fire & Safety Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-15 LPA | Industrial safety, Govt jobs, MNCs</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Environmental Engineering (NEW) -->
+        <div class="accordion-card" id="environmentalEnggCard">
+            <div class="accordion-header" onclick="toggleCard('environmentalEnggCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌿</span> Environmental Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-16 LPA | Pollution control, water treatment</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Genetic Engineering (NEW) -->
+        <div class="accordion-card" id="geneticEnggCard">
+            <div class="accordion-header" onclick="toggleCard('geneticEnggCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧬</span> Genetic Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-20 LPA | Biotech, pharma research</div></div></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 6: COMPUTER & IT ==================== -->
-    <div id="door-computers" class="door-content">
-        <div class="accordion-card" id="bcaCard">
-            <div class="accordion-header" onclick="toggleCard('bcaCard')">
-                <div class="accordion-title"><span class="accordion-icon">💻</span> BCA - Bachelor of Computer Applications (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-12 LPA | After MCA: ₹8-20 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.symbiosis.ac.in" target="_blank">Symbiosis Pune</a> | <a class="live-link" href="https://christuniversity.in" target="_blank">Christ Bangalore</a> | <a class="live-link" href="http://www.ipu.ac.in" target="_blank">IPU Delhi</a></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 7: PURE SCIENCE ==================== -->
+    <!-- ==================== DOOR 2: PURE SCIENCE (15+ BRANCHES) ==================== -->
     <div id="door-science" class="door-content">
-        <div class="accordion-card" id="bscPhysicsCard">
-            <div class="accordion-header" onclick="toggleCard('bscPhysicsCard')">
+        
+        <!-- Physics -->
+        <div class="accordion-card" id="physicsCard">
+            <div class="accordion-header" onclick="toggleCard('physicsCard')">
                 <div class="accordion-title"><span class="accordion-icon">⚛️</span> B.Sc Physics (3 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏛️ RESEARCH ORGS</div><div class="info-text"><a class="live-link" href="https://www.isro.gov.in" target="_blank">ISRO</a> | <a class="live-link" href="https://www.drdo.gov.in" target="_blank">DRDO</a> | <a class="live-link" href="https://www.barc.gov.in" target="_blank">BARC</a> | <a class="live-link" href="https://www.iisc.ac.in" target="_blank">IISc</a> | <a class="live-link" href="https://www.csir.res.in" target="_blank">CSIR</a> | <a class="live-link" href="https://www.icmr.gov.in" target="_blank">ICMR</a></div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹6-15 LPA | PhD: ₹10-25 LPA | Scientist: ₹15-30 LPA</div></div>
-                </div>
-                <div class="section-title">⭐ Famous Scientists</div>
-                <div><span class="famous-badge">Dr. Vikram Sarabhai (ISRO Founder)</span> <span class="famous-badge">Dr. Homi J. Bhabha</span> <span class="famous-badge">Dr. C. V. Raman (Nobel Prize)</span></div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹6-15 LPA | PhD: ₹10-25 LPA</div></div></div>
+                <div class="section-title">⭐ Famous Physicists</div>
+                <div><span class="famous-badge">Dr. C. V. Raman</span> <span class="famous-badge">Dr. Homi J. Bhabha</span> <span class="famous-badge">Dr. Vikram Sarabhai</span></div>
+            </div>
+        </div>
+        
+        <!-- Chemistry -->
+        <div class="accordion-card" id="chemistryCard">
+            <div class="accordion-header" onclick="toggleCard('chemistryCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧪</span> B.Sc Chemistry (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="section-title">⭐ Famous Chemists</div>
+                <div><span class="famous-badge">Venkatraman Ramakrishnan (Nobel)</span> <span class="famous-badge">Marie Curie</span></div>
+            </div>
+        </div>
+        
+        <!-- Mathematics -->
+        <div class="accordion-card" id="mathsCard">
+            <div class="accordion-header" onclick="toggleCard('mathsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📐</span> B.Sc Mathematics (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="section-title">⭐ Famous Mathematicians</div>
+                <div><span class="famous-badge">Srinivasa Ramanujan</span> <span class="famous-badge">C. R. Rao</span> <span class="famous-badge">Manjul Bhargava</span></div>
+            </div>
+        </div>
+        
+        <!-- Biotechnology (NEW) -->
+        <div class="accordion-card" id="biotechCard">
+            <div class="accordion-header" onclick="toggleCard('biotechCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Biotechnology (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-10 LPA | M.Sc: ₹8-20 LPA</div></div></div>
+                <div class="section-title">⭐ Famous Biotechnologists</div>
+                <div><span class="famous-badge">Kiran Mazumdar-Shaw</span> <span class="famous-badge">Dr. R. A. Mashelkar</span></div>
+            </div>
+        </div>
+        
+        <!-- Genetics (NEW) -->
+        <div class="accordion-card" id="geneticsCard">
+            <div class="accordion-header" onclick="toggleCard('geneticsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Genetics (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-9 LPA | M.Sc: ₹8-18 LPA</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Food Technology (NEW) -->
+        <div class="accordion-card" id="foodTechCard">
+            <div class="accordion-header" onclick="toggleCard('foodTechCard')">
+                <div class="accordion-title"><span class="accordion-icon">🍽️</span> B.Sc Food Technology (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹8-18 LPA</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Biomedical Sciences (NEW) -->
+        <div class="accordion-card" id="biomedicalScienceCard">
+            <div class="accordion-header" onclick="toggleCard('biomedicalScienceCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏥</span> B.Sc Biomedical Sciences (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹8-15 LPA</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Environmental Science -->
+        <div class="accordion-card" id="envScienceCard">
+            <div class="accordion-header" onclick="toggleCard('envScienceCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌿</span> B.Sc Environmental Science (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="section-title">⭐ Famous Environmentalists</div>
+                <div><span class="famous-badge">Sunderlal Bahuguna</span> <span class="famous-badge">Medha Patkar</span></div>
+            </div>
+        </div>
+        
+        <!-- Microbiology -->
+        <div class="accordion-card" id="microbioCard">
+            <div class="accordion-header" onclick="toggleCard('microbioCard')">
+                <div class="accordion-title"><span class="accordion-icon">🦠</span> B.Sc Microbiology (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="section-title">⭐ Famous Microbiologists</div>
+                <div><span class="famous-badge">Louis Pasteur</span> <span class="famous-badge">Alexander Fleming</span></div>
+            </div>
+        </div>
+        
+        <!-- Biochemistry -->
+        <div class="accordion-card" id="biochemCard">
+            <div class="accordion-header" onclick="toggleCard('biochemCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧪</span> B.Sc Biochemistry (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content"></div>
+        </div>
+        
+        <!-- Bioinformatics -->
+        <div class="accordion-card" id="bioinfoCard">
+            <div class="accordion-header" onclick="toggleCard('bioinfoCard')">
+                <div class="accordion-title"><span class="accordion-icon">💻</span> B.Sc Bioinformatics (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content"></div>
+        </div>
+        
+        <!-- Statistics -->
+        <div class="accordion-card" id="statisticsCard">
+            <div class="accordion-header" onclick="toggleCard('statisticsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> B.Sc Statistics (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="section-title">⭐ Famous Statisticians</div>
+                <div><span class="famous-badge">P. C. Mahalanobis</span> <span class="famous-badge">C. R. Rao</span></div>
+            </div>
+        </div>
+        
+        <!-- Geology -->
+        <div class="accordion-card" id="geologyCard">
+            <div class="accordion-header" onclick="toggleCard('geologyCard')">
+                <div class="accordion-title"><span class="accordion-icon">⛰️</span> B.Sc Geology (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="section-title">⭐ Famous Geologists</div>
+                <div><span class="famous-badge">Dr. D. N. Wadia</span></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 8: MANAGEMENT ==================== -->
-    <div id="door-management" class="door-content">
-        <div class="accordion-card" id="bbaCard">
-            <div class="accordion-header" onclick="toggleCard('bbaCard')">
-                <div class="accordion-title"><span class="accordion-icon">📈</span> BBA - Bachelor of Business Administration (3 years)</div>
+    <!-- ==================== DOOR 3: SCHOLARSHIPS (COMPLETE) ==================== -->
+    <div id="door-scholarships" class="door-content">
+        <div class="accordion-card" id="scholarshipFullCard">
+            <div class="accordion-header" onclick="toggleCard('scholarshipFullCard')">
+                <div class="accordion-title"><span class="accordion-icon">💰</span> Complete Scholarships for Engineering & Science Students</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">IPMAT</a> | <a class="live-link" href="http://www.du.ac.in" target="_blank">DU JAT</a> | <a class="live-link" href="https://www.nmims.edu" target="_blank">NPAT</a> | <a class="live-link" href="https://www.set.edu" target="_blank">SET</a></div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-10 LPA | After MBA (IIM): ₹15-30 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🎓 KVPY</div><div class="info-text"><a class="live-link" href="https://kvpy.iisc.ac.in" target="_blank">Kishore Vaigyanik Protsahan Yojana</a> - ₹5,000-8,000/month for 5 years for Science students</div></div>
+                    <div class="info-card"><div class="info-label">💡 INSPIRE</div><div class="info-text"><a class="live-link" href="https://www.inspire-dst.gov.in" target="_blank">Innovation in Science Pursuit for Inspired Research</a> - ₹80,000/year for top 1% students</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ IIT Merit-cum-Means</div><div class="info-text">Full tuition fee waiver for IIT students with family income less than ₹5-9 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🇮🇳 National Scholarship Portal</div><div class="info-text"><a class="live-link" href="https://scholarships.gov.in" target="_blank">scholarships.gov.in</a> - Central & State scholarships ₹5,000-50,000/year</div></div>
+                    <div class="info-card"><div class="info-label">🎓 JNCASR Scholarship</div><div class="info-text">Jawaharlal Nehru Centre for Advanced Scientific Research - ₹10,000-20,000/month</div></div>
+                    <div class="info-card"><div class="info-label">🏫 State Scholarships</div><div class="info-text">Check your state's scholarship portal (UP Scholarship, MP Scholarship, Maharashtra, etc.)</div></div>
+                    <div class="info-card"><div class="info-label">👩‍🎓 Women Scientist Scheme</div><div class="info-text">WOS-A, WOS-B, WOS-C for women in Science & Technology</div></div>
+                    <div class="info-card"><div class="info-label">🌐 AICTE Scholarships</div><div class="info-text"><a class="live-link" href="https://www.aicte-india.org" target="_blank">AICTE Pragati Scholarship</a> for girls, SAKSHAM for differently abled</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Prime Minister's Scholarship Scheme</div><div class="info-text">₹2,500/month for wards of Ex-Servicemen</div></div>
+                    <div class="info-card"><div class="info-label">🎓 NEST Scholarship</div><div class="info-text">For students from low-income families (₹2,000-5,000/month)</div></div>
+                    <div class="info-card"><div class="info-label">📚 LIC Golden Jubilee Scholarship</div><div class="info-text">₹10,000-15,000/year for meritorious students</div></div>
+                    <div class="info-card"><div class="info-label">🏭 Tata Scholarship</div><div class="info-text">For students from underprivileged backgrounds pursuing Engineering</div></div>
                 </div>
-                <div class="section-title">⭐ Famous Business Leaders</div>
-                <div><span class="famous-badge">Ratan Tata</span> <span class="famous-badge">Mukesh Ambani</span> <span class="famous-badge">Indra Nooyi</span></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 9: DESIGN ==================== -->
-    <div id="door-design" class="door-content">
-        <div class="accordion-card" id="bdesCard">
-            <div class="accordion-header" onclick="toggleCard('bdesCard')">
-                <div class="accordion-title"><span class="accordion-icon">🎨</span> B.Des - Bachelor of Design (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID DAT</a> | <a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT</a> | <a class="live-link" href="https://uceed.iitb.ac.in" target="_blank">UCEED</a></div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NID Ahmedabad, NIFT Delhi, IIT Bombay IDC, MIT ID Pune</div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-18 LPA | Senior Designer: ₹15-30 LPA</div></div>
-                </div>
-                <div class="section-title">⭐ Famous Designers</div>
-                <div><span class="famous-badge">Sabyasachi Mukherjee</span> <span class="famous-badge">Manish Malhotra</span> <span class="famous-badge">Ritu Beri</span></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 10: ABROAD STUDIES ==================== -->
+    <!-- ==================== DOOR 4: ABROAD STUDIES ==================== -->
     <div id="door-abroad" class="door-content">
-        <div class="accordion-card" id="usaAbroadCard">
-            <div class="accordion-header" onclick="toggleCard('usaAbroadCard')">
-                <div class="accordion-title"><span class="accordion-icon">🇺🇸</span> USA - Study & Work</div>
+        <div class="accordion-card" id="abroadFullCard">
+            <div class="accordion-header" onclick="toggleCard('abroadFullCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Studies for PCM Students</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.ielts.org" target="_blank">IELTS</a> | <a class="live-link" href="https://www.ets.org/toefl" target="_blank">TOEFL</a> | <a class="live-link" href="https://www.collegeboard.org/sat" target="_blank">SAT</a> | <a class="live-link" href="https://www.ets.org/gre" target="_blank">GRE</a></div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">Software Engineer: $100k-200k/year | OPT: 3 years STEM</div></div>
-                    <div class="info-card"><div class="info-label">🔗 VISA</div><div class="info-text">F-1 Visa → OPT (1-3 years) → H-1B → Green Card</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="accordion-card" id="germanyAbroadCard">
-            <div class="accordion-header" onclick="toggleCard('germanyAbroadCard')">
-                <div class="accordion-title"><span class="accordion-icon">🇩🇪</span> Germany - Free/Low Cost Education</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 COST</div><div class="info-text">No tuition fees (public universities) | Semester fee: €200-500 | Living: €10k/year</div></div>
-                    <div class="info-card"><div class="info-label">📋 REQUIREMENTS</div><div class="info-text">German A2-B1, IELTS 6.5, <a class="live-link" href="https://www.daad.in" target="_blank">DAAD Scholarship</a> available</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="accordion-card" id="canadaAbroadCard">
-            <div class="accordion-header" onclick="toggleCard('canadaAbroadCard')">
-                <div class="accordion-title"><span class="accordion-icon">🇨🇦</span> Canada - High PR Pathway</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">Software Engineer: CAD 80k-150k/year</div></div>
-                    <div class="info-card"><div class="info-label">🔗 VISA</div><div class="info-text">Student Visa → PGWP (1-3 years) → Express Entry → PR in 2-3 years</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="accordion-card" id="australiaAbroadCard">
-            <div class="accordion-header" onclick="toggleCard('australiaAbroadCard')">
-                <div class="accordion-title"><span class="accordion-icon">🇦🇺</span> Australia - Skilled Migration</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">Engineer: AUD 80k-150k/year</div></div>
-                    <div class="info-card"><div class="info-label">🔗 VISA</div><div class="info-text">Student Visa → Temporary Graduate Visa (2-4 years) → PR via SkillSelect</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="accordion-card" id="scholarshipAbroadCard">
-            <div class="accordion-header" onclick="toggleCard('scholarshipAbroadCard')">
-                <div class="accordion-title"><span class="accordion-icon">🎓</span> Scholarships for Abroad</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text"><a class="live-link" href="https://us.fulbrightonline.org" target="_blank">Fulbright Scholarship</a>, Stanford Reliance Dhirubhai Fellowship</div></div>
-                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text"><a class="live-link" href="https://www.daad.in" target="_blank">DAAD Scholarship</a> - Fully funded</div></div>
-                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text"><a class="live-link" href="https://www.chevening.org" target="_blank">Chevening Scholarship</a>, Commonwealth Scholarship</div></div>
-                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text"><a class="live-link" href="https://www.australiaawards.gov.au" target="_blank">Australia Awards</a></div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">B.Tech/BS/MS | SAT/TOEFL/GRE | Salary: $80k-150k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">No tuition fees | <a class="live-link" href="https://www.daad.in" target="_blank">DAAD Scholarship</a> | Salary: €50k-80k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">PGWP (3 years) | Easy PR pathway</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">Post-study work visa (2-4 years)</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">Graduate Route Visa (2 years)</div></div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 11: PSU & GOVERNMENT JOBS ==================== -->
+    <!-- ==================== DOOR 5: PSU & GOVERNMENT JOBS ==================== -->
     <div id="door-psu" class="door-content">
-        <div class="accordion-card" id="psuJobsCard">
-            <div class="accordion-header" onclick="toggleCard('psuJobsCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏭</span> PSU & Government Jobs for Engineers</div>
+        <div class="accordion-card" id="psuJobsFullCard">
+            <div class="accordion-header" onclick="toggleCard('psuJobsFullCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏭</span> PSU & Government Jobs</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏭 PSUs</div><div class="info-text">ISRO, DRDO, BHEL, HAL, NTPC, POWERGRID, GAIL, ONGC, SAIL, IOCL, BPCL, HPCL</div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">GATE (for PSUs), ESE (UPSC Engineering Services), SSC JE, RRB JE, State Engineering Exams</div></div>
-                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">Executive Trainee: ₹12-18 LPA | Senior Engineer: ₹20-30 LPA | Chief Engineer: ₹30-50 LPA</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://gate.iitm.ac.in" target="_blank">GATE</a> | <a class="live-link" href="https://upsc.gov.in" target="_blank">ESE (IES/ISS)</a> | SSC JE | RRB JE</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text">ISRO, DRDO, BHEL, HAL, NTPC, POWERGRID, GAIL, ONGC, IOCL, BPCL, SAIL</div></div>
                 </div>
-                <div class="section-title">📋 GATE Exam Details</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://gate.iitm.ac.in" target="_blank">GATE Official Website</a></div></div>
-                    <div class="info-card"><div class="info-label">📅 Exam Date</div><div class="info-text">February every year</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ PSUs through GATE</div><div class="info-text">BHEL, IOCL, GAIL, HPCL, BPCL, NTPC, POWERGRID, PGCIL</div></div>
-                </div>
+                <div class="section-title">⭐ Famous ISRO Scientists</div>
+                <div><span class="famous-badge">Dr. K. Sivan</span> <span class="famous-badge">Dr. A. S. Kiran Kumar</span></div>
+                <div class="section-title">⭐ Famous DRDO Scientists</div>
+                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Dr. Tessy Thomas</span></div>
             </div>
         </div>
     </div>
