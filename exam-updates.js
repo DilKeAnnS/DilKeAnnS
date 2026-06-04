@@ -19,7 +19,6 @@ const EXAM_FEEDS = [
     }
 ];
 
-// Fetch and display all exam updates
 async function fetchAllExamUpdates() {
     const container = document.getElementById('exam-updates-container');
     if (!container) return;
