@@ -43,7 +43,7 @@
         @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tiles-grid { grid-template-columns: repeat(6, 1fr); gap: 20px; } .tile { padding: 20px 12px; } .tile-icon { font-size: 42px; } .tile-name { font-size: 14px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } .welcome { font-size: 14px; } .tagline { font-size: 16px; } .search-bar input { font-size: 16px; } .ask-ai { font-size: 14px; padding: 8px 16px; } }
         @media (max-width: 480px) { .tile-name { font-size: 10px; } .tile-icon { font-size: 26px; } .ask-ai span { display: none; } .ask-ai { padding: 6px 10px; } .logo-section { flex-wrap: wrap; justify-content: center; } }
     </style>
-    <!-- Language System: Core + Loader -->
+    <!-- Language System -->
     <script src="languages-core.js"></script>
     <script src="languages-loader.js"></script>
 </head>
@@ -54,7 +54,7 @@
             <img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'">
             <div>
                 <h1>दिल के अंश</h1>
-                <p data-i18n="app_tagline">Dil-Ke-AnnS Career Saathi</p>
+                <p id="appTagline">Dil-Ke-AnnS Career Saathi</p>
             </div>
         </div>
         <div class="language-selector">
@@ -76,23 +76,23 @@
         <div class="notification-icon" id="alertBtn">🔔</div>
     </div>
     <div style="text-align: center;">
-        <div class="tagline" data-i18n="tagline">🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳</div>
-        <div class="welcome" id="welcomeMsg" data-i18n="welcome">👋 Welcome back, Learner!</div>
+        <div class="tagline" id="taglineText">🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳</div>
+        <div class="welcome" id="welcomeMsg">👋 Welcome back, Learner!</div>
     </div>
     <div class="hero">
         <div class="search-bar">
             <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="Search courses, exams, jobs, schemes..." data-i18n="search_placeholder">
+            <input type="text" id="searchInput" placeholder="Search courses, exams, jobs, schemes...">
             <div class="ask-ai" id="askAiBtn">
                 <img src="AnnS%20AI%20tool%20logo.png" alt="AI">
-                <span data-i18n="ask_ai">Ask AnnS AI</span>
+                <span id="askAiText">Ask AnnS AI</span>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="section-title" data-i18n="explore_title">📚 Explore Career Pathways</div>
+    <div class="section-title" id="exploreTitle">📚 Explore Career Pathways</div>
     <div class="tiles-grid" id="tilesGrid"></div>
 </div>
 
@@ -103,7 +103,7 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-    // Tile definitions with links
+    // Tile definitions
     const tiles = [
         { nameKey: "education", icon: "🎓", link: "education.html" },
         { nameKey: "business", icon: "💼", link: "business.html" },
@@ -129,16 +129,83 @@
         { nameKey: "bottom_profile", icon: "👤", link: "#" }
     ];
 
-    function getDefaultText(key) {
-        const defaults = {
-            education: "Education", business: "Business", jobs_exams: "Jobs & Exams",
-            study_material: "Study Material", magazines: "Magazines", enewspapers: "E-newspapers",
-            current_affairs: "Current Affairs", mock_test: "Mock test", after_10th: "After 10th",
-            after_12th: "After 12th", something_interesting: "Something Interesting", results: "Results",
-            application_forms: "App Forms", bharat: "🇮🇳 BHARAT", bottom_home: "Home",
-            bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
-        };
-        return defaults[key] || key;
+    let currentLang = 'en';
+
+    // Default text fallback
+    const defaultText = {
+        app_tagline: "Dil-Ke-AnnS Career Saathi",
+        tagline: "🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳",
+        welcome: "👋 Welcome back, Learner!",
+        search_placeholder: "Search courses, exams, jobs, schemes...",
+        ask_ai: "Ask AnnS AI",
+        explore_title: "📚 Explore Career Pathways",
+        education: "Education", business: "Business", jobs_exams: "Jobs & Exams",
+        study_material: "Study Material", magazines: "Magazines", enewspapers: "E-newspapers",
+        current_affairs: "Current Affairs", mock_test: "Mock test", after_10th: "After 10th",
+        after_12th: "After 12th", something_interesting: "Something Interesting", results: "Results",
+        application_forms: "App Forms", bharat: "🇮🇳 BHARAT", bottom_home: "Home",
+        bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile",
+        coming_soon: "coming soon", notification_center: "Notification Center",
+        notifications: "Exam Alerts • Govt Schemes • Job Updates • Important Circulars",
+        ai_mentor: "AnnS AI Mentor", ai_modes: "Doubt Solver • Career Mentor • Debate Judge • Exam Planner",
+        search_alert: "Please type something to search", searching: "Searching for"
+    };
+
+    function t(key) {
+        if (window.translations && window.translations[currentLang] && window.translations[currentLang][key]) {
+            return window.translations[currentLang][key];
+        }
+        return defaultText[key] || key;
+    }
+
+    function updateAllText() {
+        // Update header elements
+        const appTagline = document.getElementById('appTagline');
+        if (appTagline) appTagline.textContent = t('app_tagline');
+        
+        const taglineText = document.getElementById('taglineText');
+        if (taglineText) taglineText.textContent = t('tagline');
+        
+        const welcomeMsg = document.getElementById('welcomeMsg');
+        if (welcomeMsg) {
+            const hours = new Date().getHours();
+            let greeting = hours < 12 ? '🌅 ' : (hours < 17 ? '☀️ ' : '🌙 ');
+            welcomeMsg.innerHTML = greeting + t('welcome');
+        }
+        
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.placeholder = t('search_placeholder');
+        
+        const askAiText = document.getElementById('askAiText');
+        if (askAiText) askAiText.textContent = t('ask_ai');
+        
+        const exploreTitle = document.getElementById('exploreTitle');
+        if (exploreTitle) exploreTitle.innerHTML = t('explore_title');
+        
+        // Update all tiles
+        document.querySelectorAll('.tile').forEach(tile => {
+            const nameKey = tile.getAttribute('data-name-key');
+            const nameSpan = tile.querySelector('.tile-name');
+            if (nameSpan && nameKey) nameSpan.textContent = t(nameKey);
+        });
+        
+        // Update bottom bar
+        document.querySelectorAll('.nav-item').forEach(item => {
+            const nameKey = item.getAttribute('data-name-key');
+            const nameSpan = item.querySelector('span:last-child');
+            if (nameSpan && nameKey) nameSpan.textContent = t(nameKey);
+        });
+    }
+
+    function changeLanguage(langCode) {
+        currentLang = langCode;
+        localStorage.setItem('career_saathi_language', langCode);
+        
+        // Update dropdown
+        const selector = document.getElementById('languageSelect');
+        if (selector) selector.value = langCode;
+        
+        updateAllText();
     }
 
     function renderTiles() {
@@ -147,7 +214,7 @@
         grid.innerHTML = tiles.map(tile => `
             <div class="tile" data-link="${tile.link}" data-name-key="${tile.nameKey}">
                 <span class="tile-icon">${tile.icon}</span>
-                <div class="tile-name" data-i18n="${tile.nameKey}">${getDefaultText(tile.nameKey)}</div>
+                <div class="tile-name">${defaultText[tile.nameKey] || tile.nameKey}</div>
             </div>
         `).join('');
         
@@ -157,10 +224,11 @@
                 if (link && link !== '#') window.location.href = link;
                 else {
                     const nameKey = tile.getAttribute('data-name-key');
-                    alert(`🚀 ${window.t ? t(nameKey) : getDefaultText(nameKey)} ${window.t ? t('coming_soon') : 'coming soon'}`);
+                    alert(`🚀 ${t(nameKey)} ${t('coming_soon')}`);
                 }
             });
         });
+        updateAllText();
     }
 
     function renderBottomBar() {
@@ -169,7 +237,7 @@
         bar.innerHTML = bottomNav.map(item => `
             <div class="nav-item" data-link="${item.link}" data-name-key="${item.nameKey}">
                 <span>${item.icon}</span>
-                <span data-i18n="${item.nameKey}">${getDefaultText(item.nameKey)}</span>
+                <span>${defaultText[item.nameKey] || item.nameKey}</span>
             </div>
         `).join('');
         
@@ -179,21 +247,11 @@
                 if (link && link !== '#') window.location.href = link;
                 else {
                     const nameKey = nav.getAttribute('data-name-key');
-                    alert(`📱 ${window.t ? t(nameKey) : getDefaultText(nameKey)} ${window.t ? t('coming_soon') : 'coming soon'}`);
+                    alert(`📱 ${t(nameKey)} ${t('coming_soon')}`);
                 }
             });
         });
-    }
-
-    function updateTileAndNavLanguages() {
-        document.querySelectorAll('.tile .tile-name[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (window.t) el.textContent = t(key);
-        });
-        document.querySelectorAll('.nav-item span:last-child[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (window.t) el.textContent = t(key);
-        });
+        updateAllText();
     }
 
     function setupSearch() {
@@ -202,7 +260,7 @@
             input.addEventListener('keypress', e => {
                 if (e.key === 'Enter') {
                     const query = e.target.value.trim();
-                    alert(query ? `${window.t ? t('searching') : 'Searching for'}: "${query}"` : (window.t ? t('search_alert') : 'Please type something to search'));
+                    alert(query ? `${t('searching')}: "${query}"` : t('search_alert'));
                 }
             });
         }
@@ -211,7 +269,7 @@
     function setupAI() {
         const askBtn = document.getElementById('askAiBtn');
         const floatingBtn = document.getElementById('floatingAiBtn');
-        const openAI = () => alert(`🤖 ${window.t ? t('ai_mentor') : 'AnnS AI Mentor'}\n\n${window.t ? t('ai_modes') : 'Doubt Solver • Career Mentor • Debate Judge • Exam Planner'}`);
+        const openAI = () => alert(`🤖 ${t('ai_mentor')}\n\n${t('ai_modes')}`);
         if (askBtn) askBtn.addEventListener('click', openAI);
         if (floatingBtn) floatingBtn.addEventListener('click', openAI);
     }
@@ -219,52 +277,31 @@
     function setupNotifications() {
         const alertBtn = document.getElementById('alertBtn');
         if (alertBtn) {
-            alertBtn.addEventListener('click', () => alert(`🔔 ${window.t ? t('notification_center') : 'Notification Center'}\n\n${window.t ? t('notifications') : 'Exam Alerts • Govt Schemes • Job Updates • Important Circulars'}`));
+            alertBtn.addEventListener('click', () => alert(`🔔 ${t('notification_center')}\n\n${t('notifications')}`));
         }
     }
 
-    function setWelcomeMessage() {
-        const hours = new Date().getHours();
-        const welcomeDiv = document.getElementById('welcomeMsg');
-        if (welcomeDiv) {
-            let greeting = '';
-            if (hours < 12) greeting = '🌅 ' + (window.t ? t('welcome') : 'Welcome back, Learner!');
-            else if (hours < 17) greeting = '☀️ ' + (window.t ? t('welcome') : 'Welcome back, Learner!');
-            else greeting = '🌙 ' + (window.t ? t('welcome') : 'Welcome back, Learner!');
-            welcomeDiv.innerHTML = greeting;
+    function loadSavedLanguage() {
+        const savedLang = localStorage.getItem('career_saathi_language');
+        if (savedLang) {
+            currentLang = savedLang;
+            const selector = document.getElementById('languageSelect');
+            if (selector) selector.value = savedLang;
         }
+        updateAllText();
     }
 
-    // Override updatePageLanguage to also update tiles and bottom bar
-    if (typeof window !== 'undefined') {
-        const originalUpdate = window.updatePageLanguage;
-        if (originalUpdate) {
-            window.updatePageLanguage = function() {
-                originalUpdate();
-                updateTileAndNavLanguages();
-                setWelcomeMessage();
-                const searchInput = document.getElementById('searchInput');
-                if (searchInput && window.t) searchInput.placeholder = t('search_placeholder');
-                const askAiSpan = document.querySelector('.ask-ai span');
-                if (askAiSpan && window.t) askAiSpan.textContent = t('ask_ai');
-            };
-        }
-    }
-
-    // Initialize everything
+    // Make functions globally available for language switcher
+    window.changeLanguage = changeLanguage;
+    window.t = t;
+    
+    // Initialize
     renderTiles();
     renderBottomBar();
     setupSearch();
     setupAI();
     setupNotifications();
-    
-    // Wait for language system to load
-    setTimeout(() => {
-        if (typeof loadSavedLanguage === 'function') {
-            loadSavedLanguage();
-        }
-        setWelcomeMessage();
-    }, 100);
+    loadSavedLanguage();
 </script>
 </body>
 </html>
