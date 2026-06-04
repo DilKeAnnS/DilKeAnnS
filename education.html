@@ -9,21 +9,24 @@
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
+        .language-selector select option { color: black; background: white; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         .container { padding: 20px 16px; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
         .streams-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 30px; }
-        .stream-card { background: white; border-radius: 24px; padding: 20px 12px; text-align: center; cursor: pointer; transition: transform 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .stream-card { background: white; border-radius: 24px; padding: 20px 12px; text-align: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
         .stream-card:active { transform: scale(0.97); }
+        .stream-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .stream-icon { font-size: 48px; margin-bottom: 12px; display: block; }
         .stream-name { font-size: 16px; font-weight: 700; color: #1a1a2e; }
-        .stream-desc { font-size: 11px; color: #64748B; margin-top: 6px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .stream-desc { font-size: 11px; color: #64748B; margin-top: 6px; line-height: 1.3; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
@@ -35,6 +38,7 @@
             .stream-card { padding: 28px 16px; }
             .stream-icon { font-size: 64px; }
             .stream-name { font-size: 18px; }
+            .stream-desc { font-size: 12px; }
             .header { padding: 20px 5% 30px 5%; }
             .logo img { height: 60px; }
             .logo h1 { font-size: 26px; }
@@ -45,79 +49,231 @@
             .stream-desc { font-size: 9px; }
         }
     </style>
+    <!-- Language System -->
+    <script src="languages-core.js"></script>
+    <script src="languages-loader.js"></script>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="logo">
+            <img src="App%20logo.png" alt="Logo">
+            <div>
+                <h1>दिल के अंश</h1>
+                <p id="appTagline">Career Saathi</p>
+            </div>
+        </div>
+        <div class="language-selector">
+            <select id="languageSelect" onchange="changeLanguage(this.value)">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">📖 Choose your career path</div>
+    <div class="tagline" id="taglineText">📖 Choose your career path after 10th/12th</div>
 </div>
 <div class="container">
-    <div class="page-title">🎓 Education Streams (10 Career Paths)</div>
+    <div class="page-title" id="pageTitle">🎓 10 Career Streams – Complete Guidance</div>
     <div class="streams-grid" id="streamsGrid"></div>
 </div>
 <div class="bottom-bar" id="bottomBar"></div>
+
 <script>
-    const streams = [
-        { name: "Medical", icon: "🩺", desc: "Doctor, Dentist, Paramedical, Pharmacy", link: "medical.html" },
-        { name: "Non-Medical", icon: "⚙️", desc: "Engineering, BCA, B.Sc, Architecture", link: "non_medical.html" },
-        { name: "Commerce", icon: "📊", desc: "B.Com, BBA, CA, CS, CMA", link: "commerce.html" },
-        { name: "Arts", icon: "🎨", desc: "BA, Law, Journalism, Psychology", link: "arts.html" },
-        { name: "Sports", icon: "🏅", desc: "B.P.Ed, Sports Science, Coaching", link: "sports.html" },
-        { name: "Agriculture", icon: "🌾", desc: "B.Sc Agri, Horticulture, Forestry", link: "agriculture.html" },
-        { name: "Artist", icon: "🎭", desc: "Acting, Music, Dance, Fine Arts", link: "artist.html" },
-        { name: "Designing", icon: "✏️", desc: "Fashion, Interior, Graphic, UI/UX", link: "designing.html" },
-        { name: "Skilled", icon: "🔧", desc: "ITI, Vocational, Diploma, PMKVY", link: "skilled.html" },
-        { name: "Abroad", icon: "🌏", desc: "Study in USA, UK, Canada, Australia", link: "abroad.html" }
+    // Stream data (static names, icons, links)
+    const streamsData = [
+        { name: "Medical", nameKey: "medical", icon: "🩺", desc: "Doctor, Dentist, Paramedical, Nursing, Pharmacy", descKey: "medical_desc", link: "medical.html" },
+        { name: "Non-Medical", nameKey: "non_medical", icon: "⚙️", desc: "Engineering, BCA, B.Sc, Architecture, Defence", descKey: "non_medical_desc", link: "non_medical.html" },
+        { name: "Commerce", nameKey: "commerce", icon: "📊", desc: "B.Com, BBA, CA, CS, CMA, CFA, Economics", descKey: "commerce_desc", link: "commerce.html" },
+        { name: "Arts", nameKey: "arts", icon: "🎨", desc: "BA, Law, Journalism, Psychology, Social Work", descKey: "arts_desc", link: "arts.html" },
+        { name: "Sports", nameKey: "sports", icon: "🏅", desc: "B.P.Ed, Sports Science, Coaching, Physiotherapy", descKey: "sports_desc", link: "sports.html" },
+        { name: "Agriculture", nameKey: "agriculture", icon: "🌾", desc: "B.Sc Agri, Horticulture, Forestry, Dairy Tech", descKey: "agriculture_desc", link: "agriculture.html" },
+        { name: "Artist", nameKey: "artist", icon: "🎭", desc: "Acting, Music, Dance, Fine Arts, Film Production", descKey: "artist_desc", link: "artist.html" },
+        { name: "Designing", nameKey: "designing", icon: "✏️", desc: "Fashion, Interior, Graphic, UI/UX, Animation", descKey: "designing_desc", link: "designing.html" },
+        { name: "Skilled", nameKey: "skilled", icon: "🔧", desc: "ITI, Vocational, Diploma, PMKVY, Apprenticeship", descKey: "skilled_desc", link: "skilled.html" },
+        { name: "Abroad Studies", nameKey: "abroad", icon: "🌏", desc: "Study in USA, UK, Canada, Australia, Germany", descKey: "abroad_desc", link: "abroad.html" }
     ];
 
     const bottomNav = [
-        { name: "Home", icon: "🏠", link: "index.html" },
-        { name: "Search", icon: "🔍", link: "#" },
-        { name: "AnnS AI", icon: "🤖", link: "#" },
-        { name: "Alerts", icon: "🔔", link: "#" },
-        { name: "Profile", icon: "👤", link: "#" }
+        { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
+        { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
+        { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
+        { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
+        { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
     ];
+
+    let currentLang = 'en';
+
+    // Default text fallback for this page
+    const defaultText = {
+        app_tagline: "Career Saathi",
+        tagline: "📖 Choose your career path after 10th/12th",
+        page_title: "🎓 10 Career Streams – Complete Guidance",
+        medical: "Medical",
+        non_medical: "Non-Medical",
+        commerce: "Commerce",
+        arts: "Arts",
+        sports: "Sports",
+        agriculture: "Agriculture",
+        artist: "Artist",
+        designing: "Designing",
+        skilled: "Skilled",
+        abroad: "Abroad Studies",
+        medical_desc: "Doctor, Dentist, Paramedical, Nursing, Pharmacy",
+        non_medical_desc: "Engineering, BCA, B.Sc, Architecture, Defence",
+        commerce_desc: "B.Com, BBA, CA, CS, CMA, CFA, Economics",
+        arts_desc: "BA, Law, Journalism, Psychology, Social Work",
+        sports_desc: "B.P.Ed, Sports Science, Coaching, Physiotherapy",
+        agriculture_desc: "B.Sc Agri, Horticulture, Forestry, Dairy Tech",
+        artist_desc: "Acting, Music, Dance, Fine Arts, Film Production",
+        designing_desc: "Fashion, Interior, Graphic, UI/UX, Animation",
+        skilled_desc: "ITI, Vocational, Diploma, PMKVY, Apprenticeship",
+        abroad_desc: "Study in USA, UK, Canada, Australia, Germany",
+        bottom_home: "Home",
+        bottom_search: "Search",
+        bottom_ai: "AnnS AI",
+        bottom_alerts: "Alerts",
+        bottom_profile: "Profile",
+        coming_soon: "coming soon"
+    };
+
+    function t(key) {
+        if (window.translations && window.translations[currentLang] && window.translations[currentLang][key]) {
+            return window.translations[currentLang][key];
+        }
+        return defaultText[key] || key;
+    }
 
     function renderStreams() {
         const grid = document.getElementById('streamsGrid');
         if (!grid) return;
-        grid.innerHTML = streams.map(s => `
-            <div class="stream-card" data-link="${s.link}">
-                <span class="stream-icon">${s.icon}</span>
-                <div class="stream-name">${s.name}</div>
-                <div class="stream-desc">${s.desc}</div>
+        
+        grid.innerHTML = streamsData.map(stream => `
+            <div class="stream-card" data-link="${stream.link}" data-name="${stream.name}">
+                <span class="stream-icon">${stream.icon}</span>
+                <div class="stream-name" data-i18n="${stream.nameKey}">${stream.name}</div>
+                <div class="stream-desc" data-i18n="${stream.descKey}">${stream.desc}</div>
             </div>
         `).join('');
+        
         document.querySelectorAll('.stream-card').forEach(card => {
             card.addEventListener('click', () => {
                 const link = card.getAttribute('data-link');
-                if (link && link !== '#') window.location.href = link;
-                else alert(`🚧 ${card.querySelector('.stream-name').innerText} page coming soon!`);
+                const name = card.getAttribute('data-name');
+                if (link && link !== '#') {
+                    window.location.href = link;
+                } else {
+                    alert(`🚧 ${name} ${t('coming_soon')}`);
+                }
             });
+        });
+        
+        // Apply current language to stream names and descriptions
+        updateStreamLanguages();
+    }
+
+    function updateStreamLanguages() {
+        document.querySelectorAll('.stream-card .stream-name[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            el.textContent = t(key);
+        });
+        document.querySelectorAll('.stream-card .stream-desc[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            el.textContent = t(key);
         });
     }
 
     function renderBottomBar() {
         const bar = document.getElementById('bottomBar');
         if (!bar) return;
-        bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+        
+        bar.innerHTML = bottomNav.map(item => `
+            <div class="nav-item" data-link="${item.link}" data-name-key="${item.nameKey}">
+                <span>${item.icon}</span>
+                <span data-i18n="${item.nameKey}">${item.name}</span>
+            </div>
+        `).join('');
+        
         document.querySelectorAll('.nav-item').forEach(nav => {
             nav.addEventListener('click', () => {
                 const link = nav.getAttribute('data-link');
-                if (link && link !== '#') window.location.href = link;
-                else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`);
+                const nameKey = nav.getAttribute('data-name-key');
+                if (link && link !== '#') {
+                    window.location.href = link;
+                } else {
+                    alert(`📱 ${t(nameKey)} ${t('coming_soon')}`);
+                }
             });
+        });
+        
+        // Apply current language to bottom bar
+        document.querySelectorAll('.nav-item span:last-child[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            el.textContent = t(key);
         });
     }
 
-    function goBack() { window.location.href = 'index.html'; }
+    function updatePageText() {
+        const appTagline = document.getElementById('appTagline');
+        if (appTagline) appTagline.textContent = t('app_tagline');
+        
+        const taglineText = document.getElementById('taglineText');
+        if (taglineText) taglineText.textContent = t('tagline');
+        
+        const pageTitle = document.getElementById('pageTitle');
+        if (pageTitle) pageTitle.textContent = t('page_title');
+        
+        updateStreamLanguages();
+        
+        document.querySelectorAll('.nav-item span:last-child[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            el.textContent = t(key);
+        });
+    }
 
+    function changeLanguage(langCode) {
+        currentLang = langCode;
+        localStorage.setItem('career_saathi_language', langCode);
+        
+        const selector = document.getElementById('languageSelect');
+        if (selector) selector.value = langCode;
+        
+        updatePageText();
+    }
+
+    function loadSavedLanguage() {
+        const savedLang = localStorage.getItem('career_saathi_language');
+        if (savedLang) {
+            currentLang = savedLang;
+            const selector = document.getElementById('languageSelect');
+            if (selector) selector.value = savedLang;
+        }
+        updatePageText();
+    }
+
+    function goBack() { 
+        window.location.href = 'index.html'; 
+    }
+
+    // Make functions globally available
+    window.changeLanguage = changeLanguage;
+    window.t = t;
+
+    // Initialize
     renderStreams();
     renderBottomBar();
+    loadSavedLanguage();
 </script>
 </body>
 </html>
