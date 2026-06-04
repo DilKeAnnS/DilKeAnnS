@@ -7,285 +7,435 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .language-selector select option { color: black; background: white; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">🏅 Sports & Physical Education Careers</div>
+    <div class="tagline">🏅 Complete Sports & Physical Education Career Guide - 10th to Olympian | Live Exam Updates</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">🏅 Sports Stream</div>
-
-    <div class="section-card">
-        <div class="section-title" id="after10thTitle">🎓 After 10th – Start Early</div>
-        <div class="list-item" id="after10thItem1">• Choose 11th/12th with Physical Education (any stream)</div>
-        <div class="list-item" id="after10thItem2">• Join Sports School / Academy (Cricket, Football, Hockey, Boxing, Wrestling, Athletics, etc.)</div>
-        <div class="list-item" id="after10thItem3">• Diploma Courses after 10th: Sports Coaching, Fitness Training, Yoga, Gym Instructor</div>
-        <div class="list-item" id="after10thItem4">• SAI (Sports Authority of India) Academies, Khelo India Programs</div>
+    <div class="page-title">🏅 Sports & Physical Education Careers</div>
+    <div class="page-subtitle">40+ Courses | 100+ Colleges | B.P.Ed | M.P.Ed | Sports Science | Coaching | Nutrition | Full Roadmap</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="after10th">🎓 <span class="door-label">After 10th - Start Early</span></button>
+        <button class="door-btn" data-door="bped">🏆 <span class="door-label">B.P.Ed - Physical Education (3 years)</span></button>
+        <button class="door-btn" data-door="sportscience">🔬 <span class="door-label">B.Sc Sports Science</span></button>
+        <button class="door-btn" data-door="coaching">📋 <span class="door-label">Sports Coaching Diplomas</span></button>
+        <button class="door-btn" data-door="physio">🩺 <span class="door-label">Sports Physiotherapy</span></button>
+        <button class="door-btn" data-door="nutrition">🥗 <span class="door-label">Sports Nutrition</span></button>
+        <button class="door-btn" data-door="management">📊 <span class="door-label">Sports Management</span></button>
+        <button class="door-btn" data-door="fitness">💪 <span class="door-label">Fitness Certifications</span></button>
+        <button class="door-btn" data-door="athlete">🏃 <span class="door-label">Professional Athlete Path</span></button>
+        <button class="door-btn" data-door="govt">🏛️ <span class="door-label">Sports Quota Jobs</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Sports Careers</span></button>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="after12thTitle">🎓 After 12th – Degree Courses</div>
-        <div class="list-item" id="bpedItem">• B.P.Ed – Bachelor of Physical Education (3 years) → Physical Education Teacher, Coach</div>
-        <div class="list-item" id="sportsScienceItem">• B.Sc Sports Science → Sports Scientist, Performance Analyst, Strength & Conditioning Coach</div>
-        <div class="list-item" id="coachingItem">• Diploma in Sports Coaching (NSNIS) – Cricket, Football, Boxing, Wrestling, Athletics, etc.</div>
-        <div class="list-item" id="physioItem">• B.Sc / Diploma in Physiotherapy (Sports Physio) – High demand in teams & academies</div>
-        <div class="list-item" id="sportsMgmtItem">• BBA in Sports Management / B.Sc Sports Management – Team Manager, Event Manager, Marketing</div>
-        <div class="list-item" id="yogaItem">• B.A / B.Sc Yoga Science – Yoga Teacher, Therapist</div>
-        <div class="list-item" id="nutritionItem">• B.Sc Nutrition / Sports Nutrition – Sports Nutritionist for athletes & gyms</div>
+    
+    <!-- ==================== DOOR 1: AFTER 10th SPORTS ==================== -->
+    <div id="door-after10th" class="door-content active">
+        <div class="accordion-card active" id="after10thCard">
+            <div class="accordion-header" onclick="toggleCard('after10thCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎓</span> Sports Pathways After 10th - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Start your sports career early after 10th by choosing the right stream and training pathway.<br><span class="salary-text">💰 Early Start Advantage: Build foundation, get noticed for state/national level</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Early specialization, more time for training, easier to get sports quota benefits, better chances of representing state/country.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 10th results (Age 15-16). Best time to join sports academies and professional training.</div></div>
+                </div>
+                <div class="section-title">📌 Option 1: 11th/12th with Physical Education</div>
+                <div class="roadmap-step"><div class="roadmap-year">Class 11-12</div><div class="roadmap-text">Choose any stream (Arts/Commerce/Science) + Physical Education as a main subject. Learn theory + practical sports training.<br><span class="salary-text">💰 After 12th: Eligible for B.P.Ed, B.Sc Sports Science, Diploma in Coaching</span></div></div>
+                <div class="section-title">📌 Option 2: Sports School / Academy Admission</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏏 Cricket</div><div class="info-text">National Cricket Academy (NCA), MRF Pace Academy, Sehwag Cricket Academy, VVS Cricket Academy</div></div>
+                    <div class="info-card"><div class="info-label">⚽ Football</div><div class="info-text">AIFF Academies, Bhaichung Bhutia Football Schools, Minerva Academy, Tata Football Academy</div></div>
+                    <div class="info-card"><div class="info-label">🥊 Boxing</div><div class="info-text">Sports Authority of India (SAI) Academies, Army Sports Institute Pune</div></div>
+                    <div class="info-card"><div class="info-label">🤼 Wrestling</div><div class="info-text">SAI Wrestling Academies, Akharas in Haryana, Punjab, Uttar Pradesh</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Shooting</div><div class="info-text">Dr. Karni Singh Shooting Range Delhi, Gagan Narang Shooting Academy</div></div>
+                    <div class="info-card"><div class="info-label">🏸 Badminton</div><div class="info-text">Prakash Padukone Badminton Academy, Gopichand Badminton Academy Hyderabad</div></div>
+                </div>
+                <div class="section-title">📌 Option 3: Diploma Courses After 10th</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 Diploma in Sports Coaching</div><div class="info-text">1-2 years | From NSNIS (Netaji Subhas National Institute of Sports) - Various sports</div></div>
+                    <div class="info-card"><div class="info-label">💪 Diploma in Fitness Training</div><div class="info-text">1 year | Gym Instructor, Personal Trainer Certification</div></div>
+                    <div class="info-card"><div class="info-label">🧘 Diploma in Yoga</div><div class="info-text">1 year | Yoga Teacher Training, Yoga Instructor</div></div>
+                    <div class="info-card"><div class="info-label">🩺 Diploma in Physiotherapy Assistant</div><div class="info-text">1 year | Assist physiotherapists in sports rehab centers</div></div>
+                    <div class="info-card"><div class="info-label">🥗 Diploma in Sports Nutrition</div><div class="info-text">1 year | Nutrition for athletes, diet planning</div></div>
+                    <div class="info-card"><div class="info-label">🏋️ Diploma in Gym Instructor</div><div class="info-text">6-12 months | Work in gyms, fitness centers</div></div>
+                </div>
+                <div class="section-title">📌 Option 4: Government Sports Training Programs</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏛️ SAI Academies</div><div class="info-text">Sports Authority of India centers across India - Free coaching, accommodation, stipend</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Khelo India Program</div><div class="info-text">Government's flagship scheme for grassroot talent identification and development</div></div>
+                    <div class="info-card"><div class="info-label">🛡️ Army Sports Company</div><div class="info-text">For talented sportspersons - Job guarantee after training</div></div>
+                    <div class="info-card"><div class="info-label">⚓ Navy Sports Quota</div><div class="info-text">Recruitment through sports quota for national/state level players</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Sports Personalities Who Started Early</div>
+                <div><span class="famous-badge">Sachin Tendulkar (Started at 11, Made debut at 16)</span> <span class="famous-badge">P. V. Sindhu (Started Badminton at 8)</span> <span class="famous-badge">Neeraj Chopra (Started Javelin at 15)</span> <span class="famous-badge">Mary Kom (Started Boxing at 18)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="athleteTitle">🏃 Professional Athlete Path</div>
-        <div class="list-item" id="athleteItem1">• Train at Sports Academy after 12th for: Cricket, Football, Kabaddi, Hockey, Athletics, Shooting, Archery, Badminton, Swimming, Gymnastics</div>
-        <div class="list-item" id="athleteItem2">• Aim for State Level → National Level → Khelo India → International</div>
-        <div class="list-item" id="athleteItem3">• Alongside, pursue open degree (BA/B.Com) for backup</div>
+    
+    <!-- ==================== DOOR 2: B.P.Ed - PHYSICAL EDUCATION ==================== -->
+    <div id="door-bped" class="door-content">
+        <div class="accordion-card" id="bpedCard">
+            <div class="accordion-header" onclick="toggleCard('bpedCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏆</span> B.P.Ed - Bachelor of Physical Education (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of physical fitness, sports training, coaching methodology, sports psychology, sports medicine, exercise physiology.<br><span class="salary-text">💰 B.P.Ed Fresher: ₹4-8 LPA | M.P.Ed: ₹6-12 LPA | PGT Physical Education: ₹8-15 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Become a Physical Education Teacher in Schools/Colleges, Sports Coach, Fitness Trainer. High demand in KVS, NVS, State Govt Schools.<br><span class="salary-text">💰 Govt PE Teacher: ₹50k-80k/month + Allowances</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th (any stream) with minimum 50% marks. Some colleges require participation in sports at school/college level.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.lnipes.in" target="_blank">LNIPE Gwalior</a> | <a class="live-link" href="https://www.lakshmibai.nic.in" target="_blank">Lakshmibai National College of Physical Education</a> | <a class="live-link" href="https://www.tnpesu.edu.in" target="_blank">TNPESU Chennai</a> | University of Delhi - Department of Physical Education</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">Physical Fitness Test (PFT) | Written Entrance Exam | Sports Participation Certificate Required</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Physically fit, interest in sports, teaching ability, communication skills, leadership qualities</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th → Entrance Exam + PFT → B.P.Ed (3 years) → M.P.Ed (2 years) → UGC NET → Assistant Professor/PE Teacher</div></div>
+                </div>
+                <div class="section-title">🏛️ Top B.P.Ed Colleges in India</div>
+                <table class="college-table">
+                    <thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>Specialization</th></tr></thead>
+                    <tbody>
+                        <tr><td><a class="live-link" href="https://www.lnipes.in" target="_blank">LNIPE Gwalior</a></th><td>Gwalior</th><td>₹30,000</th>那样Sports Coaching, Physical Education</th></tr>
+                        <tr><td><a class="live-link" href="https://www.lakshmibai.nic.in" target="_blank">LNCPE Thiruvananthapuram</a></th><td>Thiruvananthapuram</th><td>₹25,000</th>那样Physical Education</th></tr>
+                        <tr><td><a class="live-link" href="https://www.tnpesu.edu.in" target="_blank">TNPESU Chennai</a></th><td>Chennai</th><td>₹20,000</th>那样Sports Sciences</th></tr>
+                        <tr><td>University of Delhi - DPE</th><td>Delhi</th><td>₹15,000</th>那样Physical Education</th></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Complete Career Roadmap (B.P.Ed → Professor)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.P.Ed Degree - Theory + Practical (Cricket, Football, Volleyball, Athletics, Yoga, Gymnastics)<br><span class="salary-text">💰 PE Teacher (Primary): ₹4-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.P.Ed - Master of Physical Education (Specialization in Sports Coaching, Sports Psychology, Exercise Physiology)<br><span class="salary-text">💰 PE Teacher (Secondary/High School): ₹6-12 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">UGC NET</div><div class="roadmap-text">Clearing UGC NET - Eligible for Assistant Professor in Colleges/Universities<br><span class="salary-text">💰 Assistant Professor: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">PhD</div><div class="roadmap-text">PhD in Physical Education → Associate Professor → Professor<br><span class="salary-text">💰 Professor: ₹15-25 LPA | HOD: ₹20-30 LPA</span></div></div>
+                <div class="section-title">💼 Job Opportunities after B.P.Ed</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏫 KVS/NVS</div><div class="info-text">Kendriya Vidyalaya Sangathan PE Teacher - ₹50k-70k/month</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ State Govt Schools</div><div class="info-text">State Government PE Teacher - ₹40k-60k/month</div></div>
+                    <div class="info-card"><div class="info-label">🏫 Private Schools</div><div class="info-text">CBSE/ICSE Schools - ₹30k-50k/month</div></div>
+                    <div class="info-card"><div class="info-label">🎓 Colleges</div><div class="info-text">Assistant Professor (Physical Education) - ₹60k-80k/month</div></div>
+                    <div class="info-card"><div class="info-label">🏟️ Sports Academies</div><div class="info-text">Head Coach, Sports Coordinator - ₹40k-80k/month</div></div>
+                </div>
+                <div class="section-title">⭐ Famous B.P.Ed/Physical Education Graduates</div>
+                <div><span class="famous-badge">Dr. P. M. Joseph (Former Director, LNIPE)</span> <span class="famous-badge">Prof. Ajit Kumar (Sports Scientist)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="fitnessTitle">💪 Fitness Industry Certifications</div>
-        <div class="list-item" id="fitnessItem1">• Certified Fitness Trainer, Personal Trainer, Strength & Conditioning Coach, Gym Instructor, Zumba Trainer</div>
-        <div class="list-item" id="fitnessItem2">• Quick jobs in gyms, hotels, cruise ships, personal training</div>
+    
+    <!-- ==================== DOOR 3: B.Sc SPORTS SCIENCE ==================== -->
+    <div id="door-sportscience" class="door-content">
+        <div class="accordion-card" id="sportsScienceCard">
+            <div class="accordion-header" onclick="toggleCard('sportsScienceCard')">
+                <div class="accordion-title"><span class="accordion-icon">🔬</span> B.Sc Sports Science (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of biomechanics, exercise physiology, sports psychology, sports nutrition, strength and conditioning, sports analytics.<br><span class="salary-text">💰 B.Sc: ₹4-8 LPA | M.Sc: ₹8-15 LPA | PhD: ₹12-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Work with professional athletes, sports teams, Olympic training centers. High demand in IPL, ISL, and international leagues.<br><span class="salary-text">💰 Sports Scientist (IPL): ₹15-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.lnipes.in" target="_blank">LNIPE Gwalior</a> | <a class="live-link" href="https://www.sriher.ac.in" target="_blank">SRU - Sri Ramachandra Institute</a> | <a class="live-link" href="https://www.manipal.edu" target="_blank">Manipal Academy of Higher Education</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Sports Science)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Sc Sports Science<br><span class="salary-text">💰 Fitness Trainer/Analyst: ₹4-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Sc Sports Science (Specialization in Biomechanics, Physiology, Psychology)<br><span class="salary-text">💰 Sports Scientist: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">PhD</div><div class="roadmap-text">PhD → Research Scientist at SAI, NSNIS, or International Labs<br><span class="salary-text">💰 Research Scientist: ₹12-25 LPA</span></div></div>
+                <div class="section-title">🏛️ Top Recruiters for Sports Scientists</div>
+                <div><span class="famous-badge">Sports Authority of India (SAI)</span> <span class="famous-badge">IPL Teams (CSK, MI, RCB, KKR)</span> <span class="famous-badge">ISL Teams</span> <span class="famous-badge">Pro Kabaddi League</span> <span class="famous-badge">Netaji Subhas National Institute of Sports (NSNIS)</span> <span class="famous-badge">International Olympic Training Centers</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="defenceTitle">🛡️ Defence & Government Jobs via Sports Quota</div>
-        <div class="list-item" id="defenceItem1">• Army, Navy, Air Force Sports Quota – direct entry for State/National level players</div>
-        <div class="list-item" id="defenceItem2">• Government Jobs: Railways, Income Tax, Police, Excise, Forest, SSC, Banking – relaxed cutoffs for sportspersons</div>
+        <!-- ==================== DOOR 4: SPORTS COACHING DIPLOMAS ==================== -->
+    <div id="door-coaching" class="door-content">
+        <div class="accordion-card" id="coachingCard">
+            <div class="accordion-header" onclick="toggleCard('coachingCard')">
+                <div class="accordion-title"><span class="accordion-icon">📋</span> Sports Coaching Diplomas - NSNIS (1-2 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional coaching diploma from Netaji Subhas National Institute of Sports (NSNIS) - India's premier sports coaching institute.<br><span class="salary-text">💰 Starting Salary: ₹5-10 LPA | Senior Coach: ₹10-20 LPA | National Coach: ₹20-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Government recognized coaching certification, opportunity to coach at state/national level, work with SAI academies.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Sports Available</div><div class="info-text">Cricket, Football, Hockey, Boxing, Wrestling, Athletics, Badminton, Table Tennis, Swimming, Gymnastics, Weightlifting, Kabaddi, Volleyball, Basketball, Tennis, Archery, Shooting</div></div>
+                </div>
+                <div class="section-title">📋 NSNIS Coaching Diploma Details</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📅 Duration</div><div class="info-text">1 year (Regular) | 2 years (Distance)</div></div>
+                    <div class="info-card"><div class="info-label">🎓 Eligibility</div><div class="info-text">Graduation in any stream + Participation in sports at inter-college/university level</div></div>
+                    <div class="info-card"><div class="info-label">📋 Selection</div><div class="info-text">Written exam + Physical fitness test + Interview</div></div>
+                    <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://www.nsnispunjab.org" target="_blank">nsnispunjab.org</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Sports Coach)</div>
+                <div class="roadmap-step"><div class="roadmap-year">1-2 Years</div><div class="roadmap-text">NSNIS Coaching Diploma<br><span class="salary-text">💰 Assistant Coach: ₹5-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-4 Years</div><div class="roadmap-text">State Level Coach → Academy Head Coach<br><span class="salary-text">💰 Coach: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">National Level Coach → SAI Coach<br><span class="salary-text">💰 National Coach: ₹15-25 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">10+ Years</div><div class="roadmap-text">Chief National Coach → Director of Coaching<br><span class="salary-text">💰 Chief Coach: ₹25-40 LPA</span></div></div>
+                <div class="section-title">⭐ Famous Indian Coaches</div>
+                <div><span class="famous-badge">Pullela Gopichand (Badminton National Coach)</span> <span class="famous-badge">Rahul Dravid (Former Head Coach, Indian Cricket Team)</span> <span class="famous-badge">Harendra Singh (Hockey Coach)</span> <span class="famous-badge">B. I. Fernandez (Athletics Coach)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="careersTitle">🏆 Top Career Options Summary</div>
-        <div class="list-item" id="career1">• Professional Athlete – Play for state/nation</div>
-        <div class="list-item" id="career2">• Sports Coach / Physical Education Teacher – B.P.Ed / Diploma</div>
-        <div class="list-item" id="career3">• Sports Physiotherapist – Work with teams</div>
-        <div class="list-item" id="career4">• Sports Nutritionist – B.Sc Nutrition</div>
-        <div class="list-item" id="career5">• Sports Manager – BBA Sports Management</div>
-        <div class="list-item" id="career6">• Sports Analyst / Commentator – B.Sc Sports Science / BJMC</div>
-        <div class="list-item" id="career7">• Yoga Instructor / Fitness Trainer – Certifications</div>
+    
+    <!-- ==================== DOOR 5: SPORTS PHYSIOTHERAPY ==================== -->
+    <div id="door-physio" class="door-content">
+        <div class="accordion-card" id="physioCard">
+            <div class="accordion-header" onclick="toggleCard('physioCard')">
+                <div class="accordion-title"><span class="accordion-icon">🩺</span> Sports Physiotherapy - BPT/MPT (4.5 + 2 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Specialized physiotherapy for athletes - injury prevention, rehabilitation, sports massage, taping techniques, exercise therapy.<br><span class="salary-text">💰 BPT: ₹4-8 LPA | MPT Sports: ₹8-18 LPA | IPL Team Physio: ₹20-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Work with professional sports teams (IPL, ISL, Pro Kabaddi), national athletes, sports academies. High demand, good salary, travel with teams.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.aiims.edu" target="_blank">AIIMS Delhi</a> | <a class="live-link" href="https://www.cmcvellore.ac.in" target="_blank">CMC Vellore</a> | <a class="live-link" href="https://www.manipal.edu" target="_blank">Manipal University</a> | <a class="live-link" href="https://www.jssuni.edu.in" target="_blank">JSS University Mysore</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Sports Physio)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4.5 Years</div><div class="roadmap-text">BPT - Bachelor of Physiotherapy (4 years academic + 6 months internship)<br><span class="salary-text">💰 Physiotherapist: ₹4-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MPT in Sports Physiotherapy<br><span class="salary-text">💰 Sports Physio: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Sports Team Physio (State Level) → National Level Teams<br><span class="salary-text">💰 Team Physio: ₹12-25 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">IPL/ISL Team Physio → Indian National Team Physio<br><span class="salary-text">💰 IPL Physio: ₹20-40 LPA | National Team: ₹25-50 LPA</span></div></div>
+                <div class="section-title">🏛️ Top Recruiters for Sports Physiotherapists</div>
+                <div><span class="famous-badge">IPL Teams (CSK, MI, RCB, KKR, SRH, DC, RR, PBKS, LSG, GT)</span> <span class="famous-badge">ISL Teams (ATK Mohun Bagan, Mumbai City, Bengaluru FC)</span> <span class="famous-badge">Sports Authority of India (SAI)</span> <span class="famous-badge">Pro Kabaddi League Teams</span> <span class="famous-badge">National Cricket Academy (NCA)</span> <span class="famous-badge">Indian Olympic Association</span></div>
+                <div class="section-title">⭐ Famous Sports Physiotherapists</div>
+                <div><span class="famous-badge">Dr. Nitin Patel (Physio for Indian Cricket Team)</span> <span class="famous-badge">Dr. Paresh G. (IPL Physio)</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="entranceTitle">📋 Entrance & Preparation</div>
-        <div class="list-item" id="entranceItem1">• B.P.Ed entrance exams (Physical fitness test, written)</div>
-        <div class="list-item" id="entranceItem2">• NSNIS Coaching Diploma – selection trials</div>
-        <div class="list-item" id="entranceItem3">• State & National level sports participation required for quota jobs</div>
+    
+    <!-- ==================== DOOR 6: SPORTS NUTRITION ==================== -->
+    <div id="door-nutrition" class="door-content">
+        <div class="accordion-card" id="nutritionCard">
+            <div class="accordion-header" onclick="toggleCard('nutritionCard')">
+                <div class="accordion-title"><span class="accordion-icon">🥗</span> B.Sc Sports Nutrition (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of nutrition for athletes - diet planning, supplements, hydration, body composition, performance enhancement.<br><span class="salary-text">💰 B.Sc: ₹3-7 LPA | M.Sc: ₹6-12 LPA | Sports Nutritionist: ₹10-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Essential for professional athletes, sports teams, fitness centers. Growing demand in IPL, ISL, and international sports.</div></div>
+                    <div class="info-card"><div class="info-label">📋 CERTIFICATIONS</div><div class="info-text">ISSN Certificate, IOC Diploma in Sports Nutrition, Certified Sports Nutritionist (CISSN)</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Sports Nutrition)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Sc Nutrition & Dietetics<br><span class="salary-text">💰 Nutritionist: ₹3-6 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Sc Sports Nutrition + Certification (ISSN/CISSN)<br><span class="salary-text">💰 Sports Nutritionist: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Sports Team Nutritionist → Head of Nutrition<br><span class="salary-text">💰 Team Nutritionist: ₹12-25 LPA</span></div></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 7: SPORTS MANAGEMENT ==================== -->
+    <div id="door-management" class="door-content">
+        <div class="accordion-card" id="managementCard">
+            <div class="accordion-header" onclick="toggleCard('managementCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> BBA/B.Sc Sports Management (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of sports business, event management, sports marketing, sponsorship, athlete management, sports analytics.<br><span class="salary-text">💰 Fresher: ₹5-10 LPA | Sports Manager: ₹10-20 LPA | Team Director: ₹25-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing sports industry in India (IPL, ISL, PKL), sports leagues, event management companies, sports marketing agencies.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.icss.edu.in" target="_blank">ICSS Pune</a> | <a class="live-link" href="https://www.amity.edu" target="_blank">Amity University</a> | <a class="live-link" href="https://www.lnipes.in" target="_blank">LNIPE Gwalior</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Sports Management)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">BBA Sports Management<br><span class="salary-text">💰 Sports Marketing Executive: ₹5-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MBA Sports Management<br><span class="salary-text">💰 Sports Manager: ₹10-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">Team Manager → Operations Head → League Director<br><span class="salary-text">💰 Director: ₹20-40 LPA</span></div></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 8: FITNESS CERTIFICATIONS ==================== -->
+    <div id="door-fitness" class="door-content">
+        <div class="accordion-card" id="fitnessCard">
+            <div class="accordion-header" onclick="toggleCard('fitnessCard')">
+                <div class="accordion-title"><span class="accordion-icon">💪</span> Fitness Certifications (3-12 months)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💪 Certified Fitness Trainer</div><div class="info-text">3-6 months | Salary: ₹3-8 LPA | Work in gyms, fitness centers, corporate wellness</div></div>
+                    <div class="info-card"><div class="info-label">🏋️ Personal Trainer</div><div class="info-text">3-6 months | Salary: ₹4-10 LPA | One-on-one training, celebrity training</div></div>
+                    <div class="info-card"><div class="info-label">🏃 Strength & Conditioning Coach</div><div class="info-text">6-12 months | Salary: ₹6-15 LPA | Work with sports teams, athletes, academies</div></div>
+                    <div class="info-card"><div class="info-label">🏋️ Gym Instructor</div><div class="info-text">3 months | Salary: ₹2-5 LPA | Work in local gyms, fitness centers</div></div>
+                    <div class="info-card"><div class="info-label">🕺 Zumba Trainer</div><div class="info-text">2-3 months | Salary: ₹3-8 LPA | Group fitness classes, dance fitness</div></div>
+                    <div class="info-card"><div class="info-label">🧘 Yoga Instructor</div><div class="info-text">3-6 months | Salary: ₹3-10 LPA | Yoga studios, wellness centers, corporate</div></div>
+                </div>
+                <div class="section-title">📋 Top Certification Providers</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 ACE</div><div class="info-text">American Council on Exercise - International certification</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 NASM</div><div class="info-text">National Academy of Sports Medicine - CPT, CES, PES</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 ISSA</div><div class="info-text">International Sports Sciences Association</div></div>
+                    <div class="info-card"><div class="info-label">🇮🇳 REPS India</div><div class="info-text">Register of Exercise Professionals India - National certification</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 9: PROFESSIONAL ATHLETE PATH ==================== -->
+    <div id="door-athlete" class="door-content">
+        <div class="accordion-card" id="athleteCard">
+            <div class="accordion-header" onclick="toggleCard('athleteCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏃</span> Professional Athlete Path - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Path to becoming a professional athlete - representing state, country in national/international competitions.<br><span class="salary-text">💰 Domestic Players: ₹10-50 LPA | International Players: ₹50 LPA - ₹10 Cr+</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Fame, recognition, government rewards, endorsements, lifelong pension, job security through sports quota.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">Start from childhood (Age 8-12). Join sports academies, get professional coaching.</div></div>
+                </div>
+                <div class="section-title">🗺️ Professional Athlete Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">Age 8-12</div><div class="roadmap-text">Start sports training at local club/academy. Develop basic skills and fitness.<br><span class="salary-text">💰 Focus: Technique, Fundamentals</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Age 12-15</div><div class="roadmap-text">Join SAI Academy, District Level Tournaments. Get noticed by coaches.<br><span class="salary-text">💰 Scholarship: Khelo India - ₹5-10k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Age 15-18</div><div class="roadmap-text">State Level Championships, National School Games. Win medals at state level.<br><span class="salary-text">💰 State Medalist: ₹1-5 Lakh (Cash award)</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Age 18-22</div><div class="roadmap-text">National Championships (Senior), Represent India at Junior International Tournaments.<br><span class="salary-text">💰 SAI Stipend: ₹20-50k/month + Free boarding/coaching</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Age 22+</div><div class="roadmap-text">Senior National Team, Commonwealth Games, Asian Games, World Championships, Olympics<br><span class="salary-text">💰 International Medalist: ₹50 Lakh - ₹5 Cr (Govt Award) + Endorsements</span></div></div>
+                <div class="section-title">🏛️ Government Support for Athletes</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏅 Khelo India Program</div><div class="info-text">₹5-10 Lakh/year scholarship for identified athletes</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ SAI Academies</div><div class="info-text">Free coaching, accommodation, equipment, stipend</div></div>
+                    <div class="info-card"><div class="info-label">🎓 TOP Scheme</div><div class="info-text">Target Olympic Podium Scheme - ₹25-50 Lakh/year funding</div></div>
+                    <div class="info-card"><div class="info-label">🏆 Cash Awards</div><div class="info-text">Olympic Gold: ₹7.5 Cr, Silver: ₹5 Cr, Bronze: ₹3 Cr (Govt of India)</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Indian Athletes and Their Earnings</div>
+                <div><span class="famous-badge">Neeraj Chopra (Javelin) - ₹1.5 Cr (Salary) + ₹10 Cr+ Endorsements</span> <span class="famous-badge">P. V. Sindhu (Badminton) - ₹50 LPA + ₹15 Cr+ Endorsements</span> <span class="famous-badge">Virat Kohli (Cricket) - ₹100 Cr+ per year</span> <span class="famous-badge">Mirabai Chanu (Weightlifting) - ₹50 LPA + Endorsements</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 10: SPORTS QUOTA JOBS ==================== -->
+    <div id="door-govt" class="door-content">
+        <div class="accordion-card" id="govtQuotaCard">
+            <div class="accordion-header" onclick="toggleCard('govtQuotaCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Sports Quota Jobs - Government Recruitment</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏛️ Railways</div><div class="info-text">Indian Railways recruits sportspersons for Group C posts. Open for national/state level medalists. Salary: ₹40k-80k/month</div></div>
+                    <div class="info-card"><div class="info-label">🛡️ Indian Army</div><div class="info-text">Army Sports Quota Entry - Direct recruitment for national/international players. Salary: ₹60k-1.2L/month + Allowances</div></div>
+                    <div class="info-card"><div class="info-label">⚓ Indian Navy</div><div class="info-text">Navy Sports Quota - Recruitment for sailors and officers. Salary: ₹50k-1L/month</div></div>
+                    <div class="info-card"><div class="info-label">✈️ Indian Air Force</div><div class="info-text">Air Force Sports Quota - Direct entry for national/international players. Salary: ₹60k-1.2L/month</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Income Tax</div><div class="info-text">Income Tax Department recruits sportspersons for Inspector/Assistant posts. Salary: ₹50k-80k/month</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Excise Department</div><div class="info-text">State Excise Departments recruit through sports quota. Salary: ₹40k-70k/month</div></div>
+                    <div class="info-card"><div class="info-label">🚔 Police</div><div class="info-text">State Police, CISF, BSF, CRPF, ITBP - Sports quota recruitment. Salary: ₹35k-80k/month</div></div>
+                    <div class="info-card"><div class="info-label">🌲 Forest Department</div><div class="info-text">Forest Guard, Ranger posts through sports quota. Salary: ₹30k-60k/month</div></div>
+                    <div class="info-card"><div class="info-label">🏦 Banking (PSU)</div><div class="info-text">SBI, IBPS, RBI recruit sportspersons for clerk/PO posts. Relaxed cutoffs for medalists</div></div>
+                    <div class="info-card"><div class="info-label">📋 SSC</div><div class="info-text">SSC CGL/CHSL - Relaxation in cut-off marks for sportspersons. Salary: ₹6-15 LPA</div></div>
+                </div>
+                <div class="section-title">📋 Eligibility for Sports Quota Jobs</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏅 National Level</div><div class="info-text">Medalist in Senior/Junior National Championships - Eligible for most quotas</div></div>
+                    <div class="info-card"><div class="info-label">🏅 State Level</div><div class="info-text">Medalist in State Championships - Eligible for Police, Excise, Forest Dept</div></div>
+                    <div class="info-card"><div class="info-label">🏅 International</div><div class="info-text">Participated in Asian Games/Commonwealth/World Championships - Direct recruitment</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Sportspersons in Government Jobs</div>
+                <div><span class="famous-badge">Milkha Singh (Indian Railways)</span> <span class="famous-badge">P. T. Usha (Indian Railways)</span> <span class="famous-badge">Major Dhyan Chand (Indian Army)</span> <span class="famous-badge">Neeraj Chopra (Indian Army - Junior Commissioned Officer)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 11: ABROAD SPORTS CAREERS ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="abroadSportsCard">
+            <div class="accordion-header" onclick="toggleCard('abroadSportsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Sports Careers - Study & Work</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">B.Sc Sports Science, M.Sc Exercise Physiology, Sports Management | Salary: AUD 70k-120k/year | PR pathway</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">Sports Management, Athletic Training, Exercise Science | NCAA Scholarships | Salary: $50k-100k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">MSc Sports Science, Sports Psychology, Sports Management | Salary: £30k-60k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">Kinesiology, Sports Science, Athletic Therapy | PGWP pathway | Salary: CAD 50k-80k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">M.Sc Sports Science (Low tuition/free) | DAAD Scholarship | Salary: €40k-70k/year</div></div>
+                </div>
+                <div class="section-title">🎓 Scholarships for Sports Courses Abroad</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 NCAA Scholarships</div><div class="info-text">Full athletic scholarships for talented sportspersons in US universities</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia Awards</div><div class="info-text">Fully funded for master's in Sports Science</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 DAAD</div><div class="info-text">Fully funded for master's in Sports Science at German universities</div></div>
+                </div>
+                <div class="section-title">⭐ Indians Who Made it Big in International Sports</div>
+                <div><span class="famous-badge">Sania Mirza (Tennis - International)</span> <span class="famous-badge">Vijay Singh (Golf - International)</span> <span class="famous-badge">Anju Bobby George (Athletics - World Championships Medal)</span></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
-    en: {
-        app_tagline: "Career Saathi",
-        tagline: "🏅 Sports & Physical Education Careers",
-        page_title: "🏅 Sports Stream",
-        after10th_title: "🎓 After 10th – Start Early",
-        after10th_item1: "• Choose 11th/12th with Physical Education (any stream)",
-        after10th_item2: "• Join Sports School / Academy (Cricket, Football, Hockey, Boxing, Wrestling, Athletics, etc.)",
-        after10th_item3: "• Diploma Courses after 10th: Sports Coaching, Fitness Training, Yoga, Gym Instructor",
-        after10th_item4: "• SAI (Sports Authority of India) Academies, Khelo India Programs",
-        after12th_title: "🎓 After 12th – Degree Courses",
-        bped: "• B.P.Ed – Bachelor of Physical Education (3 years) → Physical Education Teacher, Coach",
-        sports_science: "• B.Sc Sports Science → Sports Scientist, Performance Analyst, Strength & Conditioning Coach",
-        coaching: "• Diploma in Sports Coaching (NSNIS) – Cricket, Football, Boxing, Wrestling, Athletics, etc.",
-        physio: "• B.Sc / Diploma in Physiotherapy (Sports Physio) – High demand in teams & academies",
-        sports_mgmt: "• BBA in Sports Management / B.Sc Sports Management – Team Manager, Event Manager, Marketing",
-        yoga: "• B.A / B.Sc Yoga Science – Yoga Teacher, Therapist",
-        nutrition: "• B.Sc Nutrition / Sports Nutrition – Sports Nutritionist for athletes & gyms",
-        athlete_title: "🏃 Professional Athlete Path",
-        athlete_item1: "• Train at Sports Academy after 12th for: Cricket, Football, Kabaddi, Hockey, Athletics, Shooting, Archery, Badminton, Swimming, Gymnastics",
-        athlete_item2: "• Aim for State Level → National Level → Khelo India → International",
-        athlete_item3: "• Alongside, pursue open degree (BA/B.Com) for backup",
-        fitness_title: "💪 Fitness Industry Certifications",
-        fitness_item1: "• Certified Fitness Trainer, Personal Trainer, Strength & Conditioning Coach, Gym Instructor, Zumba Trainer",
-        fitness_item2: "• Quick jobs in gyms, hotels, cruise ships, personal training",
-        defence_title: "🛡️ Defence & Government Jobs via Sports Quota",
-        defence_item1: "• Army, Navy, Air Force Sports Quota – direct entry for State/National level players",
-        defence_item2: "• Government Jobs: Railways, Income Tax, Police, Excise, Forest, SSC, Banking – relaxed cutoffs for sportspersons",
-        careers_title: "🏆 Top Career Options Summary",
-        career1: "• Professional Athlete – Play for state/nation",
-        career2: "• Sports Coach / Physical Education Teacher – B.P.Ed / Diploma",
-        career3: "• Sports Physiotherapist – Work with teams",
-        career4: "• Sports Nutritionist – B.Sc Nutrition",
-        career5: "• Sports Manager – BBA Sports Management",
-        career6: "• Sports Analyst / Commentator – B.Sc Sports Science / BJMC",
-        career7: "• Yoga Instructor / Fitness Trainer – Certifications",
-        entrance_title: "📋 Entrance & Preparation",
-        entrance_item1: "• B.P.Ed entrance exams (Physical fitness test, written)",
-        entrance_item2: "• NSNIS Coaching Diploma – selection trials",
-        entrance_item3: "• State & National level sports participation required for quota jobs",
-        bottom_home: "Home",
-        bottom_search: "Search",
-        bottom_ai: "AnnS AI",
-        bottom_alerts: "Alerts",
-        bottom_profile: "Profile"
-    },
-    hi: {
-        app_tagline: "करियर साथी",
-        tagline: "🏅 खेल और शारीरिक शिक्षा करियर",
-        page_title: "🏅 खेल स्ट्रीम",
-        after10th_title: "🎓 10वीं के बाद – जल्दी शुरू करें",
-        after10th_item1: "• 11वीं/12वीं में शारीरिक शिक्षा चुनें (कोई भी स्ट्रीम)",
-        after10th_item2: "• खेल स्कूल / अकादमी में शामिल हों (क्रिकेट, फुटबॉल, हॉकी, बॉक्सिंग, कुश्ती, एथलेटिक्स)",
-        after10th_item3: "• 10वीं के बाद डिप्लोमा पाठ्यक्रम: खेल कोचिंग, फिटनेस प्रशिक्षण, योग, जिम इंस्ट्रक्टर",
-        after10th_item4: "• एसएआई अकादमियां, खेलो इंडिया कार्यक्रम",
-        after12th_title: "🎓 12वीं के बाद – डिग्री पाठ्यक्रम",
-        bped: "• बी.पी.एड – शारीरिक शिक्षा स्नातक → शारीरिक शिक्षा शिक्षक, कोच",
-        sports_science: "• बी.एससी खेल विज्ञान → खेल वैज्ञानिक, प्रदर्शन विश्लेषक",
-        coaching: "• खेल कोचिंग में डिप्लोमा (एनएसएनआईएस)",
-        physio: "• बी.एससी / डिप्लोमा इन फिजियोथेरेपी (खेल फिजियो)",
-        sports_mgmt: "• बीबीए इन स्पोर्ट्स मैनेजमेंट",
-        yoga: "• बी.ए / बी.एससी योग विज्ञान",
-        nutrition: "• बी.एससी पोषण / खेल पोषण",
-        athlete_title: "🏃 पेशेवर एथलीट पथ",
-        athlete_item1: "• 12वीं के बाद खेल अकादमी में प्रशिक्षण लें",
-        athlete_item2: "• राज्य स्तर → राष्ट्रीय स्तर → खेलो इंडिया → अंतर्राष्ट्रीय",
-        athlete_item3: "• साथ में बैकअप के लिए ओपन डिग्री (बीए/बी.कॉम) करें",
-        fitness_title: "💪 फिटनेस उद्योग प्रमाणपत्र",
-        fitness_item1: "• प्रमाणित फिटनेस ट्रेनर, पर्सनल ट्रेनर, जिम इंस्ट्रक्टर, ज़ुम्बा ट्रेनर",
-        fitness_item2: "• जिम, होटल, क्रूज जहाजों में त्वरित नौकरियां",
-        defence_title: "🛡️ रक्षा और सरकारी नौकरियां (खेल कोटा)",
-        defence_item1: "• सेना, नौसेना, वायुसेना खेल कोटा",
-        defence_item2: "• सरकारी नौकरियां: रेलवे, आयकर, पुलिस, उत्पादन शुल्क, वन, एसएससी, बैंकिंग",
-        careers_title: "🏆 शीर्ष करियर विकल्प सारांश",
-        career1: "• पेशेवर एथलीट",
-        career2: "• खेल कोच / शारीरिक शिक्षा शिक्षक",
-        career3: "• खेल फिजियोथेरेपिस्ट",
-        career4: "• खेल पोषण विशेषज्ञ",
-        career5: "• खेल प्रबंधक",
-        career6: "• खेल विश्लेषक / कमेंटेटर",
-        career7: "• योग प्रशिक्षक / फिटनेस ट्रेनर",
-        entrance_title: "📋 प्रवेश और तैयारी",
-        entrance_item1: "• बी.पी.एड प्रवेश परीक्षा",
-        entrance_item2: "• एनएसएनआईएस कोचिंग डिप्लोमा – चयन परीक्षण",
-        entrance_item3: "• कोटा नौकरियों के लिए राज्य और राष्ट्रीय स्तर की खेल भागीदारी आवश्यक",
-        bottom_home: "होम",
-        bottom_search: "खोजें",
-        bottom_ai: "एनएस एआई",
-        bottom_alerts: "सूचनाएं",
-        bottom_profile: "प्रोफ़ाइल"
-    }
-};
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
 </script>
 </body>
-<script>
-// Continue JavaScript for sports.html
-const bottomNav = [
-    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
-    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
-    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
-    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
-    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
-];
-
-let currentLang = 'en';
-
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-
-function updateAllText() {
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    
-    document.getElementById('after10thTitle').textContent = t('after10th_title');
-    document.getElementById('after10thItem1').textContent = t('after10th_item1');
-    document.getElementById('after10thItem2').textContent = t('after10th_item2');
-    document.getElementById('after10thItem3').textContent = t('after10th_item3');
-    document.getElementById('after10thItem4').textContent = t('after10th_item4');
-    
-    document.getElementById('after12thTitle').textContent = t('after12th_title');
-    document.getElementById('bpedItem').textContent = t('bped');
-    document.getElementById('sportsScienceItem').textContent = t('sports_science');
-    document.getElementById('coachingItem').textContent = t('coaching');
-    document.getElementById('physioItem').textContent = t('physio');
-    document.getElementById('sportsMgmtItem').textContent = t('sports_mgmt');
-    document.getElementById('yogaItem').textContent = t('yoga');
-    document.getElementById('nutritionItem').textContent = t('nutrition');
-    
-    document.getElementById('athleteTitle').textContent = t('athlete_title');
-    document.getElementById('athleteItem1').textContent = t('athlete_item1');
-    document.getElementById('athleteItem2').textContent = t('athlete_item2');
-    document.getElementById('athleteItem3').textContent = t('athlete_item3');
-    
-    document.getElementById('fitnessTitle').textContent = t('fitness_title');
-    document.getElementById('fitnessItem1').textContent = t('fitness_item1');
-    document.getElementById('fitnessItem2').textContent = t('fitness_item2');
-    
-    document.getElementById('defenceTitle').textContent = t('defence_title');
-    document.getElementById('defenceItem1').textContent = t('defence_item1');
-    document.getElementById('defenceItem2').textContent = t('defence_item2');
-    
-    document.getElementById('careersTitle').textContent = t('careers_title');
-    document.getElementById('career1').textContent = t('career1');
-    document.getElementById('career2').textContent = t('career2');
-    document.getElementById('career3').textContent = t('career3');
-    document.getElementById('career4').textContent = t('career4');
-    document.getElementById('career5').textContent = t('career5');
-    document.getElementById('career6').textContent = t('career6');
-    document.getElementById('career7').textContent = t('career7');
-    
-    document.getElementById('entranceTitle').textContent = t('entrance_title');
-    document.getElementById('entranceItem1').textContent = t('entrance_item1');
-    document.getElementById('entranceItem2').textContent = t('entrance_item2');
-    document.getElementById('entranceItem3').textContent = t('entrance_item3');
-    
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
-}
-
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'education.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-renderBottomBar();
-loadSavedLanguage();
-</script>
 </html>
