@@ -8,61 +8,374 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
+        .language-selector select option { color: black; background: white; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         .container { padding: 20px 16px; }
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
+        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
         .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
         .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
+            </select>
+        </div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">🌏 Study Abroad – International Careers</div>
+    <div class="tagline" id="taglineText">🌏 Study Abroad – International Careers</div>
 </div>
+
 <div class="container">
-    <div class="page-title">🌏 Abroad Studies Stream</div>
-    <div class="section-card"><div class="section-title">🇺🇸 Study in the USA</div><div class="list-item">• Popular courses: Business, Computer Science, Nursing, Engineering, Arts, Design, Psychology</div><div class="list-item">• Pathway: 12th → SAT/IELTS/TOEFL → University → OPT Work Visa → H-1B</div><div class="list-item">• Official: EducationUSA (state.gov)</div></div>
-    <div class="section-card"><div class="section-title">🇨🇦 Study in Canada</div><div class="list-item">• Top courses: Diploma in Business, Computer Science, Hospitality, Agriculture, Healthcare, Engineering, Trades</div><div class="list-item">• Pathway: 12th → IELTS → Diploma/Bachelor → PGWP → PR</div><div class="list-item">• Official: Canada.ca/study</div></div>
-    <div class="section-card"><div class="section-title">🇬🇧 Study in the United Kingdom (UK)</div><div class="list-item">• Courses: Business, Computer Science, Medicine (foundation), Law, Arts, Fashion, Design</div><div class="list-item">• Pathway: 12th → IELTS → Foundation/Bachelor → Graduate Route → Work Visa</div><div class="list-item">• Official: UK Government Student Visa</div></div>
-    <div class="section-card"><div class="section-title">🇦🇺 Study in Australia</div><div class="list-item">• Popular: Nursing, IT, Engineering, Agriculture, Hospitality, Automotive, Trades</div><div class="list-item">• Pathway: 12th → IELTS/PTE → TAFE Diploma/Bachelor → PSW → PR options</div><div class="list-item">• Official: StudyAustralia.gov.au</div></div>
-    <div class="section-card"><div class="section-title">🇳🇿 Study in New Zealand</div><div class="list-item">• Top: Agriculture, IT, Engineering Technicians, Hospitality, Film & Animation</div><div class="list-item">• Pathway: 12th → IELTS → Diploma/Bachelor → Post-study work visa → PR</div><div class="list-item">• Official: StudyWithNewZealand.govt.nz</div></div>
-    <div class="section-card"><div class="section-title">🇩🇪 Study in Germany (Free/Low Cost)</div><div class="list-item">• Engineering, Computer Science, Business, Design, Medicine (long duration)</div><div class="list-item">• Requirements: German A1-B1 or English-taught programs with IELTS</div><div class="list-item">• Official: DAAD Germany</div></div>
-    <div class="section-card"><div class="section-title">🇫🇷 Study in France</div><div class="list-item">• Fashion & Luxury, Art & Design, Business, Hospitality, Engineering, Culinary Arts</div><div class="list-item">• Official: Campus France</div></div>
-    <div class="section-card"><div class="section-title">🇮🇪 Study in Ireland</div><div class="list-item">• Computer Science (high demand), Business, Nursing, Engineering</div><div class="list-item">• Official: Education in Ireland</div></div>
-    <div class="section-card"><div class="section-title">🇯🇵 Study in Japan</div><div class="list-item">• Engineering, Robotics, Japanese Language Program, Animation, Gaming, Manga</div><div class="list-item">• Official: StudyInJapan.go.jp</div></div>
-    <div class="section-card"><div class="section-title">🇰🇷 Study in South Korea</div><div class="list-item">• Korean Language Program, Engineering, Fashion, Film & Media, K-Arts</div><div class="list-item">• Official: StudyInKorea.go.kr</div></div>
-    <div class="section-card"><div class="section-title">🇦🇪 Study in UAE / Dubai</div><div class="list-item">• Business, IT, Hospitality, Aviation Management</div><div class="list-item">• Official: UAE Ministry of Education</div></div>
-    <div class="section-card"><div class="section-title">🧭 Types of Courses After 12th</div><div class="list-item">• Bachelor Degrees (3-4 years): BBA, BSc, Engineering, Nursing, IT, Arts, Design</div><div class="list-item">• Diplomas (1-2 years): Business, IT, Hospitality, Agriculture, Automotive, Healthcare (popular for PR in Canada/Australia/NZ)</div><div class="list-item">• Foundation Programs (1 year): to improve English, Math, academic readiness</div></div>
-    <div class="section-card"><div class="section-title">💰 Cheapest Options for Indian Students</div><div class="list-item">• Germany (public universities free), France (low tuition), Italy (scholarships), Poland, Hungary, Japan/Korea (language scholarships)</div></div>
-    <div class="section-card"><div class="section-title">🎓 Full Scholarships After 12th</div><div class="list-item">• Fulbright (USA), DAAD (Germany), MEXT (Japan), KGSP (South Korea), Campus France Scholarships</div></div>
-    <div class="section-card"><div class="section-title">🌟 Which Country is Best For You?</div><div class="list-item">• PR + Job opportunities → Canada, Australia, New Zealand</div><div class="list-item">• Low budget education → Germany, France, Italy</div><div class="list-item">• High-tech careers → USA, Japan, Korea</div><div class="list-item">• Fashion / Design → France, Italy, UK</div></div>
-    <div class="section-card"><div class="section-title">📋 General Admission Requirements</div><div class="list-item">• 12th pass with minimum 60-70% (depends on university)</div><div class="list-item">• English proficiency: IELTS (6.0-7.0), TOEFL (80-100), PTE</div><div class="list-item">• Standardized tests: SAT (USA), GRE/GMAT (postgraduate)</div><div class="list-item">• Statement of Purpose, Letters of Recommendation, Financial proof, Passport & Visa</div></div>
+    <div class="page-title" id="pageTitle">🌏 Abroad Studies Stream</div>
+
+    <div class="section-card">
+        <div class="section-title" id="usaTitle">🇺🇸 Study in the USA</div>
+        <div class="list-item" id="usaCourses">• Popular courses: Business, Computer Science, Nursing, Engineering, Arts, Design, Psychology</div>
+        <div class="list-item" id="usaPathway">• Pathway: 12th → SAT/IELTS/TOEFL → University → OPT Work Visa → H-1B</div>
+        <div class="list-item" id="usaOfficial">• Official: EducationUSA (state.gov)</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="canadaTitle">🇨🇦 Study in Canada</div>
+        <div class="list-item" id="canadaCourses">• Top courses: Diploma in Business, Computer Science, Hospitality, Agriculture, Healthcare, Engineering, Trades</div>
+        <div class="list-item" id="canadaPathway">• Pathway: 12th → IELTS → Diploma/Bachelor → PGWP → PR</div>
+        <div class="list-item" id="canadaOfficial">• Official: Canada.ca/study</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="ukTitle">🇬🇧 Study in the United Kingdom (UK)</div>
+        <div class="list-item" id="ukCourses">• Courses: Business, Computer Science, Medicine (foundation), Law, Arts, Fashion, Design</div>
+        <div class="list-item" id="ukPathway">• Pathway: 12th → IELTS → Foundation/Bachelor → Graduate Route → Work Visa</div>
+        <div class="list-item" id="ukOfficial">• Official: UK Government Student Visa</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="australiaTitle">🇦🇺 Study in Australia</div>
+        <div class="list-item" id="australiaCourses">• Popular: Nursing, IT, Engineering, Agriculture, Hospitality, Automotive, Trades</div>
+        <div class="list-item" id="australiaPathway">• Pathway: 12th → IELTS/PTE → TAFE Diploma/Bachelor → PSW → PR options</div>
+        <div class="list-item" id="australiaOfficial">• Official: StudyAustralia.gov.au</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="nzTitle">🇳🇿 Study in New Zealand</div>
+        <div class="list-item" id="nzCourses">• Top: Agriculture, IT, Engineering Technicians, Hospitality, Film & Animation</div>
+        <div class="list-item" id="nzPathway">• Pathway: 12th → IELTS → Diploma/Bachelor → Post-study work visa → PR</div>
+        <div class="list-item" id="nzOfficial">• Official: StudyWithNewZealand.govt.nz</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="germanyTitle">🇩🇪 Study in Germany (Free/Low Cost)</div>
+        <div class="list-item" id="germanyCourses">• Engineering, Computer Science, Business, Design, Medicine (long duration)</div>
+        <div class="list-item" id="germanyRequirements">• Requirements: German A1-B1 or English-taught programs with IELTS</div>
+        <div class="list-item" id="germanyOfficial">• Official: DAAD Germany</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="franceTitle">🇫🇷 Study in France</div>
+        <div class="list-item" id="franceCourses">• Fashion & Luxury, Art & Design, Business, Hospitality, Engineering, Culinary Arts</div>
+        <div class="list-item" id="franceOfficial">• Official: Campus France</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="irelandTitle">🇮🇪 Study in Ireland</div>
+        <div class="list-item" id="irelandCourses">• Computer Science (high demand), Business, Nursing, Engineering</div>
+        <div class="list-item" id="irelandOfficial">• Official: Education in Ireland</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="japanTitle">🇯🇵 Study in Japan</div>
+        <div class="list-item" id="japanCourses">• Engineering, Robotics, Japanese Language Program, Animation, Gaming, Manga</div>
+        <div class="list-item" id="japanOfficial">• Official: StudyInJapan.go.jp</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="koreaTitle">🇰🇷 Study in South Korea</div>
+        <div class="list-item" id="koreaCourses">• Korean Language Program, Engineering, Fashion, Film & Media, K-Arts</div>
+        <div class="list-item" id="koreaOfficial">• Official: StudyInKorea.go.kr</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="uaeTitle">🇦🇪 Study in UAE / Dubai</div>
+        <div class="list-item" id="uaeCourses">• Business, IT, Hospitality, Aviation Management</div>
+        <div class="list-item" id="uaeOfficial">• Official: UAE Ministry of Education</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="courseTypesTitle">🧭 Types of Courses After 12th</div>
+        <div class="list-item" id="bachelorAbroad">• Bachelor Degrees (3-4 years): BBA, BSc, Engineering, Nursing, IT, Arts, Design</div>
+        <div class="list-item" id="diplomaAbroad">• Diplomas (1-2 years): Business, IT, Hospitality, Agriculture, Automotive, Healthcare (popular for PR in Canada/Australia/NZ)</div>
+        <div class="list-item" id="foundationAbroad">• Foundation Programs (1 year): to improve English, Math, academic readiness</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="cheapTitle">💰 Cheapest Options for Indian Students</div>
+        <div class="list-item" id="cheapOptions">• Germany (public universities free), France (low tuition), Italy (scholarships), Poland, Hungary, Japan/Korea (language scholarships)</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="scholarshipTitle">🎓 Full Scholarships After 12th</div>
+        <div class="list-item" id="scholarshipOptions">• Fulbright (USA), DAAD (Germany), MEXT (Japan), KGSP (South Korea), Campus France Scholarships</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="comparisonTitle">🌟 Which Country is Best For You?</div>
+        <div class="list-item" id="comparisonPr">• PR + Job opportunities → Canada, Australia, New Zealand</div>
+        <div class="list-item" id="comparisonBudget">• Low budget education → Germany, France, Italy</div>
+        <div class="list-item" id="comparisonTech">• High-tech careers → USA, Japan, Korea</div>
+        <div class="list-item" id="comparisonDesign">• Fashion / Design → France, Italy, UK</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title" id="requirementsTitle">📋 General Admission Requirements</div>
+        <div class="list-item" id="academicReq">• 12th pass with minimum 60-70% (depends on university)</div>
+        <div class="list-item" id="englishReq">• English proficiency: IELTS (6.0-7.0), TOEFL (80-100), PTE</div>
+        <div class="list-item" id="testReq">• Standardized tests: SAT (USA), GRE/GMAT (postgraduate)</div>
+        <div class="list-item" id="documentsReq">• Statement of Purpose, Letters of Recommendation, Financial proof, Passport & Visa</div>
+    </div>
 </div>
+
 <div class="bottom-bar" id="bottomBar"></div>
+
 <script>
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" },{ name: "Search", icon: "🔍", link: "#" },{ name: "AnnS AI", icon: "🤖", link: "#" },{ name: "Alerts", icon: "🔔", link: "#" },{ name: "Profile", icon: "👤", link: "#" }];
-    function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert(`📱 ${nav.querySelector('span:last-child').innerText} coming soon`); }); }); }
-    function goBack() { window.location.href = 'education.html'; }
-    renderBottomBar();
+// ==================== TRANSLATIONS ====================
+const translations = {
+    en: {
+        app_tagline: "Career Saathi",
+        tagline: "🌏 Study Abroad – International Careers",
+        page_title: "🌏 Abroad Studies Stream",
+        usa_title: "🇺🇸 Study in the USA",
+        usa_courses: "• Popular courses: Business, Computer Science, Nursing, Engineering, Arts, Design, Psychology",
+        usa_pathway: "• Pathway: 12th → SAT/IELTS/TOEFL → University → OPT Work Visa → H-1B",
+        usa_official: "• Official: EducationUSA (state.gov)",
+        canada_title: "🇨🇦 Study in Canada",
+        canada_courses: "• Top courses: Diploma in Business, Computer Science, Hospitality, Agriculture, Healthcare, Engineering, Trades",
+        canada_pathway: "• Pathway: 12th → IELTS → Diploma/Bachelor → PGWP → PR",
+        canada_official: "• Official: Canada.ca/study",
+        uk_title: "🇬🇧 Study in the United Kingdom (UK)",
+        uk_courses: "• Courses: Business, Computer Science, Medicine (foundation), Law, Arts, Fashion, Design",
+        uk_pathway: "• Pathway: 12th → IELTS → Foundation/Bachelor → Graduate Route → Work Visa",
+        uk_official: "• Official: UK Government Student Visa",
+        australia_title: "🇦🇺 Study in Australia",
+        australia_courses: "• Popular: Nursing, IT, Engineering, Agriculture, Hospitality, Automotive, Trades",
+        australia_pathway: "• Pathway: 12th → IELTS/PTE → TAFE Diploma/Bachelor → PSW → PR options",
+        australia_official: "• Official: StudyAustralia.gov.au",
+        nz_title: "🇳🇿 Study in New Zealand",
+        nz_courses: "• Top: Agriculture, IT, Engineering Technicians, Hospitality, Film & Animation",
+        nz_pathway: "• Pathway: 12th → IELTS → Diploma/Bachelor → Post-study work visa → PR",
+        nz_official: "• Official: StudyWithNewZealand.govt.nz",
+        germany_title: "🇩🇪 Study in Germany (Free/Low Cost)",
+        germany_courses: "• Engineering, Computer Science, Business, Design, Medicine (long duration)",
+        germany_requirements: "• Requirements: German A1-B1 or English-taught programs with IELTS",
+        germany_official: "• Official: DAAD Germany",
+        france_title: "🇫🇷 Study in France",
+        france_courses: "• Fashion & Luxury, Art & Design, Business, Hospitality, Engineering, Culinary Arts",
+        france_official: "• Official: Campus France",
+        ireland_title: "🇮🇪 Study in Ireland",
+        ireland_courses: "• Computer Science (high demand), Business, Nursing, Engineering",
+        ireland_official: "• Official: Education in Ireland",
+        japan_title: "🇯🇵 Study in Japan",
+        japan_courses: "• Engineering, Robotics, Japanese Language Program, Animation, Gaming, Manga",
+        japan_official: "• Official: StudyInJapan.go.jp",
+        korea_title: "🇰🇷 Study in South Korea",
+        korea_courses: "• Korean Language Program, Engineering, Fashion, Film & Media, K-Arts",
+        korea_official: "• Official: StudyInKorea.go.kr",
+        uae_title: "🇦🇪 Study in UAE / Dubai",
+        uae_courses: "• Business, IT, Hospitality, Aviation Management",
+        uae_official: "• Official: UAE Ministry of Education",
+        course_types_title: "🧭 Types of Courses After 12th",
+        bachelor_abroad: "• Bachelor Degrees (3-4 years): BBA, BSc, Engineering, Nursing, IT, Arts, Design",
+        diploma_abroad: "• Diplomas (1-2 years): Business, IT, Hospitality, Agriculture, Automotive, Healthcare (popular for PR in Canada/Australia/NZ)",
+        foundation_abroad: "• Foundation Programs (1 year): to improve English, Math, academic readiness",
+        cheap_title: "💰 Cheapest Options for Indian Students",
+        cheap_options: "• Germany (public universities free), France (low tuition), Italy (scholarships), Poland, Hungary, Japan/Korea (language scholarships)",
+        scholarship_title: "🎓 Full Scholarships After 12th",
+        scholarship_options: "• Fulbright (USA), DAAD (Germany), MEXT (Japan), KGSP (South Korea), Campus France Scholarships",
+        comparison_title: "🌟 Which Country is Best For You?",
+        comparison_pr: "• PR + Job opportunities → Canada, Australia, New Zealand",
+        comparison_budget: "• Low budget education → Germany, France, Italy",
+        comparison_tech: "• High-tech careers → USA, Japan, Korea",
+        comparison_design: "• Fashion / Design → France, Italy, UK",
+        requirements_title: "📋 General Admission Requirements",
+        academic_req: "• 12th pass with minimum 60-70% (depends on university)",
+        english_req: "• English proficiency: IELTS (6.0-7.0), TOEFL (80-100), PTE",
+        test_req: "• Standardized tests: SAT (USA), GRE/GMAT (postgraduate)",
+        documents_req: "• Statement of Purpose, Letters of Recommendation, Financial proof, Passport & Visa",
+        bottom_home: "Home",
+        bottom_search: "Search",
+        bottom_ai: "AnnS AI",
+        bottom_alerts: "Alerts",
+        bottom_profile: "Profile"
+    },
+    hi: {
+        app_tagline: "करियर साथी",
+        tagline: "🌏 विदेश में अध्ययन – अंतर्राष्ट्रीय करियर",
+        page_title: "🌏 विदेश अध्ययन स्ट्रीम",
+        usa_title: "🇺🇸 अमेरिका में अध्ययन",
+        usa_courses: "• लोकप्रिय पाठ्यक्रम: बिजनेस, कंप्यूटर साइंस, नर्सिंग, इंजीनियरिंग",
+        usa_pathway: "• मार्ग: 12वीं → सैट/आईईएलटीएस/टीओईएफएल → विश्वविद्यालय → ओपीटी वर्क वीज़ा → एच-1बी",
+        canada_title: "🇨🇦 कनाडा में अध्ययन",
+        canada_courses: "• शीर्ष पाठ्यक्रम: बिजनेस, कंप्यूटर साइंस, हॉस्पिटैलिटी, कृषि में डिप्लोमा",
+        canada_pathway: "• मार्ग: 12वीं → आईईएलटीएस → डिप्लोमा/बैचलर → पीजीडब्ल्यूपी → पीआर",
+        uk_title: "🇬🇧 यूके में अध्ययन",
+        uk_courses: "• पाठ्यक्रम: बिजनेस, कंप्यूटर साइंस, कानून, कला, फैशन",
+        australia_title: "🇦🇺 ऑस्ट्रेलिया में अध्ययन",
+        australia_courses: "• लोकप्रिय: नर्सिंग, आईटी, इंजीनियरिंग, कृषि, हॉस्पिटैलिटी",
+        germany_title: "🇩🇪 जर्मनी में अध्ययन (मुफ्त/कम लागत)",
+        germany_courses: "• इंजीनियरिंग, कंप्यूटर साइंस, बिजनेस, डिजाइन",
+        germany_requirements: "• आवश्यकताएं: जर्मन ए1-बी1 या अंग्रेजी में पाठ्यक्रम",
+        japan_title: "🇯🇵 जापान में अध्ययन",
+        japan_courses: "• इंजीनियरिंग, रोबोटिक्स, जापानी भाषा कार्यक्रम, एनीमेशन",
+        scholarship_title: "🎓 12वीं के बाद पूर्ण छात्रवृत्तियां",
+        scholarship_options: "• फुलब्राइट (यूएसए), डीएएडी (जर्मनी), मेक्स्ट (जापान), केजीएसपी (दक्षिण कोरिया)",
+        comparison_title: "🌟 आपके लिए कौन सा देश सर्वोत्तम है?",
+        comparison_pr: "• पीआर + नौकरी के अवसर → कनाडा, ऑस्ट्रेलिया, न्यूजीलैंड",
+        comparison_budget: "• कम बजट शिक्षा → जर्मनी, फ्रांस, इटली",
+        comparison_tech: "• उच्च-तकनीकी करियर → यूएसए, जापान, कोरिया",
+        requirements_title: "📋 सामान्य प्रवेश आवश्यकताएं",
+        english_req: "• अंग्रेजी दक्षता: आईईएलटीएस (6.0-7.0), टीओईएफएल (80-100)",
+        bottom_home: "होम",
+        bottom_search: "खोजें",
+        bottom_ai: "एनएस एआई",
+        bottom_alerts: "सूचनाएं",
+        bottom_profile: "प्रोफ़ाइल"
+    }
+};
 </script>
 </body>
+<script>
+// Continue JavaScript for abroad.html
+const bottomNav = [
+    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
+    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
+    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
+    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
+    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
+];
+
+let currentLang = 'en';
+
+function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+
+function updateAllText() {
+    document.getElementById('appTagline').textContent = t('app_tagline');
+    document.getElementById('taglineText').textContent = t('tagline');
+    document.getElementById('pageTitle').textContent = t('page_title');
+    
+    document.getElementById('usaTitle').textContent = t('usa_title');
+    document.getElementById('usaCourses').textContent = t('usa_courses');
+    document.getElementById('usaPathway').textContent = t('usa_pathway');
+    document.getElementById('usaOfficial').textContent = t('usa_official');
+    
+    document.getElementById('canadaTitle').textContent = t('canada_title');
+    document.getElementById('canadaCourses').textContent = t('canada_courses');
+    document.getElementById('canadaPathway').textContent = t('canada_pathway');
+    document.getElementById('canadaOfficial').textContent = t('canada_official');
+    
+    document.getElementById('ukTitle').textContent = t('uk_title');
+    document.getElementById('ukCourses').textContent = t('uk_courses');
+    document.getElementById('ukPathway').textContent = t('uk_pathway');
+    document.getElementById('ukOfficial').textContent = t('uk_official');
+    
+    document.getElementById('australiaTitle').textContent = t('australia_title');
+    document.getElementById('australiaCourses').textContent = t('australia_courses');
+    document.getElementById('australiaPathway').textContent = t('australia_pathway');
+    document.getElementById('australiaOfficial').textContent = t('australia_official');
+    
+    document.getElementById('nzTitle').textContent = t('nz_title');
+    document.getElementById('nzCourses').textContent = t('nz_courses');
+    document.getElementById('nzPathway').textContent = t('nz_pathway');
+    document.getElementById('nzOfficial').textContent = t('nz_official');
+    
+    document.getElementById('germanyTitle').textContent = t('germany_title');
+    document.getElementById('germanyCourses').textContent = t('germany_courses');
+    document.getElementById('germanyRequirements').textContent = t('germany_requirements');
+    document.getElementById('germanyOfficial').textContent = t('germany_official');
+    
+    document.getElementById('franceTitle').textContent = t('france_title');
+    document.getElementById('franceCourses').textContent = t('france_courses');
+    document.getElementById('franceOfficial').textContent = t('france_official');
+    
+    document.getElementById('irelandTitle').textContent = t('ireland_title');
+    document.getElementById('irelandCourses').textContent = t('ireland_courses');
+    document.getElementById('irelandOfficial').textContent = t('ireland_official');
+    
+    document.getElementById('japanTitle').textContent = t('japan_title');
+    document.getElementById('japanCourses').textContent = t('japan_courses');
+    document.getElementById('japanOfficial').textContent = t('japan_official');
+    
+    document.getElementById('koreaTitle').textContent = t('korea_title');
+    document.getElementById('koreaCourses').textContent = t('korea_courses');
+    document.getElementById('koreaOfficial').textContent = t('korea_official');
+    
+    document.getElementById('uaeTitle').textContent = t('uae_title');
+    document.getElementById('uaeCourses').textContent = t('uae_courses');
+    document.getElementById('uaeOfficial').textContent = t('uae_official');
+    
+    document.getElementById('courseTypesTitle').textContent = t('course_types_title');
+    document.getElementById('bachelorAbroad').textContent = t('bachelor_abroad');
+    document.getElementById('diplomaAbroad').textContent = t('diploma_abroad');
+    document.getElementById('foundationAbroad').textContent = t('foundation_abroad');
+    
+    document.getElementById('cheapTitle').textContent = t('cheap_title');
+    document.getElementById('cheapOptions').textContent = t('cheap_options');
+    
+    document.getElementById('scholarshipTitle').textContent = t('scholarship_title');
+    document.getElementById('scholarshipOptions').textContent = t('scholarship_options');
+    
+    document.getElementById('comparisonTitle').textContent = t('comparison_title');
+    document.getElementById('comparisonPr').textContent = t('comparison_pr');
+    document.getElementById('comparisonBudget').textContent = t('comparison_budget');
+    document.getElementById('comparisonTech').textContent = t('comparison_tech');
+    document.getElementById('comparisonDesign').textContent = t('comparison_design');
+    
+    document.getElementById('requirementsTitle').textContent = t('requirements_title');
+    document.getElementById('academicReq').textContent = t('academic_req');
+    document.getElementById('englishReq').textContent = t('english_req');
+    document.getElementById('testReq').textContent = t('test_req');
+    document.getElementById('documentsReq').textContent = t('documents_req');
+    
+    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
+}
+
+function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
+function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
+function goBack() { window.location.href = 'education.html'; }
+function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
+
+document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
+renderBottomBar();
+loadSavedLanguage();
+</script>
 </html>
