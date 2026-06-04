@@ -93,7 +93,7 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-    // ==================== TRANSLATIONS ====================
+    // ==================== TRANSLATIONS FOR MEDICAL PAGE ====================
     const translations = {
         en: {
             app_tagline: "Career Saathi",
@@ -148,6 +148,33 @@
             bottom_ai: "एनएस एआई",
             bottom_alerts: "सूचनाएं",
             bottom_profile: "प्रोफ़ाइल"
+        },
+        mr: {
+            app_tagline: "करिअर साथी",
+            tagline: "🩺 वैद्यकीय आणि आरोग्य सेवा करिअर",
+            page_title: "🩺 वैद्यकीय शाखा",
+            neet_title: "🎓 नीट-आधारित व्यावसायिक अभ्यासक्रम",
+            paramedical_title: "🩺 पॅरामेडिकल अभ्यासक्रम",
+            pharmacy_title: "💊 फार्मसी आणि वैद्यकीय विज्ञान",
+            entrance_title: "📋 प्रवेश परीक्षा",
+            mbbs: "• एमबीबीएस – वैद्यकशास्त्र पदवी",
+            bds: "• बीडीएस – डेंटल सर्जरी",
+            bams: "• बीएएमएस – आयुर्वेदिक डॉक्टर",
+            bhms: "• बीएचएमएस – होमिओपॅथिक डॉक्टर",
+            bums: "• बीयूएमएस – युनानी मेडिसिन",
+            bnys: "• बीएनवायएस – नेचुरोपॅथी आणि योग",
+            nursing: "• बी.एससी नर्सिंग (4 वर्ष)",
+            bpt: "• बीपीटी – फिजिओथेरपी",
+            radiology: "• बी.एससी रेडिओलॉजी",
+            mlt: "• बी.एससी मेडिकल लॅब टेक्नोलॉजी",
+            bpharm: "• बी.फार्म (4 वर्ष)",
+            biotech: "• बी.एससी बायोटेक्नोलॉजी",
+            neet: "• नीट – राष्ट्रीय पात्रता प्रवेश परीक्षा",
+            bottom_home: "मुख्यपृष्ठ",
+            bottom_search: "शोधा",
+            bottom_ai: "AnnS AI",
+            bottom_alerts: "सूचना",
+            bottom_profile: "प्रोफाइल"
         }
     };
 
@@ -217,9 +244,14 @@
     }
 
     function goBack() { window.location.href = 'education.html'; }
+    
     function loadSavedLanguage() {
         const saved = localStorage.getItem('career_saathi_language');
-        if (saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); }
+        if (saved && translations[saved]) { 
+            currentLang = saved; 
+            document.getElementById('languageSelect').value = saved; 
+            updateAllText(); 
+        }
     }
 
     document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
