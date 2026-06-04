@@ -45,6 +45,9 @@
         .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
         .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
         .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
         .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
         .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
         .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
@@ -53,7 +56,7 @@
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; color: #64748B; }
-        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
@@ -64,12 +67,12 @@
         <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">⚙️ Complete Engineering & PCM Career Guide - 10th to CEO | 100+ Branches | All Scholarships</div>
+    <div class="tagline">⚙️ Complete Engineering & PCM Career Guide - 10th to CEO | Live Exam Updates</div>
 </div>
 
 <div class="container">
     <div class="page-title">⚙️ Non-Medical (PCM) Stream</div>
-    <div class="page-subtitle">100+ Courses | 300+ Colleges | All Engineering Branches | All Pure Science | Complete Scholarships</div>
+    <div class="page-subtitle">100+ Courses | 300+ Colleges | Live Exam Links | Complete Roadmap | All Branches Full Detail</div>
     
     <div class="door-nav">
         <button class="door-btn active" data-door="engineering">🎓 <span class="door-label">Engineering (35+ Branches)</span></button>
@@ -79,10 +82,10 @@
         <button class="door-btn" data-door="psu">🏭 <span class="door-label">PSU & Govt Jobs</span></button>
     </div>
     
-    <!-- ==================== DOOR 1: ENGINEERING (35+ BRANCHES) ==================== -->
+    <!-- ==================== DOOR 1: ENGINEERING - FULL DETAIL FOR EACH BRANCH ==================== -->
     <div id="door-engineering" class="door-content active">
         
-        <!-- CSE -->
+        <!-- CSE - COMPLETE DETAIL -->
         <div class="accordion-card active" id="cseCard">
             <div class="accordion-header" onclick="toggleCard('cseCard')">
                 <div class="accordion-title"><span class="accordion-icon">💻</span> CSE - Computer Science Engineering (4 years)</div>
@@ -90,277 +93,481 @@
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of programming, algorithms, software development, computer systems.<br><span class="salary-text">💰 Fresher: ₹8-40 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">JEE Main</a> | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Advanced</a> | <a class="live-link" href="https://www.bitsadmission.com" target="_blank">BITSAT</a></div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of programming, algorithms, software development, computer systems, databases, networking, cybersecurity.<br><span class="salary-text">💰 Fresher Salary: ₹8-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest paying engineering branch, global opportunities, work from home options, AI/ML/Data Science boom, high demand in IT sector.<br><span class="salary-text">💰 After M.Tech: ₹15-60 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCM (Age 17+). Minimum 50-75% marks depending on college. Start JEE preparation from Class 11.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.nitt.edu" target="_blank">NIT Trichy</a> | <a class="live-link" href="https://www.bits-pilani.ac.in" target="_blank">BITS Pilani</a> | <a class="live-link" href="https://www.vit.ac.in" target="_blank">VIT Vellore</a> | <a class="live-link" href="https://www.srmist.edu.in" target="_blank">SRM Chennai</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">JEE Main</a> | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Advanced</a> | <a class="live-link" href="https://www.bitsadmission.com" target="_blank">BITSAT</a> | <a class="live-link" href="https://viteee.vit.ac.in" target="_blank">VITEEE</a> | <a class="live-link" href="https://www.srmist.edu.in/admissions" target="_blank">SRMJEE</a></div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Logical thinking, problem-solving ability, interest in coding and mathematics, creativity, patience for debugging, team player</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCM → JEE Main/Advanced → B.Tech CSE (4 years) → M.Tech/MS or Job → Higher Studies or Industry</div></div>
+                </div>
+                <div class="section-title">📋 JEE MAIN - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">jeemain.nta.nic.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Exam Dates</div><div class="info-text">January Session (1st week), April Session (1st week)</div></div>
+                    <div class="info-card"><div class="info-label">📊 Cutoff 2024</div><div class="info-text">General: 90+ percentile, OBC/EWS: 75+, SC/ST: 60+</div></div>
+                    <div class="info-card"><div class="info-label">📅 Result Date</div><div class="info-text">February & May respectively</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Engineering Colleges (NIRF Ranked)</div>
+                <table><thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
+                <tbody>
+                    <tr><td><a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a></td><td>Chennai</td><td>₹2,00,000</td><td>1</td><td><a class="live-link" href="https://www.iitm.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td><a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a></td><td>Delhi</td><td>₹2,00,000</td><td>2</td><td><a class="live-link" href="https://www.iitd.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a></td><td>Mumbai</td><td>₹2,00,000</td><td>3</td><td><a class="live-link" href="https://www.iitb.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td><a class="live-link" href="https://www.iitk.ac.in" target="_blank">IIT Kanpur</a></td><td>Kanpur</td><td>₹2,00,000</td><td>4</td><td><a class="live-link" href="https://www.iitk.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td><a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a></td><td>Kharagpur</td><td>₹2,00,000</td><td>5</td><td><a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">Visit</a></td></tr>
+                </tbody></table>
+                <div class="section-title">🗺️ Complete Career Roadmap (10th → CEO)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text">PCM Stream - Focus on Mathematics, Physics. Start JEE preparation from Class 11. Aim for 75%+ in Boards.<br><span class="salary-text">💰 After 12th: JEE qualified</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Tech CSE Degree with specialization (AI/ML, Cyber Security, Data Science, Cloud Computing, DevOps)<br><span class="salary-text">💰 Software Engineer: ₹8-40 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Tech/MS in CS (IITs/NITs/IIITs) or MBA from IIM or MS abroad (USA, Germany, Canada)<br><span class="salary-text">💰 Senior Engineer: ₹20-60 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Technical Lead → Engineering Manager → Senior Manager<br><span class="salary-text">💰 Manager: ₹35-80 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Director of Engineering → VP Engineering → CTO<br><span class="salary-text">💰 CTO: ₹1 Cr - ₹3 Cr+</span></div></div>
+                <div class="section-title">💰 Scholarships for CSE Students</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 KVPY</div><div class="info-text"><a class="live-link" href="https://kvpy.iisc.ac.in" target="_blank">KVPY Scholarship</a> - ₹5,000-8,000/month for 5 years</div></div>
+                    <div class="info-card"><div class="info-label">💡 INSPIRE</div><div class="info-text"><a class="live-link" href="https://www.inspire-dst.gov.in" target="_blank">INSPIRE Scholarship</a> - ₹80,000/year for top 1% students</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ IIT MCM</div><div class="info-text">IIT Merit-cum-Means Scholarship - Full tuition fee waiver for eligible students</div></div>
+                    <div class="info-card"><div class="info-label">🇮🇳 NSP</div><div class="info-text"><a class="live-link" href="https://scholarships.gov.in" target="_blank">National Scholarship Portal</a> - Central & State scholarships ₹5,000-50,000/year</div></div>
                 </div>
                 <div class="section-title">⭐ Famous Computer Engineers</div>
-                <div><span class="famous-badge">Sundar Pichai (Google CEO)</span> <span class="famous-badge">Satya Nadella (Microsoft CEO)</span> <span class="famous-badge">N. R. Narayana Murthy (Infosys)</span></div>
+                <div><span class="famous-badge">Sundar Pichai (Google CEO)</span> <span class="famous-badge">Satya Nadella (Microsoft CEO)</span> <span class="famous-badge">N. R. Narayana Murthy (Infosys Founder)</span> <span class="famous-badge">Shiv Nadar (HCL Founder)</span> <span class="famous-badge">Azim Premji (Wipro)</span></div>
             </div>
         </div>
         
-        <!-- AI & ML -->
+        <!-- AI & ML - COMPLETE DETAIL -->
         <div class="accordion-card" id="aimlCard">
             <div class="accordion-header" onclick="toggleCard('aimlCard')">
                 <div class="accordion-title"><span class="accordion-icon">🤖</span> AI & ML - Artificial Intelligence & Machine Learning (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹10-50 LPA | After M.Tech: ₹20-70 LPA</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of algorithms that enable computers to learn from data and make decisions without explicit programming. Includes Deep Learning, Neural Networks, NLP, Computer Vision.<br><span class="salary-text">💰 Fresher Salary: ₹10-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Fastest growing field in tech, AI revolution across all industries, highest salaries, global demand, future-proof career.<br><span class="salary-text">💰 After M.Tech/AI: ₹20-70 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCM (Age 17+). Strong mathematics background required.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iiit.ac.in" target="_blank">IIIT Hyderabad</a> | <a class="live-link" href="https://www.bits-pilani.ac.in" target="_blank">BITS Pilani</a> | <a class="live-link" href="https://www.iiitd.ac.in" target="_blank">IIIT Delhi</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEE Main, JEE Advanced, BITSAT, VITEEE (same as CSE)</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Strong mathematical aptitude, interest in statistics and probability, analytical thinking, curiosity about how AI works</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCM → JEE → B.Tech AI/ML (4 years) → M.Tech/MS in AI/ML (2 years) → AI Researcher/Engineer</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap - AI/ML</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Tech AI/ML Degree<br><span class="salary-text">💰 ML Engineer: ₹10-50 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Tech/MS in AI/ML from IITs/IIITs or abroad (USA/Germany)<br><span class="salary-text">💰 AI Research Scientist: ₹25-70 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">Lead AI Scientist → AI Director → Chief AI Officer<br><span class="salary-text">💰 Chief AI Officer: ₹80 LPA - ₹3 Cr</span></div></div>
                 <div class="section-title">⭐ Famous AI Experts</div>
-                <div><span class="famous-badge">Andrew Ng</span> <span class="famous-badge">Fei-Fei Li</span> <span class="famous-badge">Geoffrey Hinton</span></div>
+                <div><span class="famous-badge">Andrew Ng (Co-founder Coursera, Google Brain)</span> <span class="famous-badge">Fei-Fei Li (Stanford AI Lab)</span> <span class="famous-badge">Geoffrey Hinton (Godfather of AI)</span> <span class="famous-badge">Yann LeCun (Chief AI Scientist, Meta)</span></div>
             </div>
         </div>
         
-        <!-- Data Science -->
+        <!-- Data Science Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="dataScienceCard">
             <div class="accordion-header" onclick="toggleCard('dataScienceCard')">
                 <div class="accordion-title"><span class="accordion-icon">📊</span> Data Science Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹8-45 LPA | ₹15-55 LPA (M.Tech)</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of extracting insights from large datasets, statistical analysis, predictive modeling, data visualization, big data technologies.<br><span class="salary-text">💰 Fresher Salary: ₹8-45 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand across all industries (Finance, Healthcare, E-commerce, Marketing), data-driven decision making, excellent salaries.<br><span class="salary-text">💰 After M.Tech: ₹15-55 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCM. Strong foundation in mathematics and statistics required.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.iiit.ac.in" target="_blank">IIIT Hyderabad</a> | <a class="live-link" href="https://www.isical.ac.in" target="_blank">ISI Kolkata</a> | <a class="live-link" href="https://www.bits-pilani.ac.in" target="_blank">BITS Pilani</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEE Main, JEE Advanced, BITSAT, ISI Admission Test, CUET</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in statistics and patterns, analytical mindset, problem-solving skills, attention to detail</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCM → Entrance Exam → B.Tech/B.Sc Data Science (4/3 years) → M.Tech/M.Sc Data Science → Data Scientist</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap - Data Science</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Tech Data Science<br><span class="salary-text">💰 Data Analyst: ₹8-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Tech/M.Sc Data Science<br><span class="salary-text">💰 Data Scientist: ₹15-45 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">Lead Data Scientist → Head of Data Analytics → Chief Data Officer<br><span class="salary-text">💰 Chief Data Officer: ₹60 LPA - ₹2 Cr</span></div></div>
+                <div class="section-title">⭐ Famous Data Scientists</div>
+                <div><span class="famous-badge">DJ Patil (First US Chief Data Scientist)</span> <span class="famous-badge">Hilary Mason</span> <span class="famous-badge">Kirk Borne</span></div>
             </div>
         </div>
         
-        <!-- Robotics Engineering (NEW) -->
+                <!-- Robotics Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="roboticsCard">
             <div class="accordion-header" onclick="toggleCard('roboticsCard')">
                 <div class="accordion-title"><span class="accordion-icon">🤖</span> Robotics Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-25 LPA | After M.Tech: ₹15-40 LPA</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design, construction, operation, and application of robots. Combines mechanical, electrical, electronics, and computer engineering.<br><span class="salary-text">💰 Fresher Salary: ₹6-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Future of manufacturing, healthcare, defence, space exploration. High demand in Industry 4.0.<br><span class="salary-text">💰 After M.Tech: ₹15-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.iitk.ac.in" target="_blank">IIT Kanpur</a> | <a class="live-link" href="https://www.iiit.ac.in" target="_blank">IIIT Hyderabad</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Robotics Engineer, Automation Engineer, Robotics Software Engineer, Research Scientist, AI Robotics Specialist</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Robotics Engineers</div>
-                <div><span class="famous-badge">Dr. Vijay Kumar</span> <span class="famous-badge">Dr. Rodney Brooks</span></div>
+                <div><span class="famous-badge">Dr. Vijay Kumar (UPenn Robotics)</span> <span class="famous-badge">Dr. Rodney Brooks (iRobot Founder)</span></div>
             </div>
         </div>
         
-        <!-- Civil -->
+        <!-- Civil Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="civilCard">
             <div class="accordion-header" onclick="toggleCard('civilCard')">
                 <div class="accordion-title"><span class="accordion-icon">🏗️</span> Civil Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design, construction, and maintenance of infrastructure like buildings, bridges, roads, dams, airports, water supply systems.<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Evergreen branch, government infrastructure projects, PSU jobs, opportunity to build nation.<br><span class="salary-text">💰 After M.Tech: ₹10-25 LPA | PSU: ₹12-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitr.ac.in" target="_blank">IIT Roorkee</a> | <a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.nitt.edu" target="_blank">NIT Trichy</a> | <a class="live-link" href="https://www.dtu.ac.in" target="_blank">DTU Delhi</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEE Main, JEE Advanced, GATE (for M.Tech/PSUs), SSC JE, RRB JE, State Engineering Exams</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="http://www.nhpcindia.com" target="_blank">NHPC</a> | <a class="live-link" href="https://www.nbccindia.com" target="_blank">NBCC</a> | <a class="live-link" href="https://www.sjvn.nic.in" target="_blank">SJVN</a> | <a class="live-link" href="https://www.bbrl.co.in" target="_blank">BBRL</a> | State PWDs, NHAI</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Civil Engineers</div>
-                <div><span class="famous-badge">Sir M. Visvesvaraya (Bharat Ratna)</span> <span class="famous-badge">M. S. Ramaiah</span> <span class="famous-badge">Dr. B. C. Punmia</span></div>
+                <div><span class="famous-badge">Sir M. Visvesvaraya (Bharat Ratna)</span> <span class="famous-badge">M. S. Ramaiah</span> <span class="famous-badge">Dr. B. C. Punmia</span> <span class="famous-badge">E. Sreedharan (Delhi Metro)</span></div>
             </div>
         </div>
         
-        <!-- Mechanical -->
+        <!-- Mechanical Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="mechanicalCard">
             <div class="accordion-header" onclick="toggleCard('mechanicalCard')">
                 <div class="accordion-title"><span class="accordion-icon">⚙️</span> Mechanical Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design, manufacturing, and maintenance of mechanical systems, machines, engines, HVAC, thermal systems, and automotive components.<br><span class="salary-text">💰 Fresher Salary: ₹5-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Evergreen core branch, PSU jobs (BHEL, HAL, NTPC), diverse career options.<br><span class="salary-text">💰 After M.Tech: ₹10-30 LPA | PSU: ₹15-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.nitt.edu" target="_blank">NIT Trichy</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.bhel.com" target="_blank">BHEL</a> | <a class="live-link" href="https://hal-india.co.in" target="_blank">HAL</a> | <a class="live-link" href="https://www.ntpc.co.in" target="_blank">NTPC</a> | <a class="live-link" href="https://www.gailonline.com" target="_blank">GAIL</a> | <a class="live-link" href="https://www.sail.co.in" target="_blank">SAIL</a></div></div>
+                </div>
                 <div class="section-title">⭐ Famous Mechanical Engineers</div>
-                <div><span class="famous-badge">Elon Musk</span> <span class="famous-badge">Henry Ford</span> <span class="famous-badge">James Watt</span></div>
+                <div><span class="famous-badge">Elon Musk (Tesla, SpaceX)</span> <span class="famous-badge">Henry Ford (Ford Motors)</span> <span class="famous-badge">James Watt (Steam Engine)</span> <span class="famous-badge">George Stephenson (Railways)</span></div>
             </div>
         </div>
         
-        <!-- Electrical -->
+        <!-- Electrical Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="electricalCard">
             <div class="accordion-header" onclick="toggleCard('electricalCard')">
                 <div class="accordion-title"><span class="accordion-icon">⚡</span> Electrical Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of electricity, electronics, power generation, transmission, distribution, control systems, electromagnetism.<br><span class="salary-text">💰 Fresher Salary: ₹5-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in power sector, PSU jobs, opportunities in renewable energy.<br><span class="salary-text">💰 After M.Tech: ₹10-28 LPA | PSU: ₹12-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.powergridindia.com" target="_blank">Powergrid</a> | <a class="live-link" href="https://www.ntpc.co.in" target="_blank">NTPC</a> | <a class="live-link" href="https://www.bhel.com" target="_blank">BHEL</a> | <a class="live-link" href="https://www.nhpcindia.com" target="_blank">NHPC</a></div></div>
+                </div>
                 <div class="section-title">⭐ Famous Electrical Engineers</div>
-                <div><span class="famous-badge">Nikola Tesla</span> <span class="famous-badge">Thomas Edison</span> <span class="famous-badge">Michael Faraday</span></div>
+                <div><span class="famous-badge">Nikola Tesla</span> <span class="famous-badge">Thomas Edison</span> <span class="famous-badge">Michael Faraday</span> <span class="famous-badge">Dr. Homi J. Bhabha</span></div>
             </div>
         </div>
         
-        <!-- Electronics & Communication -->
+        <!-- Electronics & Communication - COMPLETE DETAIL -->
         <div class="accordion-card" id="eceCard">
             <div class="accordion-header" onclick="toggleCard('eceCard')">
-                <div class="accordion-title"><span class="accordion-icon">📡</span> Electronics & Communication (4 years)</div>
+                <div class="accordion-title"><span class="accordion-icon">📡</span> Electronics & Communication Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design of electronic circuits, communication systems, embedded systems, VLSI, signal processing, IoT.<br><span class="salary-text">💰 Fresher Salary: ₹6-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Semiconductor industry growth, 5G/6G demand, core electronics jobs, ISRO/DRDO opportunities.<br><span class="salary-text">💰 After M.Tech/VLSI: ₹15-35 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COMPANIES</div><div class="info-text">Intel, Qualcomm, Texas Instruments, Samsung, ISRO, DRDO, BEL</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Electronics Engineers</div>
-                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Sam Pitroda</span></div>
+                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Sam Pitroda</span> <span class="famous-badge">Jack Kilby (Inventor of IC)</span></div>
             </div>
         </div>
         
-        <!-- Aerospace -->
+        <!-- Aerospace Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="aerospaceCard">
             <div class="accordion-header" onclick="toggleCard('aerospaceCard')">
                 <div class="accordion-title"><span class="accordion-icon">🚀</span> Aerospace Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design of aircraft, spacecraft, missiles, and satellites. Study of aerodynamics, propulsion, avionics, materials.<br><span class="salary-text">💰 Fresher Salary: ₹8-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">ISRO, DRDO, HAL opportunities, space industry growth, exciting projects.<br><span class="salary-text">💰 After M.Tech: ₹15-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.iitk.ac.in" target="_blank">IIT Kanpur</a> | <a class="live-link" href="https://www.iist.ac.in" target="_blank">IIST Thiruvananthapuram</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP RECRUITERS</div><div class="info-text"><a class="live-link" href="https://www.isro.gov.in" target="_blank">ISRO</a> | <a class="live-link" href="https://www.drdo.gov.in" target="_blank">DRDO</a> | <a class="live-link" href="https://hal-india.co.in" target="_blank">HAL</a> | Boeing, Airbus, SpaceX</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Aerospace Engineers</div>
-                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Dr. K. Sivan</span> <span class="famous-badge">Dr. Vikram Sarabhai</span></div>
+                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam (Missile Man)</span> <span class="famous-badge">Dr. K. Sivan (ISRO Chairman)</span> <span class="famous-badge">Dr. Vikram Sarabhai (ISRO Founder)</span> <span class="famous-badge">Elon Musk (SpaceX)</span></div>
             </div>
         </div>
         
-        <!-- Biotechnology Engineering (NEW) -->
+        <!-- Biotechnology Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="biotechEnggCard">
             <div class="accordion-header" onclick="toggleCard('biotechEnggCard')">
                 <div class="accordion-title"><span class="accordion-icon">🧬</span> Biotechnology Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-15 LPA | After M.Tech: ₹10-25 LPA</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Application of biological systems and organisms to develop products for medicine, agriculture, and industry.<br><span class="salary-text">💰 Fresher Salary: ₹4-15 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing pharma and biotech industry, research opportunities, healthcare innovation.<br><span class="salary-text">💰 After M.Tech: ₹10-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a> | <a class="live-link" href="https://www.jnu.ac.in" target="_blank">JNU Delhi</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEE Main, JEE Advanced, GAT-B (for M.Sc Biotech), CUET</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Biotech Engineers</div>
-                <div><span class="famous-badge">Kiran Mazumdar-Shaw</span> <span class="famous-badge">Dr. R. A. Mashelkar</span></div>
+                <div><span class="famous-badge">Kiran Mazumdar-Shaw (Biocon)</span> <span class="famous-badge">Dr. R. A. Mashelkar</span> <span class="famous-badge">Dr. Krishna Ella (Bharat Biotech)</span></div>
             </div>
         </div>
         
-        <!-- Biomedical Engineering (NEW) -->
+        <!-- Biomedical Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="biomedicalCard">
             <div class="accordion-header" onclick="toggleCard('biomedicalCard')">
                 <div class="accordion-title"><span class="accordion-icon">🏥</span> Biomedical Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-18 LPA | Medical devices, hospitals, research</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Application of engineering principles to medicine and healthcare. Medical devices, imaging systems, prosthetics, hospital equipment.<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing healthcare industry, medical device companies, hospital jobs, research opportunities.<br><span class="salary-text">💰 After M.Tech: ₹10-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a> | <a class="live-link" href="https://www.vit.ac.in" target="_blank">VIT Vellore</a></div></div>
+                </div>
             </div>
         </div>
         
-        <!-- Chemical Engineering (NEW) -->
+        <!-- Chemical Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="chemicalEnggCard">
             <div class="accordion-header" onclick="toggleCard('chemicalEnggCard')">
                 <div class="accordion-title"><span class="accordion-icon">🧪</span> Chemical Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-22 LPA | PSU: ONGC, IOCL, BPCL, HPCL</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Conversion of raw materials into useful products through chemical processes. Industries: petrochemicals, pharma, food, fertilizers.<br><span class="salary-text">💰 Fresher Salary: ₹6-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High-paying PSU jobs (ONGC, IOCL, BPCL, HPCL), process industries, high demand.<br><span class="salary-text">💰 After M.Tech: ₹12-28 LPA | PSU: ₹15-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.ongcindia.com" target="_blank">ONGC</a> | <a class="live-link" href="https://www.iocl.com" target="_blank">IOCL</a> | <a class="live-link" href="https://www.bpcl.com" target="_blank">BPCL</a> | <a class="live-link" href="https://www.hpcl.com" target="_blank">HPCL</a> | <a class="live-link" href="https://www.gailonline.com" target="_blank">GAIL</a></div></div>
+                </div>
             </div>
         </div>
         
-        <!-- Metallurgical Engineering (NEW) -->
+        <!-- Metallurgical Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="metallurgyCard">
             <div class="accordion-header" onclick="toggleCard('metallurgyCard')">
                 <div class="accordion-title"><span class="accordion-icon">🏭</span> Metallurgical Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-18 LPA | PSU: SAIL, Tata Steel, JSW</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of metals, alloys, extraction, processing, heat treatment, material science.<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.sail.co.in" target="_blank">SAIL</a> | <a class="live-link" href="https://www.tatasteel.com" target="_blank">Tata Steel</a> | <a class="live-link" href="https://www.jsw.in" target="_blank">JSW Steel</a> | <a class="live-link" href="https://www.nmdc.co.in" target="_blank">NMDC</a></div></div>
+                </div>
                 <div class="section-title">⭐ Famous Metallurgists</div>
-                <div><span class="famous-badge">Sir M. Visvesvaraya</span></div>
+                <div><span class="famous-badge">Sir M. Visvesvaraya</span> <span class="famous-badge">Dr. J. J. Irani</span></div>
             </div>
         </div>
         
-        <!-- Mining Engineering (NEW) -->
+                <!-- Robotics Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="roboticsCard">
+            <div class="accordion-header" onclick="toggleCard('roboticsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🤖</span> Robotics Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design, construction, operation, and application of robots. Combines mechanical, electrical, electronics, and computer engineering.<br><span class="salary-text">💰 Fresher Salary: ₹6-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Future of manufacturing, healthcare, defence, space exploration. High demand in Industry 4.0.<br><span class="salary-text">💰 After M.Tech: ₹15-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.iitk.ac.in" target="_blank">IIT Kanpur</a> | <a class="live-link" href="https://www.iiit.ac.in" target="_blank">IIIT Hyderabad</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Robotics Engineer, Automation Engineer, Robotics Software Engineer, Research Scientist, AI Robotics Specialist</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Robotics Engineers</div>
+                <div><span class="famous-badge">Dr. Vijay Kumar (UPenn Robotics)</span> <span class="famous-badge">Dr. Rodney Brooks (iRobot Founder)</span></div>
+            </div>
+        </div>
+        
+        <!-- Civil Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="civilCard">
+            <div class="accordion-header" onclick="toggleCard('civilCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏗️</span> Civil Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design, construction, and maintenance of infrastructure like buildings, bridges, roads, dams, airports, water supply systems.<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Evergreen branch, government infrastructure projects, PSU jobs, opportunity to build nation.<br><span class="salary-text">💰 After M.Tech: ₹10-25 LPA | PSU: ₹12-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitr.ac.in" target="_blank">IIT Roorkee</a> | <a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.nitt.edu" target="_blank">NIT Trichy</a> | <a class="live-link" href="https://www.dtu.ac.in" target="_blank">DTU Delhi</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEE Main, JEE Advanced, GATE (for M.Tech/PSUs), SSC JE, RRB JE, State Engineering Exams</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="http://www.nhpcindia.com" target="_blank">NHPC</a> | <a class="live-link" href="https://www.nbccindia.com" target="_blank">NBCC</a> | <a class="live-link" href="https://www.sjvn.nic.in" target="_blank">SJVN</a> | <a class="live-link" href="https://www.bbrl.co.in" target="_blank">BBRL</a> | State PWDs, NHAI</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Civil Engineers</div>
+                <div><span class="famous-badge">Sir M. Visvesvaraya (Bharat Ratna)</span> <span class="famous-badge">M. S. Ramaiah</span> <span class="famous-badge">Dr. B. C. Punmia</span> <span class="famous-badge">E. Sreedharan (Delhi Metro)</span></div>
+            </div>
+        </div>
+        
+        <!-- Mechanical Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="mechanicalCard">
+            <div class="accordion-header" onclick="toggleCard('mechanicalCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚙️</span> Mechanical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design, manufacturing, and maintenance of mechanical systems, machines, engines, HVAC, thermal systems, and automotive components.<br><span class="salary-text">💰 Fresher Salary: ₹5-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Evergreen core branch, PSU jobs (BHEL, HAL, NTPC), diverse career options.<br><span class="salary-text">💰 After M.Tech: ₹10-30 LPA | PSU: ₹15-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.nitt.edu" target="_blank">NIT Trichy</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.bhel.com" target="_blank">BHEL</a> | <a class="live-link" href="https://hal-india.co.in" target="_blank">HAL</a> | <a class="live-link" href="https://www.ntpc.co.in" target="_blank">NTPC</a> | <a class="live-link" href="https://www.gailonline.com" target="_blank">GAIL</a> | <a class="live-link" href="https://www.sail.co.in" target="_blank">SAIL</a></div></div>
+                </div>
+                <div class="section-title">⭐ Famous Mechanical Engineers</div>
+                <div><span class="famous-badge">Elon Musk (Tesla, SpaceX)</span> <span class="famous-badge">Henry Ford (Ford Motors)</span> <span class="famous-badge">James Watt (Steam Engine)</span> <span class="famous-badge">George Stephenson (Railways)</span></div>
+            </div>
+        </div>
+        
+        <!-- Electrical Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="electricalCard">
+            <div class="accordion-header" onclick="toggleCard('electricalCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚡</span> Electrical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of electricity, electronics, power generation, transmission, distribution, control systems, electromagnetism.<br><span class="salary-text">💰 Fresher Salary: ₹5-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in power sector, PSU jobs, opportunities in renewable energy.<br><span class="salary-text">💰 After M.Tech: ₹10-28 LPA | PSU: ₹12-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.powergridindia.com" target="_blank">Powergrid</a> | <a class="live-link" href="https://www.ntpc.co.in" target="_blank">NTPC</a> | <a class="live-link" href="https://www.bhel.com" target="_blank">BHEL</a> | <a class="live-link" href="https://www.nhpcindia.com" target="_blank">NHPC</a></div></div>
+                </div>
+                <div class="section-title">⭐ Famous Electrical Engineers</div>
+                <div><span class="famous-badge">Nikola Tesla</span> <span class="famous-badge">Thomas Edison</span> <span class="famous-badge">Michael Faraday</span> <span class="famous-badge">Dr. Homi J. Bhabha</span></div>
+            </div>
+        </div>
+        
+        <!-- Electronics & Communication - COMPLETE DETAIL -->
+        <div class="accordion-card" id="eceCard">
+            <div class="accordion-header" onclick="toggleCard('eceCard')">
+                <div class="accordion-title"><span class="accordion-icon">📡</span> Electronics & Communication Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design of electronic circuits, communication systems, embedded systems, VLSI, signal processing, IoT.<br><span class="salary-text">💰 Fresher Salary: ₹6-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Semiconductor industry growth, 5G/6G demand, core electronics jobs, ISRO/DRDO opportunities.<br><span class="salary-text">💰 After M.Tech/VLSI: ₹15-35 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COMPANIES</div><div class="info-text">Intel, Qualcomm, Texas Instruments, Samsung, ISRO, DRDO, BEL</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Electronics Engineers</div>
+                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Sam Pitroda</span> <span class="famous-badge">Jack Kilby (Inventor of IC)</span></div>
+            </div>
+        </div>
+        
+        <!-- Aerospace Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="aerospaceCard">
+            <div class="accordion-header" onclick="toggleCard('aerospaceCard')">
+                <div class="accordion-title"><span class="accordion-icon">🚀</span> Aerospace Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design of aircraft, spacecraft, missiles, and satellites. Study of aerodynamics, propulsion, avionics, materials.<br><span class="salary-text">💰 Fresher Salary: ₹8-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">ISRO, DRDO, HAL opportunities, space industry growth, exciting projects.<br><span class="salary-text">💰 After M.Tech: ₹15-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitm.ac.in" target="_blank">IIT Madras</a> | <a class="live-link" href="https://www.iitk.ac.in" target="_blank">IIT Kanpur</a> | <a class="live-link" href="https://www.iist.ac.in" target="_blank">IIST Thiruvananthapuram</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP RECRUITERS</div><div class="info-text"><a class="live-link" href="https://www.isro.gov.in" target="_blank">ISRO</a> | <a class="live-link" href="https://www.drdo.gov.in" target="_blank">DRDO</a> | <a class="live-link" href="https://hal-india.co.in" target="_blank">HAL</a> | Boeing, Airbus, SpaceX</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Aerospace Engineers</div>
+                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam (Missile Man)</span> <span class="famous-badge">Dr. K. Sivan (ISRO Chairman)</span> <span class="famous-badge">Dr. Vikram Sarabhai (ISRO Founder)</span> <span class="famous-badge">Elon Musk (SpaceX)</span></div>
+            </div>
+        </div>
+        
+        <!-- Biotechnology Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="biotechEnggCard">
+            <div class="accordion-header" onclick="toggleCard('biotechEnggCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧬</span> Biotechnology Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Application of biological systems and organisms to develop products for medicine, agriculture, and industry.<br><span class="salary-text">💰 Fresher Salary: ₹4-15 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing pharma and biotech industry, research opportunities, healthcare innovation.<br><span class="salary-text">💰 After M.Tech: ₹10-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a> | <a class="live-link" href="https://www.jnu.ac.in" target="_blank">JNU Delhi</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">JEE Main, JEE Advanced, GAT-B (for M.Sc Biotech), CUET</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Biotech Engineers</div>
+                <div><span class="famous-badge">Kiran Mazumdar-Shaw (Biocon)</span> <span class="famous-badge">Dr. R. A. Mashelkar</span> <span class="famous-badge">Dr. Krishna Ella (Bharat Biotech)</span></div>
+            </div>
+        </div>
+        
+        <!-- Biomedical Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="biomedicalCard">
+            <div class="accordion-header" onclick="toggleCard('biomedicalCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏥</span> Biomedical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Application of engineering principles to medicine and healthcare. Medical devices, imaging systems, prosthetics, hospital equipment.<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing healthcare industry, medical device companies, hospital jobs, research opportunities.<br><span class="salary-text">💰 After M.Tech: ₹10-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay</a> | <a class="live-link" href="https://www.iitd.ac.in" target="_blank">IIT Delhi</a> | <a class="live-link" href="https://www.iitkgp.ac.in" target="_blank">IIT Kharagpur</a> | <a class="live-link" href="https://www.vit.ac.in" target="_blank">VIT Vellore</a></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chemical Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="chemicalEnggCard">
+            <div class="accordion-header" onclick="toggleCard('chemicalEnggCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧪</span> Chemical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Conversion of raw materials into useful products through chemical processes. Industries: petrochemicals, pharma, food, fertilizers.<br><span class="salary-text">💰 Fresher Salary: ₹6-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High-paying PSU jobs (ONGC, IOCL, BPCL, HPCL), process industries, high demand.<br><span class="salary-text">💰 After M.Tech: ₹12-28 LPA | PSU: ₹15-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.ongcindia.com" target="_blank">ONGC</a> | <a class="live-link" href="https://www.iocl.com" target="_blank">IOCL</a> | <a class="live-link" href="https://www.bpcl.com" target="_blank">BPCL</a> | <a class="live-link" href="https://www.hpcl.com" target="_blank">HPCL</a> | <a class="live-link" href="https://www.gailonline.com" target="_blank">GAIL</a></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Metallurgical Engineering - COMPLETE DETAIL -->
+        <div class="accordion-card" id="metallurgyCard">
+            <div class="accordion-header" onclick="toggleCard('metallurgyCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏭</span> Metallurgical Engineering (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of metals, alloys, extraction, processing, heat treatment, material science.<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.sail.co.in" target="_blank">SAIL</a> | <a class="live-link" href="https://www.tatasteel.com" target="_blank">Tata Steel</a> | <a class="live-link" href="https://www.jsw.in" target="_blank">JSW Steel</a> | <a class="live-link" href="https://www.nmdc.co.in" target="_blank">NMDC</a></div></div>
+                </div>
+                <div class="section-title">⭐ Famous Metallurgists</div>
+                <div><span class="famous-badge">Sir M. Visvesvaraya</span> <span class="famous-badge">Dr. J. J. Irani</span></div>
+            </div>
+        </div>
+        
+        <!-- Mining Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="miningCard">
             <div class="accordion-header" onclick="toggleCard('miningCard')">
                 <div class="accordion-title"><span class="accordion-icon">⛏️</span> Mining Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-20 LPA | PSU: Coal India, NMDC, ONGC</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Extraction of minerals from earth, mine planning, safety, ventilation, mineral processing.<br><span class="salary-text">💰 Fresher Salary: ₹6-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.coalindia.in" target="_blank">Coal India</a> | <a class="live-link" href="https://www.nmdc.co.in" target="_blank">NMDC</a> | <a class="live-link" href="https://www.ongcindia.com" target="_blank">ONGC</a> | <a class="live-link" href="https://www.hcl.co.in" target="_blank">HCL</a></div></div>
+                </div>
             </div>
         </div>
         
-        <!-- Petroleum Engineering (NEW) -->
+        <!-- Petroleum Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="petroleumCard">
             <div class="accordion-header" onclick="toggleCard('petroleumCard')">
                 <div class="accordion-title"><span class="accordion-icon">🛢️</span> Petroleum Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹8-30 LPA | PSU: ONGC, Oil India, Reliance</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Exploration and production of oil and gas. Drilling, reservoir engineering, production technology.<br><span class="salary-text">💰 Fresher Salary: ₹8-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text"><a class="live-link" href="https://www.ongcindia.com" target="_blank">ONGC</a> | <a class="live-link" href="https://www.oil-india.com" target="_blank">Oil India</a> | <a class="live-link" href="https://www.iocl.com" target="_blank">IOCL</a> | <a class="live-link" href="https://www.bpcl.com" target="_blank">BPCL</a></div></div>
+                </div>
             </div>
         </div>
         
-        <!-- Instrumentation Engineering (NEW) -->
+        <!-- Instrumentation Engineering - COMPLETE DETAIL -->
         <div class="accordion-card" id="instrumentationCard">
             <div class="accordion-header" onclick="toggleCard('instrumentationCard')">
                 <div class="accordion-title"><span class="accordion-icon">📟</span> Instrumentation Engineering (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-18 LPA | Automation, control systems, PSUs</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Textile Engineering (NEW) -->
-        <div class="accordion-card" id="textileCard">
-            <div class="accordion-header" onclick="toggleCard('textileCard')">
-                <div class="accordion-title"><span class="accordion-icon">👕</span> Textile Engineering (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-12 LPA | Textile mills, fashion industry</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Production Engineering (NEW) -->
-        <div class="accordion-card" id="productionCard">
-            <div class="accordion-header" onclick="toggleCard('productionCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏭</span> Production Engineering (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-16 LPA | Manufacturing industries</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Ceramic Engineering (NEW) -->
-        <div class="accordion-card" id="ceramicCard">
-            <div class="accordion-header" onclick="toggleCard('ceramicCard')">
-                <div class="accordion-title"><span class="accordion-icon">🍶</span> Ceramic Engineering (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-14 LPA | Glass, cement, ceramic industries</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Marine Engineering (NEW) -->
-        <div class="accordion-card" id="marineEnggCard">
-            <div class="accordion-header" onclick="toggleCard('marineEnggCard')">
-                <div class="accordion-title"><span class="accordion-icon">🚢</span> Marine Engineering (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹8-25 LPA | Merchant Navy, Shipyards</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Naval Architecture (NEW) -->
-        <div class="accordion-card" id="navalCard">
-            <div class="accordion-header" onclick="toggleCard('navalCard')">
-                <div class="accordion-title"><span class="accordion-icon">⛴️</span> Naval Architecture (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-20 LPA | Ship design, Shipyards, Navy</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Fire & Safety Engineering (NEW) -->
-        <div class="accordion-card" id="fireSafetyCard">
-            <div class="accordion-header" onclick="toggleCard('fireSafetyCard')">
-                <div class="accordion-title"><span class="accordion-icon">🔥</span> Fire & Safety Engineering (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-15 LPA | Industrial safety, Govt jobs, MNCs</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Environmental Engineering (NEW) -->
-        <div class="accordion-card" id="environmentalEnggCard">
-            <div class="accordion-header" onclick="toggleCard('environmentalEnggCard')">
-                <div class="accordion-title"><span class="accordion-icon">🌿</span> Environmental Engineering (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-16 LPA | Pollution control, water treatment</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Genetic Engineering (NEW) -->
-        <div class="accordion-card" id="geneticEnggCard">
-            <div class="accordion-header" onclick="toggleCard('geneticEnggCard')">
-                <div class="accordion-title"><span class="accordion-icon">🧬</span> Genetic Engineering (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-20 LPA | Biotech, pharma research</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Design of control systems, sensors, automation, industrial instrumentation, process control.<br><span class="salary-text">💰 Fresher Salary: ₹5-18 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text">BHEL, NTPC, ONGC, IOCL, BPCL, HPCL</div></div>
+                </div>
             </div>
         </div>
     </div>
@@ -375,9 +582,14 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹6-15 LPA | PhD: ₹10-25 LPA</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of matter, energy, space, time, and their interactions. Foundation of all physical sciences.<br><span class="salary-text">💰 B.Sc: ₹3-8 LPA | M.Sc: ₹6-15 LPA | PhD: ₹10-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Gateway to research careers, opportunities in ISRO/DRDO/BARC, teaching, data science roles, defense services.</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ RESEARCH ORGS</div><div class="info-text"><a class="live-link" href="https://www.isro.gov.in" target="_blank">ISRO</a> | <a class="live-link" href="https://www.drdo.gov.in" target="_blank">DRDO</a> | <a class="live-link" href="https://www.barc.gov.in" target="_blank">BARC</a> | <a class="live-link" href="https://www.iisc.ac.in" target="_blank">IISc</a> | <a class="live-link" href="https://www.csir.res.in" target="_blank">CSIR</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">CUET</a> | <a class="live-link" href="https://www.jest.org.in" target="_blank">JEST</a> | <a class="live-link" href="https://www.iisc.ac.in" target="_blank">IISER Aptitude Test</a></div></div>
+                </div>
                 <div class="section-title">⭐ Famous Physicists</div>
-                <div><span class="famous-badge">Dr. C. V. Raman</span> <span class="famous-badge">Dr. Homi J. Bhabha</span> <span class="famous-badge">Dr. Vikram Sarabhai</span></div>
+                <div><span class="famous-badge">Dr. C. V. Raman (Nobel Prize)</span> <span class="famous-badge">Dr. Homi J. Bhabha</span> <span class="famous-badge">Dr. Vikram Sarabhai</span> <span class="famous-badge">Dr. S. Chandrasekhar (Nobel Prize)</span> <span class="famous-badge">Albert Einstein</span></div>
             </div>
         </div>
         
@@ -388,8 +600,12 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of matter, composition, properties, reactions, and transformations.<br><span class="salary-text">💰 B.Sc: ₹3-8 LPA | M.Sc: ₹6-15 LPA | PhD: ₹10-22 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ CAREER</div><div class="info-text">Pharma Industry (Sun Pharma, Cipla, Dr. Reddy's), Chemical Industry (Reliance, Tata Chemicals), PSUs (ONGC, IOCL, BPCL), Quality Control</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Chemists</div>
-                <div><span class="famous-badge">Venkatraman Ramakrishnan (Nobel)</span> <span class="famous-badge">Marie Curie</span></div>
+                <div><span class="famous-badge">Venkatraman Ramakrishnan (Nobel Prize)</span> <span class="famous-badge">Marie Curie (Nobel Prize)</span> <span class="famous-badge">Alfred Nobel</span> <span class="famous-badge">Dr. Asima Chatterjee</span></div>
             </div>
         </div>
         
@@ -400,54 +616,60 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of numbers, quantities, structures, patterns, and change.<br><span class="salary-text">💰 B.Sc: ₹4-12 LPA | M.Sc: ₹8-20 LPA | PhD: ₹12-28 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 CAREER</div><div class="info-text">Data Science (₹10-35 LPA), Actuarial Science (₹8-30 LPA), Quantitative Finance (₹12-40 LPA), Teaching (₹6-15 LPA), Research (ISI, CMI, TIFR)</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Mathematicians</div>
-                <div><span class="famous-badge">Srinivasa Ramanujan</span> <span class="famous-badge">C. R. Rao</span> <span class="famous-badge">Manjul Bhargava</span></div>
+                <div><span class="famous-badge">Srinivasa Ramanujan</span> <span class="famous-badge">C. R. Rao</span> <span class="famous-badge">Manjul Bhargava (Fields Medal)</span> <span class="famous-badge">Shakuntala Devi</span> <span class="famous-badge">Aryabhata</span></div>
             </div>
         </div>
         
-        <!-- Biotechnology (NEW) -->
+        <!-- Biotechnology -->
         <div class="accordion-card" id="biotechCard">
             <div class="accordion-header" onclick="toggleCard('biotechCard')">
                 <div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Biotechnology (3 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-10 LPA | M.Sc: ₹8-20 LPA</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-10 LPA | M.Sc: ₹8-20 LPA | PhD: ₹12-30 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ CAREER</div><div class="info-text">Pharma R&D, Biotech Companies (Biocon, Serum Institute), Genomics, Drug Discovery, Research Labs (ICMR, CSIR)</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Biotechnologists</div>
-                <div><span class="famous-badge">Kiran Mazumdar-Shaw</span> <span class="famous-badge">Dr. R. A. Mashelkar</span></div>
+                <div><span class="famous-badge">Kiran Mazumdar-Shaw (Biocon)</span> <span class="famous-badge">Dr. R. A. Mashelkar</span> <span class="famous-badge">Dr. Krishna Ella</span></div>
             </div>
         </div>
         
-        <!-- Genetics (NEW) -->
-        <div class="accordion-card" id="geneticsCard">
-            <div class="accordion-header" onclick="toggleCard('geneticsCard')">
-                <div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Genetics (3 years)</div>
+        <!-- Statistics -->
+        <div class="accordion-card" id="statisticsCard">
+            <div class="accordion-header" onclick="toggleCard('statisticsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> B.Sc Statistics (3 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-9 LPA | M.Sc: ₹8-18 LPA</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹4-12 LPA | M.Sc: ₹8-20 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ CAREER</div><div class="info-text">Data Analyst (₹6-15 LPA), Business Analyst (₹8-18 LPA), Govt Statistician (ISS, NSSO, CSO), Banking Risk Analyst, RBI Grade B</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Statisticians</div>
+                <div><span class="famous-badge">P. C. Mahalanobis (Founder of ISI)</span> <span class="famous-badge">C. R. Rao</span> <span class="famous-badge">Florence Nightingale</span></div>
             </div>
         </div>
         
-        <!-- Food Technology (NEW) -->
-        <div class="accordion-card" id="foodTechCard">
-            <div class="accordion-header" onclick="toggleCard('foodTechCard')">
-                <div class="accordion-title"><span class="accordion-icon">🍽️</span> B.Sc Food Technology (3 years)</div>
+        <!-- Geology -->
+        <div class="accordion-card" id="geologyCard">
+            <div class="accordion-header" onclick="toggleCard('geologyCard')">
+                <div class="accordion-title"><span class="accordion-icon">⛰️</span> B.Sc Geology (3 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹8-18 LPA</div></div></div>
-            </div>
-        </div>
-        
-        <!-- Biomedical Sciences (NEW) -->
-        <div class="accordion-card" id="biomedicalScienceCard">
-            <div class="accordion-header" onclick="toggleCard('biomedicalScienceCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏥</span> B.Sc Biomedical Sciences (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹8-15 LPA</div></div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹4-10 LPA | M.Sc: ₹8-18 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ CAREER</div><div class="info-text">Oil & Gas (ONGC, Oil India), Mining (Coal India, NMDC), Geological Survey of India (GSI), Environmental Consulting, Academics</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Geologists</div>
+                <div><span class="famous-badge">Dr. D. N. Wadia</span> <span class="famous-badge">Dr. H. S. S. Lawrence</span></div>
             </div>
         </div>
         
@@ -459,7 +681,7 @@
             </div>
             <div class="accordion-content">
                 <div class="section-title">⭐ Famous Environmentalists</div>
-                <div><span class="famous-badge">Sunderlal Bahuguna</span> <span class="famous-badge">Medha Patkar</span></div>
+                <div><span class="famous-badge">Dr. Anil Agarwal</span> <span class="famous-badge">Sunderlal Bahuguna (Chipko Movement)</span> <span class="famous-badge">Medha Patkar</span></div>
             </div>
         </div>
         
@@ -475,50 +697,90 @@
             </div>
         </div>
         
-        <!-- Biochemistry -->
-        <div class="accordion-card" id="biochemCard">
-            <div class="accordion-header" onclick="toggleCard('biochemCard')">
-                <div class="accordion-title"><span class="accordion-icon">🧪</span> B.Sc Biochemistry (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content"></div>
-        </div>
-        
         <!-- Bioinformatics -->
         <div class="accordion-card" id="bioinfoCard">
             <div class="accordion-header" onclick="toggleCard('bioinfoCard')">
                 <div class="accordion-title"><span class="accordion-icon">💻</span> B.Sc Bioinformatics (3 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
-            <div class="accordion-content"></div>
-        </div>
-        
-        <!-- Statistics -->
-        <div class="accordion-card" id="statisticsCard">
-            <div class="accordion-header" onclick="toggleCard('statisticsCard')">
-                <div class="accordion-title"><span class="accordion-icon">📊</span> B.Sc Statistics (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
             <div class="accordion-content">
-                <div class="section-title">⭐ Famous Statisticians</div>
-                <div><span class="famous-badge">P. C. Mahalanobis</span> <span class="famous-badge">C. R. Rao</span></div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹4-12 LPA | M.Sc: ₹8-20 LPA</div></div></div>
             </div>
         </div>
         
-        <!-- Geology -->
-        <div class="accordion-card" id="geologyCard">
-            <div class="accordion-header" onclick="toggleCard('geologyCard')">
-                <div class="accordion-title"><span class="accordion-icon">⛰️</span> B.Sc Geology (3 years)</div>
+        <!-- Food Technology -->
+        <div class="accordion-card" id="foodTechCard">
+            <div class="accordion-header" onclick="toggleCard('foodTechCard')">
+                <div class="accordion-title"><span class="accordion-icon">🍽️</span> B.Sc Food Technology (3 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="section-title">⭐ Famous Geologists</div>
-                <div><span class="famous-badge">Dr. D. N. Wadia</span></div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹8-18 LPA | Food Safety Officer: ₹6-12 LPA</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Genetics -->
+        <div class="accordion-card" id="geneticsCard">
+            <div class="accordion-header" onclick="toggleCard('geneticsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Genetics (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-9 LPA | M.Sc: ₹8-18 LPA | Genetic Counselor: ₹6-15 LPA</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Biochemistry -->
+        <div class="accordion-card" id="biochemCard">
+            <div class="accordion-header" onclick="toggleCard('biochemCard')">
+                <div class="accordion-title"><span class="accordion-icon">🧪</span> B.Sc Biochemistry (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹3-8 LPA | M.Sc: ₹6-15 LPA</div></div></div>
+            </div>
+        </div>
+        
+        <!-- Astrophysics -->
+        <div class="accordion-card" id="astroCard">
+            <div class="accordion-header" onclick="toggleCard('astroCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌌</span> B.Sc Astrophysics (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹4-12 LPA | M.Sc: ₹8-20 LPA | PhD: ₹12-30 LPA</div></div></div>
+                <div class="section-title">⭐ Famous Astrophysicists</div>
+                <div><span class="famous-badge">Dr. Jayant Narlikar</span> <span class="famous-badge">Dr. Meghnad Saha</span> <span class="famous-badge">Stephen Hawking</span></div>
+            </div>
+        </div>
+        
+        <!-- Nanotechnology -->
+        <div class="accordion-card" id="nanoCard">
+            <div class="accordion-header" onclick="toggleCard('nanoCard')">
+                <div class="accordion-title"><span class="accordion-icon">🔬</span> B.Sc Nanotechnology (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="section-title">⭐ Famous Nanotechnologists</div>
+                <div><span class="famous-badge">Prof. C. N. R. Rao (Bharat Ratna)</span> <span class="famous-badge">Richard Feynman</span></div>
+            </div>
+        </div>
+        
+        <!-- Forensic Science -->
+        <div class="accordion-card" id="forensicCard">
+            <div class="accordion-header" onclick="toggleCard('forensicCard')">
+                <div class="accordion-title"><span class="accordion-icon">🔍</span> B.Sc Forensic Science (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">B.Sc: ₹4-12 LPA | M.Sc: ₹8-20 LPA</div></div></div>
+                <div class="section-title">⭐ Famous Forensic Scientists</div>
+                <div><span class="famous-badge">Dr. B. R. Sharma</span> <span class="famous-badge">Dr. G. B. Mohanty</span> <span class="famous-badge">Dr. Edmond Locard</span></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 3: SCHOLARSHIPS (COMPLETE) ==================== -->
+    <!-- ==================== DOOR 3: SCHOLARSHIPS ==================== -->
     <div id="door-scholarships" class="door-content">
         <div class="accordion-card" id="scholarshipFullCard">
             <div class="accordion-header" onclick="toggleCard('scholarshipFullCard')">
@@ -553,11 +815,12 @@
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">B.Tech/BS/MS | SAT/TOEFL/GRE | Salary: $80k-150k/year</div></div>
-                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">No tuition fees | <a class="live-link" href="https://www.daad.in" target="_blank">DAAD Scholarship</a> | Salary: €50k-80k/year</div></div>
-                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">PGWP (3 years) | Easy PR pathway</div></div>
-                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">Post-study work visa (2-4 years)</div></div>
-                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">Graduate Route Visa (2 years)</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">B.Tech, BS, MS in Engineering/CS | <a class="live-link" href="https://www.collegeboard.org/sat" target="_blank">SAT</a>/<a class="live-link" href="https://www.ets.org/toefl" target="_blank">TOEFL</a>/<a class="live-link" href="https://www.ets.org/gre" target="_blank">GRE</a> | Salary: $80k-150k/year | OPT: 3 years STEM</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">No tuition fees (public universities) | <a class="live-link" href="https://www.ielts.org" target="_blank">IELTS</a> 6.5 | <a class="live-link" href="https://www.daad.in" target="_blank">DAAD Scholarship</a> | Salary: €50k-80k/year | PR pathway</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">PGWP (3 years) | Easy PR pathway through Express Entry | Salary: CAD 60k-100k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">Post-study work visa (2-4 years) | SkillSelect PR pathway | Salary: AUD 70k-120k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">Graduate Route Visa (2 years) | Salary: £35k-70k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇫🇷 France</div><div class="info-text">Low tuition fees | <a class="live-link" href="https://www.campusfrance.org" target="_blank">Campus France</a> | Scholarships available</div></div>
                 </div>
             </div>
         </div>
@@ -567,18 +830,20 @@
     <div id="door-psu" class="door-content">
         <div class="accordion-card" id="psuJobsFullCard">
             <div class="accordion-header" onclick="toggleCard('psuJobsFullCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏭</span> PSU & Government Jobs</div>
+                <div class="accordion-title"><span class="accordion-icon">🏭</span> PSU & Government Jobs for Engineers</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://gate.iitm.ac.in" target="_blank">GATE</a> | <a class="live-link" href="https://upsc.gov.in" target="_blank">ESE (IES/ISS)</a> | SSC JE | RRB JE</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text">ISRO, DRDO, BHEL, HAL, NTPC, POWERGRID, GAIL, ONGC, IOCL, BPCL, SAIL</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://gate.iitm.ac.in" target="_blank">GATE</a> (for PSUs) | <a class="live-link" href="https://upsc.gov.in" target="_blank">ESE (IES/ISS)</a> | SSC JE | RRB JE | State Engineering Exams</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP PSUs</div><div class="info-text">ISRO, DRDO, BHEL, HAL, NTPC, POWERGRID, GAIL, ONGC, IOCL, BPCL, HPCL, SAIL, NMDC, Coal India</div></div>
+                    <div class="info-card"><div class="info-label">💰 SALARY</div><div class="info-text">Executive Trainee: ₹12-18 LPA | Senior Engineer: ₹20-30 LPA | Chief Engineer: ₹30-50 LPA</div></div>
+                    <div class="info-card"><div class="info-label">📅 GATE Exam</div><div class="info-text">February every year | <a class="live-link" href="https://gate.iitm.ac.in" target="_blank">Official Website</a></div></div>
                 </div>
                 <div class="section-title">⭐ Famous ISRO Scientists</div>
-                <div><span class="famous-badge">Dr. K. Sivan</span> <span class="famous-badge">Dr. A. S. Kiran Kumar</span></div>
+                <div><span class="famous-badge">Dr. K. Sivan</span> <span class="famous-badge">Dr. A. S. Kiran Kumar</span> <span class="famous-badge">Dr. K. Radhakrishnan</span> <span class="famous-badge">Dr. Vikram Sarabhai</span></div>
                 <div class="section-title">⭐ Famous DRDO Scientists</div>
-                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Dr. Tessy Thomas</span></div>
+                <div><span class="famous-badge">Dr. A. P. J. Abdul Kalam</span> <span class="famous-badge">Dr. V. K. Saraswat</span> <span class="famous-badge">Dr. Tessy Thomas (Missile Woman)</span></div>
             </div>
         </div>
     </div>
