@@ -6,181 +6,501 @@
     <title>After 12th | Dil-Ke-AnnS Career Saathi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #F5F0E8 0%, #E8E2D9 100%); padding-bottom: 70px; color: #2D2A24; }
-        
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 30px 30px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; transition: all 0.2s; }
-        .back-button:hover { background: rgba(255,255,255,0.25); transform: translateX(-2px); }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; transition: all 0.2s; }
-        .language-selector select:hover { background: rgba(255,255,255,0.25); }
-        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; opacity: 0.9; }
-        
-        .container { padding: 20px 16px; max-width: 1200px; margin: 0 auto; }
-        .page-title { font-size: 28px; font-weight: 800; margin-bottom: 25px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; background: linear-gradient(135deg, #1B4D3E 20%, #E67E22 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        
-        /* Tab Styles */
-        .tab-container { margin-bottom: 30px; }
-        .tab-buttons { display: flex; flex-wrap: wrap; gap: 12px; border-bottom: 3px solid #E8E2D9; padding-bottom: 0; margin-bottom: 25px; }
-        .tab-btn { background: transparent; border: none; padding: 12px 24px; font-size: 15px; font-weight: 600; cursor: pointer; border-radius: 40px 40px 0 0; transition: all 0.3s; color: #64748B; display: flex; align-items: center; gap: 8px; position: relative; }
-        .tab-btn:hover { background: #F0EADF; color: #1B4D3E; transform: translateY(-2px); }
-        .tab-btn.active { background: #E67E22; color: white; box-shadow: 0 -4px 12px rgba(230,126,34,0.3); }
-        .tab-btn.active::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 3px; background: #E67E22; }
-        
-        .tab-pane { display: none; animation: fadeInUp 0.4s ease; }
-        .tab-pane.active { display: block; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Card Styles */
-        .section-card { background: white; border-radius: 24px; padding: 22px; margin-bottom: 24px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid rgba(232,226,217,0.5); transition: all 0.3s; }
-        .section-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); }
-        .section-title { font-size: 22px; font-weight: 800; margin-bottom: 16px; color: #1B4D3E; display: flex; align-items: center; gap: 10px; border-left: 4px solid #E67E22; padding-left: 15px; }
-        .list-item { padding: 10px 0; border-bottom: 1px solid #F0EADF; font-size: 15px; line-height: 1.45; transition: all 0.2s; }
-        .list-item:hover { padding-left: 8px; color: #E67E22; }
-        
-        .badge { display: inline-block; background: #E67E22; color: white; font-size: 11px; padding: 2px 8px; border-radius: 20px; margin-left: 10px; }
-        
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 8px 12px 20px; border-top: 1px solid #E8E2D9; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 6px 14px; border-radius: 30px; transition: all 0.2s; }
-        .nav-item:hover { background: #F0EADF; transform: translateY(-2px); }
-        .nav-item span:first-child { font-size: 24px; }
-        .nav-item span:last-child { font-size: 11px; font-weight: 500; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; font-weight: 700; }
-        
-        @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tab-btn { padding: 14px 28px; font-size: 16px; } .section-title { font-size: 24px; } .list-item { font-size: 16px; } }
-        @media (max-width: 550px) { .tab-btn span { display: none; } .tab-btn .emoji { display: inline; } .tab-btn { padding: 10px 14px; } }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
+    <!-- Auto-update script for exam results -->
+    <script>
+        function updateExamDates() {
+            const currentYear = new Date().getFullYear();
+            document.querySelectorAll('.exam-year').forEach(el => {
+                el.textContent = currentYear;
+            });
+        }
+        window.onload = updateExamDates;
+    </script>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option><option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option><option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option><option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option><option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option><option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">🎯 Complete Guide After 12th Class</div>
+    <div class="tagline">🎯 Complete After 12th Career Guide - 20+ Pathways | 500+ Courses | Live Exam Links | Govt Jobs | Abroad</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">🎓 After 12th Career Roadmap</div>
+    <div class="page-title">🎓 Options After 12th - Complete Career Roadmap</div>
+    <div class="page-subtitle">All Streams | Professional Courses | Government Jobs | Abroad Studies | Live Exam Updates | Complete Guidance</div>
     
-    <div class="tab-container">
-        <div class="tab-buttons">
-            <button class="tab-btn active" data-tab="streams">📚 <span>Streams</span></button>
-            <button class="tab-btn" data-tab="professional">📜 <span>Professional Courses</span></button>
-            <button class="tab-btn" data-tab="govt">🏛️ <span>Govt Jobs & Defence</span></button>
-            <button class="tab-btn" data-tab="abroad">🌍 <span>Abroad & Tips</span></button>
+    <div class="door-nav">
+        <button class="door-btn active" data-door="science">🔬 <span class="door-label">Science (PCM/PCB)</span></button>
+        <button class="door-btn" data-door="engineering">⚙️ <span class="door-label">Engineering (B.Tech/B.E)</span></button>
+        <button class="door-btn" data-door="medical">🩺 <span class="door-label">Medical (MBBS/BDS/BAMS)</span></button>
+        <button class="door-btn" data-door="commerce">📊 <span class="door-label">Commerce</span></button>
+        <button class="door-btn" data-door="arts">🎨 <span class="door-label">Arts/Humanities</span></button>
+        <button class="door-btn" data-door="law">⚖️ <span class="door-label">Law (LLB)</span></button>
+        <button class="door-btn" data-door="hotel">🏨 <span class="door-label">Hotel Management</span></button>
+        <button class="door-btn" data-door="design">🎨 <span class="door-label">Design</span></button>
+        <button class="door-btn" data-door="paralegal">📜 <span class="door-label">Paralegal & Vocational</span></button>
+        <button class="door-btn" data-door="govt">🏛️ <span class="door-label">Government Jobs</span></button>
+        <button class="door-btn" data-door="defence">🛡️ <span class="door-label">Defence Jobs</span></button>
+        <button class="door-btn" data-door="banking">🏦 <span class="door-label">Banking Jobs</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Studies</span></button>
+        <button class="door-btn" data-door="tips">💡 <span class="door-label">Tips & Guidance</span></button>
+    </div>
+    
+    <!-- ==================== DOOR 1: SCIENCE STREAMS (PCM/PCB) ==================== -->
+    <div id="door-science" class="door-content active">
+        <div class="accordion-card active" id="scienceOverviewCard">
+            <div class="accordion-header" onclick="toggleCard('scienceOverviewCard')">
+                <div class="accordion-title"><span class="accordion-icon">🔬</span> Science Stream (PCM/PCB) - Complete Overview</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of Physics, Chemistry, Biology/Mathematics. Foundation for Engineering, Medical, Research, IT, Defence, Aviation, and Pure Sciences.<br><span class="salary-text">💰 Starting Salary: ₹4-8 LPA | After PG: ₹8-25 LPA | After PhD: ₹12-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Most career options, highest earning potential, gateway to IITs/NITs/AIIMS, opportunities in PSUs (ISRO, DRDO, BHEL), global job market, research opportunities.</div></div>
+                    <div class="info-card"><div class="info-label">📋 SUBJECTS</div><div class="info-text">Physics, Chemistry, Mathematics (PCM) OR Biology (PCB), English, optional subjects</div></div>
+                </div>
+            </div>
         </div>
-        
-        <!-- Tab 1: Streams -->
-        <div id="streams" class="tab-pane active">
-            <div class="section-card"><div class="section-title" id="medicalTitle">🩺 Medical Stream (PCB)</div>
-                <div class="list-item" id="medicalCourses">• MBBS, BDS, BAMS, BHMS, BUMS, BNYS</div>
-                <div class="list-item" id="medicalPara">• B.Sc Nursing, BPT, BOT, Radiology, MLT, OT Technology</div>
-                <div class="list-item" id="medicalPharm">• B.Pharm, Pharm.D, D.Pharm</div>
-                <div class="list-item" id="medicalVet">• BVSc & AH – Veterinary Science</div>
-                <div class="list-item" id="medicalExam">• Entrance: NEET – Mandatory for MBBS/BDS</div></div>
-            
-            <div class="section-card"><div class="section-title" id="enggTitle">⚙️ Non-Medical / Engineering (PCM)</div>
-                <div class="list-item" id="enggBranches">• B.Tech/B.E in CSE, Mechanical, Civil, Electrical, AI/ML, Data Science, Robotics, Aerospace</div>
-                <div class="list-item" id="enggOther">• B.Arch, BCA, B.Sc Computer Science, Merchant Navy, NDA, Pilot Training</div>
-                <div class="list-item" id="enggExam">• Entrance: JEE Main, JEE Advanced, BITSAT, VITEEE, NATA</div></div>
-            
-            <div class="section-card"><div class="section-title" id="commerceTitle">📊 Commerce Stream</div>
-                <div class="list-item" id="commerceDegrees">• B.Com, BBA, BAF, BBI, BFM, Economics</div>
-                <div class="list-item" id="commerceProf">• Professional: CA, CS, CMA, CFA</div>
-                <div class="list-item" id="commerceLaw">• Law: LLB (5 years) through CLAT</div></div>
-            
-            <div class="section-card"><div class="section-title" id="artsTitle">🎨 Arts / Humanities Stream</div>
-                <div class="list-item" id="artsDegrees">• BA in Political Science, History, Geography, Psychology, Sociology, English</div>
-                <div class="list-item" id="artsProf">• BA+LLB, BBA, BJMC, BFA, BSW, BHM, B.Ed</div>
-                <div class="list-item" id="artsBest">• Best for: UPSC, Law, Journalism, Psychology, Social Work</div></div>
-            
-            <div class="section-card"><div class="section-title" id="agriTitle">🌾 Agriculture & Life Sciences</div>
-                <div class="list-item" id="agriCourses">• B.Sc Agriculture, Horticulture, Forestry, Fisheries, Food Technology</div>
-                <div class="list-item" id="agriBtech">• B.Tech Agricultural Engineering, Biotechnology, Dairy Technology</div>
-                <div class="list-item" id="agriExam">• Entrance: ICAR AIEEA, State Agriculture Exams</div></div>
+    </div>
+    
+    <!-- ==================== DOOR 2: ENGINEERING (B.Tech/B.E) ==================== -->
+    <div id="door-engineering" class="door-content">
+        <div class="accordion-card" id="engineeringCard">
+            <div class="accordion-header" onclick="toggleCard('engineeringCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚙️</span> Engineering (B.Tech/B.E) - 4 years</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional degree in various engineering disciplines. Gateway to IT, Manufacturing, PSUs, Research, and Management roles.<br><span class="salary-text">💰 Fresher: ₹8-40 LPA | After M.Tech: ₹15-60 LPA | PSU: ₹12-25 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest paying undergraduate degree, global opportunities, PSU jobs (ISRO, DRDO, BHEL, NTPC), work in top IT companies (Google, Microsoft, Amazon).</div></div>
+                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAMS (LIVE LINKS)</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">JEE Main</a> (NITs, IIITs) | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Advanced</a> (IITs) | <a class="live-link" href="https://www.bitsadmission.com" target="_blank">BITSAT</a> (BITS Pilani) | <a class="live-link" href="https://viteee.vit.ac.in" target="_blank">VITEEE</a> (VIT) | <a class="live-link" href="https://www.srmist.edu.in" target="_blank">SRMJEE</a> (SRM) | <a class="live-link" href="https://wbjeeb.nic.in" target="_blank">WBJEE</a> | <a class="live-link" href="https://mhtcet2025.mahacet.org" target="_blank">MHT-CET</a> | <a class="live-link" href="https://cetonline.karnataka.gov.in/kea" target="_blank">KCET</a> | <a class="live-link" href="https://ap eapcet.nic.in" target="_blank">AP EAPCET</a> | <a class="live-link" href="https://tseamcet.nic.in" target="_blank">TS EAMCET</a></div></div>
+                </div>
+                <div class="section-title">📋 Popular Engineering Branches</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💻 Computer Science (CSE)</div><div class="info-text">Salary: ₹8-40 LPA | Top Recruiters: Google, Microsoft, Amazon, TCS, Infosys, Wipro</div></div>
+                    <div class="info-card"><div class="info-label">🤖 AI & Machine Learning</div><div class="info-text">Salary: ₹10-50 LPA | Top Recruiters: Google AI, Microsoft AI, NVIDIA, IBM, Fractal</div></div>
+                    <div class="info-card"><div class="info-label">📊 Data Science</div><div class="info-text">Salary: ₹8-45 LPA | Top Recruiters: Amazon, Flipkart, Mu Sigma, Tiger Analytics</div></div>
+                    <div class="info-card"><div class="info-label">⚙️ Mechanical</div><div class="info-text">Salary: ₹5-20 LPA | PSUs: BHEL, HAL, NTPC, GAIL | Private: Tata Motors, Mahindra, L&T</div></div>
+                    <div class="info-card"><div class="info-label">🏗️ Civil</div><div class="info-text">Salary: ₹5-18 LPA | PSUs: NHPC, NBCC, PWD | Private: L&T, Shapoorji Pallonji</div></div>
+                    <div class="info-card"><div class="info-label">⚡ Electrical</div><div class="info-text">Salary: ₹5-22 LPA | PSUs: Powergrid, NTPC, BHEL | Private: Siemens, Schneider, ABB</div></div>
+                    <div class="info-card"><div class="info-label">📡 Electronics (ECE)</div><div class="info-text">Salary: ₹6-25 LPA | Recruiters: Intel, Qualcomm, Texas Instruments, Samsung, ISRO, DRDO</div></div>
+                    <div class="info-card"><div class="info-label">🚀 Aerospace</div><div class="info-text">Salary: ₹8-25 LPA | Recruiters: ISRO, DRDO, HAL, Boeing, Airbus, SpaceX</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (Engineering)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Tech/B.E Degree + Internships<br><span class="salary-text">💰 Software Engineer/Design Engineer: ₹8-40 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Tech (GATE exam) / MBA (CAT exam) / MS abroad (GRE)<br><span class="salary-text">💰 Senior Engineer/Manager: ₹15-60 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">Team Lead → Technical Manager → Engineering Director<br><span class="salary-text">💰 Director: ₹40 LPA - ₹1 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">10+ Years</div><div class="roadmap-text">CTO / VP Engineering / Chief Architect / Entrepreneur<br><span class="salary-text">💰 CTO: ₹1 Cr - ₹5 Cr+</span></div></div>
+                <div class="section-title">🏛️ Top Engineering Colleges (NIRF Ranked) with Links</div>
+                <table class="college-table">
+                    <thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
+                    <tbody>
+                        <tr><td>IIT Madras</td><td>Chennai</td><td>₹2,00,000</td><td>1</td><td><a class="live-link" href="https://www.iitm.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>IIT Delhi</td><td>Delhi</td><td>₹2,00,000</td><td>2</td><td><a class="live-link" href="https://www.iitd.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>IIT Bombay</td><td>Mumbai</td><td>₹2,00,000</td><td>3</td><td><a class="live-link" href="https://www.iitb.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>IIT Kanpur</td><td>Kanpur</td><td>₹2,00,000</td><td>4</td><td><a class="live-link" href="https://www.iitk.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>NIT Trichy</td><td>Trichy</td><td>₹1,50,000</td><td>9</td><td><a class="live-link" href="https://www.nitt.edu" target="_blank">Visit</a></td></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">⭐ Famous Engineers from India</div>
+                <div><span class="famous-badge">Sundar Pichai (Google CEO - IIT KGP)</span> <span class="famous-badge">Satya Nadella (Microsoft CEO - Manipal)</span> <span class="famous-badge">N. R. Narayana Murthy (Infosys - NITK)</span> <span class="famous-badge">Dr. A. P. J. Abdul Kalam (Aerospace)</span></div>
+            </div>
         </div>
-        
-        <!-- Tab 2: Professional Courses -->
-        <div id="professional" class="tab-pane">
-            <div class="section-card"><div class="section-title" id="caTitle">📜 CA – Chartered Accountant</div>
-                <div class="list-item" id="caPath">• Path: CA Foundation → Intermediate → Articleship (3 years) → Final</div>
-                <div class="list-item" id="caSalary">• Salary: ₹8-30 LPA after qualification</div></div>
-            
-            <div class="section-card"><div class="section-title" id="csTitle">📜 CS – Company Secretary</div>
-                <div class="list-item" id="csPath">• Path: CSEET → Executive → Professional</div>
-                <div class="list-item" id="csSalary">• Salary: ₹6-20 LPA</div></div>
-            
-            <div class="section-card"><div class="section-title" id="cmaTitle">📜 CMA – Cost & Management Accountant</div>
-                <div class="list-item" id="cmaPath">• Path: Foundation → Intermediate → Final</div>
-                <div class="list-item" id="cmaSalary">• Salary: ₹6-15 LPA</div></div>
-            
-            <div class="section-card"><div class="section-title" id="cfaTitle">📜 CFA – Chartered Financial Analyst (Global)</div>
-                <div class="list-item" id="cfaPath">• Path: Level 1 → Level 2 → Level 3</div>
-                <div class="list-item" id="cfaSalary">• Salary: ₹8-35 LPA (international)</div></div>
-            
-            <div class="section-card"><div class="section-title" id="designTitle">🎨 Designing & Creative Fields</div>
-                <div class="list-item" id="designCourses">• B.Des (Fashion, Interior, Graphic, UI/UX, Animation, Product)</div>
-                <div class="list-item" id="designExam">• Entrance: NIFT, NID DAT, UCEED</div></div>
-            
-            <div class="section-card"><div class="section-title" id="hotelTitle">🏨 Hotel Management</div>
-                <div class="list-item" id="hotelCourses">• BHM – Bachelor of Hotel Management</div>
-                <div class="list-item" id="hotelCareer">• Careers: Hotel Manager, Chef, Event Planner, Airline Services</div></div>
+    </div>
+    
+    <!-- ==================== DOOR 3: MEDICAL STREAM (MBBS/BDS/BAMS) ==================== -->
+    <div id="door-medical" class="door-content">
+        <div class="accordion-card" id="medicalCard">
+            <div class="accordion-header" onclick="toggleCard('medicalCard')">
+                <div class="accordion-title"><span class="accordion-icon">🩺</span> Medical Stream (MBBS/BDS/BAMS/BHMS/BUMS) - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional medical degrees to become doctor/dentist/healthcare professional.<br><span class="salary-text">💰 MBBS Fresher: ₹8-12 LPA | PG: ₹15-30 LPA | Super Specialist: ₹50 LPA - ₹2 Cr</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest social respect, job security, ability to save lives, government jobs, international opportunities (USMLE, PLAB).</div></div>
+                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAMS (LIVE LINKS)</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET</a> (National Eligibility cum Entrance Test) - Mandatory for MBBS/BDS/BAMS/BHMS/BUMS | Exam Date: May <span class="exam-year"></span> | <a class="live-link" href="https://aiimsexams.ac.in" target="_blank">AIIMS PG</a> | <a class="live-link" href="https://www.jipmer.edu.in" target="_blank">JIPMER</a> (now under NEET)</div></div>
+                </div>
+                <div class="section-title">📋 Medical Courses Detail</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🩺 MBBS (5.5 years)</div><div class="info-text">Bachelor of Medicine & Surgery | Salary: ₹8-12 LPA (Fresher) | PG (MD/MS): ₹15-30 LPA | Super Specialist (DM/MCh): ₹50 LPA - ₹2 Cr</div></div>
+                    <div class="info-card"><div class="info-label">🦷 BDS (5 years)</div><div class="info-text">Bachelor of Dental Surgery | Salary: ₹6-30 LPA | MDS: ₹15-30 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🌿 BAMS (5.5 years)</div><div class="info-text">Bachelor of Ayurvedic Medicine | Salary: ₹5-20 LPA</div></div>
+                    <div class="info-card"><div class="info-label">💊 BHMS (5.5 years)</div><div class="info-text">Bachelor of Homeopathic Medicine | Salary: ₹4-15 LPA</div></div>
+                    <div class="info-card"><div class="info-label">📜 BUMS (5.5 years)</div><div class="info-text">Bachelor of Unani Medicine | Salary: ₹4-12 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🧘 BNYS (5.5 years)</div><div class="info-text">Bachelor of Naturopathy & Yoga Sciences | Salary: ₹4-10 LPA</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Medical Colleges with Links</div>
+                <table class="college-table">
+                    <thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
+                    <tbody>
+                        <tr><td>AIIMS Delhi</td><td>Delhi</td><td>₹1,856</td><td>1</td><td><a class="live-link" href="https://aiims.edu" target="_blank">Visit</a></td></tr>
+                        <tr><td>CMC Vellore</td><td>Vellore</td><td>₹4,00,000</td><td>2</td><td><a class="live-link" href="https://cmcvellore.ac.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>JIPMER</td><td>Puducherry</td><td>₹10,000</td><td>3</td><td><a class="live-link" href="https://jipmer.edu.in" target="_blank">Visit</a></td></tr>
+                        <tr><td>AFMC Pune</td><td>Pune</td><td>₹1,50,000</td><td>4</td><td><a class="live-link" href="https://afmc.nic.in" target="_blank">Visit</a></td></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">⭐ Famous Doctors from India</div>
+                <div><span class="famous-badge">Dr. Devi Shetty</span> <span class="famous-badge">Dr. Naresh Trehan</span> <span class="famous-badge">Dr. Randeep Guleria</span> <span class="famous-badge">Dr. Soumya Swaminathan</span></div>
+            </div>
         </div>
-        
-        <!-- Tab 3: Govt Jobs & Defence -->
-        <div id="govt" class="tab-pane">
-            <div class="section-card"><div class="section-title" id="govtTitle">🏛️ Government Jobs After 12th</div>
-                <div class="list-item" id="govtJobs">• SSC CHSL (10+2 level), SSC GD, Railway RRB (Group D, NTPC)</div>
-                <div class="list-item" id="govtJobs2">• Police Constable, Forest Guard, ESIC, FCI, LIC Assistant</div>
-                <div class="list-item" id="govtJobs3">• After graduation: UPSC, SSC CGL, Banking PO, State PSC</div></div>
-            
-            <div class="section-card"><div class="section-title" id="defenceTitle">🛡️ Defence & Armed Forces</div>
-                <div class="list-item" id="defenceNDA">• NDA (Army/Navy/Air Force) – After 12th</div>
-                <div class="list-item" id="defenceTES">• TES – Technical Entry Scheme, Indian Army</div>
-                <div class="list-item" id="defenceAgniveer">• Agniveer, Coast Guard, Paramilitary Forces (CRPF, BSF, ITBP)</div>
-                <div class="list-item" id="defenceQuota">• Sports quota and NCC special entry</div></div>
-            
-            <div class="section-card"><div class="section-title" id="bankingTitle">🏦 Banking Jobs</div>
-                <div class="list-item" id="bankingPO">• IBPS PO/Clerk, SBI PO, RBI Grade B</div>
-                <div class="list-item" id="bankingSalary">• Salary: ₹8-15 LPA for PO</div></div>
+    </div>
+        <!-- ==================== DOOR 4: COMMERCE STREAM ==================== -->
+    <div id="door-commerce" class="door-content">
+        <div class="accordion-card" id="commerceDetailCard">
+            <div class="accordion-header" onclick="toggleCard('commerceDetailCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> Commerce Stream - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Foundation for careers in finance, accounting, banking, taxation, auditing, management, and business.<br><span class="salary-text">💰 Starting Salary: ₹3-8 LPA | CA/CS: ₹8-15 LPA | MBA: ₹15-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Gateway to professional courses (CA, CS, CMA, CFA), banking careers, corporate finance, entrepreneurship, and government jobs.</div></div>
+                </div>
+                <div class="section-title">📋 Professional Courses after 12th Commerce</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📜 CA - Chartered Accountant (4-5 years)</div><div class="info-text">Path: CA Foundation → Intermediate → Articleship (3 years) → Final<br>Salary: ₹8-15 LPA (Fresher) | ₹20-50 LPA (Experienced) | Partner: ₹50L-2Cr<br>🔗 <a class="live-link" href="https://www.icai.org" target="_blank">icai.org</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 CS - Company Secretary (3-4 years)</div><div class="info-text">Path: CSEET → Executive → Professional<br>Salary: ₹6-12 LPA (Fresher) | ₹15-30 LPA (Experienced)<br>🔗 <a class="live-link" href="https://www.icsi.edu" target="_blank">icsi.edu</a></div></div>
+                    <div class="info-card"><div class="info-label">📊 CMA - Cost & Management Accountant (3-4 years)</div><div class="info-text">Path: Foundation → Intermediate → Final<br>Salary: ₹6-10 LPA (Fresher) | ₹15-25 LPA (Experienced)<br>🔗 <a class="live-link" href="https://www.icmai.in" target="_blank">icmai.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📈 CFA - Chartered Financial Analyst (2-3 years)</div><div class="info-text">Global qualification for investment management. 3 levels.<br>Salary: ₹8-35 LPA (India), $80k-200k (USA)<br>🔗 <a class="live-link" href="https://www.cfainstitute.org" target="_blank">cfainstitute.org</a></div></div>
+                </div>
+                <div class="section-title">📋 Degree Courses after 12th Commerce</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 B.Com (3 years)</div><div class="info-text">Specializations: Accounting, Finance, Taxation, Economics, Banking<br>Salary: ₹3-8 LPA | After M.Com: ₹6-12 LPA | After MBA: ₹15-30 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🎓 BBA (3 years)</div><div class="info-text">Bachelor of Business Administration<br>Salary: ₹4-10 LPA | After MBA (IIMs): ₹20-35 LPA</div></div>
+                    <div class="info-card"><div class="info-label">📊 BAF/BBI/BFM (3 years)</div><div class="info-text">Bachelor of Accounting & Finance / Banking & Insurance / Financial Markets<br>Salary: ₹4-10 LPA</div></div>
+                    <div class="info-card"><div class="info-label">📊 Economics (BA/B.Sc)</div><div class="info-text">Salary: ₹4-12 LPA | After MA Economics: ₹8-20 LPA | RBI/NABARD/SEBI jobs</div></div>
+                </div>
+                <div class="section-title">📋 Entrance Exams for Commerce (LIVE LINKS)</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 CUET</div><div class="info-text">For B.Com/BBA in Central Universities (DU, BHU, JNU) - <a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">cuet.samarth.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🎓 IPMAT</div><div class="info-text">For BBA at IIM Indore/Rohtak/Jammu - <a class="live-link" href="https://www.iimidr.ac.in" target="_blank">iimidr.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🎓 NPAT</div><div class="info-text">For BBA at NMIMS - <a class="live-link" href="https://www.nmims.edu" target="_blank">nmims.edu</a></div></div>
+                    <div class="info-card"><div class="info-label">🎓 SET</div><div class="info-text">For BBA at Symbiosis - <a class="live-link" href="https://www.set.edu" target="_blank">set.edu</a></div></div>
+                </div>
+                <div class="section-title">⭐ Famous Commerce Graduates</div>
+                <div><span class="famous-badge">Kumar Mangalam Birla</span> <span class="famous-badge">Nirmala Sitharaman</span> <span class="famous-badge">Deepak Parekh</span> <span class="famous-badge">Uday Kotak</span></div>
+            </div>
         </div>
-        
-        <!-- Tab 4: Abroad & Tips -->
-        <div id="abroad" class="tab-pane">
-            <div class="section-card"><div class="section-title" id="abroadTitle">🌍 Study Abroad After 12th</div>
-                <div class="list-item" id="abroadFields">• Engineering (B.S), Computer Science, Business Management, Nursing, Hospitality</div>
-                <div class="list-item" id="abroadCountries">• Top countries: USA, Canada, UK, Australia, Germany, New Zealand, Ireland, Japan</div>
-                <div class="list-item" id="abroadReq">• Requirements: IELTS/TOEFL, SAT/ACT, SOP, LORs</div>
-                <div class="list-item" id="abroadScholarship">• Scholarships: Fulbright, DAAD, MEXT, KGSP</div></div>
-            
-            <div class="section-card"><div class="section-title" id="directJobsTitle">💼 Direct Jobs & Entrepreneurship</div>
-                <div class="list-item" id="directJobs">• BPO/KPO, Retail, Sales, Real Estate, Insurance, Banking (customer service)</div>
-                <div class="list-item" id="freelancing">• Freelancing: Content writing, Graphic design, Web development, Digital marketing</div>
-                <div class="list-item" id="startup">• Start your own business: E-commerce, Coaching centre, Food outlet, YouTube channel</div></div>
-            
-            <div class="section-card"><div class="section-title" id="tipsTitle">💡 Key Tips for After 12th</div>
-                <div class="list-item" id="tip1">✅ Choose based on YOUR interest and market demand – not family pressure</div>
-                <div class="list-item" id="tip2">✅ Professional courses (CA, CS) can be done alongside graduation</div>
-                <div class="list-item" id="tip3">✅ Skill courses (Digital Marketing, Web Dev) give side income during studies</div>
-                <div class="list-item" id="tip4">✅ Government exam preparation requires discipline – start early, follow routine</div>
-                <div class="list-item" id="tip5">✅ Gap year is OK if used productively (internship, skill course, entrance prep)</div></div>
+    </div>
+    
+    <!-- ==================== DOOR 5: ARTS/HUMANITIES ==================== -->
+    <div id="door-arts" class="door-content">
+        <div class="accordion-card" id="artsDetailCard">
+            <div class="accordion-header" onclick="toggleCard('artsDetailCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎨</span> Arts/Humanities - Complete Career Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of Political Science, History, Geography, Psychology, Sociology, Economics, English, Philosophy, Public Administration.<br><span class="salary-text">💰 Starting Salary: ₹3-7 LPA | After MA: ₹6-12 LPA | IAS/IPS: ₹70k-2.5L/month</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Gateway to UPSC Civil Services, Law, Journalism, Psychology, Social Work, Teaching, Research, Public Policy, International Relations.</div></div>
+                </div>
+                <div class="section-title">📋 Career Options after 12th Arts</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏛️ UPSC Civil Services</div><div class="info-text">IAS, IPS, IFS, IRS, Group A Services<br>Salary: ₹70k-2.5L/month | Exam: UPSC CSE - <a class="live-link" href="https://upsc.gov.in" target="_blank">upsc.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">⚖️ LLB (5 years integrated)</div><div class="info-text">BA+LLB | Corporate Lawyer: ₹15-30 LPA | Judge: ₹2-2.5L/month<br>Exam: CLAT - <a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">consortiumofnlus.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📰 BJMC (Journalism)</div><div class="info-text">Journalist, News Anchor, Content Creator, Media Manager<br>Salary: ₹4-15 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🧠 Psychology (BA/B.Sc)</div><div class="info-text">Clinical Psychologist, Counsellor, HR Specialist, School Psychologist<br>Salary: ₹4-15 LPA | M.Phil Clinical: ₹8-18 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🤝 Social Work (BSW/MSW)</div><div class="info-text">Social Worker, NGO Manager, CSR Executive<br>Salary: ₹3-10 LPA | Top NGOs: CRY, UNICEF, Oxfam, Care India</div></div>
+                    <div class="info-card"><div class="info-label">🎓 B.Ed (2 years)</div><div class="info-text">Teacher - PRT, TGT, PGT<br>Salary: Govt School: ₹5-10 LPA | Private: ₹3-8 LPA | CTET Exam: <a class="live-link" href="https://ctet.nic.in" target="_blank">ctet.nic.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🌍 Foreign Languages</div><div class="info-text">Translator, Interpreter, MNC Jobs, Embassy Jobs<br>Salary: ₹5-20 LPA | Languages: French, German, Spanish, Japanese, Chinese</div></div>
+                    <div class="info-card"><div class="info-label">🎭 BFA (Fine Arts)</div><div class="info-text">Artist, Art Director, Gallery Curator, Illustrator, Animator<br>Salary: ₹4-15 LPA</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Arts Colleges (NIRF Ranked)</div>
+                <table class="college-table">
+                    <thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
+                    <tbody>
+                        <tr><a class="live-link" href="https://www.jnu.ac.in" target="_blank">JNU</a> </th>那样Delhi</th>那样₹10,000</th>那样1</th>那样<a class="live-link" href="https://www.jnu.ac.in" target="_blank">Visit</a> </th></tr>
+                        <tr><a class="live-link" href="https://www.du.ac.in" target="_blank">University of Delhi</a> </th>那样Delhi</th>那样₹25,000</th>那样2</th>那样<a class="live-link" href="https://www.du.ac.in" target="_blank">Visit</a> </th></tr>
+                        <tr><a class="live-link" href="https://www.bhu.ac.in" target="_blank">BHU</a> </th>那样Varanasi</th>那样₹15,000</th>那样3</th>那样<a class="live-link" href="https://www.bhu.ac.in" target="_blank">Visit</a> </th></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">⭐ Famous Arts Graduates</div>
+                <div><span class="famous-badge">Dr. B. R. Ambedkar (Constitution Maker)</span> <span class="famous-badge">Dr. A. P. J. Abdul Kalam (BA Economics)</span> <span class="famous-badge">Narendra Modi (BA Political Science)</span> <span class="famous-badge">Manmohan Singh (Economist)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 6: LAW (LLB) ==================== -->
+    <div id="door-law" class="door-content">
+        <div class="accordion-card" id="lawCard">
+            <div class="accordion-header" onclick="toggleCard('lawCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚖️</span> Law (LLB) - 5 years integrated | 3 years after graduation</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of legal systems, constitutional law, criminal law, corporate law, civil law, taxation law.<br><span class="salary-text">💰 Fresher Lawyer: ₹5-10 LPA | Corporate Lawyer: ₹15-30 LPA | Senior Advocate: ₹1-5 Cr</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAMS (LIVE LINKS)</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">CLAT</a> (Common Law Admission Test for NLUs) | <a class="live-link" href="https://www.ailet.in" target="_blank">AILET</a> (NLU Delhi) | <a class="live-link" href="https://www.lsatindia.in" target="_blank">LSAT India</a></div></div>
+                </div>
+                <div class="section-title">🏛️ Top NLUs (National Law Universities)</div>
+                <table class="college-table">
+                    <thead><tr><th>NLU</th><th>City</th><th>Fees/Year</th><th>CLAT Rank</th><th>Website</th></tr></thead>
+                    <tbody>
+                        <tr><a class="live-link" href="https://www.nls.ac.in" target="_blank">NLSIU Bangalore</a> </th>那样Bangalore</th>那样₹2,50,000</th>那样1-120</th>那样<a class="live-link" href="https://www.nls.ac.in" target="_blank">Visit</a> </th></tr>
+                        <tr><a class="live-link" href="https://nalsar.ac.in" target="_blank">NALSAR Hyderabad</a> </th>那样Hyderabad</th>那样₹2,00,000</th>那样121-250</th>那样<a class="live-link" href="https://nalsar.ac.in" target="_blank">Visit</a> </th></tr>
+                        <tr><a class="live-link" href="https://nludelhi.ac.in" target="_blank">NLU Delhi</a></th>那样Delhi</th>那样₹2,00,000</th>那样251-400</th>那样<a class="live-link" href="https://nludelhi.ac.in" target="_blank">Visit</a> </th></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Career Roadmap (Law)</div>
+                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">BA/BBA/B.Com + LLB Integrated Degree<br><span class="salary-text">💰 Fresher: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Junior Advocate under Senior Advocate<br><span class="salary-text">💰 Junior: ₹3-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Corporate Lawyer → Legal Manager<br><span class="salary-text">💰 Corporate: ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8-12 Years</div><div class="roadmap-text">Partner → Legal Head → Judge<br><span class="salary-text">💰 Partner: ₹30-60 LPA | Judge: ₹2-2.5L/month</span></div></div>
+                <div class="section-title">⭐ Famous Lawyers</div>
+                <div><span class="famous-badge">Fali S. Nariman</span> <span class="famous-badge">Harish Salve</span> <span class="famous-badge">Ram Jethmalani</span> <span class="famous-badge">Mukul Rohatgi</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 7: HOTEL MANAGEMENT ==================== -->
+    <div id="door-hotel" class="door-content">
+        <div class="accordion-card" id="hotelCard">
+            <div class="accordion-header" onclick="toggleCard('hotelCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏨</span> Hotel Management (BHM/B.Sc Hospitality) - 4 years</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of hospitality management, food production, front office, housekeeping, catering, event management.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | GM: ₹25-50 LPA | VP Operations: ₹40-80 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAM</div><div class="info-text"><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">NCHM JEE</a> (National Council for Hotel Management Joint Entrance Examination) - Exam: May <span class="exam-year"></span></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP IHMs</div><div class="info-text"><a class="live-link" href="https://www.ihmpusa.net" target="_blank">IHM Pusa Delhi</a> | <a class="live-link" href="https://www.ihmmumbai.net" target="_blank">IHM Mumbai</a> | <a class="live-link" href="https://www.ihmchennai.net" target="_blank">IHM Chennai</a> | <a class="live-link" href="https://www.ihmbangalore.net" target="_blank">IHM Bangalore</a></div></div>
+                </div>
+                <div class="section-title">🌍 International Opportunities</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇦🇪 Dubai</div><div class="info-text">Tax-free salary: AED 10k-30k/month | Top hotels: Burj Al Arab, Atlantis, Armani Hotel</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇭 Switzerland</div><div class="info-text">Luxury hotel careers | Salary: CHF 5k-10k/month | Top schools: EHL, Les Roches, Glion</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">J-1 Visa internship | Salary: $3k-8k/month | Top brands: Marriott, Hilton, Hyatt, Four Seasons</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 8: DESIGN ==================== -->
+    <div id="door-design" class="door-content">
+        <div class="accordion-card" id="designCard">
+            <div class="accordion-header" onclick="toggleCard('designCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎨</span> Design (B.Des/B.Sc Design) - 4 years</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Fashion Design, Interior Design, Graphic Design, UI/UX Design, Animation, Product Design.<br><span class="salary-text">💰 Fresher: ₹6-18 LPA | Senior Designer: ₹15-30 LPA | Creative Director: ₹30-60 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAMS</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID DAT</a> (National Institute of Design) | <a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT</a> (Fashion Design) | <a class="live-link" href="https://uceed.iitb.ac.in" target="_blank">UCEED</a> (IIT Design Entrance)</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text"><a class="live-link" href="https://www.nid.edu" target="_blank">NID Ahmedabad</a> | <a class="live-link" href="https://www.nift.ac.in" target="_blank">NIFT Delhi</a> | <a class="live-link" href="https://www.iitb.ac.in" target="_blank">IIT Bombay IDC</a> | <a class="live-link" href="https://www.pearlacademy.com" target="_blank">Pearl Academy</a></div></div>
+                </div>
+                <div class="section-title">⭐ Famous Designers</div>
+                <div><span class="famous-badge">Sabyasachi Mukherjee</span> <span class="famous-badge">Manish Malhotra</span> <span class="famous-badge">Ritu Beri</span> <span class="famous-badge">Tarun Tahiliani</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 9: PARALEGAL & VOCATIONAL ==================== -->
+    <div id="door-paralegal" class="door-content">
+        <div class="accordion-card" id="paralegalCard">
+            <div class="accordion-header" onclick="toggleCard('paralegalCard')">
+                <div class="accordion-title"><span class="accordion-icon">📜</span> Paralegal & Vocational Courses after 12th</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📋 Diploma in Paralegal Studies</div><div class="info-text">Duration: 1-2 years | Salary: ₹3-8 LPA | Work in law firms, courts, legal departments</div></div>
+                    <div class="info-card"><div class="info-label">💻 Diploma in Computer Applications (DCA)</div><div class="info-text">Duration: 6-12 months | Salary: ₹2-5 LPA | Office jobs, data entry, IT support</div></div>
+                    <div class="info-card"><div class="info-label">📊 Certificate in Tally & GST</div><div class="info-text">Duration: 3-6 months | Salary: ₹2-5 LPA | Accounting jobs, GST filing, billing</div></div>
+                    <div class="info-card"><div class="info-label">🎨 Certificate in Graphic Design</div><div class="info-text">Duration: 6-12 months | Salary: ₹3-8 LPA | Freelance opportunities</div></div>
+                    <div class="info-card"><div class="info-label">📱 Digital Marketing Certificate</div><div class="info-text">Duration: 3-6 months | Salary: ₹4-10 LPA | SEO, SMM, Google Ads, freelancing</div></div>
+                    <div class="info-card"><div class="info-label">🖥️ Web Development Certificate</div><div class="info-text">Duration: 6-12 months | Salary: ₹4-12 LPA | Freelance, IT jobs</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 10: GOVERNMENT JOBS AFTER 12TH ==================== -->
+    <div id="door-govt" class="door-content">
+        <div class="accordion-card" id="govtJobsCard">
+            <div class="accordion-header" onclick="toggleCard('govtJobsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Government Jobs After 12th - Complete Detailed List</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Direct government job opportunities after 12th. SSC CHSL, Railways, Defence, Police, Post Office, Banking (Clerk).<br><span class="salary-text">💰 Salary Range: ₹25k-60k/month + allowances + pension</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM PORTALS (LIVE LINKS)</div><div class="info-text"><a class="live-link" href="https://ssc.nic.in" target="_blank">SSC Official</a> | <a class="live-link" href="https://upsc.gov.in" target="_blank">UPSC</a> | <a class="live-link" href="https://indianrailways.gov.in" target="_blank">Indian Railways</a> | <a class="live-link" href="https://rrbapply.gov.in" target="_blank">RRB</a> | <a class="live-link" href="https://joinindianarmy.nic.in" target="_blank">Indian Army</a></div></div>
+                </div>
+                
+                <div class="section-title">1️⃣ SSC JOBS AFTER 12TH</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📋 SSC CHSL (10+2 level)</div><div class="info-text">Posts: LDC, JSA, PA, DEO | Salary: ₹30k-50k/month | Vacancies: 5,000+ per year<br>Exam: Tier I (CBT) + Tier II (Skill Test)<br>🔗 <a class="live-link" href="https://ssc.nic.in" target="_blank">ssc.nic.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 SSC GD Constable</div><div class="info-text">Posts: Constable in CAPF (BSF, CISF, CRPF, SSB, ITBP)<br>Salary: ₹35k-45k/month | Vacancies: 25,000+<br>Selection: CBT + PET + Medical</div></div>
+                    <div class="info-card"><div class="info-label">📋 SSC MTS</div><div class="info-text">Multi Tasking Staff (Peon, Daftary, Mali, Watchman)<br>Salary: ₹25k-35k/month | Selection: CBT only</div></div>
+                </div>
+                
+                <div class="section-title">2️⃣ RAILWAY JOBS AFTER 12TH</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🚂 RRB NTPC (Non-Technical Popular Categories)</div><div class="info-text">Posts: Junior Clerk, Time Keeper, Commercial Apprentice, Station Master<br>Salary: ₹25k-55k/month | Vacancies: 30,000+<br>Selection: CBT + Skill Test<br>🔗 <a class="live-link" href="https://rrbapply.gov.in" target="_blank">rrbapply.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🚂 RRB JE (Junior Engineer)</div><div class="info-text">Posts: Junior Engineer (Civil, Mechanical, Electrical, S&T)<br>Eligibility: 12th + Diploma in Engineering<br>Salary: ₹35k-60k/month</div></div>
+                    <div class="info-card"><div class="info-label">🚂 RPF Constable/SI</div><div class="info-text">Railway Protection Force | Salary: ₹35k-55k/month | Physical test required</div></div>
+                </div>
+                
+                <div class="section-title">3️⃣ DEFENCE JOBS AFTER 12TH</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🛡️ NDA (National Defence Academy)</div><div class="info-text">Post: Army/Navy/Air Force Officer | Duration: 3 years training + commission<br>Salary: ₹70k-1.5L/month + allowances<br>Exam: UPSC NDA (April & September) - <a class="live-link" href="https://upsc.gov.in" target="_blank">upsc.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🛡️ Indian Army - Soldier (Technical & Clerks)</div><div class="info-text">Soldier GD, Technical, Clerk, Nursing Assistant<br>Salary: ₹30k-45k/month | Physical + Written + Medical<br>🔗 <a class="live-link" href="https://joinindianarmy.nic.in" target="_blank">joinindianarmy.nic.in</a></div></div>
+                    <div class="info-card"><div class="info-label">⚓ Indian Navy - SSR/AA/MR</div><div class="info-text">Senior Secondary Recruit (SSR), Artificer Apprentice (AA), Matric Recruit (MR)<br>Salary: ₹35k-55k/month | Exam + Physical + Medical<br>🔗 <a class="live-link" href="https://joinindiannavy.gov.in" target="_blank">joinindiannavy.gov.in</a></div></div>
+                    <div class="info-card"><div class="info-label">✈️ Indian Air Force - Airmen</div><div class="info-text">Group X (Technical), Group Y (Non-Technical)<br>Salary: ₹35k-55k/month | Exam: Air Force Common Admission Test (AFCAT)<br>🔗 <a class="live-link" href="https://airmenselection.cdac.in" target="_blank">airmenselection.cdac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🛡️ Agniveer (Agnipath Scheme)</div><div class="info-text">4 years service in Army/Navy/Air Force<br>Salary: ₹30k-40k/month + ₹11.71 Lakhs at exit<br>Eligibility: 12th pass, age 17.5-21</div></div>
+                </div>
+                
+                <div class="section-title">4️⃣ POLICE & STATE JOBS AFTER 12TH</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">👮 State Police Constable</div><div class="info-text">Salary: ₹30k-50k/month | Physical + Written + Medical<br>State-wise recruitment (UP Police, Bihar Police, MP Police, Rajasthan Police, etc.)</div></div>
+                    <div class="info-card"><div class="info-label">🌲 Forest Guard</div><div class="info-text">Salary: ₹30k-45k/month | Physical stamina + Walking test required</div></div>
+                    <div class="info-card"><div class="info-label">🏢 Patwari/Revenue Dept</div><div class="info-text">Salary: ₹30k-50k/month | State-level exam (e.g., Rajasthan Patwari, MP Patwari)</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 11: BANKING JOBS AFTER 12TH ==================== -->
+    <div id="door-banking" class="door-content">
+        <div class="accordion-card" id="bankingJobsCard">
+            <div class="accordion-header" onclick="toggleCard('bankingJobsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏦</span> Banking Jobs After 12th - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Banking jobs in Public Sector Banks (SBI, PNB, BOB, etc.), Regional Rural Banks (RRBs), and Private Banks.<br><span class="salary-text">💰 Clerk: ₹25k-40k/month | PO: ₹50k-80k/month | IBPS PO: ₹8-15 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM PORTALS (LIVE LINKS)</div><div class="info-text"><a class="live-link" href="https://www.ibps.in" target="_blank">IBPS Official</a> | <a class="live-link" href="https://www.sbi.co.in" target="_blank">SBI Careers</a> | <a class="live-link" href="https://www.rbi.org.in" target="_blank">RBI</a></div></div>
+                </div>
+                <div class="section-title">📋 Banking Exam Details</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏦 IBPS Clerk</div><div class="info-text">Eligibility: 12th pass (for certain states) / Graduation for others<br>Salary: ₹25k-40k/month | Exam: Prelims + Mains<br>Vacancies: 5,000+ per year</div></div>
+                    <div class="info-card"><div class="info-label">🏦 IBPS PO</div><div class="info-text">Eligibility: Graduation (12th pass not eligible)<br>Salary: ₹8-15 LPA | Exam: Prelims + Mains + Interview</div></div>
+                    <div class="info-card"><div class="info-label">🏦 SBI Clerk</div><div class="info-text">Junior Associates | Salary: ₹25k-40k/month<br>Exam: Prelims + Mains</div></div>
+                    <div class="info-card"><div class="info-label">🏦 Regional Rural Bank (RRB) Clerk/PO</div><div class="info-text">Salary: ₹25k-40k/month (Clerk), ₹45k-60k/month (Officer)<br>Exam: IBPS RRB</div></div>
+                    <div class="info-card"><div class="info-label">🏦 Private Bank (12th pass entry)</div><div class="info-text">Kotak Mahindra, ICICI, HDFC, Axis - 12th pass eligible for Customer Service, BDA, Call Center roles<br>Salary: ₹15k-25k/month</div></div>
+                </div>
+                <div class="section-title">📋 Exam Pattern (IBPS Clerk)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Prelims</div><div class="roadmap-text">English, Reasoning, Quantitative Aptitude (1 hour) | 100 marks</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Mains</div><div class="roadmap-text">General Awareness, Reasoning, English, Quantitative, Computer (2 hours) | 200 marks</div></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 12: ABROAD STUDIES AFTER 12TH ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="abroadCard">
+            <div class="accordion-header" onclick="toggleCard('abroadCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Studies After 12th - Complete Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHY STUDY ABROAD?</div><div class="info-text">World-class universities, global exposure, higher salaries, research opportunities, PR pathways in Canada/Australia/NZ/Europe.<br><span class="salary-text">💰 Starting Salary: ₹20-60 LPA | STEM OPT in USA: 3 years</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAMS (LIVE LINKS)</div><div class="info-text"><a class="live-link" href="https://www.ielts.org" target="_blank">IELTS</a> | <a class="live-link" href="https://www.ets.org/toefl" target="_blank">TOEFL</a> | <a class="live-link" href="https://www.collegeboard.org/sat" target="_blank">SAT</a> (USA) | <a class="live-link" href="https://www.ets.org/gre" target="_blank">GRE</a> (PG) | <a class="live-link" href="https://www.gmac.com/gmat" target="_blank">GMAT</a> (MBA)</div></div>
+                </div>
+                <div class="section-title">📋 Country-wise Detailed Guide</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">Top Unis: Harvard, MIT, Stanford, UC Berkeley, Caltech<br>Exams: SAT (UG), GRE/GMAT (PG), TOEFL/IELTS<br>Salary: $60k-150k/year | OPT: 1-3 years<br>🔗 <a class="live-link" href="https://educationusa.state.gov" target="_blank">educationusa.state.gov</a></div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">Top Unis: UoT, UBC, McGill, Waterloo, McMaster<br>Exams: IELTS (6.0-7.0), TOEFL, PTE<br>Salary: CAD 50k-90k/year | PGWP: 1-3 years | PR: Express Entry<br>🔗 <a class="live-link" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html" target="_blank">Canada Study Permit</a></div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">Top Unis: Oxford, Cambridge, Imperial, LSE, UCL<br>Exams: IELTS (6.5-7.5), TOEFL<br>Salary: £30k-80k/year | Graduate Route: 2 years<br>🔗 <a class="live-link" href="https://www.gov.uk/student-visa" target="_blank">UK Student Visa</a></div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">Top Unis: ANU, Melbourne, Sydney, UNSW, Monash<br>Exams: IELTS (6.0-7.0), TOEFL, PTE<br>Salary: AUD 60k-100k/year | PSW: 2-4 years | PR pathway<br>🔗 <a class="live-link" href="https://www.studyaustralia.gov.au" target="_blank">Study Australia</a></div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">Top Unis: TUM, RWTH Aachen, KIT, TU Berlin<br>Tuition: Free (public universities) | Semester fee: €200-500<br>Requirement: German A2/B1 + IELTS 6.5<br>🔗 <a class="live-link" href="https://www.daad.in" target="_blank">DAAD India</a></div></div>
+                    <div class="info-card"><div class="info-label">🇫🇷 France</div><div class="info-text">Top Unis: PSL, Polytechnique, Sorbonne, HEC Paris<br>Tuition: €2,770-3,770/year (public)<br>Scholarship: Eiffel Excellence<br>🔗 <a class="live-link" href="https://www.campusfrance.org" target="_blank">Campus France</a></div></div>
+                    <div class="info-card"><div class="info-label">🇮🇪 Ireland</div><div class="info-text">Top Unis: TCD, UCD, Galway, UCC<br>Exams: IELTS 6.5<br>Salary: €35k-65k/year | Stay-back: 2 years<br>🔗 <a class="live-link" href="https://www.educationinireland.com" target="_blank">Education in Ireland</a></div></div>
+                    <div class="info-card"><div class="info-label">🇳🇿 New Zealand</div><div class="info-text">Top Unis: University of Auckland, Otago, Victoria, Canterbury<br>Exams: IELTS 6.0-6.5<br>Salary: NZD 50k-80k/year | PSW: 1-3 years | PR pathway</div></div>
+                    <div class="info-card"><div class="info-label">🇸🇬 Singapore</div><div class="info-text">Top Unis: NUS, NTU, SMU<br>Exams: IELTS 6.5, SAT/ACT for UG<br>Salary: SGD 60k-120k/year</div></div>
+                </div>
+                <div class="section-title">🎓 Top Scholarships for Indian Students (LIVE LINKS)</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 Fulbright</div><div class="info-text">Fully funded for master's/PhD - <a class="live-link" href="https://www.usief.org.in" target="_blank">usief.org.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 Chevening</div><div class="info-text">Fully funded for 1-year master's - <a class="live-link" href="https://www.chevening.org" target="_blank">chevening.org</a></div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia Awards</div><div class="info-text">Fully funded - <a class="live-link" href="https://www.australiaawards.gov.au" target="_blank">australiaawards.gov.au</a></div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Vanier</div><div class="info-text">CAD 50,000/year for PhD - <a class="live-link" href="https://www.vanier.gc.ca" target="_blank">vanier.gc.ca</a></div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 DAAD</div><div class="info-text">Fully funded for master's/PhD - <a class="live-link" href="https://www.daad.in" target="_blank">daad.in</a></div></div>
+                    <div class="info-card"><div class="info-label">🇯🇵 MEXT</div><div class="info-text">Fully funded for UG/PG/PhD - <a class="live-link" href="https://www.mext.go.jp" target="_blank">mext.go.jp</a></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 13: TIPS & GUIDANCE ==================== -->
+    <div id="door-tips" class="door-content">
+        <div class="accordion-card" id="tipsCard">
+            <div class="accordion-header" onclick="toggleCard('tipsCard')">
+                <div class="accordion-title"><span class="accordion-icon">💡</span> Important Tips for After 12th Students</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎯 Tip 1</div><div class="info-text">Choose your career path based on YOUR interest, aptitude, and market demand - not family or peer pressure.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Tip 2</div><div class="info-text">Professional courses (CA, CS, CMA) can be done alongside graduation - plan your time wisely.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Tip 3</div><div class="info-text">Skill courses (Digital Marketing, Web Development, Data Science) can provide side income even during studies.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Tip 4</div><div class="info-text">Government exam preparation requires discipline - start early, follow a routine, take mock tests regularly.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Tip 5</div><div class="info-text">Gap year is OK if used productively - internship, skill course, entrance exam preparation, or volunteering.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Tip 6</div><div class="info-text">Build a professional network on LinkedIn - connect with alumni, professors, and industry professionals.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Tip 7</div><div class="info-text">Learn English and computer skills - essential for almost every job and higher education.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Tip 8</div><div class="info-text">Use free resources - YouTube, NPTEL, SWAYAM, Coursera (audit), edX (audit), Khan Academy.</div></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -188,69 +508,19 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-const translations = { 
-en: {
-    app_tagline: "Career Saathi", tagline: "🎯 Complete Guide After 12th Class", page_title: "🎓 After 12th Career Roadmap",
-    medicalTitle: "🩺 Medical Stream (PCB)", medicalCourses: "• MBBS, BDS, BAMS, BHMS, BUMS, BNYS", medicalPara: "• B.Sc Nursing, BPT, BOT, Radiology, MLT, OT Technology",
-    medicalPharm: "• B.Pharm, Pharm.D, D.Pharm", medicalVet: "• BVSc & AH – Veterinary Science", medicalExam: "• Entrance: NEET – Mandatory for MBBS/BDS",
-    enggTitle: "⚙️ Non-Medical / Engineering (PCM)", enggBranches: "• B.Tech/B.E in CSE, Mechanical, Civil, Electrical, AI/ML, Data Science, Robotics, Aerospace",
-    enggOther: "• B.Arch, BCA, B.Sc Computer Science, Merchant Navy, NDA, Pilot Training", enggExam: "• Entrance: JEE Main, JEE Advanced, BITSAT, VITEEE, NATA",
-    commerceTitle: "📊 Commerce Stream", commerceDegrees: "• B.Com, BBA, BAF, BBI, BFM, Economics", commerceProf: "• Professional: CA, CS, CMA, CFA", commerceLaw: "• Law: LLB (5 years) through CLAT",
-    artsTitle: "🎨 Arts / Humanities Stream", artsDegrees: "• BA in Political Science, History, Geography, Psychology, Sociology, English",
-    artsProf: "• BA+LLB, BBA, BJMC, BFA, BSW, BHM, B.Ed", artsBest: "• Best for: UPSC, Law, Journalism, Psychology, Social Work",
-    agriTitle: "🌾 Agriculture & Life Sciences", agriCourses: "• B.Sc Agriculture, Horticulture, Forestry, Fisheries, Food Technology",
-    agriBtech: "• B.Tech Agricultural Engineering, Biotechnology, Dairy Technology", agriExam: "• Entrance: ICAR AIEEA, State Agriculture Exams",
-    caTitle: "📜 CA – Chartered Accountant", caPath: "• Path: CA Foundation → Intermediate → Articleship (3 years) → Final", caSalary: "• Salary: ₹8-30 LPA after qualification",
-    csTitle: "📜 CS – Company Secretary", csPath: "• Path: CSEET → Executive → Professional", csSalary: "• Salary: ₹6-20 LPA",
-    cmaTitle: "📜 CMA – Cost & Management Accountant", cmaPath: "• Path: Foundation → Intermediate → Final", cmaSalary: "• Salary: ₹6-15 LPA",
-    cfaTitle: "📜 CFA – Chartered Financial Analyst", cfaPath: "• Path: Level 1 → Level 2 → Level 3", cfaSalary: "• Salary: ₹8-35 LPA (international)",
-    designTitle: "🎨 Designing & Creative Fields", designCourses: "• B.Des (Fashion, Interior, Graphic, UI/UX, Animation, Product)", designExam: "• Entrance: NIFT, NID DAT, UCEED",
-    hotelTitle: "🏨 Hotel Management", hotelCourses: "• BHM – Bachelor of Hotel Management", hotelCareer: "• Careers: Hotel Manager, Chef, Event Planner, Airline Services",
-    govtTitle: "🏛️ Government Jobs After 12th", govtJobs: "• SSC CHSL (10+2 level), SSC GD, Railway RRB (Group D, NTPC)",
-    govtJobs2: "• Police Constable, Forest Guard, ESIC, FCI, LIC Assistant", govtJobs3: "• After graduation: UPSC, SSC CGL, Banking PO, State PSC",
-    defenceTitle: "🛡️ Defence & Armed Forces", defenceNDA: "• NDA (Army/Navy/Air Force) – After 12th", defenceTES: "• TES – Technical Entry Scheme, Indian Army",
-    defenceAgniveer: "• Agniveer, Coast Guard, Paramilitary Forces (CRPF, BSF, ITBP)", defenceQuota: "• Sports quota and NCC special entry",
-    bankingTitle: "🏦 Banking Jobs", bankingPO: "• IBPS PO/Clerk, SBI PO, RBI Grade B", bankingSalary: "• Salary: ₹8-15 LPA for PO",
-    abroadTitle: "🌍 Study Abroad After 12th", abroadFields: "• Engineering (B.S), Computer Science, Business Management, Nursing, Hospitality",
-    abroadCountries: "• Top countries: USA, Canada, UK, Australia, Germany, New Zealand, Ireland, Japan", abroadReq: "• Requirements: IELTS/TOEFL, SAT/ACT, SOP, LORs",
-    abroadScholarship: "• Scholarships: Fulbright, DAAD, MEXT, KGSP", directJobsTitle: "💼 Direct Jobs & Entrepreneurship",
-    directJobs: "• BPO/KPO, Retail, Sales, Real Estate, Insurance, Banking (customer service)", freelancing: "• Freelancing: Content writing, Graphic design, Web development, Digital marketing",
-    startup: "• Start your own business: E-commerce, Coaching centre, Food outlet, YouTube channel", tipsTitle: "💡 Key Tips for After 12th",
-    tip1: "✅ Choose based on YOUR interest and market demand – not family pressure", tip2: "✅ Professional courses (CA, CS) can be done alongside graduation",
-    tip3: "✅ Skill courses (Digital Marketing, Web Dev) give side income during studies", tip4: "✅ Government exam preparation requires discipline – start early, follow routine",
-    tip5: "✅ Gap year is OK if used productively (internship, skill course, entrance prep)",
-    bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
-},
-hi: {
-    app_tagline: "करियर साथी", tagline: "🎯 12वीं कक्षा के बाद संपूर्ण गाइड", page_title: "🎓 12वीं के बाद करियर रोडमैप",
-    medicalTitle: "🩺 मेडिकल स्ट्रीम (पीसीबी)", medicalCourses: "• एमबीबीएस, बीडीएस, बीएएमएस, बीएचएमएस", medicalPara: "• बी.एससी नर्सिंग, बीपीटी, बीओटी, रेडियोलॉजी",
-    enggTitle: "⚙️ नॉन-मेडिकल / इंजीनियरिंग (पीसीएम)", enggBranches: "• बी.टेक/बी.ई सीएसई, मैकेनिकल, सिविल, इलेक्ट्रिकल, एआई/एमएल",
-    commerceTitle: "📊 कॉमर्स स्ट्रीम", commerceDegrees: "• बी.कॉम, बीबीए, बीएएफ, बीबीआई, बीएफएम", commerceProf: "• व्यावसायिक: सीए, सीएस, सीएमए, सीएफए",
-    artsTitle: "🎨 कला / मानविकी स्ट्रीम", artsDegrees: "• बीए राजनीति विज्ञान, इतिहास, भूगोल, मनोविज्ञान",
-    caTitle: "📜 सीए – चार्टर्ड अकाउंटेंट", caPath: "• पथ: सीए फाउंडेशन → इंटरमीडिएट → आर्टिकलशिप → फाइनल", caSalary: "• वेतन: ₹8-30 लाख प्रति वर्ष",
-    csTitle: "📜 सीएस – कंपनी सेक्रेटरी", csPath: "• पथ: सीएसईईटी → एग्जीक्यूटिव → प्रोफेशनल", cmaTitle: "📜 सीएमए – कॉस्ट मैनेजमेंट अकाउंटेंट",
-    govtTitle: "🏛️ 12वीं के बाद सरकारी नौकरियां", govtJobs: "• एसएससी सीएचएसएल, एसएससी जीडी, रेलवे आरआरबी",
-    defenceTitle: "🛡️ रक्षा और सशस्त्र बल", defenceNDA: "• एनडीए (आर्मी/नेवी/एयरफोर्स) – 12वीं के बाद",
-    abroadTitle: "🌍 12वीं के बाद विदेश में अध्ययन", abroadFields: "• इंजीनियरिंग, कंप्यूटर साइंस, बिजनेस मैनेजमेंट, नर्सिंग",
-    tipsTitle: "💡 12वीं के बाद महत्वपूर्ण सुझाव", tip1: "✅ अपनी रुचि और बाजार की मांग के आधार पर चुनें",
-    tip2: "✅ व्यावसायिक पाठ्यक्रम (सीए, सीएस) स्नातक के साथ किए जा सकते हैं",
-    bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल"
-}};
-</script>
-<script>
-const bottomNav = [{ nameKey: "bottom_home", icon: "🏠", link: "index.html" }, { nameKey: "bottom_search", icon: "🔍", link: "#" }, { nameKey: "bottom_ai", icon: "🤖", link: "#" }, { nameKey: "bottom_alerts", icon: "🔔", link: "#" }, { nameKey: "bottom_profile", icon: "👤", link: "#" }];
-let currentLang = 'en'; function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-function updateAllText() { for(let id of ['appTagline','taglineText','pageTitle']) document.getElementById(id).textContent = t(id === 'appTagline' ? 'app_tagline' : id === 'taglineText' ? 'tagline' : 'page_title');
-    const ids = ['medicalTitle','medicalCourses','medicalPara','medicalPharm','medicalVet','medicalExam','enggTitle','enggBranches','enggOther','enggExam','commerceTitle','commerceDegrees','commerceProf','commerceLaw','artsTitle','artsDegrees','artsProf','artsBest','agriTitle','agriCourses','agriBtech','agriExam','caTitle','caPath','caSalary','csTitle','csPath','csSalary','cmaTitle','cmaPath','cmaSalary','cfaTitle','cfaPath','cfaSalary','designTitle','designCourses','designExam','hotelTitle','hotelCourses','hotelCareer','govtTitle','govtJobs','govtJobs2','govtJobs3','defenceTitle','defenceNDA','defenceTES','defenceAgniveer','defenceQuota','bankingTitle','bankingPO','bankingSalary','abroadTitle','abroadFields','abroadCountries','abroadReq','abroadScholarship','directJobsTitle','directJobs','freelancing','startup','tipsTitle','tip1','tip2','tip3','tip4','tip5'];
-    ids.forEach(id => { let el = document.getElementById(id); if(el) el.textContent = t(id); });
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if(idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); }); }
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'index.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-document.querySelectorAll('.tab-btn').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active')); document.getElementById(btn.getAttribute('data-tab')).classList.add('active'); }); });
-renderBottomBar(); loadSavedLanguage();
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'index.html'; }
 </script>
 </body>
 </html>
