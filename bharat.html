@@ -125,18 +125,17 @@
         <div class="list-item"><strong>Cyber Crime Reporting:</strong> <a href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a></div>
     </div>
 
-    <!-- Section 5: GOVERNMENT BUDGET & EXPENSES (AUTO-UPDATING YEAR) -->
+    <!-- Section 5: GOVERNMENT BUDGET & EXPENSES (INDIAN FINANCIAL YEAR) -->
     <div class="section-card">
         <div class="section-title">💰 Central Government Budget <span id="budgetYearDisplay"></span></div>
         
-        <!-- Auto-update note with official link -->
         <div class="budget-update-note">
-            <strong>📅 Budget Year: <span id="budgetYear"></span></strong><br>
-            📌 Data updates automatically when new Union Budget is released.<br>
+            <strong>📅 Indian Financial Year: <span id="budgetYear"></span></strong><br>
+            📌 Budget updates automatically each year after February 1st announcement.<br>
             <a href="https://www.indiabudget.gov.in" target="_blank">🔗 Official Union Budget Website →</a>
         </div>
         
-        <div class="list-item"><strong>Total Budget Estimate:</strong> ₹47.66 lakh crore (approx)</div>
+        <div class="list-item"><strong>Total Budget Estimate (2025-26):</strong> ₹47.66 lakh crore (approx)</div>
         <div class="list-item"><strong>Fiscal Deficit Target:</strong> 4.5% of GDP</div>
         
         <table class="budget-table">
@@ -156,7 +155,7 @@
                 <tr><td>Police & Internal Security</td><td>85,000</td><td>1.8%</td></tr>
             </tbody>
         </table>
-        <div class="list-item"><span class="highlight">💡 Note:</span> Amounts are approximate. Visit official budget website for exact figures.</div>
+        <div class="list-item"><span class="highlight">💡 Note:</span> Visit official budget website for latest figures. Budgets are updated annually in February.</div>
     </div>
 
     <!-- Section 6: MLA / MP Expense Breakdown -->
@@ -242,11 +241,27 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-    // Auto-update budget year
-    const currentYear = new Date().getFullYear();
-    const nextYear = currentYear + 1;
-    document.getElementById('budgetYear').innerText = currentYear + '-' + nextYear;
-    document.getElementById('budgetYearDisplay').innerHTML = currentYear + '-' + nextYear;
+    // Function to get Indian Financial Year based on current date
+    // Indian Financial Year: 1st April to 31st March
+    function getIndianFinancialYear() {
+        const today = new Date();
+        const currentYear = today.getFullYear();
+        const currentMonth = today.getMonth(); // 0 = Jan, 3 = April
+        
+        // If current month is January, February, March (0,1,2) -> FY is previous year
+        if (currentMonth >= 0 && currentMonth <= 2) {
+            // Example: Jan 2025 -> FY 2024-25
+            return (currentYear - 1) + '-' + currentYear.toString().slice(-2);
+        } else {
+            // Example: April 2025 -> FY 2025-26
+            return currentYear + '-' + (currentYear + 1).toString().slice(-2);
+        }
+    }
+    
+    // Display the financial year
+    const financialYear = getIndianFinancialYear();
+    document.getElementById('budgetYear').innerText = financialYear;
+    document.getElementById('budgetYearDisplay').innerHTML = financialYear;
 
     const bottomNav = [
         { name: "Home", icon: "🏠", link: "index.html" },
