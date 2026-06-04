@@ -43,6 +43,8 @@
         @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tiles-grid { grid-template-columns: repeat(6, 1fr); gap: 20px; } .tile { padding: 20px 12px; } .tile-icon { font-size: 42px; } .tile-name { font-size: 14px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } .welcome { font-size: 14px; } .tagline { font-size: 16px; } .search-bar input { font-size: 16px; } .ask-ai { font-size: 14px; padding: 8px 16px; } }
         @media (max-width: 480px) { .tile-name { font-size: 10px; } .tile-icon { font-size: 26px; } .ask-ai span { display: none; } .ask-ai { padding: 6px 10px; } .logo-section { flex-wrap: wrap; justify-content: center; } }
     </style>
+    <script src="languages-core.js"></script>
+    <script src="languages-loader.js"></script>
 </head>
 <body>
 <div class="header">
@@ -56,18 +58,12 @@
         </div>
         <div class="language-selector">
             <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
+                <option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option><option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option><option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option><option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option><option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option><option value="as">🇮🇳 অসমীয়া</option>
             </select>
         </div>
         <div class="notification-icon" id="alertBtn">🔔</div>
@@ -100,155 +96,7 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-    // ==================== COMPLETE TRANSLATIONS FOR ALL 12 LANGUAGES ====================
-    const translations = {
-        en: {
-            app_tagline: "Dil-Ke-AnnS Career Saathi", tagline: "🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳",
-            welcome: "Welcome back, Learner!", search_placeholder: "Search courses, exams, jobs, schemes...",
-            ask_ai: "Ask AnnS AI", explore_title: "📚 Explore Career Pathways",
-            education: "Education", business: "Business", jobs_exams: "Jobs & Exams",
-            study_material: "Study Material", magazines: "Magazines", enewspapers: "E-newspapers",
-            current_affairs: "Current Affairs", mock_test: "Mock test", after_10th: "After 10th",
-            after_12th: "After 12th", something_interesting: "Something Interesting", results: "Results",
-            application_forms: "App Forms", bharat: "🇮🇳 BHARAT",
-            bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile",
-            coming_soon: "coming soon"
-        },
-        hi: {
-            app_tagline: "दिल-के-अंश करियर साथी", tagline: "🇮🇳 अनोनिमस पढ़ो, बिंदास बनो 🇮🇳",
-            welcome: "वापसी पर स्वागत है, विद्यार्थी!", search_placeholder: "कोर्स, परीक्षा, नौकरी, योजनाएं खोजें...",
-            ask_ai: "एनएस एआई से पूछें", explore_title: "📚 करियर के रास्ते खोजें",
-            education: "शिक्षा", business: "व्यवसाय", jobs_exams: "नौकरी और परीक्षा",
-            study_material: "अध्ययन सामग्री", magazines: "पत्रिकाएं", enewspapers: "ई-समाचार पत्र",
-            current_affairs: "दैनिक करेंट अफेयर्स", mock_test: "मॉक टेस्ट", after_10th: "10वीं के बाद",
-            after_12th: "12वीं के बाद", something_interesting: "कुछ रोचक", results: "परिणाम और कटऑफ",
-            application_forms: "आवेदन पत्र", bharat: "🇮🇳 भारत",
-            bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल",
-            coming_soon: "जल्द आ रहा है"
-        },
-        mr: {
-            app_tagline: "दिल-के-अंश करिअर साथी", tagline: "🇮🇳 अनोनिमस पढा, बिंदास बना 🇮🇳",
-            welcome: "परत येण्याचे स्वागत आहे, विद्यार्थी!", search_placeholder: "अभ्यासक्रम, परीक्षा, नोकऱ्या, योजना शोधा...",
-            ask_ai: "AnnS AI ला विचारा", explore_title: "📚 करिअर मार्ग एक्सप्लोर करा",
-            education: "शिक्षण", business: "व्यवसाय", jobs_exams: "नोकऱ्या आणि परीक्षा",
-            study_material: "अभ्यास साहित्य", magazines: "मासिके", enewspapers: "ई-वृत्तपत्रे",
-            current_affairs: "दैनिक चालू घडामोडी", mock_test: "मॉक टेस्ट", after_10th: "10 वी नंतर",
-            after_12th: "12 वी नंतर", something_interesting: "काहीतरी मनोरंजक", results: "निकाल आणि कटऑफ",
-            application_forms: "अर्ज", bharat: "🇮🇳 भारत",
-            bottom_home: "मुख्यपृष्ठ", bottom_search: "शोधा", bottom_ai: "AnnS AI", bottom_alerts: "सूचना", bottom_profile: "प्रोफाइल",
-            coming_soon: "लवकर येत आहे"
-        },
-        ta: {
-            app_tagline: "தில்-கே-அன்ஷ் கரியர் சாதி", tagline: "🇮🇳 அனானிமஸ் படி, பிந்தாஸ் பண்ணு 🇮🇳",
-            welcome: "மீண்டும் வரவேற்கிறோம், கற்பவரே!", search_placeholder: "படிப்புகள், தேர்வுகள், வேலைகள், திட்டங்களைத் தேடு...",
-            ask_ai: "AnnS AI ஐ கேளுங்கள்", explore_title: "📚 வாழ்க்கை பாதைகளை ஆராயுங்கள்",
-            education: "கல்வி", business: "வணிகம்", jobs_exams: "வேலைகள் & தேர்வுகள்",
-            study_material: "படிப்பு பொருட்கள்", magazines: "பத்திரிகைகள்", enewspapers: "மின்-செய்தித்தாள்கள்",
-            current_affairs: "தற்போதைய நிகழ்வுகள்", mock_test: "மாதிரி தேர்வு", after_10th: "10 ஆம் வகுப்பிற்கு பின்",
-            after_12th: "12 ஆம் வகுப்பிற்கு பின்", something_interesting: "சுவாரஸ்யமானவை", results: "முடிவுகள் & கட்-ஆஃப்",
-            application_forms: "விண்ணப்ப படிவங்கள்", bharat: "🇮🇳 பாரத்",
-            bottom_home: "முகப்பு", bottom_search: "தேடுக", bottom_ai: "AnnS AI", bottom_alerts: "அலர்ட்கள்", bottom_profile: "சுயவிவரம்",
-            coming_soon: "விரைவில் வரும்"
-        },
-        te: {
-            app_tagline: "దిల్-కే-అన్ష్ కెరీర్ సాథీ", tagline: "🇮🇳 అనామకంగా చదువు, బిందాస్ గా ఉండు 🇮🇳",
-            welcome: "తిరిగి స్వాగతం, విద్యార్థీ!", search_placeholder: "కోర్సులు, పరీక్షలు, ఉద్యోగాలు, పథకాలను వెతకండి...",
-            ask_ai: "AnnS AI ను అడగండి", explore_title: "📚 కెరీర్ మార్గాలను అన్వేషించండి",
-            education: "విద్య", business: "వ్యాపారం", jobs_exams: "ఉద్యోగాలు & పరీక్షలు",
-            study_material: "స్టడీ మెటీరియల్", magazines: "మ్యాగజైన్లు", enewspapers: "ఈ-వార్తాపత్రికలు",
-            current_affairs: "దైనందిన కరెంట్ అఫైర్స్", mock_test: "మాక్ టెస్ట్", after_10th: "10వ తరగతి తర్వాత",
-            after_12th: "12వ తరగతి తర్వాత", something_interesting: "ఏదైనా ఆసక్తికరం", results: "ఫలితాలు & కటాఫ్",
-            application_forms: "దరఖాస్తు ఫారాలు", bharat: "🇮🇳 భారత్",
-            bottom_home: "హోమ్", bottom_search: "వెతకండి", bottom_ai: "AnnS AI", bottom_alerts: "హెచ్చరికలు", bottom_profile: "ప్రొఫైల్",
-            coming_soon: "త్వరలో రానున్నది"
-        },
-        kn: {
-            app_tagline: "ದಿಲ್-ಕೆ-ಅನ್ಷ್ ಕರಿಯರ್ ಸಾಥಿ", tagline: "🇮🇳 ಅನಾಮಧೇಯವಾಗಿ ಓದು, ಬಿಂದಾಸ್ ಆಗಿರು 🇮🇳",
-            welcome: "ಮತ್ತೆ ಸ್ವಾಗತ, ವಿದ್ಯಾರ್ಥಿ!", search_placeholder: "ಕೋರ್ಸ್ಗಳು, ಪರೀಕ್ಷೆಗಳು, ಉದ್ಯೋಗಗಳು, ಯೋಜನೆಗಳನ್ನು ಹುಡುಕಿ...",
-            ask_ai: "AnnS AI ಕೇಳಿ", explore_title: "📚 ವೃತ್ತಿ ಮಾರ್ಗಗಳನ್ನು ಅನ್ವೇಷಿಸಿ",
-            education: "ಶಿಕ್ಷಣ", business: "ವ್ಯಾಪಾರ", jobs_exams: "ಉದ್ಯೋಗಗಳು ಮತ್ತು ಪರೀಕ್ಷೆಗಳು",
-            study_material: "ಅಧ್ಯಯನ ಸಾಮಗ್ರಿ", magazines: "ನಿಯತಕಾಲಿಕೆಗಳು", enewspapers: "ಇ-ಪತ್ರಿಕೆಗಳು",
-            current_affairs: "ದೈನಂದಿನ ಪ್ರಸ್ತುತ ವಿದ್ಯಮಾನಗಳು", mock_test: "ಮಾಕ್ ಟೆಸ್ಟ್", after_10th: "10ನೇ ತರಗತಿ ನಂತರ",
-            after_12th: "12ನೇ ತರಗತಿ ನಂತರ", something_interesting: "ಆಸಕ್ತಿದಾಯಕ ಸಂಗತಿಗಳು", results: "ಫಲಿತಾಂಶಗಳು ಮತ್ತು ಕಟ್-ಆಫ್",
-            application_forms: "ಅರ್ಜಿ ನಮೂನೆಗಳು", bharat: "🇮🇳 ಭಾರತ್",
-            bottom_home: "ಮುಖಪುಟ", bottom_search: "ಹುಡುಕು", bottom_ai: "AnnS AI", bottom_alerts: "ಎಚ್ಚರಿಕೆಗಳು", bottom_profile: "ಪ್ರೊಫೈಲ್",
-            coming_soon: "ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ"
-        },
-        ml: {
-            app_tagline: "ദിൽ-കെ-അൻഷ് കരിയർ സാഥി", tagline: "🇮🇳 അജ്ഞാതമായി പഠിക്കുക, ബിന്ദാസ് ആകുക 🇮🇳",
-            welcome: "തിരികെ സ്വാഗതം, വിദ്യാർത്ഥീ!", search_placeholder: "കോഴ്സുകൾ, പരീക്ഷകൾ, ജോലികൾ, പദ്ധതികൾ തിരയുക...",
-            ask_ai: "AnnS AI യോട് ചോദിക്കൂ", explore_title: "📚 കരിയർ പാതകൾ പര്യവേക്ഷണം ചെയ്യുക",
-            education: "വിദ്യാഭ്യാസം", business: "ബിസിനസ്സ്", jobs_exams: "ജോലികൾ & പരീക്ഷകൾ",
-            study_material: "പഠന സാമഗ്രികൾ", magazines: "മാസികകൾ", enewspapers: "ഇ-പത്രങ്ങൾ",
-            current_affairs: "ദൈനംദിന കറന്റ് അഫയേഴ്സ്", mock_test: "മോക്ക് ടെസ്റ്റ്", after_10th: "10th ന് ശേഷം",
-            after_12th: "12th ന് ശേഷം", something_interesting: "രസകരമായ ചിലത്", results: "ഫലങ്ങളും കട്ട്-ഓഫും",
-            application_forms: "അപേക്ഷാ ഫോമുകൾ", bharat: "🇮🇳 ഭാരത്",
-            bottom_home: "ഹോം", bottom_search: "തിരയുക", bottom_ai: "AnnS AI", bottom_alerts: "അലേർട്ടുകൾ", bottom_profile: "പ്രൊഫൈൽ",
-            coming_soon: "ഉടൻ വരുന്നു"
-        },
-        bn: {
-            app_tagline: "দিল-কে-আনশ ক্যারিয়ার সাথী", tagline: "🇮🇳 বেনামে পড়ো, বিন্দাস বোনো 🇮🇳",
-            welcome: "ফিরে আসার জন্য স্বাগতম, শিক্ষার্থী!", search_placeholder: "কোর্স, পরীক্ষা, চাকরি, প্রকল্প খুঁজুন...",
-            ask_ai: "AnnS AI কে জিজ্ঞাসা করুন", explore_title: "📚 ক্যারিয়ার পথ অন্বেষণ করুন",
-            education: "শিক্ষা", business: "ব্যবসা", jobs_exams: "চাকরি ও পরীক্ষা",
-            study_material: "পাঠ্য সামগ্রী", magazines: "ম্যাগাজিন", enewspapers: "ই-সংবাদপত্র",
-            current_affairs: "দৈনিক কারেন্ট অ্যাফেয়ার্স", mock_test: "মক টেস্ট", after_10th: "১০ম শ্রেণির পরে",
-            after_12th: "১২শ শ্রেণির পরে", something_interesting: "আকর্ষণীয় কিছু", results: "ফলাফল ও কাটঅফ",
-            application_forms: "আবেদন ফর্ম", bharat: "🇮🇳 ভারত",
-            bottom_home: "হোম", bottom_search: "অনুসন্ধান", bottom_ai: "AnnS AI", bottom_alerts: "সতর্কতা", bottom_profile: "প্রোফাইল",
-            coming_soon: "শীঘ্রই আসছে"
-        },
-        gu: {
-            app_tagline: "દિલ-કે-અન્શ કરિયર સાથી", tagline: "🇮🇳 અનામી રીતે ભણો, બિન્દાસ બનો 🇮🇳",
-            welcome: "પાછા સ્વાગત છે, વિદ્યાર્થી!", search_placeholder: "કોર્સ, પરીક્ષાઓ, નોકરીઓ, યોજનાઓ શોધો...",
-            ask_ai: "AnnS AI ને પૂછો", explore_title: "📚 કારકિર્દી માર્ગો શોધો",
-            education: "શિક્ષણ", business: "વ્યવસાય", jobs_exams: "નોકરી અને પરીક્ષાઓ",
-            study_material: "અભ્યાસ સામગ્રી", magazines: "મેગેઝિન", enewspapers: "ઈ-અખબારો",
-            current_affairs: "દૈનિક સમસામયિક બાબતો", mock_test: "મોક ટેસ્ટ", after_10th: "10મા પછી",
-            after_12th: "12મા પછી", something_interesting: "કંઈક રસપ્રદ", results: "પરિણામો અને કટઓફ",
-            application_forms: "અરજી ફોર્મ", bharat: "🇮🇳 ભારત",
-            bottom_home: "હોમ", bottom_search: "શોધો", bottom_ai: "AnnS AI", bottom_alerts: "ચેતવણીઓ", bottom_profile: "પ્રોફાઇલ",
-            coming_soon: "ટૂંક સમયમાં આવી રહ્યું છે"
-        },
-        pa: {
-            app_tagline: "ਦਿਲ-ਕੇ-ਅੰਨ੍ਸ ਕੈਰੀਅਰ ਸਾਥੀ", tagline: "🇮🇳 ਅਗਿਆਤ ਪੜ੍ਹੋ, ਬਿੰਦਾਸ ਬਣੋ 🇮🇳",
-            welcome: "ਵਾਪਸੀ ਤੇ ਸੁਆਗਤ ਹੈ, ਵਿਦਿਆਰਥੀ!", search_placeholder: "ਕੋਰਸ, ਪ੍ਰੀਖਿਆਵਾਂ, ਨੌਕਰੀਆਂ, ਯੋਜਨਾਵਾਂ ਖੋਜੋ...",
-            ask_ai: "AnnS AI ਨੂੰ ਪੁੱਛੋ", explore_title: "📚 ਕੈਰੀਅਰ ਦੇ ਰਾਹ ਖੋਜੋ",
-            education: "ਸਿੱਖਿਆ", business: "ਕਾਰੋਬਾਰ", jobs_exams: "ਨੌਕਰੀਆਂ ਅਤੇ ਪ੍ਰੀਖਿਆਵਾਂ",
-            study_material: "ਅਧਿਐਨ ਸਮੱਗਰੀ", magazines: "ਮੈਗਜ਼ੀਨ", enewspapers: "ਈ-ਅਖਬਾਰ",
-            current_affairs: "ਰੋਜ਼ਾਨਾ ਕਰੰਟ ਅਫੇਅਰਜ਼", mock_test: "ਮੌਕ ਟੈਸਟ", after_10th: "10ਵੀਂ ਤੋਂ ਬਾਅਦ",
-            after_12th: "12ਵੀਂ ਤੋਂ ਬਾਅਦ", something_interesting: "ਕੁਝ ਦਿਲਚਸਪ", results: "ਨਤੀਜੇ ਅਤੇ ਕਟਆਫ",
-            application_forms: "ਅਰਜ਼ੀ ਫਾਰਮ", bharat: "🇮🇳 ਭਾਰਤ",
-            bottom_home: "ਹੋਮ", bottom_search: "ਖੋਜ", bottom_ai: "AnnS AI", bottom_alerts: "ਚੇਤਾਵਨੀਆਂ", bottom_profile: "ਪ੍ਰੋਫਾਈਲ",
-            coming_soon: "ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ"
-        },
-        or: {
-            app_tagline: "ଦିଲ-କେ-ଅନ୍ସ କ୍ୟାରିୟର ସାଥୀ", tagline: "🇮🇳 ଅଜ୍ଞାତ ଭାବରେ ପଢ, ବିନ୍ଦାସ୍ ହୁଅ 🇮🇳",
-            welcome: "ଫେରିଥିବାରୁ ସ୍ୱାଗତ, ଶିକ୍ଷାର୍ଥୀ!", search_placeholder: "କୋର୍ସ, ପରୀକ୍ଷା, ଚାକିରି, ଯୋଜନା ଖୋଜ...",
-            ask_ai: "AnnS AI କୁ ପଚାର", explore_title: "📚 କ୍ୟାରିୟର ପଥ ଅନୁସନ୍ଧାନ କର",
-            education: "ଶିକ୍ଷା", business: "ବ୍ୟବସାୟ", jobs_exams: "ଚାକିରି ଏବଂ ପରୀକ୍ଷା",
-            study_material: "ଅଧ୍ୟୟନ ସାମଗ୍ରୀ", magazines: "ପତ୍ରିକା", enewspapers: "ଇ-ଖବରକାଗଜ",
-            current_affairs: "ଦୈନିକ କରେଣ୍ଟ ଆଫେୟାର୍ସ", mock_test: "ମକ୍ ଟେଷ୍ଟ", after_10th: "୧୦ମ ପରେ",
-            after_12th: "୧୨ଶ ପରେ", something_interesting: "କିଛି ରୋଚକ", results: "ଫଳାଫଳ ଏବଂ କଟଅଫ",
-            application_forms: "ଆବେଦନ ଫର୍ମ", bharat: "🇮🇳 ଭାରତ",
-            bottom_home: "ହୋମ", bottom_search: "ଖୋଜ", bottom_ai: "AnnS AI", bottom_alerts: "ସତର୍କତା", bottom_profile: "ପ୍ରୋଫାଇଲ",
-            coming_soon: "ଶୀଘ୍ର ଆସୁଛି"
-        },
-        as: {
-            app_tagline: "দিল-কে-আনছ কেৰিয়াৰ সাথী", tagline: "🇮🇳 বেনামে পঢ়, বিন্দাছ হৈ থাক 🇮🇳",
-            welcome: "আকৌ আহিলাৰ বাবে স্বাগতম, শিক্ষাৰ্থী!", search_placeholder: "কোৰ্চ, পৰীক্ষা, চাকৰি, আঁচনি সন্ধান কৰক...",
-            ask_ai: "AnnS AI ক সুধক", explore_title: "📚 কেৰিয়াৰ পথ অনুসন্ধান কৰক",
-            education: "শিক্ষা", business: "ব্যৱসায়", jobs_exams: "চাকৰি আৰু পৰীক্ষা",
-            study_material: "অধ্যয়ন সামগ্ৰী", magazines: "মেগাজিন", enewspapers: "ই-বাতৰি কাকত",
-            current_affairs: "দৈনিক কাৰেণ্ট এফেয়াৰ্ছ", mock_test: "মক টেষ্ট", after_10th: "১০ম শ্ৰেণীৰ পিছত",
-            after_12th: "১২শ শ্ৰেণীৰ পিছত", something_interesting: "আকৰ্ষণীয় কিছুমান", results: "ফলাফল আৰু কাটঅফ",
-            application_forms: "আৱেদন ফৰ্ম", bharat: "🇮🇳 ভাৰত",
-            bottom_home: "হোম", bottom_search: "সন্ধান", bottom_ai: "AnnS AI", bottom_alerts: "সতৰ্কবাণী", bottom_profile: "প্ৰ'ফাইল",
-            coming_soon: "শীঘ্ৰেই আহি আছে"
-        }
-    };
-
-    // Tile definitions with links
+    // ==================== TILES WITH CORRECT LINKS ====================
     const tiles = [
         { nameKey: "education", icon: "🎓", link: "education.html" },
         { nameKey: "business", icon: "💼", link: "business.html" },
@@ -260,7 +108,7 @@
         { nameKey: "mock_test", icon: "✅", link: "#" },
         { nameKey: "after_10th", icon: "📖", link: "after_10th.html" },
         { nameKey: "after_12th", icon: "🎯", link: "after_12th.html" },
-        { nameKey: "something_interesting", icon: "💡", link: "#" },
+        { nameKey: "something_interesting", icon: "💡", link: "something_interesting.html" },
         { nameKey: "results", icon: "📊", link: "#" },
         { nameKey: "application_forms", icon: "📋", link: "#" },
         { nameKey: "bharat", icon: "🇮🇳", link: "bharat.html" }
@@ -276,18 +124,29 @@
 
     let currentLang = 'en';
 
+    const defaultText = {
+        app_tagline: "Dil-Ke-AnnS Career Saathi", tagline: "🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳", welcome: "👋 Welcome back, Learner!",
+        search_placeholder: "Search courses, exams, jobs, schemes...", ask_ai: "Ask AnnS AI", explore_title: "📚 Explore Career Pathways",
+        education: "Education", business: "Business", jobs_exams: "Jobs & Exams", study_material: "Study Material", magazines: "Magazines",
+        enewspapers: "E-newspapers", current_affairs: "Current Affairs", mock_test: "Mock test", after_10th: "After 10th", after_12th: "After 12th",
+        something_interesting: "Something Interesting", results: "Results", application_forms: "App Forms", bharat: "🇮🇳 BHARAT",
+        bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile",
+        coming_soon: "coming soon"
+    };
+
     function t(key) {
-        return translations[currentLang][key] || translations.en[key] || key;
+        if (window.translations && window.translations[currentLang] && window.translations[currentLang][key]) {
+            return window.translations[currentLang][key];
+        }
+        return defaultText[key] || key;
     }
 
     function updateAllText() {
         document.getElementById('appTagline').textContent = t('app_tagline');
         document.getElementById('taglineText').textContent = t('tagline');
-        
         const hours = new Date().getHours();
         let greeting = hours < 12 ? '🌅 ' : (hours < 17 ? '☀️ ' : '🌙 ');
         document.getElementById('welcomeMsg').innerHTML = greeting + t('welcome');
-        
         document.getElementById('searchInput').placeholder = t('search_placeholder');
         document.getElementById('askAiText').textContent = t('ask_ai');
         document.getElementById('exploreTitle').innerHTML = t('explore_title');
@@ -306,7 +165,7 @@
     }
 
     function changeLanguage(langCode) {
-        if (!translations[langCode]) return;
+        if (!window.translations || !window.translations[langCode]) return;
         currentLang = langCode;
         localStorage.setItem('career_saathi_language', langCode);
         document.getElementById('languageSelect').value = langCode;
@@ -319,17 +178,19 @@
         grid.innerHTML = tiles.map(tile => `
             <div class="tile" data-link="${tile.link}" data-name-key="${tile.nameKey}">
                 <span class="tile-icon">${tile.icon}</span>
-                <div class="tile-name">${t(tile.nameKey)}</div>
+                <div class="tile-name">${defaultText[tile.nameKey] || tile.nameKey}</div>
             </div>
         `).join('');
         
         document.querySelectorAll('.tile').forEach(tile => {
             tile.addEventListener('click', () => {
                 const link = tile.getAttribute('data-link');
+                const nameKey = tile.getAttribute('data-name-key');
                 if (link && link !== '#') window.location.href = link;
-                else alert(`🚀 ${t(tile.getAttribute('data-name-key'))} ${t('coming_soon')}`);
+                else alert(`🚀 ${t(nameKey)} ${t('coming_soon')}`);
             });
         });
+        updateAllText();
     }
 
     function renderBottomBar() {
@@ -338,17 +199,19 @@
         bar.innerHTML = bottomNav.map(item => `
             <div class="nav-item" data-link="${item.link}" data-name-key="${item.nameKey}">
                 <span>${item.icon}</span>
-                <span>${t(item.nameKey)}</span>
+                <span>${defaultText[item.nameKey] || item.nameKey}</span>
             </div>
         `).join('');
         
         document.querySelectorAll('.nav-item').forEach(nav => {
             nav.addEventListener('click', () => {
                 const link = nav.getAttribute('data-link');
+                const nameKey = nav.getAttribute('data-name-key');
                 if (link && link !== '#') window.location.href = link;
-                else alert(`📱 ${t(nav.getAttribute('data-name-key'))} ${t('coming_soon')}`);
+                else alert(`📱 ${t(nameKey)} ${t('coming_soon')}`);
             });
         });
+        updateAllText();
     }
 
     function setupSearch() {
@@ -357,7 +220,7 @@
             input.addEventListener('keypress', e => {
                 if (e.key === 'Enter') {
                     const query = e.target.value.trim();
-                    alert(query ? `Searching for: "${query}"` : 'Please type something to search');
+                    alert(query ? `${t('searching') || 'Searching for'}: "${query}"` : t('search_alert') || 'Please type something to search');
                 }
             });
         }
@@ -366,7 +229,7 @@
     function setupAI() {
         const askBtn = document.getElementById('askAiBtn');
         const floatingBtn = document.getElementById('floatingAiBtn');
-        const openAI = () => alert(`🤖 AnnS AI Mentor\n\nDoubt Solver • Career Mentor • Debate Judge • Exam Planner`);
+        const openAI = () => alert(`🤖 ${t('ai_mentor') || 'AnnS AI Mentor'}\n\n${t('ai_modes') || 'Doubt Solver • Career Mentor • Debate Judge • Exam Planner'}`);
         if (askBtn) askBtn.addEventListener('click', openAI);
         if (floatingBtn) floatingBtn.addEventListener('click', openAI);
     }
@@ -374,13 +237,13 @@
     function setupNotifications() {
         const alertBtn = document.getElementById('alertBtn');
         if (alertBtn) {
-            alertBtn.addEventListener('click', () => alert(`🔔 Notification Center\n\nExam Alerts • Govt Schemes • Job Updates`));
+            alertBtn.addEventListener('click', () => alert(`🔔 ${t('notification_center') || 'Notification Center'}\n\n${t('notifications') || 'Exam Alerts • Govt Schemes • Job Updates'}`));
         }
     }
 
     function loadSavedLanguage() {
         const saved = localStorage.getItem('career_saathi_language');
-        if (saved && translations[saved]) {
+        if (saved && window.translations && window.translations[saved]) {
             currentLang = saved;
             document.getElementById('languageSelect').value = saved;
         }
