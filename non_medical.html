@@ -4,7 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Non-Medical | Dil-Ke-AnnS Career Saathi</title>
-    <style>/* same style as medical.html - copy from above */</style>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 45px; width: auto; border-radius: 12px; }
+        .logo h1 { font-size: 18px; font-weight: 700; }
+        .logo p { font-size: 9px; opacity: 0.85; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
+        .container { padding: 20px 16px; }
+        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
+        .section-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; }
+        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .nav-item.active { background: #F0EADF; }
+        .nav-item.active span:last-child { color: #1B4D3E; font-weight: 600; }
+        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } }
+    </style>
+    <link rel="stylesheet" href="exam-styles.css">
 </head>
 <body>
 <div class="header">
@@ -15,20 +39,120 @@
     </div>
     <div class="tagline">⚙️ Engineering & PCM Careers</div>
 </div>
+
 <div class="container">
-    <div class="page-title">⚙️ Non-Medical (PCM)</div>
-    <div class="section-card"><div class="section-title">🎓 Engineering (B.Tech/B.E)</div><div class="list-item">• CSE, IT, Mechanical, Civil, Electrical, ECE, Aerospace, AI/ML, Data Science, Robotics, Chemical, Petroleum, Marine, Biotechnology</div></div>
-    <div class="section-card"><div class="section-title">🏛️ Architecture & Planning</div><div class="list-item">• B.Arch, B.Plan, Interior Design, Urban Planning</div></div>
-    <div class="section-card"><div class="section-title">✈️ Defence & Merchant Navy</div><div class="list-item">• NDA, TES, Merchant Navy, Marine Engineering, Nautical Science</div></div>
-    <div class="section-card"><div class="section-title">🛫 Aviation</div><div class="list-item">• Commercial Pilot, Aircraft Maintenance Engineering, Aeronautical Engineering, Aviation Management</div></div>
-    <div class="section-card"><div class="section-title">💻 Computer & IT (Non-Engineering)</div><div class="list-item">• BCA, B.Sc CS, B.Sc Data Science, B.Sc Cyber Security, B.Sc Animation, Cloud Computing</div></div>
-    <div class="section-card"><div class="section-title">🔬 Pure Science (B.Sc)</div><div class="list-item">• Physics, Chemistry, Mathematics, Statistics, Electronics, Geology, Environmental Science, Forensic Science, Astrophysics, Nanotechnology</div></div>
-    <div class="section-card"><div class="section-title">📊 Management & Design</div><div class="list-item">• BBA, BHM, B.Des (Industrial/Product/Fashion/UI-UX), Graphic Design, Animation</div></div>
-    <div class="section-card"><div class="section-title">📚 Commerce Options for PCM</div><div class="list-item">• B.Com, Economics, CA, CS, CMA</div></div>
-    <div class="section-card"><div class="section-title">📋 Entrance Exams</div><div class="list-item">• JEE Main, JEE Advanced, BITSAT, VITEEE, SRMJEE, NATA, UCEED</div></div>
-    <div class="section-card"><div class="section-title">💼 Government Jobs</div><div class="list-item">• UPSC, State PSC, SSC, Banking, Railways, ISRO, DRDO, Defence</div></div>
-</div>
-<div class="bottom-bar" id="bottomBar"></div>
-<script>/* same bottom bar script as medical.html */</script>
-</body>
-</html>
+    <div class="page-title">⚙️ Non-Medical (PCM) Stream</div>
+
+    <div class="section-card">
+        <div class="section-title">🎓 Engineering & Technology (B.Tech / B.E)</div>
+        <div class="list-item">• Computer Science Engineering (CSE)</div>
+        <div class="list-item">• Information Technology (IT)</div>
+        <div class="list-item">• Artificial Intelligence & Machine Learning (AI/ML)</div>
+        <div class="list-item">• Data Science Engineering</div>
+        <div class="list-item">• Robotics & Automation</div>
+        <div class="list-item">• Mechanical Engineering</div>
+        <div class="list-item">• Civil Engineering</div>
+        <div class="list-item">• Electrical Engineering</div>
+        <div class="list-item">• Electronics & Communication Engineering (ECE)</div>
+        <div class="list-item">• Aerospace Engineering</div>
+        <div class="list-item">• Automobile Engineering</div>
+        <div class="list-item">• Chemical Engineering</div>
+        <div class="list-item">• Petroleum Engineering</div>
+        <div class="list-item">• Marine Engineering</div>
+        <div class="list-item">• Biotechnology Engineering</div>
+        <div class="list-item">• Food Technology</div>
+        <div class="list-item">• Mechatronics Engineering</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🏛️ Architecture & Planning</div>
+        <div class="list-item">• B.Arch – Bachelor of Architecture (5 years)</div>
+        <div class="list-item">• B.Plan – Bachelor of Planning</div>
+        <div class="list-item">• B.Des Interior Design</div>
+        <div class="list-item">• Urban Planning</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🛡️ Defence & Merchant Navy</div>
+        <div class="list-item">• NDA (Army, Navy, Air Force) – After 12th</div>
+        <div class="list-item">• TES – Technical Entry Scheme, Indian Army</div>
+        <div class="list-item">• Merchant Navy – B.Tech Marine Engineering</div>
+        <div class="list-item">• Nautical Science (B.Sc)</div>
+        <div class="list-item">• Diploma in Nautical Science</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🛫 Aviation Careers</div>
+        <div class="list-item">• Commercial Pilot Training</div>
+        <div class="list-item">• Aircraft Maintenance Engineering (AME)</div>
+        <div class="list-item">• Aeronautical Engineering</div>
+        <div class="list-item">• Aviation Management</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">💻 Computer & IT (Non-Engineering Degrees)</div>
+        <div class="list-item">• BCA – Bachelor of Computer Applications</div>
+        <div class="list-item">• B.Sc Computer Science</div>
+        <div class="list-item">• B.Sc Data Science</div>
+        <div class="list-item">• B.Sc Cyber Security</div>
+        <div class="list-item">• B.Sc Animation & Gaming</div>
+        <div class="list-item">• Cloud Computing & DevOps courses</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🔬 Pure Science Degrees (B.Sc)</div>
+        <div class="list-item">• B.Sc Physics, Chemistry, Mathematics, Statistics</div>
+        <div class="list-item">• B.Sc Electronics, Geology, Environmental Science</div>
+        <div class="list-item">• B.Sc Forensic Science, Nanotechnology</div>
+        <div class="list-item">• B.Sc Astrophysics, Aeronautics</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">📊 Management (After 12th or After Graduation)</div>
+        <div class="list-item">• BBA – Bachelor of Business Administration</div>
+        <div class="list-item">• Integrated BBA+MBA (5 years)</div>
+        <div class="list-item">• BHM – Hotel Management</div>
+        <div class="list-item">• Travel & Tourism</div>
+        <div class="list-item">• After graduation: MBA (Marketing, Finance, HR, IT, Operations, Data Analytics)</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🎨 Design & Creative Fields</div>
+        <div class="list-item">• B.Des (Industrial / Product / Fashion / UI-UX)</div>
+        <div class="list-item">• Graphic Designing, Animation & VFX</div>
+        <div class="list-item">• Photography, Gaming Design, Interior Design</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">📊 Commerce Options for PCM Students</div>
+        <div class="list-item">• B.Com, Economics, Finance</div>
+        <div class="list-item">• CA (Chartered Accountant), CS, CMA</div>
+        <div class="list-item">• Stock Market & Investment Banking Courses</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">🛠️ Skill-based Professional Courses</div>
+        <div class="list-item">• Electrician / Fitter / Technician Courses</div>
+        <div class="list-item">• Solar Technician, Drone Technology</div>
+        <div class="list-item">• CNC Programming, Welding Technology</div>
+        <div class="list-item">• Automobile Technician, HVAC</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">📋 Entrance Exams for PCM</div>
+        <div class="list-item">• JEE Main – For NITs, IIITs, and other engineering colleges</div>
+        <div class="list-item">• JEE Advanced – For IITs</div>
+        <div class="list-item">• BITSAT – BITS Pilani, Goa, Hyderabad</div>
+        <div class="list-item">• VITEEE – VIT University</div>
+        <div class="list-item">• SRMJEE – SRM University</div>
+        <div class="list-item">• NATA – For B.Arch</div>
+        <div class="list-item">• UCEED – For B.Des at IITs</div>
+        <div class="list-item">• State CETs (KCET, MHT-CET, UPSEE, etc.)</div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-title">💼 Government Jobs After PCM</div>
+        <div class="list-item">• UPSC (Civil Services – IAS, IPS, IFS)</div>
+        <div class="list-item">• State PSC</div>
+        <div class="list-item">• SSC (CGL, CHSL, JE)</div>
+        <div
