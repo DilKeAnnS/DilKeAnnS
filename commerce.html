@@ -56,7 +56,6 @@
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
         @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
@@ -68,27 +67,32 @@
         <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline">📊 Complete Commerce Career Guide - 10th to CEO | Live Exam Updates</div>
+    <div class="tagline">📊 Complete Commerce Career Guide - 10th to CEO | Live Exam Updates | All Professional Courses</div>
 </div>
 
 <div class="container">
     <div class="page-title">📊 Commerce & Business Careers</div>
-    <div class="page-subtitle">50+ Courses | 150+ Colleges | Live Exam Links | Auto Results | Complete Roadmap</div>
+    <div class="page-subtitle">60+ Courses | 200+ Colleges | Live Exam Links | CA/CS/CMA/CFA Full Details | Complete Roadmap</div>
     
     <div class="door-nav">
         <button class="door-btn active" data-door="bachelor">🎓 <span class="door-label">Bachelor Degrees</span></button>
-        <button class="door-btn" data-door="professional">📜 <span class="door-label">Professional Courses</span></button>
-        <button class="door-btn" data-door="law">⚖️ <span class="door-label">Law</span></button>
+        <button class="door-btn" data-door="ca">📜 <span class="door-label">CA - Chartered Accountant</span></button>
+        <button class="door-btn" data-door="cs">📋 <span class="door-label">CS - Company Secretary</span></button>
+        <button class="door-btn" data-door="cma">📊 <span class="door-label">CMA - Cost Accountant</span></button>
+        <button class="door-btn" data-door="cfa">📈 <span class="door-label">CFA - Financial Analyst</span></button>
+        <button class="door-btn" data-door="law">⚖️ <span class="door-label">Law (LLB)</span></button>
         <button class="door-btn" data-door="hotel">🏨 <span class="door-label">Hotel Management</span></button>
-        <button class="door-btn" data-door="creative">🎨 <span class="door-label">Creative Fields</span></button>
+        <button class="door-btn" data-door="digital">📱 <span class="door-label">Digital Marketing</span></button>
         <button class="door-btn" data-door="entrepreneurship">🚀 <span class="door-label">Entrepreneurship</span></button>
         <button class="door-btn" data-door="exams">📋 <span class="door-label">Entrance Exams</span></button>
         <button class="door-btn" data-door="govt">🏛️ <span class="door-label">Govt Jobs</span></button>
+        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Studies</span></button>
     </div>
     
     <!-- ==================== DOOR 1: BACHELOR DEGREES ==================== -->
     <div id="door-bachelor" class="door-content active">
-        <!-- B.Com - FULL DETAIL -->
+        
+        <!-- B.Com - COMPLETE DETAIL -->
         <div class="accordion-card active" id="bcomCard">
             <div class="accordion-header" onclick="toggleCard('bcomCard')">
                 <div class="accordion-title"><span class="accordion-icon">📊</span> B.Com - Bachelor of Commerce (3 years)</div>
@@ -96,40 +100,52 @@
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of accounting, taxation, finance, business law, economics.<br><span class="salary-text">💰 Fresher Salary: ₹3-8 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Foundation for CA/CS/CMA, banking jobs, corporate careers.<br><span class="salary-text">💰 After M.Com: ₹6-15 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th Commerce (Age 17+). Minimum 50% marks.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.srcc.edu" target="_blank">SRCC Delhi</a> | <a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Hindu College</a> | <a class="live-link" href="https://www.lsr.edu.in" target="_blank">LSR</a> | <a class="live-link" href="https://www.christuniversity.in" target="_blank">Christ University</a> | <a class="live-link" href="https://www.nmims.edu" target="_blank">NMIMS</a></div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">CUET</a> | University-specific entrance exams</div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in numbers, business, finance, analytical thinking</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th Commerce → CUET → B.Com (3 years) → M.Com/CA/CS/MBA/Job</div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of accounting, taxation, finance, business law, economics, auditing, corporate governance.<br><span class="salary-text">💰 Fresher Salary: ₹3-8 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Foundation for CA/CS/CMA, banking jobs, corporate careers, entrepreneurship.<br><span class="salary-text">💰 After M.Com/CA: ₹8-20 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th Commerce (Age 17+). Minimum 45-50% marks depending on college.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.srcc.edu" target="_blank">SRCC Delhi</a> | <a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Hindu College</a> | <a class="live-link" href="https://www.lsr.edu.in" target="_blank">LSR</a> | <a class="live-link" href="https://christuniversity.in" target="_blank">Christ University</a> | <a class="live-link" href="https://www.nmims.edu" target="_blank">NMIMS</a> | <a class="live-link" href="https://www.stxaviers.edu" target="_blank">St. Xavier's Mumbai</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">CUET (Common University Entrance Test)</a> | University-specific entrance exams</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in numbers, business, finance, analytical thinking, attention to detail, good with calculations</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th Commerce → CUET → B.Com (3 years) → M.Com/CA/CS/CMA/MBA/Job</div></div>
                 </div>
                 <div class="section-title">📋 CUET EXAM - LIVE UPDATES</div>
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 CUET Official</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">cuet.samarth.ac.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📝 Application Link</div><div class="info-text">Feb-Mar 2025</div></div>
-                    <div class="info-card"><div class="info-label">📊 Result Link</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">Check Result</a> <span id="cuetResultDate">(Expected: June 2025)</span></div></div>
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">cuet.samarth.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Exam Dates</div><div class="info-text">May-June 2025 (tentative)</div></div>
+                    <div class="info-card"><div class="info-label">📊 Result</div><div class="info-text">June-July 2025</div></div>
+                    <div class="info-card"><div class="info-label">📝 Application</div><div class="info-text">February-March 2025</div></div>
                 </div>
                 <div class="section-title">🏛️ Top Commerce Colleges (NIRF Ranked)</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
-                <tbody>
-                    <tr><td><a class="live-link" href="https://www.srcc.edu" target="_blank">SRCC</a></td><td>Delhi</td><td>₹25,000</td><td>1</td><td><a class="live-link" href="https://www.srcc.edu" target="_blank">Visit</a></td></tr>
-                    <tr><td><a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Hindu College</a></td><td>Delhi</td><td>₹25,000</td><td>2</td><td><a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Visit</a></td></tr>
-                    <tr><td><a class="live-link" href="https://www.lsr.edu.in" target="_blank">LSR</a></td><td>Delhi</td><td>₹25,000</td><td>3</td><td><a class="live-link" href="https://www.lsr.edu.in" target="_blank">Visit</a></td></tr>
-                    <tr><td><a class="live-link" href="https://www.christuniversity.in" target="_blank">Christ University</a></td><td>Bangalore</td><td>₹1,00,000</td><td>4</td><td><a class="live-link" href="https://www.christuniversity.in" target="_blank">Visit</a></td></tr>
-                </tbody></table>
-                <div class="section-title">🗺️ Career Roadmap (10th → CEO)</div>
-                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text">Commerce Stream - Focus on Accountancy, Business Studies, Economics<br><span class="salary-text">💰 After 12th: CUET qualified</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Com Degree<br><span class="salary-text">💰 Accountant: ₹3-8 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Com / MBA / CA / CS / CMA<br><span class="salary-text">💰 Senior: ₹8-20 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Finance Manager → Finance Controller → CFO<br><span class="salary-text">💰 CFO: ₹50 LPA - ₹2 Cr</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CEO / Managing Director / Partner at Big 4<br><span class="salary-text">💰 CEO: ₹1 Cr - ₹5 Cr+</span></div></div>
+                <table class="college-table">
+                    <thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
+                    <tbody>
+                        <tr><td><a class="live-link" href="https://www.srcc.edu" target="_blank">SRCC</a></th><td>Delhi</th><td>₹25,000</th><td>1</th><td><a class="live-link" href="https://www.srcc.edu" target="_blank">Visit</a> </th></tr>
+                        <tr><td><a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Hindu College</a></th><td>Delhi</th><td>₹25,000</th><td>2</th><td><a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Visit</a> </th></tr>
+                        <tr><td><a class="live-link" href="https://www.lsr.edu.in" target="_blank">LSR</a></th><td>Delhi</th><td>₹25,000</th><td>3</th><td><a class="live-link" href="https://www.lsr.edu.in" target="_blank">Visit</a> </th></tr>
+                        <tr><td><a class="live-link" href="https://christuniversity.in" target="_blank">Christ University</a></th><td>Bangalore</th><td>₹1,00,000</th><td>4</th><td><a class="live-link" href="https://christuniversity.in" target="_blank">Visit</a> </th></tr>
+                        <tr><td><a class="live-link" href="https://www.nmims.edu" target="_blank">NMIMS</a></th><td>Mumbai</th> Whether₹1,20,000</th><td>5</th><td><a class="live-link" href="https://www.nmims.edu" target="_blank">Visit</a> </th></tr>
+                    </tbody>
+                </table>
+                <div class="section-title">🗺️ Complete Career Roadmap (10th → CEO)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text">Commerce Stream - Focus on Accountancy, Business Studies, Economics, Mathematics. Score 75%+ for top colleges.<br><span class="salary-text">💰 After 12th: CUET qualified</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Com Degree with Specialization (Accounting, Finance, Taxation, Economics, Banking)<br><span class="salary-text">💰 Accountant: ₹3-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Com / MBA (IIM/FMS/XLRI) / CA / CS / CMA / CFA<br><span class="salary-text">💰 Senior Accountant: ₹8-15 LPA | MBA Graduate: ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Finance Manager → Senior Finance Manager<br><span class="salary-text">💰 Finance Manager: ₹20-40 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Finance Controller → CFO (Chief Financial Officer)<br><span class="salary-text">💰 CFO: ₹50 LPA - ₹2 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CEO / Managing Director / Partner at Big 4 (Deloitte, PwC, EY, KPMG)<br><span class="salary-text">💰 CEO: ₹1 Cr - ₹5 Cr+</span></div></div>
+                <div class="section-title">💰 Scholarships for Commerce Students</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 NSP Scholarship</div><div class="info-text"><a class="live-link" href="https://scholarships.gov.in" target="_blank">National Scholarship Portal</a> - ₹5,000-50,000/year</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ Merit-cum-Means</div><div class="info-text">College-specific scholarships for meritorious students</div></div>
+                    <div class="info-card"><div class="info-label">🏫 State Scholarships</div><div class="info-text">Check your state's scholarship portal</div></div>
+                    <div class="info-card"><div class="info-label">🎓 University Scholarships</div><div class="info-text">Many universities offer merit-based scholarships</div></div>
+                </div>
                 <div class="section-title">⭐ Famous Commerce Graduates</div>
-                <div><span class="famous-badge">Kumar Mangalam Birla (Aditya Birla Group)</span> <span class="famous-badge">Nirmala Sitharaman (Finance Minister)</span> <span class="famous-badge">Deepak Parekh (HDFC)</span></div>
+                <div><span class="famous-badge">Kumar Mangalam Birla (Aditya Birla Group)</span> <span class="famous-badge">Nirmala Sitharaman (Finance Minister)</span> <span class="famous-badge">Deepak Parekh (HDFC Chairman)</span> <span class="famous-badge">Uday Kotak (Kotak Mahindra Bank)</span> <span class="famous-badge">Anand Mahindra (Mahindra Group)</span></div>
             </div>
         </div>
         
-        <!-- BBA -->
+        <!-- BBA - COMPLETE DETAIL -->
         <div class="accordion-card" id="bbaCard">
             <div class="accordion-header" onclick="toggleCard('bbaCard')">
                 <div class="accordion-title"><span class="accordion-icon">📈</span> BBA - Bachelor of Business Administration (3 years)</div>
@@ -137,16 +153,28 @@
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Management, marketing, finance, HR, operations.<br><span class="salary-text">💰 Fresher Salary: ₹4-10 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Direct path to MBA, corporate jobs, startup skills.<br><span class="salary-text">💰 After MBA: ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">IPMAT</a> | DU JAT | NPAT | SET</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">Shaheed Sukhdev College, NMIMS, Symbiosis, Christ, Xavier's, IIM Indore (IPM)</div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of management, marketing, finance, HR, operations, entrepreneurship, business analytics.<br><span class="salary-text">💰 Fresher Salary: ₹4-10 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Direct path to MBA from IIMs, corporate management roles, startup skills, leadership development.<br><span class="salary-text">💰 After MBA: ₹15-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th Commerce/Arts (Age 17+). Minimum 50-60% marks.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="http://www.sgscc.ac.in" target="_blank">Shaheed Sukhdev College</a> | <a class="live-link" href="https://www.nmims.edu" target="_blank">NMIMS</a> | <a class="live-link" href="https://www.symbiosis.ac.in" target="_blank">Symbiosis Pune</a> | <a class="live-link" href="https://christuniversity.in" target="_blank">Christ University</a> | <a class="live-link" href="https://www.iimidr.ac.in" target="_blank">IIM Indore IPM</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">IPMAT (IIM Indore/Rohtak/Jammu)</a> | <a class="live-link" href="http://www.du.ac.in" target="_blank">DU JAT</a> | <a class="live-link" href="https://www.nmims.edu" target="_blank">NPAT</a> | <a class="live-link" href="https://www.set.edu" target="_blank">SET</a></div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Leadership qualities, communication skills, interest in business, strategic thinking, team player</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th Commerce → Entrance Exam → BBA (3 years) → MBA from IIM/FMS/XLRI/ISB → Corporate Leadership</div></div>
                 </div>
-                <div class="section-title">🗺️ Career Roadmap (BBA)</div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">BBA Degree<br><span class="salary-text">💰 Management Trainee: ₹4-10 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MBA from IIM/FMS/XLRI via CAT<br><span class="salary-text">💰 MBA Graduate: ₹15-30 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Manager → Senior Manager → Director<br><span class="salary-text">💰 Director: ₹40 LPA - ₹1 Cr</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CEO / Managing Director<br><span class="salary-text">💰 CEO: ₹1 Cr - ₹5 Cr+</span></div></div>
+                <div class="section-title">📋 BBA ENTRANCE EXAMS - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 IPMAT</div><div class="info-text"><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">iimidr.ac.in</a> - Exam: May 2025</div></div>
+                    <div class="info-card"><div class="info-label">🔗 DU JAT</div><div class="info-text"><a class="live-link" href="http://www.du.ac.in" target="_blank">du.ac.in</a> - Exam: June 2025</div></div>
+                    <div class="info-card"><div class="info-label">🔗 NPAT</div><div class="info-text"><a class="live-link" href="https://www.nmims.edu" target="_blank">nmims.edu</a> - Exam: Jan-May 2025</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (BBA → CEO)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">BBA Degree with Specialization (Marketing, Finance, HR, Operations, Analytics)<br><span class="salary-text">💰 Management Trainee: ₹4-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MBA from IIMs (CAT) / FMS / XLRI / ISB / SPJIMR / MDI<br><span class="salary-text">💰 MBA Graduate: ₹15-30 LPA (IIMs: ₹25-35 LPA)</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Assistant Manager → Deputy Manager → Manager<br><span class="salary-text">💰 Manager: ₹20-40 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Senior Manager → Director → Vice President<br><span class="salary-text">💰 VP: ₹40 LPA - ₹1 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Managing Director (MD) → Chief Executive Officer (CEO)<br><span class="salary-text">💰 CEO: ₹1 Cr - ₹5 Cr+</span></div></div>
+                <div class="section-title">⭐ Famous BBA Graduates</div>
+                <div><span class="famous-badge">Mukesh Ambani (Reliance Industries)</span> <span class="famous-badge">Anand Mahindra (Mahindra Group)</span> <span class="famous-badge">Indra Nooyi (Former PepsiCo CEO)</span></div>
             </div>
         </div>
         
@@ -158,248 +186,362 @@
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📊 BAF</div><div class="info-text">Bachelor of Accounting & Finance - ₹4-9 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🏦 BBI</div><div class="info-text">Bachelor of Banking & Insurance - ₹4-9 LPA</div></div>
-                    <div class="info-card"><div class="info-label">📈 BFM</div><div class="info-text">Bachelor of Financial Markets - ₹4-10 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NMIMS, HR College Mumbai, St. Xavier's Kolkata, Christ University</div></div>
+                    <div class="info-card"><div class="info-label">📊 BAF</div><div class="info-text">Bachelor of Accounting & Finance - Focus on advanced accounting, auditing, taxation. Salary: ₹4-9 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏦 BBI</div><div class="info-text">Bachelor of Banking & Insurance - Focus on banking operations, insurance, risk management. Salary: ₹4-9 LPA</div></div>
+                    <div class="info-card"><div class="info-label">📈 BFM</div><div class="info-text">Bachelor of Financial Markets - Focus on stock markets, trading, portfolio management. Salary: ₹4-10 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NMIMS Mumbai, HR College Mumbai, St. Xavier's Kolkata, Christ University, Narsee Monjee College</div></div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 2: PROFESSIONAL COURSES ==================== -->
-    <div id="door-professional" class="door-content">
-        <!-- CA - Chartered Accountant -->
-        <div class="accordion-card" id="caCard">
-            <div class="accordion-header" onclick="toggleCard('caCard')">
-                <div class="accordion-title"><span class="accordion-icon">📜</span> CA - Chartered Accountant</div>
+    <!-- ==================== DOOR 2: CA - CHARTERED ACCOUNTANT (COMPLETE DETAIL) ==================== -->
+    <div id="door-ca" class="door-content">
+        <div class="accordion-card" id="caFullCard">
+            <div class="accordion-header" onclick="toggleCard('caFullCard')">
+                <div class="accordion-title"><span class="accordion-icon">📜</span> CA - Chartered Accountant (Complete Career Guide)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional in accounting, auditing, taxation, financial management.<br><span class="salary-text">💰 Starting Salary: ₹8-15 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Most respected commerce profession, highest earning potential.<br><span class="salary-text">💰 Experienced CA: ₹20-50 LPA | Partner: ₹50 LPA - ₹2 Cr</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icai.org" target="_blank">ICAI Exams</a> | <a class="live-link" href="https://www.icai.org" target="_blank">CA Foundation</a> | <a class="live-link" href="https://www.icai.org" target="_blank">CA Intermediate</a> | <a class="live-link" href="https://www.icai.org" target="_blank">CA Final</a></div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Detail-oriented, analytical, strong mathematics, discipline</div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional in accounting, auditing, taxation, financial management, corporate law.<br><span class="salary-text">💰 Starting Salary: ₹8-15 LPA | Experienced: ₹20-50 LPA | Partner: ₹50L-2Cr</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Most respected commerce profession, highest earning potential, global recognition, statutory authority, mandatory for company audits, Big 4 opportunities (Deloitte, PwC, EY, KPMG).</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th (register for CA Foundation) or after graduation (direct entry route). Age 17+.</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icai.org" target="_blank">ICAI (Institute of Chartered Accountants of India)</a> - Official Website</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Detail-oriented, analytical, strong mathematics, discipline, integrity, hard work, perseverance</div></div>
                 </div>
-                <div class="section-title">🗺️ CA Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">After 12th</div><div class="roadmap-text">Register for CA Foundation (4 papers)<br><span class="salary-text">💰 Exam: May/Nov</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">9 Months</div><div class="roadmap-text">CA Intermediate (8 papers) + Orientation/ITT training</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2.5 Years</div><div class="roadmap-text">Articleship (Practical Training)<br><span class="salary-text">💰 Stipend: ₹2-10k/month (Year 1), ₹5-20k/month (Year 3)</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">6 Months</div><div class="roadmap-text">CA Final (8 papers) + Advanced ITT</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CA Qualification → Audit/Accounting/Tax/Consulting<br><span class="salary-text">💰 CA: ₹8-15 LPA (Fresher) | ₹20-50 LPA (Exp) | Partner: ₹50L-2Cr</span></div></div>
+                <div class="section-title">🗺️ CA Complete Roadmap (4-5 Years)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Months</div><div class="roadmap-text"><strong>CA Foundation</strong> (4 papers: Principles of Accounting, Business Laws, Quantitative Aptitude, Business Economics)<br><span class="salary-text">📅 Exams: May/Nov | Pass %: 15-20% | Registration: After 12th</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8 Months</div><div class="roadmap-text"><strong>CA Intermediate</strong> (8 papers - 2 groups: Accounting, Corporate Laws, Cost Management, Taxation, Advanced Accounting, Auditing, Financial Management, Information Systems)<br><span class="salary-text">📅 Exams: May/Nov | Pass %: 10-15%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2.5 Years</div><div class="roadmap-text"><strong>Articleship (Practical Training)</strong> - Work under a practicing CA. Get hands-on experience in audit, taxation, accounting.<br><span class="salary-text">💰 Stipend: Year 1: ₹2-5k/month | Year 2: ₹5-10k/month | Year 3: ₹10-20k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">6 Months</div><div class="roadmap-text"><strong>CA Final</strong> (8 papers - 2 groups: Financial Reporting, Strategic Financial Management, Advanced Auditing, Corporate Laws, Direct Tax, Indirect Tax, Management Accounting)<br><span class="salary-text">📅 Exams: May/Nov | Pass %: 5-10%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Qualified</div><div class="roadmap-text"><strong>CA Member of ICAI</strong> → Practice or Job<br><span class="salary-text">💰 CA Fresher: ₹8-15 LPA | Senior CA: ₹20-50 LPA | Partner at CA Firm: ₹50L-2Cr</span></div></div>
+                <div class="section-title">📋 ICAI EXAM DETAILS - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://www.icai.org" target="_blank">icai.org</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Foundation Exam</div><div class="info-text">May and November</div></div>
+                    <div class="info-card"><div class="info-label">📅 Inter/Final Exam</div><div class="info-text">May and November</div></div>
+                    <div class="info-card"><div class="info-label">📊 Result Date</div><div class="info-text">2 months after exam</div></div>
+                </div>
+                <div class="section-title">🏛️ Top CA Firms</div>
+                <div><span class="famous-badge">Big 4: Deloitte, PwC, EY, KPMG</span> <span class="famous-badge">BDO</span> <span class="famous-badge">Grant Thornton</span> <span class="famous-badge">RSM</span> <span class="famous-badge">Walker Chandiok</span> <span class="famous-badge">S. R. Batliboi</span> <span class="famous-badge">Lodha & Co.</span></div>
                 <div class="section-title">⭐ Famous Chartered Accountants</div>
-                <div><span class="famous-badge">Kumar Mangalam Birla</span> <span class="famous-badge">Nirmala Sitharaman</span> <span class="famous-badge">Deepak Parekh</span> <span class="famous-badge">Rahul Bajaj</span></div>
+                <div><span class="famous-badge">Kumar Mangalam Birla (Aditya Birla Group)</span> <span class="famous-badge">Nirmala Sitharaman (Finance Minister of India)</span> <span class="famous-badge">Deepak Parekh (HDFC Chairman)</span> <span class="famous-badge">Rahul Bajaj (Bajaj Group)</span> <span class="famous-badge">K. M. Kundnani (Former President ICAI)</span></div>
             </div>
         </div>
-        
-        <!-- CS - Company Secretary -->
-        <div class="accordion-card" id="csCard">
-            <div class="accordion-header" onclick="toggleCard('csCard')">
-                <div class="accordion-title"><span class="accordion-icon">📋</span> CS - Company Secretary</div>
+    </div>
+        <!-- ==================== DOOR 3: CS - COMPANY SECRETARY ==================== -->
+    <div id="door-cs" class="door-content">
+        <div class="accordion-card" id="csFullCard">
+            <div class="accordion-header" onclick="toggleCard('csFullCard')">
+                <div class="accordion-title"><span class="accordion-icon">📋</span> CS - Company Secretary (Complete Career Guide)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Expert in corporate law, governance, and compliance.<br><span class="salary-text">💰 Starting Salary: ₹6-12 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Mandatory for listed companies, high demand, corporate exposure.<br><span class="salary-text">💰 Experienced CS: ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icsi.edu" target="_blank">ICSI</a> | CSEET | Executive | Professional</div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Expert in corporate law, governance, compliance, board management, securities law, and company regulations.<br><span class="salary-text">💰 Starting Salary: ₹6-12 LPA | Experienced: ₹15-30 LPA | Company Secretary in Listed Company: ₹25-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Mandatory for listed companies, high demand in corporate sector, exposure to board meetings, prestigious profession, global recognition through ICSI.</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th (any stream) or after graduation. Age 17+.</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icsi.edu" target="_blank">ICSI (Institute of Company Secretaries of India)</a> - Official Website</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in corporate law, governance, attention to detail, good communication skills, integrity</div></div>
                 </div>
-                <div class="section-title">🗺️ CS Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">After 12th</div><div class="roadmap-text">CSEET (Company Secretary Executive Entrance Test)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">9 Months</div><div class="roadmap-text">CS Executive (8 papers)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">15 Months</div><div class="roadmap-text">CS Professional (9 papers) + Training</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CS Qualification → Company Secretary at Corporate<br><span class="salary-text">💰 CS: ₹6-12 LPA (Fresher) | ₹15-30 LPA (Exp) | ₹30-50 LPA (VP/Legal Head)</span></div></div>
-            </div>
-        </div>
-        
-        <!-- CMA -->
-        <div class="accordion-card" id="cmaCard">
-            <div class="accordion-header" onclick="toggleCard('cmaCard')">
-                <div class="accordion-title"><span class="accordion-icon">📊</span> CMA - Cost & Management Accountant</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
+                <div class="section-title">🗺️ CS Complete Roadmap (3-4 Years)</div>
+                <div class="roadmap-step"><div class="roadmap-year">CSEET</div><div class="roadmap-text">Company Secretary Executive Entrance Test (online, open book) - 4 papers<br><span class="salary-text">📅 Exams: Every month | Pass %: 30-40%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">9 Months</div><div class="roadmap-text"><strong>CS Executive</strong> (8 papers - 2 modules: Jurisprudence, Company Law, Securities Law, Tax, Cost Management, Accounting, Economic Laws)<br><span class="salary-text">📅 Exams: June & December | Pass %: 10-15%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">15 Months</div><div class="roadmap-text"><strong>CS Professional</strong> (9 papers - 3 modules: Governance, Ethics, Drafting, Due Diligence, Insolvency)<br><span class="salary-text">📅 Exams: June & December | Pass %: 8-12%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Training</div><div class="roadmap-text">15 months practical training in a company/CS firm<br><span class="salary-text">💰 Stipend: ₹5-15k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Qualified</div><div class="roadmap-text"><strong>CS Member of ICSI</strong> → Company Secretary at Corporate<br><span class="salary-text">💰 CS Fresher: ₹6-12 LPA | Experienced CS: ₹15-30 LPA | VP/Legal Head: ₹30-60 LPA</span></div></div>
+                <div class="section-title">📋 ICSI EXAM DETAILS - LIVE UPDATES</div>
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Specialist in cost management, strategic finance, decision-making.<br><span class="salary-text">💰 Starting Salary: ₹6-10 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icmai.in" target="_blank">ICMAI</a> | Foundation | Intermediate | Final</div></div>
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://www.icsi.edu" target="_blank">icsi.edu</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 CSEET</div><div class="info-text">Every month (online)</div></div>
+                    <div class="info-card"><div class="info-label">📅 Executive/Professional</div><div class="info-text">June and December</div></div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- CFA -->
-        <div class="accordion-card" id="cfaCard">
-            <div class="accordion-header" onclick="toggleCard('cfaCard')">
-                <div class="accordion-title"><span class="accordion-icon">📈</span> CFA - Chartered Financial Analyst (Global)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Global gold standard in investment management and financial analysis.<br><span class="salary-text">💰 Salary: ₹8-35 LPA (India) | $80k-200k (US)</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.cfainstitute.org" target="_blank">CFA Level 1,2,3</a></div></div>
-                    <div class="info-card"><div class="info-label">🗺️ ROADMAP</div><div class="info-text">Level 1 (6 months) → Level 2 (6 months) → Level 3 (6 months) → Charterholder</div></div>
-                </div>
+                <div class="section-title">🏛️ Top Recruiters for CS</div>
+                <div><span class="famous-badge">Tata Group</span> <span class="famous-badge">Reliance Industries</span> <span class="famous-badge">Aditya Birla Group</span> <span class="famous-badge">Infosys</span> <span class="famous-badge">Wipro</span> <span class="famous-badge">HDFC Bank</span> <span class="famous-badge">ICICI Bank</span> <span class="famous-badge">Stock Exchanges (BSE, NSE)</span></div>
+                <div class="section-title">⭐ Famous Company Secretaries</div>
+                <div><span class="famous-badge">N. K. Jain (Former President ICSI)</span> <span class="famous-badge">C. S. Ravishankar (Former President ICSI)</span></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 3: LAW ==================== -->
-    <div id="door-law" class="door-content">
-        <div class="accordion-card" id="llbCard">
-            <div class="accordion-header" onclick="toggleCard('llbCard')">
-                <div class="accordion-title"><span class="accordion-icon">⚖️</span> LLB - Bachelor of Laws (5 years after 12th | 3 years after graduation)</div>
+    <!-- ==================== DOOR 4: CMA - COST & MANAGEMENT ACCOUNTANT ==================== -->
+    <div id="door-cma" class="door-content">
+        <div class="accordion-card" id="cmaFullCard">
+            <div class="accordion-header" onclick="toggleCard('cmaFullCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> CMA - Cost & Management Accountant (Complete Career Guide)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of legal systems, constitutional law, criminal law, corporate law.<br><span class="salary-text">💰 Fresher Lawyer: ₹5-10 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Prestigious profession, high earning potential, advocacy, judiciary.<br><span class="salary-text">💰 Senior Lawyer: ₹20-50 LPA | Top Advocate: ₹1-5 Cr</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">CLAT</a> | <a class="live-link" href="https://www.ailet.in" target="_blank">AILET</a> | <a class="live-link" href="https://www.lsatindia.in" target="_blank">LSAT</a></div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NLSIU Bangalore, NALSAR Hyderabad, NLU Delhi, GNLU Gandhinagar, Symbiosis Pune</div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Specialist in cost management, strategic finance, decision-making, budgeting, performance management.<br><span class="salary-text">💰 Starting Salary: ₹6-10 LPA | Experienced: ₹15-25 LPA | Senior: ₹25-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in manufacturing, FMCG, pharma industries, PSUs, cost auditing, strategic roles.</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icmai.in" target="_blank">ICMAI (Institute of Cost Accountants of India)</a></div></div>
+                </div>
+                <div class="section-title">🗺️ CMA Complete Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">Foundation</div><div class="roadmap-text">4 papers (after 12th) - Accounts, Law, Economics, Maths/Statistics<br><span class="salary-text">💰 Pass %: 20-25%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Intermediate</div><div class="roadmap-text">8 papers (2 groups) - Cost & Management Accounting, Operations Management, Financial Accounting, Direct/Indirect Tax<br><span class="salary-text">💰 Pass %: 10-15%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">8 papers (2 groups) - Strategic Cost Management, Corporate Laws, Financial Management, Business Valuation<br><span class="salary-text">💰 Pass %: 8-12%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Practical Training</div><div class="roadmap-text">3 years of practical training in cost management<br><span class="salary-text">💰 Stipend: ₹5-15k/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Qualified</div><div class="roadmap-text">CMA → Cost Accountant in Industry/PSU<br><span class="salary-text">💰 Salary: ₹6-10 LPA (Fresher) | ₹15-25 LPA (Experienced) | ₹25-50 LPA (Senior)</span></div></div>
+                <div class="section-title">🏛️ Top Recruiters for CMA</div>
+                <div><span class="famous-badge">Big 4 (Deloitte, PwC, EY, KPMG)</span> <span class="famous-badge">Tata Motors</span> <span class="famous-badge">Reliance</span> <span class="famous-badge">ITC</span> <span class="famous-badge">HUL</span> <span class="famous-badge">PSUs (BHEL, NTPC, SAIL)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 5: CFA - CHARTERED FINANCIAL ANALYST ==================== -->
+    <div id="door-cfa" class="door-content">
+        <div class="accordion-card" id="cfaFullCard">
+            <div class="accordion-header" onclick="toggleCard('cfaFullCard')">
+                <div class="accordion-title"><span class="accordion-icon">📈</span> CFA - Chartered Financial Analyst (Global Career)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Global gold standard in investment management, portfolio management, equity research, risk analysis.<br><span class="salary-text">💰 India: ₹8-35 LPA | USA: $80k-200k/year | Dubai: AED 200k-500k/year</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Global recognition, highest salaries in finance, investment banking, portfolio management, hedge funds, mutual funds, private equity.</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.cfainstitute.org" target="_blank">CFA Institute (USA)</a> - 3 levels</div></div>
+                </div>
+                <div class="section-title">🗺️ CFA Complete Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">Level 1</div><div class="roadmap-text">6 months preparation (Ethics, Quant, Economics, Financial Reporting, Corporate Finance)<br><span class="salary-text">📅 Exams: February, May, August, November | Pass %: 35-40%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Level 2</div><div class="roadmap-text">6 months preparation (Asset Classes, Derivatives, Equity, Fixed Income, Alternative Investments)<br><span class="salary-text">📅 Exams: May, August, November | Pass %: 40-45%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Level 3</div><div class="roadmap-text">6 months preparation (Portfolio Management, Wealth Planning, Risk Management)<br><span class="salary-text">📅 Exams: February, August | Pass %: 45-50%</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Qualified</div><div class="roadmap-text">CFA Charterholder → Investment Banker, Portfolio Manager, Equity Analyst, Risk Manager, Wealth Manager<br><span class="salary-text">💰 Salary: ₹12-40 LPA (India) | $120k-300k (USA) | €80k-180k (Europe)</span></div></div>
+                <div class="section-title">📋 CFA EXAM DETAILS - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://www.cfainstitute.org" target="_blank">cfainstitute.org</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Registration</div><div class="info-text">Open year-round</div></div>
+                    <div class="info-card"><div class="info-label">💰 Exam Fee</div><div class="info-text">Level 1: $900-1,200 | Level 2 & 3: $1,000-1,300</div></div>
+                </div>
+                <div class="section-title">🏛️ Top Recruiters for CFA</div>
+                <div><span class="famous-badge">Goldman Sachs</span> <span class="famous-badge">Morgan Stanley</span> <span class="famous-badge">JP Morgan Chase</span> <span class="famous-badge">BlackRock</span> <span class="famous-badge">Fidelity</span> <span class="famous-badge">Blackstone</span> <span class="famous-badge">KKR</span></div>
+                <div class="section-title">⭐ Famous CFAs</div>
+                <div><span class="famous-badge">Warren Buffett (Berkshire Hathaway)</span> <span class="famous-badge">Rakesh Jhunjhunwala (Indian Investor)</span> <span class="famous-badge">Radhakishan Damani (DMart)</span> <span class="famous-badge">John C. Bogle (Vanguard)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 6: LAW (LLB) ==================== -->
+    <div id="door-law" class="door-content">
+        <div class="accordion-card" id="llbFullCard">
+            <div class="accordion-header" onclick="toggleCard('llbFullCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚖️</span> LLB - Bachelor of Laws (5 years | 3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of legal systems, constitutional law, criminal law, corporate law, civil law, taxation law.<br><span class="salary-text">💰 Fresher Lawyer: ₹5-10 LPA | Corporate Lawyer: ₹15-30 LPA | Senior Advocate: ₹1-5 Cr</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Prestigious profession, high earning potential, advocacy, judiciary, corporate legal roles, public prosecutor, legal advisor.<br><span class="salary-text">💰 Judge: ₹2-2.5L/month | Supreme Court Advocate: ₹10-50 Cr (top)</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">5-year LLB after 12th | 3-year LLB after graduation</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.nls.ac.in" target="_blank">NLSIU Bangalore</a> | <a class="live-link" href="https://nalsar.ac.in" target="_blank">NALSAR Hyderabad</a> | <a class="live-link" href="https://nludelhi.ac.in" target="_blank">NLU Delhi</a> | <a class="live-link" href="https://gnlu.ac.in" target="_blank">GNLU Gandhinagar</a> | <a class="live-link" href="https://www.nujs.edu" target="_blank">NUJS Kolkata</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">CLAT (Common Law Admission Test)</a> | <a class="live-link" href="https://www.ailet.in" target="_blank">AILET</a> | <a class="live-link" href="https://www.lsatindia.in" target="_blank">LSAT</a></div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in justice, strong analytical skills, good communication, persuasive ability, logical reasoning</div></div>
                 </div>
                 <div class="section-title">📋 CLAT EXAM - LIVE UPDATES</div>
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 CLAT Official</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">consortiumofnlus.ac.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📊 Cutoff (2024)</div><div class="info-text">NLSIU Bangalore: 120+ rank, NLU Delhi: 200+ rank</div></div>
+                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">consortiumofnlus.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📅 Exam Date</div><div class="info-text">December 2025</div></div>
+                    <div class="info-card"><div class="info-label">📊 Cutoff 2024</div><div class="info-text">NLSIU Bangalore: 120+ rank, NALSAR: 200+ rank, NLU Delhi: 300+ rank</div></div>
                 </div>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">BA/BBA/B.Com + LLB (Integrated) from NLU<br><span class="salary-text">💰 Fresher: ₹5-10 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Litigation Assistant → Junior Advocate</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Senior Advocate → Corporate Counsel<br><span class="salary-text">💰 Corporate Lawyer: ₹15-30 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">High Court/Supreme Court Advocate | Judge | Legal Head<br><span class="salary-text">💰 Top: ₹1-5 Cr (Senior Advocate) | Judge: ₹2-2.5L/month</span></div></div>
+                <div class="section-title">🏛️ Top NLUs (NIRF Ranked)</div>
+                <table><thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th></tr></thead>
+                <tbody><tr><td>NLSIU Bangalore</th><td>Bangalore</th><td>₹2,50,000</th><td>1</th></tr>
+                <tr><td>NALSAR Hyderabad</th><td>Hyderabad</th><td>₹2,00,000</th><td>2</th></tr>
+                <tr><td>NLU Delhi</th><td>Delhi</th><td>₹2,00,000</th><td>3</th></tr>
+                <tr><td>GNLU Gandhinagar</th><td>Gandhinagar</th><td>₹2,00,000</th><td>4</th></tr>
+                <tr><td>NUJS Kolkata</th><td>Kolkata</th><td>₹1,80,000</th><td>5</th></tr>
+                </tbody>
+                </table>
+                <div class="section-title">🗺️ Career Roadmap (Law)</div>
+                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">BA/BBA/B.Com + LLB (Integrated) from NLU<br><span class="salary-text">💰 Fresher Lawyer: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Litigation Assistant → Junior Advocate under Senior Advocate<br><span class="salary-text">💰 Junior Advocate: ₹3-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Senior Advocate → Corporate Counsel → Legal Manager<br><span class="salary-text">💰 Corporate Lawyer: ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8-12 Years</div><div class="roadmap-text">Partner at Law Firm → Legal Head → Judge<br><span class="salary-text">💰 Partner: ₹30-60 LPA | Judge: ₹2-2.5L/month</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">High Court/Supreme Court Senior Advocate → Attorney General<br><span class="salary-text">💰 Senior Advocate: ₹1-5 Cr+</span></div></div>
                 <div class="section-title">⭐ Famous Lawyers</div>
-                <div><span class="famous-badge">Fali S. Nariman</span> <span class="famous-badge">Harish Salve</span> <span class="famous-badge">Ram Jethmalani</span> <span class="famous-badge">Mukul Rohatgi</span></div>
+                <div><span class="famous-badge">Fali S. Nariman</span> <span class="famous-badge">Harish Salve</span> <span class="famous-badge">Ram Jethmalani</span> <span class="famous-badge">Mukul Rohatgi</span> <span class="famous-badge">Indira Jaising</span> <span class="famous-badge">Soli Sorabjee</span></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 4: HOTEL MANAGEMENT ==================== -->
+    <!-- ==================== DOOR 7: HOTEL MANAGEMENT ==================== -->
     <div id="door-hotel" class="door-content">
-        <div class="accordion-card" id="bhmCard">
-            <div class="accordion-header" onclick="toggleCard('bhmCard')">
+        <div class="accordion-card" id="bhmFullCard">
+            <div class="accordion-header" onclick="toggleCard('bhmFullCard')">
                 <div class="accordion-title"><span class="accordion-icon">🏨</span> BHM - Bachelor of Hotel Management (4 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Hospitality management, food production, front office, housekeeping.<br><span class="salary-text">💰 Fresher Salary: ₹4-8 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">NCHM JEE</a></div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IHM Pusa Delhi, IHM Mumbai, IHM Chennai, IHM Bangalore, Welcomgroup</div></div>
-                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Hotel Manager, Chef, Event Planner, Airline Services, Cruise Ship, Entrepreneur</div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Hospitality management, food production, front office, housekeeping, catering, event management.<br><span class="salary-text">💰 Fresher: ₹4-8 LPA | Department Head: ₹10-20 LPA | GM: ₹25-50 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Global career opportunities, tax-free salaries abroad, fast career growth, prestigious hotels, cruise ships.</div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">NCHM JEE</a> (National Council for Hotel Management Joint Entrance Examination)</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP IHMs</div><div class="info-text"><a class="live-link" href="https://www.ihmpusa.net" target="_blank">IHM Pusa Delhi</a> | <a class="live-link" href="https://www.ihmmumbai.net" target="_blank">IHM Mumbai</a> | <a class="live-link" href="https://www.ihmchennai.net" target="_blank">IHM Chennai</a> | <a class="live-link" href="https://www.ihmbangalore.net" target="_blank">IHM Bangalore</a> | <a class="live-link" href="https://www.ihmhyderabad.net" target="_blank">IHM Hyderabad</a></div></div>
                 </div>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">BHM Degree + Industrial Training<br><span class="salary-text">💰 Management Trainee: ₹4-8 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Assistant Manager → Department Head<br><span class="salary-text">💰 Department Head: ₹10-20 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">8-10 Years</div><div class="roadmap-text">General Manager → Hotel Director → VP Operations<br><span class="salary-text">💰 GM: ₹25-50 LPA | Director: ₹40-80 LPA</span></div></div>
+                <div class="section-title">🗺️ Career Roadmap (Hotel Management)</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">BHM Degree + Industrial Training (6 months)<br><span class="salary-text">💰 Management Trainee: ₹4-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">Assistant Manager → Department Head (Food & Beverage, Front Office, Housekeeping)<br><span class="salary-text">💰 Department Head: ₹10-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-8 Years</div><div class="roadmap-text">General Manager → Hotel Director<br><span class="salary-text">💰 GM: ₹25-50 LPA | Director: ₹40-80 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">10-15 Years</div><div class="roadmap-text">VP Operations → Regional Director → CEO of Hotel Chain<br><span class="salary-text">💰 CEO: ₹80 LPA - ₹2 Cr</span></div></div>
+                <div class="section-title">🌍 International Opportunities</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇦🇪 Dubai</div><div class="info-text">Tax-free salary: AED 10k-30k/month</div></div>
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">J-1 Visa internship, Salary: $3k-8k/month</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇭 Switzerland</div><div class="info-text">Luxury hotel careers, Salary: CHF 5k-10k/month</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">Salary: AUD 60k-120k/year</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Hotel Management Graduates</div>
+                <div><span class="famous-badge">P. R. S. Oberoi (Chairman, Oberoi Hotels)</span> <span class="famous-badge">Vikram Oberoi (CEO, Oberoi Hotels)</span></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 5: CREATIVE FIELDS ==================== -->
-    <div id="door-creative" class="door-content">
-        <div class="accordion-card" id="digitalMarketingCard">
-            <div class="accordion-header" onclick="toggleCard('digitalMarketingCard')">
+    <!-- ==================== DOOR 8: DIGITAL MARKETING ==================== -->
+    <div id="door-digital" class="door-content">
+        <div class="accordion-card" id="digitalFullCard">
+            <div class="accordion-header" onclick="toggleCard('digitalFullCard')">
                 <div class="accordion-title"><span class="accordion-icon">📱</span> Digital Marketing (3-6 months courses)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">SEO, Social Media Marketing, Google Ads, Email Marketing, Analytics.<br><span class="salary-text">💰 Fresher Salary: ₹4-8 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 CERTIFICATIONS</div><div class="info-text"><a class="live-link" href="https://skillshop.google.com" target="_blank">Google Digital Garage</a>, HubSpot, SEMrush, Facebook Blueprint</div></div>
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">SEO (Search Engine Optimization), SMM (Social Media Marketing), Google Ads, Email Marketing, Content Marketing, Analytics, Affiliate Marketing.<br><span class="salary-text">💰 Executive: ₹4-8 LPA | Manager: ₹10-20 LPA | Head: ₹20-40 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Fastest growing field, work from home options, high demand in all industries, freelancing opportunities, startup growth.</div></div>
+                    <div class="info-card"><div class="info-label">📋 CERTIFICATIONS</div><div class="info-text"><a class="live-link" href="https://skillshop.google.com" target="_blank">Google Digital Garage</a> | <a class="live-link" href="https://academy.hubspot.com" target="_blank">HubSpot Academy</a> | <a class="live-link" href="https://www.semrush.com/academy" target="_blank">SEMrush Academy</a> | <a class="live-link" href="https://www.facebook.com/business/learn" target="_blank">Facebook Blueprint</a></div></div>
                 </div>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">3-6 Months</div><div class="roadmap-text">Certification Courses<br><span class="salary-text">💰 Digital Marketing Executive: ₹4-8 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">SEO/SMM Specialist → Team Lead<br><span class="salary-text">💰 Specialist: ₹8-15 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">5+ Years</div><div class="roadmap-text">Digital Marketing Manager → Head of Marketing<br><span class="salary-text">💰 Manager: ₹15-30 LPA | Head: ₹30-60 LPA</span></div></div>
-            </div>
-        </div>
-        
-        <div class="accordion-card" id="fashionCard">
-            <div class="accordion-header" onclick="toggleCard('fashionCard')">
-                <div class="accordion-title"><span class="accordion-icon">👗</span> Fashion Design / Interior Design / Graphic Design</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 COURSES</div><div class="info-text">B.Des Fashion, B.Sc Interior Design, Diploma in Graphic Design, Certificate in UI/UX</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NIFT, Pearl Academy, NID, JD Institute, Symbiosis Institute of Design</div></div>
-                    <div class="info-card"><div class="info-label">💰 SALARY</div><div class="info-text">₹4-12 LPA (Fresher), ₹15-30 LPA (Senior)</div></div>
-                </div>
+                <div class="section-title">🗺️ Career Roadmap (Digital Marketing)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3-6 Months</div><div class="roadmap-text">Certification Courses + Internship<br><span class="salary-text">💰 Digital Marketing Executive: ₹3-5 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1-2 Years</div><div class="roadmap-text">SEO/SMM Specialist → Team Lead<br><span class="salary-text">💰 Specialist: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Digital Marketing Manager → Head of Digital Marketing<br><span class="salary-text">💰 Manager: ₹10-20 LPA | Head: ₹20-35 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Director of Marketing → CMO (Chief Marketing Officer)<br><span class="salary-text">💰 CMO: ₹40 LPA - ₹1.5 Cr</span></div></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 6: ENTREPRENEURSHIP ==================== -->
+    <!-- ==================== DOOR 9: ENTREPRENEURSHIP ==================== -->
     <div id="door-entrepreneurship" class="door-content">
-        <div class="accordion-card" id="startupCard">
-            <div class="accordion-header" onclick="toggleCard('startupCard')">
+        <div class="accordion-card" id="startupFullCard">
+            <div class="accordion-header" onclick="toggleCard('startupFullCard')">
                 <div class="accordion-title"><span class="accordion-icon">🚀</span> Entrepreneurship & Startup Guide</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💡 IDEAS</div><div class="info-text">E-commerce, Dropshipping, Digital Agency, Coaching Centre, Food Business, Handicrafts, Clothing Brand</div></div>
-                    <div class="info-card"><div class="info-label">💰 FUNDING</div><div class="info-text">Mudra Loan (₹20L), Stand-Up India (₹1Cr), Startup India Seed Fund (₹50L), Angel Investors, Venture Capital</div></div>
-                    <div class="info-card"><div class="info-label">📋 RESOURCES</div><div class="info-text"><a class="live-link" href="https://www.startupindia.gov.in" target="_blank">Startup India</a> | <a class="live-link" href="https://www.udyamregistration.gov.in" target="_blank">Udyam Registration</a> | <a class="live-link" href="https://www.gst.gov.in" target="_blank">GST Registration</a></div></div>
+                    <div class="info-card"><div class="info-label">💡 BUSINESS IDEAS</div><div class="info-text">E-commerce, Dropshipping, Digital Agency, Coaching Centre, Food Business, Clothing Brand, Handicrafts, Social Media Marketing Agency, Freelancing, YouTube Channel, Blogging, Affiliate Marketing, Software Development, SaaS, EdTech, HealthTech, FinTech, AgriTech, Real Estate, Event Management, Photography Studio, Fitness Center, Beauty Salon, Courier Service, Translation Services, Virtual Assistant, Web Development, App Development, Stock Trading, Consultancy Services, Interior Design, Catering Services, Mobile Repair Shop, Printing Services, Bakery, Cloud Kitchen, Tiffin Service, Online Tutoring, Digital Products (E-books, Templates, Courses)</div></div>
+                    <div class="info-card"><div class="info-label">💰 FUNDING SOURCES</div><div class="info-text"><a class="live-link" href="https://www.mudra.org.in" target="_blank">Mudra Loan</a> (₹50k-20L) | <a class="live-link" href="https://www.standupmitra.in" target="_blank">Stand-Up India</a> (₹10L-1Cr for SC/ST/Women) | <a class="live-link" href="https://www.startupindia.gov.in" target="_blank">Startup India Seed Fund</a> (₹50L) | Angel Investors (₹20L-2Cr) | Venture Capital (₹2Cr+) | Bank Loans | Crowdfunding | Government Subsidies | Self-funding | Family & Friends | Business Loans | NBFCs</div></div>
+                    <div class="info-card"><div class="info-label">📋 REGISTRATION</div><div class="info-text"><a class="live-link" href="https://www.startupindia.gov.in" target="_blank">Startup India Registration</a> | <a class="live-link" href="https://www.udyamregistration.gov.in" target="_blank">Udyam Registration (MSME)</a> | <a class="live-link" href="https://www.gst.gov.in" target="_blank">GST Registration</a> | <a class="live-link" href="https://www.mca.gov.in" target="_blank">Company Registration (LLP/Private Limited)</a> | <a class="live-link" href="https://www.trademarkregister.in" target="_blank">Trademark Registration</a> | <a class="live-link" href="https://www.fssai.gov.in" target="_blank">FSSAI (Food Business)</a></div></div>
                 </div>
-                <div class="section-title">🗺️ Entrepreneurship Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 1</div><div class="roadmap-text">Identify Idea → Market Research → Business Plan</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 2</div><div class="roadmap-text">Legal Registration (LLP/Private Limited) → GST → Udyam</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 3</div><div class="roadmap-text">Funding: Mudra (₹50k-20L) → Angel Investors (₹20L-2Cr) → VC (₹2Cr+)
-</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 4</div><div class="roadmap-text">Launch → Marketing → Scale → IPO/Successful Exit</div></div>
+                <div class="section-title">🗺️ Entrepreneurship Roadmap (7 Stages)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Stage 1</div><div class="roadmap-text">Idea Generation → Market Research → Competitor Analysis → Business Plan (1-2 months)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Stage 2</div><div class="roadmap-text">Legal Registration (LLP/Private Limited) → GST → Udyam → Bank Account (2-4 weeks)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Stage 3</div><div class="roadmap-text">MVP Development → Minimum Viable Product → Testing → Feedback (1-3 months)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Stage 4</div><div class="roadmap-text">Funding - Bootstrapping → Mudra (₹50k-20L) → Angel Investors (₹20L-2Cr) → VC (₹2Cr+)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Stage 5</div><div class="roadmap-text">Launch → Marketing (Digital, Social Media, Influencer, PR) → Sales (3-6 months)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Stage 6</div><div class="roadmap-text">Scale → Team Building → Process Automation → Expansion (1-3 years)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Stage 7</div><div class="roadmap-text">IPO → Exit → Acquisition → Next Venture (3-10 years)</div></div>
+                <div class="section-title">⭐ Famous Indian Entrepreneurs</div>
+                <div><span class="famous-badge">Ratan Tata (Tata Group)</span> <span class="famous-badge">Mukesh Ambani (Reliance)</span> <span class="famous-badge">Gautam Adani (Adani Group)</span> <span class="famous-badge">Kiran Mazumdar-Shaw (Biocon)</span> <span class="famous-badge">Falguni Nayar (Nykaa)</span> <span class="famous-badge">Byju Raveendran (BYJU'S)</span> <span class="famous-badge">Vijay Shekhar Sharma (Paytm)</span> <span class="famous-badge">Deepinder Goyal (Zomato)</span> <span class="famous-badge">Nithin Kamath (Zerodha)</span></div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 7: ENTRANCE EXAMS ==================== -->
+    <!-- ==================== DOOR 10: ENTRANCE EXAMS ==================== -->
     <div id="door-exams" class="door-content">
-        <div class="accordion-card" id="examsCard">
-            <div class="accordion-header" onclick="toggleCard('examsCard')">
+        <div class="accordion-card" id="examsFullCard">
+            <div class="accordion-header" onclick="toggleCard('examsFullCard')">
                 <div class="accordion-title"><span class="accordion-icon">📋</span> Commerce Entrance Exams - Complete List</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <table>
-                    <thead><tr><th>Exam</th><th>Purpose</th><th>Official Link</th></tr></thead>
+                    <thead><tr><th>Exam</th><th>Purpose</th><th>Official Link</th><th>Exam Date (2025)</th></tr></thead>
                     <tbody>
-                        <tr><td>CUET</td><td>B.Com/BBA in Central/State Universities</td><td><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">cuet.samarth.ac.in</a></td></tr>
-                        <tr><td>IPMAT</td><td>BBA at IIM Indore/Rohtak/Jammu/Bodh Gaya</td><td><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">iimidr.ac.in</a></td></tr>
-                        <tr><td>DU JAT</td><td>BBA at Delhi University</td><td><a class="live-link" href="https://admission.uod.ac.in" target="_blank">admission.uod.ac.in</a></td></tr>
-                        <tr><td>NPAT</td><td>BBA at NMIMS</td><td><a class="live-link" href="https://nmims.edu" target="_blank">nmims.edu</a></td></tr>
-                        <tr><td>SET</td><td>BBA at Symbiosis</td><td><a class="live-link" href="https://www.sethomepage.com" target="_blank">sethomepage.com</a></td></tr>
-                        <tr><td>CA Foundation</td><td>Chartered Accountancy</td><td><a class="live-link" href="https://www.icai.org" target="_blank">icai.org</a></td></tr>
-                        <tr><td>CS Foundation</td><td>Company Secretary</td><td><a class="live-link" href="https://www.icsi.edu" target="_blank">icsi.edu</a></td></tr>
-                        <tr><td>CLAT</td><td>Law (LLB)</td><td><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">consortiumofnlus.ac.in</a></td></tr>
-                        <tr><td>NCHM JEE</td><td>Hotel Management</td><td><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">nchm.nta.nic.in</a></td></tr>
+                        <tr><td><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">CUET</a></th><td>B.Com/BBA/Hons in Central/State Universities</th><td><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">cuet.samarth.ac.in</a></th><td>May-June</th></tr>
+                        <tr><td><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">IPMAT</a></th><td>BBA at IIM Indore/Rohtak/Jammu/Bodh Gaya</th><td><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">iimidr.ac.in</a></th><td>May</th></tr>
+                        <tr><td><a class="live-link" href="http://www.du.ac.in" target="_blank">DU JAT</a></th><td>BBA at Delhi University</th><td><a class="live-link" href="https://admission.uod.ac.in" target="_blank">admission.uod.ac.in</a></th><td>June</th></tr>
+                        <tr><td><a class="live-link" href="https://www.nmims.edu" target="_blank">NPAT</a></th><td>BBA at NMIMS</th><td><a class="live-link" href="https://www.nmims.edu" target="_blank">nmims.edu</a></th><td>Jan-May</th></tr>
+                        <tr><td><a class="live-link" href="https://www.set.edu" target="_blank">SET</a></th><td>BBA at Symbiosis</th><td><a class="live-link" href="https://www.set.edu" target="_blank">set.edu</a></th><td>May</th></tr>
+                        <tr><td><a class="live-link" href="https://www.icai.org" target="_blank">CA Foundation</a></th><td>Chartered Accountancy</th><td><a class="live-link" href="https://www.icai.org" target="_blank">icai.org</a></th><td>May, Nov</th></tr>
+                        <tr><td><a class="live-link" href="https://www.icsi.edu" target="_blank">CS Foundation</a></th><td>Company Secretary</th><td><a class="live-link" href="https://www.icsi.edu" target="_blank">icsi.edu</a></th><td>June, Dec</th></tr>
+                        <tr><td><a class="live-link" href="https://www.icmai.in" target="_blank">CMA Foundation</a></th><td>Cost Management Accountancy</th><td><a class="live-link" href="https://www.icmai.in" target="_blank">icmai.in</a></th><td>June, Dec</th></tr>
+                        <tr><td><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">CLAT</a></th><td>Law (LLB) at NLUs</th><td><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">consortiumofnlus.ac.in</a></th><td>December</th></tr>
+                        <tr><td><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">NCHM JEE</a></th><td>Hotel Management</th><td><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">nchm.nta.nic.in</a></th><td>April</th></tr>
                     </tbody>
                 </table>
+                <div class="section-title">💡 Preparation Tips</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📚 CUET</div><div class="info-text">Focus on Accountancy, Business Studies, Economics, Maths, English, General Test</div></div>
+                    <div class="info-card"><div class="info-label">📚 CA Foundation</div><div class="info-text">Principles of Accounting, Business Laws, Quantitative Aptitude, Business Economics</div></div>
+                    <div class="info-card"><div class="info-label">📚 CLAT</div><div class="info-text">Legal Reasoning, Logical Reasoning, English, Current Affairs, Quantitative Aptitude</div></div>
+                </div>
             </div>
         </div>
     </div>
     
-    <!-- ==================== DOOR 8: GOVERNMENT JOBS ==================== -->
+    <!-- ==================== DOOR 11: GOVERNMENT JOBS ==================== -->
     <div id="door-govt" class="door-content">
-        <div class="accordion-card" id="govtJobsCard">
-            <div class="accordion-header" onclick="toggleCard('govtJobsCard')">
+        <div class="accordion-card" id="govtJobsFullCard">
+            <div class="accordion-header" onclick="toggleCard('govtJobsFullCard')">
                 <div class="accordion-title"><span class="accordion-icon">🏛️</span> Government Jobs for Commerce Students</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏦 Banking</div><div class="info-text">IBPS PO (₹8-15 LPA), SBI PO (₹9-18 LPA), RBI Grade B (₹12-20 LPA), IBPS Clerk (₹5-8 LPA)</div></div>
-                    <div class="info-card"><div class="info-label">📋 SSC</div><div class="info-text">SSC CGL (₹6-15 LPA), SSC CHSL (₹4-8 LPA)</div></div>
-                    <div class="info-card"><div class="info-label">🚂 Railways</div><div class="info-text">RRB NTPC (₹4-12 LPA)</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ UPSC</div><div class="info-text">Civil Services (IAS/IPS/IFS) - ₹70k-2.5L/month (post 7th Pay Commission)</div></div>
-                    <div class="info-card"><div class="info-label">🏢 State PSC</div><div class="info-text">State Civil Services, Deputy Collector, DSP, Commercial Tax Officer</div></div>
-                    <div class="info-card"><div class="info-label">📊 Others</div><div class="info-text">Insurance (LIC, NIACL), FCI, NABARD, SEBI, IRDAI</div></div>
+                    <div class="info-card"><div class="info-label">🏦 Banking</div><div class="info-text"><a class="live-link" href="https://www.ibps.in" target="_blank">IBPS PO</a> (₹8-15 LPA), <a class="live-link" href="https://www.sbi.co.in" target="_blank">SBI PO</a> (₹9-18 LPA), <a class="live-link" href="https://www.rbi.org.in" target="_blank">RBI Grade B</a> (₹12-20 LPA), IBPS Clerk (₹5-8 LPA), SBI Clerk (₹4-7 LPA), RBI Assistant (₹6-10 LPA), NABARD Grade A (₹12-18 LPA)</div></div>
+                    <div class="info-card"><div class="info-label">📋 SSC</div><div class="info-text"><a class="live-link" href="https://ssc.nic.in" target="_blank">SSC CGL</a> (₹6-15 LPA), <a class="live-link" href="https://ssc.nic.in" target="_blank">SSC CHSL</a> (₹4-8 LPA), SSC MTS (₹3-6 LPA), SSC GD (₹3-6 LPA)</div></div>
+                    <div class="info-card"><div class="info-label">🚂 Railways</div><div class="info-text"><a class="live-link" href="https://rrbapply.gov.in" target="_blank">RRB NTPC</a> (₹4-12 LPA), RRB Group D (₹3-6 LPA), RRB JE (₹6-10 LPA)</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ UPSC</div><div class="info-text"><a class="live-link" href="https://upsc.gov.in" target="_blank">Civil Services (IAS/IPS/IFS)</a> - ₹70k-2.5L/month (post 7th Pay Commission)</div></div>
+                    <div class="info-card"><div class="info-label">🏢 Others</div><div class="info-text">Insurance (LIC, NIACL, GIC), FCI, NABARD, SEBI, IRDAI, EPFO, ESIC, PSUs (BHEL, NTPC, ONGC - Finance/HR roles)</div></div>
                 </div>
                 <div class="section-title">📋 Banking Exam Structure (IBPS PO)</div>
-                <div class="roadmap-step"><div class="roadmap-year">Prelims</div><div class="roadmap-text">English, Reasoning, Quantitative Aptitude (1 hour)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Mains</div><div class="roadmap-text">Reasoning, GA, English, Quantitative, Computer (3.5 hours)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Interview</div><div class="roadmap-text">50 marks</div></div>
-                <div class="section-title">⭐ Famous Bureaucrats</div>
-                <div><span class="famous-badge">Dr. K. Sivan (ISRO)</span> <span class="famous-badge">T. N. Seshan</span> <span class="famous-badge">Nirmala Sitharaman</span></div>
+                <div class="roadmap-step"><div class="roadmap-year">Prelims</div><div class="roadmap-text">English, Reasoning, Quantitative Aptitude (1 hour) | 100 marks</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Mains</div><div class="roadmap-text">Reasoning, GA, English, Quantitative, Computer (3.5 hours) | 200 marks</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Interview</div><div class="roadmap-text">50 marks | Qualifying + Merit</div></div>
+                <div class="section-title">📋 SSC CGL Exam Structure</div>
+                <div class="roadmap-step"><div class="roadmap-year">Tier 1</div><div class="roadmap-text">GK, Reasoning, Quantitative, English (1 hour)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Tier 2</div><div class="roadmap-text">Quantitative, English, Statistics, Finance (3 papers)</div></div>
+                <div class="section-title">⭐ Famous Bureaucrats from Commerce Background</div>
+                <div><span class="famous-badge">Nirmala Sitharaman (Finance Minister)</span> <span class="famous-badge">Dr. K. Sivan (ISRO Chairman - Commerce background)</span> <span class="famous-badge">T. N. Seshan (Former CEC)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 12: ABROAD STUDIES ==================== -->
+    <div id="door-abroad" class="door-content">
+        <div class="accordion-card" id="abroadCommerceCard">
+            <div class="accordion-header" onclick="toggleCard('abroadCommerceCard')">
+                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Studies for Commerce Students</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">MBA (2 years), MS Finance, MS Accounting, MS Business Analytics | <a class="live-link" href="https://www.gmac.com/gmat" target="_blank">GMAT</a>/<a class="live-link" href="https://www.ets.org/toefl" target="_blank">TOEFL</a>/<a class="live-link" href="https://www.ielts.org" target="_blank">IELTS</a> | Salary: $80k-150k/year | OPT: 1-3 years | H-1B Visa → Green Card</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">MSc Finance, MSc Accounting, MBA | IELTS 6.5-7.0 | Salary: £35k-80k/year | Graduate Route Visa (2 years) | Top Unis: LSE, Warwick, Manchester, Imperial, King's</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">MBA, PG Diploma in Finance/Accounting, MFin | IELTS 6.5-7.0 | Salary: CAD 60k-100k/year | PGWP (1-3 years) | Express Entry PR (1-2 years) | Top Unis: UoT, UBC, McGill, York</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">Master of Professional Accounting, MBA, MFin | IELTS 6.5 | Salary: AUD 70k-120k/year | Post-study work visa (2-4 years) | SkillSelect PR | Top Unis: Melbourne, Sydney, ANU</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">MSc Finance, MBA (low tuition/free) | IELTS 6.5 | German A1-A2 recommended | Salary: €50k-80k/year | 18 months job search visa | PR after 21 months | Top Unis: Mannheim, Frankfurt, Cologne</div></div>
+                    <div class="info-card"><div class="info-label">🇸🇬 Singapore</div><div class="info-text">MBA, MSc Finance | IELTS 6.5-7.0 | Salary: SGD 60k-120k/year | Top Unis: NUS, NTU, SMU</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇪 UAE/Dubai</div><div class="info-text">MBA, MSc Finance | IELTS 6.5 | Salary: AED 120k-300k/year (Tax-free) | No income tax | Top Unis: University of Dubai, Middlesex Dubai, Heriot-Watt</div></div>
+                </div>
+                <div class="section-title">🎓 Scholarships for Abroad Studies</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🇺🇸 Fulbright</div><div class="info-text"><a class="live-link" href="https://us.fulbrightonline.org" target="_blank">Fulbright Scholarship</a> - Fully funded</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 Chevening</div><div class="info-text"><a class="live-link" href="https://www.chevening.org" target="_blank">Chevening Scholarship</a> - Fully funded (1 year master's)</div></div>
+                    <div class="info-card"><div class="info-label">🇦🇺 Australia Awards</div><div class="info-text"><a class="live-link" href="https://www.australiaawards.gov.au" target="_blank">Australia Awards</a> - Fully funded</div></div>
+                    <div class="info-card"><div class="info-label">🇨🇦 Vanier</div><div class="info-text"><a class="live-link" href="https://www.vanier.gc.ca" target="_blank">Vanier Canada Scholarship</a> - CAD 50k/year</div></div>
+                    <div class="info-card"><div class="info-label">🇩🇪 DAAD</div><div class="info-text"><a class="live-link" href="https://www.daad.in" target="_blank">DAAD Scholarship</a> - Fully funded</div></div>
+                    <div class="info-card"><div class="info-label">🇬🇧 Commonwealth</div><div class="info-text"><a class="live-link" href="https://cscuk.fcdo.gov.uk" target="_blank">Commonwealth Scholarship</a> - Fully funded</div></div>
+                </div>
+                <div class="section-title">📋 Required Standardized Tests</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">IELTS</div><div class="info-text">Minimum 6.5 overall (UK, Canada, Australia, NZ)</div></div>
+                    <div class="info-card"><div class="info-label">TOEFL</div><div class="info-text">Minimum 90-100 (USA, Canada)</div></div>
+                    <div class="info-card"><div class="info-label">GMAT</div><div class="info-text">600-700+ for top MBA programs (USA, Europe, Singapore)</div></div>
+                    <div class="info-card"><div class="info-label">GRE</div><div class="info-text">310-320+ for MS Finance/Business Analytics</div></div>
+                </div>
+                <div class="section-title">⭐ Famous Indians Who Studied Abroad for Commerce</div>
+                <div><span class="famous-badge">Indra Nooyi (IIM Calcutta → Yale MBA)</span> <span class="famous-badge">Rajat Gupta (IIM Ahmedabad → Harvard MBA)</span> <span class="famous-badge">Vikram Pandit (Columbia University)</span></div>
             </div>
         </div>
     </div>
@@ -421,11 +563,6 @@
     document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
     document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
     function goBack() { window.location.href = 'education.html'; }
-    function updateCUETDate() {
-        const resultSpan = document.getElementById('cuetResultDate');
-        if(resultSpan) resultSpan.innerHTML = `(Expected: June ${new Date().getFullYear()})`;
-    }
-    updateCUETDate();
 </script>
 </body>
 </html>
