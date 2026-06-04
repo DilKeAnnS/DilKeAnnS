@@ -6,77 +6,80 @@
     <title>Medical | Dil-Ke-AnnS Career Saathi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #F0F4F8 0%, #E8EDF2 100%); padding-bottom: 80px; color: #1a2a3a; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
         
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 30px 30px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; transition: all 0.2s; }
-        .back-button:hover { background: rgba(255,255,255,0.25); transform: translateX(-2px); }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; opacity: 0.9; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         
-        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
-        .page-title { font-size: 28px; font-weight: 800; margin-bottom: 10px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
-        .page-subtitle { font-size: 14px; color: #64748B; margin-bottom: 25px; padding-left: 20px; }
+        .container { padding: 20px 16px; max-width: 1200px; margin: 0 auto; }
+        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
+        .page-subtitle { font-size: 12px; color: #64748B; margin-bottom: 20px; padding-left: 19px; }
         
-        /* Door/Tab Navigation */
-        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 8px; border-radius: 60px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .door-btn { background: transparent; border: none; padding: 12px 20px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 50px; transition: all 0.3s; color: #1a2a3a; display: flex; align-items: center; gap: 8px; }
-        .door-btn:hover { background: #F0EADF; transform: translateY(-2px); }
-        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 4px 12px rgba(230,126,34,0.3); }
+        /* Door Navigation - Mobile Friendly */
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 16px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
         
-        /* Accordion Cards for Sub-Doors */
-        .accordion-card { background: white; border-radius: 24px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; transition: all 0.3s; }
-        .accordion-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .accordion-header { background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #E67E22; }
-        .accordion-title { font-size: 20px; font-weight: 800; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
-        .accordion-icon { font-size: 28px; }
-        .accordion-arrow { font-size: 20px; transition: transform 0.3s; color: #E67E22; }
-        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
-        .accordion-content { display: none; padding: 20px; background: white; }
-        .accordion-card.active .accordion-content { display: block; animation: fadeIn 0.3s ease; }
+        /* For mobile - show tooltip on long press (simple title attribute) */
+        .door-btn .door-label { display: inline; }
+        @media (max-width: 550px) { 
+            .door-btn .door-label { display: none; } 
+            .door-btn { padding: 10px 14px; }
+            .door-btn::after { content: attr(data-title); font-size: 10px; display: none; }
+        }
+        
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        /* 7W+3P Grid */
-        .wow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 25px; }
-        .wow-card { background: #F8F9FA; border-radius: 16px; padding: 15px; border-left: 4px solid #E67E22; }
-        .wow-label { font-weight: 800; color: #E67E22; margin-bottom: 8px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
-        .wow-text { font-size: 14px; line-height: 1.5; color: #2D2A24; }
+        /* Accordion Cards */
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 18px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
         
-        /* Info Sections */
-        .info-section { margin-bottom: 25px; }
-        .info-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; border-left: 3px solid #E67E22; padding-left: 12px; }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
-        .info-box { background: #F8F9FA; border-radius: 16px; padding: 15px; }
-        .info-box strong { color: #E67E22; display: block; margin-bottom: 6px; }
+        /* Info Grids */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 12px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; color: #2D2A24; }
         
-        .college-table, .exam-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .college-table th, .college-table td, .exam-table th, .exam-table td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
-        .college-table th, .exam-table th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; display: flex; align-items: center; gap: 8px; border-left: 3px solid #E67E22; padding-left: 12px; }
         
-        .cutoff-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-        .cutoff-table th, .cutoff-table td { padding: 8px; text-align: center; border: 1px solid #E8E2D9; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        
+        .cutoff-table th, .cutoff-table td { text-align: center; }
         .cutoff-table th { background: #1B4D3E; color: white; }
         
-        .roadmap-step { display: flex; margin-bottom: 15px; align-items: flex-start; gap: 15px; }
-        .roadmap-year { background: #E67E22; color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
-        .roadmap-content { flex: 1; background: #F8F9FA; padding: 12px; border-radius: 12px; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
         
-        .famous-person { display: inline-block; background: #1B4D3E; color: white; padding: 6px 12px; border-radius: 40px; margin: 5px; font-size: 12px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 10px; border-radius: 30px; margin: 3px; font-size: 11px; }
         
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 8px 12px 20px; border-top: 1px solid #E8E2D9; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 6px 14px; border-radius: 30px; transition: all 0.2s; }
-        .nav-item:hover { background: #F0EADF; transform: translateY(-2px); }
-        .nav-item span:first-child { font-size: 24px; }
-        .nav-item span:last-child { font-size: 11px; font-weight: 500; color: #64748B; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
         
-        @media (min-width: 768px) { .door-btn { padding: 14px 28px; font-size: 15px; } .container { padding: 30px 24px; } }
-        @media (max-width: 550px) { .door-btn span { display: none; } .door-btn { padding: 10px 14px; } .roadmap-year { width: 50px; height: 50px; font-size: 10px; } }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } }
     </style>
 </head>
 <body>
@@ -88,10 +91,7 @@
             <select id="languageSelect">
                 <option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option>
                 <option value="mr">🇮🇳 मराठी</option><option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option><option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option><option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option><option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option><option value="as">🇮🇳 অসমীয়া</option>
+                <option value="te">🇮🇳 తెలుగు</option>
             </select>
         </div>
         <div style="opacity:0;">🔔</div>
@@ -101,288 +101,141 @@
 
 <div class="container">
     <div class="page-title" id="pageTitle">🩺 Medical & Healthcare Careers</div>
-    <div class="page-subtitle" id="pageSubtitle">Complete Career Roadmap | 50+ Courses | 100+ Colleges | Full Exam Details | Salary Data | Abroad Options</div>
+    <div class="page-subtitle" id="pageSubtitle">Complete Career Roadmap | 50+ Courses | Exam Details | Salary Data | Abroad Options</div>
     
-    <!-- Main Doors (Categories) -->
+    <!-- DOOR NAVIGATION -->
     <div class="door-nav" id="doorNav">
-        <button class="door-btn active" data-door="neet">🎓 <span>NEET Courses</span></button>
-        <button class="door-btn" data-door="paramedical">🩺 <span>Paramedical</span></button>
-        <button class="door-btn" data-door="pharmacy">💊 <span>Pharmacy</span></button>
-        <button class="door-btn" data-door="veterinary">🐄 <span>Veterinary</span></button>
-        <button class="door-btn" data-door="research">🔬 <span>Research</span></button>
-        <button class="door-btn" data-door="abroad">🌍 <span>Abroad</span></button>
+        <button class="door-btn active" data-door="neet" data-title="NEET Courses">🎓 <span class="door-label">NEET Courses</span></button>
+        <button class="door-btn" data-door="paramedical" data-title="Paramedical">🩺 <span class="door-label">Paramedical</span></button>
+        <button class="door-btn" data-door="pharmacy" data-title="Pharmacy">💊 <span class="door-label">Pharmacy</span></button>
+        <button class="door-btn" data-door="veterinary" data-title="Veterinary">🐄 <span class="door-label">Veterinary</span></button>
+        <button class="door-btn" data-door="research" data-title="Research">🔬 <span class="door-label">Research</span></button>
+        <button class="door-btn" data-door="abroad" data-title="Abroad">🌍 <span class="door-label">Abroad</span></button>
     </div>
     
-    <!-- DOOR 1: NEET Courses -->
+    <!-- ==================== DOOR 1: NEET COURSES ==================== -->
     <div id="door-neet" class="door-content active">
-        <!-- Sub-Door: MBBS -->
-        <div class="accordion-card active" id="mbbs-card">
-            <div class="accordion-header" onclick="toggleAccordion('mbbs-card')">
-                <div class="accordion-title"><span class="accordion-icon">🩺</span> MBBS - Bachelor of Medicine & Surgery</div>
+        <!-- MBBS -->
+        <div class="accordion-card active" id="mbbsCard">
+            <div class="accordion-header" onclick="toggleCard('mbbsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🩺</span> MBBS - Bachelor of Medicine & Surgery (5.5 years)</div>
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <!-- 7W+3P Section -->
-                <div class="wow-grid">
-                    <div class="wow-card"><div class="wow-label">❓ WHAT</div><div class="wow-text">MBBS is a professional undergraduate medical degree that trains students to become licensed medical doctors capable of diagnosing, treating, and preventing diseases.</div></div>
-                    <div class="wow-card"><div class="wow-label">🌟 WHY</div><div class="wow-text">Highest social respect, job security, ability to save lives, excellent income (₹8 LPA - ₹2 Cr+), endless learning opportunities</div></div>
-                    <div class="wow-card"><div class="wow-label">⏰ WHEN</div><div class="wow-text">After 12th PCB (Age 17+). Start NEET preparation from Class 11 itself.</div></div>
-                    <div class="wow-card"><div class="wow-label">📍 WHERE</div><div class="wow-text">AIIMS, CMC Vellore, JIPMER, AFMC, Maulana Azad, Grant Medical, KGMU, BHU</div></div>
-                    <div class="wow-card"><div class="wow-label">📋 WHICH EXAM</div><div class="wow-text">NEET (National Eligibility cum Entrance Test) - Only entrance for MBBS in India</div></div>
-                    <div class="wow-card"><div class="wow-label">👤 WHOM</div><div class="wow-text">Hardworking, empathetic, good memory, stress management, strong Biology & Chemistry interest</div></div>
-                    <div class="wow-card"><div class="wow-label">🛠️ HOW</div><div class="wow-text">12th PCB (50%+ General, 40% Reserved) → Clear NEET → MBBS (5.5 years) → Internship → PG → Super-specialisation</div></div>
-                    <div class="wow-card"><div class="wow-label">📜 PAST</div><div class="wow-text">Limited seats (20,000), separate college exams, very expensive private colleges</div></div>
-                    <div class="wow-card"><div class="wow-label">📊 PRESENT</div><div class="wow-text">NEET common gateway, 1 lakh+ seats, high competition (18 lakh students), telemedicine growth</div></div>
-                    <div class="wow-card"><div class="wow-label">🚀 FUTURE</div><div class="wow-text">AI-assisted diagnostics, robotic surgery, personalized medicine, geriatric care boom, international opportunities</div></div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional medical degree to become a licensed doctor.</div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest respect, job security, ability to save lives, ₹8 LPA - ₹2 Cr+</div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (Age 17+). Start NEET prep from Class 11.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text">AIIMS Delhi, CMC Vellore, JIPMER, AFMC, Maulana Azad, Grant Medical</div></div>
+                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text">NEET (National Eligibility cum Entrance Test)</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Hardworking, empathetic, good memory, stress management</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET → MBBS (5.5 years) → Internship → PG</div></div>
+                    <div class="info-card"><div class="info-label">📜 PAST</div><div class="info-text">Limited seats (20,000), separate college exams</div></div>
+                    <div class="info-card"><div class="info-label">📊 PRESENT</div><div class="info-text">NEET common gateway, 1 lakh+ seats, 18 lakh aspirants</div></div>
+                    <div class="info-card"><div class="info-label">🚀 FUTURE</div><div class="info-text">AI diagnostics, robotic surgery, telemedicine, global opportunities</div></div>
                 </div>
-                
-                <!-- Exam Details with Live Links -->
-                <div class="info-section">
-                    <div class="info-title">📋 NEET Exam - Complete Details</div>
-                    <div class="info-grid">
-                        <div class="info-box"><strong>📅 Application Start</strong> February 2025 (tentative)</div>
-                        <div class="info-box"><strong>📅 Last Date</strong> March 2025</div>
-                        <div class="info-box"><strong>📅 Exam Date</strong> First week of May 2025</div>
-                        <div class="info-box"><strong>📅 Result Date</strong> June 2025</div>
-                        <div class="info-box"><strong>🌐 Official Link</strong> <a href="https://neet.nta.nic.in" target="_blank">neet.nta.nic.in</a></div>
-                        <div class="info-box"><strong>📝 Application Link</strong> <a href="https://neet.nta.nic.in" target="_blank">Apply Here</a></div>
-                    </div>
-                    <div class="info-title" style="margin-top:15px;">📊 Category-wise Cutoff (2024 Reference)</div>
-                    <table class="cutoff-table">
-                        <thead><tr><th>Category</th><th>Cutoff Marks (Out of 720)</th><th>Percentile</th></tr></thead>
-                        <tbody>
-                            <tr><td>General</td><td>720-137</td><td>50th</td></tr>
-                            <tr><td>OBC/SC/ST</td><td>136-107</td><td>40th</td></tr>
-                            <tr><td>General-PwD</td><td>136-121</td><td>45th</td></tr>
-                        </tbody>
-                    </table>
+                <div class="section-title">📋 NEET Exam Details</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📅 Application</div><div class="info-text">Feb-Mar 2025</div></div>
+                    <div class="info-card"><div class="info-label">📅 Exam Date</div><div class="info-text">May 2025</div></div>
+                    <div class="info-card"><div class="info-label">📅 Result</div><div class="info-text">June 2025</div></div>
+                    <div class="info-card"><div class="info-label">🌐 Official</div><div class="info-text"><a href="https://neet.nta.nic.in" target="_blank">neet.nta.nic.in</a></div></div>
                 </div>
-                
-                <!-- Top Colleges -->
-                <div class="info-section">
-                    <div class="info-title">🏛️ Top Medical Colleges in India (NIRF Ranked)</div>
-                    <table class="college-table">
-                        <thead><tr><th>College Name</th><th>City</th><th>Seats</th><th>Fees (Yearly)</th><th>NIRF Rank</th></tr></thead>
-                        <tbody>
-                            <tr><td>AIIMS Delhi</td><td>Delhi</td><td>125</td><td>₹1,856</td><td>1</td></tr>
-                            <tr><td>CMC Vellore</td><td>Vellore</td><td>100</td><td>₹4,00,000</td><td>2</td></tr>
-                            <tr><td>JIPMER Puducherry</td><td>Puducherry</td><td>200</td><td>₹10,000</td><td>3</td></tr>
-                            <tr><td>AFMC Pune</td><td>Pune</td><td>150</td><td>₹1,50,000</td><td>4</td></tr>
-                            <tr><td>Maulana Azad Delhi</td><td>Delhi</td><td>250</td><td>₹10,000</td><td>5</td></tr>
-                            <tr><td>Grant Medical Mumbai</td><td>Mumbai</td><td>200</td><td>₹70,000</td><td>6</td></tr>
-                            <tr><td>KGMU Lucknow</td><td>Lucknow</td><td>250</td><td>₹50,000</td><td>7</td></tr>
-                            <tr><td>IMS BHU Varanasi</td><td>Varanasi</td><td>150</td><td>₹10,000</td><td>8</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <!-- Career Roadmap -->
-                <div class="info-section">
-                    <div class="info-title">🗺️ Complete Career Roadmap - MBBS to Super Specialist</div>
-                    <div class="roadmap-step"><div class="roadmap-year">Class<br>10-12</div><div class="roadmap-content"><strong>PCB Stream</strong> - Focus on Biology, Chemistry, Physics. Start NEET preparation from Class 11. Minimum 50% marks required for General category.</div></div>
-                    <div class="roadmap-step"><div class="roadmap-year">After<br>12th</div><div class="roadmap-content"><strong>NEET Exam</strong> - Clear NEET with good rank. General category needs 50th percentile (720-137 marks). SC/ST/OBC needs 40th percentile.</div></div>
-                    <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-content"><strong>MBBS Degree</strong> - 4.5 years academic + 1 year compulsory rotating internship. Learn medicine, surgery, pediatrics, gynecology, etc.</div></div>
-                    <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-content"><strong>PG (MD/MS)</strong> - Specialize in fields like Medicine (MD), Surgery (MS), Pediatrics, Radiology, etc. via NEET-PG. Salary after PG: ₹15-30 LPA.</div></div>
-                    <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-content"><strong>Super Specialization (DM/MCh)</strong> - For fields like Cardiology, Neurology, Gastroenterology, Urology. Top salary: ₹50 LPA - ₹2 Cr+.</div></div>
-                    <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-content"><strong>Consultant / Professor / HOD</strong> - Lead a department, teach future doctors, or open private practice. Highest achievement: Head of Department (HOD) at top institute.</div></div>
-                </div>
-                
-                <!-- Scholarships -->
-                <div class="info-section">
-                    <div class="info-title">💰 Scholarships for MBBS Students</div>
-                    <div class="info-grid">
-                        <div class="info-box"><strong>PM Scholarship Scheme (PMSS)</strong> - For wards of Ex-Servicemen | ₹2,500/month</div>
-                        <div class="info-box"><strong>National Scholarship Portal (NSP)</strong> - Central/State scholarships | ₹5,000-50,000/year</div>
-                        <div class="info-box"><strong>INSPIRE Scholarship</strong> - For Science students (Top 1% in 12th) | ₹80,000/year</div>
-                        <div class="info-box"><strong>State Govt Scholarships</strong> - Check your state's scholarship portal</div>
-                    </div>
-                </div>
-                
-                <!-- Famous Personalities -->
-                <div class="info-section">
-                    <div class="info-title">⭐ Famous Personalities in Medicine</div>
-                    <div><span class="famous-person">Dr. Devi Shetty</span> <span class="famous-person">Dr. Naresh Trehan</span> <span class="famous-person">Dr. Randeep Guleria</span> <span class="famous-person">Dr. Soumya Swaminathan</span></div>
-                </div>
+                <div class="section-title">📊 NEET Cutoff 2024 (Reference)</div>
+                <table class="cutoff-table"><thead><tr><th>Category</th><th>Cutoff Marks</th><th>Percentile</th></tr></thead>
+                <tbody><tr><td>General</td><td>720-137</td><td>50th</td></tr><tr><td>OBC/SC/ST</td><td>136-107</td><td>40th</td></tr><tr><td>General-PwD</td><td>136-121</td><td>45th</td></tr></tbody></table>
+                <div class="section-title">🏛️ Top Medical Colleges</div>
+                <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th></tr></thead>
+                <tbody><tr><td>AIIMS Delhi</td><td>Delhi</td><td>125</td><td>₹1,856</td></tr><tr><td>CMC Vellore</td><td>Vellore</td><td>100</td><td>₹4,00,000</td></tr><tr><td>JIPMER</td><td>Puducherry</td><td>200</td><td>₹10,000</td></tr><tr><td>AFMC Pune</td><td>Pune</td><td>150</td><td>₹1,50,000</td></tr><tr><td>Maulana Azad</td><td>Delhi</td><td>250</td><td>₹10,000</td></tr></tbody></table>
+                <div class="section-title">🗺️ Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text"><strong>PCB Stream</strong> - Focus on Biology, Chemistry, Physics. Start NEET preparation.</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">After 12th</div><div class="roadmap-text"><strong>NEET Exam</strong> - Clear NEET with good rank.</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text"><strong>MBBS Degree</strong> - 4.5 years academic + 1 year internship.</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text"><strong>PG (MD/MS)</strong> - Specialization. Salary: ₹15-30 LPA</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text"><strong>DM/MCh</strong> - Super specialization. Salary: ₹50 LPA - ₹2 Cr+</div></div>
+                <div class="section-title">💰 Scholarships</div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">PM Scholarship</div><div class="info-text">₹2,500/month for wards of Ex-Servicemen</div></div><div class="info-card"><div class="info-label">NSP Scholarship</div><div class="info-text">₹5,000-50,000/year via National Scholarship Portal</div></div><div class="info-card"><div class="info-label">INSPIRE</div><div class="info-text">₹80,000/year for top 1% students</div></div></div>
+                <div class="section-title">⭐ Famous Doctors</div>
+                <div><span class="famous-badge">Dr. Devi Shetty</span> <span class="famous-badge">Dr. Naresh Trehan</span> <span class="famous-badge">Dr. Randeep Guleria</span> <span class="famous-badge">Dr. Soumya Swaminathan</span></div>
             </div>
         </div>
-        
-        <!-- Sub-Door: BDS -->
-        <div class="accordion-card" id="bds-card">
-            <div class="accordion-header" onclick="toggleAccordion('bds-card')">
-                <div class="accordion-title"><span class="accordion-icon">🦷</span> BDS - Bachelor of Dental Surgery</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
+        <!-- BDS -->
+        <div class="accordion-card" id="bdsCard">
+            <div class="accordion-header" onclick="toggleCard('bdsCard')"><div class="accordion-title"><span class="accordion-icon">🦷</span> BDS - Bachelor of Dental Surgery (5 years)</div><div class="accordion-arrow">▼</div></div>
             <div class="accordion-content">
-                <div class="wow-grid">
-                    <div class="wow-card"><div class="wow-label">❓ WHAT</div><div class="wow-text">BDS is the undergraduate degree for dental surgery, training students to become dentists.</div></div>
-                    <div class="wow-card"><div class="wow-label">🌟 WHY</div><div class="wow-text">High demand for dentists, flexible work hours, own clinic possible, good salary (₹6-30 LPA)</div></div>
-                    <div class="wow-card"><div class="wow-label">⏰ WHEN</div><div class="wow-text">After 12th PCB (Age 17+), same as MBBS</div></div>
-                    <div class="wow-card"><div class="wow-label">📍 WHERE</div><div class="wow-text">Maulana Azad Dental College, Government Dental College Mumbai, NIMS Dental College</div></div>
-                    <div class="wow-card"><div class="wow-label">📋 WHICH EXAM</div><div class="wow-text">NEET (same as MBBS)</div></div>
-                    <div class="wow-card"><div class="wow-label">👤 WHOM</div><div class="wow-text">Students interested in dental health, good hand-eye coordination, patient communication skills</div></div>
-                    <div class="wow-card"><div class="wow-label">🛠️ HOW</div><div class="wow-text">12th PCB → NEET → BDS (5 years) → Internship → MDS or Practice</div></div>
-                    <div class="wow-card"><div class="wow-label">🚀 FUTURE</div><div class="wow-text">Cosmetic dentistry, implantology, orthodontics, dental tourism in India</div></div>
-                </div>
-                <div class="info-section"><div class="info-title">📋 NEET Same as MBBS - Cutoff same category-wise</div></div>
-                <div class="info-section"><div class="info-title">🏛️ Top BDS Colleges</div><table class="college-table"><thead><tr><th>College</th><th>City</th><th>Seats</th></tr></thead><tbody><tr><td>Maulana Azad Dental College</td><td>Delhi</td><td>50</td></tr><tr><td>Government Dental College</td><td>Mumbai</td><td>60</td></tr><tr><td>NIMS Dental College</td><td>Jaipur</td><td>100</td></tr></tbody></table></div>
-                <div class="info-section"><div class="info-title">🗺️ Career Roadmap</div><div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-content"><strong>BDS Degree</strong> - 4 years academic + 1 year internship</div></div><div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-content"><strong>MDS (Master of Dental Surgery)</strong> - Specialization in Orthodontics, Prosthodontics, Oral Surgery</div></div><div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-content"><strong>Dentist / Consultant</strong> - Own clinic, corporate hospital, or teaching</div></div></div>
-                <div class="info-section"><div class="info-title">⭐ Famous Dentists</div><div><span class="famous-person">Dr. Sanjeev Kapoor</span> <span class="famous-person">Dr. Rajesh Goyal</span></div></div>
+                <div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-30 LPA</div></div><div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">Maulana Azad Dental, Govt Dental Mumbai, NIMS Jaipur</div></div><div class="info-card"><div class="info-label">📋 Exam</div><div class="info-text">NEET (Same as MBBS)</div></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">BDS Degree → Internship</div></div><div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MDS Specialization</div></div>
             </div>
         </div>
-        
-        <!-- Sub-Door: BAMS -->
-        <div class="accordion-card" id="bams-card">
-            <div class="accordion-header" onclick="toggleAccordion('bams-card')">
-                <div class="accordion-title"><span class="accordion-icon">🌿</span> BAMS - Bachelor of Ayurvedic Medicine & Surgery</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid">
-                    <div class="wow-card"><div class="wow-label">❓ WHAT</div><div class="wow-text">BAMS is the undergraduate degree in Ayurveda - traditional Indian medicine system.</div></div>
-                    <div class="wow-card"><div class="wow-label">🌟 WHY</div><div class="wow-text">Growing demand for Ayurveda, government AYUSH departments, own clinic possible (₹5-20 LPA)</div></div>
-                    <div class="wow-card"><div class="wow-label">📋 WHICH EXAM</div><div class="wow-text">NEET</div></div>
-                    <div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">National Institute of Ayurveda Jaipur, Gujarat Ayurved University, Tilak Ayurved College Pune</div></div>
-                    <div class="wow-card"><div class="wow-label">🚀 FUTURE</div><div class="wow-text">AYUSH hospitals, wellness centers, Ayurvedic product manufacturing, global demand</div></div>
-                </div>
-                <div class="info-section"><div class="info-title">⭐ Famous Ayurvedacharyas</div><div><span class="famous-person">Vaidya Balendu Prakash</span> <span class="famous-person">Dr. Partap Chauhan</span> <span class="famous-person">Dr. Dinesh Sharma</span></div></div>
-            </div>
+        <!-- BAMS -->
+        <div class="accordion-card" id="bamsCard">
+            <div class="accordion-header" onclick="toggleCard('bamsCard')"><div class="accordion-title"><span class="accordion-icon">🌿</span> BAMS - Bachelor of Ayurvedic Medicine & Surgery (5.5 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-20 LPA</div></div><div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">National Institute of Ayurveda Jaipur, Gujarat Ayurved University</div></div></div></div>
         </div>
-        
-        <!-- Sub-Door: BHMS -->
-        <div class="accordion-card" id="bhms-card">
-            <div class="accordion-header" onclick="toggleAccordion('bhms-card')">
-                <div class="accordion-title"><span class="accordion-icon">💊</span> BHMS - Bachelor of Homeopathic Medicine & Surgery</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid">
-                    <div class="wow-card"><div class="wow-label">❓ WHAT</div><div class="wow-text">BHMS is the undergraduate degree in Homeopathy - alternative medicine system.</div></div>
-                    <div class="wow-card"><div class="wow-label">🌟 WHY</div><div class="wow-text">Growing acceptance, government jobs (CGHS, Railways), own practice (₹4-15 LPA)</div></div>
-                    <div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">National Institute of Homoeopathy Kolkata, Dr. Gururaju Govt Homoeopathic College, Nehru Homoeopathic College</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Sub-Door: BUMS -->
-        <div class="accordion-card" id="bums-card">
-            <div class="accordion-header" onclick="toggleAccordion('bums-card')">
-                <div class="accordion-title"><span class="accordion-icon">📜</span> BUMS - Bachelor of Unani Medicine & Surgery</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid">
-                    <div class="wow-card"><div class="wow-label">❓ WHAT</div><div class="wow-text">BUMS is the undergraduate degree in Unani medicine system.</div></div>
-                    <div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">National Institute of Unani Medicine Bangalore, Govt Unani Medical College Chennai, Ajmal Khan Tibbiya College</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Sub-Door: BNYS -->
-        <div class="accordion-card" id="bnys-card">
-            <div class="accordion-header" onclick="toggleAccordion('bnys-card')">
-                <div class="accordion-title"><span class="accordion-icon">🧘</span> BNYS - Bachelor of Naturopathy & Yogic Sciences</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid">
-                    <div class="wow-card"><div class="wow-label">❓ WHAT</div><div class="wow-text">BNYS focuses on natural healing methods, yoga, and lifestyle medicine.</div></div>
-                    <div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">SDM College of Naturopathy Karnataka, Sri Sri College Bengaluru, JSS College of Naturopathy</div></div>
-                </div>
-            </div>
+        <!-- BHMS -->
+        <div class="accordion-card" id="bhmsCard">
+            <div class="accordion-header" onclick="toggleCard('bhmsCard')"><div class="accordion-title"><span class="accordion-icon">💊</span> BHMS - Bachelor of Homeopathic Medicine (5.5 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-15 LPA</div></div><div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">National Institute of Homoeopathy Kolkata, Dr. Gururaju College</div></div></div></div>
         </div>
     </div>
     
-    <!-- DOOR 2: Paramedical Courses -->
+    <!-- ==================== DOOR 2: PARAMEDICAL ==================== -->
     <div id="door-paramedical" class="door-content">
-        <!-- Similar structure for 15+ paramedical courses -->
-        <div class="accordion-card" id="nursing-card">
-            <div class="accordion-header" onclick="toggleAccordion('nursing-card')">
-                <div class="accordion-title"><span class="accordion-icon">👩‍⚕️</span> B.Sc Nursing - 4 Years</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid"><div class="wow-card"><div class="wow-label">💰 Salary</div><div class="wow-text">₹4-8 LPA (India), $60,000-100,000 (Abroad)</div></div><div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">RAKCON Delhi, CMC Vellore, AIIMS Nursing, NIMHANS</div></div><div class="wow-card"><div class="wow-label">🌍 Abroad</div><div class="wow-text">NCLEX-RN (USA), NCLEX (Canada), NMC (UK), AHPRA (Australia)</div></div></div>
-            </div>
+        <div class="accordion-card" id="nursingCard">
+            <div class="accordion-header" onclick="toggleCard('nursingCard')"><div class="accordion-title"><span class="accordion-icon">👩‍⚕️</span> B.Sc Nursing (4 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-8 LPA (India), $60k-100k (Abroad)</div></div><div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">RAKCON Delhi, CMC Vellore, AIIMS Nursing</div></div><div class="info-card"><div class="info-label">🌍 Abroad</div><div class="info-text">NCLEX-RN (USA), NMC (UK), AHPRA (Australia)</div></div></div></div>
         </div>
-        <div class="accordion-card" id="bpt-card">
-            <div class="accordion-header" onclick="toggleAccordion('bpt-card')">
-                <div class="accordion-title"><span class="accordion-icon">🦿</span> BPT - Bachelor of Physiotherapy (4.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid"><div class="wow-card"><div class="wow-label">💰 Salary</div><div class="wow-text">₹4-10 LPA</div></div><div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">AIIMS Delhi, CMC Vellore, Manipal College of Allied Health</div></div></div>
-            </div>
+        <div class="accordion-card" id="bptCard">
+            <div class="accordion-header" onclick="toggleCard('bptCard')"><div class="accordion-title"><span class="accordion-icon">🦿</span> BPT - Physiotherapy (4.5 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-10 LPA</div></div><div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">AIIMS Delhi, CMC Vellore, Manipal</div></div></div></div>
         </div>
-        <!-- Add more paramedical courses similarly -->
+        <div class="accordion-card" id="mltCard">
+            <div class="accordion-header" onclick="toggleCard('mltCard')"><div class="accordion-title"><span class="accordion-icon">🔬</span> B.Sc Medical Lab Technology (3 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹3-7 LPA</div></div><div class="info-card"><div class="info-label">📋 Jobs</div><div class="info-text">Lab Technician, Path Lab, Hospital Lab</div></div></div></div>
+        </div>
+        <div class="accordion-card" id="radiologyCard">
+            <div class="accordion-header" onclick="toggleCard('radiologyCard')"><div class="accordion-title"><span class="accordion-icon">📷</span> B.Sc Radiology (3 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-9 LPA</div></div></div></div>
+        </div>
     </div>
     
-    <!-- DOOR 3: Pharmacy & Medical Sciences -->
+    <!-- ==================== DOOR 3: PHARMACY ==================== -->
     <div id="door-pharmacy" class="door-content">
-        <div class="accordion-card" id="bpharm-card">
-            <div class="accordion-header" onclick="toggleAccordion('bpharm-card')">
-                <div class="accordion-title"><span class="accordion-icon">💊</span> B.Pharm - Bachelor of Pharmacy (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid"><div class="wow-card"><div class="wow-label">💰 Salary</div><div class="wow-text">₹4-12 LPA</div></div><div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">NIPER Mohali, Jamia Hamdard Delhi, Manipal College of Pharmaceutical Sciences</div></div><div class="wow-card"><div class="wow-label">📋 Jobs</div><div class="wow-text">Pharmacist, Drug Inspector, Clinical Research Associate, Medical Writer, Sales Executive</div></div></div>
-            </div>
+        <div class="accordion-card" id="bpharmCard">
+            <div class="accordion-header" onclick="toggleCard('bpharmCard')"><div class="accordion-title"><span class="accordion-icon">💊</span> B.Pharm (4 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-12 LPA</div></div><div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">NIPER Mohali, Jamia Hamdard, Manipal</div></div><div class="info-card"><div class="info-label">📋 Jobs</div><div class="info-text">Pharmacist, Drug Inspector, Clinical Research</div></div></div></div>
         </div>
-        <div class="accordion-card" id="pharmd-card">
-            <div class="accordion-header" onclick="toggleAccordion('pharmd-card')">
-                <div class="accordion-title"><span class="accordion-icon">💊</span> Pharm.D - Doctor of Pharmacy (6 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid"><div class="wow-card"><div class="wow-label">💰 Salary</div><div class="wow-text">₹5-15 LPA</div></div><div class="wow-card"><div class="wow-label">📋 Jobs</div><div class="wow-text">Clinical Pharmacist, Hospital Pharmacist, Drug Safety Associate</div></div></div>
-            </div>
+        <div class="accordion-card" id="pharmdCard">
+            <div class="accordion-header" onclick="toggleCard('pharmdCard')"><div class="accordion-title"><span class="accordion-icon">💊</span> Pharm.D (6 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹5-15 LPA</div></div><div class="info-card"><div class="info-label">📋 Jobs</div><div class="info-text">Clinical Pharmacist, Hospital Pharmacist</div></div></div></div>
         </div>
     </div>
     
-    <!-- DOOR 4: Veterinary & Allied -->
+    <!-- ==================== DOOR 4: VETERINARY ==================== -->
     <div id="door-veterinary" class="door-content">
-        <div class="accordion-card" id="bvsc-card">
-            <div class="accordion-header" onclick="toggleAccordion('bvsc-card')">
-                <div class="accordion-title"><span class="accordion-icon">🐄</span> BVSc & AH - Veterinary Science (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid"><div class="wow-card"><div class="wow-label">💰 Salary</div><div class="wow-text">₹6-15 LPA</div></div><div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">IVRI Bareilly, GADVASU Ludhiana, Bombay Veterinary College, Madras Veterinary College</div></div><div class="wow-card"><div class="wow-label">📋 Jobs</div><div class="wow-text">Veterinary Officer, Govt Vet Hospital, Private Clinic, Poultry/Dairy Industry</div></div></div>
-            </div>
+        <div class="accordion-card" id="bvscCard">
+            <div class="accordion-header" onclick="toggleCard('bvscCard')"><div class="accordion-title"><span class="accordion-icon">🐄</span> BVSc & AH - Veterinary Science (5.5 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹6-15 LPA</div></div><div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">IVRI Bareilly, GADVASU Ludhiana, Bombay Veterinary College</div></div></div></div>
         </div>
     </div>
     
-    <!-- DOOR 5: Research & Pure Science -->
+    <!-- ==================== DOOR 5: RESEARCH ==================== -->
     <div id="door-research" class="door-content">
-        <div class="accordion-card" id="biotech-card">
-            <div class="accordion-header" onclick="toggleAccordion('biotech-card')">
-                <div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Biotechnology (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid"><div class="wow-card"><div class="wow-label">💰 Salary</div><div class="wow-text">₹3-10 LPA</div></div><div class="wow-card"><div class="wow-label">🏛️ Top Colleges</div><div class="wow-text">IITs, Vellore Institute of Technology, University of Delhi, JNU</div></div><div class="wow-card"><div class="wow-label">📋 Higher Studies</div><div class="wow-text">M.Sc Biotechnology, MBA Biotech, PhD</div></div></div>
-            </div>
+        <div class="accordion-card" id="biotechCard">
+            <div class="accordion-header" onclick="toggleCard('biotechCard')"><div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Biotechnology (3 years)</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹3-10 LPA</div></div><div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">IITs, VIT, Delhi University, JNU</div></div><div class="info-card"><div class="info-label">📋 Higher Studies</div><div class="info-text">M.Sc, PhD, MBA Biotech</div></div></div></div>
         </div>
     </div>
     
-    <!-- DOOR 6: Abroad Options -->
+    <!-- ==================== DOOR 6: ABROAD ==================== -->
     <div id="door-abroad" class="door-content">
-        <div class="accordion-card" id="usmle-card">
-            <div class="accordion-header" onclick="toggleAccordion('usmle-card')">
-                <div class="accordion-title"><span class="accordion-icon">🇺🇸</span> USA - USMLE Pathway</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid"><div class="wow-card"><div class="wow-label">📋 Steps</div><div class="wow-text">USMLE Step 1, Step 2 CK, Step 3 + Residency (3-7 years)</div></div><div class="wow-card"><div class="wow-label">💰 Salary</div><div class="wow-text">$200,000-500,000/year</div></div><div class="wow-card"><div class="wow-label">🌐 Official</div><div class="wow-text"><a href="https://www.usmle.org" target="_blank">usmle.org</a></div></div></div>
-            </div>
+        <div class="accordion-card" id="usmleCard">
+            <div class="accordion-header" onclick="toggleCard('usmleCard')"><div class="accordion-title"><span class="accordion-icon">🇺🇸</span> USA - USMLE Pathway</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">📋 Steps</div><div class="info-text">USMLE Step 1, Step 2 CK, Step 3 + Residency</div></div><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">$200,000-500,000/year</div></div><div class="info-card"><div class="info-label">🌐 Official</div><div class="info-text"><a href="https://www.usmle.org" target="_blank">usmle.org</a></div></div></div></div>
         </div>
-        <div class="accordion-card" id="plab-card">
-            <div class="accordion-header" onclick="toggleAccordion('plab-card')">
-                <div class="accordion-title"><span class="accordion-icon">🇬🇧</span> UK - PLAB Pathway</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="wow-grid"><div class="wow-card"><div class="wow-label">💰 Salary</div><div class="wow-text">£30,000-100,000/year</div></div><div class="wow-card"><div class="wow-label">🌐 Official</div><div class="wow-text"><a href="https://www.gmc-uk.org" target="_blank">gmc-uk.org</a></div></div></div>
-            </div>
+        <div class="accordion-card" id="plabCard">
+            <div class="accordion-header" onclick="toggleCard('plabCard')"><div class="accordion-title"><span class="accordion-icon">🇬🇧</span> UK - PLAB Pathway</div><div class="accordion-arrow">▼</div></div>
+            <div class="accordion-content"><div class="info-grid"><div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">£30,000-100,000/year</div></div><div class="info-card"><div class="info-label">🌐 Official</div><div class="info-text"><a href="https://www.gmc-uk.org" target="_blank">gmc-uk.org</a></div></div></div></div>
         </div>
     </div>
 </div>
@@ -390,8 +243,8 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-    // Toggle accordion
-    function toggleAccordion(cardId) {
+    // Toggle accordion cards
+    function toggleCard(cardId) {
         const card = document.getElementById(cardId);
         card.classList.toggle('active');
     }
@@ -407,7 +260,7 @@
         });
     });
     
-    // Bottom bar
+    // Bottom bar navigation
     const bottomNav = [
         { name: "Home", icon: "🏠", link: "index.html" },
         { name: "Search", icon: "🔍", link: "#" },
