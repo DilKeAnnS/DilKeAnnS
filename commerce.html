@@ -7,228 +7,425 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
         .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
         .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo img { height: 45px; width: auto; border-radius: 12px; }
         .logo h1 { font-size: 18px; font-weight: 700; }
         .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; outline: none; }
-        .language-selector select option { color: black; background: white; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
         .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; }
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 14px; }
-        .section-card { background: white; border-radius: 20px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .section-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1B4D3E; display: flex; align-items: center; gap: 8px; border-left: 4px solid #E67E22; padding-left: 12px; }
-        .list-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
         .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; font-weight: 500; color: #64748B; }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
         .nav-item.active { background: #F0EADF; }
-        .nav-item.active span:last-child { color: #1B4D3E; }
-        @media (min-width: 768px) { .container { max-width: 800px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .bottom-bar { padding: 10px 5% 22px; } }
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p id="appTagline">Career Saathi</p></div></div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
-                <option value="as">🇮🇳 অসমীয়া</option>
-            </select>
-        </div>
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
         <div style="opacity:0;">🔔</div>
     </div>
-    <div class="tagline" id="taglineText">📊 Commerce & Business Careers</div>
+    <div class="tagline">📊 Complete Commerce Career Guide - 10th to CEO | Live Exam Updates</div>
 </div>
 
 <div class="container">
-    <div class="page-title" id="pageTitle">📊 Commerce Stream</div>
-
-    <div class="section-card">
-        <div class="section-title" id="bachelorTitle">🎓 Bachelor Degrees</div>
-        <div class="list-item" id="bcomItem">• B.Com (Bachelor of Commerce) – 3 years</div>
-        <div class="list-item" id="bcomHonsItem">• B.Com (Hons)</div>
-        <div class="list-item" id="bbaItem">• BBA – Bachelor of Business Administration</div>
-        <div class="list-item" id="bafItem">• BAF – Bachelor of Accounting & Finance</div>
-        <div class="list-item" id="bbiItem">• BBI – Bachelor of Banking & Insurance</div>
-        <div class="list-item" id="bfmItem">• BFM – Bachelor of Financial Markets</div>
-        <div class="list-item" id="economicsItem">• Bachelor of Economics (B.A / B.Sc Economics)</div>
+    <div class="page-title">📊 Commerce & Business Careers</div>
+    <div class="page-subtitle">50+ Courses | 150+ Colleges | Live Exam Links | Auto Results | Complete Roadmap</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="bachelor">🎓 <span class="door-label">Bachelor Degrees</span></button>
+        <button class="door-btn" data-door="professional">📜 <span class="door-label">Professional Courses</span></button>
+        <button class="door-btn" data-door="law">⚖️ <span class="door-label">Law</span></button>
+        <button class="door-btn" data-door="hotel">🏨 <span class="door-label">Hotel Management</span></button>
+        <button class="door-btn" data-door="creative">🎨 <span class="door-label">Creative Fields</span></button>
+        <button class="door-btn" data-door="entrepreneurship">🚀 <span class="door-label">Entrepreneurship</span></button>
+        <button class="door-btn" data-door="exams">📋 <span class="door-label">Entrance Exams</span></button>
+        <button class="door-btn" data-door="govt">🏛️ <span class="door-label">Govt Jobs</span></button>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="professionalTitle">📜 Professional Courses</div>
-        <div class="list-item" id="caItem">• CA – Chartered Accountant</div>
-        <div class="list-item" id="csItem">• CS – Company Secretary</div>
-        <div class="list-item" id="cmaItem">• CMA – Cost & Management Accountant</div>
-        <div class="list-item" id="cfaItem">• CFA – Chartered Financial Analyst</div>
+    
+    <!-- ==================== DOOR 1: BACHELOR DEGREES ==================== -->
+    <div id="door-bachelor" class="door-content active">
+        <!-- B.Com - FULL DETAIL -->
+        <div class="accordion-card active" id="bcomCard">
+            <div class="accordion-header" onclick="toggleCard('bcomCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> B.Com - Bachelor of Commerce (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of accounting, taxation, finance, business law, economics.<br><span class="salary-text">💰 Fresher Salary: ₹3-8 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Foundation for CA/CS/CMA, banking jobs, corporate careers.<br><span class="salary-text">💰 After M.Com: ₹6-15 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th Commerce (Age 17+). Minimum 50% marks.</div></div>
+                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.srcc.edu" target="_blank">SRCC Delhi</a> | <a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Hindu College</a> | <a class="live-link" href="https://www.lsr.edu.in" target="_blank">LSR</a> | <a class="live-link" href="https://www.christuniversity.in" target="_blank">Christ University</a> | <a class="live-link" href="https://www.nmims.edu" target="_blank">NMIMS</a></div></div>
+                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">CUET</a> | University-specific entrance exams</div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in numbers, business, finance, analytical thinking</div></div>
+                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th Commerce → CUET → B.Com (3 years) → M.Com/CA/CS/MBA/Job</div></div>
+                </div>
+                <div class="section-title">📋 CUET EXAM - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 CUET Official</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">cuet.samarth.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📝 Application Link</div><div class="info-text">Feb-Mar 2025</div></div>
+                    <div class="info-card"><div class="info-label">📊 Result Link</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">Check Result</a> <span id="cuetResultDate">(Expected: June 2025)</span></div></div>
+                </div>
+                <div class="section-title">🏛️ Top Commerce Colleges (NIRF Ranked)</div>
+                <table><thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
+                <tbody>
+                    <tr><td><a class="live-link" href="https://www.srcc.edu" target="_blank">SRCC</a></td><td>Delhi</td><td>₹25,000</td><td>1</td><td><a class="live-link" href="https://www.srcc.edu" target="_blank">Visit</a></td></tr>
+                    <tr><td><a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Hindu College</a></td><td>Delhi</td><td>₹25,000</td><td>2</td><td><a class="live-link" href="https://www.hinducollege.ac.in" target="_blank">Visit</a></td></tr>
+                    <tr><td><a class="live-link" href="https://www.lsr.edu.in" target="_blank">LSR</a></td><td>Delhi</td><td>₹25,000</td><td>3</td><td><a class="live-link" href="https://www.lsr.edu.in" target="_blank">Visit</a></td></tr>
+                    <tr><td><a class="live-link" href="https://www.christuniversity.in" target="_blank">Christ University</a></td><td>Bangalore</td><td>₹1,00,000</td><td>4</td><td><a class="live-link" href="https://www.christuniversity.in" target="_blank">Visit</a></td></tr>
+                </tbody></table>
+                <div class="section-title">🗺️ Career Roadmap (10th → CEO)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text">Commerce Stream - Focus on Accountancy, Business Studies, Economics<br><span class="salary-text">💰 After 12th: CUET qualified</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Com Degree<br><span class="salary-text">💰 Accountant: ₹3-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Com / MBA / CA / CS / CMA<br><span class="salary-text">💰 Senior: ₹8-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Finance Manager → Finance Controller → CFO<br><span class="salary-text">💰 CFO: ₹50 LPA - ₹2 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CEO / Managing Director / Partner at Big 4<br><span class="salary-text">💰 CEO: ₹1 Cr - ₹5 Cr+</span></div></div>
+                <div class="section-title">⭐ Famous Commerce Graduates</div>
+                <div><span class="famous-badge">Kumar Mangalam Birla (Aditya Birla Group)</span> <span class="famous-badge">Nirmala Sitharaman (Finance Minister)</span> <span class="famous-badge">Deepak Parekh (HDFC)</span></div>
+            </div>
+        </div>
+        
+        <!-- BBA -->
+        <div class="accordion-card" id="bbaCard">
+            <div class="accordion-header" onclick="toggleCard('bbaCard')">
+                <div class="accordion-title"><span class="accordion-icon">📈</span> BBA - Bachelor of Business Administration (3 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Management, marketing, finance, HR, operations.<br><span class="salary-text">💰 Fresher Salary: ₹4-10 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Direct path to MBA, corporate jobs, startup skills.<br><span class="salary-text">💰 After MBA: ₹15-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">IPMAT</a> | DU JAT | NPAT | SET</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">Shaheed Sukhdev College, NMIMS, Symbiosis, Christ, Xavier's, IIM Indore (IPM)</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap (BBA)</div>
+                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">BBA Degree<br><span class="salary-text">💰 Management Trainee: ₹4-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MBA from IIM/FMS/XLRI via CAT<br><span class="salary-text">💰 MBA Graduate: ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Manager → Senior Manager → Director<br><span class="salary-text">💰 Director: ₹40 LPA - ₹1 Cr</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CEO / Managing Director<br><span class="salary-text">💰 CEO: ₹1 Cr - ₹5 Cr+</span></div></div>
+            </div>
+        </div>
+        
+        <!-- BAF, BBI, BFM -->
+        <div class="accordion-card" id="specializedCard">
+            <div class="accordion-header" onclick="toggleCard('specializedCard')">
+                <div class="accordion-title"><span class="accordion-icon">💰</span> Specialized B.Com Programs (BAF, BBI, BFM)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📊 BAF</div><div class="info-text">Bachelor of Accounting & Finance - ₹4-9 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏦 BBI</div><div class="info-text">Bachelor of Banking & Insurance - ₹4-9 LPA</div></div>
+                    <div class="info-card"><div class="info-label">📈 BFM</div><div class="info-text">Bachelor of Financial Markets - ₹4-10 LPA</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NMIMS, HR College Mumbai, St. Xavier's Kolkata, Christ University</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="lawTitle">⚖️ Law & Integrated Courses</div>
-        <div class="list-item" id="llbItem">• LLB (5 years after 12th) through CLAT</div>
-        <div class="list-item" id="bcomLlblItem">• B.Com + LLB (5 years integrated)</div>
-        <div class="list-item" id="baLlblItem">• BA + LLB (5 years integrated)</div>
-        <div class="list-item" id="bbaMbaItem">• Integrated BBA+MBA (5 years)</div>
+    
+    <!-- ==================== DOOR 2: PROFESSIONAL COURSES ==================== -->
+    <div id="door-professional" class="door-content">
+        <!-- CA - Chartered Accountant -->
+        <div class="accordion-card" id="caCard">
+            <div class="accordion-header" onclick="toggleCard('caCard')">
+                <div class="accordion-title"><span class="accordion-icon">📜</span> CA - Chartered Accountant</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional in accounting, auditing, taxation, financial management.<br><span class="salary-text">💰 Starting Salary: ₹8-15 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Most respected commerce profession, highest earning potential.<br><span class="salary-text">💰 Experienced CA: ₹20-50 LPA | Partner: ₹50 LPA - ₹2 Cr</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icai.org" target="_blank">ICAI Exams</a> | <a class="live-link" href="https://www.icai.org" target="_blank">CA Foundation</a> | <a class="live-link" href="https://www.icai.org" target="_blank">CA Intermediate</a> | <a class="live-link" href="https://www.icai.org" target="_blank">CA Final</a></div></div>
+                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Detail-oriented, analytical, strong mathematics, discipline</div></div>
+                </div>
+                <div class="section-title">🗺️ CA Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">After 12th</div><div class="roadmap-text">Register for CA Foundation (4 papers)<br><span class="salary-text">💰 Exam: May/Nov</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">9 Months</div><div class="roadmap-text">CA Intermediate (8 papers) + Orientation/ITT training</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2.5 Years</div><div class="roadmap-text">Articleship (Practical Training)<br><span class="salary-text">💰 Stipend: ₹2-10k/month (Year 1), ₹5-20k/month (Year 3)</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">6 Months</div><div class="roadmap-text">CA Final (8 papers) + Advanced ITT</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CA Qualification → Audit/Accounting/Tax/Consulting<br><span class="salary-text">💰 CA: ₹8-15 LPA (Fresher) | ₹20-50 LPA (Exp) | Partner: ₹50L-2Cr</span></div></div>
+                <div class="section-title">⭐ Famous Chartered Accountants</div>
+                <div><span class="famous-badge">Kumar Mangalam Birla</span> <span class="famous-badge">Nirmala Sitharaman</span> <span class="famous-badge">Deepak Parekh</span> <span class="famous-badge">Rahul Bajaj</span></div>
+            </div>
+        </div>
+        
+        <!-- CS - Company Secretary -->
+        <div class="accordion-card" id="csCard">
+            <div class="accordion-header" onclick="toggleCard('csCard')">
+                <div class="accordion-title"><span class="accordion-icon">📋</span> CS - Company Secretary</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Expert in corporate law, governance, and compliance.<br><span class="salary-text">💰 Starting Salary: ₹6-12 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Mandatory for listed companies, high demand, corporate exposure.<br><span class="salary-text">💰 Experienced CS: ₹15-30 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icsi.edu" target="_blank">ICSI</a> | CSEET | Executive | Professional</div></div>
+                </div>
+                <div class="section-title">🗺️ CS Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">After 12th</div><div class="roadmap-text">CSEET (Company Secretary Executive Entrance Test)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">9 Months</div><div class="roadmap-text">CS Executive (8 papers)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">15 Months</div><div class="roadmap-text">CS Professional (9 papers) + Training</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CS Qualification → Company Secretary at Corporate<br><span class="salary-text">💰 CS: ₹6-12 LPA (Fresher) | ₹15-30 LPA (Exp) | ₹30-50 LPA (VP/Legal Head)</span></div></div>
+            </div>
+        </div>
+        
+        <!-- CMA -->
+        <div class="accordion-card" id="cmaCard">
+            <div class="accordion-header" onclick="toggleCard('cmaCard')">
+                <div class="accordion-title"><span class="accordion-icon">📊</span> CMA - Cost & Management Accountant</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Specialist in cost management, strategic finance, decision-making.<br><span class="salary-text">💰 Starting Salary: ₹6-10 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text"><a class="live-link" href="https://www.icmai.in" target="_blank">ICMAI</a> | Foundation | Intermediate | Final</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CFA -->
+        <div class="accordion-card" id="cfaCard">
+            <div class="accordion-header" onclick="toggleCard('cfaCard')">
+                <div class="accordion-title"><span class="accordion-icon">📈</span> CFA - Chartered Financial Analyst (Global)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Global gold standard in investment management and financial analysis.<br><span class="salary-text">💰 Salary: ₹8-35 LPA (India) | $80k-200k (US)</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.cfainstitute.org" target="_blank">CFA Level 1,2,3</a></div></div>
+                    <div class="info-card"><div class="info-label">🗺️ ROADMAP</div><div class="info-text">Level 1 (6 months) → Level 2 (6 months) → Level 3 (6 months) → Charterholder</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="hotelTitle">🏨 Hotel Management & Hospitality</div>
-        <div class="list-item" id="bhmItem">• BHM – Bachelor of Hotel Management</div>
-        <div class="list-item" id="bscHmItem">• B.Sc Hospitality & Hotel Administration</div>
-        <div class="list-item" id="eventItem">• Event Management, Travel & Tourism</div>
+    
+    <!-- ==================== DOOR 3: LAW ==================== -->
+    <div id="door-law" class="door-content">
+        <div class="accordion-card" id="llbCard">
+            <div class="accordion-header" onclick="toggleCard('llbCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚖️</span> LLB - Bachelor of Laws (5 years after 12th | 3 years after graduation)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of legal systems, constitutional law, criminal law, corporate law.<br><span class="salary-text">💰 Fresher Lawyer: ₹5-10 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Prestigious profession, high earning potential, advocacy, judiciary.<br><span class="salary-text">💰 Senior Lawyer: ₹20-50 LPA | Top Advocate: ₹1-5 Cr</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">CLAT</a> | <a class="live-link" href="https://www.ailet.in" target="_blank">AILET</a> | <a class="live-link" href="https://www.lsatindia.in" target="_blank">LSAT</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NLSIU Bangalore, NALSAR Hyderabad, NLU Delhi, GNLU Gandhinagar, Symbiosis Pune</div></div>
+                </div>
+                <div class="section-title">📋 CLAT EXAM - LIVE UPDATES</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔗 CLAT Official</div><div class="info-text"><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">consortiumofnlus.ac.in</a></div></div>
+                    <div class="info-card"><div class="info-label">📊 Cutoff (2024)</div><div class="info-text">NLSIU Bangalore: 120+ rank, NLU Delhi: 200+ rank</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">BA/BBA/B.Com + LLB (Integrated) from NLU<br><span class="salary-text">💰 Fresher: ₹5-10 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Litigation Assistant → Junior Advocate</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Senior Advocate → Corporate Counsel<br><span class="salary-text">💰 Corporate Lawyer: ₹15-30 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">High Court/Supreme Court Advocate | Judge | Legal Head<br><span class="salary-text">💰 Top: ₹1-5 Cr (Senior Advocate) | Judge: ₹2-2.5L/month</span></div></div>
+                <div class="section-title">⭐ Famous Lawyers</div>
+                <div><span class="famous-badge">Fali S. Nariman</span> <span class="famous-badge">Harish Salve</span> <span class="famous-badge">Ram Jethmalani</span> <span class="famous-badge">Mukul Rohatgi</span></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="designCommerceTitle">🎨 Design & Creative Fields (Commerce allowed)</div>
-        <div class="list-item" id="fashionItem">• Fashion Design, Interior Design, Graphic Design, Animation, Jewellery Design</div>
-        <div class="list-item" id="digitalItem">• Digital Marketing, Social Media Management, SEO</div>
+    
+    <!-- ==================== DOOR 4: HOTEL MANAGEMENT ==================== -->
+    <div id="door-hotel" class="door-content">
+        <div class="accordion-card" id="bhmCard">
+            <div class="accordion-header" onclick="toggleCard('bhmCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏨</span> BHM - Bachelor of Hotel Management (4 years)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Hospitality management, food production, front office, housekeeping.<br><span class="salary-text">💰 Fresher Salary: ₹4-8 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">NCHM JEE</a></div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">IHM Pusa Delhi, IHM Mumbai, IHM Chennai, IHM Bangalore, Welcomgroup</div></div>
+                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Hotel Manager, Chef, Event Planner, Airline Services, Cruise Ship, Entrepreneur</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">BHM Degree + Industrial Training<br><span class="salary-text">💰 Management Trainee: ₹4-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">Assistant Manager → Department Head<br><span class="salary-text">💰 Department Head: ₹10-20 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">8-10 Years</div><div class="roadmap-text">General Manager → Hotel Director → VP Operations<br><span class="salary-text">💰 GM: ₹25-50 LPA | Director: ₹40-80 LPA</span></div></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="entrepreneurshipTitle">🚀 Entrepreneurship & Start-ups</div>
-        <div class="list-item" id="retailItem">• Retail business, E-commerce, Digital agency, Service-based business</div>
-        <div class="list-item" id="stockItem">• Stock Market Trading & Investment</div>
+    
+    <!-- ==================== DOOR 5: CREATIVE FIELDS ==================== -->
+    <div id="door-creative" class="door-content">
+        <div class="accordion-card" id="digitalMarketingCard">
+            <div class="accordion-header" onclick="toggleCard('digitalMarketingCard')">
+                <div class="accordion-title"><span class="accordion-icon">📱</span> Digital Marketing (3-6 months courses)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">SEO, Social Media Marketing, Google Ads, Email Marketing, Analytics.<br><span class="salary-text">💰 Fresher Salary: ₹4-8 LPA</span></div></div>
+                    <div class="info-card"><div class="info-label">📋 CERTIFICATIONS</div><div class="info-text"><a class="live-link" href="https://skillshop.google.com" target="_blank">Google Digital Garage</a>, HubSpot, SEMrush, Facebook Blueprint</div></div>
+                </div>
+                <div class="section-title">🗺️ Career Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">3-6 Months</div><div class="roadmap-text">Certification Courses<br><span class="salary-text">💰 Digital Marketing Executive: ₹4-8 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">SEO/SMM Specialist → Team Lead<br><span class="salary-text">💰 Specialist: ₹8-15 LPA</span></div></div>
+                <div class="roadmap-step"><div class="roadmap-year">5+ Years</div><div class="roadmap-text">Digital Marketing Manager → Head of Marketing<br><span class="salary-text">💰 Manager: ₹15-30 LPA | Head: ₹30-60 LPA</span></div></div>
+            </div>
+        </div>
+        
+        <div class="accordion-card" id="fashionCard">
+            <div class="accordion-header" onclick="toggleCard('fashionCard')">
+                <div class="accordion-title"><span class="accordion-icon">👗</span> Fashion Design / Interior Design / Graphic Design</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📋 COURSES</div><div class="info-text">B.Des Fashion, B.Sc Interior Design, Diploma in Graphic Design, Certificate in UI/UX</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">NIFT, Pearl Academy, NID, JD Institute, Symbiosis Institute of Design</div></div>
+                    <div class="info-card"><div class="info-label">💰 SALARY</div><div class="info-text">₹4-12 LPA (Fresher), ₹15-30 LPA (Senior)</div></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="entranceCommerceTitle">📋 Entrance Exams for Commerce</div>
-        <div class="list-item" id="caFoundationItem">• CA Foundation – After 12th (register any time)</div>
-        <div class="list-item" id="csFoundationItem">• CS Foundation – After 12th</div>
-        <div class="list-item" id="clatItem">• CLAT – For Law (LLB)</div>
-        <div class="list-item" id="ipmatItem">• IPMAT – For BBA at IIM Indore/Rohtak</div>
-        <div class="list-item" id="dujatItem">• DU JAT – Delhi University BBA</div>
-        <div class="list-item" id="npatItem">• NPAT – NMIMS BBA</div>
-        <div class="list-item" id="setItem">• SET – Symbiosis BBA</div>
+    
+    <!-- ==================== DOOR 6: ENTREPRENEURSHIP ==================== -->
+    <div id="door-entrepreneurship" class="door-content">
+        <div class="accordion-card" id="startupCard">
+            <div class="accordion-header" onclick="toggleCard('startupCard')">
+                <div class="accordion-title"><span class="accordion-icon">🚀</span> Entrepreneurship & Startup Guide</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">💡 IDEAS</div><div class="info-text">E-commerce, Dropshipping, Digital Agency, Coaching Centre, Food Business, Handicrafts, Clothing Brand</div></div>
+                    <div class="info-card"><div class="info-label">💰 FUNDING</div><div class="info-text">Mudra Loan (₹20L), Stand-Up India (₹1Cr), Startup India Seed Fund (₹50L), Angel Investors, Venture Capital</div></div>
+                    <div class="info-card"><div class="info-label">📋 RESOURCES</div><div class="info-text"><a class="live-link" href="https://www.startupindia.gov.in" target="_blank">Startup India</a> | <a class="live-link" href="https://www.udyamregistration.gov.in" target="_blank">Udyam Registration</a> | <a class="live-link" href="https://www.gst.gov.in" target="_blank">GST Registration</a></div></div>
+                </div>
+                <div class="section-title">🗺️ Entrepreneurship Roadmap</div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 1</div><div class="roadmap-text">Identify Idea → Market Research → Business Plan</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 2</div><div class="roadmap-text">Legal Registration (LLP/Private Limited) → GST → Udyam</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 3</div><div class="roadmap-text">Funding: Mudra (₹50k-20L) → Angel Investors (₹20L-2Cr) → VC (₹2Cr+)
+</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Step 4</div><div class="roadmap-text">Launch → Marketing → Scale → IPO/Successful Exit</div></div>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="govtJobsCommerceTitle">💼 Government Jobs After Commerce</div>
-        <div class="list-item" id="sscCglItem">• SSC CGL, CHSL – For graduate students</div>
-        <div class="list-item" id="bankingItem">• Banking – IBPS PO/Clerk, SBI PO, RBI Grade B</div>
-        <div class="list-item" id="railwaysItem">• Railways (RRB NTPC, Group D)</div>
-        <div class="list-item" id="stateGovtItem">• State Government Exams (PSC, Patwari, etc.)</div>
-        <div class="list-item" id="insuranceItem">• Insurance (LIC, NICL, UIIC)</div>
+    
+    <!-- ==================== DOOR 7: ENTRANCE EXAMS ==================== -->
+    <div id="door-exams" class="door-content">
+        <div class="accordion-card" id="examsCard">
+            <div class="accordion-header" onclick="toggleCard('examsCard')">
+                <div class="accordion-title"><span class="accordion-icon">📋</span> Commerce Entrance Exams - Complete List</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <table>
+                    <thead><tr><th>Exam</th><th>Purpose</th><th>Official Link</th></tr></thead>
+                    <tbody>
+                        <tr><td>CUET</td><td>B.Com/BBA in Central/State Universities</td><td><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">cuet.samarth.ac.in</a></td></tr>
+                        <tr><td>IPMAT</td><td>BBA at IIM Indore/Rohtak/Jammu/Bodh Gaya</td><td><a class="live-link" href="https://www.iimidr.ac.in" target="_blank">iimidr.ac.in</a></td></tr>
+                        <tr><td>DU JAT</td><td>BBA at Delhi University</td><td><a class="live-link" href="https://admission.uod.ac.in" target="_blank">admission.uod.ac.in</a></td></tr>
+                        <tr><td>NPAT</td><td>BBA at NMIMS</td><td><a class="live-link" href="https://nmims.edu" target="_blank">nmims.edu</a></td></tr>
+                        <tr><td>SET</td><td>BBA at Symbiosis</td><td><a class="live-link" href="https://www.sethomepage.com" target="_blank">sethomepage.com</a></td></tr>
+                        <tr><td>CA Foundation</td><td>Chartered Accountancy</td><td><a class="live-link" href="https://www.icai.org" target="_blank">icai.org</a></td></tr>
+                        <tr><td>CS Foundation</td><td>Company Secretary</td><td><a class="live-link" href="https://www.icsi.edu" target="_blank">icsi.edu</a></td></tr>
+                        <tr><td>CLAT</td><td>Law (LLB)</td><td><a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">consortiumofnlus.ac.in</a></td></tr>
+                        <tr><td>NCHM JEE</td><td>Hotel Management</td><td><a class="live-link" href="https://nchm.nta.nic.in" target="_blank">nchm.nta.nic.in</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <div class="section-card">
-        <div class="section-title" id="salaryCommerceTitle">💰 High Salary Career Options After Commerce</div>
-        <div class="list-item" id="caSalaryItem">• Chartered Accountant (CA) – ₹8-30 LPA</div>
-        <div class="list-item" id="investmentItem">• Investment Banker – ₹12-40 LPA</div>
-        <div class="list-item" id="cfaSalaryItem">• Financial Analyst (CFA) – ₹8-35 LPA</div>
-        <div class="list-item" id="csSalaryItem">• Company Secretary (CS) – ₹6-20 LPA</div>
-        <div class="list-item" id="consultantItem">• Management Consultant – ₹10-30 LPA</div>
-        <div class="list-item" id="bankPoItem">• Bank PO/Probationary Officer – ₹8-15 LPA</div>
-        <div class="list-item" id="entrepreneurItem">• Entrepreneur – Unlimited potential</div>
+    
+    <!-- ==================== DOOR 8: GOVERNMENT JOBS ==================== -->
+    <div id="door-govt" class="door-content">
+        <div class="accordion-card" id="govtJobsCard">
+            <div class="accordion-header" onclick="toggleCard('govtJobsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Government Jobs for Commerce Students</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏦 Banking</div><div class="info-text">IBPS PO (₹8-15 LPA), SBI PO (₹9-18 LPA), RBI Grade B (₹12-20 LPA), IBPS Clerk (₹5-8 LPA)</div></div>
+                    <div class="info-card"><div class="info-label">📋 SSC</div><div class="info-text">SSC CGL (₹6-15 LPA), SSC CHSL (₹4-8 LPA)</div></div>
+                    <div class="info-card"><div class="info-label">🚂 Railways</div><div class="info-text">RRB NTPC (₹4-12 LPA)</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ UPSC</div><div class="info-text">Civil Services (IAS/IPS/IFS) - ₹70k-2.5L/month (post 7th Pay Commission)</div></div>
+                    <div class="info-card"><div class="info-label">🏢 State PSC</div><div class="info-text">State Civil Services, Deputy Collector, DSP, Commercial Tax Officer</div></div>
+                    <div class="info-card"><div class="info-label">📊 Others</div><div class="info-text">Insurance (LIC, NIACL), FCI, NABARD, SEBI, IRDAI</div></div>
+                </div>
+                <div class="section-title">📋 Banking Exam Structure (IBPS PO)</div>
+                <div class="roadmap-step"><div class="roadmap-year">Prelims</div><div class="roadmap-text">English, Reasoning, Quantitative Aptitude (1 hour)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Mains</div><div class="roadmap-text">Reasoning, GA, English, Quantitative, Computer (3.5 hours)</div></div>
+                <div class="roadmap-step"><div class="roadmap-year">Interview</div><div class="roadmap-text">50 marks</div></div>
+                <div class="section-title">⭐ Famous Bureaucrats</div>
+                <div><span class="famous-badge">Dr. K. Sivan (ISRO)</span> <span class="famous-badge">T. N. Seshan</span> <span class="famous-badge">Nirmala Sitharaman</span></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-// ==================== TRANSLATIONS ====================
-const translations = {
-    en: {
-        app_tagline: "Career Saathi", tagline: "📊 Commerce & Business Careers", page_title: "📊 Commerce Stream",
-        bachelor_title: "🎓 Bachelor Degrees", professional_title: "📜 Professional Courses", law_title: "⚖️ Law & Integrated Courses",
-        hotel_title: "🏨 Hotel Management & Hospitality", design_commerce_title: "🎨 Design & Creative Fields (Commerce allowed)",
-        entrepreneurship_title: "🚀 Entrepreneurship & Start-ups", entrance_commerce_title: "📋 Entrance Exams for Commerce",
-        govt_jobs_commerce_title: "💼 Government Jobs After Commerce", salary_commerce_title: "💰 High Salary Career Options After Commerce",
-        bcom: "• B.Com (Bachelor of Commerce) – 3 years", bcom_hons: "• B.Com (Hons)", bba: "• BBA – Bachelor of Business Administration",
-        baf: "• BAF – Bachelor of Accounting & Finance", bbi: "• BBI – Bachelor of Banking & Insurance", bfm: "• BFM – Bachelor of Financial Markets",
-        economics: "• Bachelor of Economics (B.A / B.Sc Economics)", ca: "• CA – Chartered Accountant", cs: "• CS – Company Secretary",
-        cma: "• CMA – Cost & Management Accountant", cfa: "• CFA – Chartered Financial Analyst",
-        llb: "• LLB (5 years after 12th) through CLAT", bcom_llb: "• B.Com + LLB (5 years integrated)",
-        ba_llb: "• BA + LLB (5 years integrated)", bba_mba: "• Integrated BBA+MBA (5 years)",
-        bhm: "• BHM – Bachelor of Hotel Management", bsc_hm: "• B.Sc Hospitality & Hotel Administration",
-        event: "• Event Management, Travel & Tourism", fashion: "• Fashion Design, Interior Design, Graphic Design, Animation, Jewellery Design",
-        digital: "• Digital Marketing, Social Media Management, SEO", retail: "• Retail business, E-commerce, Digital agency, Service-based business",
-        stock: "• Stock Market Trading & Investment", ca_foundation: "• CA Foundation – After 12th", cs_foundation: "• CS Foundation – After 12th",
-        clat: "• CLAT – For Law (LLB)", ipmat: "• IPMAT – For BBA at IIM Indore/Rohtak", dujat: "• DU JAT – Delhi University BBA",
-        npat: "• NPAT – NMIMS BBA", set: "• SET – Symbiosis BBA", ssc_cgl: "• SSC CGL, CHSL – For graduate students",
-        banking: "• Banking – IBPS PO/Clerk, SBI PO, RBI Grade B", railways: "• Railways (RRB NTPC, Group D)",
-        state_govt: "• State Government Exams (PSC, Patwari, etc.)", insurance: "• Insurance (LIC, NICL, UIIC)",
-        ca_salary: "• Chartered Accountant (CA) – ₹8-30 LPA", investment: "• Investment Banker – ₹12-40 LPA",
-        cfa_salary: "• Financial Analyst (CFA) – ₹8-35 LPA", cs_salary: "• Company Secretary (CS) – ₹6-20 LPA",
-        consultant: "• Management Consultant – ₹10-30 LPA", bank_po: "• Bank PO/Probationary Officer – ₹8-15 LPA",
-        entrepreneur: "• Entrepreneur – Unlimited potential",
-        bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile"
-    },
-    hi: {
-        app_tagline: "करियर साथी", tagline: "📊 कॉमर्स और व्यवसाय करियर", page_title: "📊 कॉमर्स स्ट्रीम",
-        bachelor_title: "🎓 स्नातक डिग्रियां", professional_title: "📜 व्यावसायिक पाठ्यक्रम", law_title: "⚖️ कानून और एकीकृत पाठ्यक्रम",
-        hotel_title: "🏨 होटल प्रबंधन और आतिथ्य", design_commerce_title: "🎨 डिजाइन और रचनात्मक क्षेत्र (कॉमर्स अनुमति)",
-        entrepreneurship_title: "🚀 उद्यमिता और स्टार्ट-अप", entrance_commerce_title: "📋 कॉमर्स के लिए प्रवेश परीक्षाएं",
-        govt_jobs_commerce_title: "💼 कॉमर्स के बाद सरकारी नौकरियां", salary_commerce_title: "💰 कॉमर्स के बाद उच्च वेतन करियर विकल्प",
-        bcom: "• बी.कॉम – 3 वर्ष", bcom_hons: "• बी.कॉम (ऑनर्स)", bba: "• बीबीए – बैचलर ऑफ बिजनेस एडमिनिस्ट्रेशन",
-        ca: "• सीए – चार्टर्ड अकाउंटेंट", cs: "• सीएस – कंपनी सेक्रेटरी", cma: "• सीएमए – कॉस्ट मैनेजमेंट अकाउंटेंट",
-        cfa: "• सीएफए – चार्टर्ड फाइनेंशियल एनालिस्ट",
-        llb: "• एलएलबी (12वीं के बाद 5 वर्ष) सीएलएटी के माध्यम से", ca_foundation: "• सीए फाउंडेशन – 12वीं के बाद",
-        clat: "• सीएलएटी – कानून के लिए", ipmat: "• आईपीमैट – आईआईएम में बीबीए के लिए",
-        ssc_cgl: "• एसएससी सीजीएल, सीएचएसएल", banking: "• बैंकिंग – आईबीपीएस पीओ/क्लर्क, एसबीआई पीओ",
-        railways: "• रेलवे (आरआरबी एनटीपीसी, ग्रुप डी)", ca_salary: "• चार्टर्ड अकाउंटेंट (सीए) – ₹8-30 लाख",
-        bank_po: "• बैंक पीओ – ₹8-15 लाख",
-        bottom_home: "होम", bottom_search: "खोजें", bottom_ai: "एनएस एआई", bottom_alerts: "सूचनाएं", bottom_profile: "प्रोफ़ाइल"
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
+    function goBack() { window.location.href = 'education.html'; }
+    function updateCUETDate() {
+        const resultSpan = document.getElementById('cuetResultDate');
+        if(resultSpan) resultSpan.innerHTML = `(Expected: June ${new Date().getFullYear()})`;
     }
-};
+    updateCUETDate();
 </script>
 </body>
-<script>
-// Continue JavaScript for commerce.html
-const bottomNav = [
-    { name: "Home", nameKey: "bottom_home", icon: "🏠", link: "index.html" },
-    { name: "Search", nameKey: "bottom_search", icon: "🔍", link: "#" },
-    { name: "AnnS AI", nameKey: "bottom_ai", icon: "🤖", link: "#" },
-    { name: "Alerts", nameKey: "bottom_alerts", icon: "🔔", link: "#" },
-    { name: "Profile", nameKey: "bottom_profile", icon: "👤", link: "#" }
-];
-
-let currentLang = 'en';
-
-function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
-
-function updateAllText() {
-    document.getElementById('appTagline').textContent = t('app_tagline');
-    document.getElementById('taglineText').textContent = t('tagline');
-    document.getElementById('pageTitle').textContent = t('page_title');
-    document.getElementById('bachelorTitle').textContent = t('bachelor_title');
-    document.getElementById('professionalTitle').textContent = t('professional_title');
-    document.getElementById('lawTitle').textContent = t('law_title');
-    document.getElementById('hotelTitle').textContent = t('hotel_title');
-    document.getElementById('designCommerceTitle').textContent = t('design_commerce_title');
-    document.getElementById('entrepreneurshipTitle').textContent = t('entrepreneurship_title');
-    document.getElementById('entranceCommerceTitle').textContent = t('entrance_commerce_title');
-    document.getElementById('govtJobsCommerceTitle').textContent = t('govt_jobs_commerce_title');
-    document.getElementById('salaryCommerceTitle').textContent = t('salary_commerce_title');
-    
-    const items = ['bcom','bcomHons','bba','baf','bbi','bfm','economics','ca','cs','cma','cfa','llb','bcomLlbl','baLlbl','bbaMba','bhm','bscHm','event','fashion','digital','retail','stock','caFoundation','csFoundation','clat','ipmat','dujat','npat','set','sscCgl','banking','railways','stateGovt','insurance','caSalary','investment','cfaSalary','csSalary','consultant','bankPo','entrepreneur'];
-    items.forEach(item => { const el = document.getElementById(item + 'Item'); if(el) el.textContent = t(item); });
-    
-    document.querySelectorAll('.nav-item span:last-child').forEach((el, idx) => { if (idx < bottomNav.length) el.textContent = t(bottomNav[idx].nameKey); });
-}
-
-function changeLanguage(langCode) { if (!translations[langCode]) return; currentLang = langCode; localStorage.setItem('career_saathi_language', langCode); document.getElementById('languageSelect').value = langCode; updateAllText(); }
-function renderBottomBar() { const bar = document.getElementById('bottomBar'); if(!bar) return; bar.innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${t(item.nameKey)}</span></div>`).join(''); document.querySelectorAll('.nav-item').forEach(nav => { nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }); }); }
-function goBack() { window.location.href = 'education.html'; }
-function loadSavedLanguage() { const saved = localStorage.getItem('career_saathi_language'); if(saved && translations[saved]) { currentLang = saved; document.getElementById('languageSelect').value = saved; updateAllText(); } }
-
-document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
-renderBottomBar();
-loadSavedLanguage();
-</script>
 </html>
