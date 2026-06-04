@@ -59,4 +59,8 @@ translations.pa = {
     emergency_helplines: "ਐਮਰਜੈਂਸੀ ਹੈਲਪਲਾਈਨ",
     pro_writing: "ਪ੍ਰੋ ਰਾਈਟਿੰਗ ਸਹਾਇਕ",
     essay_writer: "AI ਲੇਖ ਲੇਖਕ",
-    resume_builder: "ਰੈਜ਼
+    resume_builder: "ਰੈਜ਼ਿਊਮ ਬਿਲਡਰ",
+    grammar_check: "ਵਿਆਕਰਨ ਜਾਂਚਕਰਤਾ"
+};
+
+console.log('Punjabi language loaded');
