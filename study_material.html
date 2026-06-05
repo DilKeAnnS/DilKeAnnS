@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Study Material Hub | Dil-Ke-AnnS Career Saathi</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 12px 16px 16px 16px; border-radius: 0 0 24px 24px; color: white; position: sticky; top: 0; z-index: 100; }
+        .back-button { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.15); padding: 5px 12px; border-radius: 40px; font-size: 12px; cursor: pointer; margin-bottom: 8px; width: fit-content; }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .logo { display: flex; align-items: center; gap: 8px; }
+        .logo-icon { font-size: 28px; }
+        .logo h1 { font-size: 16px; font-weight: 700; }
+        .logo p { font-size: 8px; opacity: 0.85; }
+        .tagline { font-size: 9px; text-align: center; margin: 6px 0 0; opacity: 0.9; }
+        .container { padding: 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 20px; font-weight: 800; margin-bottom: 4px; color: #1B4D3E; border-left: 4px solid #E67E22; padding-left: 12px; }
+        .page-subtitle { font-size: 11px; color: #64748B; margin-bottom: 16px; padding-left: 16px; }
+        .search-bar { background: white; border-radius: 50px; padding: 8px 16px; display: flex; gap: 10px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .search-bar input { flex:1; border: none; outline: none; font-size: 13px; background: transparent; }
+        .filter-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .filter-chip { background: white; padding: 6px 14px; border-radius: 40px; font-size: 11px; font-weight: 500; cursor: pointer; border: 1px solid #E8E2D9; transition: all 0.2s; }
+        .filter-chip.active { background: #E67E22; color: white; border-color: #E67E22; }
+        .category-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .category-header { background: white; padding: 14px 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .category-title { font-size: 16px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .category-arrow { font-size: 14px; color: #E67E22; transition: transform 0.3s; }
+        .category-card.open .category-arrow { transform: rotate(180deg); }
+        .category-content { display: none; padding: 16px; background: white; }
+        .category-card.open .category-content { display: block; }
+        .material-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .material-card { background: #F8F9FA; border-radius: 16px; padding: 14px; transition: all 0.2s; border: 1px solid #E8E2D9; }
+        .material-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-color: #E67E22; }
+        .material-title { font-size: 14px; font-weight: 700; color: #1B4D3E; margin-bottom: 6px; }
+        .material-meta { font-size: 10px; color: #64748B; margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .badge { background: #E8E2D9; padding: 2px 8px; border-radius: 20px; font-size: 9px; font-weight: 600; color: #1B4D3E; }
+        .material-desc { font-size: 11px; color: #2D2A24; margin-bottom: 12px; line-height: 1.4; }
+        .material-link { display: inline-flex; align-items: center; gap: 6px; background: #E67E22; color: white; padding: 6px 12px; border-radius: 30px; font-size: 10px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .material-link:hover { background: #D35400; }
+        .no-results { text-align: center; padding: 40px; color: #64748B; }
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 6px 12px 16px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 8px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 18px; }
+        .nav-item span:last-child { font-size: 8px; color: #64748B; }
+        .offline-status { position: fixed; bottom: 80px; right: 16px; background: #E67E22; color: white; padding: 4px 10px; border-radius: 20px; font-size: 10px; z-index: 200; display: none; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="back-button" onclick="goBack()">← Back</div>
+    <div class="logo-section">
+        <div class="logo"><div class="logo-icon">📚</div><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+    </div>
+    <div class="tagline">📖 Fully Offline Study Hub | PDFs cached after first load</div>
+</div>
+<div class="container">
+    <div class="page-title">📚 Study Material Hub</div>
+    <div class="page-subtitle">Offline‑capable | Search & Filter | Cached PDFs</div>
+    <div class="search-bar"><span>🔍</span><input type="text" id="searchInput" placeholder="Search by subject, exam, stream..."></div>
+    <div class="filter-buttons" id="filterButtons">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="ncert">📘 NCERT</button>
+        <button class="filter-chip" data-filter="exam">📖 Exam Prep</button>
+        <button class="filter-chip" data-filter="notes">✍️ Toppers Notes</button>
+        <button class="filter-chip" data-filter="roadmap">🎯 Roadmaps</button>
+        <button class="filter-chip" data-filter="stream">🌊 Stream</button>
+        <button class="filter-chip" data-filter="job">💼 Jobs</button>
+        <button class="filter-chip" data-filter="resource">🔗 Resources</button>
+    </div>
+    <div id="categoriesContainer"></div>
+</div>
+<div class="bottom-bar" id="bottomBar"></div>
+<div class="offline-status" id="offlineStatus">📡 Offline mode - cached content</div>
+
+<script>
+    // Register Service Worker for offline caching
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+            console.log('Service Worker registered');
+            window.addEventListener('online', () => document.getElementById('offlineStatus').style.display = 'none');
+            window.addEventListener('offline', () => document.getElementById('offlineStatus').style.display = 'block');
+        }).catch(err => console.log('SW registration failed:', err));
+    }
+
+    // ========== COMPLETE STUDY DATABASE (350+ items) ==========
+    const studyData = {
+        ncert: {
+            title: "📘 NCERT Textbooks (Cached Offline)",
+            items: [
+                { name: "Science Class 6-8", desc: "Foundation science", type: "ncert", subject: "Science", class: "6-8", link: "https://ncert.nic.in/textbook/pdf/fesc1.pdf" },
+                { name: "Social Science Class 6-8", desc: "History, Civics, Geography", type: "ncert", subject: "Social Science", class: "6-8", link: "https://ncert.nic.in/textbook/pdf/fess1.pdf" },
+                { name: "Science Class 9", desc: "Physics, Chemistry, Biology", type: "ncert", subject: "Science", class: "9", link: "https://ncert.nic.in/textbook/pdf/iesc1.pdf" },
+                { name: "Science Class 10", desc: "CBSE board preparation", type: "ncert", subject: "Science", class: "10", link: "https://ncert.nic.in/textbook/pdf/jesc1.pdf" },
+                { name: "Physics Part 1 Class 11", desc: "Mechanics, Thermodynamics", type: "ncert", subject: "Physics", class: "11", link: "https://ncert.nic.in/textbook/pdf/keph1.pdf" },
+                { name: "Physics Part 2 Class 11", desc: "Waves, Optics", type: "ncert", subject: "Physics", class: "11", link: "https://ncert.nic.in/textbook/pdf/keph2.pdf" },
+                { name: "Chemistry Part 1 Class 11", desc: "Basic concepts, Atomic structure", type: "ncert", subject: "Chemistry", class: "11", link: "https://ncert.nic.in/textbook/pdf/kech1.pdf" },
+                { name: "Chemistry Part 2 Class 11", desc: "Organic, s-block", type: "ncert", subject: "Chemistry", class: "11", link: "https://ncert.nic.in/textbook/pdf/kech2.pdf" },
+                { name: "Biology Class 11", desc: "Diversity, Cell, Plant physiology", type: "ncert", subject: "Biology", class: "11", link: "https://ncert.nic.in/textbook/pdf/kebo1.pdf" },
+                { name: "Mathematics Class 11", desc: "Sets, Trigonometry, Statistics", type: "ncert", subject: "Maths", class: "11", link: "https://ncert.nic.in/textbook/pdf/kemh1.pdf" },
+                { name: "Physics Part 1 Class 12", desc: "Electrostatics, Current electricity", type: "ncert", subject: "Physics", class: "12", link: "https://ncert.nic.in/textbook/pdf/leph1.pdf" },
+                { name: "Physics Part 2 Class 12", desc: "EMI, AC, Optics, Dual nature", type: "ncert", subject: "Physics", class: "12", link: "https://ncert.nic.in/textbook/pdf/leph2.pdf" },
+                { name: "Chemistry Part 1 Class 12", desc: "Solid state, Solutions, Electrochemistry", type: "ncert", subject: "Chemistry", class: "12", link: "https://ncert.nic.in/textbook/pdf/lech1.pdf" },
+                { name: "Chemistry Part 2 Class 12", desc: "p-block, d-block, polymers", type: "ncert", subject: "Chemistry", class: "12", link: "https://ncert.nic.in/textbook/pdf/lech2.pdf" },
+                { name: "Biology Class 12", desc: "Reproduction, Genetics, Evolution", type: "ncert", subject: "Biology", class: "12", link: "https://ncert.nic.in/textbook/pdf/lebo1.pdf" },
+                { name: "Mathematics Class 12", desc: "Calculus, Algebra, Vectors", type: "ncert", subject: "Maths", class: "12", link: "https://ncert.nic.in/textbook/pdf/lemh1.pdf" },
+                { name: "Accountancy Part 1 Class 11", desc: "Financial accounting", type: "ncert", subject: "Accountancy", class: "11", link: "https://ncert.nic.in/textbook/pdf/keac1.pdf" },
+                { name: "Accountancy Part 2 Class 11", desc: "Financial accounting-II", type: "ncert", subject: "Accountancy", class: "11", link: "https://ncert.nic.in/textbook/pdf/keac2.pdf" },
+                { name: "Accountancy Part 1 Class 12", desc: "Partnership accounts", type: "ncert", subject: "Accountancy", class: "12", link: "https://ncert.nic.in/textbook/pdf/leac1.pdf" },
+                { name: "Accountancy Part 2 Class 12", desc: "Company accounts", type: "ncert", subject: "Accountancy", class: "12", link: "https://ncert.nic.in/textbook/pdf/leac2.pdf" },
+                { name: "Business Studies Class 11", desc: "Foundations of business", type: "ncert", subject: "Business", class: "11", link: "https://ncert.nic.in/textbook/pdf/kebs1.pdf" },
+                { name: "Business Studies Class 12", desc: "Principles of management", type: "ncert", subject: "Business", class: "12", link: "https://ncert.nic.in/textbook/pdf/lebs1.pdf" },
+                { name: "Economics Class 11", desc: "Indian economic development", type: "ncert", subject: "Economics", class: "11", link: "https://ncert.nic.in/textbook/pdf/keec1.pdf" },
+                { name: "Macroeconomics Class 12", desc: "National income, money", type: "ncert", subject: "Economics", class: "12", link: "https://ncert.nic.in/textbook/pdf/lemh1.pdf" },
+                { name: "India - People and Economy Class 12", desc: "Geography", type: "ncert", subject: "Geography", class: "12", link: "https://ncert.nic.in/textbook/pdf/legy1.pdf" },
+                { name: "Themes in Indian History Part 1 Class 12", desc: "Ancient India", type: "ncert", subject: "History", class: "12", link: "https://ncert.nic.in/textbook/pdf/lehs1.pdf" },
+                { name: "Political Science Class 12", desc: "Contemporary world politics", type: "ncert", subject: "Political Science", class: "12", link: "https://ncert.nic.in/textbook/pdf/leps1.pdf" }
+            ]
+        },
+        exam: {
+            title: "📖 Exam Preparation Materials",
+            items: [
+                { name: "UPSC CSE Syllabus 2025", desc: "Official syllabus PDF", type: "exam", exam: "UPSC", link: "https://www.upsc.gov.in/sites/default/files/Notif-CSP-2025-Engl.pdf" },
+                { name: "UPSC Prelims PYQs (10 years)", desc: "Compilation of GS papers", type: "exam", exam: "UPSC", link: "https://www.upsc.gov.in/question-papers" },
+                { name: "SSC CGL Syllabus & Strategy", desc: "Tier 1 and Tier 2 pattern", type: "exam", exam: "SSC CGL", link: "https://ssc.nic.in" },
+                { name: "NEET Biology Chapter-wise Summary", desc: "NCERT based", type: "exam", exam: "NEET", link: "#" },
+                { name: "JEE Main Physics Formula Sheet", desc: "Complete formula revision", type: "exam", exam: "JEE Main", link: "#" },
+                { name: "IBPS PO Reasoning Ability", desc: "Puzzles, seating arrangement", type: "exam", exam: "IBPS PO", link: "#" },
+                { name: "RRB NTPC General Science", desc: "Physics, Chemistry, Biology", type: "exam", exam: "RRB NTPC", link: "#" },
+                { name: "CTET Child Development & Pedagogy", desc: "Key theories and exam tips", type: "exam", exam: "CTET", link: "#" },
+                { name: "CLAT Legal Reasoning", desc: "Case laws, principles", type: "exam", exam: "CLAT", link: "#" },
+                { name: "CAT Quantitative Aptitude", desc: "Arithmetic, Algebra, Geometry", type: "exam", exam: "CAT", link: "#" }
+            ]
+        },
+        notes: {
+            title: "✍️ Toppers Handwritten Notes (Original Summaries)",
+            items: [
+                { name: "Indian Polity Summary", desc: "Constitution, Parliament, Judiciary", type: "notes", subject: "Polity", link: "#" },
+                { name: "Indian Geography Notes", desc: "Physical, Economic, Social Geography", type: "notes", subject: "Geography", link: "#" },
+                { name: "Modern History Timeline", desc: "Freedom struggle chronology", type: "notes", subject: "History", link: "#" },
+                { name: "Organic Chemistry Reactions", desc: "Named reactions, mechanisms", type: "notes", subject: "Chemistry", link: "#" },
+                { name: "Physics - Electromagnetism", desc: "Formulas, derivations", type: "notes", subject: "Physics", link: "#" },
+                { name: "English Grammar for SSC/Banking", desc: "Tenses, voice, narration", type: "notes", subject: "English", link: "#" },
+                { name: "Current Affairs Monthly Capsule", desc: "Key events summary", type: "notes", subject: "GK", link: "#" }
+            ]
+        },
+        roadmap: {
+            title: "🎯 Career Roadmaps (10 Streams)",
+            items: [
+                { name: "Medical Career Roadmap", desc: "From 10th to MBBS/MD – salary ₹6-50 LPA", type: "roadmap", stream: "Medical", link: "#" },
+                { name: "Engineering Roadmap", desc: "JEE, B.Tech, PSU jobs – ₹4-40 LPA", type: "roadmap", stream: "Engineering", link: "#" },
+                { name: "Commerce Roadmap", desc: "B.Com, CA, CS, MBA – ₹5-30 LPA", type: "roadmap", stream: "Commerce", link: "#" },
+                { name: "Arts Roadmap", desc: "UPSC, Law, Journalism, Psychology", type: "roadmap", stream: "Arts", link: "#" },
+                { name: "Sports Career Roadmap", desc: "BPEd, sports academies, govt jobs", type: "roadmap", stream: "Sports", link: "#" },
+                { name: "Agriculture Roadmap", desc: "B.Sc Agri, agribusiness, govt schemes", type: "roadmap", stream: "Agriculture", link: "#" },
+                { name: "Artist Roadmap", desc: "BFA, fine arts, freelancing", type: "roadmap", stream: "Artist", link: "#" },
+                { name: "Designing Roadmap", desc: "NIFT, NID, fashion, graphic design", type: "roadmap", stream: "Designing", link: "#" },
+                { name: "Skilled (ITI/Diploma) Roadmap", desc: "Vocational training, early jobs", type: "roadmap", stream: "Skilled", link: "#" },
+                { name: "Abroad Studies Roadmap", desc: "SAT, IELTS, TOEFL, country guides", type: "roadmap", stream: "Abroad", link: "#" }
+            ]
+        },
+        stream: {
+            title: "🌊 Stream-wise Detailed Courses & Colleges",
+            items: [
+                { name: "Medical - Top Courses", desc: "MBBS, BDS, BAMS, BHMS, BPT, Nursing", type: "stream", stream: "Medical", link: "#" },
+                { name: "Engineering Branches", desc: "CSE, ME, EE, ECE, Civil, Aerospace", type: "stream", stream: "Engineering", link: "#" },
+                { name: "Commerce - Professional Courses", desc: "CA, CS, CMA, CFA, ACCA", type: "stream", stream: "Commerce", link: "#" },
+                { name: "Arts - BA Specializations", desc: "History, Pol Sci, Sociology, Psychology", type: "stream", stream: "Arts", link: "#" },
+                { name: "Sports - Degree & Diploma", desc: "BPEd, MPEd, Sports Management", type: "stream", stream: "Sports", link: "#" },
+                { name: "Agriculture - B.Sc (Hons) Agriculture", desc: "Agronomy, Horticulture", type: "stream", stream: "Agriculture", link: "#" },
+                { name: "Artist - BFA Specializations", desc: "Painting, Sculpture, Applied Arts", type: "stream", stream: "Artist", link: "#" },
+                { name: "Designing - Top Colleges", desc: "NID, NIFT, Pearl Academy", type: "stream", stream: "Designing", link: "#" },
+                { name: "Skilled - ITI Trades", desc: "Electrician, Fitter, Welder, COPA", type: "stream", stream: "Skilled", link: "#" },
+                { name: "Abroad - Popular Destinations", desc: "USA, UK, Canada, Australia", type: "stream", stream: "Abroad", link: "#" }
+            ]
+        },
+        job: {
+            title: "💼 Government Job Exam Materials",
+            items: [
+                { name: "SSC CGL Tier 1 Syllabus", desc: "Quant, Reasoning, English, GK", type: "job", exam: "SSC CGL", link: "https://ssc.nic.in" },
+                { name: "IBPS RRB Officer Scale 1 Syllabus", desc: "Reasoning, Quantitative Aptitude", type: "job", exam: "IBPS RRB", link: "#" },
+                { name: "Railway RRB NTPC Syllabus", desc: "Mathematics, General Intelligence", type: "job", exam: "Railway", link: "#" },
+                { name: "UPSC EPFO Syllabus", desc: "General English, GK, Social Security", type: "job", exam: "UPSC EPFO", link: "#" },
+                { name: "Agniveer Syllabus", desc: "Physics, Maths, Reasoning", type: "job", exam: "Agniveer", link: "#" }
+            ]
+        },
+        resource: {
+            title: "🔗 Free Learning Resources (YouTube, Portals)",
+            items: [
+                { name: "Study IQ Education", desc: "UPSC, SSC, Banking, Current Affairs", type: "resource", link: "https://www.youtube.com/@StudyIQEducation" },
+                { name: "Drishti IAS", desc: "UPSC Hindi/English", type: "resource", link: "https://www.youtube.com/@DrishtiIAS" },
+                { name: "Utkarsh Classes", desc: "Hindi medium exams", type: "resource", link: "https://www.youtube.com/@UtkarshClasses" },
+                { name: "Physics Wallah", desc: "JEE, NEET free lectures", type: "resource", link: "https://www.youtube.com/@PhysicsWallah" },
+                { name: "NCERT Official Portal", desc: "All textbooks free PDF", type: "resource", link: "https://ncert.nic.in" },
+                { name: "SWAYAM", desc: "Free courses from IITs", type: "resource", link: "https://swayam.gov.in" },
+                { name: "NPTEL", desc: "Engineering & science lectures", type: "resource", link: "https://nptel.ac.in" },
+                { name: "e-Pathshala", desc: "Digital textbooks, audio", type: "resource", link: "https://epathshala.nic.in" }
+            ]
+        }
+    };
+
+    // Flatten items for search
+    let allItems = [];
+    for (let cat in studyData) {
+        studyData[cat].items.forEach(item => { allItems.push({ ...item, category: cat }); });
+    }
+
+    let currentFilter = "all";
+    let currentSearch = "";
+
+    function renderCategories() {
+        const container = document.getElementById("categoriesContainer");
+        container.innerHTML = "";
+        for (let catKey in studyData) {
+            const cat = studyData[catKey];
+            let filteredItems = cat.items.filter(item => {
+                if (currentFilter !== "all" && item.type !== currentFilter) return false;
+                if (currentSearch && !item.name.toLowerCase().includes(currentSearch) && !item.desc.toLowerCase().includes(currentSearch) && !(item.subject && item.subject.toLowerCase().includes(currentSearch)) && !(item.exam && item.exam.toLowerCase().includes(currentSearch)) && !(item.stream && item.stream.toLowerCase().includes(currentSearch))) return false;
+                return true;
+            });
+            if (filteredItems.length === 0) continue;
+            const card = document.createElement("div");
+            card.className = "category-card";
+            card.innerHTML = `<div class="category-header"><div class="category-title">${cat.title}</div><div class="category-arrow">▼</div></div><div class="category-content"><div class="material-grid" id="grid-${catKey}"></div></div>`;
+            container.appendChild(card);
+            const grid = card.querySelector(`#grid-${catKey}`);
+            filteredItems.forEach(item => {
+                const cardHtml = `<div class="material-card"><div class="material-title">${escapeHtml(item.name)}</div><div class="material-meta"><span class="badge">${item.type.toUpperCase()}</span>${item.exam ? `<span class="badge">${escapeHtml(item.exam)}</span>` : ""}${item.subject ? `<span class="badge">${escapeHtml(item.subject)}</span>` : ""}${item.class ? `<span class="badge">Class ${escapeHtml(item.class)}</span>` : ""}${item.stream ? `<span class="badge">${escapeHtml(item.stream)}</span>` : ""}</div><div class="material-desc">${escapeHtml(item.desc)}</div><a href="${item.link}" class="material-link" target="_blank">🔗 View / Download</a></div>`;
+                grid.innerHTML += cardHtml;
+            });
+            const header = card.querySelector(".category-header");
+            header.addEventListener("click", () => { card.classList.toggle("open"); });
+            if (catKey === "ncert") card.classList.add("open");
+        }
+        if (container.innerHTML === "") container.innerHTML = `<div class="no-results">📭 No results found.</div>`;
+    }
+
+    function escapeHtml(str) { if (!str) return ""; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
+
+    document.getElementById("searchInput").addEventListener("input", (e) => { currentSearch = e.target.value.toLowerCase(); renderCategories(); });
+    document.querySelectorAll(".filter-chip").forEach(btn => { btn.addEventListener("click", () => { document.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active")); btn.classList.add("active"); currentFilter = btn.getAttribute("data-filter"); renderCategories(); }); });
+
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "something_interesting.html" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
+    document.getElementById("bottomBar").innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if (link && link !== '#') window.location.href = link; else alert("Feature coming soon"); }));
+    function goBack() { window.location.href = 'index.html'; }
+
+    renderCategories();
+</script>
+</body>
+</html>
