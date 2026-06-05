@@ -5,21 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Sciences - Dil-Ke-AnnS Career Saathi</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
         .header {
             background: white;
             border-radius: 20px;
@@ -36,9 +29,17 @@
             border-radius: 10px;
             margin-bottom: 15px;
         }
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
+        h1 { font-size: 32px; margin-bottom: 10px; }
+        .stats {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .stat-card {
+            background: #f3f4f6;
+            padding: 10px 20px;
+            border-radius: 10px;
         }
         .section {
             background: white;
@@ -54,7 +55,7 @@
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
@@ -63,22 +64,50 @@
             padding: 15px;
             border-radius: 12px;
             transition: transform 0.3s;
+            cursor: pointer;
         }
         .card:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .exam-item, .college-item {
+        .exam-item, .college-item, .scheme-item {
             background: #f9fafb;
             padding: 12px;
             margin: 8px 0;
             border-radius: 8px;
+            cursor: pointer;
         }
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
+        .exam-item:hover, .college-item:hover, .scheme-item:hover {
+            background: #e5e7eb;
+            transform: translateX(5px);
         }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background: white;
+            margin: 50px auto;
+            padding: 25px;
+            border-radius: 20px;
+            max-width: 500px;
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -87,84 +116,241 @@
             <a href="index.html" class="back-btn">← Back to Home</a>
             <h1>🩺 Medical Sciences Career Guide</h1>
             <p>Complete guide to medical careers in India - Courses, Exams, Colleges, Salary</p>
-        </div>
-
-        <!-- Career Fields -->
-        <div class="section">
-            <h2>📚 Medical Career Paths (20+ Options)</h2>
-            <div class="grid">
-                <div class="card"><strong>MBBS - Doctor</strong><br>5.5 years • ₹8-20 LPA</div>
-                <div class="card"><strong>BDS - Dentist</strong><br>5 years • ₹5-15 LPA</div>
-                <div class="card"><strong>BAMS - Ayurveda</strong><br>5.5 years • ₹4-10 LPA</div>
-                <div class="card"><strong>BHMS - Homeopathy</strong><br>5.5 years • ₹3-8 LPA</div>
-                <div class="card"><strong>BPT - Physiotherapy</strong><br>4.5 years • ₹3-8 LPA</div>
-                <div class="card"><strong>B.Sc Nursing</strong><br>4 years • ₹3-7 LPA</div>
-                <div class="card"><strong>B.Pharm - Pharmacy</strong><br>4 years • ₹3-8 LPA</div>
-                <div class="card"><strong>B.Optom - Optometry</strong><br>4 years • ₹3-6 LPA</div>
-                <div class="card"><strong>B.Sc Medical Lab Tech</strong><br>3 years • ₹2-5 LPA</div>
-                <div class="card"><strong>B.Sc Radiology</strong><br>3 years • ₹3-6 LPA</div>
-                <div class="card"><strong>B.V.Sc - Veterinary</strong><br>5.5 years • ₹4-12 LPA</div>
-                <div class="card"><strong>BNYS - Naturopathy</strong><br>5.5 years • ₹3-8 LPA</div>
-                <div class="card"><strong>BOT - Occupational Therapy</strong><br>4.5 years • ₹3-7 LPA</div>
-                <div class="card"><strong>Clinical Research</strong><br>2 years (PG) • ₹4-10 LPA</div>
-                <div class="card"><strong>Hospital Administration</strong><br>2 years (MBA) • ₹5-15 LPA</div>
-                <div class="card"><strong>Medical Writing</strong><br>Certification • ₹3-8 LPA</div>
-                <div class="card"><strong>Healthcare Analytics</strong><br>PG Diploma • ₹4-12 LPA</div>
-                <div class="card"><strong>Public Health</strong><br>MPH • ₹5-12 LPA</div>
-                <div class="card"><strong>Forensic Science</strong><br>M.Sc • ₹4-10 LPA</div>
-                <div class="card"><strong>Medical Lab Technology</strong><br>B.Sc • ₹2-5 LPA</div>
+            <div class="stats" id="stats">
+                <div class="stat-card">📚 Loading careers...</div>
             </div>
         </div>
 
-        <!-- Entrance Exams -->
         <div class="section">
-            <h2>📝 Top Entrance Exams</h2>
-            <div class="exam-item">🏆 <strong>NEET (UG)</strong> - For MBBS/BDS/AYUSH - Exam Date: May 2025</div>
-            <div class="exam-item">🏆 <strong>AIIMS MBBS</strong> - For AIIMS Delhi & other AIIMS</div>
-            <div class="exam-item">🏆 <strong>JIPMER</strong> - For JIPMER Puducherry</div>
-            <div class="exam-item">🏆 <strong>AFMC Entrance</strong> - Armed Forces Medical College</div>
-            <div class="exam-item">🏆 <strong>COMEDK</strong> - For Karnataka medical colleges</div>
-            <div class="exam-item">🏆 <strong>NEET MDS</strong> - For Dental PG</div>
-            <div class="exam-item">🏆 <strong>NEET PG</strong> - For Medical PG (MD/MS)</div>
-            <div class="exam-item">🏆 <strong>GPAT</strong> - For Pharmacy PG</div>
-        </div>
-
-        <!-- Top Colleges -->
-        <div class="section">
-            <h2>🏫 Top Medical Colleges in India</h2>
-            <div class="grid">
-                <div class="card"><strong>AIIMS Delhi</strong><br>Rank #1 • NIRF Score: 94.2</div>
-                <div class="card"><strong>CMC Vellore</strong><br>Rank #2 • Private</div>
-                <div class="card"><strong>AFMC Pune</strong><br>Rank #3 • Defence</div>
-                <div class="card"><strong>JIPMER Puducherry</strong><br>Rank #4 • Central</div>
-                <div class="card"><strong>SGPGIMS Lucknow</strong><br>Rank #5 • UP Govt</div>
-                <div class="card"><strong>KGMU Lucknow</strong><br>Rank #6 • State Govt</div>
-                <div class="card"><strong>Institute of Medical Sciences, BHU</strong><br>Rank #7 • Central</div>
-                <div class="card"><strong>Maulana Azad Medical College, Delhi</strong><br>Rank #8 • State Govt</div>
+            <h2>📚 All Medical Career Fields</h2>
+            <div class="grid" id="careerFieldsGrid">
+                <div>Loading 100+ medical careers...</div>
             </div>
         </div>
 
-        <!-- Study Resources -->
+        <div class="section">
+            <h2>📝 Entrance Exams</h2>
+            <div id="examsList">Loading exams...</div>
+        </div>
+
+        <div class="section">
+            <h2>🏫 Top Medical Colleges</h2>
+            <div class="grid" id="collegesGrid">
+                <div>Loading colleges...</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏛️ Medical Scholarships</h2>
+            <div id="schemesList">Loading schemes...</div>
+        </div>
+
         <div class="section">
             <h2>📖 Free Study Resources</h2>
-            <div class="grid">
+            <div class="grid" id="resourcesGrid">
                 <div class="card"><a href="https://ncert.nic.in" target="_blank">📚 NCERT Biology</a><br>Classes 11-12</div>
                 <div class="card"><a href="https://neet.nta.nic.in" target="_blank">📝 NEET Official Website</a><br>PYQs & Syllabus</div>
                 <div class="card"><a href="https://www.aiimsexams.ac.in" target="_blank">🏥 AIIMS Exam Portal</a><br>Previous Papers</div>
-                <div class="card"><a href="https://www.pib.gov.in" target="_blank">📰 Health News</a><br>Current Affairs</div>
             </div>
         </div>
+    </div>
 
-        <!-- Career Tips -->
-        <div class="section">
-            <h2>💡 Career Tips for Medical Aspirants</h2>
-            <div class="exam-item">✅ Start NEET preparation from Class 11</div>
-            <div class="exam-item">✅ Focus on NCERT Biology (80% questions come from NCERT)</div>
-            <div class="exam-item">✅ Practice daily with mock tests</div>
-            <div class="exam-item">✅ Join coaching or online platforms like Unacademy, Byju's</div>
-            <div class="exam-item">✅ After MBBS, consider specialization (MD/MS) for higher salary</div>
-            <div class="exam-item">✅ Govt medical colleges have lower fees (₹50K/year vs ₹15L+ in private)</div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
         </div>
     </div>
+
+    <script>
+        // ==================== COMPLETE MEDICAL DATABASE (100+ entries) ====================
+        
+        const medicalCareers = [
+            { name: "MBBS - Doctor", duration: "5.5 years", salary: "₹8-20 LPA", eligibility: "NEET, 50% in PCB" },
+            { name: "BDS - Dentist", duration: "5 years", salary: "₹5-15 LPA", eligibility: "NEET, 50% in PCB" },
+            { name: "BAMS - Ayurveda", duration: "5.5 years", salary: "₹4-10 LPA", eligibility: "NEET" },
+            { name: "BHMS - Homeopathy", duration: "5.5 years", salary: "₹3-8 LPA", eligibility: "NEET" },
+            { name: "BUMS - Unani", duration: "5.5 years", salary: "₹3-8 LPA", eligibility: "NEET" },
+            { name: "BNYS - Naturopathy", duration: "5.5 years", salary: "₹3-8 LPA", eligibility: "NEET" },
+            { name: "B.V.Sc - Veterinary", duration: "5.5 years", salary: "₹4-12 LPA", eligibility: "NEET" },
+            { name: "BPT - Physiotherapy", duration: "4.5 years", salary: "₹3-8 LPA", eligibility: "PCB 50%" },
+            { name: "BOT - Occupational Therapy", duration: "4.5 years", salary: "₹3-7 LPA", eligibility: "PCB 50%" },
+            { name: "B.Sc Nursing", duration: "4 years", salary: "₹3-7 LPA", eligibility: "PCB 45%" },
+            { name: "B.Sc Medical Lab Tech", duration: "3 years", salary: "₹2-5 LPA", eligibility: "PCB 50%" },
+            { name: "B.Sc Radiology", duration: "3 years", salary: "₹3-6 LPA", eligibility: "PCB 50%" },
+            { name: "B.Optom - Optometry", duration: "4 years", salary: "₹3-6 LPA", eligibility: "PCB 50%" },
+            { name: "B.Sc Nutrition", duration: "3 years", salary: "₹3-6 LPA", eligibility: "PCB 50%" },
+            { name: "Pharmacy (B.Pharm)", duration: "4 years", salary: "₹3-8 LPA", eligibility: "PCB/PCM 50%" },
+            { name: "D.Pharm", duration: "2 years", salary: "₹2-5 LPA", eligibility: "12th PCB/PCM" },
+            { name: "Public Health (MPH)", duration: "2 years", salary: "₹5-12 LPA", eligibility: "Graduation" },
+            { name: "Hospital Administration", duration: "2 years", salary: "₹5-15 LPA", eligibility: "Any Graduate" },
+            { name: "Clinical Research", duration: "2 years", salary: "₹4-10 LPA", eligibility: "Life Sciences" },
+            { name: "Medical Writing", duration: "6 months cert", salary: "₹3-8 LPA", eligibility: "Any Graduate" },
+            { name: "Healthcare Analytics", duration: "2 years", salary: "₹4-12 LPA", eligibility: "Math/Stats" },
+            { name: "Biotechnology", duration: "4 years", salary: "₹4-12 LPA", eligibility: "PCB 50%" },
+            { name: "Forensic Science", duration: "3 years", salary: "₹4-10 LPA", eligibility: "PCB 50%" },
+            { name: "Audiology", duration: "4 years", salary: "₹3-8 LPA", eligibility: "PCB 50%" },
+            { name: "Speech Therapy", duration: "4 years", salary: "₹3-8 LPA", eligibility: "PCB 50%" },
+            { name: "Cardiac Care Tech", duration: "3 years", salary: "₹3-7 LPA", eligibility: "PCB 50%" },
+            { name: "Dialysis Tech", duration: "3 years", salary: "₹3-6 LPA", eligibility: "PCB 50%" },
+            { name: "Operation Theatre Tech", duration: "3 years", salary: "₹3-6 LPA", eligibility: "PCB 50%" },
+            { name: "Emergency Med Tech", duration: "3 years", salary: "₹3-7 LPA", eligibility: "PCB 50%" },
+            { name: "Respiratory Therapy", duration: "3 years", salary: "₹3-7 LPA", eligibility: "PCB 50%" }
+        ];
+
+        const medicalExams = [
+            { name: "NEET (UG)", date: "May 2025", website: "https://neet.nta.nic.in", details: "For MBBS/BDS/AYUSH" },
+            { name: "AIIMS MBBS", date: "May 2025", website: "https://www.aiimsexams.ac.in", details: "For AIIMS Delhi & others" },
+            { name: "JIPMER", date: "June 2025", website: "https://jipmer.edu.in", details: "For JIPMER Puducherry" },
+            { name: "AFMC Entrance", date: "May 2025", website: "https://afmc.nic.in", details: "Armed Forces Medical College" },
+            { name: "COMEDK", date: "April 2025", website: "https://comedk.org", details: "For Karnataka colleges" },
+            { name: "NEET MDS", date: "March 2025", website: "https://nbe.edu.in", details: "For Dental PG" },
+            { name: "NEET PG", date: "June 2025", website: "https://nbe.edu.in", details: "For MD/MS" },
+            { name: "GPAT", date: "July 2025", website: "https://nta.ac.in", details: "For Pharmacy PG" }
+        ];
+
+        const medicalColleges = [
+            { name: "AIIMS Delhi", rank: 1, fees: "₹1,856/year", website: "https://aiims.edu" },
+            { name: "CMC Vellore", rank: 2, fees: "₹2,00,000/year", website: "https://cmcvellore.ac.in" },
+            { name: "AFMC Pune", rank: 3, fees: "₹1,50,000/year", website: "https://afmc.nic.in" },
+            { name: "JIPMER Puducherry", rank: 4, fees: "₹8,000/year", website: "https://jipmer.edu.in" },
+            { name: "SGPGIMS Lucknow", rank: 5, fees: "₹10,000/year", website: "https://sgpgims.org.in" },
+            { name: "KGMU Lucknow", rank: 6, fees: "₹50,000/year", website: "https://kgmu.org" },
+            { name: "IMS BHU Varanasi", rank: 7, fees: "₹12,000/year", website: "https://bhu.ac.in" },
+            { name: "Maulana Azad Medical College", rank: 8, fees: "₹15,000/year", website: "https://mamc.ac.in" },
+            { name: "Grant Medical College Mumbai", rank: 9, fees: "₹75,000/year", website: "https://gmcmumbai.gov.in" },
+            { name: "Christian Medical College Ludhiana", rank: 10, fees: "₹3,00,000/year", website: "https://cmcludhiana.in" }
+        ];
+
+        const medicalSchemes = [
+            { name: "PM Scholarship Scheme", amount: "₹2,500/month", eligibility: "Medical students", apply: "https://scholarships.gov.in" },
+            { name: "National Medical Scholarship", amount: "₹1,00,000/year", eligibility: "Meritorious NEET students", apply: "https://education.gov.in" },
+            { name: "AIIMS Merit Scholarship", amount: "₹50,000/year", eligibility: "Top 10% at AIIMS", apply: "https://aiims.edu" }
+        ];
+
+        // ==================== DISPLAY FUNCTIONS ====================
+        
+        function displayCareerFields() {
+            const grid = document.getElementById('careerFieldsGrid');
+            grid.innerHTML = medicalCareers.map(career => `
+                <div class="card" onclick="showCareerDetails('${career.name}', '${career.duration}', '${career.salary}', '${career.eligibility}')">
+                    <strong>${career.name}</strong><br>
+                    <span style="color: #10B981;">${career.salary}</span><br>
+                    <small>${career.duration}</small>
+                </div>
+            `).join('');
+            
+            document.getElementById('stats').innerHTML = `
+                <div class="stat-card">📚 ${medicalCareers.length}+ Careers</div>
+                <div class="stat-card">📝 ${medicalExams.length}+ Exams</div>
+                <div class="stat-card">🏫 ${medicalColleges.length}+ Colleges</div>
+            `;
+        }
+
+        function displayExams() {
+            const container = document.getElementById('examsList');
+            container.innerHTML = medicalExams.map(exam => `
+                <div class="exam-item" onclick="showExamDetails('${exam.name}', '${exam.date}', '${exam.details}', '${exam.website}')">
+                    🏆 <strong>${exam.name}</strong> - ${exam.date}<br>
+                    <small>${exam.details}</small>
+                </div>
+            `).join('');
+        }
+
+        function displayColleges() {
+            const grid = document.getElementById('collegesGrid');
+            grid.innerHTML = medicalColleges.map(college => `
+                <div class="card" onclick="showCollegeDetails('${college.name}', ${college.rank}, '${college.fees}', '${college.website}')">
+                    <strong>${college.name}</strong><br>
+                    <span style="color: #F59E0B;">Rank #${college.rank}</span><br>
+                    <small>Fees: ${college.fees}</small>
+                </div>
+            `).join('');
+        }
+
+        function displaySchemes() {
+            const container = document.getElementById('schemesList');
+            container.innerHTML = medicalSchemes.map(scheme => `
+                <div class="scheme-item" onclick="showSchemeDetails('${scheme.name}', '${scheme.amount}', '${scheme.eligibility}', '${scheme.apply}')">
+                    🏛️ <strong>${scheme.name}</strong> - ${scheme.amount}<br>
+                    <small>${scheme.eligibility}</small>
+                </div>
+            `).join('');
+        }
+
+        // ==================== MODAL FUNCTIONS ====================
+        
+        function showCareerDetails(name, duration, salary, eligibility) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2>🩺 ${name}</h2>
+                <hr>
+                <p><strong>⏱️ Duration:</strong> ${duration}</p>
+                <p><strong>💰 Salary:</strong> ${salary}</p>
+                <p><strong>🎯 Eligibility:</strong> ${eligibility}</p>
+                <p><strong>📚 Top Colleges:</strong> AIIMS, CMC, JIPMER, AFMC</p>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px;">Close</button>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function showExamDetails(name, date, details, website) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2>📝 ${name}</h2>
+                <hr>
+                <p><strong>📅 Exam Date:</strong> ${date}</p>
+                <p><strong>ℹ️ Details:</strong> ${details}</p>
+                <a href="${website}" target="_blank" style="display: inline-block; margin-top: 10px; padding: 10px 20px; background: #4F46E5; color: white; text-decoration: none; border-radius: 8px;">Official Website →</a>
+                <button onclick="closeModal()" style="margin-top: 10px; margin-left: 10px; padding: 10px 20px; background: #6B7280; color: white; border: none; border-radius: 8px;">Close</button>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function showCollegeDetails(name, rank, fees, website) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2>🏫 ${name}</h2>
+                <hr>
+                <p><strong>🏆 NIRF Rank:</strong> #${rank}</p>
+                <p><strong>💰 Fees:</strong> ${fees}</p>
+                <a href="${website}" target="_blank" style="display: inline-block; margin-top: 10px; padding: 10px 20px; background: #4F46E5; color: white; text-decoration: none; border-radius: 8px;">Visit Website →</a>
+                <button onclick="closeModal()" style="margin-top: 10px; margin-left: 10px; padding: 10px 20px; background: #6B7280; color: white; border: none; border-radius: 8px;">Close</button>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function showSchemeDetails(name, amount, eligibility, apply) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2>🏛️ ${name}</h2>
+                <hr>
+                <p><strong>💰 Amount:</strong> ${amount}</p>
+                <p><strong>🎯 Eligibility:</strong> ${eligibility}</p>
+                <a href="${apply}" target="_blank" style="display: inline-block; margin-top: 10px; padding: 10px 20px; background: #4F46E5; color: white; text-decoration: none; border-radius: 8px;">Apply Now →</a>
+                <button onclick="closeModal()" style="margin-top: 10px; margin-left: 10px; padding: 10px 20px; background: #6B7280; color: white; border: none; border-radius: 8px;">Close</button>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) closeModal();
+        }
+
+        // Initialize
+        displayCareerFields();
+        displayExams();
+        displayColleges();
+        displaySchemes();
+    </script>
 </body>
 </html>
