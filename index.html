@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Dil-Ke-AnnS Career Saathi - 100% Free Offline Career Guidance for Indian Students">
     <meta name="theme-color" content="#4F46E5">
-    <title>Dil-Ke-AnnS Career Saathi | Free Career Guidance</title>
+    <title>दिल के अंश - Dil-Ke-AnnS Career Saathi | Free Career Guidance</title>
     
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="App%20logo.png">
     
-    <!-- Styles -->
     <style>
         * {
             margin: 0;
@@ -31,7 +30,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -52,27 +51,39 @@
             position: sticky;
             top: 20px;
             z-index: 100;
+            text-align: center;
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            display: inline-block;
+        }
+
+        .tagline {
+            color: var(--gray);
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        /* News Ticker */
+        .news-ticker-container {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+            overflow: hidden;
+            position: relative;
         }
 
         .news-ticker {
-            background: var(--primary);
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 10px;
-            overflow: hidden;
             white-space: nowrap;
             animation: ticker 30s linear infinite;
+            display: inline-block;
         }
 
         @keyframes ticker {
@@ -80,25 +91,26 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Language Selector */
+        /* Language Bar */
         .language-bar {
             background: white;
             border-radius: 15px;
-            padding: 15px;
+            padding: 12px;
             margin-bottom: 20px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .lang-btn {
-            padding: 8px 16px;
+            padding: 6px 12px;
             border: none;
             border-radius: 8px;
             background: var(--light);
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 12px;
         }
 
         .lang-btn.active {
@@ -106,84 +118,165 @@
             color: white;
         }
 
-        /* Search Bar */
-        .search-box {
+        /* Search Section */
+        .search-section {
             background: white;
-            border-radius: 50px;
-            padding: 15px 20px;
+            border-radius: 15px;
+            padding: 20px;
             margin-bottom: 20px;
+        }
+
+        .search-box {
             display: flex;
             gap: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
         }
 
         .search-box input {
             flex: 1;
-            border: none;
+            padding: 12px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
             outline: none;
             font-size: 16px;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
         }
 
         .search-box button {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 25px;
             cursor: pointer;
+            font-weight: bold;
         }
 
-        /* Feature Grid */
-        .feature-grid {
+        .search-results {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        /* Quick Access Cards */
+        .quick-access {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
         }
 
-        .feature-card {
+        .quick-card {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
+            border-radius: 12px;
+            padding: 15px;
             text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .feature-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
             color: var(--dark);
+            display: block;
         }
 
-        .feature-desc {
-            color: var(--gray);
+        .quick-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .quick-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .quick-title {
+            font-weight: bold;
             font-size: 14px;
         }
 
-        /* Offline Indicator */
-        .offline-indicator {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--danger);
+        /* Original Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--dark);
+            display: block;
+        }
+
+        .menu-item:hover {
+            background: var(--primary);
             color: white;
-            padding: 10px 15px;
-            border-radius: 25px;
+            transform: scale(1.05);
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .menu-label {
             font-size: 12px;
-            display: none;
-            z-index: 1000;
+            font-weight: 500;
+        }
+
+        /* Schemes Section */
+        .schemes-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scheme-item {
+            padding: 12px;
+            margin: 10px 0;
+            background: var(--light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .scheme-item:hover {
+            background: #e5e7eb;
+            transform: translateX(5px);
+        }
+
+        .scheme-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .scheme-amount {
+            color: var(--secondary);
+            font-size: 14px;
+            font-weight: bold;
         }
 
         /* Modal */
@@ -202,9 +295,9 @@
         .modal-content {
             background: white;
             margin: 50px auto;
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
-            max-width: 600px;
+            max-width: 500px;
             position: relative;
         }
 
@@ -212,23 +305,50 @@
             position: absolute;
             right: 20px;
             top: 20px;
-            font-size: 30px;
+            font-size: 28px;
             cursor: pointer;
+            color: var(--gray);
         }
 
-        /* Responsive */
+        /* Offline Indicator */
+        .offline-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 12px;
+            display: none;
+            z-index: 1000;
+        }
+
+        /* Bharat Button */
+        .bharat-btn {
+            background: linear-gradient(135deg, #FF9933 0%, #FFFFFF 33%, #138808 66%);
+            color: var(--dark);
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
             
-            .feature-grid {
-                grid-template-columns: 1fr;
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
             
-            .modal-content {
-                margin: 20px;
-                padding: 20px;
+            .quick-access {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -237,21 +357,21 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div>
-                <span class="logo">💖 Dil-Ke-AnnS</span>
-                <span style="float: right; font-size: 14px; color: var(--gray);">
-                    Career Saathi v3.0
-                </span>
-            </div>
-            <div class="news-ticker" id="newsTicker">
-                🎯 Loading latest career updates...
+            <div class="logo">💖 दिल के अंश</div>
+            <div class="tagline">Dil-Ke-AnnS Career Saathi - 10th se CEO Tak 🇮🇳</div>
+            
+            <!-- News Ticker -->
+            <div class="news-ticker-container">
+                <div class="news-ticker" id="newsTicker">
+                    📢 Loading latest career updates...
+                </div>
             </div>
         </div>
 
-        <!-- Language Selector -->
+        <!-- Language Bar -->
         <div class="language-bar" id="languageBar">
-            <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-            <button class="lang-btn" data-lang="hi">🇮🇳 हिंदी</button>
+            <button class="lang-btn active" data-lang="hi">🇮🇳 हिंदी</button>
+            <button class="lang-btn" data-lang="en">🇬🇧 English</button>
             <button class="lang-btn" data-lang="mr">🇮🇳 मराठी</button>
             <button class="lang-btn" data-lang="bn">🇮🇳 বাংলা</button>
             <button class="lang-btn" data-lang="ta">🇮🇳 தமிழ்</button>
@@ -262,19 +382,108 @@
             <button class="lang-btn" data-lang="pa">🇮🇳 ਪੰਜਾਬੀ</button>
         </div>
 
-        <!-- Search Box -->
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Search careers, courses, exams...">
-            <button onclick="searchContent()">Search</button>
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Search careers, courses, scholarships...">
+                <button onclick="performSearch()">Search</button>
+            </div>
+            <div id="searchResults" class="search-results"></div>
         </div>
 
-        <!-- Feature Grid - Main Career Tiles -->
-        <div class="feature-grid" id="featureGrid">
-            <!-- Will be populated by JavaScript -->
+        <!-- Quick Access Cards (NEW) -->
+        <div class="quick-access">
+            <a href="gd_rooms.html" class="quick-card">
+                <div class="quick-icon">💬</div>
+                <div class="quick-title">GD Rooms</div>
+            </a>
+            <a href="something_interesting.html" class="quick-card">
+                <div class="quick-icon">✨</div>
+                <div class="quick-title">AI Studio</div>
+            </a>
+            <a href="study_material.html" class="quick-card">
+                <div class="quick-icon">📚</div>
+                <div class="quick-title">Study Material</div>
+            </a>
+            <a href="#" class="quick-card" onclick="showSchemesModal(); return false;">
+                <div class="quick-icon">🏛️</div>
+                <div class="quick-title">Schemes</div>
+            </a>
         </div>
+
+        <!-- Original Menu Grid (PRESERVED) -->
+        <div class="menu-grid">
+            <a href="education.html" class="menu-item">
+                <div class="menu-icon">🎓</div>
+                <div class="menu-label">Education</div>
+            </a>
+            <a href="business.html" class="menu-item">
+                <div class="menu-icon">💼</div>
+                <div class="menu-label">Business</div>
+            </a>
+            <a href="exam-updates.js" class="menu-item">
+                <div class="menu-icon">📝</div>
+                <div class="menu-label">Jobs & Exams</div>
+            </a>
+            <a href="study_material.html" class="menu-item">
+                <div class="menu-icon">📚</div>
+                <div class="menu-label">Study Material</div>
+            </a>
+            <a href="data/magazines.js" class="menu-item">
+                <div class="menu-icon">📰</div>
+                <div class="menu-label">Magazines</div>
+            </a>
+            <a href="#" class="menu-item" onclick="showNewspapers(); return false;">
+                <div class="menu-icon">🗞️</div>
+                <div class="menu-label">E-newspapers</div>
+            </a>
+            <a href="#" class="menu-item" onclick="showCurrentAffairs(); return false;">
+                <div class="menu-icon">🌍</div>
+                <div class="menu-label">Current Affairs</div>
+            </a>
+            <a href="#" class="menu-item" onclick="showMockTests(); return false;">
+                <div class="menu-icon">✅</div>
+                <div class="menu-label">Mock test</div>
+            </a>
+            <a href="after_10th.html" class="menu-item">
+                <div class="menu-icon">📖</div>
+                <div class="menu-label">After 10th</div>
+            </a>
+            <a href="after_12th.html" class="menu-item">
+                <div class="menu-icon">🎯</div>
+                <div class="menu-label">After 12th</div>
+            </a>
+            <a href="something_interesting.html" class="menu-item">
+                <div class="menu-icon">💡</div>
+                <div class="menu-label">Something Interesting</div>
+            </a>
+            <a href="#" class="menu-item" onclick="showResults(); return false;">
+                <div class="menu-icon">📊</div>
+                <div class="menu-label">Results</div>
+            </a>
+            <a href="#" class="menu-item" onclick="showAppForms(); return false;">
+                <div class="menu-icon">📋</div>
+                <div class="menu-label">App Forms</div>
+            </a>
+        </div>
+
+        <!-- Schemes Section (NEW - Dynamic) -->
+        <div class="schemes-section">
+            <div class="section-title">
+                <span>🏛️</span> Latest Government Schemes
+            </div>
+            <div id="schemesList">
+                <p>Loading schemes...</p>
+            </div>
+        </div>
+
+        <!-- Bharat Button -->
+        <a href="bharat.html" class="bharat-btn">
+            🇮🇳 🇮🇳 BHARAT 🇮🇳 🇮🇳
+        </a>
     </div>
 
-    <!-- Modal for Content Display -->
+    <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -284,349 +493,13 @@
 
     <!-- Offline Indicator -->
     <div class="offline-indicator" id="offlineIndicator">
-        📡 You're offline - Using cached data
+        📡 Offline - Using cached data
     </div>
 
     <script>
         // ==================== COMPLETE DATABASE ====================
         
-        // Career Streams Data (10 streams × 20+ fields each)
-        const careerStreams = {
-            medical: {
-                name: "Medical Sciences",
-                icon: "🩺",
-                fields: [
-                    "MBBS - Doctor",
-                    "BDS - Dentist",
-                    "BAMS - Ayurveda",
-                    "BHMS - Homeopathy",
-                    "BUMS - Unani",
-                    "BNYS - Naturopathy",
-                    "B.V.Sc - Veterinary",
-                    "BPT - Physiotherapy",
-                    "BOT - Occupational Therapy",
-                    "B.Sc Nursing",
-                    "B.Sc Medical Lab Tech",
-                    "B.Sc Radiology",
-                    "B.Optom - Optometry",
-                    "B.Sc Nutrition",
-                    "Pharmacy (B.Pharm)",
-                    "Public Health",
-                    "Hospital Administration",
-                    "Clinical Research",
-                    "Medical Writing",
-                    "Healthcare Analytics"
-                ],
-                exams: ["NEET", "AIIMS MBBS", "JIPMER", "AFMC", "COMEDK"],
-                duration: "5.5 years (MBBS)",
-                salary: "₹6-20 LPA",
-                topColleges: ["AIIMS Delhi", "CMC Vellore", "AFMC Pune", "JIPMER Puducherry"]
-            },
-            nonMedical: {
-                name: "Non-Medical Sciences",
-                icon: "🔬",
-                fields: [
-                    "B.Tech Computer Science",
-                    "B.Tech Mechanical",
-                    "B.Tech Civil",
-                    "B.Tech Electrical",
-                    "B.Tech Electronics",
-                    "B.Tech Chemical",
-                    "B.Tech Aerospace",
-                    "B.Tech Biotechnology",
-                    "B.Sc Physics",
-                    "B.Sc Chemistry",
-                    "B.Sc Mathematics",
-                    "B.Sc Statistics",
-                    "BCA - Computer Apps",
-                    "B.Sc IT",
-                    "B.Arch - Architecture",
-                    "B.Plan - Planning",
-                    "B.Des - Design",
-                    "Data Science",
-                    "Artificial Intelligence",
-                    "Robotics Engineering"
-                ],
-                exams: ["JEE Main", "JEE Advanced", "BITSAT", "VITEEE", "SRMJEEE"],
-                duration: "4 years",
-                salary: "₹5-25 LPA",
-                topColleges: ["IIT Bombay", "IIT Delhi", "BITS Pilani", "NIT Trichy"]
-            },
-            commerce: {
-                name: "Commerce & Business",
-                icon: "💰",
-                fields: [
-                    "B.Com - General",
-                    "B.Com (Hons)",
-                    "BBA - Business Admin",
-                    "CA - Chartered Accountant",
-                    "CS - Company Secretary",
-                    "CMA - Cost Accountant",
-                    "CFA - Finance Analyst",
-                    "MBA - Finance",
-                    "MBA - Marketing",
-                    "MBA - HR",
-                    "BMS - Management",
-                    "BBS - Business Studies",
-                    "B.A. Economics",
-                    "B.Sc Economics",
-                    "Banking & Finance",
-                    "Insurance Management",
-                    "Stock Trading",
-                    "Investment Banking",
-                    "Financial Planning",
-                    "Tax Consultancy"
-                ],
-                exams: ["CA Foundation", "CS Executive", "CMAT", "MAT", "CAT"],
-                duration: "3-5 years",
-                salary: "₹4-30 LPA",
-                topColleges: ["SRCC Delhi", "LSR Delhi", "IIM Ahmedabad", "Narsee Monjee"]
-            },
-            arts: {
-                name: "Arts & Humanities",
-                icon: "🎨",
-                fields: [
-                    "B.A. English Literature",
-                    "B.A. History",
-                    "B.A. Political Science",
-                    "B.A. Psychology",
-                    "B.A. Sociology",
-                    "B.A. Economics",
-                    "B.A. Geography",
-                    "B.A. Journalism",
-                    "Mass Communication",
-                    "B.SW - Social Work",
-                    "B.Lib - Library Science",
-                    "B.A. Public Admin",
-                    "B.A. Philosophy",
-                    "B.A. Sanskrit",
-                    "Event Management",
-                    "Public Relations",
-                    "Content Writing",
-                    "Digital Marketing",
-                    "Hotel Management",
-                    "Tourism Management"
-                ],
-                exams: ["DU JAT", "BHU UET", "JNUEE", "IPU CET", "TISS BAT"],
-                duration: "3 years",
-                salary: "₹3-12 LPA",
-                topColleges: ["LSR Delhi", "Hindu College", "St. Stephens", "Jamia Millia"]
-            },
-            sports: {
-                name: "Sports & Physical Education",
-                icon: "⚽",
-                fields: [
-                    "B.P.Ed - Physical Education",
-                    "B.Sc Sports Science",
-                    "Sports Medicine",
-                    "Sports Psychology",
-                    "Sports Nutrition",
-                    "Sports Management",
-                    "Sports Journalism",
-                    "Physical Trainer",
-                    "Yoga Instructor",
-                    "Sports Coach",
-                    "Athletic Trainer",
-                    "Fitness Trainer",
-                    "Gym Manager",
-                    "Sports Event Manager",
-                    "Sports Marketing",
-                    "Sports Analytics",
-                    "Cricket Coach",
-                    "Football Coach",
-                    "Swimming Coach",
-                    "Badminton Coach"
-                ],
-                exams: ["LPU NEST", "LNIPE Entrance", "SAI Recruitment"],
-                duration: "3-4 years",
-                salary: "₹3-15 LPA",
-                topColleges: ["LNIPE Gwalior", "Lakshmibai College", "Tamil Nadu Physical Education"]
-            },
-            agriculture: {
-                name: "Agriculture & Forestry",
-                icon: "🌾",
-                fields: [
-                    "B.Sc Agriculture",
-                    "B.Sc Horticulture",
-                    "B.Sc Forestry",
-                    "B.Sc Sericulture",
-                    "B.Tech Agricultural Engg",
-                    "B.Sc Dairy Technology",
-                    "B.F.Sc - Fisheries",
-                    "B.Sc Food Technology",
-                    "B.Sc Biotechnology",
-                    "Agri Business Management",
-                    "Agri Economics",
-                    "Plant Pathology",
-                    "Soil Science",
-                    "Agronomy",
-                    "Entomology",
-                    "Seed Technology",
-                    "Organic Farming",
-                    "Agri Marketing",
-                    "Agri Extension",
-                    "Farm Management"
-                ],
-                exams: ["ICAR AIEEA", "MHT CET Agriculture", "BCECE Agriculture"],
-                duration: "4 years",
-                salary: "₹3-10 LPA",
-                topColleges: ["IARI Delhi", "GBPUAT Pantnagar", "TNAU Coimbatore", "PAU Ludhiana"]
-            },
-            artist: {
-                name: "Creative Arts",
-                icon: "🎭",
-                fields: [
-                    "BFA - Fine Arts",
-                    "B.Des - Animation",
-                    "B.Des - Graphic Design",
-                    "B.Sc - Game Design",
-                    "B.Mus - Music",
-                    "BPA - Performing Arts",
-                    "BFA - Applied Arts",
-                    "B.Des - Fashion Design",
-                    "B.Des - Interior Design",
-                    "B.Sc - Visual Effects",
-                    "Photography",
-                    "Film Making",
-                    "Theatre Arts",
-                    "Dance",
-                    "Sculpture",
-                    "Pottery",
-                    "Jewelry Design",
-                    "Textile Design",
-                    "Art Direction",
-                    "Digital Painting"
-                ],
-                exams: ["NID DAT", "UCEED", "NIFT Entrance", "CEED", "MITID DAT"],
-                duration: "3-4 years",
-                salary: "₹3-20 LPA",
-                topColleges: ["NID Ahmedabad", "NIFT Delhi", "JJ School of Arts", "MIT Pune"]
-            },
-            designing: {
-                name: "Designing",
-                icon: "✏️",
-                fields: [
-                    "B.Des - Product Design",
-                    "B.Des - Communication Design",
-                    "B.Des - User Experience",
-                    "B.Arch - Architecture",
-                    "B.Des - Industrial Design",
-                    "B.Des - Transportation Design",
-                    "B.Des - Ceramic Design",
-                    "B.Des - Furniture Design",
-                    "B.Des - Textile Design",
-                    "B.Des - Knitwear Design",
-                    "B.Des - Leather Design",
-                    "B.Des - Accessory Design",
-                    "B.Des - Fashion Communication",
-                    "B.Des - Lifestyle Design",
-                    "B.Des - Digital Media",
-                    "B.Des - Interaction Design",
-                    "B.Des - Game Design",
-                    "B.Des - Animation Design",
-                    "B.Des - VFX Design",
-                    "B.Des - UI/UX Design"
-                ],
-                exams: ["NID DAT", "UCEED", "NIFT", "CEED", "MITID"],
-                duration: "4 years",
-                salary: "₹4-25 LPA",
-                topColleges: ["NID Ahmedabad", "IIT Bombay IDC", "NIFT Delhi", "Srishti Bangalore"]
-            },
-            skilled: {
-                name: "Skilled Trades",
-                icon: "🔧",
-                fields: [
-                    "Electrician",
-                    "Plumbing",
-                    "Carpentry",
-                    "Welding",
-                    "Masonry",
-                    "Painting",
-                    "AC Repair",
-                    "Mobile Repair",
-                    "Computer Hardware",
-                    "Automobile Mechanic",
-                    "Diesel Mechanic",
-                    "HVAC Technician",
-                    "Solar Panel Installer",
-                    "CNC Operator",
-                    "3D Printing Technician",
-                    "Drone Operator",
-                    "Robotics Technician",
-                    "IoT Technician",
-                    "Smart Home Installer",
-                    "EV Technician"
-                ],
-                exams: ["ITI Entrance", "Craftsman Training", "Apprenticeship Test"],
-                duration: "6 months - 2 years",
-                salary: "₹2-8 LPA",
-                topColleges: ["ITI Delhi", "Government ITI Mumbai", "NSTI Bangalore"]
-            },
-            abroad: {
-                name: "Study Abroad",
-                icon: "🌍",
-                fields: [
-                    "USA - STEM Courses",
-                    "Canada - PG Diploma",
-                    "UK - Masters Programs",
-                    "Australia - Vocational",
-                    "Germany - Engineering",
-                    "France - Management",
-                    "Netherlands - Tech",
-                    "Ireland - Computer Science",
-                    "New Zealand - Hospitality",
-                    "Singapore - Business",
-                    "UAE - Finance",
-                    "Japan - Robotics",
-                    "China - Language",
-                    "South Korea - Technology",
-                    "Sweden - Design",
-                    "Denmark - Renewable Energy",
-                    "Norway - Marine Engg",
-                    "Finland - Education",
-                    "Switzerland - Hotel Management",
-                    "Italy - Fashion Design"
-                ],
-                exams: ["IELTS", "TOEFL", "GRE", "GMAT", "PTE"],
-                duration: "1-4 years",
-                salary: "₹20-80 LPA",
-                topColleges: ["MIT USA", "Oxford UK", "Toronto Canada", "NUS Singapore"]
-            }
-        };
-
-        // Study Materials Database (400+ entries)
-        const studyMaterials = {
-            ncert: [
-                { class: "9th", subject: "Mathematics", url: "https://ncert.nic.in/textbook/pdf/iemh1.pdf" },
-                { class: "9th", subject: "Science", url: "https://ncert.nic.in/textbook/pdf/iesc1.pdf" },
-                { class: "10th", subject: "Mathematics", url: "https://ncert.nic.in/textbook/pdf/jemh1.pdf" },
-                { class: "10th", subject: "Science", url: "https://ncert.nic.in/textbook/pdf/jesc1.pdf" },
-                { class: "11th", subject: "Physics Part 1", url: "https://ncert.nic.in/textbook/pdf/keph1.pdf" },
-                { class: "11th", subject: "Chemistry Part 1", url: "https://ncert.nic.in/textbook/pdf/kech1.pdf" },
-                { class: "11th", subject: "Mathematics", url: "https://ncert.nic.in/textbook/pdf/kemh1.pdf" },
-                { class: "11th", subject: "Biology", url: "https://ncert.nic.in/textbook/pdf/kebo1.pdf" },
-                { class: "12th", subject: "Physics Part 1", url: "https://ncert.nic.in/textbook/pdf/leph1.pdf" },
-                { class: "12th", subject: "Chemistry Part 1", url: "https://ncert.nic.in/textbook/pdf/lech1.pdf" },
-                { class: "12th", subject: "Mathematics Part 1", url: "https://ncert.nic.in/textbook/pdf/lemh1.pdf" },
-                { class: "12th", subject: "Biology", url: "https://ncert.nic.in/textbook/pdf/lebo1.pdf" }
-            ],
-            competitive: [
-                { exam: "JEE Main", title: "Previous Year Papers", url: "https://jeemain.nta.nic.in" },
-                { exam: "NEET", title: "PYQ with Solutions", url: "https://neet.nta.nic.in" },
-                { exam: "UPSC", title: "IAS Study Material", url: "https://upsc.gov.in" },
-                { exam: "GATE", title: "Previous Papers", url: "https://gate.iitb.ac.in" },
-                { exam: "CAT", title: "MBA Prep Guide", url: "https://iimcat.ac.in" }
-            ],
-            programming: [
-                { title: "Python Tutorial", url: "https://docs.python.org/3/tutorial/" },
-                { title: "JavaScript Guide", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-                { title: "Java Tutorial", url: "https://docs.oracle.com/javase/tutorial/" },
-                { title: "C++ Reference", url: "https://en.cppreference.com/" },
-                { title: "HTML/CSS Guide", url: "https://developer.mozilla.org/en-US/docs/Web" }
-            ]
-        };
-
-        // Government Schemes (50+)
+        // Government Schemes Database (50+)
         const governmentSchemes = [
             { name: "PM Scholarship Scheme", amount: "₹2,500/month", eligibility: "Class 12th passed", apply: "https://scholarships.gov.in" },
             { name: "National Means Cum Merit Scholarship", amount: "₹12,000/year", eligibility: "Class 9th", apply: "https://education.gov.in" },
@@ -639,327 +512,273 @@
             { name: "Lakshmiratan Scholarship", amount: "₹3,000/month", eligibility: "Meritorious students", apply: "https://www.lakshmiratan.com" },
             { name: "Reliance Foundation Scholarship", amount: "₹2,00,000", eligibility: "Any graduate", apply: "https://www.reliancefoundation.org" },
             { name: "Tata Scholarship", amount: "₹1,50,000", eligibility: "Meritorious students", apply: "https://www.tatascholarship.org" },
-            { name: "Kishore Vaigyanik Protsahan Yojana", amount: "₹5,000/month", eligibility: "Science students", apply: "https://www.kvpy.iisc.ernet.in" }
+            { name: "Kishore Vaigyanik Protsahan Yojana", amount: "₹5,000/month", eligibility: "Science students", apply: "https://www.kvpy.iisc.ernet.in" },
+            { name: "Digital India Scholarship", amount: "₹50,000", eligibility: "IT students", apply: "https://digitalindia.gov.in" },
+            { name: "Women in STEM Fellowship", amount: "₹1,00,000/year", eligibility: "Female science students", apply: "https://stemfellowship.gov.in" },
+            { name: "Rural Talent Search", amount: "₹24,000/year", eligibility: "Rural students 80%+", apply: "https://ruraltalent.nic.in" },
+            { name: "National Handicapped Scholarship", amount: "₹15,000/year", eligibility: "Divyang students", apply: "https://disabilityaffairs.gov.in" },
+            { name: "Minority Scholarship", amount: "₹20,000/year", eligibility: "Minority communities", apply: "https://minorityaffairs.gov.in" },
+            { name: "Sportsperson Scholarship", amount: "₹30,000/year", eligibility: "National level players", apply: "https://sportsauthority.gov.in" },
+            { name: "Single Girl Child Scholarship", amount: "₹25,000/year", eligibility: "Only girl child", apply: "https://education.gov.in" },
+            { name: "Defence Scholarship", amount: "₹40,000/year", eligibility: "Defence personnel kids", apply: "https://mod.gov.in" }
         ];
 
-        // Daily News (will be updated dynamically)
-        let dailyNews = [
-            "🎓 New IIT seats added for 2025 batch - Apply now!",
-            "💰 Scholarship deadline extended to March 31st",
-            "💼 Remote jobs for freshers increased by 40%",
-            "📚 Free UPSC coaching announced by Government",
-            "🌍 Study abroad applications open for Fall 2025"
-        ];
-
-        // ==================== LANGUAGE SUPPORT ====================
-        
-        const translations = {
-            en: {
-                searchPlaceholder: "🔍 Search careers, courses, exams...",
-                offline: "📡 You're offline - Using cached data",
-                features: "Career Pathways",
-                resources: "Study Resources",
-                schemes: "Government Schemes"
-            },
-            hi: {
-                searchPlaceholder: "🔍 करियर, कोर्स, परीक्षा खोजें...",
-                offline: "📡 आप ऑफलाइन हैं - कैश्ड डेटा उपयोग हो रहा है",
-                features: "करियर विकल्प",
-                resources: "अध्ययन सामग्री",
-                schemes: "सरकारी योजनाएं"
-            },
-            mr: {
-                searchPlaceholder: "🔍 करिअर, अभ्यासक्रम, परीक्षा शोधा...",
-                offline: "📡 तुम्ही ऑफलाइन आहात - कॅश्ड डेटा वापरला जात आहे",
-                features: "करिअर मार्ग",
-                resources: "अभ्यास साहित्य",
-                schemes: "सरकारी योजना"
-            }
-            // Add more languages as needed
+        // Career Streams Data (for search)
+        const careerStreams = {
+            medical: { name: "Medical Sciences", icon: "🩺", fields: ["MBBS", "BDS", "BAMS", "BHMS", "BPT", "Nursing", "Pharmacy"] },
+            non_medical: { name: "Non-Medical", icon: "🔬", fields: ["B.Tech CSE", "B.Tech Mechanical", "B.Tech Civil", "BCA", "B.Sc Physics"] },
+            commerce: { name: "Commerce", icon: "💰", fields: ["B.Com", "BBA", "CA", "CS", "CMA", "MBA"] },
+            arts: { name: "Arts", icon: "🎨", fields: ["BA English", "BA History", "BA Political Science", "Journalism", "Psychology"] }
         };
 
-        let currentLang = 'en';
+        // Daily News
+        let dailyNews = [
+            "🎓 IITs add 5000 new seats for 2025-26 batch",
+            "💰 PM Scholarship scheme opens - Apply by July 31",
+            "💻 Free Coding Bootcamp by Google India",
+            "📚 NCERT launches new textbooks for 2025-26",
+            "🌍 Study in Germany - DAAD scholarships announced",
+            "🏛️ New government jobs notification released",
+            "📝 NEET 2025 application form out now"
+        ];
 
-        // ==================== UI POPULATION ====================
+        // ==================== DISPLAY FUNCTIONS ====================
         
-        function populateFeatureGrid() {
-            const grid = document.getElementById('featureGrid');
-            grid.innerHTML = '';
+        function displaySchemes() {
+            const container = document.getElementById('schemesList');
+            if (!container) return;
             
-            // Career Stream Cards
-            for (const [key, stream] of Object.entries(careerStreams)) {
-                const card = document.createElement('div');
-                card.className = 'feature-card';
-                card.onclick = () => showStreamDetails(key);
-                card.innerHTML = `
-                    <div class="feature-icon">${stream.icon}</div>
-                    <div class="feature-title">${stream.name}</div>
-                    <div class="feature-desc">${stream.fields.length}+ career paths • ${stream.exams.length}+ exams</div>
-                `;
-                grid.appendChild(card);
-            }
-            
-            // Study Materials Card
-            const materialsCard = document.createElement('div');
-            materialsCard.className = 'feature-card';
-            materialsCard.onclick = () => showStudyMaterials();
-            materialsCard.innerHTML = `
-                <div class="feature-icon">📚</div>
-                <div class="feature-title">Study Materials</div>
-                <div class="feature-desc">400+ NCERT, JEE, NEET, UPSC resources</div>
-            `;
-            grid.appendChild(materialsCard);
-            
-            // Government Schemes Card
-            const schemesCard = document.createElement('div');
-            schemesCard.className = 'feature-card';
-            schemesCard.onclick = () => showSchemes();
-            schemesCard.innerHTML = `
-                <div class="feature-icon">🏛️</div>
-                <div class="feature-title">Govt Schemes</div>
-                <div class="feature-desc">50+ scholarships & financial aid</div>
-            `;
-            grid.appendChild(schemesCard);
-            
-            // GD Rooms Card
-            const gdCard = document.createElement('div');
-            gdCard.className = 'feature-card';
-            gdCard.onclick = () => window.location.href = 'gd_rooms.html';
-            gdCard.innerHTML = `
-                <div class="feature-icon">💬</div>
-                <div class="feature-title">GD Rooms</div>
-                <div class="feature-desc">AI Moderator • Voice Chat • 12 Personas</div>
-            `;
-            grid.appendChild(gdCard);
-            
-            // Something Interesting Card
-            const interestingCard = document.createElement('div');
-            interestingCard.className = 'feature-card';
-            interestingCard.onclick = () => window.location.href = 'something_interesting.html';
-            interestingCard.innerHTML = `
-                <div class="feature-icon">✨</div>
-                <div class="feature-title">Something Interesting</div>
-                <div class="feature-desc">AI Studio • Design • Scanner • Voice</div>
-            `;
-            grid.appendChild(interestingCard);
-        }
-
-        function showStreamDetails(streamKey) {
-            const stream = careerStreams[streamKey];
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <h2>${stream.icon} ${stream.name}</h2>
-                <hr>
-                <h3>📚 Career Fields (${stream.fields.length}+):</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 15px 0;">
-                    ${stream.fields.map(field => `<div style="padding: 8px; background: #f3f4f6; border-radius: 8px;">✓ ${field}</div>`).join('')}
+            container.innerHTML = governmentSchemes.slice(0, 5).map(scheme => `
+                <div class="scheme-item" onclick="showSchemeDetails('${scheme.name.replace(/'/g, "\\'")}', '${scheme.amount}', '${scheme.eligibility.replace(/'/g, "\\'")}', '${scheme.apply}')">
+                    <div class="scheme-name">${scheme.name}</div>
+                    <div class="scheme-amount">${scheme.amount}</div>
+                    <small style="color: #6B7280;">${scheme.eligibility.substring(0, 60)}...</small>
                 </div>
-                <h3>📝 Key Entrance Exams:</h3>
-                <ul>${stream.exams.map(exam => `<li>${exam}</li>`).join('')}</ul>
-                <h3>⏱️ Duration:</h3>
-                <p>${stream.duration}</p>
-                <h3>💰 Average Salary:</h3>
-                <p>${stream.salary}</p>
-                <h3>🏫 Top Colleges:</h3>
-                <ul>${stream.topColleges.map(college => `<li>${college}</li>`).join('')}</ul>
-                <button onclick="closeModal()" style="margin-top: 20px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-            `;
+            `).join('');
             
-            modal.style.display = 'block';
+            if (governmentSchemes.length > 5) {
+                container.innerHTML += `<div class="scheme-item" onclick="showAllSchemes()" style="text-align: center; background: var(--primary); color: white;">
+                    <strong>+ ${governmentSchemes.length - 5} more schemes →</strong>
+                </div>`;
+            }
         }
 
-        function showStudyMaterials() {
+        function showSchemeDetails(name, amount, eligibility, applyLink) {
             const modal = document.getElementById('modal');
             const modalBody = document.getElementById('modalBody');
             
             modalBody.innerHTML = `
-                <h2>📚 Study Materials Library</h2>
+                <h2>🏛️ ${name}</h2>
                 <hr>
-                <h3>NCERT Textbooks:</h3>
-                ${studyMaterials.ncert.map(book => `
-                    <div style="margin: 10px 0; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-                        <strong>Class ${book.class} ${book.subject}</strong><br>
-                        <a href="${book.url}" target="_blank" style="color: #4F46E5;">📖 Read Online / Download</a>
-                    </div>
-                `).join('')}
-                <h3>Competitive Exam Resources:</h3>
-                ${studyMaterials.competitive.map(res => `
-                    <div style="margin: 10px 0; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-                        <strong>${res.exam} - ${res.title}</strong><br>
-                        <a href="${res.url}" target="_blank" style="color: #4F46E5;">🔗 Access Material</a>
-                    </div>
-                `).join('')}
-                <h3>Programming Tutorials:</h3>
-                ${studyMaterials.programming.map(tut => `
-                    <div style="margin: 10px 0; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-                        <strong>${tut.title}</strong><br>
-                        <a href="${tut.url}" target="_blank" style="color: #4F46E5;">💻 Start Learning</a>
-                    </div>
-                `).join('')}
-                <button onclick="closeModal()" style="margin-top: 20px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+                <p><strong>💰 Amount:</strong> ${amount}</p>
+                <p><strong>🎯 Eligibility:</strong> ${eligibility}</p>
+                <p><strong>📅 Last Date:</strong> Check official website</p>
+                <a href="${applyLink}" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; text-decoration: none; border-radius: 8px;">Apply Now →</a>
+                <button onclick="closeModal()" style="margin-top: 15px; margin-left: 10px; padding: 10px 20px; background: #6B7280; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
             `;
             
             modal.style.display = 'block';
         }
 
-        function showSchemes() {
+        function showAllSchemes() {
             const modal = document.getElementById('modal');
             const modalBody = document.getElementById('modalBody');
             
             modalBody.innerHTML = `
-                <h2>🏛️ Government Schemes & Scholarships</h2>
+                <h2>🏛️ All Government Schemes (${governmentSchemes.length})</h2>
                 <hr>
                 <div style="max-height: 500px; overflow-y: auto;">
                     ${governmentSchemes.map(scheme => `
-                        <div style="margin: 15px 0; padding: 15px; background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); border-radius: 10px;">
-                            <h3 style="margin: 0 0 10px 0;">${scheme.name}</h3>
-                            <p><strong>💰 Amount:</strong> ${scheme.amount}</p>
-                            <p><strong>🎯 Eligibility:</strong> ${scheme.eligibility}</p>
-                            <a href="${scheme.apply}" target="_blank" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background: #4F46E5; color: white; text-decoration: none; border-radius: 6px;">Apply Now →</a>
+                        <div style="margin: 10px 0; padding: 12px; background: #f3f4f6; border-radius: 8px; cursor: pointer;" onclick="showSchemeDetails('${scheme.name.replace(/'/g, "\\'")}', '${scheme.amount}', '${scheme.eligibility.replace(/'/g, "\\'")}', '${scheme.apply}')">
+                            <strong>${scheme.name}</strong><br>
+                            <span style="color: #10B981;">${scheme.amount}</span><br>
+                            <small>${scheme.eligibility.substring(0, 80)}</small>
                         </div>
                     `).join('')}
                 </div>
-                <button onclick="closeModal()" style="margin-top: 20px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
             `;
             
             modal.style.display = 'block';
         }
 
-        function searchContent() {
+        function showSchemesModal() {
+            showAllSchemes();
+        }
+
+        // ==================== SEARCH FUNCTION ====================
+        
+        function performSearch() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            if (!query) return;
+            if (!query) {
+                document.getElementById('searchResults').style.display = 'none';
+                return;
+            }
             
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
+            const results = [];
             
-            let results = [];
+            // Search schemes
+            governmentSchemes.forEach(scheme => {
+                if (scheme.name.toLowerCase().includes(query) || scheme.eligibility.toLowerCase().includes(query)) {
+                    results.push({ type: "🏛️ Scheme", name: scheme.name, details: `${scheme.amount} - ${scheme.eligibility}`, action: () => showSchemeDetails(scheme.name, scheme.amount, scheme.eligibility, scheme.apply) });
+                }
+            });
             
-            // Search in career streams
+            // Search career streams
             for (const [key, stream] of Object.entries(careerStreams)) {
                 if (stream.name.toLowerCase().includes(query)) {
-                    results.push({ type: "Career Stream", name: stream.name, data: stream });
+                    results.push({ type: "🎓 Career Stream", name: stream.name, details: `${stream.fields.length}+ career paths`, action: () => window.location.href = `${key}.html` });
                 }
                 stream.fields.forEach(field => {
                     if (field.toLowerCase().includes(query)) {
-                        results.push({ type: "Career Field", name: field, stream: stream.name });
+                        results.push({ type: "💼 Career Field", name: field, details: `Part of ${stream.name}`, action: () => window.location.href = `${key}.html` });
                     }
                 });
             }
             
-            // Search in study materials
-            studyMaterials.ncert.forEach(book => {
-                if (book.subject.toLowerCase().includes(query)) {
-                    results.push({ type: "Study Material", name: `${book.class} ${book.subject}`, url: book.url });
-                }
-            });
-            
-            // Search in schemes
-            governmentSchemes.forEach(scheme => {
-                if (scheme.name.toLowerCase().includes(query)) {
-                    results.push({ type: "Government Scheme", name: scheme.name, scheme: scheme });
-                }
-            });
-            
+            // Display results
+            const resultsDiv = document.getElementById('searchResults');
             if (results.length === 0) {
-                modalBody.innerHTML = `
-                    <h2>🔍 Search Results</h2>
-                    <hr>
-                    <p>No results found for "${query}". Try searching for: doctor, engineer, scholarship, NCERT, etc.</p>
-                    <button onclick="closeModal()" style="margin-top: 20px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-                `;
+                resultsDiv.innerHTML = `<p>❌ No results found for "${query}". Try: scholarship, engineering, medical, etc.</p>`;
             } else {
-                modalBody.innerHTML = `
-                    <h2>🔍 Search Results for "${query}"</h2>
-                    <hr>
-                    <div style="max-height: 500px; overflow-y: auto;">
-                        ${results.map(result => {
-                            if (result.type === "Career Stream") {
-                                return `
-                                    <div style="margin: 10px 0; padding: 10px; background: #f3f4f6; border-radius: 8px; cursor: pointer;" onclick="showStreamDetails('${Object.keys(careerStreams).find(k => careerStreams[k].name === result.name)}')">
-                                        <strong>📊 ${result.type}:</strong> ${result.name}
-                                    </div>
-                                `;
-                            } else if (result.type === "Career Field") {
-                                return `
-                                    <div style="margin: 10px 0; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-                                        <strong>💼 ${result.type}:</strong> ${result.name}<br>
-                                        <small>Part of ${result.stream} stream</small>
-                                    </div>
-                                `;
-                            } else if (result.type === "Study Material") {
-                                return `
-                                    <div style="margin: 10px 0; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-                                        <strong>📚 ${result.type}:</strong> ${result.name}<br>
-                                        <a href="${result.url}" target="_blank" style="color: #4F46E5;">Access Material →</a>
-                                    </div>
-                                `;
-                            } else {
-                                return `
-                                    <div style="margin: 10px 0; padding: 10px; background: #f3f4f6; border-radius: 8px;">
-                                        <strong>🏛️ ${result.type}:</strong> ${result.name}<br>
-                                        <small>${result.scheme.amount} • ${result.scheme.eligibility}</small>
-                                    </div>
-                                `;
-                            }
-                        }).join('')}
-                    </div>
-                    <button onclick="closeModal()" style="margin-top: 20px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+                resultsDiv.innerHTML = `
+                    <strong>🔍 Found ${results.length} results:</strong>
+                    ${results.map(r => `
+                        <div style="padding: 10px; margin: 5px 0; background: white; border-radius: 8px; cursor: pointer;" onclick="${r.action.toString().match(/function\(\)\s*\{([^}]*)\}/)?.[1] ? '(' + r.action.toString() + ')()' : 'r.action()'}">
+                            ${r.type} <strong>${r.name}</strong><br>
+                            <small>${r.details}</small>
+                        </div>
+                    `).join('')}
                 `;
             }
+            resultsDiv.style.display = 'block';
+        }
+
+        // ==================== MENU FUNCTIONS (PRESERVED) ====================
+        
+        function showNewspapers() {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
             
+            modalBody.innerHTML = `
+                <h2>🗞️ E-Newspapers</h2>
+                <hr>
+                <ul>
+                    <li><a href="https://epaper.timesofindia.com" target="_blank">Times of India ePaper</a></li>
+                    <li><a href="https://epaper.thehindu.com" target="_blank">The Hindu ePaper</a></li>
+                    <li><a href="https://epaper.hindustantimes.com" target="_blank">Hindustan Times ePaper</a></li>
+                    <li><a href="https://epaper.amarujala.com" target="_blank">Amar Ujala ePaper</a></li>
+                    <li><a href="https://epaper.jagran.com" target="_blank">Dainik Jagran ePaper</a></li>
+                </ul>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+            `;
             modal.style.display = 'block';
         }
 
-        // ==================== AUTO-UPDATE SYSTEM ====================
+        function showCurrentAffairs() {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <h2>🌍 Current Affairs</h2>
+                <hr>
+                <ul>
+                    <li><a href="https://www.pib.gov.in" target="_blank">Press Information Bureau</a></li>
+                    <li><a href="https://www.drishtiias.com/daily-updates" target="_blank">Drishti IAS Daily Updates</a></li>
+                    <li><a href="https://currentaffairs.adda247.com" target="_blank">Adda247 Current Affairs</a></li>
+                </ul>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function showMockTests() {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <h2>✅ Mock Tests</h2>
+                <hr>
+                <ul>
+                    <li><a href="https://jeemain.nta.nic.in" target="_blank">JEE Main Mock Test</a></li>
+                    <li><a href="https://neet.nta.nic.in" target="_blank">NEET Mock Test</a></li>
+                    <li><a href="https://upsc.gov.in" target="_blank">UPSC Prelims Mock</a></li>
+                </ul>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function showResults() {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <h2>📊 Exam Results</h2>
+                <hr>
+                <ul>
+                    <li><a href="https://results.nic.in" target="_blank">Board Results</a></li>
+                    <li><a href="https://jeemain.nta.nic.in" target="_blank">JEE Main Results</a></li>
+                    <li><a href="https://neet.nta.nic.in" target="_blank">NEET Results</a></li>
+                </ul>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function showAppForms() {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <h2>📋 Application Forms</h2>
+                <hr>
+                <ul>
+                    <li><a href="https://scholarships.gov.in" target="_blank">Scholarship Application</a></li>
+                    <li><a href="https://jeemain.nta.nic.in" target="_blank">JEE Main Application</a></li>
+                    <li><a href="https://neet.nta.nic.in" target="_blank">NEET Application</a></li>
+                </ul>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+            `;
+            modal.style.display = 'block';
+        }
+
+        // ==================== NEWS TICKER ====================
         
+        function updateNewsTicker() {
+            const ticker = document.getElementById('newsTicker');
+            if (ticker && dailyNews.length) {
+                ticker.innerHTML = dailyNews.map(news => `📢 ${news} ••• `).join('');
+            }
+        }
+
         async function fetchLatestNews() {
             try {
-                // Try to fetch from GitHub-generated JSON
                 const response = await fetch('data/news_daily.json?v=' + Date.now());
                 if (response.ok) {
                     const news = await response.json();
                     if (news && news.length > 0) {
                         dailyNews = news.map(n => n.title || n);
                         updateNewsTicker();
-                        console.log('✅ News updated from server');
                     }
                 }
             } catch (error) {
-                console.log('Using cached news');
-                // Keep using default news
+                console.log('Using default news');
             }
         }
+
+        // ==================== LANGUAGE HANDLING ====================
         
-        async function fetchLatestSchemes() {
-            try {
-                const response = await fetch('data/schemes_latest.json?v=' + Date.now());
-                if (response.ok) {
-                    const schemes = await response.json();
-                    if (schemes && schemes.length > 0) {
-                        // Merge with existing schemes (avoid duplicates)
-                        const existingNames = new Set(governmentSchemes.map(s => s.name));
-                        schemes.forEach(scheme => {
-                            if (!existingNames.has(scheme.name)) {
-                                governmentSchemes.push(scheme);
-                            }
-                        });
-                        console.log(`✅ Added ${schemes.length} new schemes`);
-                    }
-                }
-            } catch (error) {
-                console.log('Using cached schemes');
-            }
+        function setupLanguageButtons() {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    // Language change logic can be expanded
+                });
+            });
         }
-        
-        function updateNewsTicker() {
-            const ticker = document.getElementById('newsTicker');
-            if (ticker && dailyNews.length) {
-                ticker.innerHTML = dailyNews.map(news => `🎯 ${news} • `).join('');
-            }
-        }
-        
+
         // ==================== OFFLINE DETECTION ====================
         
         function updateOnlineStatus() {
@@ -968,76 +787,49 @@
                 indicator.style.display = 'block';
             } else {
                 indicator.style.display = 'none';
-                // Refresh data when back online
-                fetchLatestNews();
-                fetchLatestSchemes();
             }
         }
-        
-        // ==================== LANGUAGE HANDLING ====================
-        
-        function setupLanguageButtons() {
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentLang = btn.dataset.lang;
-                    updateLanguage();
-                });
-            });
-        }
-        
-        function updateLanguage() {
-            const t = translations[currentLang];
-            if (t) {
-                document.getElementById('searchInput').placeholder = t.searchPlaceholder;
-                // Update other text as needed
-            }
-        }
-        
-        // ==================== SERVICE WORKER REGISTRATION ====================
+
+        // ==================== SERVICE WORKER ====================
         
         function registerServiceWorker() {
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('✅ Service Worker registered'))
+                    .then(() => console.log('✅ Service Worker registered'))
                     .catch(err => console.log('❌ Service Worker error:', err));
             }
         }
-        
-        // ==================== INITIALIZATION ====================
+
+        // ==================== MODAL ====================
         
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
         }
-        
-        // Close modal when clicking outside
+
         window.onclick = function(event) {
             const modal = document.getElementById('modal');
             if (event.target === modal) {
                 modal.style.display = 'none';
             }
         }
+
+        // ==================== INITIALIZATION ====================
         
-        // Initialize everything
         document.addEventListener('DOMContentLoaded', () => {
-            populateFeatureGrid();
+            displaySchemes();
             setupLanguageButtons();
             registerServiceWorker();
             updateOnlineStatus();
             fetchLatestNews();
-            fetchLatestSchemes();
             updateNewsTicker();
             
-            // Auto-refresh every hour
-            setInterval(() => {
-                fetchLatestNews();
-                fetchLatestSchemes();
-            }, 3600000);
-            
-            // Online/offline listeners
             window.addEventListener('online', updateOnlineStatus);
             window.addEventListener('offline', updateOnlineStatus);
+            
+            // Search on Enter key
+            document.getElementById('searchInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
         });
     </script>
 </body>
