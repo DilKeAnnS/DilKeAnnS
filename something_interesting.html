@@ -2,646 +2,856 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Something Interesting - Dil Ke AnnS Career Saathi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Something Interesting | Dil-Ke-AnnS Career Saathi</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f4f0;
-            color: #1e3c2c;
-            padding-bottom: 20px;
-        }
-        .header {
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
-            color: white;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .back-btn {
-            background: #ffb74d;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            background: white;
-            border-bottom: 2px solid #c8e6c9;
-            padding: 0 0.5rem;
-            overflow-x: auto;
-        }
-        .tab-btn {
-            background: none;
-            border: none;
-            padding: 12px 16px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: #2e5c2e;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        .tab-btn.active {
-            background: #e8f5e9;
-            color: #1b5e20;
-            border-bottom: 3px solid #ff9800;
-        }
-        .tab-pane {
-            display: none;
-            padding: 20px 16px;
-            animation: fade 0.3s ease;
-        }
-        .tab-pane.active { display: block; }
-        @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
+        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
+        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
+        .back-button:hover { background: rgba(255,255,255,0.25); }
+        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 45px; width: auto; border-radius: 12px; }
+        .logo h1 { font-size: 18px; font-weight: 700; }
+        .logo p { font-size: 9px; opacity: 0.85; }
+        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
         
-        .card {
-            background: white;
-            border-radius: 24px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #dcedc8;
-        }
-        textarea, input, select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 28px;
-            border: 1px solid #ccc;
-            font-size: 1rem;
-            margin: 8px 0;
-            font-family: inherit;
-        }
-        button {
-            background: #ff9800;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 40px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            margin: 5px 5px 5px 0;
-        }
-        button:hover { background: #f57c00; }
-        .voice-btn, .grammar-btn { background: #2e7d32; }
-        .response-area {
-            background: #f9f7f3;
-            border-radius: 20px;
-            padding: 15px;
-            margin-top: 15px;
-            border-left: 4px solid #ff9800;
-        }
-        canvas {
-            border: 2px dashed #aaa;
-            background: white;
-            border-radius: 16px;
-            width: 100%;
-            height: auto;
-            margin: 10px 0;
-        }
-        .qr-scanner { background: #1e1e1e; border-radius: 20px; overflow: hidden; margin: 10px 0; }
-        #qr-video { width: 100%; max-height: 300px; object-fit: cover; }
-        .badge { background: #ffb74d; border-radius: 40px; padding: 4px 12px; font-size: 0.7rem; display: inline-block; }
-        .persona-select { background: #e8f5e9; font-weight: bold; }
-        .room-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
-        .room-btn {
-            background: #e8f5e9;
-            color: #1b5e20;
-            padding: 6px 12px;
-            font-size: 0.75rem;
-            margin: 0;
-        }
-        .room-btn.active { background: #ff9800; color: white; }
-        .message-row {
-            background: #f5f5f5;
-            border-radius: 16px;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-        }
-        .message-user { background: #e3f2e8; text-align: right; }
-        .message-ai { background: #fff3e0; border-left: 3px solid #ff9800; }
-        .gd-messages { max-height: 300px; overflow-y: auto; margin-bottom: 10px; }
-        footer { text-align: center; padding: 20px; font-size: 0.7rem; color: #666; }
-        @media (max-width: 600px) { .tab-btn { padding: 10px 12px; font-size: 0.7rem; } }
+        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
+        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
+        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
+        
+        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
+        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
+        .door-btn:hover { background: #F0EADF; }
+        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
+        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
+        
+        .door-content { display: none; animation: fadeIn 0.3s ease; }
+        .door-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
+        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
+        .accordion-header:hover { background: #F8F4EF; }
+        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
+        .accordion-icon { font-size: 24px; }
+        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
+        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
+        .accordion-card.active .accordion-content { display: block; }
+        
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
+        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+        .info-text { font-size: 13px; line-height: 1.45; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
+        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
+        .live-link:hover { text-decoration: underline; }
+        
+        .room-selector { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+        .room-btn { background: #F0EADF; border: none; padding: 8px 16px; border-radius: 40px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+        .room-btn.active { background: #E67E22; color: white; }
+        .room-btn:hover { background: #E67E22; color: white; }
+        .chat-area { background: #F8F4EF; border-radius: 16px; padding: 15px; height: 300px; overflow-y: auto; margin-bottom: 15px; border: 1px solid #E8E2D9; }
+        .chat-message { padding: 8px 12px; margin-bottom: 8px; border-radius: 16px; background: white; border-left: 3px solid #E67E22; }
+        .chat-message.user { background: #E8F5E9; border-left-color: #1B4D3E; }
+        .chat-message.ai { background: #FFF3E0; border-left-color: #E67E22; }
+        .message-input { display: flex; gap: 10px; flex-wrap: wrap; }
+        .message-input input { flex: 1; padding: 12px; border: 1px solid #E8E2D9; border-radius: 40px; font-size: 14px; background: white; }
+        .voice-btn { background: #1B4D3E; color: white; border: none; width: 48px; height: 48px; border-radius: 50%; font-size: 22px; cursor: pointer; transition: all 0.2s; }
+        .voice-btn:hover { background: #E67E22; transform: scale(1.05); }
+        .voice-btn.listening { background: #E67E22; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .btn { background: #E67E22; color: white; border: none; padding: 10px 20px; border-radius: 40px; font-size: 14px; font-weight: 600; cursor: pointer; margin: 5px; transition: all 0.2s; }
+        .btn:hover { background: #D35400; transform: scale(1.02); }
+        .btn-secondary { background: #1B4D3E; }
+        .btn-secondary:hover { background: #0D3B2F; }
+        .leaderboard-table { width: 100%; border-collapse: collapse; }
+        .leaderboard-table th, .leaderboard-table td { padding: 8px; text-align: left; border-bottom: 1px solid #E8E2D9; }
+        .leaderboard-table th { background: #F0EADF; }
+        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
+        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
+        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
+        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
+        
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        .nav-item span:first-child { font-size: 22px; }
+        .nav-item span:last-child { font-size: 10px; color: #64748B; }
+        .nav-item.active { background: #F0EADF; }
+        
+        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } }
     </style>
 </head>
 <body>
-
 <div class="header">
-    <button class="back-btn" onclick="window.location.href='index.html'">← Home</button>
-    <h2>✨ Something Interesting ✨</h2>
-    <div></div>
+    <div class="back-button" onclick="goBack()">← Back</div>
+    <div class="logo-section">
+        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
+        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
+        <div style="opacity:0;">🔔</div>
+    </div>
+    <div class="tagline">💬 Learn, Discuss, Debate, Practice - All in One Place! 📚</div>
 </div>
 
-<div class="tabs">
-    <button class="tab-btn active" data-tab="gd">💬 GD Rooms</button>
-    <button class="tab-btn" data-tab="voice">🎤 Voice Studio</button>
-    <button class="tab-btn" data-tab="design">🎨 Design Studio</button>
-    <button class="tab-btn" data-tab="anns">🤖 AnnS AI</button>
-    <button class="tab-btn" data-tab="scanner">📷 Scanner</button>
-    <button class="tab-btn" data-tab="tools">🔧 Smart Tools</button>
-</div>
-
-<!-- ==================== GD ROOMS TAB ==================== -->
-<div id="gd" class="tab-pane active">
-    <div class="card">
-        <h3>💬 Group Discussion Rooms <span class="badge">AI Moderated</span></h3>
-        
-        <!-- Persona Selector -->
-        <select id="gdPersonaSelect" class="persona-select">
-            <option value="mentor">👨‍🏫 Mentor - Career Guidance</option>
-            <option value="teacher">📚 Teacher - Explain Concepts</option>
-            <option value="friend">💬 Friend - Casual Help</option>
-            <option value="coach">🏋️ Coach - Daily Tasks</option>
-            <option value="examiner">📝 Examiner - Tests & MCQs</option>
-            <option value="counsellor">❤️ Counsellor - Doubt & Stress</option>
-            <option value="bro">😎 Bro - Chill & Gen-Z</option>
-            <option value="didi">👩‍🦱 Didi - Caring Elder</option>
-            <option value="motivator">🔥 Motivator - Energy & Josh</option>
-            <option value="debugger">💻 Debugger - Code & Errors</option>
-            <option value="analyst">📊 Analyst - Data & Stats</option>
-            <option value="creator">🎨 Creator - Ideas & Content</option>
-        </select>
-        
-        <!-- Room Selector -->
-        <div class="room-buttons" id="roomSelector">
-            <button class="room-btn" data-room="general">💬 General</button>
-            <button class="room-btn" data-room="upsc">🏛️ UPSC</button>
-            <button class="room-btn" data-room="jee">⚙️ JEE/NEET</button>
-            <button class="room-btn" data-room="banking">🏦 Banking</button>
-            <button class="room-btn" data-room="ssc">📝 SSC</button>
-            <button class="room-btn" data-room="gk">🌍 GK/CA</button>
+<div class="container">
+    <div class="page-title">✨ Something Interesting - Interactive Learning Hub</div>
+    <div class="page-subtitle">Group Discussions | AI Counsellor | Mock Interviews | Daily Challenges | Debate Mode | Study Partner</div>
+    
+    <div class="door-nav">
+        <button class="door-btn active" data-door="gd">💬 <span class="door-label">Group Discussion</span></button>
+        <button class="door-btn" data-door="counsellor">🤖 <span class="door-label">AI Counsellor</span></button>
+        <button class="door-btn" data-door="interview">🎤 <span class="door-label">Mock Interview</span></button>
+        <button class="door-btn" data-door="challenge">🏆 <span class="door-label">Daily Challenge</span></button>
+        <button class="door-btn" data-door="debate">⚖️ <span class="door-label">Debate Mode</span></button>
+        <button class="door-btn" data-door="study">👥 <span class="door-label">Study Partner</span></button>
+        <button class="door-btn" data-door="topic">🎯 <span class="door-label">Topic Generator</span></button>
+        <button class="door-btn" data-door="answer">📝 <span class="door-label">Model Answer</span></button>
+        <button class="door-btn" data-door="leaderboard">🏅 <span class="door-label">Leaderboard</span></button>
+    </div>
+    
+    <!-- ==================== DOOR 1: GROUP DISCUSSION ==================== -->
+    <div id="door-gd" class="door-content active">
+        <div class="accordion-card active" id="gdCard">
+            <div class="accordion-header" onclick="toggleCard('gdCard')">
+                <div class="accordion-title"><span class="accordion-icon">💬</span> Live Group Discussion Rooms</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="room-selector" id="roomSelector">
+                    <button class="room-btn active" data-room="UPSC">UPSC CSE</button>
+                    <button class="room-btn" data-room="SSC">SSC/Banking</button>
+                    <button class="room-btn" data-room="NEET-JEE">NEET/JEE</button>
+                    <button class="room-btn" data-room="Current Affairs">Current Affairs</button>
+                    <button class="room-btn" data-room="Personality">Personality Dev</button>
+                    <button class="room-btn" data-room="Technology">Technology</button>
+                    <button class="room-btn" data-room="Economy">Economy</button>
+                    <button class="room-btn" data-room="General">General Discussion</button>
+                </div>
+                <div class="chat-area" id="chatArea">
+                    <div class="chat-message ai">🤖 AnnS AI: Welcome! Choose a room, share your views, and get feedback. Remember - No personal info. Stay on topic. Be respectful!</div>
+                </div>
+                <div class="message-input">
+                    <input type="text" id="messageInput" placeholder="Type your message or speak...">
+                    <button class="voice-btn" id="voiceBtn" title="Click to speak">🎤</button>
+                    <button class="btn" id="sendBtn">Send</button>
+                    <button class="btn btn-secondary" id="speakSummaryBtn">🔊 Summary</button>
+                </div>
+                <div class="section-title">📋 AI Moderator Rules</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">✅ DOs</div><div class="info-text">Stay on topic, be respectful, support arguments with facts, listen to others</div></div>
+                    <div class="info-card"><div class="info-label">❌ DON'Ts</div><div class="info-text">No personal info (phone, email, name), no abusive language, no off-topic posts</div></div>
+                    <div class="info-card"><div class="info-label">⚠️ Warning System</div><div class="info-text">1st Warning → 2min mute → 1hr mute → 1 day mute</div></div>
+                </div>
+            </div>
         </div>
-        
-        <!-- Chat Area -->
-        <div id="gdMessages" class="gd-messages response-area" style="height: 300px;">
-            💬 Select a room and start discussing...
+    </div>
+    
+    <!-- ==================== DOOR 2: AI COUNSELLOR ==================== -->
+    <div id="door-counsellor" class="door-content">
+        <div class="accordion-card" id="counsellorCard">
+            <div class="accordion-header" onclick="toggleCard('counsellorCard')">
+                <div class="accordion-title"><span class="accordion-icon">🤖</span> AnnS AI Counsellor - Ask Anything!</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ Career Guidance</div><div class="info-text">Ask about career options after 10th/12th, graduation, streams, colleges, exams, future scope</div></div>
+                    <div class="info-card"><div class="info-label">📚 Exam Preparation Tips</div><div class="info-text">Get study plans, time management tips, subject-wise strategies for JEE, NEET, UPSC, SSC, Banking, etc.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Doubt Solving</div><div class="info-text">Ask any academic doubt (Maths, Science, English, GK) - AI will explain step by step</div></div>
+                    <div class="info-card"><div class="info-label">💼 Interview Preparation</div><div class="info-text">Practice common questions, get tips for HR interviews, college admissions, job interviews</div></div>
+                </div>
+                <div class="message-input">
+                    <input type="text" id="doubtInput" placeholder="Ask any question about career, exams, doubts...">
+                    <button class="voice-btn" id="counsellorVoiceBtn">🎤</button>
+                    <button class="btn" id="askDoubtBtn">Ask AnnS AI</button>
+                </div>
+                <div id="doubtAnswer" class="chat-area" style="margin-top:12px; display:none;"></div>
+                <div class="section-title">🎯 Sample Questions You Can Ask</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎓 Career</div><div class="info-text">"What are the best career options after 12th PCM?" | "How to become a doctor?"</div></div>
+                    <div class="info-card"><div class="info-label">📋 Exam</div><div class="info-text">"How to prepare for UPSC from Class 11?" | "NEET preparation tips" | "JEE Main strategy"</div></div>
+                    <div class="info-card"><div class="info-label">💼 Interview</div><div class="info-text">"Tell me about yourself - best answer" | "Why do you want this job?"</div></div>
+                </div>
+            </div>
         </div>
-        
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <textarea id="gdMessageInput" rows="2" placeholder="Type your message... (or use voice)" style="flex: 1;"></textarea>
-            <button id="gdVoiceBtn" class="voice-btn">🎤 Voice</button>
-            <button id="gdSendBtn">📤 Send</button>
+    </div>
+    
+    <!-- ==================== DOOR 3: MOCK INTERVIEW ==================== -->
+    <div id="door-interview" class="door-content">
+        <div class="accordion-card" id="interviewCard">
+            <div class="accordion-header" onclick="toggleCard('interviewCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎤</span> Mock Interview Practice</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🏢 Job Interview</div><div class="info-text">Practice for IT jobs, Banking, SSC, Teaching, Corporate roles, Government jobs</div></div>
+                    <div class="info-card"><div class="info-label">🎓 College Interview</div><div class="info-text">IITs, NITs, Medical colleges, Law schools, Management institutes</div></div>
+                    <div class="info-card"><div class="info-label">🏛️ SSB Interview</div><div class="info-text">Defence services - NDA, CDS, AFCAT, Army, Navy, Air Force</div></div>
+                    <div class="info-card"><div class="info-label">📋 Common Questions</div><div class="info-text">Tell me about yourself, Strengths/Weaknesses, Why this role, Where do you see yourself in 5 years</div></div>
+                </div>
+                <div class="message-input">
+                    <input type="text" id="interviewRole" placeholder="Enter job/college role (e.g., Software Engineer, IAS, MBBS)">
+                    <button class="btn" id="generateInterviewBtn">Generate Interview Questions</button>
+                </div>
+                <div id="interviewQuestions" class="chat-area" style="margin-top:12px; display:none;"></div>
+                <div class="section-title">💡 Tips for Interview Success</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">1. Research</div><div class="info-text">Know the company/college, their values, recent news</div></div>
+                    <div class="info-card"><div class="info-label">2. Practice</div><div class="info-text">Record yourself answering common questions</div></div>
+                    <div class="info-card"><div class="info-label">3. Body Language</div><div class="info-text">Maintain eye contact, sit straight, smile</div></div>
+                    <div class="info-card"><div class="info-label">4. Be Honest</div><div class="info-text">Don't fake answers - be authentic</div></div>
+                </div>
+            </div>
         </div>
-        
-        <div style="margin-top: 10px; font-size: 0.7rem; color: #666;">
-            🎙️ <span id="voiceStatus">Voice idle</span> | 🤖 AI Moderator active | 🔒 Anonymous
+    </div>
+    
+    <!-- ==================== DOOR 4: DAILY CHALLENGE ==================== -->
+    <div id="door-challenge" class="door-content">
+        <div class="accordion-card" id="challengeCard">
+            <div class="accordion-header" onclick="toggleCard('challengeCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏆</span> Daily Learning Challenge</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div id="dailyChallenge" class="info-card" style="background:#FFF3E0; margin-bottom:15px;">
+                    <div class="info-text" style="font-weight:700;">📖 Today's Challenge: Explain the importance of AI in education in 100 words</div>
+                </div>
+                <textarea id="challengeAnswer" rows="5" placeholder="Write your answer here..." style="width:100%; padding:12px; border-radius:16px; border:1px solid #E8E2D9; margin-bottom:10px;"></textarea>
+                <button class="btn" id="submitChallengeBtn">Submit Challenge (+20 points)</button>
+                <div id="challengeFeedback" style="margin-top:10px; display:none;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 5: DEBATE MODE ==================== -->
+    <div id="door-debate" class="door-content">
+        <div class="accordion-card" id="debateCard">
+            <div class="accordion-header" onclick="toggleCard('debateCard')">
+                <div class="accordion-title"><span class="accordion-icon">⚖️</span> Debate Mode - For vs Against</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-card" style="margin-bottom:15px;">
+                    <div class="info-label">📌 Today's Topic: <span id="debateTopic">Should homework be banned in schools?</span></div>
+                </div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+                    <button class="btn" id="forPositionBtn">🗣️ FOR (I support)</button>
+                    <button class="btn btn-secondary" id="againstPositionBtn">🎤 AGAINST (I oppose)</button>
+                    <button class="btn" id="newTopicBtn">🔄 New Topic</button>
+                </div>
+                <div id="debateSpeech" style="display:none;">
+                    <textarea id="speechInput" rows="4" placeholder="Type or speak your argument..." style="width:100%; padding:10px; border-radius:12px; margin-bottom:10px;"></textarea>
+                    <button class="voice-btn" id="debateVoiceBtn">🎤 Speak Argument</button>
+                    <button class="btn" id="submitDebateBtn">Submit Argument</button>
+                </div>
+                <div id="debateScore" class="chat-area" style="margin-top:10px; display:none;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 6: STUDY PARTNER ==================== -->
+    <div id="door-study" class="door-content">
+        <div class="accordion-card" id="studyCard">
+            <div class="accordion-header" onclick="toggleCard('studyCard')">
+                <div class="accordion-title"><span class="accordion-icon">👥</span> Find Anonymous Study Partner</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🎯 Your Exam</div><div class="info-text"><input type="text" id="examInput" placeholder="e.g., UPSC, JEE, NEET, SSC, Banking" style="width:100%; padding:8px; border-radius:12px; border:1px solid #E8E2D9;"></div></div>
+                    <div class="info-card"><div class="info-label">📚 Your Stream</div><div class="info-text"><input type="text" id="streamInput" placeholder="e.g., Science, Commerce, Arts" style="width:100%; padding:8px; border-radius:12px; border:1px solid #E8E2D9;"></div></div>
+                    <div class="info-card"><div class="info-label">⏰ Study Time</div><div class="info-text"><input type="text" id="timeInput" placeholder="e.g., Morning, Evening, Night" style="width:100%; padding:8px; border-radius:12px; border:1px solid #E8E2D9;"></div></div>
+                </div>
+                <button class="btn" id="findPartnerBtn">Find Study Partner</button>
+                <div id="partnerResult" class="chat-area" style="margin-top:12px; display:none;"></div>
+                <div class="section-title">📋 How it works</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🔒 Anonymous</div><div class="info-text">No personal info shared. Only Learner ID</div></div>
+                    <div class="info-card"><div class="info-label">🎯 Matched by exam</div><div class="info-text">We match you with someone preparing for same exam</div></div>
+                    <div class="info-card"><div class="info-label">💬 Chat Room</div><div class="info-text">Private chat with your study partner</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 7: TOPIC GENERATOR ==================== -->
+    <div id="door-topic" class="door-content">
+        <div class="accordion-card" id="topicCard">
+            <div class="accordion-header" onclick="toggleCard('topicCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎯</span> AI Topic Generator</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">Select Topic Type</div><div class="info-text">
+                        <select id="topicType" style="width:100%; padding:8px; border-radius:12px;">
+                            <option value="GD">Group Discussion Topic</option>
+                            <option value="Debate">Debate Topic</option>
+                            <option value="Interview">Interview Question</option>
+                            <option value="Essay">Essay Topic</option>
+                            <option value="Speech">Speech Topic</option>
+                        </select>
+                    </div></div>
+                </div>
+                <button class="btn" id="generateTopicBtn">Generate Topic</button>
+                <div id="generatedTopic" class="info-card" style="margin-top:12px; background:#FFF3E0;">
+                    <div class="info-text">Click Generate to get a new topic</div>
+                </div>
+                <div class="section-title">📋 Sample Topics</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">GD Topics</div><div class="info-text">"Impact of AI on Jobs" | "Should exams be abolished?"</div></div>
+                    <div class="info-card"><div class="info-label">Debate Topics</div><div class="info-text">"Social media - boon or bane?" | "Is online education effective?"</div></div>
+                    <div class="info-card"><div class="info-label">Interview Qs</div><div class="info-text">"Tell me about yourself" | "What are your strengths and weaknesses?"</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 8: MODEL ANSWER BUILDER ==================== -->
+    <div id="door-answer" class="door-content">
+        <div class="accordion-card" id="answerCard">
+            <div class="accordion-header" onclick="toggleCard('answerCard')">
+                <div class="accordion-title"><span class="accordion-icon">📝</span> Model Answer Builder</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="message-input">
+                    <input type="text" id="questionInput" placeholder="Enter question/topic (e.g., What is democracy? or Impact of social media)">
+                    <button class="btn" id="buildAnswerBtn">Build Model Answer</button>
+                </div>
+                <div id="modelAnswer" class="chat-area" style="margin-top:12px; display:none;"></div>
+                <div class="section-title">📋 How to use</div>
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">1. Enter question</div><div class="info-text">Type any academic, GD, or interview question</div></div>
+                    <div class="info-card"><div class="info-label">2. Get structure</div><div class="info-text">Receive introduction, body, conclusion format</div></div>
+                    <div class="info-card"><div class="info-label">3. Customize</div><div class="info-text">Add your own points to make it unique</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==================== DOOR 9: LEADERBOARD ==================== -->
+    <div id="door-leaderboard" class="door-content">
+        <div class="accordion-card" id="leaderboardCard">
+            <div class="accordion-header" onclick="toggleCard('leaderboardCard')">
+                <div class="accordion-title"><span class="accordion-icon">🏅</span> Anonymous Leaderboard</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-card" style="margin-bottom:15px;">
+                    <div class="info-label">🆔 Your Anonymous ID: <span id="anonymousId"></span></div>
+                    <div class="info-text">Your Points: <span id="userPoints">0</span> | Warnings: <span id="warningCount">0</span></div>
+                </div>
+                <table class="leaderboard-table">
+                    <thead><tr><th>Rank</th><th>Learner ID</th><th>Points</th><th>Contributions</th></tr></thead>
+                    <tbody id="leaderboardBody"></tbody>
+                </table>
+                <div class="info-grid" style="margin-top:15px;">
+                    <div class="info-card"><div class="info-label">🎯 How to Earn Points</div><div class="info-text">Daily Challenge (+20) | Helping others (+5) | Debate submission (+15) | Active in GD (+2 per message)</div></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- ==================== VOICE STUDIO TAB ==================== -->
-<div id="voice" class="tab-pane">
-    <div class="card">
-        <h3>🎙️ Voice to Text + Grammar Correction</h3>
-        <button id="startVoiceBtn" class="voice-btn">🎤 Start Speaking</button>
-        <button id="grammarFixBtn" class="grammar-btn">📝 Auto Grammar Correction</button>
-        <textarea id="voiceText" rows="5" placeholder="Your spoken text will appear here... or type manually"></textarea>
-        <button id="saveNoteBtn">💾 Save Note (offline)</button>
-        <div id="savedNotesList" class="response-area" style="max-height: 200px; overflow: auto;">
-            <strong>📌 My Notes:</strong>
-            <div id="notesContainer">Loading...</div>
-        </div>
-    </div>
-</div>
-
-<!-- ==================== DESIGN STUDIO TAB ==================== -->
-<div id="design" class="tab-pane">
-    <div class="card">
-        <h3>🎨 Design Studio - Posters & Cards</h3>
-        <canvas id="designCanvas" width="500" height="300" style="width: 100%; height: auto; max-width: 500px; background: white; border: 2px solid #ddd;"></canvas>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0;">
-            <button id="addTextBtn">📝 Add Text</button>
-            <button id="clearCanvasBtn">🗑️ Clear</button>
-            <button id="exportCanvasBtn">📸 Export as PNG</button>
-        </div>
-        <input type="color" id="colorPicker" value="#ff9800">
-        <p><small>💡 Click on canvas to draw circles | Use color picker | Add text for posters</small></p>
-        <div id="designTips" class="response-area">✨ Create resumes, posters, greeting cards – save locally</div>
-    </div>
-</div>
-
-<!-- ==================== ANNS AI TAB ==================== -->
-<div id="anns" class="tab-pane">
-    <div class="card">
-        <h3>🤖 AnnS AI Assistant</h3>
-        <select id="aiPersonaSelect" class="persona-select">
-            <option value="mentor">👨‍🏫 Mentor Mode</option>
-            <option value="teacher">📚 Teacher Mode</option>
-            <option value="friend">💬 Friend Mode</option>
-            <option value="coach">🏋️ Coach Mode</option>
-            <option value="examiner">📝 Examiner Mode</option>
-            <option value="counsellor">❤️ Counsellor Mode</option>
-            <option value="bro">😎 Bro Mode</option>
-            <option value="didi">👩‍🦱 Didi Mode</option>
-            <option value="motivator">🔥 Motivator Mode</option>
-        </select>
-        <input type="text" id="annsQuestion" placeholder="Ask anything: career, exam, study tips...">
-        <button id="askAnnSBtn">💬 Ask AnnS</button>
-        <div id="annsAnswer" class="response-area">✨ AnnS will answer here (offline + online knowledge)</div>
-    </div>
-</div>
-
-<!-- ==================== SCANNER TAB ==================== -->
-<div id="scanner" class="tab-pane">
-    <div class="card">
-        <h3>📷 QR Scanner & Document OCR</h3>
-        <div id="qr-reader" class="qr-scanner" style="width: 100%; min-height: 200px; background: #1e1e1e; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white;">QR Scanner Ready</div>
-        <button id="startScannerBtn">🔍 Start QR Scanner</button>
-        <button id="stopScannerBtn">⏹️ Stop Scanner</button>
-        <p><strong>Scanned Result:</strong> <span id="qrResult">-</span></p>
-        <hr>
-        <h4>📄 Document Text (OCR)</h4>
-        <input type="file" id="ocrImageInput" accept="image/*">
-        <button id="ocrBtn">📄 Extract Text</button>
-        <div id="ocrResult" class="response-area">Extracted text will appear here...</div>
-    </div>
-</div>
-
-<!-- ==================== SMART TOOLS TAB ==================== -->
-<div id="tools" class="tab-pane">
-    <div class="card">
-        <h3>🔧 Smart Tools</h3>
-        <button id="downloadNotesBtn">📥 Download My Notes as PDF</button>
-        <button id="shareProblemBtn">📤 Share Problem (Generate QR)</button>
-        <div id="generatedQR" style="margin-top: 10px;"></div>
-        <hr>
-        <h4>📖 PDF Reader</h4>
-        <input type="file" id="pdfUpload" accept=".pdf">
-        <button id="readPdfBtn">📚 Read PDF & Summarize</button>
-        <div id="pdfSummary" class="response-area">Upload a PDF to get AI summary...</div>
-    </div>
-</div>
-
-<footer>💡 All data stays on your device (IndexedDB) | 12 AI Personas | Offline-first</footer>
+<div class="bottom-bar" id="bottomBar"></div>
 
 <script>
     // ==================== INITIALIZATION ====================
-    let db;
-    let currentGDRoom = "general";
-    let gdMessages = [];
-    let recognition = null;
-    let isVoiceActive = false;
-    let currentCanvas = null;
-    let ctx = null;
-    let html5QrCode = null;
-
-    const DB_NAME = 'CreativeDB';
-    const DB_VERSION = 2;
-
-    // Persona response styles
-    const personaStyles = {
-        mentor: "📈 As your Mentor: Let me guide you step by step.",
-        teacher: "📚 As your Teacher: Let me explain this simply.",
-        friend: "💬 Hey friend! Here's what I think.",
-        coach: "🏋️ Coach mode: Stay disciplined! Here's your plan.",
-        examiner: "📝 Examiner mode: Test yourself on this.",
-        counsellor: "❤️ Take a deep breath. Here's my advice.",
-        bro: "😎 Bro! Check this out - short and chill.",
-        didi: "👩‍🦱 Don't worry, I'm here to help you.",
-        motivator: "🔥 Let's go! You can do this!",
-        debugger: "💻 Debug mode: Let me fix that error.",
-        analyst: "📊 Analyst mode: Here are the facts and data.",
-        creator: "🎨 Creator mode: Here's a creative idea for you."
+    
+    // Generate Anonymous ID
+    const anonymousId = 'STU-' + Math.floor(Math.random() * 900000 + 100000);
+    let userPoints = parseInt(localStorage.getItem('userPoints_' + anonymousId) || '0');
+    let warnings = parseInt(localStorage.getItem('warnings_' + anonymousId) || '0');
+    let chatMessages = JSON.parse(localStorage.getItem('chatMessages_' + anonymousId) || '[]');
+    let currentRoom = 'UPSC';
+    let debatePosition = null;
+    let currentRecognition = null;
+    let currentDebateTopic = "Should homework be banned in schools?";
+    
+    // Update UI with user data
+    document.getElementById('anonymousId').innerText = anonymousId;
+    document.getElementById('userPoints').innerText = userPoints;
+    document.getElementById('warningCount').innerText = warnings;
+    
+    // Debate topics array
+    const debateTopics = [
+        "Should homework be banned in schools?",
+        "Is social media beneficial for students?",
+        "Should exams be replaced with continuous assessment?",
+        "Is online education better than traditional classroom?",
+        "Should mobile phones be banned in schools?",
+        "Is AI a threat to human jobs?",
+        "Should college education be free for all?",
+        "Is climate change the biggest threat to humanity?",
+        "Should cryptocurrency be legalized in India?",
+        "Is work from home the future of employment?"
+    ];
+    
+    // Interview questions database by role
+    const interviewQuestions = {
+        "software engineer": ["Tell me about yourself", "Explain OOP concepts", "What is your favorite programming language?", "How do you handle pressure?", "Explain a challenging project you worked on"],
+        "ias": ["Why do you want to join civil services?", "What are the biggest challenges facing India?", "Tell me about your leadership experience", "How do you handle criticism?", "What is your vision for your district?"],
+        "mbbs": ["Why did you choose medicine?", "How do you handle stress in emergency situations?", "Tell me about your internship experience", "What are the qualities of a good doctor?", "How do you maintain work-life balance?"],
+        "teacher": ["Why do you want to become a teacher?", "What is your teaching philosophy?", "How do you handle difficult students?", "How do you engage students in learning?", "What are your strengths as an educator?"],
+        "default": ["Tell me about yourself", "What are your strengths and weaknesses?", "Why should we hire you?", "Where do you see yourself in 5 years?", "Tell me about a time you faced a challenge"]
     };
-
-    // Offline knowledge base
-    const offlineKnowledge = {
-        "career after 10th": "After 10th, choose Science, Commerce, Arts, or Diploma. Check our After 10th tile.",
-        "upsc preparation": "Start with NCERTs, then Laxmikanth, Bipin Chandra, and practice previous papers.",
-        "jee preparation": "Focus on NCERT, HC Verma, and solve PYQs daily.",
-        "neet preparation": "Biology is key. Use NCERT and MTG for practice.",
-        "roadmap": "Class 10 → Choose stream → Class 12 → Entrance exam → Degree → Job",
-        "scholarship": "Check National Scholarship Portal (NSP) for various schemes."
-    };
-
-    // Open IndexedDB
-    function openDB() {
-        return new Promise((resolve, reject) => {
-            const request = indexedDB.open(DB_NAME, DB_VERSION);
-            request.onerror = () => reject(request.error);
-            request.onsuccess = () => { db = request.result; resolve(db); };
-            request.onupgradeneeded = (e) => {
-                const db = e.target.result;
-                if (!db.objectStoreNames.contains('notes')) {
-                    db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
-                }
-                if (!db.objectStoreNames.contains('gdMessages')) {
-                    db.createObjectStore('gdMessages', { keyPath: 'id', autoIncrement: true });
-                }
+    
+    // ==================== NAVIGATION FUNCTIONS ====================
+    
+    function goBack() {
+        window.location.href = 'index.html';
+    }
+    
+    function toggleCard(cardId) {
+        const card = document.getElementById(cardId);
+        card.classList.toggle('active');
+    }
+    
+    // Door navigation
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const doorId = btn.getAttribute('data-door');
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`door-${doorId}`).classList.add('active');
+        });
+    });
+    
+    // Room selector for GD
+    document.querySelectorAll('.room-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.room-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentRoom = btn.getAttribute('data-room');
+            addAIMessage(`You joined the ${currentRoom} room. What are your thoughts on today's topic?`);
+        });
+    });
+    
+    // ==================== CHAT FUNCTIONS ====================
+    
+    function addUserMessage(message) {
+        const chatArea = document.getElementById('chatArea');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chat-message user';
+        messageDiv.innerHTML = `👤 You: ${message}`;
+        chatArea.appendChild(messageDiv);
+        chatArea.scrollTop = chatArea.scrollHeight;
+        
+        // Save to localStorage
+        chatMessages.push({ user: anonymousId, message: message, room: currentRoom, timestamp: Date.now() });
+        localStorage.setItem('chatMessages_' + anonymousId, JSON.stringify(chatMessages.slice(-50)));
+        
+        // Add points for activity
+        addPoints(2, 'Active in GD');
+        
+        // Generate AI response
+        setTimeout(() => generateAIResponse(message), 500);
+    }
+    
+    function addAIMessage(message) {
+        const chatArea = document.getElementById('chatArea');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chat-message ai';
+        messageDiv.innerHTML = `🤖 AnnS AI: ${message}`;
+        chatArea.appendChild(messageDiv);
+        chatArea.scrollTop = chatArea.scrollHeight;
+    }
+    
+    function generateAIResponse(userMessage) {
+        let response = "";
+        const lowerMsg = userMessage.toLowerCase();
+        
+        if (lowerMsg.includes("hello") || lowerMsg.includes("hi")) {
+            response = "Hello! I'm AnnS AI. What would you like to discuss about " + currentRoom + "?";
+        } else if (lowerMsg.includes("topic") || lowerMsg.includes("discuss")) {
+            response = `Great! Let's discuss: "Impact of technology on ${currentRoom.toLowerCase()}". What are your thoughts?`;
+        } else if (lowerMsg.includes("opinion") || lowerMsg.includes("think")) {
+            response = "I think this is a balanced topic with multiple perspectives. Could you share your specific viewpoint?";
+        } else if (lowerMsg.includes("help") || lowerMsg.includes("suggest")) {
+            response = "Here are some key points to consider: 1) Current trends 2) Future implications 3) Practical solutions. Want to explore any of these?";
+        } else {
+            response = `Interesting point about ${currentRoom}! Can you elaborate or provide an example to support your view?`;
+        }
+        
+        addAIMessage(response);
+    }
+    
+    // ==================== SPEECH RECOGNITION ====================
+    
+    function setupVoiceRecognition(inputId, buttonId, callback) {
+        const button = document.getElementById(buttonId);
+        const input = document.getElementById(inputId);
+        
+        button.addEventListener('click', () => {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("Voice recognition not supported in this browser. Please use Chrome or Edge.");
+                return;
+            }
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'hi-IN';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            button.classList.add('listening');
+            button.innerHTML = '🎙️';
+            
+            recognition.start();
+            
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                input.value = transcript;
+                button.classList.remove('listening');
+                button.innerHTML = '🎤';
+                if (callback) callback(transcript);
+            };
+            
+            recognition.onerror = () => {
+                button.classList.remove('listening');
+                button.innerHTML = '🎤';
+                alert("Could not recognize speech. Please try again.");
+            };
+            
+            recognition.onend = () => {
+                button.classList.remove('listening');
+                button.innerHTML = '🎤';
             };
         });
     }
-
-    // Save note
-    async function saveNote(text) {
-        const tx = db.transaction('notes', 'readwrite');
-        tx.objectStore('notes').add({ text, timestamp: Date.now() });
-        await tx.complete;
-        loadNotes();
-    }
-
-    async function loadNotes() {
-        const tx = db.transaction('notes', 'readonly');
-        const notes = await tx.objectStore('notes').getAll();
-        const container = document.getElementById('notesContainer');
-        if (!notes.length) container.innerHTML = 'No notes yet.';
-        else container.innerHTML = notes.slice(-10).reverse().map(n => `<div>📄 ${escapeHtml(n.text.substring(0, 80))} <small>${new Date(n.timestamp).toLocaleTimeString()}</small></div>`).join('');
-    }
-
-    // Save GD message
-    async function saveGDMessage(room, text, sender, type) {
-        const tx = db.transaction('gdMessages', 'readwrite');
-        tx.objectStore('gdMessages').add({ room, text, sender, type, timestamp: Date.now() });
-        await tx.complete;
-        loadGDMessages();
-    }
-
-    async function loadGDMessages() {
-        const tx = db.transaction('gdMessages', 'readonly');
-        const all = await tx.objectStore('gdMessages').getAll();
-        const filtered = all.filter(m => m.room === currentGDRoom).slice(-50);
-        const container = document.getElementById('gdMessages');
-        if (!filtered.length) {
-            container.innerHTML = '<div>💬 No messages yet. Start the discussion!</div>';
-            return;
+    
+    // Setup voice for GD
+    setupVoiceRecognition('messageInput', 'voiceBtn', (text) => {
+        if (text) sendGDMessage();
+    });
+    
+    function sendGDMessage() {
+        const input = document.getElementById('messageInput');
+        if (input.value.trim()) {
+            addUserMessage(input.value.trim());
+            input.value = '';
         }
-        container.innerHTML = filtered.map(m => `
-            <div class="message-row ${m.type === 'user' ? 'message-user' : 'message-ai'}">
-                <div><strong>${escapeHtml(m.sender)}</strong> <small>${new Date(m.timestamp).toLocaleTimeString()}</small></div>
-                <div>${escapeHtml(m.text)}</div>
-            </div>
-        `).join('');
-        container.scrollTop = container.scrollHeight;
     }
-
-    // AI Response
-    function getAIResponse(question, persona) {
-        const q = question.toLowerCase();
-        let answer = "";
+    
+    document.getElementById('sendBtn').addEventListener('click', sendGDMessage);
+    document.getElementById('messageInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendGDMessage();
+    });
+    
+    // ==================== AI COUNSELLOR ====================
+    
+    setupVoiceRecognition('doubtInput', 'counsellorVoiceBtn');
+    
+    document.getElementById('askDoubtBtn').addEventListener('click', () => {
+        const question = document.getElementById('doubtInput').value;
+        if (!question.trim()) return;
         
-        for (let key in offlineKnowledge) {
-            if (q.includes(key)) {
-                answer = offlineKnowledge[key];
+        const answerDiv = document.getElementById('doubtAnswer');
+        answerDiv.style.display = 'block';
+        answerDiv.innerHTML = '<div class="chat-message ai">🤖 AnnS AI: Thinking...</div>';
+        
+        setTimeout(() => {
+            let answer = generateCounselorAnswer(question);
+            answerDiv.innerHTML = `<div class="chat-message ai">🤖 AnnS AI: ${answer}</div>`;
+            addPoints(5, 'Asking question');
+        }, 500);
+    });
+    
+    function generateCounselorAnswer(question) {
+        const q = question.toLowerCase();
+        
+        if (q.includes("career") || q.includes("job") || q.includes("after 12th")) {
+            return "Great question! Career options depend on your stream. Science: Engineering, Medical, Research. Commerce: CA, CS, MBA, B.Com. Arts: UPSC, Journalism, Law, Psychology. What's your stream?";
+        }
+        if (q.includes("neet") || q.includes("medical")) {
+            return "NEET is for MBBS/BDS. Preparation tips: 1) Master NCERT 2) Practice daily PYQs 3) Take mock tests weekly 4) Focus on Biology (360 marks) 5) Physics & Chemistry need conceptual clarity.";
+        }
+        if (q.includes("jee") || q.includes("engineering")) {
+            return "JEE Main & Advanced: Focus on Physics (Mechanics, Electrodynamics), Chemistry (Physical & Organic), Mathematics (Calculus, Algebra). Solve previous 10 years papers, take regular mocks.";
+        }
+        if (q.includes("upsc") || q.includes("ias")) {
+            return "UPSC CSE: 3 stages - Prelims (GS+CSAT), Mains (9 papers), Interview. Start with NCERT (6-12), then standard books (Laxmikanth, Spectrum). Read newspaper daily, practice answer writing.";
+        }
+        if (q.includes("interview")) {
+            return "Interview tips: 1) Research company/college 2) Prepare 'Tell me about yourself' 3) Use STAR method for behavioral questions 4) Ask thoughtful questions 5) Dress professionally. Practice with mock interviews!";
+        }
+        
+        return "That's a thoughtful question! I'd suggest breaking it down into smaller parts. Could you be more specific about what you'd like to know? I'm here to help with careers, exams, and academic doubts!";
+    }
+    
+    // ==================== MOCK INTERVIEW ====================
+    
+    document.getElementById('generateInterviewBtn').addEventListener('click', () => {
+        const role = document.getElementById('interviewRole').value.toLowerCase();
+        const questionsDiv = document.getElementById('interviewQuestions');
+        
+        let questions = interviewQuestions.default;
+        for (let [key, value] of Object.entries(interviewQuestions)) {
+            if (role.includes(key)) {
+                questions = value;
                 break;
             }
         }
         
-        if (!answer) {
-            answer = "That's a great question! Check our Study Material or GD rooms for detailed discussions. Keep learning!";
-        }
-        
-        return `${personaStyles[persona] || personaStyles.mentor}\n\n${answer}`;
-    }
-
-    // Send message in GD
-    async function sendGDMessage(text, isUser = true) {
-        if (!text.trim()) return;
-        const sender = isUser ? "You" : "AnnS AI";
-        const type = isUser ? "user" : "ai";
-        await saveGDMessage(currentGDRoom, text, sender, type);
-        
-        if (isUser) {
-            const persona = document.getElementById('gdPersonaSelect').value;
-            const reply = getAIResponse(text, persona);
-            setTimeout(() => sendGDMessage(reply, false), 500);
-        }
-    }
-
-    // Voice input
-    function initVoice() {
-        if (!('webkitSpeechRecognition' in window)) {
-            document.getElementById('voiceStatus').innerHTML = 'Voice not supported in this browser';
+        questionsDiv.style.display = 'block';
+        questionsDiv.innerHTML = `<div class="chat-message ai">🤖 AnnS AI: Here are common interview questions for ${role || "this role"}:\n\n${questions.map((q, i) => `${i+1}. ${q}`).join('\n\n')}\n\nPractice answering these, then ask me for feedback!</div>`;
+    });
+    
+    // ==================== DAILY CHALLENGE ====================
+    
+    document.getElementById('submitChallengeBtn').addEventListener('click', () => {
+        const answer = document.getElementById('challengeAnswer').value;
+        if (answer.length < 30) {
+            document.getElementById('challengeFeedback').innerHTML = '<div class="info-card" style="background:#FFE0E0;">❌ Please write at least 30 words for a meaningful answer.</div>';
+            document.getElementById('challengeFeedback').style.display = 'block';
             return;
         }
-        recognition = new webkitSpeechRecognition();
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        recognition.lang = 'hi-IN,en-IN';
         
-        recognition.onstart = () => {
-            isVoiceActive = true;
-            document.getElementById('voiceStatus').innerHTML = '🎙️ Listening... Speak now';
-        };
-        recognition.onend = () => {
-            isVoiceActive = false;
-            document.getElementById('voiceStatus').innerHTML = 'Voice idle';
-        };
-        recognition.onresult = (e) => {
-            const text = e.results[0][0].transcript;
-            document.getElementById('voiceText').value = text;
-            document.getElementById('gdMessageInput').value = text;
-            document.getElementById('voiceStatus').innerHTML = '✅ Voice captured!';
-        };
-    }
-
-    // Grammar fix
-    function fixGrammar(text) {
-        let fixed = text.replace(/\bi\s+is\b/gi, 'I am');
-        fixed = fixed.replace(/\bi\s+am\s+are\b/gi, 'I am');
-        fixed = fixed.replace(/\bhe\s+are\b/gi, 'he is');
-        fixed = fixed.replace(/\bshe\s+are\b/gi, 'she is');
-        return fixed;
-    }
-
-    // Design Studio
-    function initCanvas() {
-        const canvas = document.getElementById('designCanvas');
-        canvas.width = 500; canvas.height = 300;
-        ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const today = new Date().toDateString();
+        const submitted = localStorage.getItem('challengeSubmitted_' + anonymousId);
         
-        canvas.addEventListener('click', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            const x = (e.clientX - rect.left) * scaleX;
-            const y = (e.clientY - rect.top) * scaleY;
-            ctx.fillStyle = document.getElementById('colorPicker').value;
-            ctx.beginPath();
-            ctx.arc(x, y, 10, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        
-        document.getElementById('addTextBtn').onclick = () => {
-            const text = prompt('Enter text for design:', 'Career Saathi');
-            if (text) {
-                ctx.font = 'bold 20px "Segoe UI"';
-                ctx.fillStyle = document.getElementById('colorPicker').value;
-                ctx.fillText(text, 50, 80);
-            }
-        };
-        document.getElementById('clearCanvasBtn').onclick = () => {
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        };
-        document.getElementById('exportCanvasBtn').onclick = () => {
-            const link = document.createElement('a');
-            link.download = 'my-design.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        };
-    }
-
-    // QR Scanner
-    function loadQrScanner() {
-        const script = document.createElement('script');
-        script.src = 'https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js';
-        script.onload = () => {
-            html5QrCode = new Html5Qrcode("qr-reader");
-        };
-        document.head.appendChild(script);
-    }
-
-    // OCR
-    async function doOCR(file) {
-        const formData = new FormData();
-        formData.append('image', file);
-        try {
-            const res = await fetch('https://api.ocr.space/parse/image', {
-                method: 'POST',
-                body: formData,
-                headers: { 'apikey': 'helloworld' }
-            });
-            const data = await res.json();
-            return data.ParsedResults?.[0]?.ParsedText || 'No text found.';
-        } catch(e) {
-            return 'OCR service error. Please try again.';
+        if (submitted === today) {
+            document.getElementById('challengeFeedback').innerHTML = '<div class="info-card" style="background:#FFE0E0;">❌ You already completed today\'s challenge! Come back tomorrow.</div>';
+        } else {
+            localStorage.setItem('challengeSubmitted_' + anonymousId, today);
+            addPoints(20, 'Daily Challenge Completed');
+            document.getElementById('challengeFeedback').innerHTML = '<div class="info-card" style="background:#E0FFE0;">✅ Great answer! You earned +20 points. Keep learning!</div>';
+            document.getElementById('challengeAnswer').value = '';
         }
+        document.getElementById('challengeFeedback').style.display = 'block';
+    });
+    
+    // ==================== DEBATE MODE ====================
+    
+    function updateDebateTopic() {
+        const randomTopic = debateTopics[Math.floor(Math.random() * debateTopics.length)];
+        currentDebateTopic = randomTopic;
+        document.getElementById('debateTopic').innerText = currentDebateTopic;
+        document.getElementById('debateSpeech').style.display = 'none';
+        document.getElementById('debateScore').style.display = 'none';
+        debatePosition = null;
     }
-
-    // Download notes as PDF
-    function downloadNotesAsPDF() {
-        const notes = document.getElementById('notesContainer').innerText;
-        const blob = new Blob([`Dil Ke AnnS - My Notes\n\n${notes}\n\nGenerated on ${new Date().toLocaleString()}`], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'my-notes.pdf';
-        a.click();
-        URL.revokeObjectURL(url);
-    }
-
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
-    }
-
-    // Tab switching
-    function initTabs() {
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.tab).classList.add('active');
-            });
-        });
-    }
-
-    // ==================== MAIN INITIALIZATION ====================
-    window.onload = async () => {
-        await openDB();
-        await loadNotes();
-        initCanvas();
-        initVoice();
-        initTabs();
-        loadQrScanner();
-        await loadGDMessages();
-        
-        // Room selector
-        document.querySelectorAll('.room-btn').forEach(btn => {
-            btn.addEventListener('click', async () => {
-                document.querySelectorAll('.room-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentGDRoom = btn.dataset.room;
-                await loadGDMessages();
-            });
-        });
-        
-        // GD Send
-        document.getElementById('gdSendBtn').onclick = async () => {
-            const input = document.getElementById('gdMessageInput');
-            if (input.value.trim()) {
-                await sendGDMessage(input.value);
-                input.value = '';
-            }
-        };
-        document.getElementById('gdVoiceBtn').onclick = () => {
-            if (recognition && !isVoiceActive) recognition.start();
-            else if (recognition && isVoiceActive) recognition.stop();
-        };
-        
-        // Voice Studio
-        document.getElementById('startVoiceBtn').onclick = () => recognition?.start();
-        document.getElementById('grammarFixBtn').onclick = () => {
-            const txt = document.getElementById('voiceText').value;
-            document.getElementById('voiceText').value = fixGrammar(txt);
-        };
-        document.getElementById('saveNoteBtn').onclick = async () => {
-            const txt = document.getElementById('voiceText').value.trim();
-            if (txt) await saveNote(txt);
-            else alert('Nothing to save');
-        };
-        
-        // AnnS AI
-        document.getElementById('askAnnSBtn').onclick = () => {
-            const q = document.getElementById('annsQuestion').value;
-            const persona = document.getElementById('aiPersonaSelect').value;
-            if (q) {
-                const answer = getAIResponse(q, persona);
-                document.getElementById('annsAnswer').innerHTML = `<strong>AnnS AI (${persona} mode):</strong><br>${answer}`;
-            } else alert('Type a question');
-        };
-        
-        // Scanner
-        document.getElementById('startScannerBtn').onclick = () => {
-            if (html5QrCode) html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 },
-                (decoded) => document.getElementById('qrResult').innerText = decoded,
-                (err) => console.warn(err));
-        };
-        document.getElementById('stopScannerBtn').onclick = () => html5QrCode?.stop();
-        document.getElementById('ocrBtn').onclick = async () => {
-            const file = document.getElementById('ocrImageInput').files[0];
-            if (file) {
-                const result = await doOCR(file);
-                document.getElementById('ocrResult').innerHTML = result;
-            } else alert('Select an image');
-        };
-        
-        // Tools
-        document.getElementById('downloadNotesBtn').onclick = downloadNotesAsPDF;
-        document.getElementById('shareProblemBtn').onclick = () => {
-            const problem = prompt('What problem do you want to share?');
-            if (problem) {
-                const qrDiv = document.getElementById('generatedQR');
-                qrDiv.innerHTML = `<div class="response-area">📤 Shared: "${escapeHtml(problem.substring(0, 100))}"<br>🔗 Share this link with friends!</div>`;
-            }
-        };
-        document.getElementById('readPdfBtn').onclick = () => {
-            const file = document.getElementById('pdfUpload').files[0];
-            if (file) {
-                document.getElementById('pdfSummary').innerHTML = '📖 PDF uploaded! AI summary feature coming soon. For now, you can read the PDF directly.';
-            } else alert('Select a PDF file');
-        };
-        
-        // Service worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(console.warn);
+    
+    document.getElementById('forPositionBtn').addEventListener('click', () => {
+        debatePosition = 'for';
+        document.getElementById('debateSpeech').style.display = 'block';
+        document.getElementById('debateScore').style.display = 'none';
+    });
+    
+    document.getElementById('againstPositionBtn').addEventListener('click', () => {
+        debatePosition = 'against';
+        document.getElementById('debateSpeech').style.display = 'block';
+        document.getElementById('debateScore').style.display = 'none';
+    });
+    
+    document.getElementById('newTopicBtn').addEventListener('click', updateDebateTopic);
+    
+    setupVoiceRecognition('speechInput', 'debateVoiceBtn');
+    
+    document.getElementById('submitDebateBtn').addEventListener('click', () => {
+        const speech = document.getElementById('speechInput').value;
+        if (speech.length < 50) {
+            alert("Please write a longer argument (minimum 50 characters).");
+            return;
         }
+        
+        const debateKey = 'debate_' + new Date().toDateString() + '_' + currentDebateTopic;
+        if (localStorage.getItem(debateKey + '_' + anonymousId)) {
+            alert("You already submitted for this topic today!");
+            return;
+        }
+        
+        localStorage.setItem(debateKey + '_' + anonymousId, speech);
+        addPoints(15, `Debate submission (${debatePosition})`);
+        
+        document.getElementById('debateScore').style.display = 'block';
+        document.getElementById('debateScore').innerHTML = `<div class="chat-message ai">🤖 AnnS AI: Great argument! You earned +15 points. ${debatePosition === 'for' ? 'Supporting' : 'Opposing'} the topic "${currentDebateTopic}" - well structured! Check back tomorrow for new topic.</div>`;
+        document.getElementById('speechInput').value = '';
+    });
+    
+    // ==================== STUDY PARTNER ====================
+    
+    document.getElementById('findPartnerBtn').addEventListener('click', () => {
+        const exam = document.getElementById('examInput').value;
+        const stream = document.getElementById('streamInput').value;
+        const time = document.getElementById('timeInput').value;
+        
+        if (!exam || !stream || !time) {
+            alert("Please fill all fields to find a study partner.");
+            return;
+        }
+        
+        const partnerResult = document.getElementById('partnerResult');
+        partnerResult.style.display = 'block';
+        
+        // Find matching partner from localStorage
+        let partners = JSON.parse(localStorage.getItem('studyPartners') || '[]');
+        const myProfile = { id: anonymousId, exam, stream, time, timestamp: Date.now() };
+        
+        // Remove old entries (older than 1 day)
+        partners = partners.filter(p => Date.now() - p.timestamp < 86400000);
+        partners.push(myProfile);
+        localStorage.setItem('studyPartners', JSON.stringify(partners));
+        
+        // Find match
+        const match = partners.find(p => p.id !== anonymousId && p.exam === exam && p.time === time);
+        
+        if (match) {
+            partnerResult.innerHTML = `<div class="chat-message ai">🤖 AnnS AI: Great news! Found a study partner!\n\n📚 Exam: ${match.exam}\n⏰ Time: ${match.time}\n🆔 Partner ID: ${match.id}\n\nStart a private chat or coordinate study sessions!</div>`;
+            addPoints(10, 'Found study partner');
+        } else {
+            partnerResult.innerHTML = `<div class="chat-message ai">🤖 AnnS AI: No matching partner found right now. We'll notify you when someone with similar preferences joins!\n\nYour profile has been saved. Check back later.</div>`;
+        }
+    });
+    
+    // ==================== TOPIC GENERATOR ====================
+    
+    const topicDatabase = {
+        GD: [
+            "Impact of Artificial Intelligence on Employment",
+            "Should exams be abolished in schools?",
+            "Is remote learning the future of education?",
+            "Climate change - Individual responsibility vs Government action",
+            "Social media - Connecting or isolating society?"
+        ],
+        Debate: [
+            "Social media does more harm than good - Discuss",
+            "Online education is as effective as traditional learning",
+            "Should voting be made compulsory in India?",
+            "Is globalization beneficial for developing countries?",
+            "Censorship on the internet - Necessary or excessive?"
+        ],
+        Interview: [
+            "Tell me about a time you demonstrated leadership",
+            "How do you handle failure and criticism?",
+            "Describe a situation where you solved a difficult problem",
+            "What motivates you to perform at your best?",
+            "How do you prioritize tasks under pressure?"
+        ],
+        Essay: [
+            "The role of youth in nation building",
+            "Digital India - Opportunities and challenges",
+            "Women empowerment in the 21st century",
+            "Sustainable development - Need of the hour",
+            "Mental health awareness in Indian students"
+        ],
+        Speech: [
+            "Importance of education in rural India",
+            "Technology as a double-edged sword",
+            "My vision for a developed India by 2047",
+            "The power of positive thinking",
+            "How to overcome exam fear and anxiety"
+        ]
     };
+    
+    document.getElementById('generateTopicBtn').addEventListener('click', () => {
+        const type = document.getElementById('topicType').value;
+        const topics = topicDatabase[type];
+        const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+        const topicDiv = document.getElementById('generatedTopic');
+        topicDiv.innerHTML = `<div class="info-text" style="font-weight:700;">🎯 ${type} Topic:</div><div class="info-text">${randomTopic}</div>`;
+    });
+    
+    // ==================== MODEL ANSWER BUILDER ====================
+    
+    document.getElementById('buildAnswerBtn').addEventListener('click', () => {
+        const question = document.getElementById('questionInput').value;
+        if (!question.trim()) {
+            alert("Please enter a question or topic.");
+            return;
+        }
+        
+        const answerDiv = document.getElementById('modelAnswer');
+        answerDiv.style.display = 'block';
+        answerDiv.innerHTML = '<div class="chat-message ai">🤖 AnnS AI: Building model answer...</div>';
+        
+        setTimeout(() => {
+            const answer = generateModelAnswer(question);
+            answerDiv.innerHTML = `<div class="chat-message ai">🤖 AnnS AI: <strong>Model Answer for: "${question}"</strong><br><br>${answer}</div>`;
+        }, 500);
+    });
+    
+    function generateModelAnswer(question) {
+        return `📝 INTRODUCTION:\nStart by defining key terms and stating your position. Briefly outline the main points you'll discuss.\n\n📚 BODY PARAGRAPHS:\nPoint 1: Present your strongest argument with examples\nPoint 2: Discuss counterarguments and rebuttals\nPoint 3: Provide real-world examples or case studies\n\n🎯 CONCLUSION:\nSummarize your key points, restate your position, and end with a thought-provoking statement or call to action.\n\n💡 TIPS:\n- Keep language clear and concise\n- Use facts and data when possible\n- Structure: Introduction → Arguments → Examples → Conclusion\n- Practice writing within time limits`;
+    }
+    
+    // ==================== LEADERBOARD ====================
+    
+    function addPoints(points, reason) {
+        userPoints += points;
+        localStorage.setItem('userPoints_' + anonymousId, userPoints);
+        document.getElementById('userPoints').innerText = userPoints;
+        
+        // Save to leaderboard
+        let leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+        const userIndex = leaderboard.findIndex(u => u.id === anonymousId);
+        if (userIndex >= 0) {
+            leaderboard[userIndex].points = userPoints;
+            leaderboard[userIndex].lastActive = Date.now();
+        } else {
+            leaderboard.push({ id: anonymousId, points: userPoints, lastActive: Date.now() });
+        }
+        localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+        
+        updateLeaderboard();
+    }
+    
+    function updateLeaderboard() {
+        let leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+        leaderboard.sort((a, b) => b.points - a.points);
+        const top10 = leaderboard.slice(0, 10);
+        
+        const tbody = document.getElementById('leaderboardBody');
+        tbody.innerHTML = top10.map((user, index) => `
+            <tr>
+                <td>${index + 1}${index === 0 ? ' 👑' : index === 1 ? ' 🥈' : index === 2 ? ' 🥉' : ''}</td>
+                <td>${user.id}</td>
+                <td>${user.points}</td>
+                <td>${Math.floor(user.points / 5)}</td>
+            </tr>
+        `).join('');
+        
+        if (top10.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4">Be the first to earn points!</td></tr>';
+        }
+    }
+    
+    // ==================== BOTTOM NAVIGATION ====================
+    
+    const bottomBar = document.getElementById('bottomBar');
+    bottomBar.innerHTML = `
+        <div class="nav-item" onclick="window.location.href='index.html'"><span>🏠</span><span>Home</span></div>
+        <div class="nav-item active" onclick="window.location.href='something_interesting.html'"><span>✨</span><span>Interesting</span></div>
+        <div class="nav-item" onclick="window.location.href='gd_rooms.html'"><span>💬</span><span>GD Rooms</span></div>
+        <div class="nav-item" onclick="window.location.href='study_material.html'"><span>📚</span><span>Study</span></div>
+    `;
+    
+    // Initialize
+    updateLeaderboard();
+    
+    // Set daily challenge if not set
+    const today = new Date().toDateString();
+    const dailyChallengeKey = 'dailyChallenge_' + today;
+    if (!localStorage.getItem(dailyChallengeKey)) {
+        const challenges = [
+            "Explain the importance of AI in education in 100 words",
+            "What are the benefits of online learning? Write 100 words",
+            "Describe your dream career and why in 100 words",
+            "How can students prepare for competitive exams? Write 100 words",
+            "What is your opinion on the current education system? Write 100 words"
+        ];
+        const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
+        localStorage.setItem(dailyChallengeKey, randomChallenge);
+        document.querySelector('#dailyChallenge .info-text').innerHTML = `📖 Today's Challenge: ${randomChallenge}`;
+    } else {
+        document.querySelector('#dailyChallenge .info-text').innerHTML = `📖 Today's Challenge: ${localStorage.getItem(dailyChallengeKey)}`;
+    }
 </script>
 </body>
 </html>
