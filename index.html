@@ -40,11 +40,16 @@
         .nav-item.active span:last-child { color: #1B4D3E; font-weight: 600; }
         .floating-ai { position: fixed; bottom: 75px; right: 14px; background: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.15); cursor: pointer; z-index: 99; border: 2px solid #E67E22; }
         .floating-ai img { width: 36px; height: 36px; border-radius: 50%; }
-        @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tiles-grid { grid-template-columns: repeat(6, 1fr); gap: 20px; } .tile { padding: 20px 12px; } .tile-icon { font-size: 42px; } .tile-name { font-size: 14px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } .welcome { font-size: 14px; } .tagline { font-size: 16px; } .search-bar input { font-size: 16px; } .ask-ai { font-size: 14px; padding: 8px 16px; } }
+        @media (min-width: 768px) { .container { max-width: 1000px; margin: 0 auto; padding: 30px 24px; } .header { padding: 20px 5% 30px 5%; } .logo img { height: 60px; } .logo h1 { font-size: 26px; } .tiles-grid { grid-template-columns: repeat(5, 1fr); gap: 20px; } .tile { padding: 20px 12px; } .tile-icon { font-size: 42px; } .tile-name { font-size: 14px; } .bottom-bar { padding: 10px 5% 22px; } .nav-item span:first-child { font-size: 28px; } .nav-item span:last-child { font-size: 14px; } .welcome { font-size: 14px; } .tagline { font-size: 16px; } .search-bar input { font-size: 16px; } .ask-ai { font-size: 14px; padding: 8px 16px; } }
         @media (max-width: 480px) { .tile-name { font-size: 10px; } .tile-icon { font-size: 26px; } .ask-ai span { display: none; } .ask-ai { padding: 6px 10px; } .logo-section { flex-wrap: wrap; justify-content: center; } }
     </style>
+    <!-- Language Files -->
     <script src="languages-core.js"></script>
     <script src="languages-loader.js"></script>
+    <!-- Data Files (Offline-first) -->
+    <script src="data/education_streams.js"></script>
+    <script src="data/magazines.js"></script>
+    <script src="data/schemes.js"></script>
 </head>
 <body>
 <div class="header">
@@ -58,12 +63,18 @@
         </div>
         <div class="language-selector">
             <select id="languageSelect">
-                <option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option>
-                <option value="mr">🇮🇳 मराठी</option><option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option><option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option><option value="bn">🇮🇳 বাংলা</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option><option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="or">🇮🇳 ଓଡ଼ିଆ</option><option value="as">🇮🇳 অসমীয়া</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="bn">🇮🇳 বাংলা</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="or">🇮🇳 ଓଡ଼ିଆ</option>
+                <option value="as">🇮🇳 অসমীয়া</option>
             </select>
         </div>
         <div class="notification-icon" id="alertBtn">🔔</div>
@@ -96,12 +107,12 @@
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
-    // ==================== TILES WITH CORRECT LINKS ====================
+    // ==================== TILES CONFIGURATION ====================
     const tiles = [
         { nameKey: "education", icon: "🎓", link: "education.html" },
         { nameKey: "business", icon: "💼", link: "business.html" },
         { nameKey: "jobs_exams", icon: "📝", link: "#" },
-        { nameKey: "study_material", icon: "📚", link: "study_material.html" },      // updated link
+        { nameKey: "study_material", icon: "📚", link: "study_material.html" },
         { nameKey: "magazines", icon: "📰", link: "#" },
         { nameKey: "enewspapers", icon: "🗞️", link: "#" },
         { nameKey: "current_affairs", icon: "🌍", link: "#" },
@@ -109,6 +120,7 @@
         { nameKey: "after_10th", icon: "📖", link: "after_10th.html" },
         { nameKey: "after_12th", icon: "🎯", link: "after_12th.html" },
         { nameKey: "something_interesting", icon: "💡", link: "something_interesting.html" },
+        { nameKey: "gd_rooms", icon: "💬", link: "gd_rooms.html" },
         { nameKey: "results", icon: "📊", link: "#" },
         { nameKey: "application_forms", icon: "📋", link: "#" },
         { nameKey: "bharat", icon: "🇮🇳", link: "bharat.html" }
@@ -125,15 +137,39 @@
     let currentLang = 'en';
 
     const defaultText = {
-        app_tagline: "Dil-Ke-AnnS Career Saathi", tagline: "🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳", welcome: "👋 Welcome back, Learner!",
-        search_placeholder: "Search courses, exams, jobs, schemes...", ask_ai: "Ask AnnS AI", explore_title: "📚 Explore Career Pathways",
-        education: "Education", business: "Business", jobs_exams: "Jobs & Exams", study_material: "Study Material", magazines: "Magazines",
-        enewspapers: "E-newspapers", current_affairs: "Current Affairs", mock_test: "Mock test", after_10th: "After 10th", after_12th: "After 12th",
-        something_interesting: "Something Interesting", results: "Results", application_forms: "App Forms", bharat: "🇮🇳 BHARAT",
-        bottom_home: "Home", bottom_search: "Search", bottom_ai: "AnnS AI", bottom_alerts: "Alerts", bottom_profile: "Profile",
-        coming_soon: "coming soon", searching: "Searching for", search_alert: "Please type something to search",
-        ai_mentor: "AnnS AI Mentor", ai_modes: "Doubt Solver • Career Mentor • Debate Judge • Exam Planner",
-        notification_center: "Notification Center", notifications: "Exam Alerts • Govt Schemes • Job Updates"
+        app_tagline: "Dil-Ke-AnnS Career Saathi",
+        tagline: "🇮🇳 Anonymous Padho, Bindas Bano 🇮🇳",
+        welcome: "👋 Welcome back, Learner!",
+        search_placeholder: "Search courses, exams, jobs, schemes...",
+        ask_ai: "Ask AnnS AI",
+        explore_title: "📚 Explore Career Pathways",
+        education: "Education",
+        business: "Business",
+        jobs_exams: "Jobs & Exams",
+        study_material: "Study Material",
+        magazines: "Magazines",
+        enewspapers: "E-newspapers",
+        current_affairs: "Current Affairs",
+        mock_test: "Mock test",
+        after_10th: "After 10th",
+        after_12th: "After 12th",
+        something_interesting: "Something Interesting",
+        gd_rooms: "Group Discussion",
+        results: "Results",
+        application_forms: "App Forms",
+        bharat: "🇮🇳 BHARAT",
+        bottom_home: "Home",
+        bottom_search: "Search",
+        bottom_ai: "AnnS AI",
+        bottom_alerts: "Alerts",
+        bottom_profile: "Profile",
+        coming_soon: "coming soon",
+        searching: "Searching for",
+        search_alert: "Please type something to search",
+        ai_mentor: "AnnS AI Mentor",
+        ai_modes: "Doubt Solver • Career Mentor • Debate Judge • Exam Planner",
+        notification_center: "Notification Center",
+        notifications: "Exam Alerts • Govt Schemes • Job Updates"
     };
 
     function t(key) {
@@ -222,7 +258,7 @@
             input.addEventListener('keypress', e => {
                 if (e.key === 'Enter') {
                     const query = e.target.value.trim();
-                    alert(query ? `${t('searching') || 'Searching for'}: "${query}"` : t('search_alert') || 'Please type something to search');
+                    alert(query ? `${t('searching')}: "${query}"` : t('search_alert'));
                 }
             });
         }
@@ -231,7 +267,7 @@
     function setupAI() {
         const askBtn = document.getElementById('askAiBtn');
         const floatingBtn = document.getElementById('floatingAiBtn');
-        const openAI = () => alert(`🤖 ${t('ai_mentor') || 'AnnS AI Mentor'}\n\n${t('ai_modes') || 'Doubt Solver • Career Mentor • Debate Judge • Exam Planner'}`);
+        const openAI = () => alert(`🤖 ${t('ai_mentor')}\n\n${t('ai_modes')}`);
         if (askBtn) askBtn.addEventListener('click', openAI);
         if (floatingBtn) floatingBtn.addEventListener('click', openAI);
     }
@@ -239,7 +275,7 @@
     function setupNotifications() {
         const alertBtn = document.getElementById('alertBtn');
         if (alertBtn) {
-            alertBtn.addEventListener('click', () => alert(`🔔 ${t('notification_center') || 'Notification Center'}\n\n${t('notifications') || 'Exam Alerts • Govt Schemes • Job Updates'}`));
+            alertBtn.addEventListener('click', () => alert(`🔔 ${t('notification_center')}\n\n${t('notifications')}`));
         }
     }
 
@@ -252,66 +288,128 @@
         updateAllText();
     }
 
-    // ==================== SERVICE WORKER REGISTRATION + BACKGROUND SYNC ====================
+    // ==================== OFFLINE DATA INITIALIZATION ====================
+    async function initializeOfflineData() {
+        const DB_NAME = 'DilKeAnnS_MasterDB';
+        const DB_VERSION = 2;
+        
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+            
+            request.onerror = () => {
+                console.error("❌ IndexedDB error:", request.error);
+                reject(request.error);
+            };
+            
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains('streams')) {
+                    db.createObjectStore('streams', { keyPath: 'id' });
+                }
+                if (!db.objectStoreNames.contains('magazines')) {
+                    db.createObjectStore('magazines', { keyPath: 'id' });
+                }
+                if (!db.objectStoreNames.contains('schemes')) {
+                    db.createObjectStore('schemes', { keyPath: 'id' });
+                }
+                console.log("📦 Object stores created");
+            };
+            
+            request.onsuccess = async (event) => {
+                const db = event.target.result;
+                
+                try {
+                    // Store streams
+                    if (window.EDUCATION_STREAMS) {
+                        const tx = db.transaction('streams', 'readonly');
+                        const count = await new Promise(resolve => {
+                            const req = tx.objectStore('streams').count();
+                            req.onsuccess = () => resolve(req.result);
+                        });
+                        
+                        if (count === 0) {
+                            const writeTx = db.transaction('streams', 'readwrite');
+                            const store = writeTx.objectStore('streams');
+                            for (const [id, value] of Object.entries(window.EDUCATION_STREAMS)) {
+                                store.put({ id, ...value });
+                            }
+                            await writeTx.complete;
+                            console.log("✅ Streams saved:", Object.keys(window.EDUCATION_STREAMS).length);
+                        }
+                    }
+                    
+                    // Store magazines
+                    if (window.MAGAZINES_DB) {
+                        const tx = db.transaction('magazines', 'readonly');
+                        const count = await new Promise(resolve => {
+                            const req = tx.objectStore('magazines').count();
+                            req.onsuccess = () => resolve(req.result);
+                        });
+                        
+                        if (count === 0) {
+                            const writeTx = db.transaction('magazines', 'readwrite');
+                            const store = writeTx.objectStore('magazines');
+                            for (const [category, items] of Object.entries(window.MAGAZINES_DB)) {
+                                for (const item of items) {
+                                    store.put({ id: `${category}_${item.name.replace(/\s/g, '_')}`, category, ...item });
+                                }
+                            }
+                            await writeTx.complete;
+                            console.log("✅ Magazines saved");
+                        }
+                    }
+                    
+                    // Store schemes
+                    if (window.SCHEMES_DB) {
+                        const tx = db.transaction('schemes', 'readonly');
+                        const count = await new Promise(resolve => {
+                            const req = tx.objectStore('schemes').count();
+                            req.onsuccess = () => resolve(req.result);
+                        });
+                        
+                        if (count === 0) {
+                            const writeTx = db.transaction('schemes', 'readwrite');
+                            const store = writeTx.objectStore('schemes');
+                            for (const [category, items] of Object.entries(window.SCHEMES_DB)) {
+                                for (const item of items) {
+                                    store.put({ id: `${category}_${item.name.replace(/\s/g, '_')}`, category, ...item });
+                                }
+                            }
+                            await writeTx.complete;
+                            console.log("✅ Schemes saved");
+                        }
+                    }
+                    
+                    resolve();
+                } catch (err) {
+                    console.error("❌ Error saving data:", err);
+                    reject(err);
+                }
+            };
+        });
+    }
+
+    // ==================== SERVICE WORKER ====================
     async function registerServiceWorker() {
         if (!('serviceWorker' in navigator)) return;
         try {
             const registration = await navigator.serviceWorker.register('/sw.js');
-            console.log('Service Worker registered successfully:', registration);
+            console.log('✅ Service Worker registered');
             
-            // Wait for SW to be ready
-            await navigator.serviceWorker.ready;
-            
-            // Register background sync (if supported)
             if ('sync' in registration) {
                 try {
                     await registration.sync.register('sync-updates');
-                    console.log('Background sync registered');
-                } catch (syncErr) {
-                    console.log('Background sync registration failed:', syncErr);
+                    console.log('✅ Background sync registered');
+                } catch (e) {
+                    console.log('⚠️ Background sync not supported');
                 }
             }
-            
-            // Register periodic sync (if supported and permission granted)
-            if ('periodicSync' in registration) {
-                const status = await navigator.permissions.query({ name: 'periodic-background-sync' });
-                if (status.state === 'granted') {
-                    try {
-                        await registration.periodicSync.register('periodic-updates', { minInterval: 24 * 60 * 60 * 1000 });
-                        console.log('Periodic sync registered (daily)');
-                    } catch (psErr) {
-                        console.log('Periodic sync not available:', psErr);
-                    }
-                }
-            }
-            
-            // Listen for messages from SW (e.g., new updates)
-            navigator.serviceWorker.addEventListener('message', (event) => {
-                if (event.data && event.data.type === 'SYNC_UPDATES') {
-                    const { exams, jobs, courses } = event.data.payload;
-                    const totalNew = (exams?.length || 0) + (jobs?.length || 0) + (courses?.length || 0);
-                    if (totalNew > 0) {
-                        // Optional: show a small in-app toast/notification
-                        console.log(`📢 ${totalNew} new updates available!`);
-                        // You can also update a badge icon or show a snackbar here.
-                    }
-                }
-            });
         } catch (err) {
-            console.error('Service Worker registration failed:', err);
+            console.error('❌ Service Worker failed:', err);
         }
     }
 
-    // Call this when page loads
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            registerServiceWorker();
-        });
-    } else {
-        registerServiceWorker();
-    }
-
-    // ==================== INITIAL RENDER ====================
+    // ==================== INITIALIZE ====================
     document.getElementById('languageSelect').addEventListener('change', (e) => changeLanguage(e.target.value));
     
     renderTiles();
@@ -320,6 +418,15 @@
     setupAI();
     setupNotifications();
     loadSavedLanguage();
+    
+    // Start offline data and service worker after page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeOfflineData().then(() => registerServiceWorker());
+        });
+    } else {
+        initializeOfflineData().then(() => registerServiceWorker());
+    }
 </script>
 </body>
 </html>
