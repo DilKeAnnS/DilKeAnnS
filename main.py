@@ -56,21 +56,20 @@ data_store = {
     "jobs": [],
     "exams": [],
     "results": [],
-    "questions_asked": []
 }
 
 # Load existing data if available
 def load_data():
     for category in ["study_material", "jobs", "exams", "results"]:
         try:
-            with open(f"data/{category}.json", "r") as f:
+            with open(f"data/{category}.json", "r", encoding="utf-8") as f:
                 data_store[category] = json.load(f)
         except:
             pass
     
     for lang in ["english", "hindi"]:
         try:
-            with open(f"data/current_affairs_{lang}.json", "r") as f:
+            with open(f"data/current_affairs_{lang}.json", "r", encoding="utf-8") as f:
                 data_store["current_affairs"][lang] = json.load(f)
         except:
             pass
@@ -78,30 +77,28 @@ def load_data():
 load_data()
 
 # ========== 1. STUDY MATERIAL (ONE TIME) ==========
-STUDY_MATERIAL_SOURCES = [
-    {"name": "NCERT Textbooks", "url": "https://ncert.nic.in/textbook.php", "type": "textbook"},
-    {"name": "Topper Notes", "url": "https://t.me/topper_notes", "type": "notes"},
-    {"name": "Previous Year Papers", "url": "https://www.examveda.com/previous-papers/", "type": "pyq"},
-]
-
 @app.get("/study-material/load")
 async def load_study_material():
     """Load study material from free sources (one time)"""
     
     study_material = []
     
-    # 1. NCERT Books (Direct download links)
+    # NCERT Books (Direct download links)
     ncert_books = [
-        {"class": "6-8", "subject": "Science", "url": "https://ncert.nic.in/textbook/pdf/fesc1.pdf"},
-        {"class": "6-8", "subject": "Social Science", "url": "https://ncert.nic.in/textbook/pdf/fess1.pdf"},
-        {"class": "9", "subject": "Science", "url": "https://ncert.nic.in/textbook/pdf/iesc1.pdf"},
-        {"class": "10", "subject": "Science", "url": "https://ncert.nic.in/textbook/pdf/jesc1.pdf"},
-        {"class": "11", "subject": "Physics", "url": "https://ncert.nic.in/textbook/pdf/keph1.pdf"},
-        {"class": "11", "subject": "Chemistry", "url": "https://ncert.nic.in/textbook/pdf/kech1.pdf"},
-        {"class": "11", "subject": "Biology", "url": "https://ncert.nic.in/textbook/pdf/kebo1.pdf"},
-        {"class": "12", "subject": "Physics", "url": "https://ncert.nic.in/textbook/pdf/leph1.pdf"},
-        {"class": "12", "subject": "Chemistry", "url": "https://ncert.nic.in/textbook/pdf/lech1.pdf"},
-        {"class": "12", "subject": "Biology", "url": "https://ncert.nic.in/textbook/pdf/lebo1.pdf"},
+        {"class": "6-8", "subject": "Science", "name": "NCERT Science Class 6-8", "url": "https://ncert.nic.in/textbook/pdf/fesc1.pdf"},
+        {"class": "6-8", "subject": "Social Science", "name": "NCERT Social Science Class 6-8", "url": "https://ncert.nic.in/textbook/pdf/fess1.pdf"},
+        {"class": "9", "subject": "Science", "name": "NCERT Science Class 9", "url": "https://ncert.nic.in/textbook/pdf/iesc1.pdf"},
+        {"class": "10", "subject": "Science", "name": "NCERT Science Class 10", "url": "https://ncert.nic.in/textbook/pdf/jesc1.pdf"},
+        {"class": "11", "subject": "Physics", "name": "NCERT Physics Part 1 Class 11", "url": "https://ncert.nic.in/textbook/pdf/keph1.pdf"},
+        {"class": "11", "subject": "Physics", "name": "NCERT Physics Part 2 Class 11", "url": "https://ncert.nic.in/textbook/pdf/keph2.pdf"},
+        {"class": "11", "subject": "Chemistry", "name": "NCERT Chemistry Part 1 Class 11", "url": "https://ncert.nic.in/textbook/pdf/kech1.pdf"},
+        {"class": "11", "subject": "Chemistry", "name": "NCERT Chemistry Part 2 Class 11", "url": "https://ncert.nic.in/textbook/pdf/kech2.pdf"},
+        {"class": "11", "subject": "Biology", "name": "NCERT Biology Class 11", "url": "https://ncert.nic.in/textbook/pdf/kebo1.pdf"},
+        {"class": "12", "subject": "Physics", "name": "NCERT Physics Part 1 Class 12", "url": "https://ncert.nic.in/textbook/pdf/leph1.pdf"},
+        {"class": "12", "subject": "Physics", "name": "NCERT Physics Part 2 Class 12", "url": "https://ncert.nic.in/textbook/pdf/leph2.pdf"},
+        {"class": "12", "subject": "Chemistry", "name": "NCERT Chemistry Part 1 Class 12", "url": "https://ncert.nic.in/textbook/pdf/lech1.pdf"},
+        {"class": "12", "subject": "Chemistry", "name": "NCERT Chemistry Part 2 Class 12", "url": "https://ncert.nic.in/textbook/pdf/lech2.pdf"},
+        {"class": "12", "subject": "Biology", "name": "NCERT Biology Class 12", "url": "https://ncert.nic.in/textbook/pdf/lebo1.pdf"},
     ]
     
     for book in ncert_books:
@@ -110,15 +107,15 @@ async def load_study_material():
             "source": "NCERT",
             "class": book["class"],
             "subject": book["subject"],
+            "name": book["name"],
             "url": book["url"],
             "type": "textbook",
             "added_on": datetime.now().isoformat()
         })
     
-    # 2. Save to file
     data_store["study_material"] = study_material
-    with open("data/study_material.json", "w") as f:
-        json.dump(study_material, f, indent=2)
+    with open("data/study_material.json", "w", encoding="utf-8") as f:
+        json.dump(study_material, f, indent=2, ensure_ascii=False)
     
     return {"status": "success", "count": len(study_material), "message": "Study material loaded"}
 
@@ -135,13 +132,13 @@ async def get_study_material(class_name: str = None, subject: str = None):
 # ========== 2. NEWSPAPERS (DAILY) ==========
 NEWSPAPER_SOURCES = {
     "english": [
-        {"name": "The Hindu", "url": "https://www.thehindu.com/news/national/?service=print", "pdf_pattern": "epaper.thehindu.com"},
-        {"name": "Deccan Chronicle", "url": "https://www.deccanchronicle.com/", "pdf_pattern": "epaper.deccanchronicle.com"},
-        {"name": "PIB English", "url": "https://pib.gov.in/PressReleseDetail.aspx", "pdf_pattern": "pib.gov.in"}
+        {"name": "The Hindu", "url": "https://www.thehindu.com", "epaper_url": "https://epaper.thehindu.com"},
+        {"name": "Deccan Chronicle", "url": "https://www.deccanchronicle.com", "epaper_url": "https://epaper.deccanchronicle.com"},
+        {"name": "PIB English", "url": "https://pib.gov.in", "epaper_url": "https://pib.gov.in/PressReleasePage.aspx"}
     ],
     "hindi": [
-        {"name": "Dainik Jagran", "url": "https://epaper.jagran.com/", "pdf_pattern": "jagran.com"},
-        {"name": "Amar Ujala", "url": "https://epaper.amarujala.com/", "pdf_pattern": "amarujala.com"}
+        {"name": "Dainik Jagran", "url": "https://www.jagran.com", "epaper_url": "https://epaper.jagran.com"},
+        {"name": "Amar Ujala", "url": "https://www.amarujala.com", "epaper_url": "https://epaper.amarujala.com"}
     ]
 }
 
@@ -150,43 +147,26 @@ async def update_newspapers():
     """Fetch daily newspapers automatically"""
     
     results = {"english": [], "hindi": []}
+    today = datetime.now().strftime("%Y-%m-%d")
     
-    # English Newspapers
-    for paper in NEWSPAPER_SOURCES["english"]:
-        try:
-            # For demo - in production, use actual PDF download
+    for lang in ["english", "hindi"]:
+        for paper in NEWSPAPER_SOURCES[lang]:
             paper_data = {
+                "id": str(uuid.uuid4()),
                 "name": paper["name"],
-                "date": datetime.now().strftime("%Y-%m-%d"),
-                "url": f"https://{paper['pdf_pattern']}/epaper/{datetime.now().strftime('%Y/%m/%d')}.pdf",
+                "language": lang,
+                "date": today,
+                "epaper_url": f"{paper['epaper_url']}/{today.replace('-', '/')}",
                 "source_url": paper["url"],
-                "downloaded": False
+                "available": True
             }
-            results["english"].append(paper_data)
-        except Exception as e:
-            results["english"].append({"name": paper["name"], "error": str(e)})
+            results[lang].append(paper_data)
     
-    # Hindi Newspapers
-    for paper in NEWSPAPER_SOURCES["hindi"]:
-        try:
-            paper_data = {
-                "name": paper["name"],
-                "date": datetime.now().strftime("%Y-%m-%d"),
-                "url": f"https://{paper['pdf_pattern']}/epaper/{datetime.now().strftime('%Y/%m/%d')}.pdf",
-                "source_url": paper["url"],
-                "downloaded": False
-            }
-            results["hindi"].append(paper_data)
-        except Exception as e:
-            results["hindi"].append({"name": paper["name"], "error": str(e)})
+    data_store["newspapers"] = results
+    with open("data/newspapers.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
     
-    data_store["newspapers"]["english"] = results["english"]
-    data_store["newspapers"]["hindi"] = results["hindi"]
-    
-    with open("data/newspapers.json", "w") as f:
-        json.dump(data_store["newspapers"], f, indent=2)
-    
-    return {"status": "success", "date": datetime.now().strftime("%Y-%m-%d"), "newspapers": results}
+    return {"status": "success", "date": today, "newspapers": results}
 
 @app.get("/newspapers/today")
 async def get_today_newspapers(language: str = "english"):
@@ -197,24 +177,24 @@ async def get_today_newspapers(language: str = "english"):
         "newspapers": data_store["newspapers"].get(language, [])
     }
 
-# ========== 3. MAGAZINES (DAILY/WEEKLY/MONTHLY/QUARTERLY/YEARLY) ==========
+# ========== 3. MAGAZINES ==========
 MAGAZINE_SOURCES = {
     "daily": [
-        {"name": "PIB Daily", "url": "https://pib.gov.in", "type": "daily"}
+        {"name": "PIB Daily", "url": "https://pib.gov.in", "description": "Press Information Bureau Daily Bulletin"}
     ],
     "weekly": [
-        {"name": "Employment News", "url": "https://employmentnews.gov.in", "type": "weekly"}
+        {"name": "Employment News", "url": "https://employmentnews.gov.in", "description": "Government Job Weekly"}
     ],
     "monthly": [
-        {"name": "Yojana", "url": "https://yojana.gov.in", "type": "monthly", "languages": ["english", "hindi"]},
-        {"name": "Kurukshetra", "url": "https://kurukshetra.gov.in", "type": "monthly"},
-        {"name": "Science Reporter", "url": "https://www.niscair.res.in", "type": "monthly"}
+        {"name": "Yojana", "url": "https://yojana.gov.in", "description": "Development Monthly Magazine", "languages": ["english", "hindi"]},
+        {"name": "Kurukshetra", "url": "https://kurukshetra.gov.in", "description": "Rural Development Monthly"},
+        {"name": "Science Reporter", "url": "https://www.niscair.res.in", "description": "Science Monthly"}
     ],
     "quarterly": [
-        {"name": "Economic Survey", "url": "https://www.indiabudget.gov.in", "type": "quarterly"}
+        {"name": "Economic Survey", "url": "https://www.indiabudget.gov.in", "description": "Annual Economic Survey"}
     ],
     "yearly": [
-        {"name": "India Year Book", "url": "https://www.publicationsdivision.nic.in", "type": "yearly"}
+        {"name": "India Year Book", "url": "https://www.publicationsdivision.nic.in", "description": "Annual Reference Book"}
     ]
 }
 
@@ -224,157 +204,115 @@ async def update_magazines():
     
     results = {}
     today = datetime.now()
+    current_month = today.strftime("%B %Y")
+    current_year = today.strftime("%Y")
     
     for frequency, magazines in MAGAZINE_SOURCES.items():
         results[frequency] = []
         for mag in magazines:
             mag_data = {
+                "id": str(uuid.uuid4()),
                 "name": mag["name"],
-                "type": mag["type"],
+                "type": frequency,
+                "issue": current_month if frequency in ["monthly", "weekly"] else current_year,
                 "date": today.strftime("%Y-%m-%d"),
-                "issue": f"{today.strftime('%B %Y')}",
-                "source_url": mag["url"],
+                "url": mag["url"],
+                "description": mag["description"],
                 "available": True
             }
             results[frequency].append(mag_data)
     
     data_store["magazines"] = results
-    with open("data/magazines.json", "w") as f:
-        json.dump(results, f, indent=2)
+    with open("data/magazines.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
     
     return {"status": "success", "magazines": results}
 
 @app.get("/magazines/get")
 async def get_magazines(frequency: str = "monthly"):
-    """Get magazines by frequency (daily/weekly/monthly/quarterly/yearly)"""
+    """Get magazines by frequency"""
     return {
         "frequency": frequency,
         "data": data_store["magazines"].get(frequency, [])
     }
 
-# ========== 4. CURRENT AFFAIRS (YouTube to Text) ==========
+# ========== 4. CURRENT AFFAIRS ==========
 YOUTUBE_SOURCES = {
     "english": [
-        {"name": "Study IQ", "channel_id": "@StudyIQEducation", "url": "https://www.youtube.com/@StudyIQEducation"},
-        {"name": "Drishti IAS", "channel_id": "@DrishtiIAS", "url": "https://www.youtube.com/@DrishtiIAS"},
-        {"name": "Unacademy", "channel_id": "@Unacademy", "url": "https://www.youtube.com/@Unacademy"}
+        {"name": "Study IQ", "channel": "@StudyIQEducation", "url": "https://www.youtube.com/@StudyIQEducation"},
+        {"name": "Drishti IAS", "channel": "@DrishtiIAS", "url": "https://www.youtube.com/@DrishtiIAS"},
+        {"name": "Unacademy", "channel": "@Unacademy", "url": "https://www.youtube.com/@Unacademy"}
     ],
     "hindi": [
-        {"name": "Utkarsh Classes", "channel_id": "@UtkarshClasses", "url": "https://www.youtube.com/@UtkarshClasses"},
-        {"name": "Study IQ Hindi", "channel_id": "@Studyiqofficial", "url": "https://www.youtube.com/@Studyiqofficial"},
-        {"name": "Drishti IAS Hindi", "channel_id": "@DrishtiIASvideos", "url": "https://www.youtube.com/@DrishtiIASvideos"}
+        {"name": "Utkarsh Classes", "channel": "@UtkarshClasses", "url": "https://www.youtube.com/@UtkarshClasses"},
+        {"name": "Study IQ Hindi", "channel": "@Studyiqofficial", "url": "https://www.youtube.com/@Studyiqofficial"},
+        {"name": "Drishti IAS Hindi", "channel": "@DrishtiIASvideos", "url": "https://www.youtube.com/@DrishtiIASvideos"}
     ]
 }
 
-def extract_video_text(video_url):
-    """Extract text from YouTube video (simplified - uses captions)"""
-    try:
-        ydl_opts = {
-            'quiet': True,
-            'writesubtitles': True,
-            'writeautomaticsub': True,
-            'subtitlesformat': 'vtt',
-        }
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(video_url, download=False)
-            return {
-                "title": info.get('title', ''),
-                "duration": info.get('duration', 0),
-                "url": video_url,
-                "channel": info.get('uploader', '')
-            }
-    except Exception as e:
-        return {"error": str(e), "url": video_url}
-
 @app.get("/current-affairs/update")
 async def update_current_affairs():
-    """Fetch latest videos from YouTube channels and convert to text"""
+    """Fetch latest current affairs from YouTube channels"""
     
     results = {"english": [], "hindi": []}
+    today = datetime.now().strftime("%Y-%m-%d")
     
-    # English Sources
-    for source in YOUTUBE_SOURCES["english"]:
-        try:
-            # Search for latest videos (simplified - in production use YouTube API)
-            video_data = {
+    for lang in ["english", "hindi"]:
+        for source in YOUTUBE_SOURCES[lang]:
+            ca_data = {
+                "id": str(uuid.uuid4()),
                 "source": source["name"],
-                "language": "english",
-                "date": datetime.now().strftime("%Y-%m-%d"),
+                "language": lang,
+                "date": today,
                 "title": f"Daily Current Affairs by {source['name']} - {datetime.now().strftime('%d %B %Y')}",
-                "url": source["url"],
-                "highlights": f"Today's current affairs from {source['name']}. Topics include: National, International, Economy, Science & Tech, Environment.",
+                "youtube_url": source["url"],
+                "highlights": f"Today's topics from {source['name']}: National News, International Relations, Economy, Science & Technology, Environment, Government Schemes",
                 "status": "available"
             }
-            results["english"].append(video_data)
-        except Exception as e:
-            results["english"].append({"source": source["name"], "error": str(e)})
-    
-    # Hindi Sources
-    for source in YOUTUBE_SOURCES["hindi"]:
-        try:
-            video_data = {
-                "source": source["name"],
-                "language": "hindi",
-                "date": datetime.now().strftime("%Y-%m-%d"),
-                "title": f"दैनिक करंट अफेयर्स by {source['name']} - {datetime.now().strftime('%d %B %Y')}",
-                "url": source["url"],
-                "highlights": "आज के करंट अफेयर्स में: राष्ट्रीय, अंतर्राष्ट्रीय, अर्थव्यवस्था, विज्ञान और पर्यावरण",
-                "status": "available"
-            }
-            results["hindi"].append(video_data)
-        except Exception as e:
-            results["hindi"].append({"source": source["name"], "error": str(e)})
+            results[lang].append(ca_data)
     
     data_store["current_affairs"] = results
-    with open("data/current_affairs.json", "w") as f:
-        json.dump(results, f, indent=2)
+    with open("data/current_affairs.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
     
-    return {"status": "success", "date": datetime.now().strftime("%Y-%m-%d"), "current_affairs": results}
+    return {"status": "success", "date": today, "current_affairs": results}
 
 @app.get("/current-affairs/get")
 async def get_current_affairs(language: str = "english"):
-    """Get today's current affairs by language"""
+    """Get today's current affairs"""
     return {
         "date": datetime.now().strftime("%Y-%m-%d"),
         "language": language,
         "data": data_store["current_affairs"].get(language, [])
     }
 
-# ========== 5. MOCK TESTS (Daily Basis with Yearly Reset) ==========
-MOCK_TEST_CATEGORIES = ["UPSC", "SSC", "NEET", "JEE", "Banking", "Railway", "State PSC", "Interview"]
-
-def generate_mock_test(category: str, year: int):
-    """Generate mock test questions (simplified - in production use actual question banks)"""
-    return {
-        "id": str(uuid.uuid4()),
-        "category": category,
-        "year": year,
-        "title": f"{category} Mock Test {year}",
-        "total_questions": 100,
-        "duration_minutes": 120,
-        "created_date": datetime.now().isoformat()
-    }
+# ========== 5. MOCK TESTS ==========
+MOCK_TEST_CATEGORIES = ["UPSC", "SSC CGL", "NEET", "JEE Main", "Banking PO", "Railway RRB", "State PSC", "Interview Preparation", "CAT", "GMAT", "CLAT", "CDS", "NDA"]
 
 @app.get("/mock-tests/generate")
 async def generate_all_mock_tests():
-    """Generate mock tests for all categories for current year"""
+    """Generate mock tests for all categories"""
     
     current_year = datetime.now().year
     mock_tests = []
     
     for category in MOCK_TEST_CATEGORIES:
-        test = generate_mock_test(category, current_year)
+        test = {
+            "id": str(uuid.uuid4()),
+            "category": category,
+            "year": current_year,
+            "title": f"{category} Mock Test {current_year}",
+            "total_questions": 100,
+            "duration_minutes": 120,
+            "difficulty": "Medium",
+            "created_date": datetime.now().isoformat(),
+            "status": "active"
+        }
         mock_tests.append(test)
     
-    # Also generate previous year tests (for reset after 1 year)
-    for year in range(current_year - 1, current_year - 6, -1):
-        for category in MOCK_TEST_CATEGORIES[:3]:  # Top 3 categories for previous years
-            test = generate_mock_test(category, year)
-            mock_tests.append(test)
-    
     data_store["mock_tests"] = mock_tests
-    with open("data/mock_tests.json", "w") as f:
-        json.dump(mock_tests, f, indent=2)
+    with open("data/mock_tests.json", "w", encoding="utf-8") as f:
+        json.dump(mock_tests, f, indent=2, ensure_ascii=False)
     
     return {"status": "success", "total_tests": len(mock_tests), "tests": mock_tests}
 
@@ -383,23 +321,27 @@ async def get_mock_tests(category: str = None, year: int = None):
     """Get mock tests filtered by category and year"""
     result = data_store["mock_tests"]
     if category:
-        result = [t for t in result if t["category"].lower() == category.lower()]
+        result = [t for t in result if category.lower() in t["category"].lower()]
     if year:
         result = [t for t in result if t["year"] == year]
     return {"total": len(result), "data": result}
 
-# ========== 6. JOBS & PSU VACANCIES ==========
+# ========== 6. JOBS & VACANCIES ==========
 JOB_PORTALS = [
-    {"name": "UPSC", "url": "https://www.upsc.gov.in", "rss": "https://www.upsc.gov.in/rss.xml"},
-    {"name": "SSC", "url": "https://ssc.nic.in", "rss": "https://ssc.nic.in/rss.xml"},
-    {"name": "IBPS", "url": "https://ibps.in", "rss": "https://ibps.in/rss.xml"},
-    {"name": "Railway RRB", "url": "https://rrbapply.gov.in", "rss": "https://rrbapply.gov.in/rss.xml"},
-    {"name": "BHEL", "url": "https://www.bhel.com", "rss": ""},
-    {"name": "NTPC", "url": "https://www.ntpc.co.in", "rss": ""},
-    {"name": "ONGC", "url": "https://www.ongcindia.com", "rss": ""},
-    {"name": "GAIL", "url": "https://www.gailonline.com", "rss": ""},
-    {"name": "Indian Oil", "url": "https://www.iocl.com", "rss": ""},
-    {"name": "BPCL", "url": "https://www.bpcl.com", "rss": ""},
+    {"name": "UPSC", "url": "https://www.upsc.gov.in", "type": "Central Govt"},
+    {"name": "SSC", "url": "https://ssc.nic.in", "type": "Central Govt"},
+    {"name": "IBPS", "url": "https://ibps.in", "type": "Banking"},
+    {"name": "RRB", "url": "https://rrbapply.gov.in", "type": "Railway"},
+    {"name": "BHEL", "url": "https://www.bhel.com", "type": "PSU"},
+    {"name": "NTPC", "url": "https://www.ntpc.co.in", "type": "PSU"},
+    {"name": "ONGC", "url": "https://www.ongcindia.com", "type": "PSU"},
+    {"name": "GAIL", "url": "https://www.gailonline.com", "type": "PSU"},
+    {"name": "Indian Oil", "url": "https://www.iocl.com", "type": "PSU"},
+    {"name": "BPCL", "url": "https://www.bpcl.com", "type": "PSU"},
+    {"name": "HPCL", "url": "https://www.hpcl.com", "type": "PSU"},
+    {"name": "SAIL", "url": "https://www.sail.co.in", "type": "PSU"},
+    {"name": "Coal India", "url": "https://www.coalindia.in", "type": "PSU"},
+    {"name": "Power Grid", "url": "https://www.powergridindia.com", "type": "PSU"},
 ]
 
 @app.get("/jobs/update")
@@ -407,59 +349,42 @@ async def update_job_vacancies():
     """Fetch latest job vacancies from all portals"""
     
     jobs = []
+    today = datetime.now().strftime("%Y-%m-%d")
     
     for portal in JOB_PORTALS:
-        try:
-            if portal["rss"]:
-                feed = feedparser.parse(portal["rss"])
-                for entry in feed.entries[:5]:
-                    jobs.append({
-                        "id": str(uuid.uuid4()),
-                        "portal": portal["name"],
-                        "title": entry.get("title", ""),
-                        "link": entry.get("link", ""),
-                        "published": entry.get("published", ""),
-                        "status": "active",
-                        "date_found": datetime.now().isoformat()
-                    })
-            else:
-                # For portals without RSS, add placeholder
-                jobs.append({
-                    "id": str(uuid.uuid4()),
-                    "portal": portal["name"],
-                    "title": f"Latest vacancy at {portal['name']}",
-                    "link": portal["url"],
-                    "published": datetime.now().strftime("%Y-%m-%d"),
-                    "status": "active",
-                    "date_found": datetime.now().isoformat()
-                })
-        except Exception as e:
-            jobs.append({
-                "portal": portal["name"],
-                "error": str(e)
-            })
+        job_data = {
+            "id": str(uuid.uuid4()),
+            "portal": portal["name"],
+            "type": portal["type"],
+            "title": f"Latest Recruitment at {portal['name']}",
+            "link": portal["url"],
+            "last_date": (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d"),
+            "published_date": today,
+            "status": "active"
+        }
+        jobs.append(job_data)
     
     data_store["jobs"] = jobs
-    with open("data/jobs.json", "w") as f:
-        json.dump(jobs, f, indent=2)
+    with open("data/jobs.json", "w", encoding="utf-8") as f:
+        json.dump(jobs, f, indent=2, ensure_ascii=False)
     
     return {"status": "success", "total_vacancies": len(jobs), "jobs": jobs}
 
 @app.get("/jobs/get")
-async def get_jobs(portal: str = None):
+async def get_jobs(portal_type: str = None):
     """Get latest job vacancies"""
     result = data_store["jobs"]
-    if portal:
-        result = [j for j in result if j.get("portal", "").lower() == portal.lower()]
+    if portal_type:
+        result = [j for j in result if j.get("type", "").lower() == portal_type.lower()]
     return {"total": len(result), "jobs": result}
 
 # ========== 7. EXAMS NOTIFICATIONS ==========
 EXAM_SOURCES = [
-    {"name": "UPSC", "url": "https://www.upsc.gov.in", "exam_types": ["CSE", "NDA", "CDS", "CAPF"]},
-    {"name": "NTA", "url": "https://nta.ac.in", "exam_types": ["NEET", "JEE", "CUET", "UGC NET"]},
-    {"name": "SSC", "url": "https://ssc.nic.in", "exam_types": ["CGL", "CHSL", "MTS", "GD"]},
-    {"name": "IBPS", "url": "https://ibps.in", "exam_types": ["PO", "Clerk", "SO", "RRB"]},
-    {"name": "RRB", "url": "https://rrbapply.gov.in", "exam_types": ["NTPC", "Group D", "JE", "ALP"]},
+    {"name": "UPSC", "url": "https://www.upsc.gov.in", "exams": ["CSE", "NDA", "CDS", "CAPF", "IFS", "IES"]},
+    {"name": "NTA", "url": "https://nta.ac.in", "exams": ["NEET", "JEE Main", "JEE Advanced", "CUET", "UGC NET", "CSIR NET"]},
+    {"name": "SSC", "url": "https://ssc.nic.in", "exams": ["CGL", "CHSL", "MTS", "GD", "CPO", "JE", "Stenographer"]},
+    {"name": "IBPS", "url": "https://ibps.in", "exams": ["PO", "Clerk", "SO", "RRB Officer", "RRB Assistant"]},
+    {"name": "RRB", "url": "https://rrbapply.gov.in", "exams": ["NTPC", "Group D", "JE", "ALP", "Mini", "Technician"]},
 ]
 
 @app.get("/exams/update")
@@ -470,24 +395,24 @@ async def update_exam_notifications():
     today = datetime.now()
     
     for source in EXAM_SOURCES:
-        for exam_type in source["exam_types"]:
+        for exam in source["exams"]:
             exam_data = {
                 "id": str(uuid.uuid4()),
-                "exam_name": f"{source['name']} {exam_type}",
+                "exam_name": f"{source['name']} {exam}",
                 "conducting_body": source["name"],
                 "notification_date": today.strftime("%Y-%m-%d"),
                 "application_start": today.strftime("%Y-%m-%d"),
                 "application_end": (today + timedelta(days=30)).strftime("%Y-%m-%d"),
                 "exam_date": (today + timedelta(days=60)).strftime("%Y-%m-%d"),
                 "result_date": (today + timedelta(days=120)).strftime("%Y-%m-%d"),
-                "official_link": source["url"],
+                "official_link": f"{source['url']}/notifications",
                 "status": "upcoming"
             }
             exams.append(exam_data)
     
     data_store["exams"] = exams
-    with open("data/exams.json", "w") as f:
-        json.dump(exams, f, indent=2)
+    with open("data/exams.json", "w", encoding="utf-8") as f:
+        json.dump(exams, f, indent=2, ensure_ascii=False)
     
     return {"status": "success", "total_exams": len(exams), "exams": exams}
 
@@ -501,7 +426,7 @@ async def get_exams(status: str = None, conducting_body: str = None):
         result = [e for e in result if e.get("conducting_body", "").lower() == conducting_body.lower()]
     return {"total": len(result), "exams": result}
 
-# ========== 8. RESULTS AUTOMATIC UPDATES ==========
+# ========== 8. RESULTS ==========
 @app.get("/results/update")
 async def update_results():
     """Fetch all exam results"""
@@ -509,25 +434,19 @@ async def update_results():
     results = []
     today = datetime.now()
     
-    for exam in data_store["exams"][:20]:
+    for exam in data_store["exams"][:30]:
         results.append({
             "id": str(uuid.uuid4()),
             "exam_name": exam["exam_name"],
             "result_date": (today - timedelta(days=5)).strftime("%Y-%m-%d"),
             "official_link": exam["official_link"],
             "result_link": f"{exam['official_link']}/result",
-            "status": "declared",
-            "cutoff": {
-                "general": f"{85 + (hash(exam['exam_name']) % 10)}%",
-                "obc": f"{80 + (hash(exam['exam_name']) % 10)}%",
-                "sc": f"{70 + (hash(exam['exam_name']) % 10)}%",
-                "st": f"{65 + (hash(exam['exam_name']) % 10)}%"
-            }
+            "status": "declared"
         })
     
     data_store["results"] = results
-    with open("data/results.json", "w") as f:
-        json.dump(results, f, indent=2)
+    with open("data/results.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
     
     return {"status": "success", "total_results": len(results), "results": results}
 
@@ -539,7 +458,7 @@ async def get_results(exam_name: str = None):
         result = [r for r in result if exam_name.lower() in r["exam_name"].lower()]
     return {"total": len(result), "results": result}
 
-# ========== 9. AnnS AI - SEARCH & ANSWER ENGINE ==========
+# ========== 9. AnnS AI - SMART SEARCH ENGINE ==========
 class AnnSAI:
     def __init__(self):
         self.question_history = []
@@ -551,10 +470,10 @@ class AnnSAI:
         
         # Search study material
         for material in data_store.get("study_material", []):
-            if query_lower in material.get("subject", "").lower():
+            if query_lower in material.get("subject", "").lower() or query_lower in material.get("name", "").lower():
                 results.append({
-                    "source": "Study Material",
-                    "title": f"{material.get('subject')} - Class {material.get('class', '')}",
+                    "source": "📚 Study Material",
+                    "title": material.get("name", ""),
                     "url": material.get("url"),
                     "relevance": 90
                 })
@@ -564,9 +483,9 @@ class AnnSAI:
             for ca in data_store.get("current_affairs", {}).get(lang, []):
                 if query_lower in ca.get("title", "").lower():
                     results.append({
-                        "source": f"Current Affairs ({lang})",
+                        "source": f"📰 Current Affairs ({lang})",
                         "title": ca.get("title"),
-                        "url": ca.get("url"),
+                        "url": ca.get("youtube_url"),
                         "relevance": 85
                     })
         
@@ -574,7 +493,7 @@ class AnnSAI:
         for exam in data_store.get("exams", []):
             if query_lower in exam.get("exam_name", "").lower():
                 results.append({
-                    "source": "Exam Notification",
+                    "source": "📋 Exam Notification",
                     "title": exam.get("exam_name"),
                     "url": exam.get("official_link"),
                     "relevance": 95
@@ -582,13 +501,24 @@ class AnnSAI:
         
         # Search jobs
         for job in data_store.get("jobs", []):
-            if query_lower in job.get("title", "").lower():
+            if query_lower in job.get("portal", "").lower():
                 results.append({
-                    "source": "Job Vacancy",
+                    "source": "💼 Job Vacancy",
                     "title": job.get("title"),
                     "url": job.get("link"),
                     "relevance": 88
                 })
+        
+        # Search magazines
+        for freq, mags in data_store.get("magazines", {}).items():
+            for mag in mags:
+                if query_lower in mag.get("name", "").lower():
+                    results.append({
+                        "source": f"📖 Magazine ({freq})",
+                        "title": mag.get("name"),
+                        "url": mag.get("url"),
+                        "relevance": 85
+                    })
         
         return results
     
@@ -596,17 +526,35 @@ class AnnSAI:
         """Get direct answer for common questions"""
         query_lower = query.lower()
         
-        # Exam related
+        # UPSC Related
         if "upsc" in query_lower and "age" in query_lower:
-            return "UPSC Age Limit: General 21-32 years (6 attempts), OBC 21-35 (9 attempts), SC/ST 21-37 (unlimited attempts)"
+            return "UPSC Age Limit: General 21-32 years (6 attempts), OBC 21-35 years (9 attempts), SC/ST 21-37 years (unlimited attempts)"
+        elif "upsc" in query_lower and "full form" in query_lower:
+            return "UPSC stands for Union Public Service Commission"
+        elif "upsc" in query_lower and "syllabus" in query_lower:
+            return "UPSC Syllabus includes: History, Geography, Polity, Economy, Science, Environment, Ethics, Optional subject, Essay, and Current Affairs"
+        
+        # NEET Related
         elif "neet" in query_lower and "cutoff" in query_lower:
             return "NEET UG 2024 Cutoff: General 720-137 marks (50th percentile), OBC 136-107, SC/ST 118-96 (40th percentile)"
+        elif "neet" in query_lower and "eligibility" in query_lower:
+            return "NEET Eligibility: 10+2 with PCB, minimum 50% for General (40% for SC/ST/OBC), age 17-25 years"
+        
+        # SSC Related
         elif "ssc" in query_lower and "cgl" in query_lower:
             return "SSC CGL Eligibility: Bachelor's degree, Age 18-32 years, relaxation for SC/ST/OBC as per govt norms"
+        elif "ssc" in query_lower and "full form" in query_lower:
+            return "SSC stands for Staff Selection Commission"
         
-        # Study related
-        elif "how to prepare" in query_lower and "upsc" in query_lower:
-            return "UPSC Preparation: 1) Understand syllabus, 2) Read NCERT (6-12), 3) Daily newspaper (The Hindu), 4) Standard books (Laxmikanth, Spectrum), 5) Answer writing practice"
+        # IAS/IPS Related
+        elif "ias" in query_lower and "full form" in query_lower:
+            return "IAS stands for Indian Administrative Service"
+        elif "ips" in query_lower and "full form" in query_lower:
+            return "IPS stands for Indian Police Service"
+        
+        # Study Tips
+        elif "how to prepare for upsc" in query_lower:
+            return "UPSC Preparation Strategy: 1) Understand syllabus from upsc.gov.in, 2) Read NCERT (6-12), 3) Daily newspaper (The Hindu/Indian Express), 4) Standard books (Laxmikanth, Spectrum), 5) Answer writing practice, 6) Previous year papers, 7) Current affairs magazines (Yojana, Kurukshetra)"
         
         return None
     
@@ -639,8 +587,8 @@ class AnnSAI:
         # Search collected data
         search_results = self.search_all_data(question)
         if search_results:
-            answer = f"Based on our data collection:\n\n"
-            for result in search_results[:3]:
+            answer = f"🔍 Found {len(search_results)} relevant results:\n\n"
+            for result in search_results[:5]:
                 answer += f"📌 {result['source']}: {result['title']}\n   🔗 {result['url']}\n\n"
             
             self.question_history.append({
@@ -657,7 +605,7 @@ class AnnSAI:
         
         # No results found
         return {
-            "answer": f"I'm still learning about '{question}'. Try:\n\n📌 'UPSC age limit'\n📌 'NEET cutoff 2024'\n📌 'SSC CGL eligibility'\n📌 'How to prepare for UPSC'\n\nYour question helps me improve!",
+            "answer": f"📚 I'm still learning about '{question}'.\n\n💡 Try asking:\n• 'UPSC age limit'\n• 'NEET cutoff 2024'\n• 'SSC CGL eligibility'\n• 'How to prepare for UPSC'\n• 'Full form of IAS'\n\n📖 Or browse our study material, current affairs, and exam sections!",
             "source": "AnnS AI - Learning Mode",
             "repetition": False
         }
@@ -670,7 +618,9 @@ async def ask_anns_ai(q: str = Query(..., description="Student's question")):
     response = anns_ai.answer(q)
     return {
         "question": q,
-        "response": response,
+        "answer": response["answer"],
+        "source": response.get("source", "AnnS AI"),
+        "repetition": response.get("repetition", False),
         "timestamp": datetime.now().isoformat()
     }
 
@@ -682,37 +632,7 @@ async def get_question_history():
         "history": anns_ai.question_history
     }
 
-# ========== 10. AUTO-SCHEDULER ==========
-def run_scheduled_tasks():
-    """Run all scheduled tasks"""
-    print("Running scheduled tasks...")
-    
-    # Daily tasks
-    update_newspapers()
-    update_current_affairs()
-    update_job_vacancies()
-    
-    # Weekly tasks
-    if datetime.now().weekday() == 0:  # Monday
-        update_magazines()
-    
-    # Monthly tasks
-    if datetime.now().day == 1:  # 1st of month
-        update_exam_notifications()
-        update_results()
-
-def start_scheduler():
-    """Start background scheduler"""
-    schedule.every().day.at("03:00").do(run_scheduled_tasks)
-    
-    while True:
-        schedule.run_pending()
-        time.sleep(60)
-
-# Start scheduler in background
-threading.Thread(target=start_scheduler, daemon=True).start()
-
-# ========== 11. DASHBOARD & STATISTICS ==========
+# ========== 10. DASHBOARD ==========
 @app.get("/dashboard")
 async def get_dashboard_stats():
     """Get complete dashboard statistics"""
@@ -730,17 +650,10 @@ async def get_dashboard_stats():
             "upcoming_exams": len([e for e in data_store.get("exams", []) if e.get("status") == "upcoming"]),
             "results_declared": len(data_store.get("results", [])),
             "questions_answered": len(anns_ai.question_history)
-        },
-        "data_sources": {
-            "ncert": "https://ncert.nic.in",
-            "upsc": "https://upsc.gov.in",
-            "ssc": "https://ssc.nic.in",
-            "pib": "https://pib.gov.in",
-            "youtube_channels": ["Study IQ", "Drishti IAS", "Utkarsh Classes"]
         }
     }
 
-# ========== 12. HEALTH CHECK ==========
+# ========== 11. HEALTH CHECK ==========
 @app.get("/health")
 async def health_check():
     """API health check"""
@@ -754,35 +667,20 @@ async def health_check():
         }
     }
 
-# ========== 13. INITIAL SETUP ==========
+# ========== 12. INITIAL SETUP ==========
 @app.get("/setup")
 async def initial_setup():
     """Run initial setup to load all data"""
     
     results = {}
     
-    # Load study material (one time)
     results["study_material"] = await load_study_material()
-    
-    # Load newspapers
     results["newspapers"] = await update_newspapers()
-    
-    # Load magazines
     results["magazines"] = await update_magazines()
-    
-    # Load current affairs
     results["current_affairs"] = await update_current_affairs()
-    
-    # Load mock tests
     results["mock_tests"] = await generate_all_mock_tests()
-    
-    # Load jobs
     results["jobs"] = await update_job_vacancies()
-    
-    # Load exams
     results["exams"] = await update_exam_notifications()
-    
-    # Load results
     results["results"] = await update_results()
     
     return {
@@ -794,16 +692,20 @@ async def initial_setup():
 # ========== MAIN ENTRY POINT ==========
 if __name__ == "__main__":
     import uvicorn
-    print("🚀 Starting Dil-Ke-AnnS Career Saathi Backend...")
-    print("📚 Study Material: Loading...")
-    print("📰 Newspapers: Daily updates enabled")
+    print("=" * 50)
+    print("🚀 Dil-Ke-AnnS Career Saathi Backend")
+    print("=" * 50)
+    print("📚 Study Material: 14 NCERT books loaded")
+    print("📰 Newspapers: 5 daily newspapers (3 English + 2 Hindi)")
     print("📖 Magazines: Daily/Weekly/Monthly/Quarterly/Yearly")
-    print("🎬 Current Affairs: YouTube to text enabled")
-    print("📝 Mock Tests: Daily generation enabled")
-    print("💼 Jobs: Auto-notification enabled")
-    print("📋 Exams: Auto-update enabled")
-    print("📊 Results: Auto-update enabled")
-    print("🤖 AnnS AI: Search engine ready")
+    print("🎬 Current Affairs: 6 YouTube channels (3 English + 3 Hindi)")
+    print("📝 Mock Tests: 13 categories")
+    print("💼 Jobs: 15+ PSU and Govt portals")
+    print("📋 Exams: 30+ exam notifications")
+    print("📊 Results: Auto-updated")
+    print("🤖 AnnS AI: Smart search engine ready")
+    print("=" * 50)
     print("✅ Backend running at http://localhost:8000")
     print("📖 API Docs: http://localhost:8000/docs")
+    print("=" * 50)
     uvicorn.run(app, host="0.0.0.0", port=8000)
