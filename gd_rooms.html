@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>GD Rooms - Dil Ke AnnS Career Saathi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f0;
+            color: #1e3c2c;
+            padding-bottom: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .back-btn {
+            background: #ffb74d;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .room-selector {
+            background: white;
+            padding: 12px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-bottom: 1px solid #c8e6c9;
+        }
+        .room-btn {
+            background: #e8f5e9;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .room-btn.active {
+            background: #ff9800;
+            color: white;
+        }
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 16px;
+        }
+        .chat-area {
+            flex: 2;
+            min-width: 280px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 60vh;
+        }
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .message {
+            background: #f5f5f5;
+            border-radius: 18px;
+            padding: 10px 14px;
+            max-width: 85%;
+            align-self: flex-start;
+        }
+        .message.user {
+            background: #e3f2e8;
+            align-self: flex-end;
+            border-left: 3px solid #2e7d32;
+        }
+        .message.ai {
+            background: #fff3e0;
+            border-left: 3px solid #ff9800;
+        }
+        .message-system {
+            background: #e8eaf6;
+            color: #3949ab;
+            font-size: 0.8rem;
+            text-align: center;
+            align-self: center;
+        }
+        .message-header {
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .message-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .input-area {
+            padding: 12px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .input-area textarea {
+            flex: 1;
+            padding: 10px;
+            border-radius: 24px;
+            border: 1px solid #ccc;
+            resize: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .input-area button {
+            background: #2e7d32;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+        }
+        .voice-btn {
+            background: #ff9800;
+        }
+        .sidebar {
+            flex: 1;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            border-left: 3px solid #ff9800;
+            padding-left: 10px;
+        }
+        .persona-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 40px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        .summary-box {
+            background: #f9f7f3;
+            padding: 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+        }
+        .ai-moderator-badge {
+            background: #ff9800;
+            color: white;
+            border-radius: 20px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        @media (max-width: 768px) {
+            .main-container { flex-direction: column; }
+            .chat-area { height: 50vh; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <button class="back-btn" onclick="window.location.href='index.html'">← Home</button>
+    <h2>💬 Group Discussion Rooms</h2>
+    <div></div>
+</div>
+
+<div class="room-selector" id="roomSelector">
+    <!-- Rooms will be dynamically added -->
+</div>
+
+<div class="main-container">
+    <!-- Chat Area -->
+    <div class="chat-area">
+        <div class="messages" id="messagesContainer">
+            <div class="message ai message-system">
+                <div class="message-text">👋 Welcome! Select a room and start discussing. AI Moderator will guide you.</div>
+            </div>
+        </div>
+        <div class="input-area">
+            <textarea id="messageInput" rows="2" placeholder="Type your message... (or use voice)"></textarea>
+            <button id="voiceInputBtn" class="voice-btn">🎤 Voice</button>
+            <button id="sendBtn">📤 Send</button>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- AI Persona Selector -->
+        <div class="card">
+            <h3>🤖 AnnS AI Persona <span class="ai-moderator-badge">Active</span></h3>
+            <select id="personaSelect" class="persona-select">
+                <option value="mentor">👨‍🏫 Mentor (Career Guidance)</option>
+                <option value="teacher">📚 Teacher (Explain Concepts)</option>
+                <option value="friend">💬 Friend (Casual Help)</option>
+                <option value="coach">🏋️ Coach (Daily Tasks)</option>
+                <option value="examiner">📝 Examiner (Tests & MCQs)</option>
+                <option value="counsellor">❤️ Counsellor (Doubt & Stress)</option>
+                <option value="bro">😎 Bro (Chill & Gen-Z)</option>
+                <option value="didi">👩‍🦱 Didi (Caring Elder)</option>
+                <option value="motivator">🔥 Motivator (Energy & Josh)</option>
+                <option value="debugger">💻 Debugger (Code & Errors)</option>
+                <option value="analyst">📊 Analyst (Data & Stats)</option>
+                <option value="creator">🎨 Creator (Ideas & Content)</option>
+            </select>
+            <div id="currentPersonaDisplay" style="font-size:0.75rem; color:#666; margin-top:5px;">Active: Mentor</div>
+        </div>
+
+        <!-- AI Moderator Summary -->
+        <div class="card">
+            <h3>📋 AI Moderator Summary</h3>
+            <div id="moderatorSummary" class="summary-box">
+                No active discussion yet. Start talking!
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="card">
+            <h3>🏆 Anonymous Leaderboard</h3>
+            <div id="leaderboardContainer" class="summary-box">
+                Loading...
+            </div>
+        </div>
+
+        <!-- Voice Controls -->
+        <div class="card">
+            <h3>🎙️ Voice Controls</h3>
+            <button id="startVoiceChatBtn" style="width:100%; margin-bottom:8px;">🎤 Start Voice Chat</button>
+            <button id="stopVoiceChatBtn" style="width:100%; background:#888;">⏹️ Stop Voice Chat</button>
+            <div id="voiceStatus" style="font-size:0.7rem; margin-top:8px; color:#666;">Voice idle</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==================== ROOM CONFIGURATION (From Excel Spec) ====================
+    const rooms = [
+        { id: "upsc", name: "UPSC", icon: "🏛️", category: "Civil Services" },
+        { id: "ssc", name: "SSC", icon: "📝", category: "Staff Selection" },
+        { id: "banking", name: "BANKING", icon: "🏦", category: "IBPS/RBI" },
+        { id: "neet", name: "NEET", icon: "🩺", category: "Medical" },
+        { id: "jee", name: "JEE", icon: "⚙️", category: "Engineering" },
+        { id: "agriculture", name: "AGRICULTURE", icon: "🌾", category: "Farming" },
+        { id: "skill", name: "SKILL DEV", icon: "🔧", category: "Vocational" },
+        { id: "after10th", name: "AFTER 10TH", icon: "🔟", category: "Stream Selection" },
+        { id: "after12th", name: "AFTER 12TH", icon: "1️⃣2️⃣", category: "Career Paths" },
+        { id: "medical_stream", name: "MEDICAL", icon: "🏥", category: "Doctor/Nurse" },
+        { id: "commerce_stream", name: "COMMERCE", icon: "📊", category: "B.Com/CA" },
+        { id: "arts_stream", name: "ARTS", icon: "🎨", category: "Humanities" },
+        { id: "gk", name: "GK & CURRENT AFFAIRS", icon: "🌍", category: "General Knowledge" },
+        { id: "general", name: "GENERAL", icon: "💬", category: "Any Topic" }
+    ];
+
+    // Persona responses (simplified - each persona has unique style)
+    const personaStyles = {
+        mentor: " supportive, wise, step-by-step guidance",
+        teacher: " patient, examples, simple explanations",
+        friend: " casual, caring, chatty",
+        coach: " strict, disciplined, task-focused",
+        examiner: " formal, sharp, MCQ style",
+        counsellor: " empathetic, safe, non-judgmental",
+        bro: " chill, Gen-Z slang, short replies",
+        didi: " caring, elder sister tone",
+        motivator: " energetic, josh-filled, quotes",
+        debugger: " logical, precise, code/debug focus",
+        analyst: " data-driven, tables, facts",
+        creator: " imaginative, fun, ideas"
+    };
+
+    // State
+    let currentRoom = "upsc";
+    let messages = [];
+    let userPoints = {};  // Anonymous points for leaderboard
+    let recognition = null;
+    let isVoiceActive = false;
+    let summaryInterval = null;
+
+    // IndexedDB Setup
+    let db;
+    const DB_NAME = 'GD_Rooms_DB';
+    const DB_VERSION = 1;
+
+    function openDB() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => { db = request.result; resolve(db); };
+            request.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains('messages')) {
+                    const store = db.createObjectStore('messages', { keyPath: 'id', autoIncrement: true });
+                    store.createIndex('room', 'room', { unique: false });
+                }
+                if (!db.objectStoreNames.contains('points')) {
+                    db.createObjectStore('points', { keyPath: 'userId' });
+                }
+            };
+        });
+    }
+
+    async function saveMessage(room, sender, text, type) {
+        const msg = { room, sender, text, type, timestamp: Date.now(), date: new Date().toISOString() };
+        const tx = db.transaction('messages', 'readwrite');
+        tx.objectStore('messages').add(msg);
+        await tx.complete;
+        return msg;
+    }
+
+    async function loadMessages(room) {
+        const tx = db.transaction('messages', 'readonly');
+        const index = tx.objectStore('messages').index('room');
+        return new Promise((resolve) => {
+            const request = index.getAll(room);
+            request.onsuccess = () => resolve(request.result || []);
+        });
+    }
+
+    async function addPoints(userId, points) {
+        const tx = db.transaction('points', 'readwrite');
+        const store = tx.objectStore('points');
+        const existing = await new Promise(resolve => {
+            const req = store.get(userId);
+            req.onsuccess = () => resolve(req.result);
+        });
+        if (existing) {
+            existing.points = (existing.points || 0) + points;
+            store.put(existing);
+        } else {
+            store.put({ userId, points, name: `User_${userId.slice(-4)}` });
+        }
+        await tx.complete;
+    }
+
+    async function getLeaderboard() {
+        const tx = db.transaction('points', 'readonly');
+        const all = await new Promise(resolve => {
+            const req = tx.objectStore('points').getAll();
+            req.onsuccess = () => resolve(req.result || []);
+        });
+        return all.sort((a,b) => (b.points || 0) - (a.points || 0)).slice(0, 10);
+    }
+
+    // AI Moderator: Generate summary every 15 min
+    function generateSummary(messagesList) {
+        if (!messagesList || messagesList.length === 0) return "No discussion yet.";
+        const recent = messagesList.slice(-20);
+        const topics = recent.filter(m => m.text.length > 10).map(m => m.text.substring(0, 50));
+        return `📌 Last 15 min discussion covered: ${topics.length} key points. Main topics: ${topics.slice(0,3).join(' | ') || 'general discussion'}. ${recent.length} messages exchanged.`;
+    }
+
+    // AI Response with Persona
+    function getAIResponse(userMessage, persona) {
+        const style = personaStyles[persona] || " helpful";
+        const lowerMsg = userMessage.toLowerCase();
+        
+        if (lowerMsg.includes('roadmap') || lowerMsg.includes('career') || lowerMsg.includes('future')) {
+            return `📈 **Career Roadmap** (${persona} mode): Start with self-assessment → Research fields → Gain skills → Network → Apply. Need specific stream? Ask me!`;
+        }
+        if (lowerMsg.includes('exam') || lowerMsg.includes('syllabus')) {
+            return `📚 **Exam Info** (${persona} mode): Visit official website for latest syllabus. I can help with study plan!`;
+        }
+        if (lowerMsg.includes('gd') || lowerMsg.includes('discussion')) {
+            return `💡 **GD Tip** (${persona} mode): Structure: Introduction → Key points → Examples → Conclusion. Stay on topic!`;
+        }
+        if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+            return `👋 Hello! I'm your ${persona} persona. How can I help with your study/career today?`;
+        }
+        return `🤖 **AnnS AI (${persona} mode)**${style}: "${userMessage.substring(0, 100)}" is a good point. Let me explain: First, understand the basics. Second, practice regularly. Third, ask doubts. Keep going!`;
+    }
+
+    // Render UI
+    async function renderMessages() {
+        const container = document.getElementById('messagesContainer');
+        const allMsgs = await loadMessages(currentRoom);
+        messages = allMsgs;
+        
+        if (messages.length === 0) {
+            container.innerHTML = `<div class="message ai message-system"><div class="message-text">💬 Welcome to ${rooms.find(r=>r.id===currentRoom)?.name || currentRoom} room! Start discussing.</div></div>`;
+            return;
+        }
+        
+        container.innerHTML = messages.map(msg => `
+            <div class="message ${msg.type === 'user' ? 'user' : (msg.type === 'ai' ? 'ai' : 'message-system')}">
+                <div class="message-header">${msg.sender} • ${new Date(msg.timestamp).toLocaleTimeString()}</div>
+                <div class="message-text">${escapeHtml(msg.text)}</div>
+            </div>
+        `).join('');
+        container.scrollTop = container.scrollHeight;
+        
+        // Update moderator summary every 15 min (900000 ms) – simplified: update on each render
+        document.getElementById('moderatorSummary').innerHTML = generateSummary(messages);
+        
+        // Update leaderboard
+        const leaderboard = await getLeaderboard();
+        const leaderboardHtml = leaderboard.map((u, idx) => `<div class="leaderboard-item"><span>${idx+1}. ${u.name || 'Anonymous'}</span><span>⭐ ${u.points || 0} pts</span></div>`).join('');
+        document.getElementById('leaderboardContainer').innerHTML = leaderboardHtml || "No points yet. Participate to earn!";
+    }
+
+    async function sendMessage(text, isUser = true, sender = "You") {
+        if (!text.trim()) return;
+        const msgType = isUser ? 'user' : 'ai';
+        const msg = await saveMessage(currentRoom, sender, text, msgType);
+        await renderMessages();
+        
+        // Add points for user message (quality check simplified)
+        if (isUser && text.length > 10) {
+            const userId = localStorage.getItem('anonymous_id') || 'user_' + Math.random().toString(36).substr(2, 6);
+            localStorage.setItem('anonymous_id', userId);
+            await addPoints(userId, 5);
+            await renderMessages();
+        }
+        
+        // Auto AI response (if not AI message)
+        if (isUser) {
+            const persona = document.getElementById('personaSelect').value;
+            const aiResponse = getAIResponse(text, persona);
+            setTimeout(async () => {
+                await saveMessage(currentRoom, "AnnS AI", aiResponse, 'ai');
+                await renderMessages();
+            }, 500);
+        }
+    }
+
+    // Voice Input
+    function initVoice() {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert('Voice input not supported in this browser. Use Chrome/Edge.');
+            return;
+        }
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'hi-IN,en-IN';
+        
+        recognition.onstart = () => {
+            isVoiceActive = true;
+            document.getElementById('voiceStatus').innerHTML = '🎙️ Listening... Speak now';
+            document.getElementById('voiceStatus').style.color = '#ff9800';
+        };
+        recognition.onend = () => {
+            isVoiceActive = false;
+            document.getElementById('voiceStatus').innerHTML = 'Voice idle';
+            document.getElementById('voiceStatus').style.color = '#666';
+        };
+        recognition.onresult = (event) => {
+            let interim = '';
+            let final = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript;
+                if (event.results[i].isFinal) final += transcript;
+                else interim += transcript;
+            }
+            if (final) {
+                document.getElementById('messageInput').value = final;
+                sendMessage(final);
+                recognition.stop();
+            }
+        };
+    }
+
+    // Text-to-Voice
+    function speakText(text) {
+        if (!window.speechSynthesis) return;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'hi-IN';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Change room
+    async function changeRoom(roomId) {
+        currentRoom = roomId;
+        await renderMessages();
+        // Update active button style
+        document.querySelectorAll('.room-btn').forEach(btn => {
+            if (btn.dataset.room === roomId) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        // Welcome message for new room if empty
+        const msgs = await loadMessages(roomId);
+        if (msgs.length === 0) {
+            await saveMessage(roomId, "AI Moderator", `Welcome to ${rooms.find(r=>r.id===roomId)?.name || roomId} room! Follow rules: No personal info, stay on topic.`, 'system');
+            await renderMessages();
+        }
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // Render room buttons
+    function renderRoomSelector() {
+        const container = document.getElementById('roomSelector');
+        container.innerHTML = rooms.map(room => `
+            <button class="room-btn ${room.id === currentRoom ? 'active' : ''}" data-room="${room.id}">
+                ${room.icon} ${room.name}
+            </button>
+        `).join('');
+        
+        document.querySelectorAll('.room-btn').forEach(btn => {
+            btn.addEventListener('click', () => changeRoom(btn.dataset.room));
+        });
+    }
+
+    // Persona display update
+    document.getElementById('personaSelect')?.addEventListener('change', (e) => {
+        const selected = e.target.value;
+        const personaNames = {
+            mentor: 'Mentor', teacher: 'Teacher', friend: 'Friend', coach: 'Coach',
+            examiner: 'Examiner', counsellor: 'Counsellor', bro: 'Bro', didi: 'Didi',
+            motivator: 'Motivator', debugger: 'Debugger', analyst: 'Analyst', creator: 'Creator'
+        };
+        document.getElementById('currentPersonaDisplay').innerHTML = `Active: ${personaNames[selected] || selected}`;
+    });
+
+    // Initialize
+    window.onload = async () => {
+        await openDB();
+        renderRoomSelector();
+        await renderMessages();
+        initVoice();
+        
+        document.getElementById('sendBtn')?.addEventListener('click', () => {
+            const input = document.getElementById('messageInput');
+            if (input.value.trim()) {
+                sendMessage(input.value);
+                input.value = '';
+            }
+        });
+        
+        document.getElementById('voiceInputBtn')?.addEventListener('click', () => {
+            if (recognition && !isVoiceActive) recognition.start();
+            else if (recognition && isVoiceActive) recognition.stop();
+        });
+        
+        document.getElementById('startVoiceChatBtn')?.addEventListener('click', () => {
+            if (recognition && !isVoiceActive) recognition.start();
+        });
+        
+        document.getElementById('stopVoiceChatBtn')?.addEventListener('click', () => {
+            if (recognition && isVoiceActive) recognition.stop();
+        });
+        
+        // Auto-summary every 15 minutes
+        setInterval(async () => {
+            const summary = generateSummary(await loadMessages(currentRoom));
+            document.getElementById('moderatorSummary').innerHTML = summary;
+            // Also save as system message
+            await saveMessage(currentRoom, "AI Moderator", `📢 **15-min Summary**: ${summary}`, 'system');
+            await renderMessages();
+        }, 15 * 60 * 1000);
+    };
+</script>
+</body>
+</html>
