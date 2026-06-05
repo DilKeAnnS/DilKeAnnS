@@ -2,858 +2,169 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Medical | Dil-Ke-AnnS Career Saathi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Sciences - Dil-Ke-AnnS Career Saathi</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
-        .back-button:hover { background: rgba(255,255,255,0.25); }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo img { height: 45px; width: auto; border-radius: 12px; }
-        .logo h1 { font-size: 18px; font-weight: 700; }
-        .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
-        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
-        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
-        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
-        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
-        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
-        .door-btn:hover { background: #F0EADF; }
-        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
-        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
-        .door-content { display: none; animation: fadeIn 0.3s ease; }
-        .door-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
-        .accordion-header:hover { background: #F8F4EF; }
-        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
-        .accordion-icon { font-size: 24px; }
-        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
-        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
-        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
-        .accordion-card.active .accordion-content { display: block; }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
-        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
-        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
-        .info-text { font-size: 13px; line-height: 1.45; }
-        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
-        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
-        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
-        .live-link:hover { text-decoration: underline; }
-        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
-        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
-        .cutoff-table th, .cutoff-table td { text-align: center; }
-        .cutoff-table th { background: #1B4D3E; color: white; }
-        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
-        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
-        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
-        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
-        .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; color: #64748B; }
-        .nav-item.active { background: #F0EADF; }
-        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4F46E5;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #4F46E5;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .card {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .exam-item, .college-item {
+            background: #f9fafb;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="header">
-    <div class="back-button" onclick="goBack()">← Back</div>
-    <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
-        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
-        <div style="opacity:0;">🔔</div>
-    </div>
-    <div class="tagline">🩺 Complete Medical Career Guide - 10th to Super Specialist | Live Exam Updates</div>
-</div>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">← Back to Home</a>
+            <h1>🩺 Medical Sciences Career Guide</h1>
+            <p>Complete guide to medical careers in India - Courses, Exams, Colleges, Salary</p>
+        </div>
 
-<div class="container">
-    <div class="page-title">🩺 Medical & Healthcare Careers</div>
-    <div class="page-subtitle">80+ Courses | 200+ Colleges | Live Exam Links | Auto Results | Complete Roadmap</div>
-    
-    <div class="door-nav">
-        <button class="door-btn active" data-door="neet">🎓 <span class="door-label">NEET (6 Courses)</span></button>
-        <button class="door-btn" data-door="paramedical">🩺 <span class="door-label">Paramedical (15+ Courses)</span></button>
-        <button class="door-btn" data-door="pharmacy">💊 <span class="door-label">Pharmacy (8+ Courses)</span></button>
-        <button class="door-btn" data-door="veterinary">🐄 <span class="door-label">Veterinary (4 Courses)</span></button>
-        <button class="door-btn" data-door="research">🔬 <span class="door-label">Research (10+ Courses)</span></button>
-        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad (7 Countries)</span></button>
-    </div>
-    
-    <!-- ==================== DOOR 1: NEET COURSES ==================== -->
-    <div id="door-neet" class="door-content active">
-        
-        <!-- MBBS - FULL DETAIL -->
-        <div class="accordion-card active" id="mbbsCard">
-            <div class="accordion-header" onclick="toggleCard('mbbsCard')">
-                <div class="accordion-title"><span class="accordion-icon">🩺</span> MBBS - Doctor (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Professional medical degree to diagnose, treat, and prevent diseases.<br><span class="salary-text">💰 Fresher Salary: ₹8-12 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest respect, job security, ability to save lives.<br><span class="salary-text">💰 After PG (MD/MS): ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (Age 17+). Start NEET preparation from Class 11.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://aiims.edu" target="_blank">AIIMS Delhi</a> | <a class="live-link" href="https://cmcvellore.ac.in" target="_blank">CMC Vellore</a> | <a class="live-link" href="https://jipmer.edu.in" target="_blank">JIPMER</a> | <a class="live-link" href="https://afmc.nic.in" target="_blank">AFMC Pune</a></div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET (National Eligibility cum Entrance Test)</a></div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Hardworking, empathetic, good memory, stress management</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET → MBBS (5.5 years) → Internship → PG</div></div>
-                </div>
-                <div class="section-title">📋 NEET EXAM - LIVE UPDATES</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">neet.nta.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📝 Application Link</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">Apply Online</a> (Feb-Mar 2025)</div></div>
-                    <div class="info-card"><div class="info-label">📊 Result Link</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">Check Result</a> <span id="neetResultDate">(Expected: June 2025)</span></div></div>
-                    <div class="info-card"><div class="info-label">📡 Live Updates</div><div class="info-text" id="neetLiveUpdates">Loading latest updates...</div></div>
-                </div>
-                <div class="section-title">📊 NEET Cutoff 2024 (Official)</div>
-                <table class="cutoff-table"><thead><tr><th>Category</th><th>Cutoff Marks (720)</th><th>Percentile</th></tr></thead>
-                <tbody><tr><td>General</td><td>720-137</td><td>50th</td></tr><tr><td>OBC/SC/ST</td><td>136-107</td><td>40th</td></tr><tr><td>General-PwD</td><td>136-121</td><td>45th</td></tr></tbody></table>
-                <div class="section-title">🏛️ Top Medical Colleges (NIRF Ranked)</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
-                <tbody><tr><td>AIIMS Delhi</td><td>Delhi</td><td>125</td><td>₹1,856</td><td>1</td><td><a class="live-link" href="https://aiims.edu" target="_blank">Visit</a></td></tr>
-                <tr><td>CMC Vellore</td><td>Vellore</td><td>100</td><td>₹4,00,000</td><td>2</td><td><a class="live-link" href="https://cmcvellore.ac.in" target="_blank">Visit</a></td></tr>
-                <tr><td>JIPMER</td><td>Puducherry</td><td>200</td><td>₹10,000</td><td>3</td><td><a class="live-link" href="https://jipmer.edu.in" target="_blank">Visit</a></td></tr>
-                <tr><td>AFMC Pune</td><td>Pune</td><td>150</td><td>₹1,50,000</td><td>4</td><td><a class="live-link" href="https://afmc.nic.in" target="_blank">Visit</a></td></tr>
-                <tr><td>Maulana Azad Delhi</td><td>Delhi</td><td>250</td><td>₹10,000</td><td>5</td><td><a class="live-link" href="https://mamc.ac.in" target="_blank">Visit</a></td></tr></tbody></table>
-                <div class="section-title">🗺️ Career Roadmap (10th → Super Specialist)</div>
-                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text">PCB Stream - Focus on Biology, Chemistry, Physics. Start NEET preparation.<br><span class="salary-text">💰 After 12th: NEET qualified</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">MBBS Degree + Internship<br><span class="salary-text">💰 Fresher Doctor: ₹8-12 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">PG (MD/MS) - Specialization via NEET-PG<br><span class="salary-text">💰 Specialist: ₹15-30 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">Super Specialization (DM/MCh) - Cardiology, Neurology, etc.<br><span class="salary-text">💰 Super Specialist: ₹50 LPA - ₹1.5 Cr</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">HOD / Director / Consultant<br><span class="salary-text">💰 Top Position: ₹1 Cr - ₹3 Cr+</span></div></div>
-                <div class="section-title">💰 Scholarships</div>
-                <div class="info-grid"><div class="info-card"><div class="info-label">PM Scholarship (PMSS)</div><div class="info-text"><a class="live-link" href="https://www.pmscholarship.gov.in" target="_blank">Apply</a> - ₹2,500/month for wards of Ex-Servicemen</div></div>
-                <div class="info-card"><div class="info-label">National Scholarship Portal</div><div class="info-text"><a class="live-link" href="https://scholarships.gov.in" target="_blank">Apply</a> - ₹5,000-50,000/year</div></div>
-                <div class="info-card"><div class="info-label">INSPIRE Scholarship</div><div class="info-text"><a class="live-link" href="https://www.inspire-dst.gov.in" target="_blank">Apply</a> - ₹80,000/year for top 1% students</div></div></div>
-                <div class="section-title">⭐ Famous Doctors from India</div>
-                <div><span class="famous-badge">Dr. Devi Shetty</span> <span class="famous-badge">Dr. Naresh Trehan</span> <span class="famous-badge">Dr. Randeep Guleria</span> <span class="famous-badge">Dr. Soumya Swaminathan</span> <span class="famous-badge">Dr. Vivek Murthy</span></div>
+        <!-- Career Fields -->
+        <div class="section">
+            <h2>📚 Medical Career Paths (20+ Options)</h2>
+            <div class="grid">
+                <div class="card"><strong>MBBS - Doctor</strong><br>5.5 years • ₹8-20 LPA</div>
+                <div class="card"><strong>BDS - Dentist</strong><br>5 years • ₹5-15 LPA</div>
+                <div class="card"><strong>BAMS - Ayurveda</strong><br>5.5 years • ₹4-10 LPA</div>
+                <div class="card"><strong>BHMS - Homeopathy</strong><br>5.5 years • ₹3-8 LPA</div>
+                <div class="card"><strong>BPT - Physiotherapy</strong><br>4.5 years • ₹3-8 LPA</div>
+                <div class="card"><strong>B.Sc Nursing</strong><br>4 years • ₹3-7 LPA</div>
+                <div class="card"><strong>B.Pharm - Pharmacy</strong><br>4 years • ₹3-8 LPA</div>
+                <div class="card"><strong>B.Optom - Optometry</strong><br>4 years • ₹3-6 LPA</div>
+                <div class="card"><strong>B.Sc Medical Lab Tech</strong><br>3 years • ₹2-5 LPA</div>
+                <div class="card"><strong>B.Sc Radiology</strong><br>3 years • ₹3-6 LPA</div>
+                <div class="card"><strong>B.V.Sc - Veterinary</strong><br>5.5 years • ₹4-12 LPA</div>
+                <div class="card"><strong>BNYS - Naturopathy</strong><br>5.5 years • ₹3-8 LPA</div>
+                <div class="card"><strong>BOT - Occupational Therapy</strong><br>4.5 years • ₹3-7 LPA</div>
+                <div class="card"><strong>Clinical Research</strong><br>2 years (PG) • ₹4-10 LPA</div>
+                <div class="card"><strong>Hospital Administration</strong><br>2 years (MBA) • ₹5-15 LPA</div>
+                <div class="card"><strong>Medical Writing</strong><br>Certification • ₹3-8 LPA</div>
+                <div class="card"><strong>Healthcare Analytics</strong><br>PG Diploma • ₹4-12 LPA</div>
+                <div class="card"><strong>Public Health</strong><br>MPH • ₹5-12 LPA</div>
+                <div class="card"><strong>Forensic Science</strong><br>M.Sc • ₹4-10 LPA</div>
+                <div class="card"><strong>Medical Lab Technology</strong><br>B.Sc • ₹2-5 LPA</div>
             </div>
         </div>
-        
-        <!-- BDS - FULL DETAIL (Same as MBBS) -->
-        <div class="accordion-card" id="bdsCard">
-            <div class="accordion-header" onclick="toggleCard('bdsCard')">
-                <div class="accordion-title"><span class="accordion-icon">🦷</span> BDS - Dentist (5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Bachelor of Dental Surgery - treats teeth, gums, oral diseases.<br><span class="salary-text">💰 Fresher Salary: ₹6-10 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Own clinic possible, flexible hours, high demand.<br><span class="salary-text">💰 After MDS: ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (Age 17+). NEET required.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://mamc.ac.in" target="_blank">Maulana Azad Dental Delhi</a> | <a class="live-link" href="https://gdch.edu.in" target="_blank">Govt Dental Mumbai</a> | <a class="live-link" href="https://nims.edu" target="_blank">NIMS Jaipur</a></div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET</a></div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Good hand-eye coordination, patient communication, attention to detail</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET → BDS (5 years) → Internship → MDS</div></div>
-                </div>
-                <div class="section-title">📋 NEET EXAM - LIVE UPDATES</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">neet.nta.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📝 Application Link</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">Apply Online</a> (Feb-Mar 2025)</div></div>
-                    <div class="info-card"><div class="info-label">📊 Result Link</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">Check Result</a></div></div>
-                </div>
-                <div class="section-title">📊 NEET Cutoff 2024 (Same as MBBS)</div>
-                <table class="cutoff-table"><thead><tr><th>Category</th><th>Cutoff Marks</th><th>Percentile</th></tr></thead>
-                <tbody><tr><td>General</td><td>720-137</td><td>50th</td></tr><tr><td>OBC/SC/ST</td><td>136-107</td><td>40th</td></tr></tbody></table>
-                <div class="section-title">🏛️ Top Dental Colleges</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th><th>Website</th></tr></thead>
-                <tbody><tr><td>Maulana Azad Dental</td><td>Delhi</td><td>50</td><td>₹10,000</td><td><a class="live-link" href="https://mamc.ac.in" target="_blank">Visit</a></td></tr>
-                <tr><td>Govt Dental College</td><td>Mumbai</td><td>60</td><td>₹70,000</td><td><a class="live-link" href="https://gdch.edu.in" target="_blank">Visit</a></td></tr>
-                <tr><td>NIMS Dental</td><td>Jaipur</td><td>100</td><td>₹3,00,000</td><td><a class="live-link" href="https://nims.edu" target="_blank">Visit</a></td></tr></tbody></table>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">BDS Degree (4 years + 1 year internship)<br><span class="salary-text">💰 Fresher: ₹6-10 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MDS Specialization (Orthodontics, Prosthodontics, Oral Surgery)<br><span class="salary-text">💰 Specialist: ₹15-30 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Own Clinic / Consultant / Professor<br><span class="salary-text">💰 Top: ₹30-60 LPA</span></div></div>
-                <div class="section-title">💰 Scholarships</div>
-                <div class="info-grid"><div class="info-card"><div class="info-label">DCI Scholarships</div><div class="info-text">Dental Council of India scholarships for meritorious students</div></div></div>
-                <div class="section-title">⭐ Famous Dentists</div>
-                <div><span class="famous-badge">Dr. Sanjeev Kapoor</span> <span class="famous-badge">Dr. Rajesh Goyal</span> <span class="famous-badge">Dr. Ashok Dhoble</span></div>
-            </div>
-        </div>
-        
-        <!-- BAMS - FULL DETAIL -->
-        <div class="accordion-card" id="bamsCard">
-            <div class="accordion-header" onclick="toggleCard('bamsCard')">
-                <div class="accordion-title"><span class="accordion-icon">🌿</span> BAMS - Ayurvedic Doctor (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Bachelor of Ayurvedic Medicine - traditional Indian medicine system.<br><span class="salary-text">💰 Fresher Salary: ₹5-8 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing global demand, AYUSH departments, own clinic possible.<br><span class="salary-text">💰 After MD: ₹12-25 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (Age 17+). NEET required.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://niam.in" target="_blank">National Institute of Ayurveda Jaipur</a> | <a class="live-link" href="https://ayurveduniversity.edu.in" target="_blank">Gujarat Ayurved University</a> | Tilak Ayurved Pune</div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET</a> + <a class="live-link" href="https://ayush.gov.in" target="_blank">AYUSH Counseling</a></div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in traditional medicine, holistic healing, patient care</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET → BAMS (5.5 years) → Internship → MD Ayurveda</div></div>
-                </div>
-                <div class="section-title">📋 NEET & AYUSH EXAM - LIVE UPDATES</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 NEET Official</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">neet.nta.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🔗 AYUSH Counseling</div><div class="info-text"><a class="live-link" href="https://ayush.gov.in" target="_blank">ayush.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📝 Application</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">Apply via NEET</a></div></div>
-                </div>
-                <div class="section-title">🏛️ Top BAMS Colleges</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th><th>Website</th></tr></thead>
-                <tbody><tr><td>National Institute of Ayurveda</td><td>Jaipur</td><td>100</td><td>₹50,000</td><td><a class="live-link" href="https://niam.in" target="_blank">Visit</a></td></tr>
-                <tr><td>Gujarat Ayurved University</td><td>Jamnagar</td><td>120</td><td>₹40,000</td><td><a class="live-link" href="https://ayurveduniversity.edu.in" target="_blank">Visit</a></td></tr>
-                <tr><td>Tilak Ayurved College</td><td>Pune</td><td>80</td><td>₹60,000</td><td><a class="live-link" href="https://tilakayurved.com" target="_blank">Visit</a></td></tr></tbody></table>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">BAMS Degree + Internship<br><span class="salary-text">💰 Fresher: ₹5-8 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MD Ayurveda Specializations (Kayachikitsa, Panchakarma, Shalya)<br><span class="salary-text">💰 MD Ayurveda: ₹12-25 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">AYUSH Officer / Professor / Private Clinic<br><span class="salary-text">💰 Senior: ₹20-40 LPA</span></div></div>
-                <div class="section-title">⭐ Famous Ayurvedacharyas</div>
-                <div><span class="famous-badge">Vaidya Balendu Prakash</span> <span class="famous-badge">Dr. Partap Chauhan</span> <span class="famous-badge">Dr. Dinesh Sharma</span> <span class="famous-badge">Vaidya Devendra Triguna</span></div>
-            </div>
-        </div>
-        
-        <!-- BHMS - FULL DETAIL -->
-        <div class="accordion-card" id="bhmsCard">
-            <div class="accordion-header" onclick="toggleCard('bhmsCard')">
-                <div class="accordion-title"><span class="accordion-icon">💊</span> BHMS - Homeopathic Doctor (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Bachelor of Homeopathic Medicine - alternative medicine system.<br><span class="salary-text">💰 Fresher Salary: ₹4-7 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Government CGHS/Railways jobs, growing acceptance, own practice.<br><span class="salary-text">💰 After MD: ₹10-20 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (Age 17+). NEET required.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://nih.nic.in" target="_blank">National Institute of Homoeopathy Kolkata</a> | Dr. Gururaju Govt College | Nehru Homoeopathic College</div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET</a> + AYUSH Counseling</div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in alternative medicine, patient counseling, holistic approach</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET → BHMS (5.5 years) → Internship → MD Homeopathy</div></div>
-                </div>
-                <div class="section-title">🏛️ Top BHMS Colleges</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th></tr></thead>
-                <tbody><tr><td>National Institute of Homoeopathy</td><td>Kolkata</td><td>75</td><td>₹30,000</td></tr>
-                <tr><td>Dr. Gururaju Govt College</td><td>Hyderabad</td><td>60</td><td>₹25,000</td></tr>
-                <tr><td>Nehru Homoeopathic College</td><td>Delhi</td><td>50</td><td>₹40,000</td></tr></tbody></table>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">BHMS Degree + Internship<br><span class="salary-text">💰 Fresher: ₹4-7 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MD Homeopathy (Organon of Medicine, Materia Medica, Repertory)<br><span class="salary-text">💰 MD: ₹10-20 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">CGHS Officer / Railways Homeopath / Private Practice<br><span class="salary-text">💰 Senior: ₹15-30 LPA</span></div></div>
-                <div class="section-title">⭐ Famous Homeopaths</div>
-                <div><span class="famous-badge">Dr. Hahnemann</span> <span class="famous-badge">Dr. Rajesh Shah</span> <span class="famous-badge">Dr. Mukesh Batra</span></div>
-            </div>
-        </div>
-        
-        <!-- BUMS - FULL DETAIL -->
-        <div class="accordion-card" id="bumsCard">
-            <div class="accordion-header" onclick="toggleCard('bumsCard')">
-                <div class="accordion-title"><span class="accordion-icon">📜</span> BUMS - Unani Doctor (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Bachelor of Unani Medicine - Greco-Arabic medicine system.<br><span class="salary-text">💰 Fresher Salary: ₹4-6 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Government AYUSH jobs, growing acceptance, own clinic.<br><span class="salary-text">💰 After MD: ₹10-18 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (Age 17+). NEET required.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://nium.in" target="_blank">National Institute of Unani Medicine Bangalore</a> | Govt Unani Medical College Chennai | Ajmal Khan Tibbiya College</div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET</a> + AYUSH Counseling</div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in traditional Unani system, holistic healing</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET → BUMS (5.5 years) → Internship → MD Unani</div></div>
-                </div>
-                <div class="section-title">🏛️ Top BUMS Colleges</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th></tr></thead>
-                <tbody><tr><td>National Institute of Unani Medicine</td><td>Bangalore</td><td>60</td><td>₹35,000</td></tr>
-                <tr><td>Govt Unani Medical College</td><td>Chennai</td><td>50</td><td>₹25,000</td></tr>
-                <tr><td>Ajmal Khan Tibbiya College</td><td>Aligarh</td><td>40</td><td>₹30,000</td></tr></tbody></table>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">BUMS Degree + Internship<br><span class="salary-text">💰 Fresher: ₹4-6 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MD Unani (Moalajat, Ilmul Advia, Jarahat)<br><span class="salary-text">💰 MD: ₹10-18 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">AYUSH Officer / Unani Consultant / Private Practice<br><span class="salary-text">💰 Senior: ₹12-25 LPA</span></div></div>
-                <div class="section-title">⭐ Famous Unani Practitioners</div>
-                <div><span class="famous-badge">Hakim Ajmal Khan</span> <span class="famous-badge">Dr. Abdul Aziz</span></div>
-            </div>
-        </div>
-        
-        <!-- BNYS - FULL DETAIL -->
-        <div class="accordion-card" id="bnysCard">
-            <div class="accordion-header" onclick="toggleCard('bnysCard')">
-                <div class="accordion-title"><span class="accordion-icon">🧘</span> BNYS - Naturopathy Doctor (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Bachelor of Naturopathy & Yogic Sciences - natural healing, yoga, lifestyle medicine.<br><span class="salary-text">💰 Fresher Salary: ₹4-6 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing wellness industry, lifestyle medicine demand, yoga popularity.<br><span class="salary-text">💰 After MD: ₹10-18 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (Age 17+). NEET required.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://sdmcnys.edu.in" target="_blank">SDM College of Naturopathy</a> | Sri Sri College Bengaluru | JSS College of Naturopathy</div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET</a> + AYUSH Counseling</div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in natural healing, yoga, lifestyle medicine</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET → BNYS (5.5 years) → Internship → MD Naturopathy</div></div>
-                </div>
-                <div class="section-title">🏛️ Top BNYS Colleges</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th></tr></thead>
-                <tbody><tr><td>SDM College of Naturopathy</td><td>Karnataka</td><td>50</td><td>₹80,000</td></tr>
-                <tr><td>Sri Sri College of Yoga</td><td>Bengaluru</td><td>40</td><td>₹70,000</td></tr>
-                <tr><td>JSS College of Naturopathy</td><td>Mysore</td><td>30</td><td>₹75,000</td></tr></tbody></table>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">BNYS Degree + Internship<br><span class="salary-text">💰 Fresher: ₹4-6 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MD Naturopathy (Yoga, Hydrotherapy, Dietetics)<br><span class="salary-text">💰 MD: ₹10-18 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Wellness Center Director / Naturopathy Consultant / Yoga Teacher<br><span class="salary-text">💰 Senior: ₹15-25 LPA</span></div></div>
-                <div class="section-title">⭐ Famous Naturopaths</div>
-                <div><span class="famous-badge">Swami Ramdev</span> <span class="famous-badge">Dr. B. M. Hegde</span> <span class="famous-badge">Dr. M. M. Khan</span></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 2: PARAMEDICAL ==================== -->
-    <div id="door-paramedical" class="door-content">
-        <!-- B.Sc Nursing - FULL DETAIL -->
-        <div class="accordion-card" id="nursingCard">
-            <div class="accordion-header" onclick="toggleCard('nursingCard')">
-                <div class="accordion-title"><span class="accordion-icon">👩‍⚕️</span> B.Sc Nursing (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Bachelor of Science in Nursing - patient care, medical assistance, healthcare management.<br><span class="salary-text">💰 Fresher Salary: ₹4-8 LPA (India) | $60k-100k (Abroad)</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand globally, job security, opportunity to work abroad.<br><span class="salary-text">💰 After M.Sc: ₹8-15 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (50% marks). Age 17+.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://aiimsexams.ac.in" target="_blank">AIIMS Nursing</a> | <a class="live-link" href="https://cmcvellore.ac.in" target="_blank">CMC Vellore</a> | <a class="live-link" href="https://rakcon.com" target="_blank">RAKCON Delhi</a> | <a class="live-link" href="https://nims.edu" target="_blank">NIMS Jaipur</a></div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://aiimsexams.ac.in" target="_blank">AIIMS Nursing Exam</a> | <a class="live-link" href="https://jipmer.edu.in" target="_blank">JIPMER Nursing</a> | State Nursing Exams</div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Compassionate, patient, good communication skills, physically fit</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → Entrance Exam → B.Sc Nursing (4 years) → Internship → Registered Nurse</div></div>
-                </div>
-                <div class="section-title">📋 NURSING ENTRANCE EXAMS - LIVE UPDATES</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 AIIMS Nursing</div><div class="info-text"><a class="live-link" href="https://aiimsexams.ac.in" target="_blank">aiimsexams.ac.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🔗 JIPMER Nursing</div><div class="info-text"><a class="live-link" href="https://jipmer.edu.in" target="_blank">jipmer.edu.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🔗 INC</div><div class="info-text"><a class="live-link" href="https://www.indiannursingcouncil.org" target="_blank">Indian Nursing Council</a></div></div>
-                </div>
-                <div class="section-title">🏛️ Top Nursing Colleges</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th><th>Website</th></tr></thead>
-                <tbody><tr><td>AIIMS Nursing</td><td>Delhi</td><td>60</td><td>₹1,856</td><td><a class="live-link" href="https://aiims.edu" target="_blank">Visit</a></td></tr>
-                <tr><td>CMC Vellore</td><td>Vellore</td><td>50</td><td>₹50,000</td><td><a class="live-link" href="https://cmcvellore.ac.in" target="_blank">Visit</a></td></tr>
-                <tr><td>RAKCON Delhi</td><td>Delhi</td><td>100</td><td>₹80,000</td><td><a class="live-link" href="https://rakcon.com" target="_blank">Visit</a></td></tr></tbody></table>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Sc Nursing Degree + Internship<br><span class="salary-text">💰 Staff Nurse: ₹4-8 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Sc Nursing Specializations (Pediatric, Psychiatric, Community Health, OBG)<br><span class="salary-text">💰 Nurse Educator/Specialist: ₹8-15 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">PhD Nursing → Nursing Professor / Director<br><span class="salary-text">💰 Professor: ₹12-25 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Abroad</div><div class="roadmap-text"><a class="live-link" href="https://www.ncsbn.org/nclex.htm" target="_blank">NCLEX-RN (USA)</a> | <a class="live-link" href="https://www.nmc.org.uk" target="_blank">NMC (UK)</a> | <a class="live-link" href="https://www.ahpra.gov.au" target="_blank">AHPRA (Australia)</a><br><span class="salary-text">💰 Abroad Salary: $60k-100k/year</span></div></div>
-                <div class="section-title">⭐ Famous Nurses</div>
-                <div><span class="famous-badge">Florence Nightingale</span> <span class="famous-badge">Sister Nivedita</span> <span class="famous-badge">Sarojini Naidu (Nurse activist)</span></div>
-            </div>
-        </div>
-        
-        <!-- BPT - FULL DETAIL -->
-        <div class="accordion-card" id="bptCard">
-            <div class="accordion-header" onclick="toggleCard('bptCard')">
-                <div class="accordion-title"><span class="accordion-icon">🦿</span> BPT - Physiotherapy (4.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Bachelor of Physiotherapy - treats physical disabilities, injuries through exercise and therapy.<br><span class="salary-text">💰 Fresher Salary: ₹4-10 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in sports, hospitals, rehabilitation centers.<br><span class="salary-text">💰 After MPT: ₹8-18 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (50% marks). Age 17+.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://aiims.edu" target="_blank">AIIMS Delhi</a> | <a class="live-link" href="https://cmcvellore.ac.in" target="_blank">CMC Vellore</a> | Manipal University</div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text">AIIMS Physio Exam | IP University | State Exams</div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Good communication, physically fit, interest in rehabilitation</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → Entrance Exam → BPT (4.5 years) → Internship → MPT</div></div>
-                </div>
-                <div class="section-title">🏛️ Top BPT Colleges</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>Website</th></tr></thead>
-                <tbody><tr><td>AIIMS Delhi</td><td>Delhi</td><td>₹1,856</td><td><a class="live-link" href="https://aiims.edu" target="_blank">Visit</a></td></tr>
-                <tr><td>CMC Vellore</td><td>Vellore</td><td>₹50,000</td><td><a class="live-link" href="https://cmcvellore.ac.in" target="_blank">Visit</a></td></tr>
-                <tr><td>Manipal University</td><td>Manipal</td><td>₹1,50,000</td><td><a class="live-link" href="https://manipal.edu" target="_blank">Visit</a></td></tr></tbody></table>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">4.5 Years</div><div class="roadmap-text">BPT Degree + 6 months internship<br><span class="salary-text">💰 Physiotherapist: ₹4-10 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MPT Specializations (Ortho, Neuro, Cardio, Sports, Pediatrics)<br><span class="salary-text">💰 Specialist: ₹8-18 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Sports Physio / Clinic Owner / Rehabilitation Center Head<br><span class="salary-text">💰 Senior: ₹15-25 LPA</span></div></div>
-                <div class="section-title">⭐ Famous Physiotherapists</div>
-                <div><span class="famous-badge">Dr. Vaishali Shinde</span> <span class="famous-badge">Dr. Anjali Bhise</span></div>
-            </div>
-        </div>
-        
-        <!-- B.Sc MLT - FULL DETAIL -->
-        <div class="accordion-card" id="mltCard">
-            <div class="accordion-header" onclick="toggleCard('mltCard')">
-                <div class="accordion-title"><span class="accordion-icon">🔬</span> B.Sc MLT - Medical Lab Technology (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Performs lab tests on blood, urine, tissues for disease diagnosis.<br><span class="salary-text">💰 Fresher Salary: ₹3-7 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Essential in healthcare, high demand in diagnostic centers.<br><span class="salary-text">💰 After M.Sc: ₹8-15 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (50% marks).</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://aiims.edu" target="_blank">AIIMS Delhi</a> | <a class="live-link" href="https://cmcvellore.ac.in" target="_blank">CMC Vellore</a> | Manipal</div></div>
-                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Lab Technician, Path Lab, Blood Bank, Research Lab, Hospital Lab</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → Entrance Exam → B.Sc MLT (3 years) → M.Sc MLT</div></div>
-                </div>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Sc MLT Degree<br><span class="salary-text">💰 Lab Technician: ₹3-7 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Sc MLT Specializations (Clinical Biochemistry, Microbiology, Hematology)<br><span class="salary-text">💰 Senior Lab Technologist: ₹8-15 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Lab Manager / Quality Control Head / Pathology Lab Owner<br><span class="salary-text">💰 Manager: ₹10-20 LPA</span></div></div>
-            </div>
-        </div>
-        
-        <!-- B.Sc Radiology - FULL DETAIL -->
-        <div class="accordion-card" id="radiologyCard">
-            <div class="accordion-header" onclick="toggleCard('radiologyCard')">
-                <div class="accordion-title"><span class="accordion-icon">📷</span> B.Sc Radiology & Imaging Tech (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Operates X-ray, CT scan, MRI, ultrasound machines for medical imaging.<br><span class="salary-text">💰 Fresher Salary: ₹4-9 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Essential in diagnostics, growing demand in hospitals.<br><span class="salary-text">💰 Senior Radiographer: ₹10-20 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (50% marks).</div></div>
-                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Radiology Technician, CT/MRI Technician, Ultrasound Technician, Hospital/Diagnostic Center</div></div>
-                </div>
-                <div class="section-title">🗺️ Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Sc Radiology Degree<br><span class="salary-text">💰 Radiographer: ₹4-9 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">1-2 Years</div><div class="roadmap-text">Certificate in CT/MRI/Ultrasound<br><span class="salary-text">💰 Specialist Technician: ₹8-15 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Radiology Department Manager / Imaging Center Owner<br><span class="salary-text">💰 Manager: ₹12-20 LPA</span></div></div>
-            </div>
-        </div>
-        
-        <!-- B.Sc OT Tech - FULL DETAIL -->
-        <div class="accordion-card" id="ottCard">
-            <div class="accordion-header" onclick="toggleCard('ottCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏥</span> B.Sc Operation Theatre Technology (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Manages operation theatre equipment, sterilization, assists surgeons during surgery.<br><span class="salary-text">💰 Fresher Salary: ₹3-7 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in multi-specialty hospitals, essential in surgical teams.<br><span class="salary-text">💰 Senior OT Tech: ₹8-15 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">OT Technician, OT Assistant, Hospital OT Dept, Surgical Center</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- B.Sc Dialysis - FULL DETAIL -->
-        <div class="accordion-card" id="dialysisCard">
-            <div class="accordion-header" onclick="toggleCard('dialysisCard')">
-                <div class="accordion-title"><span class="accordion-icon">💧</span> B.Sc Dialysis Technology (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Operates dialysis machines for kidney failure patients.<br><span class="salary-text">💰 Fresher Salary: ₹3-6 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing number of kidney patients, high demand in nephrology.<br><span class="salary-text">💰 Senior Dialysis Tech: ₹7-12 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Dialysis Technician, Dialysis Center, Hospital Nephrology Dept</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- B.Sc Cardiac Care - FULL DETAIL -->
-        <div class="accordion-card" id="cardiacCard">
-            <div class="accordion-header" onclick="toggleCard('cardiacCard')">
-                <div class="accordion-title"><span class="accordion-icon">❤️</span> B.Sc Cardiac Care Technology (3 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Assists cardiologists in ECG, ECHO, TMT, angiogram procedures.<br><span class="salary-text">💰 Fresher Salary: ₹4-8 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in cardiology departments, good salary growth.<br><span class="salary-text">💰 Senior Cardiac Tech: ₹10-18 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Cardiac Technician, ECG Technician, Cardiology Department, Cath Lab</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- B.Sc Optometry - FULL DETAIL -->
-        <div class="accordion-card" id="optometryCard">
-            <div class="accordion-header" onclick="toggleCard('optometryCard')">
-                <div class="accordion-title"><span class="accordion-icon">👁️</span> B.Sc Optometry (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Eye examination, prescribing glasses, contact lenses, detecting eye diseases.<br><span class="salary-text">💰 Fresher Salary: ₹3-7 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing demand for eye care, optical chains expanding.<br><span class="salary-text">💰 After M.Optom: ₹8-15 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Optometrist, Eye Hospital, Optical Chain (Lenskart, Titan), Own Clinic</div></div>
-                </div>
-                <div class="section-title">⭐ Famous Optometrists</div>
-                <div><span class="famous-badge">Dr. B. K. Das</span> <span class="famous-badge">Dr. S. K. Gupta</span></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 3: PHARMACY ==================== -->
-    <div id="door-pharmacy" class="door-content">
-        <!-- B.Pharm - FULL DETAIL -->
-        <div class="accordion-card" id="bpharmCard">
-            <div class="accordion-header" onclick="toggleCard('bpharmCard')">
-                <div class="accordion-title"><span class="accordion-icon">💊</span> B.Pharm (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of drugs, their composition, effects, and dispensing.<br><span class="salary-text">💰 Fresher Salary: ₹4-12 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Essential in healthcare, drug inspector opportunities, pharma industry.<br><span class="salary-text">💰 After M.Pharm: ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB/PCM (50% marks). Age 17+.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://niper.ac.in" target="_blank">NIPER Mohali</a> | <a class="live-link" href="https://jamiahamdard.edu" target="_blank">Jamia Hamdard Delhi</a> | Manipal | BITS Pilani</div></div>
-                    <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://gpat.nta.nic.in" target="_blank">GPAT</a> | <a class="live-link" href="https://niper.ac.in" target="_blank">NIPER JEE</a> | State Pharmacy Exams</div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Interest in chemistry, biology, attention to detail, research-oriented</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB/PCM → Entrance Exam → B.Pharm (4 years) → Internship → M.Pharm</div></div>
-                </div>
-                <div class="section-title">📋 GPAT & NIPER EXAM - LIVE UPDATES</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 GPAT Official</div><div class="info-text"><a class="live-link" href="https://gpat.nta.nic.in" target="_blank">gpat.nta.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🔗 NIPER JEE</div><div class="info-text"><a class="live-link" href="https://niper.ac.in" target="_blank">niper.ac.in</a></div></div>
-                </div>
-                <div class="section-title">🏛️ Top Pharmacy Colleges</div>
-                <table><thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>Website</th></tr></thead>
-                <tbody><tr><td>NIPER Mohali</td><td>Mohali</td><td>₹1,00,000</td><td><a class="live-link" href="https://niper.ac.in" target="_blank">Visit</a></td></tr>
-                <tr><td>Jamia Hamdard</td><td>Delhi</td><td>₹1,50,000</td><td><a class="live-link" href="https://jamiahamdard.edu" target="_blank">Visit</a></td></tr>
-                <tr><td>Manipal College of Pharma</td><td>Manipal</td><td>₹2,00,000</td><td><a class="live-link" href="https://manipal.edu" target="_blank">Visit</a></td></tr>
-                </tbody>
-            </table>
-            <div class="section-title">🗺️ Career Roadmap</div>
-            <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Pharm Degree<br><span class="salary-text">💰 Pharmacist: ₹4-12 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Pharm Specializations (Pharmaceutics, Pharmacology, Pharmaceutical Chemistry)<br><span class="salary-text">💰 M.Pharm: ₹15-30 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">2-3 Years</div><div class="roadmap-text">PhD Pharmacy → Professor / Research Scientist<br><span class="salary-text">💰 Professor: ₹12-25 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Drug Inspector (₹60k-1.5L/month) | Clinical Research Associate | Pharma Company VP<br><span class="salary-text">💰 Top: ₹30-50 LPA</span></div></div>
-            <div class="section-title">⭐ Famous Pharmacists</div>
-            <div><span class="famous-badge">Dr. R. A. Mashelkar</span> <span class="famous-badge">Dr. Y. K. Gupta</span></div>
-        </div>
-    </div>
-    
-    <!-- Pharm.D - FULL DETAIL -->
-    <div class="accordion-card" id="pharmdCard">
-        <div class="accordion-header" onclick="toggleCard('pharmdCard')">
-            <div class="accordion-title"><span class="accordion-icon">💊</span> Pharm.D - Doctor of Pharmacy (6 years)</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Clinical pharmacy degree - works directly with patients and doctors in hospitals.<br><span class="salary-text">💰 Fresher Salary: ₹5-15 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in clinical settings, patient interaction, drug safety.<br><span class="salary-text">💰 Clinical Pharmacist: ₹8-20 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Clinical Pharmacist, Hospital Pharmacist, Drug Safety Associate, Pharmacovigilance, Clinical Research</div></div>
-            </div>
-            <div class="section-title">🗺️ Career Roadmap</div>
-            <div class="roadmap-step"><div class="roadmap-year">6 Years</div><div class="roadmap-text">Pharm.D (5 years academic + 1 year internship)<br><span class="salary-text">💰 Clinical Pharmacist: ₹5-15 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Clinical Pharmacy Specialist / Drug Safety Associate / Pharmacovigilance Officer<br><span class="salary-text">💰 Senior: ₹15-25 LPA</span></div></div>
-        </div>
-    </div>
-    
-    <!-- D.Pharm -->
-    <div class="accordion-card" id="dpharmCard">
-        <div class="accordion-header" onclick="toggleCard('dpharmCard')">
-            <div class="accordion-title"><span class="accordion-icon">📜</span> D.Pharm (2 years)</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Diploma in Pharmacy - quick entry into pharmacy profession.<br><span class="salary-text">💰 Fresher Salary: ₹2-5 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Quick entry, can start working immediately, lateral entry to B.Pharm.<br><span class="salary-text">💰 Pharmacist: ₹3-6 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Pharmacist in Medical Stores, Hospital Pharmacy, Pharmaceutical Sales</div></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- B.Sc Biotechnology -->
-    <div class="accordion-card" id="biotechCardPharmacy">
-        <div class="accordion-header" onclick="toggleCard('biotechCardPharmacy')">
-            <div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Biotechnology (3 years)</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of biological processes for technology applications - genetic engineering, bioinformatics.<br><span class="salary-text">💰 Fresher Salary: ₹3-10 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High growth industry, research opportunities, good salary in pharma.<br><span class="salary-text">💰 After M.Sc: ₹8-20 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text">IITs | VIT | Delhi University | JNU | Amity University | LPU</div></div>
-                <div class="info-card"><div class="info-label">📋 HIGHER STUDIES</div><div class="info-text">M.Sc Biotechnology, MBA Biotech, PhD, M.Tech Biotech</div></div>
-            </div>
-            <div class="section-title">🗺️ Career Roadmap</div>
-            <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Sc Biotechnology<br><span class="salary-text">💰 Research Assistant: ₹3-10 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Sc Biotechnology<br><span class="salary-text">💰 Biotech Scientist: ₹8-20 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">PhD → Research Scientist (ISRO, DRDO, CSIR, ICMR, WHO)<br><span class="salary-text">💰 Senior Scientist: ₹15-40 LPA</span></div></div>
-        </div>
-    </div>
-</div>
 
-<!-- DOOR 4: VETERINARY - FULL DETAIL -->
-<div id="door-veterinary" class="door-content">
-    <!-- BVSc - FULL DETAIL -->
-    <div class="accordion-card" id="bvscCard">
-        <div class="accordion-header" onclick="toggleCard('bvscCard')">
-            <div class="accordion-title"><span class="accordion-icon">🐄</span> BVSc & AH - Veterinary Doctor (5.5 years)</div>
-            <div class="accordion-arrow">▼</div>
+        <!-- Entrance Exams -->
+        <div class="section">
+            <h2>📝 Top Entrance Exams</h2>
+            <div class="exam-item">🏆 <strong>NEET (UG)</strong> - For MBBS/BDS/AYUSH - Exam Date: May 2025</div>
+            <div class="exam-item">🏆 <strong>AIIMS MBBS</strong> - For AIIMS Delhi & other AIIMS</div>
+            <div class="exam-item">🏆 <strong>JIPMER</strong> - For JIPMER Puducherry</div>
+            <div class="exam-item">🏆 <strong>AFMC Entrance</strong> - Armed Forces Medical College</div>
+            <div class="exam-item">🏆 <strong>COMEDK</strong> - For Karnataka medical colleges</div>
+            <div class="exam-item">🏆 <strong>NEET MDS</strong> - For Dental PG</div>
+            <div class="exam-item">🏆 <strong>NEET PG</strong> - For Medical PG (MD/MS)</div>
+            <div class="exam-item">🏆 <strong>GPAT</strong> - For Pharmacy PG</div>
         </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Treats animals - pets, livestock, wildlife.<br><span class="salary-text">💰 Fresher Salary: ₹6-15 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Government vet officer jobs, growing pet care industry.<br><span class="salary-text">💰 After MVSc: ₹12-25 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (50% marks). NEET required.</div></div>
-                <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://ivri.nic.in" target="_blank">IVRI Bareilly</a> | <a class="live-link" href="https://gadvasu.edu.in" target="_blank">GADVASU Ludhiana</a> | <a class="live-link" href="https://bvc.edu.in" target="_blank">Bombay Veterinary College</a></div></div>
-                <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET</a> | <a class="live-link" href="https://icar.nta.nic.in" target="_blank">ICAR AIEEA</a></div></div>
-                <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Love for animals, compassion, good observation skills</div></div>
-                <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET/ICAR → BVSc (5.5 years) → Internship → MVSc</div></div>
-            </div>
-            <div class="section-title">📋 ICAR AIEEA EXAM - LIVE UPDATES</div>
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">🔗 ICAR Official</div><div class="info-text"><a class="live-link" href="https://icar.nta.nic.in" target="_blank">icar.nta.nic.in</a></div></div>
-                <div class="info-card"><div class="info-label">🔗 NEET for BVSc</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">neet.nta.nic.in</a></div></div>
-            </div>
-            <div class="section-title">🏛️ Top Veterinary Colleges</div>
-            <table><thead><tr><th>College</th><th>City</th><th>Seats</th><th>Fees/Year</th><th>Website</th></tr></thead>
-            <tbody><tr><td>IVRI Bareilly</td><td>Bareilly</td><td>120</td><td>₹50,000</td><td><a class="live-link" href="https://ivri.nic.in" target="_blank">Visit</a></td></tr>
-            <tr><td>GADVASU Ludhiana</td><td>Ludhiana</td><td>100</td><td>₹60,000</td><td><a class="live-link" href="https://gadvasu.edu.in" target="_blank">Visit</a></td></tr>
-            <tr><td>Bombay Veterinary College</td><td>Mumbai</td><td>80</td><td>₹70,000</td><td><a class="live-link" href="https://bvc.edu.in" target="_blank">Visit</a></td></tr>
-            </tbody></table>
-            <div class="section-title">🗺️ Career Roadmap</div>
-            <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">BVSc Degree + Internship<br><span class="salary-text">💰 Veterinary Officer: ₹6-15 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MVSc Specializations (Surgery, Medicine, Animal Reproduction)<br><span class="salary-text">💰 Specialist: ₹12-25 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Chief Veterinary Officer / Animal Husbandry Director / Private Clinic Owner<br><span class="salary-text">💰 Senior: ₹20-40 LPA</span></div></div>
-            <div class="section-title">⭐ Famous Veterinarians</div>
-            <div><span class="famous-badge">Dr. M. A. Kareem</span> <span class="famous-badge">Dr. R. S. Chauhan</span></div>
-        </div>
-    </div>
-    
-    <!-- B.FSc - Fishery Science -->
-    <div class="accordion-card" id="fisheryCard">
-        <div class="accordion-header" onclick="toggleCard('fisheryCard')">
-            <div class="accordion-title"><span class="accordion-icon">🐟</span> B.FSc - Fishery Science (4 years)</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-10 LPA (Fresher) | ₹8-18 LPA (M.FSc)<br><span class="salary-text">💰 Fisheries Officer: ₹50k-1.2L/month</span></div></div>
-                <div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text"><a class="live-link" href="https://cife.edu.in" target="_blank">CIFE Mumbai</a> | College of Fisheries Mangalore | WBUAFS Kolkata</div></div>
-                <div class="info-card"><div class="info-label">📋 EXAM</div><div class="info-text">ICAR AIEEA</div></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Dairy Technology -->
-    <div class="accordion-card" id="dairyCard">
-        <div class="accordion-header" onclick="toggleCard('dairyCard')">
-            <div class="accordion-title"><span class="accordion-icon">🥛</span> Dairy Technology (4 years)</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-9 LPA (Fresher) | ₹10-20 LPA (M.Tech)<br><span class="salary-text">💰 Dairy Plant Manager: ₹8-18 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">NDDB, Amul, Mother Dairy, Dairy Plants, Quality Control, Dairy Technologist</div></div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- DOOR 5: RESEARCH - FULL DETAIL -->
-<div id="door-research" class="door-content">
-    <!-- B.Sc Biology/Zoology/Botany -->
-    <div class="accordion-card" id="bscBioCard">
-        <div class="accordion-header" onclick="toggleCard('bscBioCard')">
-            <div class="accordion-title"><span class="accordion-icon">🧬</span> B.Sc Biology/Zoology/Botany (3 years)</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹3-7 LPA (B.Sc) | ₹5-12 LPA (M.Sc) | ₹8-25 LPA (PhD)<br><span class="salary-text">💰 Research Scientist: ₹10-25 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">📋 HIGHER STUDIES</div><div class="info-text">M.Sc → PhD → Research Scientist (ISRO, DRDO, CSIR, ICMR, WHO) → Professor</div></div>
-                <div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">University of Delhi, BHU, JNU, Calcutta University, Mumbai University</div></div>
+        <!-- Top Colleges -->
+        <div class="section">
+            <h2>🏫 Top Medical Colleges in India</h2>
+            <div class="grid">
+                <div class="card"><strong>AIIMS Delhi</strong><br>Rank #1 • NIRF Score: 94.2</div>
+                <div class="card"><strong>CMC Vellore</strong><br>Rank #2 • Private</div>
+                <div class="card"><strong>AFMC Pune</strong><br>Rank #3 • Defence</div>
+                <div class="card"><strong>JIPMER Puducherry</strong><br>Rank #4 • Central</div>
+                <div class="card"><strong>SGPGIMS Lucknow</strong><br>Rank #5 • UP Govt</div>
+                <div class="card"><strong>KGMU Lucknow</strong><br>Rank #6 • State Govt</div>
+                <div class="card"><strong>Institute of Medical Sciences, BHU</strong><br>Rank #7 • Central</div>
+                <div class="card"><strong>Maulana Azad Medical College, Delhi</strong><br>Rank #8 • State Govt</div>
             </div>
-            <div class="section-title">🗺️ Career Roadmap</div>
-            <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Sc Biology/Zoology/Botany<br><span class="salary-text">💰 Research Assistant: ₹3-7 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Sc Specialization<br><span class="salary-text">💰 Biologist: ₹5-12 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">3-5 Years</div><div class="roadmap-text">PhD → Scientist at ISRO/DRDO/CSIR/ICMR<br><span class="salary-text">💰 Scientist: ₹12-30 LPA</span></div></div>
         </div>
-    </div>
-    
-    <!-- B.Sc Forensic Science -->
-    <div class="accordion-card" id="forensicCard">
-        <div class="accordion-header" onclick="toggleCard('forensicCard')">
-            <div class="accordion-title"><span class="accordion-icon">🔍</span> B.Sc Forensic Science (3 years)</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-12 LPA (Fresher) | ₹10-25 LPA (Senior)<br><span class="salary-text">💰 Forensic Expert: ₹8-20 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Forensic Scientist, CBI, Police Dept, Crime Lab, Private Detective, Cyber Forensics</div></div>
-                <div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">NFSU Gandhinagar, University of Delhi, LPU, Amity University</div></div>
-            </div>
-            <div class="section-title">⭐ Famous Forensic Scientists</div>
-            <div><span class="famous-badge">Dr. B. R. Sharma</span> <span class="famous-badge">Dr. A. K. Gupta</span></div>
-        </div>
-    </div>
-    
-    <!-- B.Sc Psychology -->
-    <div class="accordion-card" id="psychologyCard">
-        <div class="accordion-header" onclick="toggleCard('psychologyCard')">
-            <div class="accordion-title"><span class="accordion-icon">🧠</span> B.Sc Psychology (3 years)</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">₹4-10 LPA (M.Sc) | ₹8-18 LPA (M.Phil) | ₹12-25 LPA (PhD)<br><span class="salary-text">💰 Clinical Psychologist: ₹6-15 LPA</span></div></div>
-                <div class="info-card"><div class="info-label">📋 JOBS</div><div class="info-text">Clinical Psychologist, Counsellor, HR Specialist, School Psychologist, Rehabilitation Center, Defense Forces</div></div>
-                <div class="info-card"><div class="info-label">🏛️ Top Colleges</div><div class="info-text">University of Delhi, BHU, Jamia Millia Islamia, Christ University, LPU</div></div>
-            </div>
-            <div class="section-title">🗺️ Career Roadmap</div>
-            <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">B.Sc Psychology<br><span class="salary-text">💰 Psychologist Assistant: ₹3-6 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Sc Psychology<br><span class="salary-text">💰 Psychologist: ₹4-10 LPA</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Phil Clinical Psychology (RCI approved)<br><span class="salary-text">💰 Clinical Psychologist: ₹8-18 LPA</span></div></div>
-        </div>
-    </div>
-</div>
 
-<!-- DOOR 6: ABROAD - FULL DETAIL (7 Countries) -->
-<div id="door-abroad" class="door-content">
-    <!-- USA -->
-    <div class="accordion-card" id="usmleCard">
-        <div class="accordion-header" onclick="toggleCard('usmleCard')">
-            <div class="accordion-title"><span class="accordion-icon">🇺🇸</span> USA - USMLE Pathway</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">🌍 COUNTRY</div><div class="info-text">United States of America</div></div>
-                <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest salaries ($200k-500k), top research, advanced technology, world-class hospitals.<br><span class="salary-text">💰 Salary: Resident $60k/year | Attending $200k-500k/year</span></div></div>
-                <div class="info-card"><div class="info-label">⏰ WHEN TO APPLY</div><div class="info-text">Apply 1 year before. Intake: Fall (Aug-Sep), Spring (Jan)</div></div>
-                <div class="info-card"><div class="info-label">📍 WHERE TO STUDY</div><div class="info-text">Harvard, Johns Hopkins, Stanford, Mayo Clinic, Cleveland Clinic, Columbia</div></div>
-                <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://www.usmle.org" target="_blank">USMLE Step 1, Step 2 CK, Step 3</a> | <a class="live-link" href="https://www.ielts.org" target="_blank">IELTS/TOEFL</a></div></div>
-                <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">High achievers, research-oriented, USMLE preparation capacity, strong finances</div></div>
-                <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">NEET → MBBS → USMLE Step 1,2 → Residency (3-7 years) → Fellowship → Board Certification</div></div>
-            </div>
-            <div class="section-title">📋 USMLE EXAM - LIVE LINKS</div>
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">🔗 USMLE Official</div><div class="info-text"><a class="live-link" href="https://www.usmle.org" target="_blank">usmle.org</a></div></div>
-                <div class="info-card"><div class="info-label">🔗 ECFMG</div><div class="info-text"><a class="live-link" href="https://www.ecfmg.org" target="_blank">ecfmg.org</a></div></div>
-                <div class="info-card"><div class="info-label">🔗 NRMP Match</div><div class="info-text"><a class="live-link" href="https://www.nrmp.org" target="_blank">nrmp.org</a></div></div>
-            </div>
-            <div class="section-title">🗺️ Career Roadmap</div>
-            <div class="roadmap-step"><div class="roadmap-year">Step 1</div><div class="roadmap-text">USMLE Step 1 (Pass/Fail) - Basic sciences<br><span class="salary-text">💰 Preparation time: 3-6 months</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">Step 2</div><div class="roadmap-text">USMLE Step 2 CK (Clinical Knowledge) - Clinical sciences<br><span class="salary-text">💰 Preparation time: 2-4 months</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">3-7 Years</div><div class="roadmap-text">Residency Program (Internal Medicine, Pediatrics, Surgery, etc.)<br><span class="salary-text">💰 Resident Salary: $60k-70k/year</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">1-3 Years</div><div class="roadmap-text">Fellowship (Cardiology, Gastroenterology, Oncology, Neurosurgery)<br><span class="salary-text">💰 Fellow: $70k-80k/year</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Attending Physician / Department Chair / Professor<br><span class="salary-text">💰 Attending: $200k-500k/year | Specialist: $400k-800k/year</span></div></div>
-            <div class="section-title">⭐ Famous Indian Doctors in USA</div>
-            <div><span class="famous-badge">Dr. Vivek Murthy (US Surgeon General)</span> <span class="famous-badge">Dr. Sanjay Gupta (CNN)</span></div>
-        </div>
-    </div>
-    
-    <!-- UK -->
-    <div class="accordion-card" id="plabCard">
-        <div class="accordion-header" onclick="toggleCard('plabCard')">
-            <div class="accordion-title"><span class="accordion-icon">🇬🇧</span> UK - PLAB Pathway</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">🌍 COUNTRY</div><div class="info-text">United Kingdom (England, Scotland, Wales, Northern Ireland)</div></div>
-                <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">NHS jobs, good work-life balance, path to PR.<br><span class="salary-text">💰 Salary: Foundation £30k-40k | Specialist £70k-120k | Consultant £100k-150k/year</span></div></div>
-                <div class="info-card"><div class="info-label">📋 WHICH EXAM</div><div class="info-text"><a class="live-link" href="https://www.gmc-uk.org" target="_blank">PLAB 1 and PLAB 2</a> | <a class="live-link" href="https://www.ielts.org" target="_blank">IELTS (7.5 overall)</a></div></div>
-                <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">MBBS → PLAB 1 → PLAB 2 → GMC Registration → Foundation Years (2) → Specialty Training</div></div>
-                <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://www.gmc-uk.org" target="_blank">gmc-uk.org</a></div></div>
-            </div>
-            <div class="section-title">🗺️ Career Roadmap</div>
-            <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">Foundation Training (FY1, FY2)<br><span class="salary-text">💰 Salary: £30k-40k/year</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">3-8 Years</div><div class="roadmap-text">Specialty Training (Core + Higher)<br><span class="salary-text">💰 Specialist: £70k-120k/year</span></div></div>
-            <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Consultant / GP<br><span class="salary-text">💰 Consultant: £100k-150k/year | GP: £90k-120k/year</span></div></div>
-        </div>
-    </div>
-    
-    <!-- Canada -->
-    <div class="accordion-card" id="canadaCard">
-        <div class="accordion-header" onclick="toggleCard('canadaCard')">
-            <div class="accordion-title"><span class="accordion-icon">🇨🇦</span> Canada - MCCQE Pathway</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">CAD 150k-400k/year<br><span class="salary-text">💰 Specialist: CAD 300k-600k/year</span></div></div>
-                <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.mcc.ca" target="_blank">MCCQE Part 1 & 2</a> | <a class="live-link" href="https://www.ielts.org" target="_blank">IELTS</a></div></div>
-                <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://www.mcc.ca" target="_blank">mcc.ca</a></div></div>
+        <!-- Study Resources -->
+        <div class="section">
+            <h2>📖 Free Study Resources</h2>
+            <div class="grid">
+                <div class="card"><a href="https://ncert.nic.in" target="_blank">📚 NCERT Biology</a><br>Classes 11-12</div>
+                <div class="card"><a href="https://neet.nta.nic.in" target="_blank">📝 NEET Official Website</a><br>PYQs & Syllabus</div>
+                <div class="card"><a href="https://www.aiimsexams.ac.in" target="_blank">🏥 AIIMS Exam Portal</a><br>Previous Papers</div>
+                <div class="card"><a href="https://www.pib.gov.in" target="_blank">📰 Health News</a><br>Current Affairs</div>
             </div>
         </div>
-    </div>
-    
-    <!-- Australia -->
-    <div class="accordion-card" id="australiaCard">
-        <div class="accordion-header" onclick="toggleCard('australiaCard')">
-            <div class="accordion-title"><span class="accordion-icon">🇦🇺</span> Australia - AMC Pathway</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">AUD 120k-350k/year<br><span class="salary-text">💰 Specialist: AUD 300k-500k/year</span></div></div>
-                <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.amc.org.au" target="_blank">AMC MCQ & Clinical</a> | <a class="live-link" href="https://www.ielts.org" target="_blank">IELTS (7.0)</a></div></div>
-                <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://www.amc.org.au" target="_blank">amc.org.au</a></div></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Germany -->
-    <div class="accordion-card" id="germanyCard">
-        <div class="accordion-header" onclick="toggleCard('germanyCard')">
-            <div class="accordion-title"><span class="accordion-icon">🇩🇪</span> Germany - Approbation</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">€60k-180k/year<br><span class="salary-text">💰 No tuition fees for public universities</span></div></div>
-                <div class="info-card"><div class="info-label">📋 REQUIREMENTS</div><div class="info-text">German B2/C1 language, MBBS degree, Approbation exam (Kenntnisprüfung)</div></div>
-                <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://www.bundesgesundheitsministerium.de" target="_blank">Health Ministry</a></div></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- New Zealand -->
-    <div class="accordion-card" id="newZealandCard">
-        <div class="accordion-header" onclick="toggleCard('newZealandCard')">
-            <div class="accordion-title"><span class="accordion-icon">🇳🇿</span> New Zealand - NZREX Pathway</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">NZD 100k-280k/year<br><span class="salary-text">💰 Path to PR available</span></div></div>
-                <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.mcnz.org.nz" target="_blank">NZREX Clinical</a> | <a class="live-link" href="https://www.ielts.org" target="_blank">IELTS</a></div></div>
-                <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://www.mcnz.org.nz" target="_blank">mcnz.org.nz</a></div></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- UAE/Dubai -->
-    <div class="accordion-card" id="uaeCard">
-        <div class="accordion-header" onclick="toggleCard('uaeCard')">
-            <div class="accordion-title"><span class="accordion-icon">🇦🇪</span> UAE/Dubai - DHA Pathway</div>
-            <div class="accordion-arrow">▼</div>
-        </div>
-        <div class="accordion-content">
-            <div class="info-grid">
-                <div class="info-card"><div class="info-label">💰 Salary</div><div class="info-text">AED 30k-100k/month (₹6-20 Lakhs/month)<br><span class="salary-text">💰 Tax-free income</span></div></div>
-                <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://www.dha.gov.ae" target="_blank">DHA License</a> | <a class="live-link" href="https://www.haad.ae" target="_blank">HAAD/DoH</a> | <a class="live-link" href="https://www.moh.gov.ae" target="_blank">MOH</a></div></div>
-                <div class="info-card"><div class="info-label">🔗 Official</div><div class="info-text"><a class="live-link" href="https://www.dha.gov.ae" target="_blank">dha.gov.ae</a></div></div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="bottom-bar" id="bottomBar"></div>
-
-<script>
-    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
-    document.querySelectorAll('.door-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
-        });
-    });
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
-    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
-    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
-    function goBack() { window.location.href = 'education.html'; }
-    function updateNEETUpdates() {
-        const resultSpan = document.getElementById('neetResultDate');
-        if(resultSpan) resultSpan.innerHTML = `(Expected: June ${new Date().getFullYear()})`;
-        const updatesDiv = document.getElementById('neetLiveUpdates');
-        if(updatesDiv) updatesDiv.innerHTML = `<a class="live-link" href="https://nta.ac.in/Home/NoticesRSS" target="_blank">📡 Live RSS Feed</a> - Latest updates from NTA`;
-    }
-    updateNEETUpdates();
-</script>
+        <!-- Career Tips -->
+        <div class="section">
+            <h2>💡 Career Tips for Medical Aspirants</h2>
+            <div class="exam-item">✅ Start NEET preparation from Class 11</div>
+            <div class="exam-item">✅ Focus on NCERT Biology (80% questions come from NCERT)</div>
+            <div class="exam-item">✅ Practice daily with mock tests</div>
+            <div class="exam-item">✅ Join coaching or online platforms like Unacademy, Byju's</div>
+            <div class="exam-item">✅ After MBBS, consider specialization (MD/MS) for higher salary</div>
+            <div class="exam-item">✅ Govt medical colleges have lower fees (₹50K/year vs ₹15L+ in private)</div>
+        </div>
+    </div>
 </body>
 </html>
