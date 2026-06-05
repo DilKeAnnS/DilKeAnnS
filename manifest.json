@@ -1,0 +1,9 @@
+{
+  "name": "Dil-Ke-AnnS Study Material",
+  "short_name": "StudyHub",
+  "start_url": "study_material.html",
+  "display": "standalone",
+  "background_color": "#1B4D3E",
+  "theme_color": "#E67E22",
+  "icons": []
+}
