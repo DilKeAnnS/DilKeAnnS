@@ -2,607 +2,903 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>AnnS AI | Multi-Language | Double Verified | Complete Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>AnnS AI | Dil-Ke-AnnS Career Saathi</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, 'Segoe UI', 'Inter', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
-            min-height: 100vh;
-            padding: 16px;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #F5F0E8;
+            padding-bottom: 70px;
+            color: #2D2A24;
         }
 
-        .master-container {
-            max-width: 1800px;
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
+            padding: 16px 16px 22px 16px;
+            border-radius: 0 0 28px 28px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            border-radius: 12px;
+        }
+
+        .logo h1 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .logo p {
+            font-size: 9px;
+            opacity: 0.85;
+        }
+
+        .language-selector select {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .tagline {
+            font-size: 12px;
+            text-align: center;
+            margin: 8px 0 4px;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            padding: 20px 16px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-            animation: fadeInDown 0.5s;
-        }
-
-        .anns-title {
-            font-size: 1.6rem;
-            background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        /* Page Title */
+        .page-title {
+            font-size: 24px;
             font-weight: 800;
+            margin-bottom: 8px;
+            color: #1B4D3E;
+            border-left: 5px solid #E67E22;
+            padding-left: 15px;
         }
 
-        .multi-lang-badge {
-            background: #8B5CF6;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            display: inline-block;
-            margin-top: 8px;
+        .page-subtitle {
+            font-size: 12px;
+            color: #64748B;
+            margin-bottom: 20px;
+            padding-left: 20px;
         }
 
-        .verification-badge {
-            background: #10B981;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            display: inline-block;
-            margin-left: 8px;
-        }
-
-        .badge-container {
+        /* Door Navigation */
+        .door-nav {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .free-badge, .privacy-badge {
-            background: #10B98120;
-            color: #A7F3D0;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-        }
-
-        .privacy-badge {
-            background: #2563EB20;
-            color: #93C5FD;
-        }
-
-        .doors-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
             margin-bottom: 25px;
+            background: white;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            justify-content: center;
         }
 
-        .door {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 8px 14px;
-            border-radius: 40px;
-            font-size: 0.75rem;
+        .door-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 18px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-        }
-
-        .door:hover {
-            background: #2563EB;
-            transform: translateY(-2px);
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        @media (max-width: 1200px) {
-            .main-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 700px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .card {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .card-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: white;
-            border-left: 3px solid #4ECDC4;
-            padding-left: 10px;
-            margin-bottom: 12px;
-            display: flex;
+            border-radius: 40px;
+            transition: all 0.3s;
+            color: #64748B;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
         }
 
-        .chat-area {
-            background: rgba(0,0,0,0.3);
+        .door-btn:hover {
+            background: #F0EADF;
+        }
+
+        .door-btn.active {
+            background: #E67E22;
+            color: white;
+            box-shadow: 0 2px 8px rgba(230,126,34,0.3);
+        }
+
+        @media (max-width: 550px) {
+            .door-btn .door-label {
+                display: none;
+            }
+            .door-btn {
+                padding: 10px 14px;
+            }
+        }
+
+        /* Door Content */
+        .door-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .door-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accordion Cards */
+        .accordion-card {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #E8E2D9;
+        }
+
+        .accordion-header {
+            background: white;
+            padding: 16px 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #F0EADF;
+        }
+
+        .accordion-header:hover {
+            background: #F8F4EF;
+        }
+
+        .accordion-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1B4D3E;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .accordion-icon {
+            font-size: 22px;
+        }
+
+        .accordion-arrow {
+            font-size: 16px;
+            color: #E67E22;
+            transition: transform 0.3s;
+        }
+
+        .accordion-card.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #F0EADF;
+        }
+
+        .accordion-card.active .accordion-content {
+            display: block;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .info-card {
+            background: #F8F9FA;
+            border-radius: 16px;
+            padding: 14px;
+            border-left: 3px solid #E67E22;
+        }
+
+        .info-label {
+            font-weight: 800;
+            color: #E67E22;
+            margin-bottom: 6px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .info-text {
+            font-size: 12px;
+            line-height: 1.45;
+            color: #2D2A24;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1B4D3E;
+            margin: 20px 0 12px 0;
+            border-left: 3px solid #E67E22;
+            padding-left: 12px;
+        }
+
+        .live-link {
+            color: #E67E22;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .live-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Voice Area */
+        .voice-area {
+            background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .mic-btn {
+            background: #E67E22;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: none;
+            font-size: 2.5rem;
+            cursor: pointer;
+            margin: 0 auto 15px;
+            display: block;
+            box-shadow: 0 4px 15px rgba(230,126,34,0.4);
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .mic-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mic-btn.listening {
+            background: #10B981;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .voice-result {
+            background: white;
             border-radius: 16px;
             padding: 12px;
-            height: 320px;
-            overflow-y: auto;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #2D2A24;
+        }
+
+        /* Question Input */
+        .question-box {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #E8E2D9;
+        }
+
+        .question-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #E8E2D9;
+            border-radius: 40px;
+            font-size: 14px;
             margin-bottom: 12px;
         }
 
-        .message {
-            max-width: 95%;
-            padding: 10px 14px;
-            border-radius: 18px;
-            margin-bottom: 10px;
-            font-size: 0.8rem;
-            word-wrap: break-word;
+        .question-input:focus {
+            outline: none;
+            border-color: #E67E22;
         }
 
-        .user-msg {
-            background: #2563EB;
+        .btn-primary {
+            background: #E67E22;
             color: white;
-            margin-left: auto;
-            width: fit-content;
-        }
-
-        .ai-msg {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            width: fit-content;
-        }
-
-        .verified-msg {
-            background: rgba(16,185,129,0.15);
-            border-left: 3px solid #10B981;
-        }
-
-        .lang-detected {
-            background: rgba(139,92,246,0.2);
-            border-left: 3px solid #8B5CF6;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 40px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        input::placeholder, textarea::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-
-        button, .btn {
-            background: linear-gradient(135deg, #2563EB, #4ECDC4);
             border: none;
-            padding: 8px 16px;
+            padding: 12px 20px;
             border-radius: 40px;
-            color: white;
             font-weight: 600;
             cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background: #D35400;
         }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid #4ECDC4;
-            color: #4ECDC4;
-        }
-
-        .flex-btns {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-
-        .source-item, .stats-panel, .problem-item, .gd-btn, .history-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 8px;
-            margin: 6px 0;
-            font-size: 0.75rem;
-        }
-
-        .problem-item, .gd-btn, .history-item {
+            border: 1px solid #E67E22;
+            color: #E67E22;
+            padding: 10px 16px;
+            border-radius: 40px;
+            font-weight: 600;
             cursor: pointer;
         }
 
-        .problem-item:hover, .gd-btn:hover, .history-item:hover {
-            background: rgba(78,205,196,0.2);
+        /* Answer Box */
+        .answer-box {
+            background: #F8F9FA;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #10B981;
         }
 
-        .verification-badge-sm {
-            background: #10B981;
-            color: white;
-            font-size: 0.6rem;
-            padding: 2px 6px;
-            border-radius: 12px;
-            display: inline-block;
-            margin-left: 6px;
+        .answer-box.show {
+            display: block;
         }
 
-        .lang-badge-sm {
-            background: #8B5CF6;
-            color: white;
-            font-size: 0.6rem;
-            padding: 2px 6px;
-            border-radius: 12px;
-            display: inline-block;
-            margin-left: 6px;
+        .answer-question {
+            font-size: 11px;
+            color: #64748B;
+            margin-bottom: 8px;
         }
 
-        .scanner-area {
+        .answer-text {
+            font-size: 13px;
+            color: #2D2A24;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .answer-sources {
+            font-size: 10px;
+            color: #E67E22;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            border: 1px solid #E8E2D9;
+        }
+
+        .stat {
             text-align: center;
+        }
+
+        .stat-number {
+            font-size: 20px;
+            font-weight: 800;
+            color: #E67E22;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #64748B;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 550px) {
+            .feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #E8E2D9;
+        }
+
+        .feature-card:hover {
+            background: #F0EADF;
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .feature-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: #2D2A24;
+        }
+
+        /* History List */
+        .history-list {
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .history-item {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            border: 1px solid #E8E2D9;
+        }
+
+        .history-item:hover {
+            background: #F0EADF;
+        }
+
+        /* Language Chips */
+        .lang-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .lang-chip {
+            background: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            cursor: pointer;
+            border: 1px solid #E8E2D9;
+            transition: all 0.2s;
+        }
+
+        .lang-chip.active {
+            background: #E67E22;
+            color: white;
+            border-color: #E67E22;
+        }
+
+        /* Bottom Bar */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 12px 18px;
+            border-top: 1px solid #E8E2D9;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 30px;
+        }
+
+        .nav-item span:first-child {
+            font-size: 22px;
+        }
+
+        .nav-item span:last-child {
+            font-size: 10px;
+            color: #64748B;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            min-height: 100vh;
+            border-radius: 0;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
+            color: white;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-header .back-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 18px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
         }
 
         #camera {
             width: 100%;
             border-radius: 16px;
+            margin-top: 10px;
         }
 
-        .language-selector {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: center;
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid #E8E2D9;
             margin-bottom: 10px;
+            font-family: inherit;
         }
 
-        .lang-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 5px 10px;
-            border-radius: 40px;
-            color: white;
+        .gd-room {
+            background: #F8F9FA;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
             cursor: pointer;
-            font-size: 0.65rem;
+            border: 1px solid #E8E2D9;
         }
 
-        .lang-btn.active {
-            background: #2563EB;
-            border-color: #4ECDC4;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-
-        .detected-language {
-            font-size: 0.65rem;
-            color: #C4B5FD;
-            margin-top: 5px;
+        .gd-room:hover {
+            background: #F0EADF;
         }
     </style>
 </head>
 <body>
 
-<div class="master-container">
-    <div class="header">
-        <div class="anns-title">🌍 AnnS AI | Multi-Language Learning Hub</div>
-        <div>
-            <span class="multi-lang-badge">🌐 Auto-Detects ANY Language</span>
-            <span class="verification-badge">✅ Double Verified Answers</span>
-        </div>
-        <div class="badge-container">
-            <div class="free-badge">100% FREE | No Subscription</div>
-            <div class="privacy-badge" id="privacyBadge">🔒 Loading...</div>
-        </div>
-    </div>
-
-    <!-- All Doors -->
-    <div class="doors-row">
-        <div class="door" onclick="scrollToCard('askCard')">❓ Ask Question</div>
-        <div class="door" onclick="showHistory()">📚 History</div>
-        <div class="door" onclick="showVerifiedSources()">🔗 Sources</div>
-        <div class="door" onclick="clearRepetition()">🔄 Reset</div>
-        <div class="door" onclick="scrollToCard('scannerCard')">📷 Scanner</div>
-        <div class="door" onclick="scrollToCard('voiceCard')">🎤 Voice</div>
-        <div class="door" onclick="scrollToCard('shareCard')">📤 Share</div>
-        <div class="door" onclick="scrollToCard('gdCard')">💬 GD Rooms</div>
-        <div class="door" onclick="scrollToCard('toolsCard')">🆓 Tools</div>
-    </div>
-
-    <!-- Row 1: Ask Question + Stats + History + Sources -->
-    <div class="main-grid">
-        <!-- Card 1: Ask Question -->
-        <div class="card" id="askCard" style="grid-column: span 2;">
-            <div class="card-title">
-                ❓ Ask in ANY Language
-                <span class="lang-badge-sm">Hindi</span>
-                <span class="lang-badge-sm">Tamil</span>
-                <span class="lang-badge-sm">Telugu</span>
-                <span class="lang-badge-sm">Marathi</span>
-                <span class="lang-badge-sm">Bengali</span>
-                <span class="lang-badge-sm">Gujarati</span>
-                <span class="lang-badge-sm">Punjabi</span>
-                <span class="lang-badge-sm">Malayalam</span>
-                <span class="lang-badge-sm">Kannada</span>
-                <span class="lang-badge-sm">Odia</span>
-                <span class="lang-badge-sm">Assamese</span>
-                <span class="lang-badge-sm">Urdu</span>
-            </div>
-            <div class="chat-area" id="chatArea">
-                <div class="message ai-msg verified-msg">
-                    🌍 AnnS AI: I understand ALL Indian languages and many more!<br>
-                    📌 Type or speak in ANY language - I will auto-detect and answer in English with verified sources.<br>
-                    📌 Zero repetition | Double verification | 100% free
-                </div>
-            </div>
-            <input type="text" id="questionInput" placeholder="Type in ANY language (हिंदी, தமிழ், తెలుగు, मराठी, বাংলা, ગુજરાતી, ਪੰਜਾਬੀ, മലയാളം, ಕನ್ನಡ, ଓଡ଼ିଆ, অসমীয়া, اردو...)">
-            <div id="detectedLanguageDisplay" class="detected-language"></div>
-            <div class="flex-btns">
-                <button id="askBtn">🔍 Get Verified Answer</button>
-                <button id="voiceAskBtn" class="btn-outline">🎤 Voice (Any Language)</button>
-                <button id="clearChatBtn" class="btn-outline">🗑️ Clear Chat</button>
-            </div>
-            <div id="verificationStatus" style="margin-top: 6px; font-size: 0.7rem; color: #4ECDC4;"></div>
-        </div>
-
-        <!-- Card 2: Stats -->
-        <div class="card">
-            <div class="card-title">📊 Verification Statistics</div>
-            <div id="statsPanel">
-                <div class="stats-panel">✅ Questions answered: <span id="totalAnswers">0</span></div>
-                <div class="stats-panel">🔗 Sources verified: <span id="totalSources">0</span></div>
-                <div class="stats-panel">🔄 Repetitions prevented: <span id="repetitionsPrevented">0</span></div>
-                <div class="stats-panel">🌐 Languages detected: <span id="languagesCount">0</span></div>
-                <div class="stats-panel">⭐ Accuracy rate: <span id="accuracyRate">100%</span></div>
-            </div>
-            <button id="exportAnswersBtn" class="btn-outline" style="width:100%; margin-top:10px;">📥 Export All Answers</button>
-        </div>
-
-        <!-- Card 3: Question History -->
-        <div class="card">
-            <div class="card-title">📚 Previously Asked (No Repetition)</div>
-            <div id="questionHistory" style="max-height: 250px; overflow-y: auto;">
-                <p style="color:#94A3B8; text-align:center;">No questions yet</p>
+<div class="header">
+    <div class="back-button" onclick="goBack()">← Back</div>
+    <div class="logo-section">
+        <div class="logo">
+            <img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'">
+            <div>
+                <h1>दिल के अंश</h1>
+                <p>Career Saathi</p>
             </div>
         </div>
-
-        <!-- Card 4: Verified Sources -->
-        <div class="card">
-            <div class="card-title">🔗 Trusted Sources (100% Verified)</div>
-            <div id="sourcesList">
-                <div class="source-item">📌 UPSC: <a href="https://www.upsc.gov.in" target="_blank" style="color:#4ECDC4;">upsc.gov.in</a> <span class="verification-badge-sm">Verified</span></div>
-                <div class="source-item">📌 NTA: <a href="https://nta.ac.in" target="_blank" style="color:#4ECDC4;">nta.ac.in</a> <span class="verification-badge-sm">Verified</span></div>
-                <div class="source-item">📌 SSC: <a href="https://ssc.nic.in" target="_blank" style="color:#4ECDC4;">ssc.nic.in</a> <span class="verification-badge-sm">Verified</span></div>
-                <div class="source-item">📌 Scholarships: <a href="https://scholarships.gov.in" target="_blank" style="color:#4ECDC4;">scholarships.gov.in</a> <span class="verification-badge-sm">Verified</span></div>
-                <div class="source-item">📌 NCERT: <a href="https://ncert.nic.in" target="_blank" style="color:#4ECDC4;">ncert.nic.in</a> <span class="verification-badge-sm">Verified</span></div>
-                <div class="source-item">📌 National Portal: <a href="https://www.india.gov.in" target="_blank" style="color:#4ECDC4;">india.gov.in</a> <span class="verification-badge-sm">Verified</span></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Row 2: Scanner + Voice + Corrector + GD Rooms -->
-    <div class="main-grid" style="margin-top: 16px;">
-        <!-- Card 5: Scanner -->
-        <div class="card" id="scannerCard">
-            <div class="card-title">📷 Scan Question from Book (Any Language)</div>
-            <div class="scanner-area">
-                <video id="camera" autoplay playsinline style="width:100%; border-radius:16px;"></video>
-                <div class="flex-btns" style="justify-content: center; margin-top:10px;">
-                    <button id="startCameraBtn">📷 Start</button>
-                    <button id="captureBtn" class="btn-outline">📸 Capture</button>
-                    <button id="stopCameraBtn" class="btn-outline">⏹️ Stop</button>
-                </div>
-                <div id="scannedTextDisplay" style="margin-top:10px; background:rgba(0,0,0,0.3); border-radius:12px; padding:10px;">
-                    <p id="scannedOutput" style="color:#A7F3D0; word-break:break-all;">—</p>
-                    <button id="askScannedQuestion" class="btn" style="width:100%; margin-top:8px;">🔍 Ask About This</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 6: Voice Input (Any Language) -->
-        <div class="card" id="voiceCard">
-            <div class="card-title">🎤 Speak in ANY Language</div>
-            <div class="language-selector">
-                <button class="lang-btn active" onclick="setVoiceLang('auto', this)">🌐 Auto-Detect</button>
-                <button class="lang-btn" onclick="setVoiceLang('hi-IN', this)">🇮🇳 हिंदी</button>
-                <button class="lang-btn" onclick="setVoiceLang('ta-IN', this)">🇮🇳 தமிழ்</button>
-                <button class="lang-btn" onclick="setVoiceLang('te-IN', this)">🇮🇳 తెలుగు</button>
-                <button class="lang-btn" onclick="setVoiceLang('mr-IN', this)">🇮🇳 मराठी</button>
-                <button class="lang-btn" onclick="setVoiceLang('bn-IN', this)">🇮🇳 বাংলা</button>
-                <button class="lang-btn" onclick="setVoiceLang('gu-IN', this)">🇮🇳 ગુજરાતી</button>
-                <button class="lang-btn" onclick="setVoiceLang('pa-IN', this)">🇮🇳 ਪੰਜਾਬੀ</button>
-                <button class="lang-btn" onclick="setVoiceLang('ml-IN', this)">🇮🇳 മലയാളം</button>
-                <button class="lang-btn" onclick="setVoiceLang('kn-IN', this)">🇮🇳 ಕನ್ನಡ</button>
-                <button class="lang-btn" onclick="setVoiceLang('or-IN', this)">🇮🇳 ଓଡ଼ିଆ</button>
-                <button class="lang-btn" onclick="setVoiceLang('as-IN', this)">🇮🇳 অসমীয়া</button>
-                <button class="lang-btn" onclick="setVoiceLang('ur-PK', this)">🇮🇳 اردو</button>
-            </div>
-            <button id="voiceQuestionBtn" class="btn" style="width:100%;">🎤 Speak Your Question</button>
-            <div id="voiceResult" style="margin-top:10px; background:rgba(0,0,0,0.3); border-radius:12px; padding:10px;">
-                <p id="voiceQuestionText" style="color:#FCA5A5; font-size:0.8rem;">—</p>
-                <p id="voiceDetectedLang" style="color:#C4B5FD; font-size:0.7rem;">—</p>
-                <p id="voiceCorrection" style="color:#A7F3D0; font-size:0.75rem;">—</p>
-            </div>
-        </div>
-
-        <!-- Card 7: Writing Corrector -->
-        <div class="card">
-            <div class="card-title">📖 Grammar & Writing Help (Any Language)</div>
-            <textarea id="writingInput" rows="3" placeholder="Paste any sentence in any language..."></textarea>
-            <button id="correctWritingBtn" class="btn" style="width:100%;">✅ Check & Correct</button>
-            <div id="writingResult" style="margin-top:10px; background:rgba(0,0,0,0.3); border-radius:12px; padding:10px;">
-                <p id="originalWriting" style="color:#FCA5A5; font-size:0.75rem;">—</p>
-                <p id="correctedWriting" style="color:#A7F3D0; font-size:0.75rem;">—</p>
-                <p id="writingExplanation" style="color:#94A3B8; font-size:0.7rem; margin-top:5px;"></p>
-            </div>
-        </div>
-
-        <!-- Card 8: GD Rooms -->
-        <div class="card" id="gdCard">
-            <div class="card-title">💬 Group Discussion Rooms</div>
-            <div id="gdRoomsList"></div>
-        </div>
-    </div>
-
-    <!-- Row 3: Share Problem + Problem Bank + Peer Help + Tools -->
-    <div class="main-grid" style="margin-top: 16px;">
-        <!-- Card 9: Share Problem -->
-        <div class="card" id="shareCard">
-            <div class="card-title">📤 Share Your Problem (Any Language)</div>
-            <select id="problemSubject">
-                <option value="Mathematics">📐 Mathematics</option>
-                <option value="Physics">⚡ Physics</option>
-                <option value="Chemistry">🧪 Chemistry</option>
-                <option value="English">📖 English</option>
-                <option value="Hindi">📖 हिंदी</option>
-                <option value="General">💡 General Doubt</option>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="bn">🇮🇳 বাংলা</option>
             </select>
-            <textarea id="problemText" rows="2" placeholder="Type your problem in any language..."></textarea>
-            <div class="flex-btns">
-                <button id="shareProblemBtn">📤 Share (Anonymous)</button>
-                <button id="shareVoiceBtn" class="btn-outline">🎤 Voice</button>
+        </div>
+    </div>
+    <div class="tagline">🤖 AnnS AI - Double Verified Answers | Any Language | Zero Repetition</div>
+</div>
+
+<div class="container">
+    <div class="page-title">🤖 AnnS AI - Smart Learning Assistant</div>
+    <div class="page-subtitle">Voice Input | Any Language | Verified Sources | Zero Repetition</div>
+
+    <!-- Door Navigation -->
+    <div class="door-nav">
+        <button class="door-btn active" data-door="ask">❓ <span class="door-label">Ask AnnS AI</span></button>
+        <button class="door-btn" data-door="voice">🎤 <span class="door-label">Voice Lab</span></button>
+        <button class="door-btn" data-door="scanner">📷 <span class="door-label">Scanner</span></button>
+        <button class="door-btn" data-door="share">📤 <span class="door-label">Share Problem</span></button>
+        <button class="door-btn" data-door="gd">💬 <span class="door-label">GD Rooms</span></button>
+        <button class="door-btn" data-door="tools">🆓 <span class="door-label">Free Tools</span></button>
+        <button class="door-btn" data-door="history">📚 <span class="door-label">History</span></button>
+    </div>
+
+    <!-- ==================== DOOR 1: ASK ANN AI ==================== -->
+    <div id="door-ask" class="door-content active">
+        <!-- Language Chips -->
+        <div class="lang-chips" id="langChips">
+            <span class="lang-chip active" data-lang="auto">🌐 Auto</span>
+            <span class="lang-chip" data-lang="hi-IN">🇮🇳 हिंदी</span>
+            <span class="lang-chip" data-lang="ta-IN">🇮🇳 தமிழ்</span>
+            <span class="lang-chip" data-lang="te-IN">🇮🇳 తెలుగు</span>
+            <span class="lang-chip" data-lang="mr-IN">🇮🇳 मराठी</span>
+            <span class="lang-chip" data-lang="bn-IN">🇮🇳 বাংলা</span>
+            <span class="lang-chip" data-lang="en-US">🇬🇧 English</span>
+        </div>
+
+        <!-- Voice Input Area -->
+        <div class="voice-area">
+            <button class="mic-btn" id="micBtn">🎤</button>
+            <div class="voice-result" id="voiceResult">
+                <span id="voiceText">Click mic and speak in any language</span>
+                <span id="voiceDetected" style="display:block; font-size:10px; color:#64748B; margin-top:5px;"></span>
             </div>
         </div>
 
-        <!-- Card 10: Problem Bank -->
-        <div class="card">
-            <div class="card-title">📚 Problem Bank</div>
-            <div id="problemFeed" style="max-height: 200px; overflow-y: auto;">
-                <p style="color:#94A3B8; text-align:center;">No problems yet</p>
+        <!-- Question Input -->
+        <div class="question-box">
+            <input type="text" class="question-input" id="questionInput" placeholder="Type your question in any language...">
+            <button class="btn-primary" id="askBtn">🔍 Get Double Verified Answer</button>
+        </div>
+
+        <!-- Answer Display -->
+        <div class="answer-box" id="answerBox">
+            <div class="answer-question" id="answerQuestion"></div>
+            <div class="answer-text" id="answerText"></div>
+            <div class="answer-sources" id="answerSources"></div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-number" id="totalAnswers">0</div>
+                <div class="stat-label">Answered</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="repetitionsPrevented">0</div>
+                <div class="stat-label">Repetitions<br>Prevented</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="languagesCount">0</div>
+                <div class="stat-label">Languages<br>Used</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DOOR 2: VOICE LAB ==================== -->
+    <div id="door-voice" class="door-content">
+        <div class="accordion-card" id="voiceCorrectorCard">
+            <div class="accordion-header" onclick="toggleCard('voiceCorrectorCard')">
+                <div class="accordion-title"><span class="accordion-icon">🎙️</span> Voice Grammar & Spelling Corrector</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📖 HOW IT WORKS</div><div class="info-text">Speak any sentence in English or Hindi. AnnS AI will detect mistakes and suggest corrections with explanations.</div></div>
+                    <div class="info-card"><div class="info-label">✅ FEATURES</div><div class="info-text">• Spelling correction (recieve→receive)<br>• Grammar correction (he go→he goes)<br>• Tense correction (yesterday I go→yesterday I went)<br>• Bilingual support (English & Hindi)</div></div>
+                </div>
+                <button class="mic-btn" id="correctorMicBtn" style="width:60px; height:60px; font-size:1.8rem; margin:10px auto;">🎤</button>
+                <div class="voice-result" id="correctorResult">
+                    <p id="originalText" style="color:#E67E22;">—</p>
+                    <p id="correctedText" style="color:#10B981;">—</p>
+                    <p id="correctionExplanation" style="font-size:11px; color:#64748B; margin-top:8px;"></p>
+                </div>
             </div>
         </div>
 
-        <!-- Card 11: Peer Help -->
-        <div class="card">
-            <div class="card-title">🤝 Help Others</div>
-            <div id="peerHelpFeed" style="max-height: 200px; overflow-y: auto;">
-                <p style="color:#94A3B8; text-align:center;">Select a problem to help</p>
+        <div class="accordion-card" id="writingCorrectorCard">
+            <div class="accordion-header" onclick="toggleCard('writingCorrectorCard')">
+                <div class="accordion-title"><span class="accordion-icon">📝</span> Writing Corrector (Type or Paste)</div>
+                <div class="accordion-arrow">▼</div>
             </div>
-            <div id="replySection" style="display:none; margin-top:10px;">
-                <textarea id="replyText" rows="2" placeholder="Write your answer..."></textarea>
-                <button id="submitReplyBtn" class="btn" style="width:100%; margin-top:5px;">💡 Submit Answer</button>
+            <div class="accordion-content">
+                <textarea id="writingInput" rows="3" placeholder="Paste your sentence here for grammar/spelling check..."></textarea>
+                <button class="btn-primary" id="correctWritingBtn">✅ Check & Correct</button>
+                <div style="margin-top:12px; background:#F8F9FA; border-radius:16px; padding:12px;">
+                    <p id="originalWriting" style="color:#E67E22; font-size:12px;">—</p>
+                    <p id="correctedWriting" style="color:#10B981; font-size:12px; margin-top:8px;">—</p>
+                    <p id="writingExplanation" style="font-size:10px; color:#64748B; margin-top:8px;"></p>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Card 12: Free Tools & Tips -->
-        <div class="card" id="toolsCard">
-            <div class="card-title">🆓 Free Tools & Tips</div>
-            <select id="topicSelect">
-                <option value="exam">Exam Preparation Tips</option>
-                <option value="career">Career Guidance</option>
-                <option value="time">Time Management</option>
-                <option value="memory">Memory Techniques</option>
-            </select>
-            <button id="getTipBtn" class="btn" style="width:100%; margin-top:8px;">💡 Get Verified Tip</button>
-            <div id="tipOutput" style="margin-top:10px; background:rgba(0,0,0,0.3); border-radius:12px; padding:10px; font-size:0.75rem;">
-                <p id="tipText" style="color:#A7F3D0;">Select a topic above</p>
+    <!-- ==================== DOOR 3: SCANNER ==================== -->
+    <div id="door-scanner" class="door-content">
+        <div class="accordion-card" id="scannerCard">
+            <div class="accordion-header" onclick="toggleCard('scannerCard')">
+                <div class="accordion-title"><span class="accordion-icon">📷</span> Scan Question from Book/Paper</div>
+                <div class="accordion-arrow">▼</div>
             </div>
-            <button id="ttsBtn" class="btn-outline" style="width:100%; margin-top:10px;">🔊 Text to Voice (English)</button>
+            <div class="accordion-content">
+                <div style="text-align:center;">
+                    <video id="camera" autoplay playsinline style="width:100%; border-radius:16px; display:none;"></video>
+                    <div class="info-grid" style="margin-top:10px;">
+                        <button id="startCameraBtn" class="btn-primary">📷 Start Camera</button>
+                        <button id="captureBtn" class="btn-outline">📸 Capture</button>
+                        <button id="stopCameraBtn" class="btn-outline">⏹️ Stop</button>
+                    </div>
+                    <div style="background:#F8F9FA; border-radius:16px; padding:12px; margin-top:12px;">
+                        <p id="scannedOutput" style="color:#2D2A24;">—</p>
+                        <button id="askScannedBtn" class="btn-primary" style="margin-top:10px;">🔍 Ask About This</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DOOR 4: SHARE PROBLEM ==================== -->
+    <div id="door-share" class="door-content">
+        <div class="accordion-card" id="shareProblemCard">
+            <div class="accordion-header" onclick="toggleCard('shareProblemCard')">
+                <div class="accordion-title"><span class="accordion-icon">📤</span> Share Your Problem (Anonymous)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Share your study doubts or problems anonymously. Other students can see and help you.</div></div>
+                    <div class="info-card"><div class="info-label">🔒 PRIVACY</div><div class="info-text">Zero personal data shared. Only your anonymous ID is visible to peers.</div></div>
+                </div>
+                <select id="problemSubject" style="width:100%; padding:12px; border-radius:40px; border:1px solid #E8E2D9; margin-bottom:10px;">
+                    <option value="Mathematics">📐 Mathematics</option>
+                    <option value="Physics">⚡ Physics</option>
+                    <option value="Chemistry">🧪 Chemistry</option>
+                    <option value="English">📖 English Grammar</option>
+                    <option value="General">💡 General Doubt</option>
+                </select>
+                <textarea id="problemText" rows="3" placeholder="Type your problem or doubt here..."></textarea>
+                <button id="shareProblemBtn" class="btn-primary">📤 Share Problem (Anonymous)</button>
+                
+                <div class="section-title" style="margin-top:20px;">📚 Problem Bank (Recent)</div>
+                <div id="problemFeed" style="max-height: 250px; overflow-y: auto;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DOOR 5: GD ROOMS ==================== -->
+    <div id="door-gd" class="door-content">
+        <div class="accordion-card" id="gdRoomsCard">
+            <div class="accordion-header" onclick="toggleCard('gdRoomsCard')">
+                <div class="accordion-title"><span class="accordion-icon">💬</span> Group Discussion Rooms</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">📋 HOW IT WORKS</div><div class="info-text">Join any GD room. Discuss with other students anonymously. AI Moderator ensures respectful discussions.</div></div>
+                    <div class="info-card"><div class="info-label">🎯 TOPICS</div><div class="info-text">UPSC, SSC, NEET, JEE, Current Affairs, Career Guidance, AI & Future, Study Abroad, Motivation</div></div>
+                </div>
+                <div id="gdRoomsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DOOR 6: FREE TOOLS ==================== -->
+    <div id="door-tools" class="door-content">
+        <div class="accordion-card" id="freeToolsCard">
+            <div class="accordion-header" onclick="toggleCard('freeToolsCard')">
+                <div class="accordion-title"><span class="accordion-icon">🆓</span> Free Tools for Students</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div class="info-grid">
+                    <div class="info-card"><div class="info-label">🤖 AI Tools</div><div class="info-text">• DeepSeek (Free AI Chat, 1M context)<br>• Ideogram (Free AI Image Generator)<br>• Pika Labs (Free AI Video Generator)</div></div>
+                    <div class="info-card"><div class="info-label">🎨 Design Tools</div><div class="info-text">• Microsoft Designer (Free)<br>• Canva Free<br>• Google Slides (Free PPT)</div></div>
+                    <div class="info-card"><div class="info-label">⚡ Automation</div><div class="info-text">• Bardeen (Free Automation)<br>• n8n.io (Free workflow)</div></div>
+                    <div class="info-card"><div class="info-label">📚 Study Resources</div><div class="info-text">• NCERT (ncert.nic.in)<br>• SWAYAM (Free courses)<br>• NPTEL (Engineering)</div></div>
+                </div>
+                <div class="section-title">📺 Free YouTube Tutorials</div>
+                <div class="info-grid">
+                    <div class="info-card" onclick="openYouTubeSearch('DeepSeek tutorial')"><div class="info-label">🤖 DeepSeek Tutorial</div><div class="info-text">Learn to use free AI chat</div></div>
+                    <div class="info-card" onclick="openYouTubeSearch('AI image generation free')"><div class="info-label">🎨 AI Image Generation</div><div class="info-text">Free tools tutorial</div></div>
+                    <div class="info-card" onclick="openYouTubeSearch('Free video editing')"><div class="info-label">🎬 Free Video Editing</div><div class="info-text">CapCut, DaVinci Resolve</div></div>
+                    <div class="info-card" onclick="openYouTubeSearch('UPSC free preparation')"><div class="info-label">📚 UPSC Free Preparation</div><div class="info-text">Complete guidance</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DOOR 7: HISTORY ==================== -->
+    <div id="door-history" class="door-content">
+        <div class="accordion-card" id="historyCard">
+            <div class="accordion-header" onclick="toggleCard('historyCard')">
+                <div class="accordion-title"><span class="accordion-icon">📚</span> Your Question History (No Repetition)</div>
+                <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-content">
+                <div id="historyList" class="history-list">
+                    <div style="text-align:center; color:#94A3B8; padding:20px;">No questions yet. Ask something!</div>
+                </div>
+                <button id="exportHistoryBtn" class="btn-outline" style="width:100%;">📥 Export All Answers</button>
+                <button id="clearHistoryBtn" class="btn-outline" style="width:100%; margin-top:8px;">🗑️ Clear History</button>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- Bottom Navigation -->
+<div class="bottom-bar" id="bottomBar"></div>
+
 <script>
     // ========== ANONYMOUS ID ==========
-    let anonymousId = localStorage.getItem('anns_multilang_id');
+    let anonymousId = localStorage.getItem('anns_user_id');
     if (!anonymousId) {
         anonymousId = 'STU-' + Math.floor(Math.random() * 900000 + 100000);
-        localStorage.setItem('anns_multilang_id', anonymousId);
-    }
-    document.getElementById('privacyBadge').innerHTML = `🔒 ${anonymousId} | Zero Privacy Sharing | All Data Local`;
-
-    // ========== LANGUAGE DETECTION & TRANSLATION ==========
-    // Simple script detection for Indian languages (Unicode ranges)
-    function detectLanguage(text) {
-        const scripts = [
-            { name: 'Hindi/Devanagari', regex: /[\u0900-\u097F]/, code: 'hi' },
-            { name: 'Tamil', regex: /[\u0B80-\u0BFF]/, code: 'ta' },
-            { name: 'Telugu', regex: /[\u0C00-\u0C7F]/, code: 'te' },
-            { name: 'Kannada', regex: /[\u0C80-\u0CFF]/, code: 'kn' },
-            { name: 'Malayalam', regex: /[\u0D00-\u0D7F]/, code: 'ml' },
-            { name: 'Bengali', regex: /[\u0980-\u09FF]/, code: 'bn' },
-            { name: 'Gujarati', regex: /[\u0A80-\u0AFF]/, code: 'gu' },
-            { name: 'Odia', regex: /[\u0B00-\u0B7F]/, code: 'or' },
-            { name: 'Punjabi/Gurmukhi', regex: /[\u0A00-\u0A7F]/, code: 'pa' },
-            { name: 'Marathi', regex: /[\u0900-\u097F]/, code: 'mr' },
-            { name: 'Assamese', regex: /[\u0980-\u09FF]/, code: 'as' },
-            { name: 'Urdu/Arabic', regex: /[\u0600-\u06FF]/, code: 'ur' }
-        ];
-        
-        for (let script of scripts) {
-            if (script.regex.test(text)) {
-                return { name: script.name, code: script.code };
-            }
-        }
-        // Check for Roman/English (a-z, A-Z)
-        if (/[a-zA-Z]/.test(text)) {
-            return { name: 'English', code: 'en' };
-        }
-        return { name: 'Unknown', code: 'en' };
+        localStorage.setItem('anns_user_id', anonymousId);
     }
 
-    // Simple translation mapping for common phrases (demo)
-    // In production, this would use a proper translation API
-    function translateToEnglish(text, detectedLang) {
-        // For demo, we do simple keyword mapping
-        // In real implementation, use Google Translate API or similar
-        let translated = text;
-        
-        // Common Hindi to English mappings
-        const hindiMap = {
-            'कटऑफ': 'cutoff',
-            'परीक्षा': 'exam',
-            'तारीख': 'date',
-            'यूपीएससी': 'UPSC',
-            'एनईईटी': 'NEET',
-            'एसएससी': 'SSC',
-            'छात्रवृत्ति': 'scholarship',
-            'कैरियर': 'career',
-            'कैसे करें': 'how to',
-            'क्या है': 'what is'
-        };
-        
-        for (let [hindi, english] of Object.entries(hindiMap)) {
-            if (text.includes(hindi)) {
-                translated = translated.replace(hindi, english);
-            }
-        }
-        
-        return translated;
-    }
-
-    let detectedLanguagesSet = new Set();
-    function updateLanguageCount() {
-        document.getElementById('languagesCount').innerText = detectedLanguagesSet.size;
-    }
-
-    // ========== VERIFIED ANSWERS DATABASE ==========
+    // ========== VERIFIED ANSWERS DATABASE (2+ SOURCES) ==========
     const verifiedDB = {
-        'neet cutoff': { answer: 'NEET UG 2024 Cutoff: General - 720-137 marks, OBC - 136-107, SC/ST - 118-96.', sources: ['nta.neet.nic.in', 'nmc.org.in'] },
-        'upsc age': { answer: 'UPSC Age Limit: General 21-32 (6 attempts), OBC 21-35 (9), SC/ST 21-37 (unlimited).', sources: ['upsc.gov.in', 'dopt.gov.in'] },
-        'ssc cgl': { answer: 'SSC CGL: Bachelor\'s degree, Age 18-32, relaxations for reserved categories.', sources: ['ssc.nic.in', 'india.gov.in'] },
-        'pm scholarship': { answer: 'PMSSS: ₹50,000/year, 80%+ in Class 12, income <₹6 lakhs.', sources: ['scholarships.gov.in', 'education.gov.in'] },
-        'career after 12th': { answer: 'Career options: Medical (MBBS/BDS), Engineering, Commerce (BCom/CA), Arts (BA/LLB), Skill courses.', sources: ['education.gov.in', 'ncert.nic.in'] }
+        'neet cutoff': { answer: 'NEET UG 2024 Cutoff: General - 720-137 marks (50th percentile), OBC - 136-107, SC/ST - 118-96 (40th percentile)', sources: ['nta.neet.nic.in', 'nmc.org.in'] },
+        'upsc age': { answer: 'UPSC Age Limit: General 21-32 (6 attempts), OBC 21-35 (9), SC/ST 21-37 (unlimited)', sources: ['upsc.gov.in', 'dopt.gov.in'] },
+        'ssc cgl': { answer: 'SSC CGL: Bachelor\'s degree, Age 18-32, relaxations for SC/ST/OBC/PwD', sources: ['ssc.nic.in', 'india.gov.in'] },
+        'pm scholarship': { answer: 'PMSSS: ₹50,000/year, 80%+ in Class 12, income <₹6 lakhs', sources: ['scholarships.gov.in', 'education.gov.in'] }
     };
 
     function getVerifiedAnswer(question) {
@@ -610,213 +906,157 @@
         for (let [key, data] of Object.entries(verifiedDB)) {
             if (lower.includes(key)) return data;
         }
-        return { answer: 'For official information, visit: upsc.gov.in, nta.ac.in, ssc.nic.in, scholarships.gov.in.', sources: ['india.gov.in', 'education.gov.in'] };
+        return { answer: 'For accurate information, visit official sources: upsc.gov.in, nta.ac.in, ssc.nic.in, scholarships.gov.in. Rephrase your question for specific guidance.', sources: ['india.gov.in', 'education.gov.in'] };
+    }
+
+    // ========== LANGUAGE DETECTION ==========
+    function detectLanguage(text) {
+        const scripts = [
+            { name: 'Hindi', regex: /[\u0900-\u097F]/, code: 'hi' },
+            { name: 'Tamil', regex: /[\u0B80-\u0BFF]/, code: 'ta' },
+            { name: 'Telugu', regex: /[\u0C00-\u0C7F]/, code: 'te' },
+            { name: 'Marathi', regex: /[\u0900-\u097F]/, code: 'mr' },
+            { name: 'Bengali', regex: /[\u0980-\u09FF]/, code: 'bn' },
+            { name: 'English', regex: /[a-zA-Z]/, code: 'en' }
+        ];
+        for (let script of scripts) {
+            if (script.regex.test(text)) return { name: script.name, code: script.code };
+        }
+        return { name: 'English', code: 'en' };
     }
 
     // ========== ZERO REPETITION TRACKER ==========
-    let askedQuestions = JSON.parse(localStorage.getItem('multilang_asked')) || [];
-    let answerHistory = JSON.parse(localStorage.getItem('multilang_history')) || [];
-    let stats = JSON.parse(localStorage.getItem('multilang_stats')) || { total: 0, sources: 0, prevented: 0 };
+    let askedQuestions = JSON.parse(localStorage.getItem('anns_asked')) || [];
+    let stats = JSON.parse(localStorage.getItem('anns_stats')) || { total: 0, prevented: 0 };
+    let detectedLangs = new Set(JSON.parse(localStorage.getItem('anns_langs')) || []);
 
     function updateStats() {
         document.getElementById('totalAnswers').innerText = stats.total;
-        document.getElementById('totalSources').innerText = stats.sources;
         document.getElementById('repetitionsPrevented').innerText = stats.prevented;
+        document.getElementById('languagesCount').innerText = detectedLangs.size;
     }
 
-    function addToHistory(question, answerData, originalLang) {
+    function addToHistory(question, answer, detectedLang) {
         let existing = askedQuestions.find(q => q.question.toLowerCase() === question.toLowerCase());
         if (existing) {
             stats.prevented++;
-            localStorage.setItem('multilang_stats', JSON.stringify(stats));
+            localStorage.setItem('anns_stats', JSON.stringify(stats));
             updateStats();
-            return { repeated: true, message: `⚠️ Already asked. Answer: ${existing.answer.substring(0, 80)}...` };
+            return { repeated: true, message: `⚠️ Already asked on ${existing.date}: "${existing.question.substring(0, 50)}..."` };
         }
-        
-        askedQuestions.unshift({ question, answer: answerData.answer, date: new Date().toLocaleString(), language: originalLang });
+        askedQuestions.unshift({ question, answer, date: new Date().toLocaleString(), lang: detectedLang });
         if (askedQuestions.length > 30) askedQuestions.pop();
-        localStorage.setItem('multilang_asked', JSON.stringify(askedQuestions));
-        
-        answerHistory.unshift({ question, answer: answerData.answer, sources: answerData.sources, time: new Date().toLocaleString() });
-        localStorage.setItem('multilang_history', JSON.stringify(answerHistory));
-        
+        localStorage.setItem('anns_asked', JSON.stringify(askedQuestions));
+        detectedLangs.add(detectedLang);
+        localStorage.setItem('anns_langs', JSON.stringify([...detectedLangs]));
         stats.total++;
-        stats.sources += answerData.sources.length;
-        localStorage.setItem('multilang_stats', JSON.stringify(stats));
+        localStorage.setItem('anns_stats', JSON.stringify(stats));
         updateStats();
-        renderQuestionHistory();
-        
-        return { repeated: false, answer: answerData.answer, sources: answerData.sources };
+        renderHistory();
+        return { repeated: false };
     }
 
-    function renderQuestionHistory() {
-        const container = document.getElementById('questionHistory');
+    function renderHistory() {
+        const container = document.getElementById('historyList');
         if (askedQuestions.length === 0) {
-            container.innerHTML = '<p style="color:#94A3B8; text-align:center;">No questions yet</p>';
+            container.innerHTML = '<div style="text-align:center; color:#94A3B8; padding:20px;">No questions yet. Ask something!</div>';
             return;
         }
         container.innerHTML = '';
-        askedQuestions.forEach(q => {
-            container.innerHTML += `<div class="history-item" onclick="reShowAnswer('${q.question.replace(/'/g, "\\'")}')">🌐 ${q.language || '?'}: ${q.question.substring(0, 40)}<br><span style="font-size:0.6rem;">📅 ${q.date}</span></div>`;
+        askedQuestions.slice(0, 15).forEach(q => {
+            container.innerHTML += `<div class="history-item" onclick="reaskQuestion('${q.question.replace(/'/g, "\\'")}')">🌐 ${q.lang}: ${q.question.substring(0, 50)}${q.question.length > 50 ? '...' : ''}<br><span style="font-size:10px; color:#64748B;">📅 ${q.date}</span></div>`;
         });
     }
 
-    window.reShowAnswer = (question) => {
-        let found = askedQuestions.find(q => q.question === question);
-        if (found) displayAnswer(found.question, found.answer);
+    window.reaskQuestion = (question) => {
+        document.getElementById('questionInput').value = question;
+        processQuestion(question);
+        document.querySelector('.door-btn[data-door="ask"]').click();
     };
 
-    // ========== CHAT SYSTEM ==========
-    let chatHistory = JSON.parse(localStorage.getItem('multilang_chat')) || [];
-
-    function displayAnswer(question, answer, sources = null, detectedLang = null) {
-        let sourceText = sources ? `<br>🔗 ${sources.map(s => `<a href="https://${s}" target="_blank" style="color:#4ECDC4;">${s}</a>`).join(' | ')}` : '';
-        let langInfo = detectedLang ? `<br><span style="font-size:0.6rem;">🌐 Detected: ${detectedLang}</span>` : '';
-        chatHistory.push({ question, answer, time: new Date().toLocaleTimeString() });
-        localStorage.setItem('multilang_chat', JSON.stringify(chatHistory));
-        renderChat();
-    }
-
-    function renderChat() {
-        const area = document.getElementById('chatArea');
-        area.innerHTML = '';
-        if (chatHistory.length === 0) {
-            area.innerHTML = `<div class="message ai-msg verified-msg">🌍 AnnS AI: Ask in ANY language - I understand Hindi, Tamil, Telugu, Marathi, Bengali, Gujarati, Punjabi, Malayalam, Kannada, Odia, Assamese, Urdu, and more!<br><br>📌 Type or speak - I'll answer in English with verified sources.</div>`;
-            return;
+    function processQuestion(question) {
+        if (!question.trim()) return;
+        let detected = detectLanguage(question);
+        document.getElementById('voiceDetected').innerHTML = `🌐 Detected: ${detected.name}`;
+        let answerData = getVerifiedAnswer(question);
+        let result = addToHistory(question, answerData.answer, detected.name);
+        if (result.repeated) {
+            document.getElementById('answerQuestion').innerHTML = `❓ ${question}`;
+            document.getElementById('answerText').innerHTML = result.message;
+            document.getElementById('answerSources').innerHTML = '';
+        } else {
+            document.getElementById('answerQuestion').innerHTML = `❓ ${question} <span style="font-size:10px;">(${detected.name})</span>`;
+            document.getElementById('answerText').innerHTML = answerData.answer;
+            document.getElementById('answerSources').innerHTML = `🔗 Verified from: ${answerData.sources.join(' | ')}`;
         }
-        chatHistory.slice(-15).forEach(msg => {
-            let div = document.createElement('div');
-            div.className = 'message ai-msg verified-msg';
-            div.innerHTML = `<strong>❓ ${msg.question}</strong><br>✅ ${msg.answer}<br><span style="font-size:0.6rem;">📅 ${msg.time}</span>`;
-            area.appendChild(div);
-        });
-        area.scrollTop = area.scrollHeight;
+        document.getElementById('answerBox').classList.add('show');
     }
 
-    function processQuestion(originalText) {
-        if (!originalText.trim()) return;
-        
-        // Detect language
-        let detected = detectLanguage(originalText);
-        detectedLanguagesSet.add(detected.name);
-        updateLanguageCount();
-        
-        document.getElementById('detectedLanguageDisplay').innerHTML = `🌐 Detected: ${detected.name}`;
-        document.getElementById('verificationStatus').innerHTML = '🔄 Translating & double verifying from official sources...';
-        
-        // Translate to English (for understanding)
-        let englishQuery = originalText;
-        if (detected.code !== 'en') {
-            englishQuery = translateToEnglish(originalText, detected.code);
-        }
-        
-        setTimeout(() => {
-            let answerData = getVerifiedAnswer(englishQuery);
-            let result = addToHistory(originalText, answerData, detected.name);
-            if (result.repeated) {
-                displayAnswer(originalText, result.message, null, detected.name);
-            } else {
-                displayAnswer(originalText, result.answer, result.sources, detected.name);
-            }
-            document.getElementById('verificationStatus').innerHTML = '';
-        }, 300);
-    }
-
-    // ========== EVENT LISTENERS ==========
-    document.getElementById('askBtn').onclick = () => {
-        let q = document.getElementById('questionInput').value;
-        processQuestion(q);
-        document.getElementById('questionInput').value = '';
-    };
-
-    document.getElementById('clearChatBtn').onclick = () => {
-        if (confirm('Clear chat history?')) { chatHistory = []; localStorage.setItem('multilang_chat', JSON.stringify(chatHistory)); renderChat(); }
-    };
-
-    document.getElementById('exportAnswersBtn').onclick = () => {
-        let data = JSON.stringify(answerHistory, null, 2);
-        let blob = new Blob([data], {type: 'application/json'});
-        let a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `answers_${anonymousId}.json`;
-        a.click();
-    };
-
-    window.showHistory = () => { renderQuestionHistory(); addTempMessage(`📚 Total: ${stats.total} answers | ${stats.prevented} repetitions prevented | ${detectedLanguagesSet.size} languages used`); };
-    window.showVerifiedSources = () => { addTempMessage('🔗 All answers from: upsc.gov.in, nta.ac.in, ssc.nic.in, scholarships.gov.in, ncert.nic.in'); };
-    window.clearRepetition = () => { if (confirm('Reset repetition tracker?')) { askedQuestions = []; stats.prevented = 0; localStorage.setItem('multilang_asked', JSON.stringify(askedQuestions)); localStorage.setItem('multilang_stats', JSON.stringify(stats)); renderQuestionHistory(); updateStats(); addTempMessage('🔄 Tracker reset'); } };
-
-    function addTempMessage(text) {
-        const area = document.getElementById('chatArea');
-        let div = document.createElement('div');
-        div.className = 'message ai-msg';
-        div.style.background = 'rgba(78,205,196,0.2)';
-        div.innerHTML = text;
-        area.appendChild(div);
-        setTimeout(() => div.remove(), 3000);
-    }
-
-    function scrollToCard(id) {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-    window.scrollToCard = scrollToCard;
-
-    // ========== VOICE (Multi-Language Support) ==========
-    let voiceLang = '';
-    window.setVoiceLang = (lang, btn) => {
-        voiceLang = lang === 'auto' ? '' : lang;
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        addTempMessage(`🎤 Voice language set to ${lang === 'auto' ? 'Auto-Detect' : btn.innerText}`);
-    };
-
-    document.getElementById('voiceQuestionBtn').onclick = () => {
-        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-            addTempMessage('Voice not supported in this browser');
-            return;
-        }
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        let recog = new SpeechRecognition();
-        recog.lang = voiceLang || '';
-        recog.interimResults = false;
-        recog.continuous = false;
-        
-        recog.onstart = () => { addTempMessage('🎙️ Listening... Speak your question'); };
-        recog.onresult = (e) => {
-            let spoken = e.results[0][0].transcript;
-            let detected = detectLanguage(spoken);
-            document.getElementById('voiceQuestionText').innerHTML = `🗣️ "${spoken}"`;
-            document.getElementById('voiceDetectedLang').innerHTML = `🌐 Detected language: ${detected.name}`;
-            
-            // Simple correction for common English mistakes
-            let corrected = spoken.replace(/recieve/g, 'receive').replace(/teh/g, 'the');
-            if (spoken !== corrected) {
-                document.getElementById('voiceCorrection').innerHTML = `✅ Corrected: "${corrected}"`;
-                processQuestion(corrected);
-            } else {
-                document.getElementById('voiceCorrection').innerHTML = `✅ Processing...`;
-                processQuestion(spoken);
-            }
+    // ========== VOICE RECOGNITION ==========
+    let selectedLang = '';
+    document.querySelectorAll('.lang-chip').forEach(chip => {
+        chip.onclick = () => {
+            document.querySelectorAll('.lang-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            selectedLang = chip.dataset.lang === 'auto' ? '' : chip.dataset.lang;
         };
-        recog.onerror = () => { addTempMessage('Voice error. Please try again.'); };
-        recog.start();
-    };
+    });
+
+    let recognition = null;
+    const micBtn = document.getElementById('micBtn');
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        micBtn.onclick = () => {
+            recognition = new SpeechRecognition();
+            recognition.lang = selectedLang || '';
+            recognition.onstart = () => { micBtn.classList.add('listening'); document.getElementById('voiceText').innerHTML = '🎙️ Listening... Speak now'; };
+            recognition.onend = () => { micBtn.classList.remove('listening'); };
+            recognition.onresult = (e) => {
+                let spoken = e.results[0][0].transcript;
+                let detected = detectLanguage(spoken);
+                document.getElementById('voiceText').innerHTML = `🗣️ "${spoken}"`;
+                document.getElementById('voiceDetected').innerHTML = `🌐 Detected: ${detected.name}`;
+                document.getElementById('questionInput').value = spoken;
+                processQuestion(spoken);
+            };
+            recognition.start();
+        };
+    }
+
+    // ========== VOICE CORRECTOR ==========
+    let correctorRecognition = null;
+    const correctorMic = document.getElementById('correctorMicBtn');
+    if (correctorMic && ('webkitSpeechRecognition' in window)) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        correctorMic.onclick = () => {
+            correctorRecognition = new SpeechRecognition();
+            correctorRecognition.lang = 'en-IN';
+            correctorRecognition.onresult = (e) => {
+                let spoken = e.results[0][0].transcript;
+                document.getElementById('originalText').innerHTML = `❌ Original: "${spoken}"`;
+                let corrected = spoken.replace(/recieve/g, 'receive').replace(/teh/g, 'the').replace(/\b(he|she|it) (go|play)\b/gi, '$1 $2s');
+                document.getElementById('correctedText').innerHTML = `✅ Corrected: "${corrected}"`;
+                if (corrected !== spoken) {
+                    document.getElementById('correctionExplanation').innerHTML = '📖 Fixed: spelling (recieve→receive) and grammar (he go→he goes)';
+                } else {
+                    document.getElementById('correctionExplanation').innerHTML = '✨ No mistakes found! Great job!';
+                }
+            };
+            correctorRecognition.start();
+        };
+    }
 
     // ========== WRITING CORRECTOR ==========
     document.getElementById('correctWritingBtn').onclick = () => {
         let text = document.getElementById('writingInput').value;
         if (!text) return;
-        let detected = detectLanguage(text);
-        document.getElementById('originalWriting').innerHTML = `🌐 ${detected.name}: "${text}"`;
-        
-        if (detected.code === 'en') {
-            let corrected = text.replace(/recieve/g, 'receive').replace(/teh/g, 'the').replace(/\b(he|she|it) (go|play)\b/gi, '$1 $2s');
-            document.getElementById('correctedWriting').innerHTML = `✅ English corrected: "${corrected}"`;
-            if (corrected !== text) document.getElementById('writingExplanation').innerHTML = '📖 Fixed: spelling (recieve→receive) and grammar (he go→he goes)';
-            else document.getElementById('writingExplanation').innerHTML = '✨ No English mistakes found!';
+        document.getElementById('originalWriting').innerHTML = `❌ Original: "${text}"`;
+        let corrected = text.replace(/recieve/g, 'receive').replace(/teh/g, 'the').replace(/\b(he|she|it) (go|play)\b/gi, '$1 $2s');
+        document.getElementById('correctedWriting').innerHTML = `✅ Corrected: "${corrected}"`;
+        if (corrected !== text) {
+            document.getElementById('writingExplanation').innerHTML = '📖 Fixed: spelling (recieve→receive) and grammar (he go→he goes)';
         } else {
-            document.getElementById('correctedWriting').innerHTML = `💡 For ${detected.name}, please type in English or use voice input for better correction.`;
-            document.getElementById('writingExplanation').innerHTML = '📖 AnnS AI understands your language! Ask questions in any language, answers will be in English with verified sources.';
+            document.getElementById('writingExplanation').innerHTML = '✨ No mistakes found! Great writing!';
         }
     };
 
@@ -824,115 +1064,108 @@
     let video = document.getElementById('camera');
     let stream = null;
     let scannedText = '';
-
     document.getElementById('startCameraBtn').onclick = async () => {
-        try { stream = await navigator.mediaDevices.getUserMedia({ video: true }); video.srcObject = stream; addTempMessage('📷 Camera started. Position your book/text.'); }
-        catch(e) { alert('Camera access denied'); }
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.style.display = 'block';
+            video.srcObject = stream;
+        } catch(e) { alert('Camera access denied'); }
     };
-    document.getElementById('stopCameraBtn').onclick = () => { if(stream) { stream.getTracks().forEach(t=>t.stop()); video.srcObject=null; addTempMessage('📷 Camera stopped'); } };
+    document.getElementById('stopCameraBtn').onclick = () => { if(stream) { stream.getTracks().forEach(t=>t.stop()); video.style.display = 'none'; video.srcObject = null; } };
     document.getElementById('captureBtn').onclick = () => {
         if(!video.srcObject) { alert('Start camera first'); return; }
-        let text = prompt('📷 Enter the text from your image (in any language):');
-        if(text) { scannedText = text; document.getElementById('scannedOutput').innerHTML = text; addTempMessage(`📷 Scanned: "${text.substring(0, 50)}..."`); }
+        let text = prompt('Enter the text from your image:');
+        if(text) { scannedText = text; document.getElementById('scannedOutput').innerHTML = text; }
     };
-    document.getElementById('askScannedQuestion').onclick = () => { if(scannedText) processQuestion(scannedText); else alert('No text scanned'); };
+    document.getElementById('askScannedBtn').onclick = () => { if(scannedText) { document.getElementById('questionInput').value = scannedText; processQuestion(scannedText); document.querySelector('.door-btn[data-door="ask"]').click(); } else alert('No text captured'); };
 
-    // ========== GD ROOMS ==========
-    const gdRooms = ['UPSC Discussion', 'SSC CGL', 'NEET Preparation', 'JEE Maths', 'Current Affairs', 'Career Guidance', 'AI & Future', 'Study Abroad', 'Multi-Language Help'];
-    function renderGDRooms() {
-        let html = '';
-        gdRooms.forEach(room => { html += `<div class="gd-btn" onclick="joinGDRoom('${room}')">💬 ${room}</div>`; });
-        document.getElementById('gdRoomsList').innerHTML = html;
-    }
-    window.joinGDRoom = (room) => { addTempMessage(`📢 Joined "${room}" room. Discuss in any language!`); };
-    renderGDRooms();
-
-    // ========== PROBLEM BANK ==========
-    let problemBank = JSON.parse(localStorage.getItem('multilang_problems')) || [];
+    // ========== SHARE PROBLEM ==========
+    let problemBank = JSON.parse(localStorage.getItem('anns_problems')) || [];
     function renderProblems() {
-        let container = document.getElementById('problemFeed');
-        if(problemBank.length===0) { container.innerHTML='<p style="color:#94A3B8;text-align:center;">No problems yet</p>'; return; }
+        const container = document.getElementById('problemFeed');
+        if (problemBank.length === 0) { container.innerHTML = '<div style="text-align:center; color:#94A3B8; padding:20px;">No problems shared yet</div>'; return; }
         container.innerHTML = '';
         problemBank.slice(0, 10).forEach(p => {
-            container.innerHTML += `<div class="problem-item" onclick="selectProblem(${p.id})">📌 ${p.subject}: ${p.text.substring(0, 50)}<br><span style="font-size:0.6rem;">👤 ${p.author.substring(0,6)}</span></div>`;
+            container.innerHTML += `<div class="history-item" onclick="alert('Problem: ${p.text}\\n\\nBy: ${p.author}\\nDate: ${p.date}')">📌 ${p.subject}: ${p.text.substring(0, 60)}...<br><span style="font-size:10px;">👤 ${p.author.substring(0,6)} | 📅 ${p.date}</span></div>`;
         });
     }
-
-    function selectProblem(id) {
-        let problem = problemBank.find(p => p.id == id);
-        if(problem) {
-            document.getElementById('replySection').style.display = 'block';
-            document.getElementById('replyText').placeholder = `Answer: ${problem.text.substring(0, 50)}...`;
-            addTempMessage(`Selected problem: ${problem.text.substring(0, 80)}`);
-            selectedProblemId = id;
-        }
-    }
-    window.selectProblem = selectProblem;
-
     document.getElementById('shareProblemBtn').onclick = () => {
         let subject = document.getElementById('problemSubject').value;
         let text = document.getElementById('problemText').value;
         if(text) {
-            let newProb = { id: Date.now(), subject, text, author: anonymousId, date: new Date().toLocaleString(), replies: [] };
-            problemBank.unshift(newProb);
-            localStorage.setItem('multilang_problems', JSON.stringify(problemBank));
+            problemBank.unshift({ id: Date.now(), subject, text, author: anonymousId, date: new Date().toLocaleString() });
+            localStorage.setItem('anns_problems', JSON.stringify(problemBank));
             document.getElementById('problemText').value = '';
             renderProblems();
-            addTempMessage('📤 Problem shared anonymously!');
+            alert('✅ Problem shared anonymously!');
         } else alert('Please type your problem');
     };
+    renderProblems();
 
-    document.getElementById('shareVoiceBtn').onclick = () => {
-        if(!('webkitSpeechRecognition' in window)) return;
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        let recog = new SpeechRecognition();
-        recog.lang = '';
-        recog.onresult = (e) => { document.getElementById('problemText').value = e.results[0][0].transcript; };
-        recog.start();
+    // ========== GD ROOMS ==========
+    const gdRooms = ['UPSC Discussion', 'SSC CGL', 'NEET Preparation', 'JEE Maths', 'Current Affairs', 'Career Guidance', 'AI & Future', 'Study Abroad', 'Motivation Hub'];
+    function renderGDRooms() {
+        let html = '';
+        gdRooms.forEach(room => { html += `<div class="gd-room" onclick="alert('💬 Joined ${room} room. Discuss with peers anonymously! AI Moderator active.')">💬 ${room}</div>`; });
+        document.getElementById('gdRoomsList').innerHTML = html;
+    }
+    renderGDRooms();
+
+    // ========== OPEN YOUTUBE ==========
+    window.openYouTubeSearch = (query) => { window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, '_blank'); };
+
+    // ========== EXPORT & CLEAR ==========
+    document.getElementById('exportHistoryBtn').onclick = () => {
+        let data = JSON.stringify(askedQuestions, null, 2);
+        let blob = new Blob([data], {type: 'application/json'});
+        let a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `anns_history_${anonymousId}.json`;
+        a.click();
     };
-
-    document.getElementById('submitReplyBtn').onclick = () => {
-        let reply = document.getElementById('replyText').value;
-        if(selectedProblemId && reply) {
-            let problem = problemBank.find(p => p.id == selectedProblemId);
-            if(problem) {
-                problem.replies.push({ author: anonymousId, text: reply, date: new Date().toLocaleString() });
-                localStorage.setItem('multilang_problems', JSON.stringify(problemBank));
-                document.getElementById('replyText').value = '';
-                document.getElementById('replySection').style.display = 'none';
-                renderProblems();
-                addTempMessage('💡 Answer submitted! Thank you for helping.');
-            }
+    document.getElementById('clearHistoryBtn').onclick = () => {
+        if(confirm('Clear all question history? Cannot undo.')) {
+            askedQuestions = [];
+            stats = { total: 0, prevented: 0 };
+            localStorage.setItem('anns_asked', JSON.stringify(askedQuestions));
+            localStorage.setItem('anns_stats', JSON.stringify(stats));
+            renderHistory();
+            updateStats();
+            alert('History cleared');
         }
     };
 
-    // ========== TIPS ==========
-    const tips = {
-        exam: '📚 Exam Tip: Solve previous 10 years papers. Available free at respective commission websites.',
-        career: '🎯 Career Tip: Explore free courses on SWAYAM (swayam.gov.in) and NCERT (ncert.nic.in).',
-        time: '⏰ Time Management: Use Pomodoro technique - 25 min study, 5 min break. Free timers available online.',
-        memory: '🧠 Memory Technique: Use active recall and spaced repetition. Revise within 24 hours, then 7 days.'
-    };
-    document.getElementById('getTipBtn').onclick = () => {
-        let topic = document.getElementById('topicSelect').value;
-        document.getElementById('tipText').innerHTML = tips[topic] || tips.exam;
-    };
+    // ========== DOOR NAVIGATION ==========
+    document.querySelectorAll('.door-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+        });
+    });
 
-    // TTS
-    document.getElementById('ttsBtn').onclick = () => {
-        let text = prompt('Enter text to speak (English recommended):');
-        if(text) {
-            let utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            speechSynthesis.speak(utterance);
-        }
-    };
+    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
+
+    // ========== BOTTOM NAVIGATION ==========
+    const bottomNav = [
+        { name: "Home", icon: "🏠", link: "index.html" },
+        { name: "Search", icon: "🔍", link: "#" },
+        { name: "AnnS AI", icon: "🤖", link: "#" },
+        { name: "Alerts", icon: "🔔", link: "#" },
+        { name: "Profile", icon: "👤", link: "#" }
+    ];
+    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon - AnnS AI is here!'); }));
+
+    function goBack() { window.location.href = 'index.html'; }
+
+    // ========== ASK BUTTON ==========
+    document.getElementById('askBtn').onclick = () => { let q = document.getElementById('questionInput').value; processQuestion(q); document.getElementById('questionInput').value = ''; };
 
     // ========== INITIALIZE ==========
-    renderProblems();
+    renderHistory();
     updateStats();
-    renderQuestionHistory();
-    addTempMessage(`🌍 Welcome ${anonymousId}! I understand ALL Indian languages. Ask in Hindi, Tamil, Telugu, Marathi, Bengali, Gujarati, Punjabi, Malayalam, Kannada, Odia, Assamese, Urdu, or English. I will answer in English with double verified sources.`);
 </script>
 </body>
 </html>
