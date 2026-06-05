@@ -2,1192 +2,517 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>AnnS AI | Dil-Ke-AnnS Career Saathi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Something Interesting - Dil Ke AnnS Career Saathi</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: #F5F0E8;
-            padding-bottom: 65px;
-            color: #2D2A24;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(145deg, #f0f7f0 0%, #e8f0e8 100%);
+            color: #1e3c2c;
+            padding-bottom: 80px;
         }
-
-        /* Header - COMPACT */
+        /* Header */
         .header {
-            background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
-            padding: 10px 16px 14px 16px;
-            border-radius: 0 0 20px 20px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
             color: white;
+            padding: 1rem;
             position: sticky;
             top: 0;
             z-index: 100;
-        }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(255,255,255,0.15);
-            padding: 5px 12px;
-            border-radius: 40px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-bottom: 8px;
-            width: fit-content;
-        }
-
-        .logo-section {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-icon {
-            font-size: 28px;
-        }
-
-        .logo h1 {
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .logo p {
-            font-size: 7px;
-            opacity: 0.85;
-        }
-
-        .tagline {
-            font-size: 8px;
-            text-align: center;
-            margin: 4px 0 0;
-            opacity: 0.9;
-        }
-
-        .container {
-            padding: 14px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .page-title {
-            font-size: 17px;
-            font-weight: 800;
-            margin-bottom: 4px;
-            color: #1B4D3E;
-            border-left: 4px solid #E67E22;
-            padding-left: 10px;
-        }
-
-        .page-subtitle {
-            font-size: 9px;
-            color: #64748B;
-            margin-bottom: 14px;
-            padding-left: 14px;
-        }
-
-        .door-nav {
-            display: flex;
             flex-wrap: wrap;
-            gap: 4px;
-            margin-bottom: 14px;
-            background: white;
-            padding: 5px;
-            border-radius: 50px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-            justify-content: center;
         }
-
-        .door-btn {
-            background: transparent;
-            border: none;
-            padding: 5px 10px;
-            font-size: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 40px;
-            color: #64748B;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .door-btn.active {
-            background: #E67E22;
-            color: white;
-        }
-
-        @media (max-width: 550px) {
-            .door-btn .door-label { display: none; }
-            .door-btn { padding: 5px 8px; }
-        }
-
-        .door-content {
-            display: none;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .door-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .accordion-card {
-            background: white;
-            border-radius: 14px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border: 1px solid #E8E2D9;
-        }
-
-        .accordion-header {
-            background: white;
-            padding: 10px 12px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #1B4D3E;
+        .header h1 {
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
         }
-
-        .accordion-arrow {
-            font-size: 11px;
-            color: #E67E22;
-            transition: transform 0.2s;
-        }
-
-        .accordion-card.active .accordion-arrow {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            display: none;
-            padding: 10px;
-            background: white;
-            border-top: 1px solid #F0EADF;
-        }
-
-        .accordion-card.active .accordion-content {
-            display: block;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .info-card {
-            background: #F8F9FA;
-            border-radius: 10px;
-            padding: 8px;
-            border-left: 3px solid #E67E22;
-            cursor: pointer;
-        }
-
-        .info-label {
-            font-weight: 800;
-            color: #E67E22;
-            margin-bottom: 3px;
-            font-size: 10px;
-        }
-
-        .info-text {
-            font-size: 10px;
-            line-height: 1.35;
-            color: #2D2A24;
-        }
-
-        .section-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #1B4D3E;
-            margin: 10px 0 8px 0;
-            border-left: 3px solid #E67E22;
-            padding-left: 8px;
-        }
-
-        .voice-area {
-            background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .mic-btn {
-            background: #E67E22;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
+        .back-btn {
+            background: #ffb74d;
             border: none;
-            font-size: 1.6rem;
-            cursor: pointer;
-            margin: 0 auto 8px;
-            display: block;
-            color: white;
-        }
-
-        .mic-btn:active {
-            transform: scale(0.95);
-        }
-
-        .mic-btn.listening {
-            background: #10B981;
-            animation: pulse 1.2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .voice-result {
-            background: white;
-            border-radius: 10px;
-            padding: 8px;
-            margin-top: 8px;
-            font-size: 11px;
-        }
-
-        .question-box {
-            background: white;
-            border-radius: 14px;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #E8E2D9;
-        }
-
-        .question-input {
-            width: 100%;
             padding: 8px 12px;
-            border: 1px solid #E8E2D9;
             border-radius: 40px;
-            font-size: 11px;
-            margin-bottom: 8px;
-        }
-
-        .question-input:focus {
-            outline: none;
-            border-color: #E67E22;
-        }
-
-        .btn-primary {
-            background: #E67E22;
-            color: white;
-            border: none;
-            padding: 7px 14px;
-            border-radius: 40px;
-            font-weight: 600;
+            color: #3c2800;
+            font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            font-size: 11px;
+            transition: 0.2s;
         }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #E67E22;
-            color: #E67E22;
-            padding: 5px 10px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 10px;
-        }
-
-        .answer-box {
-            background: #F8F9FA;
-            border-radius: 14px;
-            padding: 10px;
-            margin-bottom: 10px;
-            display: none;
-            border-left: 4px solid #10B981;
-        }
-
-        .answer-box.show {
-            display: block;
-        }
-
-        .answer-question {
-            font-size: 9px;
-            color: #64748B;
-            margin-bottom: 5px;
-        }
-
-        .answer-text {
-            font-size: 11px;
-            color: #2D2A24;
-            margin-bottom: 6px;
-            line-height: 1.4;
-        }
-
-        .answer-sources {
-            font-size: 8px;
-            color: #E67E22;
-        }
-
-        .stats-bar {
-            background: white;
-            border-radius: 14px;
-            padding: 8px;
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 10px;
-            border: 1px solid #E8E2D9;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 15px;
-            font-weight: 800;
-            color: #E67E22;
-        }
-
-        .stat-label {
-            font-size: 7px;
-            color: #64748B;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 8px;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid #E8E2D9;
-        }
-
-        .feature-card:hover {
-            background: #F0EADF;
-        }
-
-        .feature-icon {
-            font-size: 18px;
-            margin-bottom: 3px;
-        }
-
-        .feature-name {
-            font-size: 9px;
-            font-weight: 500;
-        }
-
-        .lang-chips {
+        .back-btn:hover { background: #ffa726; }
+        /* Tabs */
+        .tabs {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 10px;
-        }
-
-        .lang-chip {
             background: white;
-            padding: 3px 8px;
-            border-radius: 30px;
-            font-size: 8px;
+            border-bottom: 2px solid #c8e6c9;
+            padding: 0 0.5rem;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #2e5c2e;
             cursor: pointer;
-            border: 1px solid #E8E2D9;
+            transition: all 0.2s;
+            border-radius: 30px 30px 0 0;
         }
-
-        .lang-chip.active {
-            background: #E67E22;
-            color: white;
+        .tab-btn.active {
+            background: #e8f5e9;
+            color: #1b5e20;
+            border-bottom: 3px solid #ff9800;
         }
-
-        .gd-room {
-            background: #F8F9FA;
-            border-radius: 10px;
-            padding: 8px;
-            margin-bottom: 6px;
-            cursor: pointer;
-            border: 1px solid #E8E2D9;
-            font-size: 11px;
-        }
-
-        .chat-messages {
-            background: #F8F9FA;
-            border-radius: 10px;
-            padding: 8px;
-            height: 250px;
-            overflow-y: auto;
-            margin-bottom: 8px;
-        }
-
-        .chat-message {
-            background: white;
-            padding: 6px 8px;
-            border-radius: 12px;
-            margin-bottom: 5px;
-            font-size: 10px;
-        }
-
-        .chat-message.user {
-            background: #E67E22;
-            color: white;
-            margin-left: auto;
-            width: fit-content;
-        }
-
-        .chat-message.ai {
-            background: #F0EADF;
-            width: fit-content;
-        }
-
-        .history-item {
-            background: white;
-            border-radius: 8px;
-            padding: 7px;
-            margin-bottom: 5px;
-            cursor: pointer;
-            font-size: 9px;
-            border: 1px solid #E8E2D9;
-        }
-
-        .bottom-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 5px 12px 14px;
-            border-top: 1px solid #E8E2D9;
-            z-index: 100;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
-            cursor: pointer;
-            padding: 3px 8px;
-            border-radius: 30px;
-        }
-
-        .nav-item span:first-child {
-            font-size: 17px;
-        }
-
-        .nav-item span:last-child {
-            font-size: 7px;
-            color: #64748B;
-        }
-
-        .camera-controls {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-            justify-content: center;
-        }
-
-        #camera {
-            width: 100%;
-            border-radius: 10px;
+        .tab-pane {
             display: none;
+            padding: 20px 16px;
+            animation: fade 0.3s ease;
         }
-
-        textarea {
+        .tab-pane.active { display: block; }
+        @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+        /* Cards & UI */
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            border: 1px solid #dcedc8;
+        }
+        textarea, input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 28px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            margin: 8px 0;
             font-family: inherit;
+        }
+        button {
+            background: #ff9800;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 5px 0;
+        }
+        button:hover { background: #f57c00; transform: scale(0.98); }
+        .voice-btn, .grammar-btn {
+            background: #2c3e2b;
+            margin-right: 8px;
+        }
+        .response-area {
+            background: #f9f7f3;
+            border-radius: 24px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 5px solid #ff9800;
+        }
+        canvas {
+            border: 2px dashed #aaa;
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+        .qr-scanner {
+            background: #1e1e1e;
+            border-radius: 24px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        #qr-video {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        .badge {
+            background: #ffb74d;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #5d7e5a;
         }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <div class="back-button" onclick="goBack()">← Back</div>
-    <div class="logo-section">
-        <div class="logo">
-            <div class="logo-icon">🎓</div>
-            <div>
-                <h1>दिल के अंश</h1>
-                <p>Career Saathi</p>
-            </div>
-        </div>
-    </div>
-    <div class="tagline">🤖 AnnS AI - Double Verified | Any Language | Zero Repetition</div>
+    <button class="back-btn" onclick="window.location.href='index.html'">← Home</button>
+    <h1>✨ Something Interesting ✨</h1>
+    <div></div>
 </div>
 
-<div class="container">
-    <div class="page-title">🤖 AnnS AI - Smart Assistant</div>
-    <div class="page-subtitle">Voice | Any Language | Verified Sources</div>
+<div class="tabs">
+    <button class="tab-btn active" data-tab="voice">🎤 Voice Studio</button>
+    <button class="tab-btn" data-tab="design">🎨 Design Studio</button>
+    <button class="tab-btn" data-tab="anns">🤖 AnnS AI</button>
+    <button class="tab-btn" data-tab="scanner">📷 Scanner</button>
+    <button class="tab-btn" data-tab="gd">💬 GD & Share</button>
+</div>
 
-    <!-- Door Navigation -->
-    <div class="door-nav">
-        <button class="door-btn active" data-door="ask">❓ <span class="door-label">Ask</span></button>
-        <button class="door-btn" data-door="voice">🎤 <span class="door-label">Voice</span></button>
-        <button class="door-btn" data-door="scanner">📷 <span class="door-label">Scan</span></button>
-        <button class="door-btn" data-door="share">📤 <span class="door-label">Share</span></button>
-        <button class="door-btn" data-door="gd">💬 <span class="door-label">GD</span></button>
-        <button class="door-btn" data-door="tools">🆓 <span class="door-label">Tools</span></button>
-        <button class="door-btn" data-door="history">📚 <span class="door-label">History</span></button>
-    </div>
-
-    <!-- DOOR 1: ASK -->
-    <div id="door-ask" class="door-content active">
-        <div class="lang-chips" id="langChips">
-            <span class="lang-chip active" data-lang="auto">🌐 Auto</span>
-            <span class="lang-chip" data-lang="hi-IN">🇮🇳 हिंदी</span>
-            <span class="lang-chip" data-lang="ta-IN">🇮🇳 தமிழ்</span>
-            <span class="lang-chip" data-lang="te-IN">🇮🇳 తెలుగు</span>
-            <span class="lang-chip" data-lang="mr-IN">🇮🇳 मराठी</span>
-            <span class="lang-chip" data-lang="en-US">🇬🇧 English</span>
-        </div>
-
-        <div class="voice-area">
-            <button class="mic-btn" id="micBtn">🎤</button>
-            <div class="voice-result" id="voiceResult">
-                <span id="voiceText">Click mic and speak</span>
-                <span id="voiceDetected" style="display:block; font-size:8px; color:#64748B;"></span>
-            </div>
-        </div>
-
-        <div class="question-box">
-            <input type="text" class="question-input" id="questionInput" placeholder="Ask anything...">
-            <button class="btn-primary" id="askBtn">🔍 Get Answer</button>
-        </div>
-
-        <div class="answer-box" id="answerBox">
-            <div class="answer-question" id="answerQuestion"></div>
-            <div class="answer-text" id="answerText"></div>
-            <div class="answer-sources" id="answerSources"></div>
-        </div>
-
-        <div class="stats-bar">
-            <div class="stat"><div class="stat-number" id="totalAnswers">0</div><div class="stat-label">Answered</div></div>
-            <div class="stat"><div class="stat-number" id="repetitionsPrevented">0</div><div class="stat-label">Repetitions</div></div>
-            <div class="stat"><div class="stat-number" id="languagesCount">0</div><div class="stat-label">Languages</div></div>
-        </div>
-    </div>
-
-    <!-- DOOR 2: VOICE LAB -->
-    <div id="door-voice" class="door-content">
-        <div class="accordion-card" id="voiceCorrectorCard">
-            <div class="accordion-header" onclick="toggleCard('voiceCorrectorCard')">
-                <div class="accordion-title"><span>🎙️</span> Voice Grammar Corrector</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📖 HOW TO USE</div><div class="info-text">Click mic, speak a sentence. AI corrects spelling, grammar, tense.</div></div>
-                </div>
-                <button class="mic-btn" id="correctorMicBtn" style="width:50px; height:50px; font-size:1.4rem;">🎤</button>
-                <div class="voice-result">
-                    <p id="originalText" style="color:#E67E22; font-size:10px;">—</p>
-                    <p id="correctedText" style="color:#10B981; font-size:10px; margin-top:5px;">—</p>
-                    <p id="correctionExplanation" style="font-size:8px; color:#64748B; margin-top:4px;"></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-card" id="writingCorrectorCard">
-            <div class="accordion-header" onclick="toggleCard('writingCorrectorCard')">
-                <div class="accordion-title"><span>📝</span> Writing Corrector</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <textarea id="writingInput" rows="2" placeholder="Type or paste a sentence..." style="width:100%; padding:8px; border-radius:10px; border:1px solid #E8E2D9; font-size:10px;"></textarea>
-                <button class="btn-primary" id="correctWritingBtn" style="margin-top:6px;">✅ Check & Correct</button>
-                <div style="margin-top:8px; background:#F8F9FA; border-radius:10px; padding:8px;">
-                    <p id="originalWriting" style="color:#E67E22; font-size:10px;">—</p>
-                    <p id="correctedWriting" style="color:#10B981; font-size:10px; margin-top:5px;">—</p>
-                    <p id="writingExplanation" style="font-size:8px; color:#64748B; margin-top:4px;"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DOOR 3: SCANNER -->
-    <div id="door-scanner" class="door-content">
-        <div class="accordion-card" id="scannerCard">
-            <div class="accordion-header" onclick="toggleCard('scannerCard')">
-                <div class="accordion-title"><span>📷</span> Scan Question</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div style="text-align:center;">
-                    <video id="camera" autoplay playsinline style="width:100%; border-radius:10px;"></video>
-                    <div class="camera-controls">
-                        <button id="startCameraBtn" class="btn-primary" style="flex:1;">📷 Start</button>
-                        <button id="switchCameraBtn" class="btn-outline" style="flex:1;">🔄 Swap</button>
-                        <button id="stopCameraBtn" class="btn-outline" style="flex:1;">⏹️ Stop</button>
-                    </div>
-                    <button id="captureBtn" class="btn-primary" style="margin-top:8px; width:100%;">📸 Capture Text</button>
-                    <div style="background:#F8F9FA; border-radius:10px; padding:8px; margin-top:8px;">
-                        <p id="scannedOutput" style="font-size:10px;">—</p>
-                        <button id="askScannedBtn" class="btn-primary" style="margin-top:6px;">🔍 Ask About This</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DOOR 4: SHARE PROBLEM -->
-    <div id="door-share" class="door-content">
-        <div class="accordion-card" id="shareProblemCard">
-            <div class="accordion-header" onclick="toggleCard('shareProblemCard')">
-                <div class="accordion-title"><span>📤</span> Share Problem</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <select id="problemSubject" style="width:100%; padding:7px; border-radius:40px; border:1px solid #E8E2D9; margin-bottom:8px; font-size:10px;">
-                    <option value="Physics">⚡ Physics</option>
-                    <option value="Chemistry">🧪 Chemistry</option>
-                    <option value="Math">📐 Mathematics</option>
-                    <option value="English">📖 English</option>
-                    <option value="General">💡 General</option>
-                </select>
-                <textarea id="problemText" rows="2" placeholder="Type your problem..." style="width:100%; padding:7px; border-radius:10px; border:1px solid #E8E2D9; font-size:10px;"></textarea>
-                <button id="shareProblemBtn" class="btn-primary" style="margin-top:6px;">📤 Share</button>
-                <div class="section-title" style="margin-top:10px;">📚 Problem Bank</div>
-                <div id="problemFeed" style="max-height: 180px; overflow-y: auto;"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DOOR 5: GD ROOMS -->
-    <div id="door-gd" class="door-content">
-        <div class="accordion-card" id="gdRoomsCard">
-            <div class="accordion-header" onclick="toggleCard('gdRoomsCard')">
-                <div class="accordion-title"><span>💬</span> Group Discussion</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 HOW IT WORKS</div><div class="info-text">Join room, ask questions. AI answers instantly.</div></div>
-                </div>
-                <div class="section-title">🎯 Select Room</div>
-                <div id="gdRoomsList" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); gap:6px; margin-bottom:10px;"></div>
-                
-                <div id="activeChatRoom" style="display:none;">
-                    <div class="section-title">💬 <span id="currentRoomName"></span> <button id="closeChatBtn" class="btn-outline" style="font-size:8px; padding:2px 6px;">✖</button></div>
-                    <div class="chat-messages" id="chatMessages">
-                        <div class="chat-message ai">🤖 AnnS AI: Ask any question!</div>
-                    </div>
-                    <div style="display:flex; gap:6px;">
-                        <input type="text" id="chatInput" placeholder="Ask a question..." style="flex:1; padding:7px; border-radius:40px; border:1px solid #E8E2D9; font-size:10px;">
-                        <button id="sendChatBtn" class="btn-primary" style="width:auto; padding:7px 14px;">Send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DOOR 6: FREE TOOLS -->
-    <div id="door-tools" class="door-content">
-        <div class="accordion-card" id="freeToolsCard">
-            <div class="accordion-header" onclick="toggleCard('freeToolsCard')">
-                <div class="accordion-title"><span>🆓</span> Free Tools</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card" onclick="window.open('https://deepseek.com', '_blank')"><div class="info-label">🤖 DeepSeek</div><div class="info-text">Free AI Chat (1M context)</div></div>
-                    <div class="info-card" onclick="window.open('https://ideogram.ai', '_blank')"><div class="info-label">🎨 Ideogram</div><div class="info-text">Free AI Image Generator</div></div>
-                    <div class="info-card" onclick="window.open('https://pika.art', '_blank')"><div class="info-label">🎬 Pika Labs</div><div class="info-text">Free AI Video Generator</div></div>
-                    <div class="info-card" onclick="window.open('https://designer.microsoft.com', '_blank')"><div class="info-label">🎨 MS Designer</div><div class="info-text">Free Design Tool</div></div>
-                    <div class="info-card" onclick="window.open('https://bardeen.ai', '_blank')"><div class="info-label">⚡ Bardeen</div><div class="info-text">Free Automation</div></div>
-                    <div class="info-card" onclick="window.open('https://prowritingaid.com', '_blank')"><div class="info-label">✍️ ProWritingAid</div><div class="info-text">Free Writing Assistant</div></div>
-                </div>
-                <div class="section-title">📺 Free Tutorials</div>
-                <div class="feature-grid">
-                    <div class="feature-card" onclick="window.open('https://www.youtube.com/results?search_query=DeepSeek+tutorial', '_blank')"><div class="feature-icon">🤖</div><div class="feature-name">DeepSeek</div></div>
-                    <div class="feature-card" onclick="window.open('https://www.youtube.com/results?search_query=Ideogram+AI+tutorial', '_blank')"><div class="feature-icon">🎨</div><div class="feature-name">Ideogram</div></div>
-                    <div class="feature-card" onclick="window.open('https://www.youtube.com/results?search_query=Pika+Labs+tutorial', '_blank')"><div class="feature-icon">🎬</div><div class="feature-name">Pika Labs</div></div>
-                    <div class="feature-card" onclick="window.open('https://www.youtube.com/results?search_query=UPSC+free+preparation', '_blank')"><div class="feature-icon">📚</div><div class="feature-name">UPSC Prep</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DOOR 7: HISTORY -->
-    <div id="door-history" class="door-content">
-        <div class="accordion-card" id="historyCard">
-            <div class="accordion-header" onclick="toggleCard('historyCard')">
-                <div class="accordion-title"><span>📚</span> Question History</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div id="historyList" style="max-height: 260px; overflow-y: auto;"></div>
-                <button id="exportHistoryBtn" class="btn-outline" style="width:100%; margin-top:6px;">📥 Export</button>
-                <button id="clearHistoryBtn" class="btn-outline" style="width:100%; margin-top:5px;">🗑️ Clear</button>
-            </div>
+<!-- ==================== VOICE STUDIO ==================== -->
+<div id="voice" class="tab-pane active">
+    <div class="card">
+        <h3>🎙️ Voice to Text + Grammar Fix</h3>
+        <button id="startVoiceBtn" class="voice-btn">🎤 Start Speaking</button>
+        <button id="grammarFixBtn" class="grammar-btn">📝 Auto Grammar Correction</button>
+        <textarea id="voiceText" rows="4" placeholder="Your spoken text will appear here... or type manually"></textarea>
+        <button id="saveNoteBtn">💾 Save Note (offline)</button>
+        <div id="savedNotesList" class="response-area" style="max-height:200px; overflow:auto;">
+            <strong>📌 My Notes:</strong><br>
+            <div id="notesContainer">Loading...</div>
         </div>
     </div>
 </div>
 
-<div class="bottom-bar" id="bottomBar"></div>
+<!-- ==================== DESIGN STUDIO ==================== -->
+<div id="design" class="tab-pane">
+    <div class="card">
+        <h3>🖌️ Poster / Design Automation</h3>
+        <canvas id="designCanvas" width="500" height="300" style="width:100%; height:auto; max-width:500px; background:#fff;"></canvas>
+        <div style="display: flex; flex-wrap: wrap; gap:8px; margin:10px 0;">
+            <button id="addTextBtn">📝 Add Text</button>
+            <button id="clearCanvasBtn">🗑️ Clear</button>
+            <button id="exportCanvasBtn">📸 Export as PNG</button>
+        </div>
+        <input type="color" id="colorPicker" value="#ff9800">
+        <span>Draw / click on canvas to add circles</span>
+        <p><small>💡 Tip: Click on canvas to draw dots, use color picker.</small></p>
+        <div class="response-area" id="designTips">✨ Create resumes, posters, greeting cards – save locally.</div>
+    </div>
+</div>
+
+<!-- ==================== ANNS AI ==================== -->
+<div id="anns" class="tab-pane">
+    <div class="card">
+        <h3>🤖 AnnS AI Assistant (Career + Creativity)</h3>
+        <input type="text" id="annsQuestion" placeholder="Ask anything: career, exam, design tip...">
+        <button id="askAnnSBtn">💬 Ask AnnS</button>
+        <div id="annsAnswer" class="response-area">✨ AnnS will answer here (offline + online knowledge)</div>
+        <p><small>🔍 Uses local knowledge if offline; when online calls backend for deeper answers.</small></p>
+    </div>
+</div>
+
+<!-- ==================== SCANNER (QR + OCR) ==================== -->
+<div id="scanner" class="tab-pane">
+    <div class="card">
+        <h3>📷 QR Code Scanner & Document Text</h3>
+        <div id="qr-reader" class="qr-scanner" style="width:100%;"></div>
+        <button id="startScannerBtn">🔍 Start QR Scanner</button>
+        <button id="stopScannerBtn">⏹️ Stop Scanner</button>
+        <p><strong>Scanned Result:</strong> <span id="qrResult">-</span></p>
+        <hr>
+        <h4>📄 Document Text (OCR - Online)</h4>
+        <input type="file" id="ocrImageInput" accept="image/*">
+        <button id="ocrBtn">📄 Extract Text (Online)</button>
+        <div id="ocrResult" class="response-area">Extracted text will appear here...</div>
+    </div>
+</div>
+
+<!-- ==================== GD ROOMS & SHARE PROBLEM ==================== -->
+<div id="gd" class="tab-pane">
+    <div class="card">
+        <h3>💬 Group Discussion Rooms (Local-first)</h3>
+        <p><strong>Share your problem or start discussion:</strong></p>
+        <textarea id="problemText" rows="3" placeholder="What's on your mind? Career dilemma, study problem..."></textarea>
+        <button id="shareProblemBtn">📤 Save & Share (generate QR)</button>
+        <div id="generatedQR" style="margin-top: 10px;"></div>
+        <hr>
+        <h3>🗣️ GD Rooms (P2P Chat - simplified)</h3>
+        <p>Room ID: <input id="roomIdInput" placeholder="Enter room name" value="career_hub"> 
+        <button id="joinRoomBtn">Join Room</button></p>
+        <div id="gdMessages" class="response-area" style="height:200px; overflow-y:scroll; background:#f3f0e6;"></div>
+        <input type="text" id="gdMessageInput" placeholder="Type your message...">
+        <button id="sendGdMsgBtn">Send</button>
+        <p><small>📡 Note: Real-time chat uses WebRTC (demo). For full offline, messages stored locally per room.</small></p>
+    </div>
+</div>
+
+<footer>💡 All data stays on your device (IndexedDB). AnnS AI works offline with cached knowledge.</footer>
 
 <script>
-    // ========== ANONYMOUS ID ==========
-    let anonymousId = localStorage.getItem('anns_final_id');
-    if (!anonymousId) {
-        anonymousId = 'STU-' + Math.floor(Math.random() * 900000 + 100000);
-        localStorage.setItem('anns_final_id', anonymousId);
+    // ---------- UTILITIES ----------
+    const API_BASE = 'http://localhost:8000';   // ← CHANGE AFTER DEPLOYING BACKEND
+    let currentCanvas = null;
+    let ctx = null;
+    let drawingMode = false;
+
+    // IndexedDB setup for notes & designs
+    let db;
+    const DB_NAME = 'DilKeAnnS_CreativeDB';
+    const DB_VERSION = 1;
+    function openDB() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => { db = request.result; resolve(db); };
+            request.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains('notes')) {
+                    db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
+                }
+                if (!db.objectStoreNames.contains('designs')) {
+                    db.createObjectStore('designs', { keyPath: 'id', autoIncrement: true });
+                }
+                if (!db.objectStoreNames.contains('gdMessages')) {
+                    db.createObjectStore('gdMessages', { keyPath: 'id', autoIncrement: true });
+                }
+            };
+        });
     }
 
-    // ========== COMPREHENSIVE ANSWER DATABASE ==========
-    const answerDatabase = {
-        'full form of upsc': 'UPSC stands for Union Public Service Commission. It conducts Civil Services Examination (CSE) for IAS, IPS, IFS, and other central services.',
-        'what is upsc': 'UPSC (Union Public Service Commission) is India\'s central recruiting agency for civil services. It conducts exams like CSE, NDA, CDS, CAPF, etc.',
-        'doppler effect': 'The Doppler Effect is the change in frequency of a wave relative to an observer moving relative to the wave source. Example: Ambulance siren sounds higher pitch when approaching and lower when moving away.',
-        'newton first law': "Newton's First Law (Law of Inertia): An object remains at rest or in uniform motion unless acted by an external force. Example: A book stays on table until pushed.",
-        'newton second law': "Newton's Second Law: Force = Mass × Acceleration (F = ma). The acceleration of an object depends on the net force acting on it and its mass.",
-        'newton third law': "Newton's Third Law: For every action, there is an equal and opposite reaction. Example: When you jump, you push down on Earth and Earth pushes you up.",
-        'neet cutoff': 'NEET UG 2024 Cutoff: General 720-137 marks (50th percentile), OBC 136-107, SC 118-96, ST 118-96 (40th percentile for reserved).',
-        'upsc age limit': 'UPSC Age Limit for CSE 2025: General 21-32 years (6 attempts), OBC 21-35 years (9 attempts), SC/ST 21-37 years (unlimited).',
-        'upsc attempt': 'UPSC Attempt Limits: General 6 attempts, OBC 9 attempts, SC/ST unlimited attempts. PwD: 9 attempts for General/OBC, unlimited for SC/ST.',
-        'ssc cgl': 'SSC CGL Eligibility: Bachelor\'s degree from recognized university, Age 18-32 years, relaxation for SC/ST (5 years) and OBC (3 years).',
-        'ssc full form': 'SSC stands for Staff Selection Commission. It conducts exams for recruitment to Group B and Group C posts in government departments.',
-        'pm scholarship': 'PMSSS (PM Scholarship Scheme): ₹50,000 per year for Class 12 passed students with 80%+ marks and family income below ₹6 lakhs. Apply at scholarships.gov.in.',
-        'gst full form': 'GST stands for Goods and Services Tax. It is an indirect tax implemented in India on July 1, 2017 - "One Nation One Tax".',
-        'computer full form': 'COMPUTER stands for Common Operating Machine Purposely Used for Technological and Educational Research.',
-        'pdf full form': 'PDF stands for Portable Document Format, developed by Adobe Systems for document sharing.',
-        'html full form': 'HTML stands for HyperText Markup Language, the standard language for creating web pages.',
-        'basic full form': 'BASIC stands for Beginner\'s All-purpose Symbolic Instruction Code, a family of high-level programming languages.',
-        'india full form': 'INDIA is not an acronym. The name comes from the Indus River. However, an informal backronym: Independent Nation Declared In August.',
-        'what is gst': 'GST (Goods and Services Tax) is a value-added tax levied on most goods and services sold for domestic consumption. It replaced many indirect taxes.',
-        'what is cloud computing': 'Cloud computing is delivery of computing services (servers, storage, databases, networking, software) over the internet ("the cloud").',
-        'what is ai': 'Artificial Intelligence (AI) is simulation of human intelligence in machines programmed to think and learn. Examples: ChatGPT, self-driving cars.',
-        'what is ias': 'IAS (Indian Administrative Service) is the premier civil service of India. Officers hold key positions like District Collector, Cabinet Secretary.',
-        'what is ips': 'IPS (Indian Police Service) officers lead police forces, CBI, RAW. They maintain law and order across India.',
-        'what is ifs': 'IFS (Indian Foreign Service) officers represent India abroad as diplomats, ambassadors, high commissioners.'
-    };
+    async function saveNote(text) {
+        const note = { text: text, timestamp: new Date().toISOString() };
+        const tx = db.transaction('notes', 'readwrite');
+        const store = tx.objectStore('notes');
+        store.add(note);
+        await tx.complete;
+        loadNotes();
+    }
 
-    function getAnswerFromDB(question) {
-        let lower = question.toLowerCase().trim();
-        for (let [key, answer] of Object.entries(answerDatabase)) {
-            if (lower.includes(key)) {
-                return answer;
+    async function loadNotes() {
+        if (!db) await openDB();
+        const tx = db.transaction('notes', 'readonly');
+        const store = tx.objectStore('notes');
+        const notes = await store.getAll();
+        const container = document.getElementById('notesContainer');
+        if (notes.length === 0) container.innerHTML = 'No notes yet.';
+        else {
+            container.innerHTML = notes.map(n => `<div>📄 ${escapeHtml(n.text.substring(0,80))} <small>(${new Date(n.timestamp).toLocaleString()})</small></div>`).join('');
+        }
+    }
+
+    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+    // ---------- VOICE + GRAMMAR ----------
+    let recognition;
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'hi-IN,en-IN';
+        recognition.interimResults = false;
+        recognition.onresult = (e) => {
+            const transcript = e.results[0][0].transcript;
+            document.getElementById('voiceText').value = transcript;
+        };
+        recognition.onerror = (e) => console.warn(e);
+    }
+    document.getElementById('startVoiceBtn')?.addEventListener('click', () => {
+        if(recognition) recognition.start();
+        else alert('Voice input not supported in this browser.');
+    });
+    // Simple grammar correction (basic)
+    function simpleGrammarFix(text) {
+        let fixed = text.replace(/\bi\s+is\b/gi, 'I am');
+        fixed = fixed.replace(/\bi\s+am\s+are\b/gi, 'I am');
+        fixed = fixed.replace(/\bhe\s+are\b/gi, 'he is');
+        fixed = fixed.replace(/\bshe\s+are\b/gi, 'she is');
+        fixed = fixed.replace(/\bthere\s+is\s+many\b/gi, 'there are many');
+        return fixed;
+    }
+    document.getElementById('grammarFixBtn')?.addEventListener('click', () => {
+        let txt = document.getElementById('voiceText').value;
+        txt = simpleGrammarFix(txt);
+        document.getElementById('voiceText').value = txt;
+    });
+    document.getElementById('saveNoteBtn')?.addEventListener('click', async () => {
+        const text = document.getElementById('voiceText').value.trim();
+        if(text) await saveNote(text);
+        else alert('Nothing to save.');
+    });
+
+    // ---------- DESIGN STUDIO (Canvas) ----------
+    function initCanvas() {
+        const canvas = document.getElementById('designCanvas');
+        canvas.width = 500; canvas.height = 300;
+        ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+            ctx.fillStyle = document.getElementById('colorPicker').value;
+            ctx.beginPath();
+            ctx.arc(x, y, 10, 0, Math.PI*2);
+            ctx.fill();
+        });
+        document.getElementById('addTextBtn')?.addEventListener('click', () => {
+            const text = prompt('Enter text for poster:','Career Saathi');
+            if(text){
+                ctx.font = 'bold 20px "Segoe UI"';
+                ctx.fillStyle = document.getElementById('colorPicker').value;
+                ctx.fillText(text, 50, 80);
             }
-        }
-        return null;
-    }
-
-    function getSmartAnswer(question) {
-        let dbAnswer = getAnswerFromDB(question);
-        if (dbAnswer) {
-            return { answer: dbAnswer, sources: ['📚 Official Sources'] };
-        }
-        
-        if (question.includes('?') || question.toLowerCase().startsWith('what') || question.toLowerCase().startsWith('how') || question.toLowerCase().startsWith('why')) {
-            return { 
-                answer: `I understand your question: "${question.substring(0, 80)}${question.length > 80 ? '...' : ''}"\n\nFor the best answer, please ask specific questions like:\n• What is UPSC?\n• Full form of GDP?\n• NEET cutoff 2024?\n• Explain Newton's first law\n• SSC CGL eligibility\n• What is Doppler effect?`, 
-                sources: ['💡 Try asking specific question'] 
-            };
-        }
-        
-        return { 
-            answer: `"${question.substring(0, 100)}"\n\nI can help you with:\n• Exam details (UPSC, SSC, NEET, JEE)\n• Science concepts (Doppler effect, Newton's laws)\n• Full forms (GST, PDF, HTML, BASIC)\n• Career guidance (IAS, IPS, IFS)\n• Government schemes (PMSSS, Scholarships)\n\nAsk me anything specific!`, 
-            sources: ['✨ Ask any question'] 
-        };
-    }
-
-    function detectLanguage(text) {
-        if (/[\u0900-\u097F]/.test(text)) return 'Hindi';
-        if (/[\u0B80-\u0BFF]/.test(text)) return 'Tamil';
-        if (/[\u0C00-\u0C7F]/.test(text)) return 'Telugu';
-        return 'English';
-    }
-
-    // ========== HISTORY & STATS ==========
-    let askedQuestions = JSON.parse(localStorage.getItem('anns_final_asked')) || [];
-    let stats = JSON.parse(localStorage.getItem('anns_final_stats')) || { total: 0, prevented: 0 };
-    let detectedLangs = new Set(JSON.parse(localStorage.getItem('anns_final_langs')) || []);
-
-    function updateStats() {
-        document.getElementById('totalAnswers').innerText = stats.total;
-        document.getElementById('repetitionsPrevented').innerText = stats.prevented;
-        document.getElementById('languagesCount').innerText = detectedLangs.size;
-    }
-
-    function addToHistory(question, answer, lang) {
-        let existing = askedQuestions.find(q => q.question.toLowerCase() === question.toLowerCase());
-        if (existing) {
-            stats.prevented++;
-            localStorage.setItem('anns_final_stats', JSON.stringify(stats));
-            updateStats();
-            return { repeated: true, message: `⚠️ Already asked: "${existing.question.substring(0, 50)}..."` };
-        }
-        
-        askedQuestions.unshift({ question, answer, date: new Date().toLocaleString(), lang: lang });
-        if (askedQuestions.length > 30) askedQuestions.pop();
-        localStorage.setItem('anns_final_asked', JSON.stringify(askedQuestions));
-        
-        detectedLangs.add(lang);
-        localStorage.setItem('anns_final_langs', JSON.stringify([...detectedLangs]));
-        
-        stats.total++;
-        localStorage.setItem('anns_final_stats', JSON.stringify(stats));
-        updateStats();
-        renderHistory();
-        return { repeated: false };
-    }
-
-    function renderHistory() {
-        const container = document.getElementById('historyList');
-        if (askedQuestions.length === 0) {
-            container.innerHTML = '<div style="text-align:center; color:#94A3B8; padding:12px;">No questions yet</div>';
-            return;
-        }
-        container.innerHTML = '';
-        askedQuestions.slice(0, 15).forEach(q => {
-            container.innerHTML += `<div class="history-item" onclick="reaskQuestion('${q.question.replace(/'/g, "\\'")}')">🌐 ${q.lang}: ${q.question.substring(0, 45)}...<br><span style="font-size:7px;">📅 ${q.date}</span></div>`;
+        });
+        document.getElementById('clearCanvasBtn')?.addEventListener('click', () => {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+        });
+        document.getElementById('exportCanvasBtn')?.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'design.png';
+            link.href = canvas.toDataURL();
+            link.click();
         });
     }
 
-    function reaskQuestion(question) {
-        document.getElementById('questionInput').value = question;
-        processQuestion(question);
-        document.querySelector('.door-btn[data-door="ask"]').click();
-    }
-
-    function processQuestion(question) {
-        if (!question.trim()) return;
-        
-        let detectedLang = detectLanguage(question);
-        document.getElementById('voiceDetected').innerHTML = `🌐 Detected: ${detectedLang}`;
-        
-        let answerData = getSmartAnswer(question);
-        let result = addToHistory(question, answerData.answer, detectedLang);
-        
-        if (result.repeated) {
-            document.getElementById('answerQuestion').innerHTML = `❓ ${question}`;
-            document.getElementById('answerText').innerHTML = result.message;
-            document.getElementById('answerSources').innerHTML = '';
-        } else {
-            document.getElementById('answerQuestion').innerHTML = `❓ ${question} <span style="font-size:8px;">(${detectedLang})</span>`;
-            document.getElementById('answerText').innerHTML = answerData.answer;
-            document.getElementById('answerSources').innerHTML = `🔗 ${answerData.sources[0]}`;
-        }
-        document.getElementById('answerBox').classList.add('show');
-    }
-
-    // ========== VOICE RECOGNITION ==========
-    let selectedLang = '';
-    document.querySelectorAll('.lang-chip').forEach(chip => {
-        chip.onclick = function() {
-            document.querySelectorAll('.lang-chip').forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            selectedLang = this.dataset.lang === 'auto' ? '' : this.dataset.lang;
-        };
-    });
-
-    let voiceRecognition;
-    const micBtn = document.getElementById('micBtn');
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        micBtn.onclick = () => {
-            voiceRecognition = new SpeechRecognition();
-            voiceRecognition.lang = selectedLang || '';
-            voiceRecognition.onstart = () => { micBtn.classList.add('listening'); document.getElementById('voiceText').innerHTML = '🎙️ Listening...'; };
-            voiceRecognition.onend = () => { micBtn.classList.remove('listening'); };
-            voiceRecognition.onresult = (e) => {
-                let spoken = e.results[0][0].transcript;
-                let detectedLang = detectLanguage(spoken);
-                document.getElementById('voiceText').innerHTML = `🗣️ "${spoken}"`;
-                document.getElementById('voiceDetected').innerHTML = `🌐 Detected: ${detectedLang}`;
-                document.getElementById('questionInput').value = spoken;
-                processQuestion(spoken);
-            };
-            voiceRecognition.start();
-        };
-    }
-
-    // ========== VOICE CORRECTOR ==========
-    let correctorRec;
-    const correctorMic = document.getElementById('correctorMicBtn');
-    if (correctorMic && ('webkitSpeechRecognition' in window)) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        correctorMic.onclick = () => {
-            correctorRec = new SpeechRecognition();
-            correctorRec.lang = 'en-IN';
-            correctorRec.onstart = () => correctorMic.classList.add('listening');
-            correctorRec.onend = () => correctorMic.classList.remove('listening');
-            correctorRec.onresult = (e) => {
-                let spoken = e.results[0][0].transcript;
-                document.getElementById('originalText').innerHTML = `❌ Original: "${spoken}"`;
-                let corrected = spoken;
-                let explanation = '';
-                
-                if (/recieve/i.test(spoken)) {
-                    corrected = corrected.replace(/recieve/gi, 'receive');
-                    explanation = '📖 Spelling: recieve → receive (i before e except after c)';
-                } else if (/\b(he|she|it) go\b/i.test(spoken)) {
-                    corrected = corrected.replace(/\b(he|she|it) go\b/gi, '$1 goes');
-                    explanation = '📖 Grammar: He/She/It + goes (adds "s")';
-                } else if (/\b(he|she|it) play\b/i.test(spoken)) {
-                    corrected = corrected.replace(/\b(he|she|it) play\b/gi, '$1 plays');
-                    explanation = '📖 Grammar: He/She/It + plays (adds "s")';
-                } else if (spoken.includes('have pass')) {
-                    corrected = corrected.replace(/have pass/g, 'have passed');
-                    explanation = '📖 Tense: have + past participle (passed)';
-                } else if (spoken.includes('yesterday') && !spoken.includes('ed')) {
-                    explanation = '📖 Tip: Use past tense for yesterday (went, played, ate)';
-                } else {
-                    explanation = '✨ No mistakes found! Great job!';
-                }
-                document.getElementById('correctedText').innerHTML = `✅ Corrected: "${corrected}"`;
-                document.getElementById('correctionExplanation').innerHTML = explanation;
-            };
-            correctorRec.start();
-        };
-    }
-
-    // ========== WRITING CORRECTOR ==========
-    document.getElementById('correctWritingBtn').onclick = () => {
-        let text = document.getElementById('writingInput').value;
-        if (!text) return;
-        
-        document.getElementById('originalWriting').innerHTML = `❌ Original: "${text}"`;
-        let corrected = text;
-        let explanation = '';
-        
-        if (/recieve/i.test(text)) {
-            corrected = corrected.replace(/recieve/gi, 'receive');
-            explanation = 'Spelling: recieve → receive';
-        } else if (/\b(he|she|it) go\b/i.test(text)) {
-            corrected = corrected.replace(/\b(he|she|it) go\b/gi, '$1 goes');
-            explanation = 'Grammar: He/She/It + goes';
-        } else if (/\b(he|she|it) play\b/i.test(text)) {
-            corrected = corrected.replace(/\b(he|she|it) play\b/gi, '$1 plays');
-            explanation = 'Grammar: He/She/It + plays';
-        } else if (text.includes('have pass')) {
-            corrected = corrected.replace(/have pass/g, 'have passed');
-            explanation = 'Tense: have + past participle';
-        } else if (text.includes('yesterday') && !text.includes('ed')) {
-            explanation = 'Tip: Use past tense for yesterday';
-        } else {
-            explanation = 'No mistakes found! Great writing!';
-        }
-        document.getElementById('correctedWriting').innerHTML = `✅ Corrected: "${corrected}"`;
-        document.getElementById('writingExplanation').innerHTML = `📖 ${explanation}`;
+    // ---------- ANNS AI (fetch backend or offline fallback) ----------
+    const offlineKnowledge = {
+        'career after 10th': 'You can choose Science, Commerce, Arts, or vocational courses. Explore our After 10th tile.',
+        'design career': 'Graphic design, UX/UI, fashion design – start with Canva and build a portfolio.'
     };
-
-    // ========== SCANNER WITH FRONT/BACK CAMERA ==========
-    let video = document.getElementById('camera');
-    let currentStream = null;
-    let currentFacing = 'environment';
-    let scannedText = '';
-
-    async function startCamera(facingMode) {
-        if (currentStream) {
-            currentStream.getTracks().forEach(track => track.stop());
-        }
+    async function askAnnS(question) {
+        const answerDiv = document.getElementById('annsAnswer');
+        answerDiv.innerHTML = '🤔 Thinking...';
         try {
-            currentStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: facingMode } } });
-            video.srcObject = currentStream;
-            video.style.display = 'block';
-        } catch (err) {
-            try {
-                currentStream = await navigator.mediaDevices.getUserMedia({ video: true });
-                video.srcObject = currentStream;
-                video.style.display = 'block';
-            } catch(e) { alert('Camera not available'); }
+            const res = await fetch(`${API_BASE}/anns-ai/ask?q=${encodeURIComponent(question)}`);
+            if(res.ok) {
+                const data = await res.json();
+                answerDiv.innerHTML = `<strong>AnnS:</strong> ${data.answer || data.message}<br><small>source: backend</small>`;
+                return;
+            }
+        } catch(e) { console.log('Backend offline, using local'); }
+        // fallback offline
+        let answer = "I don't know that yet. Please check Study Material tile.";
+        const qlow = question.toLowerCase();
+        for(let key in offlineKnowledge) {
+            if(qlow.includes(key)) answer = offlineKnowledge[key];
         }
+        answerDiv.innerHTML = `<strong>AnnS (offline):</strong> ${answer}<br><small>⚡ offline mode</small>`;
     }
-
-    document.getElementById('startCameraBtn').onclick = () => startCamera(currentFacing);
-    document.getElementById('stopCameraBtn').onclick = () => {
-        if (currentStream) { currentStream.getTracks().forEach(t => t.stop()); video.style.display = 'none'; }
-    };
-    document.getElementById('switchCameraBtn').onclick = () => {
-        currentFacing = currentFacing === 'environment' ? 'user' : 'environment';
-        startCamera(currentFacing);
-    };
-    document.getElementById('captureBtn').onclick = () => {
-        let text = prompt('📷 Enter text from image:');
-        if (text) { scannedText = text; document.getElementById('scannedOutput').innerHTML = text; }
-    };
-    document.getElementById('askScannedBtn').onclick = () => {
-        if (scannedText) {
-            document.getElementById('questionInput').value = scannedText;
-            processQuestion(scannedText);
-            document.querySelector('.door-btn[data-door="ask"]').click();
-        } else { alert('No text captured'); }
-    };
-
-    // ========== SHARE PROBLEM ==========
-    let problemBank = JSON.parse(localStorage.getItem('anns_final_problems')) || [];
-    function renderProblems() {
-        const container = document.getElementById('problemFeed');
-        if (problemBank.length === 0) {
-            container.innerHTML = '<div style="text-align:center; color:#94A3B8; padding:12px;">No problems yet</div>';
-            return;
-        }
-        container.innerHTML = '';
-        problemBank.slice(0, 10).forEach(p => {
-            container.innerHTML += `<div class="history-item" onclick="alert('📌 ${p.subject}: ${p.text}\\n\\n👤 ${p.author}\\n📅 ${p.date}')">📌 ${p.subject}: ${p.text.substring(0, 40)}...<br><span style="font-size:7px;">👤 ${p.author.substring(0,6)} | ${p.date}</span></div>`;
-        });
-    }
-    document.getElementById('shareProblemBtn').onclick = () => {
-        let subject = document.getElementById('problemSubject').value;
-        let text = document.getElementById('problemText').value;
-        if (text) {
-            problemBank.unshift({ id: Date.now(), subject, text, author: anonymousId, date: new Date().toLocaleString() });
-            localStorage.setItem('anns_final_problems', JSON.stringify(problemBank));
-            document.getElementById('problemText').value = '';
-            renderProblems();
-            alert('✅ Problem shared anonymously!');
-        } else { alert('Please type your problem'); }
-    };
-    renderProblems();
-
-    // ========== GD ROOMS ==========
-    const gdRoomsList = ['UPSC Discussion', 'SSC CGL', 'NEET Preparation', 'JEE Maths', 'Current Affairs', 'Career Guidance', 'Motivation Hub'];
-    let currentRoom = null;
-    let roomChats = JSON.parse(localStorage.getItem('anns_final_room_chats')) || {};
-
-    function renderGDRooms() {
-        const container = document.getElementById('gdRoomsList');
-        container.innerHTML = '';
-        gdRoomsList.forEach(room => {
-            container.innerHTML += `<div class="gd-room" onclick="joinGDRoom('${room}')">💬 ${room}</div>`;
-        });
-    }
-
-    function joinGDRoom(room) {
-        currentRoom = room;
-        document.getElementById('activeChatRoom').style.display = 'block';
-        document.getElementById('currentRoomName').innerHTML = room;
-        if (!roomChats[room]) {
-            roomChats[room] = [{ sender: 'ai', text: `🤖 AnnS AI: Welcome to ${room}! Ask any question.`, time: new Date().toLocaleTimeString() }];
-        }
-        renderChatMessages();
-    }
-
-    function renderChatMessages() {
-        const container = document.getElementById('chatMessages');
-        if (!currentRoom || !roomChats[currentRoom]) return;
-        container.innerHTML = '';
-        roomChats[currentRoom].forEach(msg => {
-            container.innerHTML += `<div class="chat-message ${msg.sender === 'user' ? 'user' : 'ai'}"><strong>${msg.sender === 'user' ? anonymousId.substring(0,6) : 'AnnS AI'}:</strong> ${msg.text}</div>`;
-        });
-        container.scrollTop = container.scrollHeight;
-    }
-
-    document.getElementById('sendChatBtn').onclick = () => {
-        let input = document.getElementById('chatInput');
-        if (input.value.trim() && currentRoom) {
-            let userMsg = input.value;
-            roomChats[currentRoom].push({ sender: 'user', text: userMsg, time: new Date().toLocaleTimeString() });
-            localStorage.setItem('anns_final_room_chats', JSON.stringify(roomChats));
-            renderChatMessages();
-            
-            setTimeout(() => {
-                let aiAnswer = getAnswerFromDB(userMsg);
-                if (!aiAnswer) {
-                    aiAnswer = `Thank you for your question. For best results, ask specific questions like:\n• What is UPSC?\n• NEET cutoff 2024?\n• Explain Doppler effect\n• Full form of GST`;
-                }
-                roomChats[currentRoom].push({ sender: 'ai', text: aiAnswer, time: new Date().toLocaleTimeString() });
-                localStorage.setItem('anns_final_room_chats', JSON.stringify(roomChats));
-                renderChatMessages();
-            }, 300);
-            input.value = '';
-        }
-    };
-
-    document.getElementById('closeChatBtn').onclick = () => {
-        currentRoom = null;
-        document.getElementById('activeChatRoom').style.display = 'none';
-    };
-    renderGDRooms();
-
-    // ========== EXPORT & CLEAR ==========
-    document.getElementById('exportHistoryBtn').onclick = () => {
-        let data = JSON.stringify(askedQuestions, null, 2);
-        let blob = new Blob([data], {type: 'application/json'});
-        let a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `anns_history_${anonymousId}.json`;
-        a.click();
-        alert('📥 History exported');
-    };
-    document.getElementById('clearHistoryBtn').onclick = () => {
-        if (confirm('Clear all history?')) {
-            askedQuestions = [];
-            stats = { total: 0, prevented: 0 };
-            localStorage.setItem('anns_final_asked', JSON.stringify(askedQuestions));
-            localStorage.setItem('anns_final_stats', JSON.stringify(stats));
-            renderHistory();
-            updateStats();
-            alert('🗑️ History cleared');
-        }
-    };
-
-    // ========== NAVIGATION ==========
-    document.querySelectorAll('.door-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
-        });
+    document.getElementById('askAnnSBtn')?.addEventListener('click', () => {
+        const q = document.getElementById('annsQuestion').value;
+        if(q) askAnnS(q);
+        else alert('Type a question.');
     });
 
-    function toggleCard(cardId) {
-        document.getElementById(cardId).classList.toggle('active');
+    // ---------- QR SCANNER (using html5-qrcode) ----------
+    let html5QrCode;
+    function loadQrScanner() {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js';
+        script.onload = () => {
+            html5QrCode = new Html5Qrcode("qr-reader");
+        };
+        document.head.appendChild(script);
     }
+    document.getElementById('startScannerBtn')?.addEventListener('click', () => {
+        if(html5QrCode) {
+            html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, (decodedText) => {
+                document.getElementById('qrResult').innerText = decodedText;
+            }, (err) => console.warn(err));
+        } else alert('QR library loading...');
+    });
+    document.getElementById('stopScannerBtn')?.addEventListener('click', () => {
+        if(html5QrCode) html5QrCode.stop();
+    });
+    // OCR (online using Tesseract.js? but free api: we'll use a public demo OCR)
+    document.getElementById('ocrBtn')?.addEventListener('click', async () => {
+        const fileInput = document.getElementById('ocrImageInput');
+        if(!fileInput.files[0]) { alert('Select an image'); return; }
+        const formData = new FormData();
+        formData.append('image', fileInput.files[0]);
+        document.getElementById('ocrResult').innerHTML = 'Processing OCR...';
+        // Free OCR API (demo, limited) -> using OCR.space free tier
+        try {
+            const res = await fetch('https://api.ocr.space/parse/image', {
+                method: 'POST',
+                body: formData,
+                headers: { 'apikey': 'helloworld' }  // free demo key
+            });
+            const data = await res.json();
+            const text = data.ParsedResults?.[0]?.ParsedText || 'No text found.';
+            document.getElementById('ocrResult').innerHTML = text;
+        } catch(e) {
+            document.getElementById('ocrResult').innerHTML = 'OCR failed. Use QR scanner offline.';
+        }
+    });
 
-    const bottomNav = [
-        { name: "Home", icon: "🏠", link: "index.html" },
-        { name: "Search", icon: "🔍", link: "#" },
-        { name: "AnnS AI", icon: "🤖", link: "#" },
-        { name: "Alerts", icon: "🔔", link: "#" },
-        { name: "Profile", icon: "👤", link: "#" }
-    ];
-    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
-    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => {
-        let link = nav.getAttribute('data-link');
-        if (link && link !== '#') window.location.href = link;
-        else alert('🚀 AnnS AI is active!');
-    }));
+    // ---------- SHARE PROBLEM (Generate QR) ----------
+    document.getElementById('shareProblemBtn')?.addEventListener('click', () => {
+        const problem = document.getElementById('problemText').value;
+        if(!problem) { alert('Write something'); return; }
+        const qrDiv = document.getElementById('generatedQR');
+        qrDiv.innerHTML = '';
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js';
+        script.onload = () => {
+            new QRCode(qrDiv, { text: problem, width: 128, height: 128 });
+        };
+        document.head.appendChild(script);
+    });
 
-    function goBack() { window.location.href = 'index.html'; }
+    // ---------- GD ROOMS (Local storage based chat simulation + simple WebRTC plan) ----------
+    let currentRoom = null;
+    function loadGdMessages(room) {
+        const tx = db.transaction('gdMessages', 'readonly');
+        const store = tx.objectStore('gdMessages');
+        const req = store.getAll();
+        req.onsuccess = () => {
+            const messages = req.result.filter(m => m.room === room);
+            const container = document.getElementById('gdMessages');
+            container.innerHTML = messages.map(m => `<div><strong>${m.sender || 'User'}:</strong> ${escapeHtml(m.text)} <small>${new Date(m.time).toLocaleTimeString()}</small></div>`).join('');
+        };
+    }
+    document.getElementById('joinRoomBtn')?.addEventListener('click', async () => {
+        currentRoom = document.getElementById('roomIdInput').value;
+        loadGdMessages(currentRoom);
+    });
+    document.getElementById('sendGdMsgBtn')?.addEventListener('click', async () => {
+        if(!currentRoom) { alert('Join a room first'); return; }
+        const msg = document.getElementById('gdMessageInput').value;
+        if(!msg) return;
+        const tx = db.transaction('gdMessages', 'readwrite');
+        const store = tx.objectStore('gdMessages');
+        store.add({ room: currentRoom, text: msg, sender: 'Me', time: Date.now() });
+        await tx.complete;
+        loadGdMessages(currentRoom);
+        document.getElementById('gdMessageInput').value = '';
+    });
 
-    document.getElementById('askBtn').onclick = () => {
-        let q = document.getElementById('questionInput').value;
-        processQuestion(q);
-        document.getElementById('questionInput').value = '';
+    // ---------- INITIALIZE ----------
+    window.onload = async () => {
+        await openDB();
+        loadNotes();
+        initCanvas();
+        loadQrScanner();
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        // service worker registration for offline caching (optional)
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(console.log);
+        }
     };
-
-    renderHistory();
-    updateStats();
 </script>
 </body>
 </html>
