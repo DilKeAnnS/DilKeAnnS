@@ -18,7 +18,6 @@
             color: #2D2A24;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
             padding: 16px 16px 22px 16px;
@@ -42,10 +41,6 @@
             width: fit-content;
         }
 
-        .back-button:hover {
-            background: rgba(255,255,255,0.25);
-        }
-
         .logo-section {
             display: flex;
             justify-content: space-between;
@@ -61,12 +56,6 @@
             gap: 10px;
         }
 
-        .logo img {
-            height: 45px;
-            width: auto;
-            border-radius: 12px;
-        }
-
         .logo h1 {
             font-size: 18px;
             font-weight: 700;
@@ -77,55 +66,42 @@
             opacity: 0.85;
         }
 
-        .language-selector select {
-            background: rgba(255,255,255,0.15);
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
         .tagline {
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
             margin: 8px 0 4px;
             opacity: 0.9;
         }
 
-        /* Container */
         .container {
             padding: 20px 16px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* Page Title */
         .page-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #1B4D3E;
             border-left: 5px solid #E67E22;
             padding-left: 15px;
         }
 
         .page-subtitle {
-            font-size: 12px;
+            font-size: 11px;
             color: #64748B;
             margin-bottom: 20px;
             padding-left: 20px;
         }
 
-        /* Door Navigation */
         .door-nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 25px;
+            gap: 6px;
+            margin-bottom: 20px;
             background: white;
-            padding: 10px;
+            padding: 8px;
             border-radius: 50px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             justify-content: center;
@@ -134,8 +110,8 @@
         .door-btn {
             background: transparent;
             border: none;
-            padding: 10px 18px;
-            font-size: 13px;
+            padding: 8px 14px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             border-radius: 40px;
@@ -143,7 +119,7 @@
             color: #64748B;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .door-btn:hover {
@@ -153,19 +129,13 @@
         .door-btn.active {
             background: #E67E22;
             color: white;
-            box-shadow: 0 2px 8px rgba(230,126,34,0.3);
         }
 
         @media (max-width: 550px) {
-            .door-btn .door-label {
-                display: none;
-            }
-            .door-btn {
-                padding: 10px 14px;
-            }
+            .door-btn .door-label { display: none; }
+            .door-btn { padding: 8px 12px; }
         }
 
-        /* Door Content */
         .door-content {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -180,7 +150,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Accordion Cards */
         .accordion-card {
             background: white;
             border-radius: 20px;
@@ -192,7 +161,7 @@
 
         .accordion-header {
             background: white;
-            padding: 16px 18px;
+            padding: 14px 16px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -205,20 +174,16 @@
         }
 
         .accordion-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #1B4D3E;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .accordion-icon {
-            font-size: 22px;
+            gap: 8px;
         }
 
         .accordion-arrow {
-            font-size: 16px;
+            font-size: 14px;
             color: #E67E22;
             transition: transform 0.3s;
         }
@@ -229,27 +194,25 @@
 
         .accordion-content {
             display: none;
-            padding: 20px;
+            padding: 16px;
             background: white;
-            border-top: 1px solid #F0EADF;
         }
 
         .accordion-card.active .accordion-content {
             display: block;
         }
 
-        /* Info Grid */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .info-card {
             background: #F8F9FA;
             border-radius: 16px;
-            padding: 14px;
+            padding: 12px;
             border-left: 3px solid #E67E22;
         }
 
@@ -258,9 +221,6 @@
             color: #E67E22;
             margin-bottom: 6px;
             font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
         .info-text {
@@ -270,45 +230,33 @@
         }
 
         .section-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #1B4D3E;
-            margin: 20px 0 12px 0;
+            margin: 16px 0 12px 0;
             border-left: 3px solid #E67E22;
-            padding-left: 12px;
+            padding-left: 10px;
         }
 
-        .live-link {
-            color: #E67E22;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .live-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Voice Area */
         .voice-area {
             background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
             border-radius: 20px;
             padding: 20px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .mic-btn {
             background: #E67E22;
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             border: none;
-            font-size: 2.5rem;
+            font-size: 2rem;
             cursor: pointer;
-            margin: 0 auto 15px;
+            margin: 0 auto 12px;
             display: block;
-            box-shadow: 0 4px 15px rgba(230,126,34,0.4);
-            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(230,126,34,0.3);
             color: white;
         }
 
@@ -333,24 +281,22 @@
             padding: 12px;
             margin-top: 12px;
             font-size: 13px;
-            color: #2D2A24;
         }
 
-        /* Question Input */
         .question-box {
             background: white;
             border-radius: 20px;
             padding: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             border: 1px solid #E8E2D9;
         }
 
         .question-input {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 16px;
             border: 1px solid #E8E2D9;
             border-radius: 40px;
-            font-size: 14px;
+            font-size: 13px;
             margin-bottom: 12px;
         }
 
@@ -363,12 +309,12 @@
             background: #E67E22;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .btn-primary:hover {
@@ -379,18 +325,17 @@
             background: transparent;
             border: 1px solid #E67E22;
             color: #E67E22;
-            padding: 10px 16px;
+            padding: 8px 14px;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
         }
 
-        /* Answer Box */
         .answer-box {
             background: #F8F9FA;
             border-radius: 20px;
             padding: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             display: none;
             border-left: 4px solid #10B981;
         }
@@ -399,32 +344,13 @@
             display: block;
         }
 
-        .answer-question {
-            font-size: 11px;
-            color: #64748B;
-            margin-bottom: 8px;
-        }
-
-        .answer-text {
-            font-size: 13px;
-            color: #2D2A24;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-
-        .answer-sources {
-            font-size: 10px;
-            color: #E67E22;
-        }
-
-        /* Stats Bar */
         .stats-bar {
             background: white;
             border-radius: 20px;
-            padding: 15px;
+            padding: 12px;
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             border: 1px solid #E8E2D9;
         }
 
@@ -433,22 +359,21 @@
         }
 
         .stat-number {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #E67E22;
         }
 
         .stat-label {
-            font-size: 10px;
+            font-size: 9px;
             color: #64748B;
         }
 
-        /* Feature Grid */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
         @media (max-width: 550px) {
@@ -460,11 +385,11 @@
         .feature-card {
             background: white;
             border-radius: 16px;
-            padding: 14px;
+            padding: 12px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
             border: 1px solid #E8E2D9;
+            transition: all 0.2s;
         }
 
         .feature-card:hover {
@@ -473,53 +398,29 @@
         }
 
         .feature-icon {
-            font-size: 28px;
-            margin-bottom: 6px;
+            font-size: 24px;
+            margin-bottom: 4px;
         }
 
         .feature-name {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
-            color: #2D2A24;
         }
 
-        /* History List */
-        .history-list {
-            max-height: 250px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-        }
-
-        .history-item {
-            background: white;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            font-size: 12px;
-            border: 1px solid #E8E2D9;
-        }
-
-        .history-item:hover {
-            background: #F0EADF;
-        }
-
-        /* Language Chips */
         .lang-chips {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .lang-chip {
             background: white;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 30px;
-            font-size: 11px;
+            font-size: 10px;
             cursor: pointer;
             border: 1px solid #E8E2D9;
-            transition: all 0.2s;
         }
 
         .lang-chip.active {
@@ -528,7 +429,59 @@
             border-color: #E67E22;
         }
 
-        /* Bottom Bar */
+        .gd-room {
+            background: #F8F9FA;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            border: 1px solid #E8E2D9;
+            transition: all 0.2s;
+        }
+
+        .gd-room:hover {
+            background: #F0EADF;
+        }
+
+        .chat-messages {
+            background: #F8F9FA;
+            border-radius: 16px;
+            padding: 12px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+        }
+
+        .chat-message {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 16px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .chat-message.user {
+            background: #E67E22;
+            color: white;
+            margin-left: auto;
+            width: fit-content;
+        }
+
+        .chat-message.ai {
+            background: #F0EADF;
+            width: fit-content;
+        }
+
+        .history-item {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            border: 1px solid #E8E2D9;
+        }
+
         .bottom-bar {
             position: fixed;
             bottom: 0;
@@ -553,15 +506,14 @@
         }
 
         .nav-item span:first-child {
-            font-size: 22px;
+            font-size: 20px;
         }
 
         .nav-item span:last-child {
-            font-size: 10px;
+            font-size: 9px;
             color: #64748B;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -577,8 +529,6 @@
         .modal-content {
             background: white;
             min-height: 100vh;
-            border-radius: 0;
-            animation: slideUp 0.3s ease;
         }
 
         .modal-header {
@@ -594,7 +544,7 @@
             background: rgba(255,255,255,0.2);
             border: none;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -605,37 +555,10 @@
             padding: 20px;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-
         #camera {
             width: 100%;
             border-radius: 16px;
-            margin-top: 10px;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 16px;
-            border: 1px solid #E8E2D9;
-            margin-bottom: 10px;
-            font-family: inherit;
-        }
-
-        .gd-room {
-            background: #F8F9FA;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            border: 1px solid #E8E2D9;
-        }
-
-        .gd-room:hover {
-            background: #F0EADF;
+            display: none;
         }
     </style>
 </head>
@@ -645,21 +568,10 @@
     <div class="back-button" onclick="goBack()">← Back</div>
     <div class="logo-section">
         <div class="logo">
-            <img src="App%20logo.png" alt="Logo" onerror="this.style.display='none'">
             <div>
                 <h1>दिल के अंश</h1>
                 <p>Career Saathi</p>
             </div>
-        </div>
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">🇬🇧 English</option>
-                <option value="hi">🇮🇳 हिंदी</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="bn">🇮🇳 বাংলা</option>
-            </select>
         </div>
     </div>
     <div class="tagline">🤖 AnnS AI - Double Verified Answers | Any Language | Zero Repetition</div>
@@ -680,20 +592,17 @@
         <button class="door-btn" data-door="history">📚 <span class="door-label">History</span></button>
     </div>
 
-    <!-- ==================== DOOR 1: ASK ANN AI ==================== -->
+    <!-- DOOR 1: ASK ANN AI -->
     <div id="door-ask" class="door-content active">
-        <!-- Language Chips -->
         <div class="lang-chips" id="langChips">
             <span class="lang-chip active" data-lang="auto">🌐 Auto</span>
             <span class="lang-chip" data-lang="hi-IN">🇮🇳 हिंदी</span>
             <span class="lang-chip" data-lang="ta-IN">🇮🇳 தமிழ்</span>
             <span class="lang-chip" data-lang="te-IN">🇮🇳 తెలుగు</span>
             <span class="lang-chip" data-lang="mr-IN">🇮🇳 मराठी</span>
-            <span class="lang-chip" data-lang="bn-IN">🇮🇳 বাংলা</span>
             <span class="lang-chip" data-lang="en-US">🇬🇧 English</span>
         </div>
 
-        <!-- Voice Input Area -->
         <div class="voice-area">
             <button class="mic-btn" id="micBtn">🎤</button>
             <div class="voice-result" id="voiceResult">
@@ -702,37 +611,25 @@
             </div>
         </div>
 
-        <!-- Question Input -->
         <div class="question-box">
             <input type="text" class="question-input" id="questionInput" placeholder="Type your question in any language...">
             <button class="btn-primary" id="askBtn">🔍 Get Double Verified Answer</button>
         </div>
 
-        <!-- Answer Display -->
         <div class="answer-box" id="answerBox">
             <div class="answer-question" id="answerQuestion"></div>
             <div class="answer-text" id="answerText"></div>
             <div class="answer-sources" id="answerSources"></div>
         </div>
 
-        <!-- Stats -->
         <div class="stats-bar">
-            <div class="stat">
-                <div class="stat-number" id="totalAnswers">0</div>
-                <div class="stat-label">Answered</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number" id="repetitionsPrevented">0</div>
-                <div class="stat-label">Repetitions<br>Prevented</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number" id="languagesCount">0</div>
-                <div class="stat-label">Languages<br>Used</div>
-            </div>
+            <div class="stat"><div class="stat-number" id="totalAnswers">0</div><div class="stat-label">Answered</div></div>
+            <div class="stat"><div class="stat-number" id="repetitionsPrevented">0</div><div class="stat-label">Repetitions Prevented</div></div>
+            <div class="stat"><div class="stat-number" id="languagesCount">0</div><div class="stat-label">Languages Used</div></div>
         </div>
     </div>
 
-    <!-- ==================== DOOR 2: VOICE LAB ==================== -->
+    <!-- DOOR 2: VOICE LAB -->
     <div id="door-voice" class="door-content">
         <div class="accordion-card" id="voiceCorrectorCard">
             <div class="accordion-header" onclick="toggleCard('voiceCorrectorCard')">
@@ -741,14 +638,14 @@
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📖 HOW IT WORKS</div><div class="info-text">Speak any sentence in English or Hindi. AnnS AI will detect mistakes and suggest corrections with explanations.</div></div>
-                    <div class="info-card"><div class="info-label">✅ FEATURES</div><div class="info-text">• Spelling correction (recieve→receive)<br>• Grammar correction (he go→he goes)<br>• Tense correction (yesterday I go→yesterday I went)<br>• Bilingual support (English & Hindi)</div></div>
+                    <div class="info-card"><div class="info-label">📖 HOW IT WORKS</div><div class="info-text">Speak any sentence. AnnS AI detects mistakes and suggests corrections with explanations.</div></div>
+                    <div class="info-card"><div class="info-label">✅ FEATURES</div><div class="info-text">Spelling correction | Grammar correction | Tense correction | Bilingual support</div></div>
                 </div>
-                <button class="mic-btn" id="correctorMicBtn" style="width:60px; height:60px; font-size:1.8rem; margin:10px auto;">🎤</button>
+                <button class="mic-btn" id="correctorMicBtn" style="width:60px; height:60px; font-size:1.5rem; margin:10px auto;">🎤</button>
                 <div class="voice-result" id="correctorResult">
-                    <p id="originalText" style="color:#E67E22;">—</p>
-                    <p id="correctedText" style="color:#10B981;">—</p>
-                    <p id="correctionExplanation" style="font-size:11px; color:#64748B; margin-top:8px;"></p>
+                    <p id="originalText" style="color:#E67E22; font-size:12px;">—</p>
+                    <p id="correctedText" style="color:#10B981; font-size:12px; margin-top:8px;">—</p>
+                    <p id="correctionExplanation" style="font-size:10px; color:#64748B; margin-top:6px;"></p>
                 </div>
             </div>
         </div>
@@ -759,18 +656,18 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <textarea id="writingInput" rows="3" placeholder="Paste your sentence here for grammar/spelling check..."></textarea>
-                <button class="btn-primary" id="correctWritingBtn">✅ Check & Correct</button>
+                <textarea id="writingInput" rows="3" placeholder="Paste your sentence here for grammar/spelling check..." style="width:100%; padding:12px; border-radius:16px; border:1px solid #E8E2D9;"></textarea>
+                <button class="btn-primary" id="correctWritingBtn" style="margin-top:10px;">✅ Check & Correct</button>
                 <div style="margin-top:12px; background:#F8F9FA; border-radius:16px; padding:12px;">
                     <p id="originalWriting" style="color:#E67E22; font-size:12px;">—</p>
                     <p id="correctedWriting" style="color:#10B981; font-size:12px; margin-top:8px;">—</p>
-                    <p id="writingExplanation" style="font-size:10px; color:#64748B; margin-top:8px;"></p>
+                    <p id="writingExplanation" style="font-size:10px; color:#64748B; margin-top:6px;"></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ==================== DOOR 3: SCANNER ==================== -->
+    <!-- DOOR 3: SCANNER -->
     <div id="door-scanner" class="door-content">
         <div class="accordion-card" id="scannerCard">
             <div class="accordion-header" onclick="toggleCard('scannerCard')">
@@ -780,10 +677,10 @@
             <div class="accordion-content">
                 <div style="text-align:center;">
                     <video id="camera" autoplay playsinline style="width:100%; border-radius:16px; display:none;"></video>
-                    <div class="info-grid" style="margin-top:10px;">
-                        <button id="startCameraBtn" class="btn-primary">📷 Start Camera</button>
-                        <button id="captureBtn" class="btn-outline">📸 Capture</button>
-                        <button id="stopCameraBtn" class="btn-outline">⏹️ Stop</button>
+                    <div style="display:flex; gap:10px; margin-top:10px;">
+                        <button id="startCameraBtn" class="btn-primary" style="flex:1;">📷 Start Camera</button>
+                        <button id="captureBtn" class="btn-outline" style="flex:1;">📸 Capture</button>
+                        <button id="stopCameraBtn" class="btn-outline" style="flex:1;">⏹️ Stop</button>
                     </div>
                     <div style="background:#F8F9FA; border-radius:16px; padding:12px; margin-top:12px;">
                         <p id="scannedOutput" style="color:#2D2A24;">—</p>
@@ -794,7 +691,7 @@
         </div>
     </div>
 
-    <!-- ==================== DOOR 4: SHARE PROBLEM ==================== -->
+    <!-- DOOR 4: SHARE PROBLEM -->
     <div id="door-share" class="door-content">
         <div class="accordion-card" id="shareProblemCard">
             <div class="accordion-header" onclick="toggleCard('shareProblemCard')">
@@ -802,27 +699,22 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Share your study doubts or problems anonymously. Other students can see and help you.</div></div>
-                    <div class="info-card"><div class="info-label">🔒 PRIVACY</div><div class="info-text">Zero personal data shared. Only your anonymous ID is visible to peers.</div></div>
-                </div>
                 <select id="problemSubject" style="width:100%; padding:12px; border-radius:40px; border:1px solid #E8E2D9; margin-bottom:10px;">
                     <option value="Mathematics">📐 Mathematics</option>
                     <option value="Physics">⚡ Physics</option>
                     <option value="Chemistry">🧪 Chemistry</option>
-                    <option value="English">📖 English Grammar</option>
+                    <option value="English">📖 English</option>
                     <option value="General">💡 General Doubt</option>
                 </select>
-                <textarea id="problemText" rows="3" placeholder="Type your problem or doubt here..."></textarea>
-                <button id="shareProblemBtn" class="btn-primary">📤 Share Problem (Anonymous)</button>
-                
-                <div class="section-title" style="margin-top:20px;">📚 Problem Bank (Recent)</div>
-                <div id="problemFeed" style="max-height: 250px; overflow-y: auto;"></div>
+                <textarea id="problemText" rows="3" placeholder="Type your problem or doubt here..." style="width:100%; padding:12px; border-radius:16px; border:1px solid #E8E2D9;"></textarea>
+                <button id="shareProblemBtn" class="btn-primary" style="margin-top:10px;">📤 Share Problem (Anonymous)</button>
+                <div class="section-title" style="margin-top:16px;">📚 Problem Bank</div>
+                <div id="problemFeed" style="max-height: 200px; overflow-y: auto;"></div>
             </div>
         </div>
     </div>
 
-    <!-- ==================== DOOR 5: GD ROOMS ==================== -->
+    <!-- DOOR 5: GD ROOMS - FULLY FUNCTIONAL CHAT -->
     <div id="door-gd" class="door-content">
         <div class="accordion-card" id="gdRoomsCard">
             <div class="accordion-header" onclick="toggleCard('gdRoomsCard')">
@@ -834,12 +726,27 @@
                     <div class="info-card"><div class="info-label">📋 HOW IT WORKS</div><div class="info-text">Join any GD room. Discuss with other students anonymously. AI Moderator ensures respectful discussions.</div></div>
                     <div class="info-card"><div class="info-label">🎯 TOPICS</div><div class="info-text">UPSC, SSC, NEET, JEE, Current Affairs, Career Guidance, AI & Future, Study Abroad, Motivation</div></div>
                 </div>
-                <div id="gdRoomsList"></div>
+                
+                <!-- Room Selection -->
+                <div class="section-title">🎯 Select GD Room</div>
+                <div id="gdRoomsList" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:10px; margin-bottom:16px;"></div>
+                
+                <!-- Active Chat Room -->
+                <div id="activeChatRoom" style="display:none;">
+                    <div class="section-title">💬 <span id="currentRoomName"></span> <button id="closeChatBtn" class="btn-outline" style="font-size:10px; padding:4px 10px; margin-left:10px;">✖ Exit</button></div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-message ai">🤖 AnnS AI Moderator: Welcome! Discuss respectfully. No personal info. Stay on topic.</div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <input type="text" id="chatInput" class="question-input" style="flex:1; margin-bottom:0;" placeholder="Type your message...">
+                        <button id="sendChatBtn" class="btn-primary" style="width:auto;">📤 Send</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- ==================== DOOR 6: FREE TOOLS ==================== -->
+    <!-- DOOR 6: FREE TOOLS -->
     <div id="door-tools" class="door-content">
         <div class="accordion-card" id="freeToolsCard">
             <div class="accordion-header" onclick="toggleCard('freeToolsCard')">
@@ -848,23 +755,23 @@
             </div>
             <div class="accordion-content">
                 <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🤖 AI Tools</div><div class="info-text">• DeepSeek (Free AI Chat, 1M context)<br>• Ideogram (Free AI Image Generator)<br>• Pika Labs (Free AI Video Generator)</div></div>
-                    <div class="info-card"><div class="info-label">🎨 Design Tools</div><div class="info-text">• Microsoft Designer (Free)<br>• Canva Free<br>• Google Slides (Free PPT)</div></div>
-                    <div class="info-card"><div class="info-label">⚡ Automation</div><div class="info-text">• Bardeen (Free Automation)<br>• n8n.io (Free workflow)</div></div>
-                    <div class="info-card"><div class="info-label">📚 Study Resources</div><div class="info-text">• NCERT (ncert.nic.in)<br>• SWAYAM (Free courses)<br>• NPTEL (Engineering)</div></div>
+                    <div class="info-card"><div class="info-label">🤖 AI Tools</div><div class="info-text">• DeepSeek (Free AI Chat)<br>• Ideogram (Free AI Image)<br>• Pika Labs (Free AI Video)</div></div>
+                    <div class="info-card"><div class="info-label">🎨 Design Tools</div><div class="info-text">• Microsoft Designer<br>• Canva Free<br>• Google Slides</div></div>
+                    <div class="info-card"><div class="info-label">⚡ Automation</div><div class="info-text">• Bardeen (Free)<br>• n8n.io</div></div>
+                    <div class="info-card"><div class="info-label">📚 Study Resources</div><div class="info-text">• NCERT (ncert.nic.in)<br>• SWAYAM<br>• NPTEL</div></div>
                 </div>
                 <div class="section-title">📺 Free YouTube Tutorials</div>
-                <div class="info-grid">
-                    <div class="info-card" onclick="openYouTubeSearch('DeepSeek tutorial')"><div class="info-label">🤖 DeepSeek Tutorial</div><div class="info-text">Learn to use free AI chat</div></div>
-                    <div class="info-card" onclick="openYouTubeSearch('AI image generation free')"><div class="info-label">🎨 AI Image Generation</div><div class="info-text">Free tools tutorial</div></div>
-                    <div class="info-card" onclick="openYouTubeSearch('Free video editing')"><div class="info-label">🎬 Free Video Editing</div><div class="info-text">CapCut, DaVinci Resolve</div></div>
-                    <div class="info-card" onclick="openYouTubeSearch('UPSC free preparation')"><div class="info-label">📚 UPSC Free Preparation</div><div class="info-text">Complete guidance</div></div>
+                <div class="feature-grid">
+                    <div class="feature-card" onclick="window.open('https://www.youtube.com/results?search_query=DeepSeek+tutorial', '_blank')"><div class="feature-icon">🤖</div><div class="feature-name">DeepSeek Tutorial</div></div>
+                    <div class="feature-card" onclick="window.open('https://www.youtube.com/results?search_query=AI+image+generation+free', '_blank')"><div class="feature-icon">🎨</div><div class="feature-name">AI Image Generation</div></div>
+                    <div class="feature-card" onclick="window.open('https://www.youtube.com/results?search_query=free+video+editing+tutorial', '_blank')"><div class="feature-icon">🎬</div><div class="feature-name">Free Video Editing</div></div>
+                    <div class="feature-card" onclick="window.open('https://www.youtube.com/results?search_query=UPSC+free+preparation', '_blank')"><div class="feature-icon">📚</div><div class="feature-name">UPSC Free Prep</div></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ==================== DOOR 7: HISTORY ==================== -->
+    <!-- DOOR 7: HISTORY -->
     <div id="door-history" class="door-content">
         <div class="accordion-card" id="historyCard">
             <div class="accordion-header" onclick="toggleCard('historyCard')">
@@ -872,33 +779,27 @@
                 <div class="accordion-arrow">▼</div>
             </div>
             <div class="accordion-content">
-                <div id="historyList" class="history-list">
-                    <div style="text-align:center; color:#94A3B8; padding:20px;">No questions yet. Ask something!</div>
-                </div>
-                <button id="exportHistoryBtn" class="btn-outline" style="width:100%;">📥 Export All Answers</button>
+                <div id="historyList" style="max-height: 300px; overflow-y: auto;"></div>
+                <button id="exportHistoryBtn" class="btn-outline" style="width:100%; margin-top:10px;">📥 Export All Answers</button>
                 <button id="clearHistoryBtn" class="btn-outline" style="width:100%; margin-top:8px;">🗑️ Clear History</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bottom Navigation -->
 <div class="bottom-bar" id="bottomBar"></div>
 
 <script>
     // ========== ANONYMOUS ID ==========
-    let anonymousId = localStorage.getItem('anns_user_id');
-    if (!anonymousId) {
-        anonymousId = 'STU-' + Math.floor(Math.random() * 900000 + 100000);
-        localStorage.setItem('anns_user_id', anonymousId);
-    }
+    let anonymousId = localStorage.getItem('anns_user_id') || ('STU-' + Math.floor(Math.random() * 900000 + 100000));
+    localStorage.setItem('anns_user_id', anonymousId);
 
-    // ========== VERIFIED ANSWERS DATABASE (2+ SOURCES) ==========
+    // ========== VERIFIED ANSWERS DATABASE ==========
     const verifiedDB = {
-        'neet cutoff': { answer: 'NEET UG 2024 Cutoff: General - 720-137 marks (50th percentile), OBC - 136-107, SC/ST - 118-96 (40th percentile)', sources: ['nta.neet.nic.in', 'nmc.org.in'] },
-        'upsc age': { answer: 'UPSC Age Limit: General 21-32 (6 attempts), OBC 21-35 (9), SC/ST 21-37 (unlimited)', sources: ['upsc.gov.in', 'dopt.gov.in'] },
-        'ssc cgl': { answer: 'SSC CGL: Bachelor\'s degree, Age 18-32, relaxations for SC/ST/OBC/PwD', sources: ['ssc.nic.in', 'india.gov.in'] },
-        'pm scholarship': { answer: 'PMSSS: ₹50,000/year, 80%+ in Class 12, income <₹6 lakhs', sources: ['scholarships.gov.in', 'education.gov.in'] }
+        'newton first law': { answer: 'Newton\'s First Law (Law of Inertia): An object remains at rest or in uniform motion unless acted by an external force.', sources: ['ncert.nic.in', 'physics.ncert.gov.in'] },
+        'neet cutoff': { answer: 'NEET UG 2024 Cutoff: General 720-137, OBC 136-107, SC/ST 118-96', sources: ['nta.neet.nic.in', 'nmc.org.in'] },
+        'upsc age': { answer: 'UPSC Age Limit: General 21-32 (6 attempts), OBC 21-35 (9), SC/ST 21-37', sources: ['upsc.gov.in', 'dopt.gov.in'] },
+        'ssc cgl': { answer: 'SSC CGL: Bachelor\'s degree, Age 18-32, relaxation for SC/ST/OBC', sources: ['ssc.nic.in', 'india.gov.in'] }
     };
 
     function getVerifiedAnswer(question) {
@@ -906,26 +807,18 @@
         for (let [key, data] of Object.entries(verifiedDB)) {
             if (lower.includes(key)) return data;
         }
-        return { answer: 'For accurate information, visit official sources: upsc.gov.in, nta.ac.in, ssc.nic.in, scholarships.gov.in. Rephrase your question for specific guidance.', sources: ['india.gov.in', 'education.gov.in'] };
+        return { answer: 'For accurate information, visit official sources: upsc.gov.in, nta.ac.in, ssc.nic.in', sources: ['india.gov.in', 'education.gov.in'] };
     }
 
-    // ========== LANGUAGE DETECTION ==========
+    // Language Detection
     function detectLanguage(text) {
-        const scripts = [
-            { name: 'Hindi', regex: /[\u0900-\u097F]/, code: 'hi' },
-            { name: 'Tamil', regex: /[\u0B80-\u0BFF]/, code: 'ta' },
-            { name: 'Telugu', regex: /[\u0C00-\u0C7F]/, code: 'te' },
-            { name: 'Marathi', regex: /[\u0900-\u097F]/, code: 'mr' },
-            { name: 'Bengali', regex: /[\u0980-\u09FF]/, code: 'bn' },
-            { name: 'English', regex: /[a-zA-Z]/, code: 'en' }
-        ];
-        for (let script of scripts) {
-            if (script.regex.test(text)) return { name: script.name, code: script.code };
-        }
+        if (/[\u0900-\u097F]/.test(text)) return { name: 'Hindi', code: 'hi' };
+        if (/[\u0B80-\u0BFF]/.test(text)) return { name: 'Tamil', code: 'ta' };
+        if (/[\u0C00-\u0C7F]/.test(text)) return { name: 'Telugu', code: 'te' };
         return { name: 'English', code: 'en' };
     }
 
-    // ========== ZERO REPETITION TRACKER ==========
+    // Zero Repetition Tracker
     let askedQuestions = JSON.parse(localStorage.getItem('anns_asked')) || [];
     let stats = JSON.parse(localStorage.getItem('anns_stats')) || { total: 0, prevented: 0 };
     let detectedLangs = new Set(JSON.parse(localStorage.getItem('anns_langs')) || []);
@@ -942,7 +835,7 @@
             stats.prevented++;
             localStorage.setItem('anns_stats', JSON.stringify(stats));
             updateStats();
-            return { repeated: true, message: `⚠️ Already asked on ${existing.date}: "${existing.question.substring(0, 50)}..."` };
+            return { repeated: true, message: `⚠️ Already asked on ${existing.date}` };
         }
         askedQuestions.unshift({ question, answer, date: new Date().toLocaleString(), lang: detectedLang });
         if (askedQuestions.length > 30) askedQuestions.pop();
@@ -958,21 +851,18 @@
 
     function renderHistory() {
         const container = document.getElementById('historyList');
-        if (askedQuestions.length === 0) {
-            container.innerHTML = '<div style="text-align:center; color:#94A3B8; padding:20px;">No questions yet. Ask something!</div>';
-            return;
-        }
+        if (askedQuestions.length === 0) { container.innerHTML = '<div style="text-align:center; color:#94A3B8; padding:20px;">No questions yet</div>'; return; }
         container.innerHTML = '';
         askedQuestions.slice(0, 15).forEach(q => {
-            container.innerHTML += `<div class="history-item" onclick="reaskQuestion('${q.question.replace(/'/g, "\\'")}')">🌐 ${q.lang}: ${q.question.substring(0, 50)}${q.question.length > 50 ? '...' : ''}<br><span style="font-size:10px; color:#64748B;">📅 ${q.date}</span></div>`;
+            container.innerHTML += `<div class="history-item" onclick="reaskQuestion('${q.question.replace(/'/g, "\\'")}')">🌐 ${q.lang}: ${q.question.substring(0, 50)}...<br><span style="font-size:9px;">📅 ${q.date}</span></div>`;
         });
     }
 
-    window.reaskQuestion = (question) => {
+    function reaskQuestion(question) {
         document.getElementById('questionInput').value = question;
         processQuestion(question);
         document.querySelector('.door-btn[data-door="ask"]').click();
-    };
+    }
 
     function processQuestion(question) {
         if (!question.trim()) return;
@@ -983,33 +873,32 @@
         if (result.repeated) {
             document.getElementById('answerQuestion').innerHTML = `❓ ${question}`;
             document.getElementById('answerText').innerHTML = result.message;
-            document.getElementById('answerSources').innerHTML = '';
         } else {
-            document.getElementById('answerQuestion').innerHTML = `❓ ${question} <span style="font-size:10px;">(${detected.name})</span>`;
+            document.getElementById('answerQuestion').innerHTML = `❓ ${question} <span style="font-size:9px;">(${detected.name})</span>`;
             document.getElementById('answerText').innerHTML = answerData.answer;
-            document.getElementById('answerSources').innerHTML = `🔗 Verified from: ${answerData.sources.join(' | ')}`;
+            document.getElementById('answerSources').innerHTML = `🔗 Sources: ${answerData.sources.join(' | ')}`;
         }
         document.getElementById('answerBox').classList.add('show');
     }
 
-    // ========== VOICE RECOGNITION ==========
+    // Voice Recognition
     let selectedLang = '';
     document.querySelectorAll('.lang-chip').forEach(chip => {
-        chip.onclick = () => {
+        chip.onclick = function() {
             document.querySelectorAll('.lang-chip').forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            selectedLang = chip.dataset.lang === 'auto' ? '' : chip.dataset.lang;
+            this.classList.add('active');
+            selectedLang = this.dataset.lang === 'auto' ? '' : this.dataset.lang;
         };
     });
 
-    let recognition = null;
+    let recognition;
     const micBtn = document.getElementById('micBtn');
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    if ('webkitSpeechRecognition' in window) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         micBtn.onclick = () => {
             recognition = new SpeechRecognition();
             recognition.lang = selectedLang || '';
-            recognition.onstart = () => { micBtn.classList.add('listening'); document.getElementById('voiceText').innerHTML = '🎙️ Listening... Speak now'; };
+            recognition.onstart = () => { micBtn.classList.add('listening'); document.getElementById('voiceText').innerHTML = '🎙️ Listening...'; };
             recognition.onend = () => { micBtn.classList.remove('listening'); };
             recognition.onresult = (e) => {
                 let spoken = e.results[0][0].transcript;
@@ -1023,70 +912,75 @@
         };
     }
 
-    // ========== VOICE CORRECTOR ==========
-    let correctorRecognition = null;
+    // Voice Corrector (WORKING)
+    let correctorRec;
     const correctorMic = document.getElementById('correctorMicBtn');
-    if (correctorMic && ('webkitSpeechRecognition' in window)) {
+    if (correctorMic && 'webkitSpeechRecognition' in window) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         correctorMic.onclick = () => {
-            correctorRecognition = new SpeechRecognition();
-            correctorRecognition.lang = 'en-IN';
-            correctorRecognition.onresult = (e) => {
+            correctorRec = new SpeechRecognition();
+            correctorRec.lang = 'en-IN';
+            correctorRec.onstart = () => correctorMic.classList.add('listening');
+            correctorRec.onend = () => correctorMic.classList.remove('listening');
+            correctorRec.onresult = (e) => {
                 let spoken = e.results[0][0].transcript;
                 document.getElementById('originalText').innerHTML = `❌ Original: "${spoken}"`;
-                let corrected = spoken.replace(/recieve/g, 'receive').replace(/teh/g, 'the').replace(/\b(he|she|it) (go|play)\b/gi, '$1 $2s');
+                let corrected = spoken;
+                let explanation = '';
+                if (/recieve/i.test(spoken)) { corrected = corrected.replace(/recieve/gi, 'receive'); explanation = '📖 Spelling: recieve → receive (i before e except after c)'; }
+                else if (/\b(he|she|it) go\b/i.test(spoken)) { corrected = corrected.replace(/\b(he|she|it) go\b/gi, '$1 goes'); explanation = '📖 Grammar: He/She/It + goes'; }
+                else if (/\b(he|she|it) play\b/i.test(spoken)) { corrected = corrected.replace(/\b(he|she|it) play\b/gi, '$1 plays'); explanation = '📖 Grammar: He/She/It + plays'; }
+                else if (spoken.includes('have pass')) { corrected = corrected.replace(/have pass/g, 'have passed'); explanation = '📖 Tense: have + past participle (passed)'; }
+                else { explanation = '✨ No mistakes found! Great job!'; }
                 document.getElementById('correctedText').innerHTML = `✅ Corrected: "${corrected}"`;
-                if (corrected !== spoken) {
-                    document.getElementById('correctionExplanation').innerHTML = '📖 Fixed: spelling (recieve→receive) and grammar (he go→he goes)';
-                } else {
-                    document.getElementById('correctionExplanation').innerHTML = '✨ No mistakes found! Great job!';
-                }
+                document.getElementById('correctionExplanation').innerHTML = explanation;
             };
-            correctorRecognition.start();
+            correctorRec.start();
         };
     }
 
-    // ========== WRITING CORRECTOR ==========
+    // Writing Corrector (WORKING)
     document.getElementById('correctWritingBtn').onclick = () => {
         let text = document.getElementById('writingInput').value;
         if (!text) return;
         document.getElementById('originalWriting').innerHTML = `❌ Original: "${text}"`;
-        let corrected = text.replace(/recieve/g, 'receive').replace(/teh/g, 'the').replace(/\b(he|she|it) (go|play)\b/gi, '$1 $2s');
+        let corrected = text;
+        let explanation = '';
+        if (/recieve/i.test(text)) { corrected = corrected.replace(/recieve/gi, 'receive'); explanation = 'Spelling: recieve → receive'; }
+        else if (/\b(he|she|it) go\b/i.test(text)) { corrected = corrected.replace(/\b(he|she|it) go\b/gi, '$1 goes'); explanation = 'Grammar: He/She/It + goes'; }
+        else if (/\b(he|she|it) play\b/i.test(text)) { corrected = corrected.replace(/\b(he|she|it) play\b/gi, '$1 plays'); explanation = 'Grammar: He/She/It + plays'; }
+        else if (text.includes('have pass')) { corrected = corrected.replace(/have pass/g, 'have passed'); explanation = 'Tense: have + past participle'; }
+        else { explanation = 'No mistakes found! Great writing!'; }
         document.getElementById('correctedWriting').innerHTML = `✅ Corrected: "${corrected}"`;
-        if (corrected !== text) {
-            document.getElementById('writingExplanation').innerHTML = '📖 Fixed: spelling (recieve→receive) and grammar (he go→he goes)';
-        } else {
-            document.getElementById('writingExplanation').innerHTML = '✨ No mistakes found! Great writing!';
-        }
+        document.getElementById('writingExplanation').innerHTML = `📖 ${explanation}`;
     };
 
-    // ========== SCANNER ==========
+    // Scanner
     let video = document.getElementById('camera');
     let stream = null;
     let scannedText = '';
     document.getElementById('startCameraBtn').onclick = async () => {
-        try {
-            stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            video.style.display = 'block';
-            video.srcObject = stream;
-        } catch(e) { alert('Camera access denied'); }
+        try { stream = await navigator.mediaDevices.getUserMedia({ video: true }); video.style.display = 'block'; video.srcObject = stream; }
+        catch(e) { alert('Camera access denied'); }
     };
-    document.getElementById('stopCameraBtn').onclick = () => { if(stream) { stream.getTracks().forEach(t=>t.stop()); video.style.display = 'none'; video.srcObject = null; } };
+    document.getElementById('stopCameraBtn').onclick = () => { if(stream) { stream.getTracks().forEach(t=>t.stop()); video.style.display = 'none'; } };
     document.getElementById('captureBtn').onclick = () => {
-        if(!video.srcObject) { alert('Start camera first'); return; }
-        let text = prompt('Enter the text from your image:');
+        let text = prompt('📷 Enter the text from your image:');
         if(text) { scannedText = text; document.getElementById('scannedOutput').innerHTML = text; }
     };
-    document.getElementById('askScannedBtn').onclick = () => { if(scannedText) { document.getElementById('questionInput').value = scannedText; processQuestion(scannedText); document.querySelector('.door-btn[data-door="ask"]').click(); } else alert('No text captured'); };
+    document.getElementById('askScannedBtn').onclick = () => {
+        if(scannedText) { document.getElementById('questionInput').value = scannedText; processQuestion(scannedText); document.querySelector('.door-btn[data-door="ask"]').click(); }
+        else alert('No text captured');
+    };
 
-    // ========== SHARE PROBLEM ==========
+    // Share Problem
     let problemBank = JSON.parse(localStorage.getItem('anns_problems')) || [];
     function renderProblems() {
         const container = document.getElementById('problemFeed');
         if (problemBank.length === 0) { container.innerHTML = '<div style="text-align:center; color:#94A3B8; padding:20px;">No problems shared yet</div>'; return; }
         container.innerHTML = '';
         problemBank.slice(0, 10).forEach(p => {
-            container.innerHTML += `<div class="history-item" onclick="alert('Problem: ${p.text}\\n\\nBy: ${p.author}\\nDate: ${p.date}')">📌 ${p.subject}: ${p.text.substring(0, 60)}...<br><span style="font-size:10px;">👤 ${p.author.substring(0,6)} | 📅 ${p.date}</span></div>`;
+            container.innerHTML += `<div class="history-item">📌 ${p.subject}: ${p.text.substring(0, 60)}...<br><span style="font-size:9px;">👤 ${p.author.substring(0,6)} | ${p.date}</span></div>`;
         });
     }
     document.getElementById('shareProblemBtn').onclick = () => {
@@ -1102,19 +996,62 @@
     };
     renderProblems();
 
-    // ========== GD ROOMS ==========
-    const gdRooms = ['UPSC Discussion', 'SSC CGL', 'NEET Preparation', 'JEE Maths', 'Current Affairs', 'Career Guidance', 'AI & Future', 'Study Abroad', 'Motivation Hub'];
+    // GD Rooms - FULLY FUNCTIONAL CHAT
+    const gdRoomsList = ['UPSC Discussion', 'SSC CGL', 'NEET Preparation', 'JEE Maths', 'Current Affairs', 'Career Guidance', 'AI & Future', 'Study Abroad', 'Motivation Hub'];
+    let currentRoom = null;
+    let roomChats = JSON.parse(localStorage.getItem('gd_room_chats')) || {};
+
     function renderGDRooms() {
-        let html = '';
-        gdRooms.forEach(room => { html += `<div class="gd-room" onclick="alert('💬 Joined ${room} room. Discuss with peers anonymously! AI Moderator active.')">💬 ${room}</div>`; });
-        document.getElementById('gdRoomsList').innerHTML = html;
+        const container = document.getElementById('gdRoomsList');
+        container.innerHTML = '';
+        gdRoomsList.forEach(room => {
+            container.innerHTML += `<div class="gd-room" onclick="joinGDRoom('${room}')">💬 ${room}</div>`;
+        });
     }
+
+    function joinGDRoom(room) {
+        currentRoom = room;
+        document.getElementById('activeChatRoom').style.display = 'block';
+        document.getElementById('currentRoomName').innerHTML = room;
+        if (!roomChats[room]) {
+            roomChats[room] = [{ sender: 'ai', text: `🤖 AnnS AI Moderator: Welcome to ${room}! Discuss respectfully. No personal info. Stay on topic.`, time: new Date().toLocaleTimeString() }];
+        }
+        renderChatMessages();
+    }
+
+    function renderChatMessages() {
+        const container = document.getElementById('chatMessages');
+        if (!currentRoom || !roomChats[currentRoom]) return;
+        container.innerHTML = '';
+        roomChats[currentRoom].forEach(msg => {
+            container.innerHTML += `<div class="chat-message ${msg.sender === 'user' ? 'user' : 'ai'}"><strong>${msg.sender === 'user' ? anonymousId.substring(0,8) : 'AnnS AI'}:</strong> ${msg.text}</div>`;
+        });
+        container.scrollTop = container.scrollHeight;
+    }
+
+    document.getElementById('sendChatBtn').onclick = () => {
+        let input = document.getElementById('chatInput');
+        if (input.value.trim() && currentRoom) {
+            roomChats[currentRoom].push({ sender: 'user', text: input.value, time: new Date().toLocaleTimeString() });
+            localStorage.setItem('gd_room_chats', JSON.stringify(roomChats));
+            renderChatMessages();
+            // Auto AI response
+            setTimeout(() => {
+                roomChats[currentRoom].push({ sender: 'ai', text: '🤖 Thanks for sharing! Keep the discussion respectful and on topic.', time: new Date().toLocaleTimeString() });
+                localStorage.setItem('gd_room_chats', JSON.stringify(roomChats));
+                renderChatMessages();
+            }, 500);
+            input.value = '';
+        }
+    };
+
+    document.getElementById('closeChatBtn').onclick = () => {
+        currentRoom = null;
+        document.getElementById('activeChatRoom').style.display = 'none';
+    };
     renderGDRooms();
 
-    // ========== OPEN YOUTUBE ==========
-    window.openYouTubeSearch = (query) => { window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, '_blank'); };
-
-    // ========== EXPORT & CLEAR ==========
+    // Export & Clear
     document.getElementById('exportHistoryBtn').onclick = () => {
         let data = JSON.stringify(askedQuestions, null, 2);
         let blob = new Blob([data], {type: 'application/json'});
@@ -1124,7 +1061,7 @@
         a.click();
     };
     document.getElementById('clearHistoryBtn').onclick = () => {
-        if(confirm('Clear all question history? Cannot undo.')) {
+        if(confirm('Clear all history?')) {
             askedQuestions = [];
             stats = { total: 0, prevented: 0 };
             localStorage.setItem('anns_asked', JSON.stringify(askedQuestions));
@@ -1135,7 +1072,7 @@
         }
     };
 
-    // ========== DOOR NAVIGATION ==========
+    // Door Navigation
     document.querySelectorAll('.door-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
@@ -1147,23 +1084,15 @@
 
     function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
 
-    // ========== BOTTOM NAVIGATION ==========
-    const bottomNav = [
-        { name: "Home", icon: "🏠", link: "index.html" },
-        { name: "Search", icon: "🔍", link: "#" },
-        { name: "AnnS AI", icon: "🤖", link: "#" },
-        { name: "Alerts", icon: "🔔", link: "#" },
-        { name: "Profile", icon: "👤", link: "#" }
-    ];
+    // Bottom Navigation
+    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
     document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
-    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon - AnnS AI is here!'); }));
+    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('AnnS AI is here!'); }));
 
     function goBack() { window.location.href = 'index.html'; }
 
-    // ========== ASK BUTTON ==========
     document.getElementById('askBtn').onclick = () => { let q = document.getElementById('questionInput').value; processQuestion(q); document.getElementById('questionInput').value = ''; };
 
-    // ========== INITIALIZE ==========
     renderHistory();
     updateStats();
 </script>
