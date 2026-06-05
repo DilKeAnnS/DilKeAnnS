@@ -5,18 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Something Interesting - Dil Ke AnnS Career Saathi</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(145deg, #f0f7f0 0%, #e8f0e8 100%);
+            background: #f0f4f0;
             color: #1e3c2c;
-            padding-bottom: 80px;
+            padding-bottom: 20px;
         }
-        /* Header */
         .header {
             background: linear-gradient(135deg, #2e7d32, #1b5e20);
             color: white;
@@ -24,47 +19,38 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-        }
-        .header h1 {
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
             gap: 10px;
         }
         .back-btn {
             background: #ffb74d;
             border: none;
-            padding: 8px 12px;
+            padding: 8px 16px;
             border-radius: 40px;
-            color: #3c2800;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
         }
-        .back-btn:hover { background: #ffa726; }
-        /* Tabs */
         .tabs {
             display: flex;
             flex-wrap: wrap;
             background: white;
             border-bottom: 2px solid #c8e6c9;
             padding: 0 0.5rem;
+            overflow-x: auto;
         }
         .tab-btn {
             background: none;
             border: none;
             padding: 12px 16px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: bold;
             color: #2e5c2e;
             cursor: pointer;
             transition: all 0.2s;
-            border-radius: 30px 30px 0 0;
+            white-space: nowrap;
         }
         .tab-btn.active {
             background: #e8f5e9;
@@ -78,13 +64,13 @@
         }
         .tab-pane.active { display: block; }
         @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-        /* Cards & UI */
+        
         .card {
             background: white;
-            border-radius: 28px;
+            border-radius: 24px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border: 1px solid #dcedc8;
         }
         textarea, input, select {
@@ -105,19 +91,16 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
-            margin: 5px 0;
+            margin: 5px 5px 5px 0;
         }
-        button:hover { background: #f57c00; transform: scale(0.98); }
-        .voice-btn, .grammar-btn {
-            background: #2c3e2b;
-            margin-right: 8px;
-        }
+        button:hover { background: #f57c00; }
+        .voice-btn, .grammar-btn { background: #2e7d32; }
         .response-area {
             background: #f9f7f3;
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 15px;
             margin-top: 15px;
-            border-left: 5px solid #ff9800;
+            border-left: 4px solid #ff9800;
         }
         canvas {
             border: 2px dashed #aaa;
@@ -127,139 +110,223 @@
             height: auto;
             margin: 10px 0;
         }
-        .qr-scanner {
-            background: #1e1e1e;
-            border-radius: 24px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        #qr-video {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-        }
-        .badge {
-            background: #ffb74d;
-            border-radius: 40px;
-            padding: 4px 12px;
+        .qr-scanner { background: #1e1e1e; border-radius: 20px; overflow: hidden; margin: 10px 0; }
+        #qr-video { width: 100%; max-height: 300px; object-fit: cover; }
+        .badge { background: #ffb74d; border-radius: 40px; padding: 4px 12px; font-size: 0.7rem; display: inline-block; }
+        .persona-select { background: #e8f5e9; font-weight: bold; }
+        .room-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+        .room-btn {
+            background: #e8f5e9;
+            color: #1b5e20;
+            padding: 6px 12px;
             font-size: 0.75rem;
-            display: inline-block;
+            margin: 0;
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #5d7e5a;
+        .room-btn.active { background: #ff9800; color: white; }
+        .message-row {
+            background: #f5f5f5;
+            border-radius: 16px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
         }
+        .message-user { background: #e3f2e8; text-align: right; }
+        .message-ai { background: #fff3e0; border-left: 3px solid #ff9800; }
+        .gd-messages { max-height: 300px; overflow-y: auto; margin-bottom: 10px; }
+        footer { text-align: center; padding: 20px; font-size: 0.7rem; color: #666; }
+        @media (max-width: 600px) { .tab-btn { padding: 10px 12px; font-size: 0.7rem; } }
     </style>
 </head>
 <body>
 
 <div class="header">
     <button class="back-btn" onclick="window.location.href='index.html'">← Home</button>
-    <h1>✨ Something Interesting ✨</h1>
+    <h2>✨ Something Interesting ✨</h2>
     <div></div>
 </div>
 
 <div class="tabs">
-    <button class="tab-btn active" data-tab="voice">🎤 Voice Studio</button>
+    <button class="tab-btn active" data-tab="gd">💬 GD Rooms</button>
+    <button class="tab-btn" data-tab="voice">🎤 Voice Studio</button>
     <button class="tab-btn" data-tab="design">🎨 Design Studio</button>
     <button class="tab-btn" data-tab="anns">🤖 AnnS AI</button>
     <button class="tab-btn" data-tab="scanner">📷 Scanner</button>
-    <button class="tab-btn" data-tab="gd">💬 GD & Share</button>
+    <button class="tab-btn" data-tab="tools">🔧 Smart Tools</button>
 </div>
 
-<!-- ==================== VOICE STUDIO ==================== -->
-<div id="voice" class="tab-pane active">
+<!-- ==================== GD ROOMS TAB ==================== -->
+<div id="gd" class="tab-pane active">
     <div class="card">
-        <h3>🎙️ Voice to Text + Grammar Fix</h3>
+        <h3>💬 Group Discussion Rooms <span class="badge">AI Moderated</span></h3>
+        
+        <!-- Persona Selector -->
+        <select id="gdPersonaSelect" class="persona-select">
+            <option value="mentor">👨‍🏫 Mentor - Career Guidance</option>
+            <option value="teacher">📚 Teacher - Explain Concepts</option>
+            <option value="friend">💬 Friend - Casual Help</option>
+            <option value="coach">🏋️ Coach - Daily Tasks</option>
+            <option value="examiner">📝 Examiner - Tests & MCQs</option>
+            <option value="counsellor">❤️ Counsellor - Doubt & Stress</option>
+            <option value="bro">😎 Bro - Chill & Gen-Z</option>
+            <option value="didi">👩‍🦱 Didi - Caring Elder</option>
+            <option value="motivator">🔥 Motivator - Energy & Josh</option>
+            <option value="debugger">💻 Debugger - Code & Errors</option>
+            <option value="analyst">📊 Analyst - Data & Stats</option>
+            <option value="creator">🎨 Creator - Ideas & Content</option>
+        </select>
+        
+        <!-- Room Selector -->
+        <div class="room-buttons" id="roomSelector">
+            <button class="room-btn" data-room="general">💬 General</button>
+            <button class="room-btn" data-room="upsc">🏛️ UPSC</button>
+            <button class="room-btn" data-room="jee">⚙️ JEE/NEET</button>
+            <button class="room-btn" data-room="banking">🏦 Banking</button>
+            <button class="room-btn" data-room="ssc">📝 SSC</button>
+            <button class="room-btn" data-room="gk">🌍 GK/CA</button>
+        </div>
+        
+        <!-- Chat Area -->
+        <div id="gdMessages" class="gd-messages response-area" style="height: 300px;">
+            💬 Select a room and start discussing...
+        </div>
+        
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <textarea id="gdMessageInput" rows="2" placeholder="Type your message... (or use voice)" style="flex: 1;"></textarea>
+            <button id="gdVoiceBtn" class="voice-btn">🎤 Voice</button>
+            <button id="gdSendBtn">📤 Send</button>
+        </div>
+        
+        <div style="margin-top: 10px; font-size: 0.7rem; color: #666;">
+            🎙️ <span id="voiceStatus">Voice idle</span> | 🤖 AI Moderator active | 🔒 Anonymous
+        </div>
+    </div>
+</div>
+
+<!-- ==================== VOICE STUDIO TAB ==================== -->
+<div id="voice" class="tab-pane">
+    <div class="card">
+        <h3>🎙️ Voice to Text + Grammar Correction</h3>
         <button id="startVoiceBtn" class="voice-btn">🎤 Start Speaking</button>
         <button id="grammarFixBtn" class="grammar-btn">📝 Auto Grammar Correction</button>
-        <textarea id="voiceText" rows="4" placeholder="Your spoken text will appear here... or type manually"></textarea>
+        <textarea id="voiceText" rows="5" placeholder="Your spoken text will appear here... or type manually"></textarea>
         <button id="saveNoteBtn">💾 Save Note (offline)</button>
-        <div id="savedNotesList" class="response-area" style="max-height:200px; overflow:auto;">
-            <strong>📌 My Notes:</strong><br>
+        <div id="savedNotesList" class="response-area" style="max-height: 200px; overflow: auto;">
+            <strong>📌 My Notes:</strong>
             <div id="notesContainer">Loading...</div>
         </div>
     </div>
 </div>
 
-<!-- ==================== DESIGN STUDIO ==================== -->
+<!-- ==================== DESIGN STUDIO TAB ==================== -->
 <div id="design" class="tab-pane">
     <div class="card">
-        <h3>🖌️ Poster / Design Automation</h3>
-        <canvas id="designCanvas" width="500" height="300" style="width:100%; height:auto; max-width:500px; background:#fff;"></canvas>
-        <div style="display: flex; flex-wrap: wrap; gap:8px; margin:10px 0;">
+        <h3>🎨 Design Studio - Posters & Cards</h3>
+        <canvas id="designCanvas" width="500" height="300" style="width: 100%; height: auto; max-width: 500px; background: white; border: 2px solid #ddd;"></canvas>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0;">
             <button id="addTextBtn">📝 Add Text</button>
             <button id="clearCanvasBtn">🗑️ Clear</button>
             <button id="exportCanvasBtn">📸 Export as PNG</button>
         </div>
         <input type="color" id="colorPicker" value="#ff9800">
-        <span>Draw / click on canvas to add circles</span>
-        <p><small>💡 Tip: Click on canvas to draw dots, use color picker.</small></p>
-        <div class="response-area" id="designTips">✨ Create resumes, posters, greeting cards – save locally.</div>
+        <p><small>💡 Click on canvas to draw circles | Use color picker | Add text for posters</small></p>
+        <div id="designTips" class="response-area">✨ Create resumes, posters, greeting cards – save locally</div>
     </div>
 </div>
 
-<!-- ==================== ANNS AI ==================== -->
+<!-- ==================== ANNS AI TAB ==================== -->
 <div id="anns" class="tab-pane">
     <div class="card">
-        <h3>🤖 AnnS AI Assistant (Career + Creativity)</h3>
-        <input type="text" id="annsQuestion" placeholder="Ask anything: career, exam, design tip...">
+        <h3>🤖 AnnS AI Assistant</h3>
+        <select id="aiPersonaSelect" class="persona-select">
+            <option value="mentor">👨‍🏫 Mentor Mode</option>
+            <option value="teacher">📚 Teacher Mode</option>
+            <option value="friend">💬 Friend Mode</option>
+            <option value="coach">🏋️ Coach Mode</option>
+            <option value="examiner">📝 Examiner Mode</option>
+            <option value="counsellor">❤️ Counsellor Mode</option>
+            <option value="bro">😎 Bro Mode</option>
+            <option value="didi">👩‍🦱 Didi Mode</option>
+            <option value="motivator">🔥 Motivator Mode</option>
+        </select>
+        <input type="text" id="annsQuestion" placeholder="Ask anything: career, exam, study tips...">
         <button id="askAnnSBtn">💬 Ask AnnS</button>
         <div id="annsAnswer" class="response-area">✨ AnnS will answer here (offline + online knowledge)</div>
-        <p><small>🔍 Uses local knowledge if offline; when online calls backend for deeper answers.</small></p>
     </div>
 </div>
 
-<!-- ==================== SCANNER (QR + OCR) ==================== -->
+<!-- ==================== SCANNER TAB ==================== -->
 <div id="scanner" class="tab-pane">
     <div class="card">
-        <h3>📷 QR Code Scanner & Document Text</h3>
-        <div id="qr-reader" class="qr-scanner" style="width:100%;"></div>
+        <h3>📷 QR Scanner & Document OCR</h3>
+        <div id="qr-reader" class="qr-scanner" style="width: 100%; min-height: 200px; background: #1e1e1e; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white;">QR Scanner Ready</div>
         <button id="startScannerBtn">🔍 Start QR Scanner</button>
         <button id="stopScannerBtn">⏹️ Stop Scanner</button>
         <p><strong>Scanned Result:</strong> <span id="qrResult">-</span></p>
         <hr>
-        <h4>📄 Document Text (OCR - Online)</h4>
+        <h4>📄 Document Text (OCR)</h4>
         <input type="file" id="ocrImageInput" accept="image/*">
-        <button id="ocrBtn">📄 Extract Text (Online)</button>
+        <button id="ocrBtn">📄 Extract Text</button>
         <div id="ocrResult" class="response-area">Extracted text will appear here...</div>
     </div>
 </div>
 
-<!-- ==================== GD ROOMS & SHARE PROBLEM ==================== -->
-<div id="gd" class="tab-pane">
+<!-- ==================== SMART TOOLS TAB ==================== -->
+<div id="tools" class="tab-pane">
     <div class="card">
-        <h3>💬 Group Discussion Rooms (Local-first)</h3>
-        <p><strong>Share your problem or start discussion:</strong></p>
-        <textarea id="problemText" rows="3" placeholder="What's on your mind? Career dilemma, study problem..."></textarea>
-        <button id="shareProblemBtn">📤 Save & Share (generate QR)</button>
+        <h3>🔧 Smart Tools</h3>
+        <button id="downloadNotesBtn">📥 Download My Notes as PDF</button>
+        <button id="shareProblemBtn">📤 Share Problem (Generate QR)</button>
         <div id="generatedQR" style="margin-top: 10px;"></div>
         <hr>
-        <h3>🗣️ GD Rooms (P2P Chat - simplified)</h3>
-        <p>Room ID: <input id="roomIdInput" placeholder="Enter room name" value="career_hub"> 
-        <button id="joinRoomBtn">Join Room</button></p>
-        <div id="gdMessages" class="response-area" style="height:200px; overflow-y:scroll; background:#f3f0e6;"></div>
-        <input type="text" id="gdMessageInput" placeholder="Type your message...">
-        <button id="sendGdMsgBtn">Send</button>
-        <p><small>📡 Note: Real-time chat uses WebRTC (demo). For full offline, messages stored locally per room.</small></p>
+        <h4>📖 PDF Reader</h4>
+        <input type="file" id="pdfUpload" accept=".pdf">
+        <button id="readPdfBtn">📚 Read PDF & Summarize</button>
+        <div id="pdfSummary" class="response-area">Upload a PDF to get AI summary...</div>
     </div>
 </div>
 
-<footer>💡 All data stays on your device (IndexedDB). AnnS AI works offline with cached knowledge.</footer>
+<footer>💡 All data stays on your device (IndexedDB) | 12 AI Personas | Offline-first</footer>
 
 <script>
-    // ---------- UTILITIES ----------
-    const API_BASE = 'http://localhost:8000';   // ← CHANGE AFTER DEPLOYING BACKEND
+    // ==================== INITIALIZATION ====================
+    let db;
+    let currentGDRoom = "general";
+    let gdMessages = [];
+    let recognition = null;
+    let isVoiceActive = false;
     let currentCanvas = null;
     let ctx = null;
-    let drawingMode = false;
+    let html5QrCode = null;
 
-    // IndexedDB setup for notes & designs
-    let db;
-    const DB_NAME = 'DilKeAnnS_CreativeDB';
-    const DB_VERSION = 1;
+    const DB_NAME = 'CreativeDB';
+    const DB_VERSION = 2;
+
+    // Persona response styles
+    const personaStyles = {
+        mentor: "📈 As your Mentor: Let me guide you step by step.",
+        teacher: "📚 As your Teacher: Let me explain this simply.",
+        friend: "💬 Hey friend! Here's what I think.",
+        coach: "🏋️ Coach mode: Stay disciplined! Here's your plan.",
+        examiner: "📝 Examiner mode: Test yourself on this.",
+        counsellor: "❤️ Take a deep breath. Here's my advice.",
+        bro: "😎 Bro! Check this out - short and chill.",
+        didi: "👩‍🦱 Don't worry, I'm here to help you.",
+        motivator: "🔥 Let's go! You can do this!",
+        debugger: "💻 Debug mode: Let me fix that error.",
+        analyst: "📊 Analyst mode: Here are the facts and data.",
+        creator: "🎨 Creator mode: Here's a creative idea for you."
+    };
+
+    // Offline knowledge base
+    const offlineKnowledge = {
+        "career after 10th": "After 10th, choose Science, Commerce, Arts, or Diploma. Check our After 10th tile.",
+        "upsc preparation": "Start with NCERTs, then Laxmikanth, Bipin Chandra, and practice previous papers.",
+        "jee preparation": "Focus on NCERT, HC Verma, and solve PYQs daily.",
+        "neet preparation": "Biology is key. Use NCERT and MTG for practice.",
+        "roadmap": "Class 10 → Choose stream → Class 12 → Entrance exam → Degree → Job",
+        "scholarship": "Check National Scholarship Portal (NSP) for various schemes."
+    };
+
+    // Open IndexedDB
     function openDB() {
         return new Promise((resolve, reject) => {
             const request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -270,9 +337,6 @@
                 if (!db.objectStoreNames.contains('notes')) {
                     db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
                 }
-                if (!db.objectStoreNames.contains('designs')) {
-                    db.createObjectStore('designs', { keyPath: 'id', autoIncrement: true });
-                }
                 if (!db.objectStoreNames.contains('gdMessages')) {
                     db.createObjectStore('gdMessages', { keyPath: 'id', autoIncrement: true });
                 }
@@ -280,73 +344,125 @@
         });
     }
 
+    // Save note
     async function saveNote(text) {
-        const note = { text: text, timestamp: new Date().toISOString() };
         const tx = db.transaction('notes', 'readwrite');
-        const store = tx.objectStore('notes');
-        store.add(note);
+        tx.objectStore('notes').add({ text, timestamp: Date.now() });
         await tx.complete;
         loadNotes();
     }
 
     async function loadNotes() {
-        if (!db) await openDB();
         const tx = db.transaction('notes', 'readonly');
-        const store = tx.objectStore('notes');
-        const notes = await store.getAll();
+        const notes = await tx.objectStore('notes').getAll();
         const container = document.getElementById('notesContainer');
-        if (notes.length === 0) container.innerHTML = 'No notes yet.';
-        else {
-            container.innerHTML = notes.map(n => `<div>📄 ${escapeHtml(n.text.substring(0,80))} <small>(${new Date(n.timestamp).toLocaleString()})</small></div>`).join('');
+        if (!notes.length) container.innerHTML = 'No notes yet.';
+        else container.innerHTML = notes.slice(-10).reverse().map(n => `<div>📄 ${escapeHtml(n.text.substring(0, 80))} <small>${new Date(n.timestamp).toLocaleTimeString()}</small></div>`).join('');
+    }
+
+    // Save GD message
+    async function saveGDMessage(room, text, sender, type) {
+        const tx = db.transaction('gdMessages', 'readwrite');
+        tx.objectStore('gdMessages').add({ room, text, sender, type, timestamp: Date.now() });
+        await tx.complete;
+        loadGDMessages();
+    }
+
+    async function loadGDMessages() {
+        const tx = db.transaction('gdMessages', 'readonly');
+        const all = await tx.objectStore('gdMessages').getAll();
+        const filtered = all.filter(m => m.room === currentGDRoom).slice(-50);
+        const container = document.getElementById('gdMessages');
+        if (!filtered.length) {
+            container.innerHTML = '<div>💬 No messages yet. Start the discussion!</div>';
+            return;
+        }
+        container.innerHTML = filtered.map(m => `
+            <div class="message-row ${m.type === 'user' ? 'message-user' : 'message-ai'}">
+                <div><strong>${escapeHtml(m.sender)}</strong> <small>${new Date(m.timestamp).toLocaleTimeString()}</small></div>
+                <div>${escapeHtml(m.text)}</div>
+            </div>
+        `).join('');
+        container.scrollTop = container.scrollHeight;
+    }
+
+    // AI Response
+    function getAIResponse(question, persona) {
+        const q = question.toLowerCase();
+        let answer = "";
+        
+        for (let key in offlineKnowledge) {
+            if (q.includes(key)) {
+                answer = offlineKnowledge[key];
+                break;
+            }
+        }
+        
+        if (!answer) {
+            answer = "That's a great question! Check our Study Material or GD rooms for detailed discussions. Keep learning!";
+        }
+        
+        return `${personaStyles[persona] || personaStyles.mentor}\n\n${answer}`;
+    }
+
+    // Send message in GD
+    async function sendGDMessage(text, isUser = true) {
+        if (!text.trim()) return;
+        const sender = isUser ? "You" : "AnnS AI";
+        const type = isUser ? "user" : "ai";
+        await saveGDMessage(currentGDRoom, text, sender, type);
+        
+        if (isUser) {
+            const persona = document.getElementById('gdPersonaSelect').value;
+            const reply = getAIResponse(text, persona);
+            setTimeout(() => sendGDMessage(reply, false), 500);
         }
     }
 
-    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-
-    // ---------- VOICE + GRAMMAR ----------
-    let recognition;
-    if ('webkitSpeechRecognition' in window) {
+    // Voice input
+    function initVoice() {
+        if (!('webkitSpeechRecognition' in window)) {
+            document.getElementById('voiceStatus').innerHTML = 'Voice not supported in this browser';
+            return;
+        }
         recognition = new webkitSpeechRecognition();
         recognition.continuous = false;
-        recognition.lang = 'hi-IN,en-IN';
         recognition.interimResults = false;
-        recognition.onresult = (e) => {
-            const transcript = e.results[0][0].transcript;
-            document.getElementById('voiceText').value = transcript;
+        recognition.lang = 'hi-IN,en-IN';
+        
+        recognition.onstart = () => {
+            isVoiceActive = true;
+            document.getElementById('voiceStatus').innerHTML = '🎙️ Listening... Speak now';
         };
-        recognition.onerror = (e) => console.warn(e);
+        recognition.onend = () => {
+            isVoiceActive = false;
+            document.getElementById('voiceStatus').innerHTML = 'Voice idle';
+        };
+        recognition.onresult = (e) => {
+            const text = e.results[0][0].transcript;
+            document.getElementById('voiceText').value = text;
+            document.getElementById('gdMessageInput').value = text;
+            document.getElementById('voiceStatus').innerHTML = '✅ Voice captured!';
+        };
     }
-    document.getElementById('startVoiceBtn')?.addEventListener('click', () => {
-        if(recognition) recognition.start();
-        else alert('Voice input not supported in this browser.');
-    });
-    // Simple grammar correction (basic)
-    function simpleGrammarFix(text) {
+
+    // Grammar fix
+    function fixGrammar(text) {
         let fixed = text.replace(/\bi\s+is\b/gi, 'I am');
         fixed = fixed.replace(/\bi\s+am\s+are\b/gi, 'I am');
         fixed = fixed.replace(/\bhe\s+are\b/gi, 'he is');
         fixed = fixed.replace(/\bshe\s+are\b/gi, 'she is');
-        fixed = fixed.replace(/\bthere\s+is\s+many\b/gi, 'there are many');
         return fixed;
     }
-    document.getElementById('grammarFixBtn')?.addEventListener('click', () => {
-        let txt = document.getElementById('voiceText').value;
-        txt = simpleGrammarFix(txt);
-        document.getElementById('voiceText').value = txt;
-    });
-    document.getElementById('saveNoteBtn')?.addEventListener('click', async () => {
-        const text = document.getElementById('voiceText').value.trim();
-        if(text) await saveNote(text);
-        else alert('Nothing to save.');
-    });
 
-    // ---------- DESIGN STUDIO (Canvas) ----------
+    // Design Studio
     function initCanvas() {
         const canvas = document.getElementById('designCanvas');
         canvas.width = 500; canvas.height = 300;
         ctx = canvas.getContext('2d');
         ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
         canvas.addEventListener('click', (e) => {
             const rect = canvas.getBoundingClientRect();
             const scaleX = canvas.width / rect.width;
@@ -355,61 +471,31 @@
             const y = (e.clientY - rect.top) * scaleY;
             ctx.fillStyle = document.getElementById('colorPicker').value;
             ctx.beginPath();
-            ctx.arc(x, y, 10, 0, Math.PI*2);
+            ctx.arc(x, y, 10, 0, Math.PI * 2);
             ctx.fill();
         });
-        document.getElementById('addTextBtn')?.addEventListener('click', () => {
-            const text = prompt('Enter text for poster:','Career Saathi');
-            if(text){
+        
+        document.getElementById('addTextBtn').onclick = () => {
+            const text = prompt('Enter text for design:', 'Career Saathi');
+            if (text) {
                 ctx.font = 'bold 20px "Segoe UI"';
                 ctx.fillStyle = document.getElementById('colorPicker').value;
                 ctx.fillText(text, 50, 80);
             }
-        });
-        document.getElementById('clearCanvasBtn')?.addEventListener('click', () => {
+        };
+        document.getElementById('clearCanvasBtn').onclick = () => {
             ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0,0,canvas.width,canvas.height);
-        });
-        document.getElementById('exportCanvasBtn')?.addEventListener('click', () => {
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        };
+        document.getElementById('exportCanvasBtn').onclick = () => {
             const link = document.createElement('a');
-            link.download = 'design.png';
+            link.download = 'my-design.png';
             link.href = canvas.toDataURL();
             link.click();
-        });
+        };
     }
 
-    // ---------- ANNS AI (fetch backend or offline fallback) ----------
-    const offlineKnowledge = {
-        'career after 10th': 'You can choose Science, Commerce, Arts, or vocational courses. Explore our After 10th tile.',
-        'design career': 'Graphic design, UX/UI, fashion design – start with Canva and build a portfolio.'
-    };
-    async function askAnnS(question) {
-        const answerDiv = document.getElementById('annsAnswer');
-        answerDiv.innerHTML = '🤔 Thinking...';
-        try {
-            const res = await fetch(`${API_BASE}/anns-ai/ask?q=${encodeURIComponent(question)}`);
-            if(res.ok) {
-                const data = await res.json();
-                answerDiv.innerHTML = `<strong>AnnS:</strong> ${data.answer || data.message}<br><small>source: backend</small>`;
-                return;
-            }
-        } catch(e) { console.log('Backend offline, using local'); }
-        // fallback offline
-        let answer = "I don't know that yet. Please check Study Material tile.";
-        const qlow = question.toLowerCase();
-        for(let key in offlineKnowledge) {
-            if(qlow.includes(key)) answer = offlineKnowledge[key];
-        }
-        answerDiv.innerHTML = `<strong>AnnS (offline):</strong> ${answer}<br><small>⚡ offline mode</small>`;
-    }
-    document.getElementById('askAnnSBtn')?.addEventListener('click', () => {
-        const q = document.getElementById('annsQuestion').value;
-        if(q) askAnnS(q);
-        else alert('Type a question.');
-    });
-
-    // ---------- QR SCANNER (using html5-qrcode) ----------
-    let html5QrCode;
+    // QR Scanner
     function loadQrScanner() {
         const script = document.createElement('script');
         script.src = 'https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js';
@@ -418,99 +504,142 @@
         };
         document.head.appendChild(script);
     }
-    document.getElementById('startScannerBtn')?.addEventListener('click', () => {
-        if(html5QrCode) {
-            html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, (decodedText) => {
-                document.getElementById('qrResult').innerText = decodedText;
-            }, (err) => console.warn(err));
-        } else alert('QR library loading...');
-    });
-    document.getElementById('stopScannerBtn')?.addEventListener('click', () => {
-        if(html5QrCode) html5QrCode.stop();
-    });
-    // OCR (online using Tesseract.js? but free api: we'll use a public demo OCR)
-    document.getElementById('ocrBtn')?.addEventListener('click', async () => {
-        const fileInput = document.getElementById('ocrImageInput');
-        if(!fileInput.files[0]) { alert('Select an image'); return; }
+
+    // OCR
+    async function doOCR(file) {
         const formData = new FormData();
-        formData.append('image', fileInput.files[0]);
-        document.getElementById('ocrResult').innerHTML = 'Processing OCR...';
-        // Free OCR API (demo, limited) -> using OCR.space free tier
+        formData.append('image', file);
         try {
             const res = await fetch('https://api.ocr.space/parse/image', {
                 method: 'POST',
                 body: formData,
-                headers: { 'apikey': 'helloworld' }  // free demo key
+                headers: { 'apikey': 'helloworld' }
             });
             const data = await res.json();
-            const text = data.ParsedResults?.[0]?.ParsedText || 'No text found.';
-            document.getElementById('ocrResult').innerHTML = text;
+            return data.ParsedResults?.[0]?.ParsedText || 'No text found.';
         } catch(e) {
-            document.getElementById('ocrResult').innerHTML = 'OCR failed. Use QR scanner offline.';
+            return 'OCR service error. Please try again.';
         }
-    });
-
-    // ---------- SHARE PROBLEM (Generate QR) ----------
-    document.getElementById('shareProblemBtn')?.addEventListener('click', () => {
-        const problem = document.getElementById('problemText').value;
-        if(!problem) { alert('Write something'); return; }
-        const qrDiv = document.getElementById('generatedQR');
-        qrDiv.innerHTML = '';
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js';
-        script.onload = () => {
-            new QRCode(qrDiv, { text: problem, width: 128, height: 128 });
-        };
-        document.head.appendChild(script);
-    });
-
-    // ---------- GD ROOMS (Local storage based chat simulation + simple WebRTC plan) ----------
-    let currentRoom = null;
-    function loadGdMessages(room) {
-        const tx = db.transaction('gdMessages', 'readonly');
-        const store = tx.objectStore('gdMessages');
-        const req = store.getAll();
-        req.onsuccess = () => {
-            const messages = req.result.filter(m => m.room === room);
-            const container = document.getElementById('gdMessages');
-            container.innerHTML = messages.map(m => `<div><strong>${m.sender || 'User'}:</strong> ${escapeHtml(m.text)} <small>${new Date(m.time).toLocaleTimeString()}</small></div>`).join('');
-        };
     }
-    document.getElementById('joinRoomBtn')?.addEventListener('click', async () => {
-        currentRoom = document.getElementById('roomIdInput').value;
-        loadGdMessages(currentRoom);
-    });
-    document.getElementById('sendGdMsgBtn')?.addEventListener('click', async () => {
-        if(!currentRoom) { alert('Join a room first'); return; }
-        const msg = document.getElementById('gdMessageInput').value;
-        if(!msg) return;
-        const tx = db.transaction('gdMessages', 'readwrite');
-        const store = tx.objectStore('gdMessages');
-        store.add({ room: currentRoom, text: msg, sender: 'Me', time: Date.now() });
-        await tx.complete;
-        loadGdMessages(currentRoom);
-        document.getElementById('gdMessageInput').value = '';
-    });
 
-    // ---------- INITIALIZE ----------
-    window.onload = async () => {
-        await openDB();
-        loadNotes();
-        initCanvas();
-        loadQrScanner();
-        // Tab switching
+    // Download notes as PDF
+    function downloadNotesAsPDF() {
+        const notes = document.getElementById('notesContainer').innerText;
+        const blob = new Blob([`Dil Ke AnnS - My Notes\n\n${notes}\n\nGenerated on ${new Date().toLocaleString()}`], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'my-notes.pdf';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
+    }
+
+    // Tab switching
+    function initTabs() {
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
                 btn.classList.add('active');
-                const tabId = btn.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
             });
         });
-        // service worker registration for offline caching (optional)
-        if('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(console.log);
+    }
+
+    // ==================== MAIN INITIALIZATION ====================
+    window.onload = async () => {
+        await openDB();
+        await loadNotes();
+        initCanvas();
+        initVoice();
+        initTabs();
+        loadQrScanner();
+        await loadGDMessages();
+        
+        // Room selector
+        document.querySelectorAll('.room-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                document.querySelectorAll('.room-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentGDRoom = btn.dataset.room;
+                await loadGDMessages();
+            });
+        });
+        
+        // GD Send
+        document.getElementById('gdSendBtn').onclick = async () => {
+            const input = document.getElementById('gdMessageInput');
+            if (input.value.trim()) {
+                await sendGDMessage(input.value);
+                input.value = '';
+            }
+        };
+        document.getElementById('gdVoiceBtn').onclick = () => {
+            if (recognition && !isVoiceActive) recognition.start();
+            else if (recognition && isVoiceActive) recognition.stop();
+        };
+        
+        // Voice Studio
+        document.getElementById('startVoiceBtn').onclick = () => recognition?.start();
+        document.getElementById('grammarFixBtn').onclick = () => {
+            const txt = document.getElementById('voiceText').value;
+            document.getElementById('voiceText').value = fixGrammar(txt);
+        };
+        document.getElementById('saveNoteBtn').onclick = async () => {
+            const txt = document.getElementById('voiceText').value.trim();
+            if (txt) await saveNote(txt);
+            else alert('Nothing to save');
+        };
+        
+        // AnnS AI
+        document.getElementById('askAnnSBtn').onclick = () => {
+            const q = document.getElementById('annsQuestion').value;
+            const persona = document.getElementById('aiPersonaSelect').value;
+            if (q) {
+                const answer = getAIResponse(q, persona);
+                document.getElementById('annsAnswer').innerHTML = `<strong>AnnS AI (${persona} mode):</strong><br>${answer}`;
+            } else alert('Type a question');
+        };
+        
+        // Scanner
+        document.getElementById('startScannerBtn').onclick = () => {
+            if (html5QrCode) html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 },
+                (decoded) => document.getElementById('qrResult').innerText = decoded,
+                (err) => console.warn(err));
+        };
+        document.getElementById('stopScannerBtn').onclick = () => html5QrCode?.stop();
+        document.getElementById('ocrBtn').onclick = async () => {
+            const file = document.getElementById('ocrImageInput').files[0];
+            if (file) {
+                const result = await doOCR(file);
+                document.getElementById('ocrResult').innerHTML = result;
+            } else alert('Select an image');
+        };
+        
+        // Tools
+        document.getElementById('downloadNotesBtn').onclick = downloadNotesAsPDF;
+        document.getElementById('shareProblemBtn').onclick = () => {
+            const problem = prompt('What problem do you want to share?');
+            if (problem) {
+                const qrDiv = document.getElementById('generatedQR');
+                qrDiv.innerHTML = `<div class="response-area">📤 Shared: "${escapeHtml(problem.substring(0, 100))}"<br>🔗 Share this link with friends!</div>`;
+            }
+        };
+        document.getElementById('readPdfBtn').onclick = () => {
+            const file = document.getElementById('pdfUpload').files[0];
+            if (file) {
+                document.getElementById('pdfSummary').innerHTML = '📖 PDF uploaded! AI summary feature coming soon. For now, you can read the PDF directly.';
+            } else alert('Select a PDF file');
+        };
+        
+        // Service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(console.warn);
         }
     };
 </script>
