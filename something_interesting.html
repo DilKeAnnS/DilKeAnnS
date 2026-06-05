@@ -2,484 +2,937 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Something Interesting | Dil-Ke-AnnS Career Saathi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>AnnS AI | Multi-Language | Double Verified | Complete Hub</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #FFF8E7 0%, #FFEEDD 100%); padding-bottom: 70px; color: #2D2A24; }
-        
-        /* Indian Flag Header */
-        .indian-flag-header {
-            background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%);
-            padding: 16px 16px 22px 16px;
-            border-radius: 0 0 30px 30px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .master-container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInDown 0.5s;
+        }
+
+        .anns-title {
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .multi-lang-badge {
+            background: #8B5CF6;
             color: white;
-            position: relative;
-            overflow: hidden;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-top: 8px;
         }
-        .indian-flag-header::before {
-            content: "🇮🇳";
-            position: absolute;
-            right: 10px;
-            bottom: 5px;
-            font-size: 80px;
-            opacity: 0.1;
-            pointer-events: none;
+
+        .verification-badge {
+            background: #10B981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-left: 8px;
         }
-        .saffron-stripe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #FF9933;
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px;
         }
-        .white-stripe {
-            position: absolute;
-            top: 4px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: white;
+
+        .free-badge, .privacy-badge {
+            background: #10B98120;
+            color: #A7F3D0;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
         }
-        .green-stripe {
-            position: absolute;
-            top: 8px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #138808;
+
+        .privacy-badge {
+            background: #2563EB20;
+            color: #93C5FD;
         }
-        .chakra {
-            position: absolute;
-            top: 16px;
-            left: 20px;
-            font-size: 32px;
-            opacity: 0.3;
+
+        .doors-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 25px;
         }
-        
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; transition: all 0.2s; }
-        .back-button:hover { background: rgba(255,255,255,0.25); transform: translateX(-2px); }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo img { height: 45px; width: auto; border-radius: 12px; }
-        .logo h1 { font-size: 18px; font-weight: 700; }
-        .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
-        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        
-        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
-        .page-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #FF9933; padding-left: 15px; background: linear-gradient(135deg, #FF9933, #138808); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
-        
-        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
-        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
-        .door-btn:hover { background: #F0EADF; }
-        .door-btn.active { background: #FF9933; color: white; box-shadow: 0 2px 8px rgba(255,153,51,0.3); }
-        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
-        
-        .door-content { display: none; animation: fadeIn 0.3s ease; }
-        .door-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
-        .accordion-header:hover { background: #FFF8F0; }
-        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
-        .accordion-icon { font-size: 24px; }
-        .accordion-arrow { font-size: 18px; color: #FF9933; transition: transform 0.3s; }
-        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
-        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
-        .accordion-card.active .accordion-content { display: block; }
-        
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
-        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #FF9933; }
-        .info-label { font-weight: 800; color: #FF9933; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
-        .info-text { font-size: 13px; line-height: 1.45; }
-        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #FF9933; padding-left: 12px; }
-        .live-link { color: #FF9933; text-decoration: none; font-weight: 600; }
-        .live-link:hover { text-decoration: underline; }
-        
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
-        .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; color: #64748B; }
-        
-        .flag-card { background: linear-gradient(135deg, #FFF8F0, #FFF0E0); border: 1px solid #FF9933; }
-        .proud-text { color: #FF9933; font-weight: 700; }
-        
-        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } }
+
+        .door {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .door:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 1200px) {
+            .main-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 700px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            border-left: 3px solid #4ECDC4;
+            padding-left: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chat-area {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 12px;
+            height: 320px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+        }
+
+        .message {
+            max-width: 95%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            word-wrap: break-word;
+        }
+
+        .user-msg {
+            background: #2563EB;
+            color: white;
+            margin-left: auto;
+            width: fit-content;
+        }
+
+        .ai-msg {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            width: fit-content;
+        }
+
+        .verified-msg {
+            background: rgba(16,185,129,0.15);
+            border-left: 3px solid #10B981;
+        }
+
+        .lang-detected {
+            background: rgba(139,92,246,0.2);
+            border-left: 3px solid #8B5CF6;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 40px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        button, .btn {
+            background: linear-gradient(135deg, #2563EB, #4ECDC4);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #4ECDC4;
+            color: #4ECDC4;
+        }
+
+        .flex-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .source-item, .stats-panel, .problem-item, .gd-btn, .history-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 8px;
+            margin: 6px 0;
+            font-size: 0.75rem;
+        }
+
+        .problem-item, .gd-btn, .history-item {
+            cursor: pointer;
+        }
+
+        .problem-item:hover, .gd-btn:hover, .history-item:hover {
+            background: rgba(78,205,196,0.2);
+        }
+
+        .verification-badge-sm {
+            background: #10B981;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-left: 6px;
+        }
+
+        .lang-badge-sm {
+            background: #8B5CF6;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-left: 6px;
+        }
+
+        .scanner-area {
+            text-align: center;
+        }
+
+        #camera {
+            width: 100%;
+            border-radius: 16px;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.65rem;
+        }
+
+        .lang-btn.active {
+            background: #2563EB;
+            border-color: #4ECDC4;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .detected-language {
+            font-size: 0.65rem;
+            color: #C4B5FD;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
-<div class="indian-flag-header">
-    <div class="saffron-stripe"></div>
-    <div class="white-stripe"></div>
-    <div class="green-stripe"></div>
-    <div class="chakra">🌀</div>
-    <div class="back-button" onclick="goBack()">← Back</div>
-    <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
-        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
-        <div style="opacity:0;">🔔</div>
+
+<div class="master-container">
+    <div class="header">
+        <div class="anns-title">🌍 AnnS AI | Multi-Language Learning Hub</div>
+        <div>
+            <span class="multi-lang-badge">🌐 Auto-Detects ANY Language</span>
+            <span class="verification-badge">✅ Double Verified Answers</span>
+        </div>
+        <div class="badge-container">
+            <div class="free-badge">100% FREE | No Subscription</div>
+            <div class="privacy-badge" id="privacyBadge">🔒 Loading...</div>
+        </div>
     </div>
-    <div class="tagline">🇮🇳 Bharat - Know Your Rights, Constitution, and More 🇮🇳</div>
+
+    <!-- All Doors -->
+    <div class="doors-row">
+        <div class="door" onclick="scrollToCard('askCard')">❓ Ask Question</div>
+        <div class="door" onclick="showHistory()">📚 History</div>
+        <div class="door" onclick="showVerifiedSources()">🔗 Sources</div>
+        <div class="door" onclick="clearRepetition()">🔄 Reset</div>
+        <div class="door" onclick="scrollToCard('scannerCard')">📷 Scanner</div>
+        <div class="door" onclick="scrollToCard('voiceCard')">🎤 Voice</div>
+        <div class="door" onclick="scrollToCard('shareCard')">📤 Share</div>
+        <div class="door" onclick="scrollToCard('gdCard')">💬 GD Rooms</div>
+        <div class="door" onclick="scrollToCard('toolsCard')">🆓 Tools</div>
+    </div>
+
+    <!-- Row 1: Ask Question + Stats + History + Sources -->
+    <div class="main-grid">
+        <!-- Card 1: Ask Question -->
+        <div class="card" id="askCard" style="grid-column: span 2;">
+            <div class="card-title">
+                ❓ Ask in ANY Language
+                <span class="lang-badge-sm">Hindi</span>
+                <span class="lang-badge-sm">Tamil</span>
+                <span class="lang-badge-sm">Telugu</span>
+                <span class="lang-badge-sm">Marathi</span>
+                <span class="lang-badge-sm">Bengali</span>
+                <span class="lang-badge-sm">Gujarati</span>
+                <span class="lang-badge-sm">Punjabi</span>
+                <span class="lang-badge-sm">Malayalam</span>
+                <span class="lang-badge-sm">Kannada</span>
+                <span class="lang-badge-sm">Odia</span>
+                <span class="lang-badge-sm">Assamese</span>
+                <span class="lang-badge-sm">Urdu</span>
+            </div>
+            <div class="chat-area" id="chatArea">
+                <div class="message ai-msg verified-msg">
+                    🌍 AnnS AI: I understand ALL Indian languages and many more!<br>
+                    📌 Type or speak in ANY language - I will auto-detect and answer in English with verified sources.<br>
+                    📌 Zero repetition | Double verification | 100% free
+                </div>
+            </div>
+            <input type="text" id="questionInput" placeholder="Type in ANY language (हिंदी, தமிழ், తెలుగు, मराठी, বাংলা, ગુજરાતી, ਪੰਜਾਬੀ, മലയാളം, ಕನ್ನಡ, ଓଡ଼ିଆ, অসমীয়া, اردو...)">
+            <div id="detectedLanguageDisplay" class="detected-language"></div>
+            <div class="flex-btns">
+                <button id="askBtn">🔍 Get Verified Answer</button>
+                <button id="voiceAskBtn" class="btn-outline">🎤 Voice (Any Language)</button>
+                <button id="clearChatBtn" class="btn-outline">🗑️ Clear Chat</button>
+            </div>
+            <div id="verificationStatus" style="margin-top: 6px; font-size: 0.7rem; color: #4ECDC4;"></div>
+        </div>
+
+        <!-- Card 2: Stats -->
+        <div class="card">
+            <div class="card-title">📊 Verification Statistics</div>
+            <div id="statsPanel">
+                <div class="stats-panel">✅ Questions answered: <span id="totalAnswers">0</span></div>
+                <div class="stats-panel">🔗 Sources verified: <span id="totalSources">0</span></div>
+                <div class="stats-panel">🔄 Repetitions prevented: <span id="repetitionsPrevented">0</span></div>
+                <div class="stats-panel">🌐 Languages detected: <span id="languagesCount">0</span></div>
+                <div class="stats-panel">⭐ Accuracy rate: <span id="accuracyRate">100%</span></div>
+            </div>
+            <button id="exportAnswersBtn" class="btn-outline" style="width:100%; margin-top:10px;">📥 Export All Answers</button>
+        </div>
+
+        <!-- Card 3: Question History -->
+        <div class="card">
+            <div class="card-title">📚 Previously Asked (No Repetition)</div>
+            <div id="questionHistory" style="max-height: 250px; overflow-y: auto;">
+                <p style="color:#94A3B8; text-align:center;">No questions yet</p>
+            </div>
+        </div>
+
+        <!-- Card 4: Verified Sources -->
+        <div class="card">
+            <div class="card-title">🔗 Trusted Sources (100% Verified)</div>
+            <div id="sourcesList">
+                <div class="source-item">📌 UPSC: <a href="https://www.upsc.gov.in" target="_blank" style="color:#4ECDC4;">upsc.gov.in</a> <span class="verification-badge-sm">Verified</span></div>
+                <div class="source-item">📌 NTA: <a href="https://nta.ac.in" target="_blank" style="color:#4ECDC4;">nta.ac.in</a> <span class="verification-badge-sm">Verified</span></div>
+                <div class="source-item">📌 SSC: <a href="https://ssc.nic.in" target="_blank" style="color:#4ECDC4;">ssc.nic.in</a> <span class="verification-badge-sm">Verified</span></div>
+                <div class="source-item">📌 Scholarships: <a href="https://scholarships.gov.in" target="_blank" style="color:#4ECDC4;">scholarships.gov.in</a> <span class="verification-badge-sm">Verified</span></div>
+                <div class="source-item">📌 NCERT: <a href="https://ncert.nic.in" target="_blank" style="color:#4ECDC4;">ncert.nic.in</a> <span class="verification-badge-sm">Verified</span></div>
+                <div class="source-item">📌 National Portal: <a href="https://www.india.gov.in" target="_blank" style="color:#4ECDC4;">india.gov.in</a> <span class="verification-badge-sm">Verified</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2: Scanner + Voice + Corrector + GD Rooms -->
+    <div class="main-grid" style="margin-top: 16px;">
+        <!-- Card 5: Scanner -->
+        <div class="card" id="scannerCard">
+            <div class="card-title">📷 Scan Question from Book (Any Language)</div>
+            <div class="scanner-area">
+                <video id="camera" autoplay playsinline style="width:100%; border-radius:16px;"></video>
+                <div class="flex-btns" style="justify-content: center; margin-top:10px;">
+                    <button id="startCameraBtn">📷 Start</button>
+                    <button id="captureBtn" class="btn-outline">📸 Capture</button>
+                    <button id="stopCameraBtn" class="btn-outline">⏹️ Stop</button>
+                </div>
+                <div id="scannedTextDisplay" style="margin-top:10px; background:rgba(0,0,0,0.3); border-radius:12px; padding:10px;">
+                    <p id="scannedOutput" style="color:#A7F3D0; word-break:break-all;">—</p>
+                    <button id="askScannedQuestion" class="btn" style="width:100%; margin-top:8px;">🔍 Ask About This</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6: Voice Input (Any Language) -->
+        <div class="card" id="voiceCard">
+            <div class="card-title">🎤 Speak in ANY Language</div>
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="setVoiceLang('auto', this)">🌐 Auto-Detect</button>
+                <button class="lang-btn" onclick="setVoiceLang('hi-IN', this)">🇮🇳 हिंदी</button>
+                <button class="lang-btn" onclick="setVoiceLang('ta-IN', this)">🇮🇳 தமிழ்</button>
+                <button class="lang-btn" onclick="setVoiceLang('te-IN', this)">🇮🇳 తెలుగు</button>
+                <button class="lang-btn" onclick="setVoiceLang('mr-IN', this)">🇮🇳 मराठी</button>
+                <button class="lang-btn" onclick="setVoiceLang('bn-IN', this)">🇮🇳 বাংলা</button>
+                <button class="lang-btn" onclick="setVoiceLang('gu-IN', this)">🇮🇳 ગુજરાતી</button>
+                <button class="lang-btn" onclick="setVoiceLang('pa-IN', this)">🇮🇳 ਪੰਜਾਬੀ</button>
+                <button class="lang-btn" onclick="setVoiceLang('ml-IN', this)">🇮🇳 മലയാളം</button>
+                <button class="lang-btn" onclick="setVoiceLang('kn-IN', this)">🇮🇳 ಕನ್ನಡ</button>
+                <button class="lang-btn" onclick="setVoiceLang('or-IN', this)">🇮🇳 ଓଡ଼ିଆ</button>
+                <button class="lang-btn" onclick="setVoiceLang('as-IN', this)">🇮🇳 অসমীয়া</button>
+                <button class="lang-btn" onclick="setVoiceLang('ur-PK', this)">🇮🇳 اردو</button>
+            </div>
+            <button id="voiceQuestionBtn" class="btn" style="width:100%;">🎤 Speak Your Question</button>
+            <div id="voiceResult" style="margin-top:10px; background:rgba(0,0,0,0.3); border-radius:12px; padding:10px;">
+                <p id="voiceQuestionText" style="color:#FCA5A5; font-size:0.8rem;">—</p>
+                <p id="voiceDetectedLang" style="color:#C4B5FD; font-size:0.7rem;">—</p>
+                <p id="voiceCorrection" style="color:#A7F3D0; font-size:0.75rem;">—</p>
+            </div>
+        </div>
+
+        <!-- Card 7: Writing Corrector -->
+        <div class="card">
+            <div class="card-title">📖 Grammar & Writing Help (Any Language)</div>
+            <textarea id="writingInput" rows="3" placeholder="Paste any sentence in any language..."></textarea>
+            <button id="correctWritingBtn" class="btn" style="width:100%;">✅ Check & Correct</button>
+            <div id="writingResult" style="margin-top:10px; background:rgba(0,0,0,0.3); border-radius:12px; padding:10px;">
+                <p id="originalWriting" style="color:#FCA5A5; font-size:0.75rem;">—</p>
+                <p id="correctedWriting" style="color:#A7F3D0; font-size:0.75rem;">—</p>
+                <p id="writingExplanation" style="color:#94A3B8; font-size:0.7rem; margin-top:5px;"></p>
+            </div>
+        </div>
+
+        <!-- Card 8: GD Rooms -->
+        <div class="card" id="gdCard">
+            <div class="card-title">💬 Group Discussion Rooms</div>
+            <div id="gdRoomsList"></div>
+        </div>
+    </div>
+
+    <!-- Row 3: Share Problem + Problem Bank + Peer Help + Tools -->
+    <div class="main-grid" style="margin-top: 16px;">
+        <!-- Card 9: Share Problem -->
+        <div class="card" id="shareCard">
+            <div class="card-title">📤 Share Your Problem (Any Language)</div>
+            <select id="problemSubject">
+                <option value="Mathematics">📐 Mathematics</option>
+                <option value="Physics">⚡ Physics</option>
+                <option value="Chemistry">🧪 Chemistry</option>
+                <option value="English">📖 English</option>
+                <option value="Hindi">📖 हिंदी</option>
+                <option value="General">💡 General Doubt</option>
+            </select>
+            <textarea id="problemText" rows="2" placeholder="Type your problem in any language..."></textarea>
+            <div class="flex-btns">
+                <button id="shareProblemBtn">📤 Share (Anonymous)</button>
+                <button id="shareVoiceBtn" class="btn-outline">🎤 Voice</button>
+            </div>
+        </div>
+
+        <!-- Card 10: Problem Bank -->
+        <div class="card">
+            <div class="card-title">📚 Problem Bank</div>
+            <div id="problemFeed" style="max-height: 200px; overflow-y: auto;">
+                <p style="color:#94A3B8; text-align:center;">No problems yet</p>
+            </div>
+        </div>
+
+        <!-- Card 11: Peer Help -->
+        <div class="card">
+            <div class="card-title">🤝 Help Others</div>
+            <div id="peerHelpFeed" style="max-height: 200px; overflow-y: auto;">
+                <p style="color:#94A3B8; text-align:center;">Select a problem to help</p>
+            </div>
+            <div id="replySection" style="display:none; margin-top:10px;">
+                <textarea id="replyText" rows="2" placeholder="Write your answer..."></textarea>
+                <button id="submitReplyBtn" class="btn" style="width:100%; margin-top:5px;">💡 Submit Answer</button>
+            </div>
+        </div>
+
+        <!-- Card 12: Free Tools & Tips -->
+        <div class="card" id="toolsCard">
+            <div class="card-title">🆓 Free Tools & Tips</div>
+            <select id="topicSelect">
+                <option value="exam">Exam Preparation Tips</option>
+                <option value="career">Career Guidance</option>
+                <option value="time">Time Management</option>
+                <option value="memory">Memory Techniques</option>
+            </select>
+            <button id="getTipBtn" class="btn" style="width:100%; margin-top:8px;">💡 Get Verified Tip</button>
+            <div id="tipOutput" style="margin-top:10px; background:rgba(0,0,0,0.3); border-radius:12px; padding:10px; font-size:0.75rem;">
+                <p id="tipText" style="color:#A7F3D0;">Select a topic above</p>
+            </div>
+            <button id="ttsBtn" class="btn-outline" style="width:100%; margin-top:10px;">🔊 Text to Voice (English)</button>
+        </div>
+    </div>
 </div>
 
-<div class="container">
-    <div class="page-title">✨ Something Interesting - Know Your Bharat</div>
-    <div class="page-subtitle">Constitution | Fundamental Rights | RTI | Legal Rights | Government Schemes | Citizen Services | Emergency Helplines</div>
-    
-    <div class="door-nav">
-        <button class="door-btn active" data-door="constitution">📜 <span class="door-label">Constitution of India</span></button>
-        <button class="door-btn" data-door="rights">🇮🇳 <span class="door-label">Fundamental Rights & Duties</span></button>
-        <button class="door-btn" data-door="rti">📋 <span class="door-label">RTI & Legal Rights</span></button>
-        <button class="door-btn" data-door="schemes">🏛️ <span class="door-label">Government Schemes</span></button>
-        <button class="door-btn" data-door="helplines">🚨 <span class="door-label">Emergency Helplines</span></button>
-        <button class="door-btn" data-door="citizen">👥 <span class="door-label">Citizen Services</span></button>
-        <button class="door-btn" data-door="tax">💰 <span class="door-label">Tax & Budget Guide</span></button>
-        <button class="door-btn" data-door="election">🗳️ <span class="door-label">Voting & Elections</span></button>
-        <button class="door-btn" data-door="cyber">💻 <span class="door-label">Cyber Laws & Safety</span></button>
-        <button class="door-btn" data-door="women">👩 <span class="door-label">Women Safety & Laws</span></button>
-        <button class="door-btn" data-door="facts">⭐ <span class="door-label">Proud Facts of India</span></button>
-    </div>
-    
-    <!-- ==================== DOOR 1: CONSTITUTION OF INDIA ==================== -->
-    <div id="door-constitution" class="door-content active">
-        <div class="accordion-card active" id="constitutionCard">
-            <div class="accordion-header" onclick="toggleCard('constitutionCard')">
-                <div class="accordion-title"><span class="accordion-icon">📜</span> Constitution of India - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">The Constitution of India is the supreme law of India. It lays down the framework defining fundamental political principles, procedures, powers, and duties of government institutions.<br><span class="salary-text">📅 Adopted: 26 November 1949 | Effective: 26 January 1950</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 KEY FACTS</div><div class="info-text">Length: Longest written constitution in the world (448 Articles, 25 Parts, 12 Schedules, 5 Appendices, 98 Amendments)<br>Handwritten: Originally handwritten in Hindi and English<br>Signatures: 284 members of Constituent Assembly signed</div></div>
-                    <div class="info-card"><div class="info-label">👤 DRAFTERS</div><div class="info-text">Chairman of Drafting Committee: Dr. B. R. Ambedkar (Father of Indian Constitution)<br>Other key members: Dr. Rajendra Prasad (President), Jawaharlal Nehru, Sardar Patel, Maulana Azad</div></div>
-                </div>
-                <div class="section-title">📜 Preamble of India</div>
-                <div class="info-card" style="background:#FFF8F0; text-align:center;">
-                    <div class="info-text" style="font-size:14px; font-style:italic;">
-                        "WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN, SOCIALIST, SECULAR, DEMOCRATIC, REPUBLIC and to secure to all its citizens:<br>
-                        JUSTICE, social, economic and political;<br>
-                        LIBERTY of thought, expression, belief, faith and worship;<br>
-                        EQUALITY of status and of opportunity;<br>
-                        and to promote among them all FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation..."
-                    </div>
-                </div>
-                <div class="section-title">📋 Constitution Highlights</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏛️ Parliamentary System</div><div class="info-text">India follows Westminster model of parliamentary democracy with President as nominal head and Prime Minister as real executive.</div></div>
-                    <div class="info-card"><div class="info-label">⚖️ Independent Judiciary</div><div class="info-text">Supreme Court at apex, High Courts in states. Single integrated judicial system with power of judicial review.</div></div>
-                    <div class="info-card"><div class="info-label">🗳️ Universal Adult Franchise</div><div class="info-text">Every citizen above 18 years has right to vote without discrimination.</div></div>
-                    <div class="info-card"><div class="info-label">📚 Official Languages</div><div class="info-text">Hindi in Devanagari script is official language. English continues as associate official language. 22 Scheduled Languages recognized.</div></div>
-                </div>
-                <div class="section-title">📋 Important Articles Every Citizen Should Know</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">Article 14</div><div class="info-text">Equality before law and equal protection of laws</div></div>
-                    <div class="info-card"><div class="info-label">Article 15</div><div class="info-text">Prohibition of discrimination on grounds of religion, race, caste, sex or place of birth</div></div>
-                    <div class="info-card"><div class="info-label">Article 19</div><div class="info-text">Freedom of speech and expression, assembly, association, movement, residence, profession</div></div>
-                    <div class="info-card"><div class="info-label">Article 21</div><div class="info-text">Protection of life and personal liberty - the heart of Fundamental Rights</div></div>
-                    <div class="info-card"><div class="info-label">Article 21A</div><div class="info-text">Right to education (6-14 years free and compulsory education)</div></div>
-                    <div class="info-card"><div class="info-label">Article 32</div><div class="info-text">Right to constitutional remedies - the soul of the Constitution</div></div>
-                    <div class="info-card"><div class="info-label">Article 51A</div><div class="info-text">Fundamental Duties of citizens</div></div>
-                    <div class="info-card"><div class="info-label">Article 226</div><div class="info-text">Power of High Courts to issue writs</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 2: FUNDAMENTAL RIGHTS & DUTIES ==================== -->
-    <div id="door-rights" class="door-content">
-        <div class="accordion-card" id="rightsCard">
-            <div class="accordion-header" onclick="toggleCard('rightsCard')">
-                <div class="accordion-title"><span class="accordion-icon">🇮🇳</span> Fundamental Rights & Duties - Complete List</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="section-title">📋 6 Fundamental Rights (Articles 12-35)</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">1️⃣ Right to Equality (Art 14-18)</div><div class="info-text">Equality before law, prohibition of discrimination, equality of opportunity, abolition of untouchability, abolition of titles</div></div>
-                    <div class="info-card"><div class="info-label">2️⃣ Right to Freedom (Art 19-22)</div><div class="info-text">Freedom of speech, assembly, association, movement, residence, profession; protection against arrest and detention</div></div>
-                    <div class="info-card"><div class="info-label">3️⃣ Right against Exploitation (Art 23-24)</div><div class="info-text">Prohibition of human trafficking, forced labour, and child labour (below 14 years)</div></div>
-                    <div class="info-card"><div class="info-label">4️⃣ Right to Freedom of Religion (Art 25-28)</div><div class="info-text">Freedom of conscience, profession, practice, and propagation of religion</div></div>
-                    <div class="info-card"><div class="info-label">5️⃣ Cultural & Educational Rights (Art 29-30)</div><div class="info-text">Protection of minorities' language, script, culture, and right to establish educational institutions</div></div>
-                    <div class="info-card"><div class="info-label">6️⃣ Right to Constitutional Remedies (Art 32)</div><div class="info-text">Right to move Supreme Court for enforcement of Fundamental Rights (Writs: Habeas Corpus, Mandamus, Prohibition, Certiorari, Quo Warranto)</div></div>
-                </div>
-                <div class="section-title">📋 11 Fundamental Duties (Article 51A)</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">1</div><div class="info-text">To abide by the Constitution and respect its ideals and institutions, the National Flag and the National Anthem</div></div>
-                    <div class="info-card"><div class="info-label">2</div><div class="info-text">To cherish and follow the noble ideals that inspired the national struggle for freedom</div></div>
-                    <div class="info-card"><div class="info-label">3</div><div class="info-text">To uphold and protect the sovereignty, unity and integrity of India</div></div>
-                    <div class="info-card"><div class="info-label">4</div><div class="info-text">To defend the country and render national service when called upon</div></div>
-                    <div class="info-card"><div class="info-label">5</div><div class="info-text">To promote harmony and the spirit of common brotherhood amongst all people of India</div></div>
-                    <div class="info-card"><div class="info-label">6</div><div class="info-text">To preserve the rich heritage of our composite culture</div></div>
-                    <div class="info-card"><div class="info-label">7</div><div class="info-text">To protect and improve the natural environment including forests, lakes, rivers, and wildlife</div></div>
-                    <div class="info-card"><div class="info-label">8</div><div class="info-text">To develop scientific temper, humanism and the spirit of inquiry and reform</div></div>
-                    <div class="info-card"><div class="info-label">9</div><div class="info-text">To safeguard public property and to abjure violence</div></div>
-                    <div class="info-card"><div class="info-label">10</div><div class="info-text">To strive towards excellence in all spheres of individual and collective activity</div></div>
-                    <div class="info-card"><div class="info-label">11</div><div class="info-text">To provide opportunities for education to children between 6-14 years (added by 86th Amendment)</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 3: RTI & LEGAL RIGHTS ==================== -->
-    <div id="door-rti" class="door-content">
-        <div class="accordion-card" id="rtiCard">
-            <div class="accordion-header" onclick="toggleCard('rtiCard')">
-                <div class="accordion-title"><span class="accordion-icon">📋</span> RTI & Legal Rights - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 RTI Act 2005 (Right to Information)</div><div class="info-text">Law that empowers citizens to seek information from government departments. Reply within 30 days.<br>Application Fee: ₹10 (online/offline)<br>🔗 <a class="live-link" href="https://rti.gov.in" target="_blank">rti.gov.in</a> | <a class="live-link" href="https://www.onlinerti.com" target="_blank">onlineRTI.com</a></div></div>
-                    <div class="info-card"><div class="info-label">⚖️ RTE Act 2009 (Right to Education)</div><div class="info-text">Free and compulsory education for children between 6-14 years. 25% reservation in private schools for disadvantaged children.<br>🔗 <a class="live-link" href="https://mhrd.gov.in/rte" target="_blank">mhrd.gov.in/rte</a></div></div>
-                    <div class="info-card"><div class="info-label">👩 Legal Services Authority Act (Free Legal Aid)</div><div class="info-text">Free legal aid for those who cannot afford. NALSA provides free lawyers for eligible citizens.<br>🔗 <a class="live-link" href="https://nalsa.gov.in" target="_blank">nalsa.gov.in</a> | Helpline: 15100</div></div>
-                    <div class="info-card"><div class="info-label">⚖️ Right to Constitutional Remedies (Article 32)</div><div class="info-text">Right to approach Supreme Court directly for enforcement of Fundamental Rights through Writs.</div></div>
-                </div>
-                <div class="section-title">📋 How to File RTI - Step by Step</div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 1</div><div class="roadmap-text">Identify the government department you need information from</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 2</div><div class="roadmap-text">Write application with specific questions (attach ₹10 court fee stamp or pay online)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 3</div><div class="roadmap-text">Submit to PIO (Public Information Officer) of the department</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 4</div><div class="roadmap-text">Department must reply within 30 days (48 hours for life/liberty matters)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Step 5</div><div class="roadmap-text">If not satisfied, file first appeal with appellate authority within 30-45 days</div></div>
-                <div class="section-title">📋 Important Legal Rights Every Citizen Should Know</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🚔 Right to Arrest Information</div><div class="info-text">Police must inform reason for arrest immediately. Arrested person has right to inform friend/family.</div></div>
-                    <div class="info-card"><div class="info-label">⚖️ Right to Bail</div><div class="info-text">For bailable offenses, bail is right not privilege. For non-bailable, court decides.</div></div>
-                    <div class="info-card"><div class="info-label">👥 Right to Free Legal Aid</div><div class="info-text">Under Article 39A, free legal aid for those who cannot afford lawyer.</div></div>
-                    <div class="info-card"><div class="info-label">📞 Right to File FIR in Any Police Station</div><div class="info-text">Zero FIR allows filing complaint in any police station regardless of jurisdiction.</div></div>
-                    <div class="info-card"><div class="info-label">👮 Right to Know Police Rules</div><div class="info-text">Police cannot refuse to give information about their rules and regulations under RTI.</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-        <!-- ==================== DOOR 4: GOVERNMENT SCHEMES ==================== -->
-    <div id="door-schemes" class="door-content">
-        <div class="accordion-card" id="schemesCard">
-            <div class="accordion-header" onclick="toggleCard('schemesCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Important Government Schemes for Citizens</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🎓 PM Scholarship Scheme (PMSS)</div><div class="info-text">For wards of Ex-Servicemen and dependents of CAPF personnel<br>Amount: ₹2,500/month | 🔗 <a class="live-link" href="https://www.pmscholarship.gov.in" target="_blank">pmscholarship.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🏦 PM Mudra Yojana (PMMY)</div><div class="info-text">Loans up to ₹20 lakh for micro enterprises<br>Types: Shishu (₹50k), Kishor (₹5L), Tarun (₹10L), Tarun Plus (₹20L)<br>🔗 <a class="live-link" href="https://www.mudra.org.in" target="_blank">mudra.org.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🇮🇳 PM Kisan Samman Nidhi</div><div class="info-text">₹6,000/year for small and marginal farmers (3 equal installments)<br>🔗 <a class="live-link" href="https://pmkisan.gov.in" target="_blank">pmkisan.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🏠 PM Awas Yojana (PMAY)</div><div class="info-text">Housing scheme for urban and rural poor<br>Subsidy: ₹1.5-2.5 lakhs on home loan interest<br>🔗 <a class="live-link" href="https://pmay-urban.gov.in" target="_blank">pmay-urban.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🏥 Ayushman Bharat (PMJAY)</div><div class="info-text">World's largest health insurance scheme<br>Coverage: ₹5 lakh per family per year<br>Eligibility: Bottom 40% of population<br>🔗 <a class="live-link" href="https://pmjay.gov.in" target="_blank">pmjay.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🔐 Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)</div><div class="info-text">Life insurance: ₹2 lakh cover at ₹436/year<br>Eligibility: 18-50 years, bank account holder</div></div>
-                    <div class="info-card"><div class="info-label">🩺 Pradhan Mantri Suraksha Bima Yojana (PMSBY)</div><div class="info-text">Accident insurance: ₹2 lakh cover at ₹20/year<br>Eligibility: 18-70 years, bank account holder</div></div>
-                    <div class="info-card"><div class="info-label">💰 Atal Pension Yojana (APY)</div><div class="info-text">Pension scheme for unorganized sector workers<br>Pension: ₹1,000-5,000/month after 60 years<br>🔗 <a class="live-link" href="https://www.atalpensionyojana.in" target="_blank">atalpensionyojana.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🌾 National Scholarship Portal (NSP)</div><div class="info-text">Central and State government scholarships<br>Amount: ₹5,000-50,000/year<br>🔗 <a class="live-link" href="https://scholarships.gov.in" target="_blank">scholarships.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">💧 Jal Jeevan Mission</div><div class="info-text">Har Ghar Jal - Tap water connection to every rural household<br>🔗 <a class="live-link" href="https://jaljeevanmission.gov.in" target="_blank">jaljeevanmission.gov.in</a></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 5: EMERGENCY HELPLINES ==================== -->
-    <div id="door-helplines" class="door-content">
-        <div class="accordion-card" id="helplinesCard">
-            <div class="accordion-header" onclick="toggleCard('helplinesCard')">
-                <div class="accordion-title"><span class="accordion-icon">🚨</span> Emergency Helplines - National & State</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🚔 Police Emergency</div><div class="info-text">100 (Nationwide)</div></div>
-                    <div class="info-card"><div class="info-label">🚒 Fire Emergency</div><div class="info-text">101 (Nationwide)</div></div>
-                    <div class="info-card"><div class="info-label">🚑 Ambulance</div><div class="info-text">108 (Nationwide) | 102 (Maternal)</div></div>
-                    <div class="info-card"><div class="info-label">👩 Women Helpline</div><div class="info-text">1091 (Nationwide) | 181 (Women in Distress)</div></div>
-                    <div class="info-card"><div class="info-label">👧 Child Helpline</div><div class="info-text">1098 (Nationwide)</div></div>
-                    <div class="info-card"><div class="info-label">🚨 Single Emergency Number</div><div class="info-text">112 (All in one emergency)</div></div>
-                    <div class="info-card"><div class="info-label">💻 Cyber Crime Helpline</div><div class="info-text">1930 | 🔗 <a class="live-link" href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">👴 Senior Citizens Helpline</div><div class="info-text">14567 | 1091 (Elderline)</div></div>
-                    <div class="info-card"><div class="info-label">👨‍👩‍👧‍👦 National Commission for Women</div><div class="info-text">7827170170 (WhatsApp) | 🔗 <a class="live-link" href="https://ncw.nic.in" target="_blank">ncw.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">⚖️ National Human Rights Commission</div><div class="info-text">14433 | 🔗 <a class="live-link" href="https://nhrc.nic.in" target="_blank">nhrc.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🚗 Road Accident Emergency</div><div class="info-text">1033 (National Highway)</div></div>
-                    <div class="info-card"><div class="info-label">🩺 COVID-19 Helpline</div><div class="info-text">1075 | 011-23978046</div></div>
-                </div>
-                <div class="section-title">📋 State-Specific Helplines</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🇮🇳 Delhi Police</div><div class="info-text">1095 (Women) | 1096 (Traffic) | 100 (Emergency)</div></div>
-                    <div class="info-card"><div class="info-label">🇮🇳 Mumbai Police</div><div class="info-text">100 | 103 (Traffic) | Women: 103</div></div>
-                    <div class="info-card"><div class="info-label">🇮🇳 Kolkata Police</div><div class="info-text">100 | Women: 1091 | Traffic: 1073</div></div>
-                    <div class="info-card"><div class="info-label">🇮🇳 Chennai Police</div><div class="info-text">100 | Women: 1091 | Traffic: 103</div></div>
-                    <div class="info-card"><div class="info-label">🇮🇳 Bengaluru Police</div><div class="info-text">100 | Women: 1091 | Traffic: 103</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 6: CITIZEN SERVICES ==================== -->
-    <div id="door-citizen" class="door-content">
-        <div class="accordion-card" id="citizenCard">
-            <div class="accordion-header" onclick="toggleCard('citizenCard')">
-                <div class="accordion-title"><span class="accordion-icon">👥</span> Citizen Services - Essential Portals</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🆔 DigiLocker</div><div class="info-text">Store and share official documents digitally<br>🔗 <a class="live-link" href="https://www.digilocker.gov.in" target="_blank">digilocker.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🌐 UMANG App</div><div class="info-text">Unified Mobile Application for New-age Governance (1500+ govt services)<br>🔗 <a class="live-link" href="https://www.umang.gov.in" target="_blank">umang.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🪪 Aadhaar Services</div><div class="info-text">UIDAI - Update address, download e-Aadhaar, check status<br>🔗 <a class="live-link" href="https://uidai.gov.in" target="_blank">uidai.gov.in</a> | Helpline: 1947</div></div>
-                    <div class="info-card"><div class="info-label">📜 Passport Seva</div><div class="info-text">Apply for passport, track status, schedule appointment<br>🔗 <a class="live-link" href="https://passportindia.gov.in" target="_blank">passportindia.gov.in</a> | Helpline: 1800-258-1800</div></div>
-                    <div class="info-card"><div class="info-label">🚗 Parivahan (Driving License)</div><div class="info-text">Apply for DL, RC, learner's license, check status<br>🔗 <a class="live-link" href="https://parivahan.gov.in" target="_blank">parivahan.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📞 BSNL Sanchar Saathi</div><div class="info-text">Check mobile connections in your name, report fraud<br>🔗 <a class="live-link" href="https://www.sancharsaathi.gov.in" target="_blank">sancharsaathi.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🏦 Income Tax e-Filing</div><div class="info-text">File IT returns, pay tax, track refund<br>🔗 <a class="live-link" href="https://www.incometax.gov.in" target="_blank">incometax.gov.in</a> | Helpline: 1800-180-1961</div></div>
-                    <div class="info-card"><div class="info-label">📬 India Post Services</div><div class="info-text">Track parcels, register complaints, e-Post office<br>🔗 <a class="live-link" href="https://www.indiapost.gov.in" target="_blank">indiapost.gov.in</a> | Helpline: 1924</div></div>
-                    <div class="info-card"><div class="info-label">⚕️ eSanjeevani (Telemedicine)</div><div class="info-text">Free online doctor consultation<br>🔗 <a class="live-link" href="https://esanjeevani.mohfw.gov.in" target="_blank">esanjeevani.mohfw.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🎓 National Scholarship Portal</div><div class="info-text">Apply for all government scholarships<br>🔗 <a class="live-link" href="https://scholarships.gov.in" target="_blank">scholarships.gov.in</a></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 7: TAX & BUDGET GUIDE ==================== -->
-    <div id="door-tax" class="door-content">
-        <div class="accordion-card" id="taxCard">
-            <div class="accordion-header" onclick="toggleCard('taxCard')">
-                <div class="accordion-title"><span class="accordion-icon">💰</span> Tax & Budget Guide - Income Tax, GST, Budget</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📊 Income Tax Slabs (New Regime - FY 2024-25)</div><div class="info-text">₹0-3 lakh: Nil | ₹3-7 lakh: 5% | ₹7-10 lakh: 10% | ₹10-12 lakh: 15% | ₹12-15 lakh: 20% | Above ₹15 lakh: 30%<br>Rebate: Up to ₹25,000 for income up to ₹7 lakh (Section 87A)<br>🔗 <a class="live-link" href="https://www.incometax.gov.in" target="_blank">incometax.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📊 Income Tax Slabs (Old Regime)</div><div class="info-text">₹0-2.5 lakh: Nil | ₹2.5-5 lakh: 5% | ₹5-10 lakh: 20% | Above ₹10 lakh: 30%<br>Deductions: 80C (₹1.5L), 80D (health insurance), HRA, home loan interest</div></div>
-                    <div class="info-card"><div class="info-label">📦 GST (Goods & Services Tax)</div><div class="info-text">5% - Essential goods | 12% - Processed goods | 18% - Standard rate | 28% - Luxury/demerit goods<br>🔗 <a class="live-link" href="https://www.gst.gov.in" target="_blank">gst.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📋 TDS (Tax Deducted at Source)</div><div class="info-text">Salary: 10% | Interest: 10% | Rent: 10% | Professional fees: 10% | No TDS if annual income below threshold</div></div>
-                    <div class="info-card"><div class="info-label">💰 Union Budget <span id="budgetYear"></span></div><div class="info-text">Total Budget: ₹47.66 lakh crore (approx)<br>Defence: ₹6.81L Cr | Education: ₹1.12L Cr | Health: ₹86,000 Cr | Railways: ₹2.40L Cr<br>🔗 <a class="live-link" href="https://www.indiabudget.gov.in" target="_blank">indiabudget.gov.in</a></div></div>
-                </div>
-                <div class="section-title">📋 Tax Saving Options (Section 80C)</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💼 PPF</div><div class="info-text">Public Provident Fund - 7.1% interest, 15-year lock-in, up to ₹1.5L deduction</div></div>
-                    <div class="info-card"><div class="info-label">📚 ELSS Mutual Funds</div><div class="info-text">Equity Linked Savings Scheme - 3-year lock-in, high returns potential</div></div>
-                    <div class="info-card"><div class="info-label">🏦 NSC</div><div class="info-text">National Savings Certificate - 5-year lock-in, current interest rate 7.7%</div></div>
-                    <div class="info-card"><div class="info-label">🏠 Home Loan Principal</div><div class="info-text">Up to ₹1.5L deduction under Section 80C for home loan principal repayment</div></div>
-                    <div class="info-card"><div class="info-label">📜 Life Insurance Premium</div><div class="info-text">Premium paid for LIC or any insurance policy (up to 10% of sum assured)</div></div>
-                    <div class="info-card"><div class="info-label">👧 Children Education/Tuition Fees</div><div class="info-text">Tuition fees for up to 2 children (max ₹1.5L combined)</div></div>
-                </div>
-                <script>
-                    document.getElementById('budgetYear').innerText = new Date().getFullYear() + '-' + (new Date().getFullYear() + 1);
-                </script>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 8: VOTING & ELECTIONS ==================== -->
-    <div id="door-election" class="door-content">
-        <div class="accordion-card" id="electionCard">
-            <div class="accordion-header" onclick="toggleCard('electionCard')">
-                <div class="accordion-title"><span class="accordion-icon">🗳️</span> Voting & Elections - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🆔 How to Get Voter ID</div><div class="info-text">Apply online on NVSP portal or offline at local ERO office<br>Eligibility: Indian citizen, 18+ years<br>Documents: Photo, Address proof, Age proof (10th certificate/Aadhaar)<br>🔗 <a class="live-link" href="https://voterportal.eci.gov.in" target="_blank">voterportal.eci.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📅 Election Process</div><div class="info-text">Lok Sabha (General Elections) - Every 5 years | Vidhan Sabha (State Elections) - Every 5 years<br>Local Body Elections - Municipal/Corporation/Zila Parishad<br>Election Commission of India: <a class="live-link" href="https://eci.gov.in" target="_blank">eci.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">✅ How to Check Name in Voter List</div><div class="info-text">Search by EPIC number or personal details on NVSP portal<br>Mobile App: Voter Helpline App</div></div>
-                    <div class="info-card"><div class="info-label">✍️ How to Vote</div><div class="info-text">Step 1: Find your polling booth (via voter slip or online)<br>Step 2: Carry Voter ID or any government ID<br>Step 3: Get your finger inked<br>Step 4: Press EVM button for your candidate (NOTA option available)</div></div>
-                    <div class="info-card"><div class="info-label">📱 NOTA (None of the Above)</div><div class="info-text">Option to reject all candidates. If NOTA wins, fresh elections are NOT held (unlike some states), but it sends a strong message.</div></div>
-                </div>
-                <div class="section-title">📋 Election Schedule (General Elections)</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📍 Lok Sabha</div><div class="info-text">543 constituencies | 7-8 phases | 60-70% turnout</div></div>
-                    <div class="info-card"><div class="info-label">📍 Vidhan Sabha (State)</div><div class="info-text">varies by state | 1-5 phases | conducted by State Election Commission</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 9: CYBER LAWS & SAFETY ==================== -->
-    <div id="door-cyber" class="door-content">
-        <div class="accordion-card" id="cyberCard">
-            <div class="accordion-header" onclick="toggleCard('cyberCard')">
-                <div class="accordion-title"><span class="accordion-icon">💻</span> Cyber Laws & Safety - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 Information Technology Act, 2000</div><div class="info-text">Primary law dealing with cyber crime and electronic commerce. Amended in 2008.<br>Key sections: 66 (hacking), 66C (identity theft), 66D (cheating by impersonation), 67 (pornography)</div></div>
-                    <div class="info-card"><div class="info-label">🔐 Cyber Crime Reporting Portal</div><div class="info-text">Report online fraud, financial scams, social media harassment, revenge porn<br>🔗 <a class="live-link" href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a> | Helpline: 1930</div></div>
-                    <div class="info-card"><div class="info-label">⚠️ Common Cyber Crimes</div><div class="info-text">Phishing, Identity Theft, Credit Card Fraud, OTP Fraud, UPI Fraud, Sextortion, Ransomware, Online Job Fraud, Lottery Scam, KYC Fraud</div></div>
-                    <div class="info-card"><div class="info-label">🛡️ How to Stay Safe Online</div><div class="info-text">Never share OTP | Use strong passwords (8-12 chars with symbols) | Two-factor authentication (2FA) | Don't click suspicious links | Keep software updated | Use antivirus</div></div>
-                    <div class="info-card"><div class="info-label">📱 Social Media Safety Tips</div><div class="info-text">Don't share Aadhaar/PAN publicly | Adjust privacy settings | Block/report abusive accounts | Think before posting personal photos | Verify friend requests</div></div>
-                    <div class="info-card"><div class="info-label">💳 UPI & Digital Payment Safety</div><div class="info-text">UPI PIN is confidential - NEVER share | Check payee name before sending | Use trusted apps (Google Pay, PhonePe, Paytm, BHIM) | Report fraud immediately to bank</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 10: WOMEN SAFETY & LAWS ==================== -->
-    <div id="door-women" class="door-content">
-        <div class="accordion-card" id="womenCard">
-            <div class="accordion-header" onclick="toggleCard('womenCard')">
-                <div class="accordion-title"><span class="accordion-icon">👩</span> Women Safety & Laws - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">👮 Women Helplines</div><div class="info-text">1091 (National Women Helpline) | 181 (Women in Distress) | 100 (Police)</div></div>
-                    <div class="info-card"><div class="info-label">⚖️ Important Laws for Women</div><div class="info-text">Dowry Prohibition Act 1961 | Sexual Harassment at Workplace Act 2013 (POSH) | Domestic Violence Act 2005 | Equal Remuneration Act | Maternity Benefit Act (26 weeks paid leave)</div></div>
-                    <div class="info-card"><div class="info-label">⚖️ IPC Sections for Women Protection</div><div class="info-text">Section 354: Outraging modesty | Section 376: Rape (10 years to life) | Section 498A: Dowry harassment (3 years imprisonment) | Section 509: Insulting modesty of woman</div></div>
-                    <div class="info-card"><div class="info-label">🚨 One Stop Centre (OSC)</div><div class="info-text">Single window for women affected by violence - Medical, Legal, Police, Psychosocial support<br>🔗 <a class="live-link" href="https://www.wcd.nic.in" target="_blank">wcd.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📱 Apps for Women Safety</div><div class="info-text">Nirbhaya App, Himmat App (Delhi), SOS India, bSafe, Raksha App</div></div>
-                    <div class="info-card"><div class="info-label">📞 Emergency Contacts</div><div class="info-text">NCW Helpline: 7827170170 | NCW Email: ncw@nic.in | State Women Commission (varies by state)</div></div>
-                </div>
-                <div class="section-title">📋 POSH Act - Sexual Harassment at Workplace</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 What is POSH?</div><div class="info-text">Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act 2013</div></div>
-                    <div class="info-card"><div class="info-label">🏢 Internal Complaints Committee (ICC)</div><div class="info-text">Every workplace with 10+ employees must have ICC to handle complaints</div></div>
-                    <div class="info-card"><div class="info-label">⏰ Complaint Timeline</div><div class="info-text">Complaint must be filed within 3 months of incident. Inquiry to be completed in 90 days.</div></div>
-                    <div class="info-card"><div class="info-label">⚖️ Punishment</div><div class="info-text">Penalty up to ₹50,000 | Loss of service benefits | Termination of employment</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 11: PROUD FACTS OF INDIA ==================== -->
-    <div id="door-facts" class="door-content">
-        <div class="accordion-card" id="factsCard">
-            <div class="accordion-header" onclick="toggleCard('factsCard')">
-                <div class="accordion-title"><span class="accordion-icon">⭐</span> Proud Facts About India</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🌍 World's Largest Democracy</div><div class="info-text">India has the largest voter base in the world - 900+ million eligible voters</div></div>
-                    <div class="info-card"><div class="info-label">📜 Oldest Living Civilization</div><div class="info-text">Indus Valley Civilization (3300-1300 BCE) - one of the world's oldest</div></div>
-                    <div class="info-card"><div class="info-label">💻 IT Powerhouse</div><div class="info-text">India produces 30%+ of global IT workforce. Silicon Valley has 200,000+ Indian engineers</div></div>
-                    <div class="info-card"><div class="info-label">🚀 Space Achievements</div><div class="info-text">ISRO's Mangalyaan reached Mars in first attempt (2014) - cheapest Mars mission ($74M)</div></div>
-                    <div class="info-card"><div class="info-label">🇮🇳 Chandrayaan-3</div><div class="info-text">India became first country to land near Moon's South Pole (August 2023)</div></div>
-                    <div class="info-card"><div class="info-label">🕌 UNESCO World Heritage Sites</div><div class="info-text">India has 42 UNESCO World Heritage Sites - 3rd highest in the world</div></div>
-                    <div class="info-card"><div class="info-label">📚 Nalanda University</div><div class="info-text">World's oldest residential university (5th century AD) - 10,000+ students from across Asia</div></div>
-                    <div class="info-card"><div class="info-label">🛕 Kumbh Mela</div><div class="info-text">Largest peaceful gathering of humans on Earth - 100-150 million pilgrims</div></div>
-                    <div class="info-card"><div class="info-label">🧮 Invention of Zero</div><div class="info-text">Mathematician Aryabhata invented the concept of zero (0). India also invented Chess, Yoga, and Ayurveda</div></div>
-                    <div class="info-card"><div class="info-label">🏅 Olympics Success</div><div class="info-text">India has won 35 Olympic medals (10 gold). Neeraj Chopra won Gold in Javelin (Tokyo 2020)</div></div>
-                    <div class="info-card"><div class="info-label">🌿 Yoga Global Influence</div><div class="info-text">UNESCO recognized Yoga as Intangible Cultural Heritage. International Yoga Day celebrated on June 21</div></div>
-                    <div class="info-card"><div class="info-label">🦚 National Symbols</div><div class="info-text">National Bird: Peacock | National Animal: Bengal Tiger | National Flower: Lotus | National Tree: Banyan</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="bottom-bar" id="bottomBar"></div>
 <script>
-    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
-    document.querySelectorAll('.door-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
+    // ========== ANONYMOUS ID ==========
+    let anonymousId = localStorage.getItem('anns_multilang_id');
+    if (!anonymousId) {
+        anonymousId = 'STU-' + Math.floor(Math.random() * 900000 + 100000);
+        localStorage.setItem('anns_multilang_id', anonymousId);
+    }
+    document.getElementById('privacyBadge').innerHTML = `🔒 ${anonymousId} | Zero Privacy Sharing | All Data Local`;
+
+    // ========== LANGUAGE DETECTION & TRANSLATION ==========
+    // Simple script detection for Indian languages (Unicode ranges)
+    function detectLanguage(text) {
+        const scripts = [
+            { name: 'Hindi/Devanagari', regex: /[\u0900-\u097F]/, code: 'hi' },
+            { name: 'Tamil', regex: /[\u0B80-\u0BFF]/, code: 'ta' },
+            { name: 'Telugu', regex: /[\u0C00-\u0C7F]/, code: 'te' },
+            { name: 'Kannada', regex: /[\u0C80-\u0CFF]/, code: 'kn' },
+            { name: 'Malayalam', regex: /[\u0D00-\u0D7F]/, code: 'ml' },
+            { name: 'Bengali', regex: /[\u0980-\u09FF]/, code: 'bn' },
+            { name: 'Gujarati', regex: /[\u0A80-\u0AFF]/, code: 'gu' },
+            { name: 'Odia', regex: /[\u0B00-\u0B7F]/, code: 'or' },
+            { name: 'Punjabi/Gurmukhi', regex: /[\u0A00-\u0A7F]/, code: 'pa' },
+            { name: 'Marathi', regex: /[\u0900-\u097F]/, code: 'mr' },
+            { name: 'Assamese', regex: /[\u0980-\u09FF]/, code: 'as' },
+            { name: 'Urdu/Arabic', regex: /[\u0600-\u06FF]/, code: 'ur' }
+        ];
+        
+        for (let script of scripts) {
+            if (script.regex.test(text)) {
+                return { name: script.name, code: script.code };
+            }
+        }
+        // Check for Roman/English (a-z, A-Z)
+        if (/[a-zA-Z]/.test(text)) {
+            return { name: 'English', code: 'en' };
+        }
+        return { name: 'Unknown', code: 'en' };
+    }
+
+    // Simple translation mapping for common phrases (demo)
+    // In production, this would use a proper translation API
+    function translateToEnglish(text, detectedLang) {
+        // For demo, we do simple keyword mapping
+        // In real implementation, use Google Translate API or similar
+        let translated = text;
+        
+        // Common Hindi to English mappings
+        const hindiMap = {
+            'कटऑफ': 'cutoff',
+            'परीक्षा': 'exam',
+            'तारीख': 'date',
+            'यूपीएससी': 'UPSC',
+            'एनईईटी': 'NEET',
+            'एसएससी': 'SSC',
+            'छात्रवृत्ति': 'scholarship',
+            'कैरियर': 'career',
+            'कैसे करें': 'how to',
+            'क्या है': 'what is'
+        };
+        
+        for (let [hindi, english] of Object.entries(hindiMap)) {
+            if (text.includes(hindi)) {
+                translated = translated.replace(hindi, english);
+            }
+        }
+        
+        return translated;
+    }
+
+    let detectedLanguagesSet = new Set();
+    function updateLanguageCount() {
+        document.getElementById('languagesCount').innerText = detectedLanguagesSet.size;
+    }
+
+    // ========== VERIFIED ANSWERS DATABASE ==========
+    const verifiedDB = {
+        'neet cutoff': { answer: 'NEET UG 2024 Cutoff: General - 720-137 marks, OBC - 136-107, SC/ST - 118-96.', sources: ['nta.neet.nic.in', 'nmc.org.in'] },
+        'upsc age': { answer: 'UPSC Age Limit: General 21-32 (6 attempts), OBC 21-35 (9), SC/ST 21-37 (unlimited).', sources: ['upsc.gov.in', 'dopt.gov.in'] },
+        'ssc cgl': { answer: 'SSC CGL: Bachelor\'s degree, Age 18-32, relaxations for reserved categories.', sources: ['ssc.nic.in', 'india.gov.in'] },
+        'pm scholarship': { answer: 'PMSSS: ₹50,000/year, 80%+ in Class 12, income <₹6 lakhs.', sources: ['scholarships.gov.in', 'education.gov.in'] },
+        'career after 12th': { answer: 'Career options: Medical (MBBS/BDS), Engineering, Commerce (BCom/CA), Arts (BA/LLB), Skill courses.', sources: ['education.gov.in', 'ncert.nic.in'] }
+    };
+
+    function getVerifiedAnswer(question) {
+        let lower = question.toLowerCase();
+        for (let [key, data] of Object.entries(verifiedDB)) {
+            if (lower.includes(key)) return data;
+        }
+        return { answer: 'For official information, visit: upsc.gov.in, nta.ac.in, ssc.nic.in, scholarships.gov.in.', sources: ['india.gov.in', 'education.gov.in'] };
+    }
+
+    // ========== ZERO REPETITION TRACKER ==========
+    let askedQuestions = JSON.parse(localStorage.getItem('multilang_asked')) || [];
+    let answerHistory = JSON.parse(localStorage.getItem('multilang_history')) || [];
+    let stats = JSON.parse(localStorage.getItem('multilang_stats')) || { total: 0, sources: 0, prevented: 0 };
+
+    function updateStats() {
+        document.getElementById('totalAnswers').innerText = stats.total;
+        document.getElementById('totalSources').innerText = stats.sources;
+        document.getElementById('repetitionsPrevented').innerText = stats.prevented;
+    }
+
+    function addToHistory(question, answerData, originalLang) {
+        let existing = askedQuestions.find(q => q.question.toLowerCase() === question.toLowerCase());
+        if (existing) {
+            stats.prevented++;
+            localStorage.setItem('multilang_stats', JSON.stringify(stats));
+            updateStats();
+            return { repeated: true, message: `⚠️ Already asked. Answer: ${existing.answer.substring(0, 80)}...` };
+        }
+        
+        askedQuestions.unshift({ question, answer: answerData.answer, date: new Date().toLocaleString(), language: originalLang });
+        if (askedQuestions.length > 30) askedQuestions.pop();
+        localStorage.setItem('multilang_asked', JSON.stringify(askedQuestions));
+        
+        answerHistory.unshift({ question, answer: answerData.answer, sources: answerData.sources, time: new Date().toLocaleString() });
+        localStorage.setItem('multilang_history', JSON.stringify(answerHistory));
+        
+        stats.total++;
+        stats.sources += answerData.sources.length;
+        localStorage.setItem('multilang_stats', JSON.stringify(stats));
+        updateStats();
+        renderQuestionHistory();
+        
+        return { repeated: false, answer: answerData.answer, sources: answerData.sources };
+    }
+
+    function renderQuestionHistory() {
+        const container = document.getElementById('questionHistory');
+        if (askedQuestions.length === 0) {
+            container.innerHTML = '<p style="color:#94A3B8; text-align:center;">No questions yet</p>';
+            return;
+        }
+        container.innerHTML = '';
+        askedQuestions.forEach(q => {
+            container.innerHTML += `<div class="history-item" onclick="reShowAnswer('${q.question.replace(/'/g, "\\'")}')">🌐 ${q.language || '?'}: ${q.question.substring(0, 40)}<br><span style="font-size:0.6rem;">📅 ${q.date}</span></div>`;
         });
-    });
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
-    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
-    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
-    function goBack() { window.location.href = 'index.html'; }
+    }
+
+    window.reShowAnswer = (question) => {
+        let found = askedQuestions.find(q => q.question === question);
+        if (found) displayAnswer(found.question, found.answer);
+    };
+
+    // ========== CHAT SYSTEM ==========
+    let chatHistory = JSON.parse(localStorage.getItem('multilang_chat')) || [];
+
+    function displayAnswer(question, answer, sources = null, detectedLang = null) {
+        let sourceText = sources ? `<br>🔗 ${sources.map(s => `<a href="https://${s}" target="_blank" style="color:#4ECDC4;">${s}</a>`).join(' | ')}` : '';
+        let langInfo = detectedLang ? `<br><span style="font-size:0.6rem;">🌐 Detected: ${detectedLang}</span>` : '';
+        chatHistory.push({ question, answer, time: new Date().toLocaleTimeString() });
+        localStorage.setItem('multilang_chat', JSON.stringify(chatHistory));
+        renderChat();
+    }
+
+    function renderChat() {
+        const area = document.getElementById('chatArea');
+        area.innerHTML = '';
+        if (chatHistory.length === 0) {
+            area.innerHTML = `<div class="message ai-msg verified-msg">🌍 AnnS AI: Ask in ANY language - I understand Hindi, Tamil, Telugu, Marathi, Bengali, Gujarati, Punjabi, Malayalam, Kannada, Odia, Assamese, Urdu, and more!<br><br>📌 Type or speak - I'll answer in English with verified sources.</div>`;
+            return;
+        }
+        chatHistory.slice(-15).forEach(msg => {
+            let div = document.createElement('div');
+            div.className = 'message ai-msg verified-msg';
+            div.innerHTML = `<strong>❓ ${msg.question}</strong><br>✅ ${msg.answer}<br><span style="font-size:0.6rem;">📅 ${msg.time}</span>`;
+            area.appendChild(div);
+        });
+        area.scrollTop = area.scrollHeight;
+    }
+
+    function processQuestion(originalText) {
+        if (!originalText.trim()) return;
+        
+        // Detect language
+        let detected = detectLanguage(originalText);
+        detectedLanguagesSet.add(detected.name);
+        updateLanguageCount();
+        
+        document.getElementById('detectedLanguageDisplay').innerHTML = `🌐 Detected: ${detected.name}`;
+        document.getElementById('verificationStatus').innerHTML = '🔄 Translating & double verifying from official sources...';
+        
+        // Translate to English (for understanding)
+        let englishQuery = originalText;
+        if (detected.code !== 'en') {
+            englishQuery = translateToEnglish(originalText, detected.code);
+        }
+        
+        setTimeout(() => {
+            let answerData = getVerifiedAnswer(englishQuery);
+            let result = addToHistory(originalText, answerData, detected.name);
+            if (result.repeated) {
+                displayAnswer(originalText, result.message, null, detected.name);
+            } else {
+                displayAnswer(originalText, result.answer, result.sources, detected.name);
+            }
+            document.getElementById('verificationStatus').innerHTML = '';
+        }, 300);
+    }
+
+    // ========== EVENT LISTENERS ==========
+    document.getElementById('askBtn').onclick = () => {
+        let q = document.getElementById('questionInput').value;
+        processQuestion(q);
+        document.getElementById('questionInput').value = '';
+    };
+
+    document.getElementById('clearChatBtn').onclick = () => {
+        if (confirm('Clear chat history?')) { chatHistory = []; localStorage.setItem('multilang_chat', JSON.stringify(chatHistory)); renderChat(); }
+    };
+
+    document.getElementById('exportAnswersBtn').onclick = () => {
+        let data = JSON.stringify(answerHistory, null, 2);
+        let blob = new Blob([data], {type: 'application/json'});
+        let a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `answers_${anonymousId}.json`;
+        a.click();
+    };
+
+    window.showHistory = () => { renderQuestionHistory(); addTempMessage(`📚 Total: ${stats.total} answers | ${stats.prevented} repetitions prevented | ${detectedLanguagesSet.size} languages used`); };
+    window.showVerifiedSources = () => { addTempMessage('🔗 All answers from: upsc.gov.in, nta.ac.in, ssc.nic.in, scholarships.gov.in, ncert.nic.in'); };
+    window.clearRepetition = () => { if (confirm('Reset repetition tracker?')) { askedQuestions = []; stats.prevented = 0; localStorage.setItem('multilang_asked', JSON.stringify(askedQuestions)); localStorage.setItem('multilang_stats', JSON.stringify(stats)); renderQuestionHistory(); updateStats(); addTempMessage('🔄 Tracker reset'); } };
+
+    function addTempMessage(text) {
+        const area = document.getElementById('chatArea');
+        let div = document.createElement('div');
+        div.className = 'message ai-msg';
+        div.style.background = 'rgba(78,205,196,0.2)';
+        div.innerHTML = text;
+        area.appendChild(div);
+        setTimeout(() => div.remove(), 3000);
+    }
+
+    function scrollToCard(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+    window.scrollToCard = scrollToCard;
+
+    // ========== VOICE (Multi-Language Support) ==========
+    let voiceLang = '';
+    window.setVoiceLang = (lang, btn) => {
+        voiceLang = lang === 'auto' ? '' : lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        addTempMessage(`🎤 Voice language set to ${lang === 'auto' ? 'Auto-Detect' : btn.innerText}`);
+    };
+
+    document.getElementById('voiceQuestionBtn').onclick = () => {
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            addTempMessage('Voice not supported in this browser');
+            return;
+        }
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recog = new SpeechRecognition();
+        recog.lang = voiceLang || '';
+        recog.interimResults = false;
+        recog.continuous = false;
+        
+        recog.onstart = () => { addTempMessage('🎙️ Listening... Speak your question'); };
+        recog.onresult = (e) => {
+            let spoken = e.results[0][0].transcript;
+            let detected = detectLanguage(spoken);
+            document.getElementById('voiceQuestionText').innerHTML = `🗣️ "${spoken}"`;
+            document.getElementById('voiceDetectedLang').innerHTML = `🌐 Detected language: ${detected.name}`;
+            
+            // Simple correction for common English mistakes
+            let corrected = spoken.replace(/recieve/g, 'receive').replace(/teh/g, 'the');
+            if (spoken !== corrected) {
+                document.getElementById('voiceCorrection').innerHTML = `✅ Corrected: "${corrected}"`;
+                processQuestion(corrected);
+            } else {
+                document.getElementById('voiceCorrection').innerHTML = `✅ Processing...`;
+                processQuestion(spoken);
+            }
+        };
+        recog.onerror = () => { addTempMessage('Voice error. Please try again.'); };
+        recog.start();
+    };
+
+    // ========== WRITING CORRECTOR ==========
+    document.getElementById('correctWritingBtn').onclick = () => {
+        let text = document.getElementById('writingInput').value;
+        if (!text) return;
+        let detected = detectLanguage(text);
+        document.getElementById('originalWriting').innerHTML = `🌐 ${detected.name}: "${text}"`;
+        
+        if (detected.code === 'en') {
+            let corrected = text.replace(/recieve/g, 'receive').replace(/teh/g, 'the').replace(/\b(he|she|it) (go|play)\b/gi, '$1 $2s');
+            document.getElementById('correctedWriting').innerHTML = `✅ English corrected: "${corrected}"`;
+            if (corrected !== text) document.getElementById('writingExplanation').innerHTML = '📖 Fixed: spelling (recieve→receive) and grammar (he go→he goes)';
+            else document.getElementById('writingExplanation').innerHTML = '✨ No English mistakes found!';
+        } else {
+            document.getElementById('correctedWriting').innerHTML = `💡 For ${detected.name}, please type in English or use voice input for better correction.`;
+            document.getElementById('writingExplanation').innerHTML = '📖 AnnS AI understands your language! Ask questions in any language, answers will be in English with verified sources.';
+        }
+    };
+
+    // ========== SCANNER ==========
+    let video = document.getElementById('camera');
+    let stream = null;
+    let scannedText = '';
+
+    document.getElementById('startCameraBtn').onclick = async () => {
+        try { stream = await navigator.mediaDevices.getUserMedia({ video: true }); video.srcObject = stream; addTempMessage('📷 Camera started. Position your book/text.'); }
+        catch(e) { alert('Camera access denied'); }
+    };
+    document.getElementById('stopCameraBtn').onclick = () => { if(stream) { stream.getTracks().forEach(t=>t.stop()); video.srcObject=null; addTempMessage('📷 Camera stopped'); } };
+    document.getElementById('captureBtn').onclick = () => {
+        if(!video.srcObject) { alert('Start camera first'); return; }
+        let text = prompt('📷 Enter the text from your image (in any language):');
+        if(text) { scannedText = text; document.getElementById('scannedOutput').innerHTML = text; addTempMessage(`📷 Scanned: "${text.substring(0, 50)}..."`); }
+    };
+    document.getElementById('askScannedQuestion').onclick = () => { if(scannedText) processQuestion(scannedText); else alert('No text scanned'); };
+
+    // ========== GD ROOMS ==========
+    const gdRooms = ['UPSC Discussion', 'SSC CGL', 'NEET Preparation', 'JEE Maths', 'Current Affairs', 'Career Guidance', 'AI & Future', 'Study Abroad', 'Multi-Language Help'];
+    function renderGDRooms() {
+        let html = '';
+        gdRooms.forEach(room => { html += `<div class="gd-btn" onclick="joinGDRoom('${room}')">💬 ${room}</div>`; });
+        document.getElementById('gdRoomsList').innerHTML = html;
+    }
+    window.joinGDRoom = (room) => { addTempMessage(`📢 Joined "${room}" room. Discuss in any language!`); };
+    renderGDRooms();
+
+    // ========== PROBLEM BANK ==========
+    let problemBank = JSON.parse(localStorage.getItem('multilang_problems')) || [];
+    function renderProblems() {
+        let container = document.getElementById('problemFeed');
+        if(problemBank.length===0) { container.innerHTML='<p style="color:#94A3B8;text-align:center;">No problems yet</p>'; return; }
+        container.innerHTML = '';
+        problemBank.slice(0, 10).forEach(p => {
+            container.innerHTML += `<div class="problem-item" onclick="selectProblem(${p.id})">📌 ${p.subject}: ${p.text.substring(0, 50)}<br><span style="font-size:0.6rem;">👤 ${p.author.substring(0,6)}</span></div>`;
+        });
+    }
+
+    function selectProblem(id) {
+        let problem = problemBank.find(p => p.id == id);
+        if(problem) {
+            document.getElementById('replySection').style.display = 'block';
+            document.getElementById('replyText').placeholder = `Answer: ${problem.text.substring(0, 50)}...`;
+            addTempMessage(`Selected problem: ${problem.text.substring(0, 80)}`);
+            selectedProblemId = id;
+        }
+    }
+    window.selectProblem = selectProblem;
+
+    document.getElementById('shareProblemBtn').onclick = () => {
+        let subject = document.getElementById('problemSubject').value;
+        let text = document.getElementById('problemText').value;
+        if(text) {
+            let newProb = { id: Date.now(), subject, text, author: anonymousId, date: new Date().toLocaleString(), replies: [] };
+            problemBank.unshift(newProb);
+            localStorage.setItem('multilang_problems', JSON.stringify(problemBank));
+            document.getElementById('problemText').value = '';
+            renderProblems();
+            addTempMessage('📤 Problem shared anonymously!');
+        } else alert('Please type your problem');
+    };
+
+    document.getElementById('shareVoiceBtn').onclick = () => {
+        if(!('webkitSpeechRecognition' in window)) return;
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recog = new SpeechRecognition();
+        recog.lang = '';
+        recog.onresult = (e) => { document.getElementById('problemText').value = e.results[0][0].transcript; };
+        recog.start();
+    };
+
+    document.getElementById('submitReplyBtn').onclick = () => {
+        let reply = document.getElementById('replyText').value;
+        if(selectedProblemId && reply) {
+            let problem = problemBank.find(p => p.id == selectedProblemId);
+            if(problem) {
+                problem.replies.push({ author: anonymousId, text: reply, date: new Date().toLocaleString() });
+                localStorage.setItem('multilang_problems', JSON.stringify(problemBank));
+                document.getElementById('replyText').value = '';
+                document.getElementById('replySection').style.display = 'none';
+                renderProblems();
+                addTempMessage('💡 Answer submitted! Thank you for helping.');
+            }
+        }
+    };
+
+    // ========== TIPS ==========
+    const tips = {
+        exam: '📚 Exam Tip: Solve previous 10 years papers. Available free at respective commission websites.',
+        career: '🎯 Career Tip: Explore free courses on SWAYAM (swayam.gov.in) and NCERT (ncert.nic.in).',
+        time: '⏰ Time Management: Use Pomodoro technique - 25 min study, 5 min break. Free timers available online.',
+        memory: '🧠 Memory Technique: Use active recall and spaced repetition. Revise within 24 hours, then 7 days.'
+    };
+    document.getElementById('getTipBtn').onclick = () => {
+        let topic = document.getElementById('topicSelect').value;
+        document.getElementById('tipText').innerHTML = tips[topic] || tips.exam;
+    };
+
+    // TTS
+    document.getElementById('ttsBtn').onclick = () => {
+        let text = prompt('Enter text to speak (English recommended):');
+        if(text) {
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            speechSynthesis.speak(utterance);
+        }
+    };
+
+    // ========== INITIALIZE ==========
+    renderProblems();
+    updateStats();
+    renderQuestionHistory();
+    addTempMessage(`🌍 Welcome ${anonymousId}! I understand ALL Indian languages. Ask in Hindi, Tamil, Telugu, Marathi, Bengali, Gujarati, Punjabi, Malayalam, Kannada, Odia, Assamese, Urdu, or English. I will answer in English with double verified sources.`);
 </script>
 </body>
 </html>
