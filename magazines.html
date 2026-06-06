@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="hi-IN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Magazines & Study Library - दिल के अंश Career Saathi</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+        }
+        .app-header {
+            background: rgba(255,255,255,0.98);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        h1 {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.5rem;
+        }
+        .nav-buttons { display: flex; gap: 10px; margin-left: auto; }
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .nav-btn.library { background: #e74c3c; }
+        .lang-toggle { background: #ff9800; }
+        .search-container { flex: 1; max-width: 300px; }
+        .search-box {
+            width: 100%;
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+        }
+        .categories {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .category-door {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-door.active {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+        }
+        .doors-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+        }
+        .door-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            animation: fadeInUp 0.5s ease;
+        }
+        .door-card:hover { transform: translateY(-5px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .door-header {
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+        .door-header.daily { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .door-header.monthly { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .door-header.quarterly { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .door-header.yearly { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .door-header.exam { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+        .door-header.stream { background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #333; }
+        .door-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+        .door-title { font-size: 1.2rem; }
+        .door-content { max-height: 600px; overflow-y: auto; padding: 15px; }
+        .door-content::-webkit-scrollbar { width: 6px; }
+        .door-content::-webkit-scrollbar-track { background: #f1f1f1; }
+        .door-content::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+        .mag-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            border-left: 4px solid #11998e;
+        }
+        .mag-card:hover { background: #e8f5e9; transform: translateX(5px); }
+        .mag-title { font-weight: bold; color: #333; margin-bottom: 5px; padding-right: 80px; }
+        .mag-description { font-size: 0.85rem; color: #666; margin-bottom: 8px; line-height: 1.4; }
+        .mag-detail { font-size: 0.75rem; color: #888; margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge.pdf { background: #e74c3c; color: white; }
+        .badge.hindi { background: #ff9800; color: white; }
+        .badge.english { background: #2196f3; color: white; }
+        .badge.free { background: #4caf50; color: white; }
+        .badge.saved { background: #9c27b0; color: white; }
+        .card-actions { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+        .action-btn {
+            padding: 5px 12px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .action-btn.read { background: #11998e; color: white; }
+        .action-btn.save { background: #667eea; color: white; }
+        .action-btn.saved { background: #9c27b0; color: white; }
+        .action-btn.delete { background: #e74c3c; color: white; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+        }
+        .modal-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            margin: 2% auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .modal-header {
+            padding: 10px;
+            background: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+        .close-modal {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        iframe { width: 100%; height: calc(100% - 50px); border: none; }
+        .library-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            z-index: 200;
+            transition: right 0.3s;
+            overflow-y: auto;
+        }
+        .library-panel.open { right: 0; }
+        .library-header {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+        }
+        .library-item { padding: 15px; border-bottom: 1px solid #eee; }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 199;
+        }
+        .overlay.active { display: block; }
+        @media (max-width: 768px) {
+            .doors-container { grid-template-columns: 1fr; }
+            .library-panel { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="window.location.href='index.html'">← वापस</button>
+            <h1>📚 मैगज़ीन लाइब्रेरी</h1>
+            <div class="nav-buttons">
+                <button class="nav-btn library" onclick="toggleLibrary()">📚 मेरी लाइब्रेरी</button>
+                <button class="nav-btn lang-toggle" onclick="toggleLanguage()">🇬🇧 English</button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search...">
+            </div>
+        </div>
+    </div>
+
+    <div class="categories" id="categoryDoors"></div>
+    <div id="doorsContainer" class="doors-container"></div>
+
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="pdfTitle">PDF Viewer</span>
+                <button class="close-modal" onclick="closePDF()">✕ Close</button>
+            </div>
+            <iframe id="pdfFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <div id="libraryPanel" class="library-panel">
+        <div class="library-header">
+            <h3>📚 मेरी सेव्ड लाइब्रेरी</h3>
+            <button onclick="toggleLibrary()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 5px;">✕ Close</button>
+        </div>
+        <div id="libraryList"></div>
+    </div>
+    <div id="overlay" class="overlay" onclick="toggleLibrary()"></div>
+
+    <script>
+        // INDEXEDDB SETUP
+        const DB_NAME = 'MagazineLibraryDB';
+        const DB_VERSION = 1;
+        const STORE_NAME = 'saved_magazines';
+        let db = null;
+        
+        function openDatabase() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => { db = request.result; resolve(db); };
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        const store = db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                        store.createIndex('date', 'date');
+                        store.createIndex('category', 'category');
+                    }
+                };
+            });
+        }
+        
+        async function saveToLibrary(item) {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readwrite');
+            const store = transaction.objectStore(STORE_NAME);
+            const savedItem = { id: `${item.category}_${item.name_english.replace(/\s/g, '_')}`, ...item, date: new Date().toISOString() };
+            return new Promise((resolve) => {
+                const request = store.add(savedItem);
+                request.onsuccess = () => resolve(true);
+                request.onerror = () => resolve(false);
+            });
+        }
+        
+        async function removeFromLibrary(id) {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readwrite');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.delete(id);
+                request.onsuccess = () => resolve(true);
+            });
+        }
+        
+        async function getAllSavedItems() {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readonly');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.getAll();
+                request.onsuccess = () => resolve(request.result);
+            });
+        }
+        
+        async function isItemSaved(id) {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readonly');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.get(id);
+                request.onsuccess = () => resolve(!!request.result);
+            });
+        }
+
+        // ============================================
+        // COMPLETE DATABASE - ALL 10 STREAMS COVERED
+        // ============================================
+        
+        let currentLang = 'hindi';
+        let currentCategory = 'daily';
+        let searchTerm = '';
+        
+        const MAGAZINES_DATA = {
+            daily: {
+                name_hindi: "📰 दैनिक समाचार पत्र (8)",
+                name_english: "📰 Daily Newspapers (8)",
+                items: [
+                    { name_hindi: "द हिंदू", name_english: "The Hindu", description_hindi: "राष्ट्रीय गुणवत्ता वाला समाचार पत्र, UPSC/सिविल सेवा के लिए उपयोगी", description_english: "National quality newspaper, useful for UPSC/Civil Services", pdfLink: "https://www.thehindu.com/", type: "daily", language: "both" },
+                    { name_hindi: "इंडियन एक्सप्रेस", name_english: "Indian Express", description_hindi: "गहन विश्लेषण और संपादकीय", description_english: "In-depth analysis and editorials", pdfLink: "https://indianexpress.com/", type: "daily", language: "both" },
+                    { name_hindi: "दैनिक भास्कर", name_english: "Dainik Bhaskar", description_hindi: "हिंदी का सबसे लोकप्रिय समाचार पत्र", description_english: "Most popular Hindi newspaper", pdfLink: "https://www.bhaskar.com/", type: "daily", language: "hindi" },
+                    { name_hindi: "अमर उजाला", name_english: "Amar Ujala", description_hindi: "हिंदी समाचार पत्र, सामान्य जागरूकता के लिए", description_english: "Hindi newspaper for general awareness", pdfLink: "https://www.amarujala.com/", type: "daily", language: "hindi" },
+                    { name_hindi: "दैनिक जागरण", name_english: "Dainik Jagran", description_hindi: "भारत का सबसे अधिक पढ़ा जाने वाला हिंदी समाचार पत्र", description_english: "India's most read Hindi newspaper", pdfLink: "https://www.jagran.com/", type: "daily", language: "hindi" },
+                    { name_hindi: "द इकोनॉमिक टाइम्स", name_english: "Economic Times", description_hindi: "व्यापार और अर्थव्यवस्था पर गहन विश्लेषण", description_english: "Business and economy in-depth analysis", pdfLink: "https://economictimes.indiatimes.com/", type: "daily", language: "english" },
+                    { name_hindi: "द टाइम्स ऑफ इंडिया", name_english: "Times of India", description_hindi: "व्यापक समाचार कवरेज", description_english: "Comprehensive news coverage", pdfLink: "https://timesofindia.indiatimes.com/", type: "daily", language: "english" },
+                    { name_hindi: "हिंदुस्तान टाइम्स", name_english: "Hindustan Times", description_hindi: "राष्ट्रीय और अंतर्राष्ट्रीय समाचार", description_english: "National and international news", pdfLink: "https://www.hindustantimes.com/", type: "daily", language: "english" }
+                ]
+            },
+            monthly: {
+                name_hindi: "📖 मासिक पत्रिकाएँ (12+)",
+                name_english: "📖 Monthly Magazines (12+)",
+                items: [
+                    { name_hindi: "योजना (Yojana)", name_english: "Yojana", description_hindi: "सरकारी योजनाओं और नीतियों पर मासिक पत्रिका", description_english: "Monthly magazine on government schemes and policies", pdfLink: "https://publicationsdivision.nic.in/", type: "monthly", language: "both" },
+                    { name_hindi: "कुरुक्षेत्र (Kurukshetra)", name_english: "Kurukshetra", description_hindi: "ग्रामीण विकास पर मासिक पत्रिका", description_english: "Monthly magazine on rural development", pdfLink: "https://publicationsdivision.nic.in/", type: "monthly", language: "both" },
+                    { name_hindi: "सिविल्स IQ (हिंदी)", name_english: "Civils IQ (Hindi)", description_hindi: "UPSC हिंदी माध्यम के लिए मासिक करेंट अफेयर्स", description_english: "Monthly current affairs for UPSC Hindi medium", pdfLink: "https://www.studyiq.com/", type: "monthly", language: "hindi" },
+                    { name_hindi: "प्रतियोगिता दर्पण", name_english: "Pratiyogita Darpan", description_hindi: "प्रतियोगी परीक्षाओं के लिए मासिक पत्रिका", description_english: "Monthly magazine for competitive exams", pdfLink: "https://www.pratiyogitadarpan.in/", type: "monthly", language: "both" },
+                    { name_hindi: "रोजगार समाचार", name_english: "Rojgar Samachar", description_hindi: "सरकारी नौकरी अलर्ट और सूचना", description_english: "Government job alerts and information", pdfLink: "https://employmentnews.gov.in/", type: "monthly", language: "both" },
+                    { name_hindi: "साइंस रिपोर्टर", name_english: "Science Reporter", description_hindi: "लोकप्रिय विज्ञान मासिक पत्रिका", description_english: "Popular science monthly magazine", pdfLink: "https://www.niscair.res.in/", type: "monthly", language: "both" },
+                    { name_hindi: "डाउन टू अर्थ", name_english: "Down To Earth", description_hindi: "पर्यावरण और विकास पत्रिका", description_english: "Environment and development magazine", pdfLink: "https://www.downtoearth.org.in/", type: "monthly", language: "english" },
+                    { name_hindi: "फ्रंटलाइन", name_english: "Frontline", description_hindi: "राजनीति, संस्कृति, विज्ञान पर गहन लेख", description_english: "In-depth articles on politics, culture, science", pdfLink: "https://frontline.thehindu.com/", type: "monthly", language: "english" }
+                ]
+            },
+            quarterly: {
+                name_hindi: "🗓️ त्रैमासिक पत्रिकाएँ (6+)",
+                name_english: "🗓️ Quarterly Magazines (6+)",
+                items: [
+                    { name_hindi: "प्रतियोगिता दर्पण (Quarterly)", name_english: "Pratiyogita Darpan (Quarterly)", description_hindi: "प्रतियोगी परीक्षाओं के लिए त्रैमासिक करेंट अफेयर्स", description_english: "Quarterly current affairs for competitive exams", pdfLink: "https://www.pratiyogitadarpan.in/", type: "quarterly", language: "both" },
+                    { name_hindi: "सिविल सेवा क्रॉनिकल", name_english: "Civil Service Chronicle", description_hindi: "UPSC उम्मीदवारों के लिए त्रैमासिक पत्रिका", description_english: "Quarterly magazine for UPSC aspirants", pdfLink: "https://cschronicle.com/", type: "quarterly", language: "english" },
+                    { name_hindi: "जन शिक्षा", name_english: "Jan Shiksha", description_hindi: "सतत शिक्षा और वयस्क शिक्षा पत्रिका", description_english: "Continuing education magazine", pdfLink: "https://www.nih.gov.in/", type: "quarterly", language: "hindi" }
+                ]
+            },
+            yearly: {
+                name_hindi: "📚 वार्षिक पुस्तकें (8+)",
+                name_english: "📚 Yearbooks (8+)",
+                items: [
+                    { name_hindi: "भारत 2025", name_english: "India 2025", description_hindi: "भारत सरकार की आधिकारिक वार्षिक संदर्भ पुस्तक", description_english: "Official annual reference book of Government of India", pdfLink: "https://publicationsdivision.nic.in/", type: "yearly", language: "both" },
+                    { name_hindi: "मानव विकास रिपोर्ट", name_english: "Human Development Report", description_hindi: "UNDP की वार्षिक रिपोर्ट", description_english: "UNDP's annual report", pdfLink: "https://hdr.undp.org/", type: "yearly", language: "english" },
+                    { name_hindi: "विश्व आर्थिक आउटलुक", name_english: "World Economic Outlook", description_hindi: "IMF की वार्षिक रिपोर्ट", description_english: "IMF's annual report", pdfLink: "https://www.imf.org/en/Publications/WEO", type: "yearly", language: "english" }
+                ]
+            },
+            exam: {
+                name_hindi: "🎯 परीक्षा-विशेष पत्रिकाएँ (12+)",
+                name_english: "🎯 Exam-Specific Magazines (12+)",
+                items: [
+                    { name_hindi: "UPSC प्रीलिम्स मासिक", name_english: "UPSC Prelims Monthly", description_hindi: "UPSC प्रीलिम्स विशेष - प्रैक्टिस प्रश्न", description_english: "UPSC Prelims special - Practice questions", pdfLink: "https://www.insightsonindia.com/", type: "exam", language: "both" },
+                    { name_hindi: "SSC मासिक करेंट अफेयर्स", name_english: "SSC Monthly Current Affairs", description_hindi: "SSC CGL, CHSL, MTS के लिए मासिक", description_english: "Monthly for SSC CGL, CHSL, MTS", pdfLink: "https://ssc.nic.in/", type: "exam", language: "both" },
+                    { name_hindi: "बैंकिंग करेंट अफेयर्स", name_english: "Banking Current Affairs", description_hindi: "IBPS PO, SBI PO, RRB के लिए", description_english: "For IBPS PO, SBI PO, RRB", pdfLink: "https://www.practicemock.com/", type: "exam", language: "english" },
+                    { name_hindi: "NEET/JEE मासिक", name_english: "NEET/JEE Monthly", description_hindi: "NEET और JEE की तैयारी के लिए", description_english: "For NEET and JEE preparation", pdfLink: "https://sathee.prutor.ai/", type: "exam", language: "both" },
+                    { name_hindi: "राज्य PCS मासिक", name_english: "State PCS Monthly", description_hindi: "UPPSC, BPSC, MPPSC, RPSC के लिए", description_english: "For UPPSC, BPSC, MPPSC, RPSC", pdfLink: "https://www.pw.live/", type: "exam", language: "both" },
+                    { name_hindi: "रेलवे एग्जाम मासिक", name_english: "Railway Exam Monthly", description_hindi: "RRB NTPC, Group D, ALP के लिए", description_english: "For RRB NTPC, Group D, ALP", pdfLink: "https://rrb.gov.in/", type: "exam", language: "both" }
+                ]
+            },
+            stream: {
+                name_hindi: "📖 स्ट्रीम-वार अध्ययन (सभी 10 स्ट्रीम)",
+                name_english: "📖 Stream-wise Study (All 10 Streams)",
+                items: {
+                    // STREAM 1: MEDICAL
+                    medical: {
+                        name_hindi: "🩺 मेडिकल",
+                        name_english: "🩺 Medical",
+                        resources: [
+                            { name_hindi: "NCERT जीव विज्ञान (11-12)", name_english: "NCERT Biology (11-12)", description_hindi: "NEET/AIIMS के लिए मूलभूत पाठ्यपुस्तक", description_english: "Fundamental textbook for NEET/AIIMS", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT रसायन विज्ञान (11-12)", name_english: "NCERT Chemistry (11-12)", description_hindi: "NEET/JEE के लिए मूलभूत पाठ्यपुस्तक", description_english: "Fundamental textbook for NEET/JEE", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT भौतिकी (11-12)", name_english: "NCERT Physics (11-12)", description_hindi: "NEET/JEE के लिए मूलभूत पाठ्यपुस्तक", description_english: "Fundamental textbook for NEET/JEE", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "सत्य (Sathee) NEET पोर्टल", name_english: "Sathee NEET Portal", description_hindi: "NCERT का निःशुल्क स्व-मूल्यांकन पोर्टल", description_english: "NCERT's free self-assessment portal", pdfLink: "https://sathee.prutor.ai/", language: "both" }
+                        ]
+                    },
+                    // STREAM 2: NON-MEDICAL
+                    non_medical: {
+                        name_hindi: "🔧 गैर-चिकित्सा",
+                        name_english: "🔧 Non-Medical",
+                        resources: [
+                            { name_hindi: "NCERT गणित (11-12)", name_english: "NCERT Mathematics (11-12)", description_hindi: "JEE मेन/एडवांस के लिए आवश्यक", description_english: "Essential for JEE Main/Advanced", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT भौतिकी (11-12)", name_english: "NCERT Physics (11-12)", description_hindi: "JEE मेन/एडवांस के लिए", description_english: "For JEE Main/Advanced", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT रसायन विज्ञान (11-12)", name_english: "NCERT Chemistry (11-12)", description_hindi: "JEE मेन/एडवांस के लिए", description_english: "For JEE Main/Advanced", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" }
+                        ]
+                    },
+                    // STREAM 3: COMMERCE
+                    commerce: {
+                        name_hindi: "📊 वाणिज्य",
+                        name_english: "📊 Commerce",
+                        resources: [
+                            { name_hindi: "NCERT लेखाशास्त्र (11-12)", name_english: "NCERT Accountancy (11-12)", description_hindi: "CA/CS/CMA के लिए मूलभूत", description_english: "Fundamental for CA/CS/CMA", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT व्यवसाय अध्ययन", name_english: "NCERT Business Studies", description_hindi: "व्यवसाय और प्रबंधन के सिद्धांत", description_english: "Principles of business and management", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT अर्थशास्त्र", name_english: "NCERT Economics", description_hindi: "व्यष्टि और समष्टि अर्थशास्त्र", description_english: "Micro and Macroeconomics", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" }
+                        ]
+                    },
+                    // STREAM 4: ARTS
+                    arts: {
+                        name_hindi: "🎭 कला",
+                        name_english: "🎭 Arts",
+                        resources: [
+                            { name_hindi: "NCERT इतिहास (6-12)", name_english: "NCERT History (6-12)", description_hindi: "UPSC/राज्य PSC के लिए आवश्यक", description_english: "Essential for UPSC/State PSC", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT भूगोल (6-12)", name_english: "NCERT Geography (6-12)", description_hindi: "भौतिक और मानव भूगोल", description_english: "Physical and Human Geography", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT राजनीति विज्ञान", name_english: "NCERT Political Science", description_hindi: "भारतीय संविधान और राजनीति", description_english: "Indian Constitution and Politics", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "NCERT समाजशास्त्र", name_english: "NCERT Sociology", description_hindi: "सामाजिक संरचना और परिवर्तन", description_english: "Social structure and change", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" }
+                        ]
+                    },
+                    // STREAM 5: SPORTS
+                    sports: {
+                        name_hindi: "⚽ खेल",
+                        name_english: "⚽ Sports",
+                        resources: [
+                            { name_hindi: "NCERT शारीरिक शिक्षा (11-12)", name_english: "NCERT Physical Education (11-12)", description_hindi: "BPEd/MPEd की तैयारी के लिए", description_english: "For BPEd/MPEd preparation", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "खेल विज्ञान (Sports Science)", name_english: "Sports Science", description_hindi: "खेल चोट, पोषण, बायोमैकेनिक्स", description_english: "Sports injuries, nutrition, biomechanics", pdfLink: "https://www.sportsauthorityofindia.nic.in/", language: "both" },
+                            { name_hindi: "योग और फिटनेस गाइड", name_english: "Yoga & Fitness Guide", description_hindi: "योग और फिटनेस की मार्गदर्शिका", description_english: "Yoga and fitness guide", pdfLink: "https://www.yogacertificationboard.nic.in/", language: "both" }
+                        ]
+                    },
+                    // STREAM 6: AGRICULTURE
+                    agriculture: {
+                        name_hindi: "🌾 कृषि",
+                        name_english: "🌾 Agriculture",
+                        resources: [
+                            { name_hindi: "कृषि विज्ञान (NCERT)", name_english: "Agricultural Science (NCERT)", description_hindi: "कृषि की मूलभूत अवधारणाएँ", description_english: "Fundamental concepts of agriculture", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "किसान पत्रिका", name_english: "Kisan Magazine", description_hindi: "कृषि और किसानों के लिए मासिक पत्रिका", description_english: "Monthly magazine for farmers", pdfLink: "https://kisanmagazine.com/", language: "hindi" },
+                            { name_hindi: "भारतीय कृषि अनुसंधान", name_english: "Indian Agricultural Research", description_hindi: "ICAR की अनुसंधान पत्रिका", description_english: "ICAR research magazine", pdfLink: "https://icar.org.in/", language: "both" }
+                        ]
+                    },
+                    // STREAM 7: ARTIST
+                    artist: {
+                        name_hindi: "🎨 कलाकार",
+                        name_english: "🎨 Artist",
+                        resources: [
+                            { name_hindi: "ललित कला (NCERT)", name_english: "Fine Arts (NCERT)", description_hindi: "चित्रकला, मूर्तिकला, कला इतिहास", description_english: "Painting, sculpture, art history", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "भारतीय कला का इतिहास", name_english: "Indian Art History", description_hindi: "प्राचीन से आधुनिक भारतीय कला", description_english: "Ancient to modern Indian art", pdfLink: "https://ncert.nic.in/textbook.php", language: "both" },
+                            { name_hindi: "कला दर्पण", name_english: "Kala Darpan", description_hindi: "समकालीन कला पत्रिका", description_english: "Contemporary art magazine", pdfLink: "https://www.lalitkala.gov.in/", language: "both" }
+                        ]
+                    },
+                    // STREAM 8: DESIGNING
+                    designing: {
+                        name_hindi: "✏️ डिजाइनिंग",
+                        name_english: "✏️ Designing",
+                        resources: [
+                            { name_hindi: "NIFT डिजाइन गाइड", name_english: "NIFT Design Guide", description_hindi: "फैशन डिजाइन की मूलभूत जानकारी", description_english: "Fundamentals of fashion design", pdfLink: "https://nift.ac.in/", language: "both" },
+                            { name_hindi: "UI/UX डिजाइन बेसिक्स", name_english: "UI/UX Design Basics", description_hindi: "यूजर इंटरफेस और अनुभव डिजाइन", description_english: "User interface and experience design", pdfLink: "https://www.nid.edu/", language: "both" },
+                            { name_hindi: "ग्राफिक डिजाइन स्टूडियो", name_english: "Graphic Design Studio", description_hindi: "ग्राफिक डिजाइन के सिद्धांत", description_english: "Principles of graphic design", pdfLink: "https://www.iitd.ac.in/", language: "both" }
+                        ]
+                    },
+                    // STREAM 9: SKILLED TRADE
+                    skilled_trade: {
+                        name_hindi: "🔨 कुशल ट्रेड",
+                        name_english: "🔨 Skilled Trade",
+                        resources: [
+                            { name_hindi: "ITI ट्रेड सिद्धांत", name_english: "ITI Trade Theory", description_hindi: "इलेक्ट्रीशियन, फिटर, वेल्डर", description_english: "Electrician, Fitter, Welder", pdfLink: "https://ncvt.gov.in/", language: "both" },
+                            { name_hindi: "डिप्लोमा इंजीनियरिंग", name_english: "Diploma Engineering", description_hindi: "पॉलिटेक्निक डिप्लोमा पाठ्यक्रम", description_english: "Polytechnic diploma curriculum", pdfLink: "https://www.aicte-india.org/", language: "both" },
+                            { name_hindi: "NSDC कौशल प्रशिक्षण", name_english: "NSDC Skill Training", description_hindi: "राष्ट्रीय कौशल विकास निगम", description_english: "National Skill Development Corporation", pdfLink: "https://nsdcindia.org/", language: "both" }
+                        ]
+                    },
+                    // STREAM 10: ABROAD STUDIES
+                    abroad_studies: {
+                        name_hindi: "🌍 विदेश अध्ययन",
+                        name_english: "🌍 Abroad Studies",
+                        resources: [
+                            { name_hindi: "IELTS/TOEFL प्रिपरेशन", name_english: "IELTS/TOEFL Preparation", description_hindi: "अंग्रेजी भाषा परीक्षा की तैयारी", description_english: "English language test preparation", pdfLink: "https://www.ielts.org/", language: "both" },
+                            { name_hindi: "GRE/GMAT गाइड", name_english: "GRE/GMAT Guide", description_hindi: "विदेशी विश्वविद्यालय प्रवेश परीक्षा", description_english: "Foreign university entrance exam", pdfLink: "https://www.ets.org/gre", language: "both" },
+                            { name_hindi: "विदेश अध्ययन पुस्तिका", name_english: "Study Abroad Handbook", description_hindi: "देश-वार शिक्षा मार्गदर्शिका", description_english: "Country-wise education guide", pdfLink: "https://www.studyabroad.com/", language: "both" },
+                            { name_hindi: "फुलब्राइट स्कॉलरशिप", name_english: "Fulbright Scholarship", description_hindi: "अमेरिका में अध्ययन के लिए पूर्ण छात्रवृत्ति", description_english: "Full scholarship for study in USA", pdfLink: "https://www.usief.org.in/", language: "both" }
+                        ]
+                    }
+                }
+            }
+        };
+
+        function renderCategories() {
+            const categories = [
+                { id: 'daily', icon: '📰', name_hindi: 'दैनिक (8)', name_english: 'Daily (8)' },
+                { id: 'monthly', icon: '📖', name_hindi: 'मासिक (12+)', name_english: 'Monthly (12+)' },
+                { id: 'quarterly', icon: '🗓️', name_hindi: 'त्रैमासिक (6+)', name_english: 'Quarterly (6+)' },
+                { id: 'yearly', icon: '📚', name_hindi: 'वार्षिक (8+)', name_english: 'Yearly (8+)' },
+                { id: 'exam', icon: '🎯', name_hindi: 'परीक्षा (12+)', name_english: 'Exam (12+)' },
+                { id: 'stream', icon: '📖', name_hindi: 'सभी 10 स्ट्रीम', name_english: 'All 10 Streams' }
+            ];
+            const container = document.getElementById('categoryDoors');
+            container.innerHTML = categories.map(cat => `
+                <button class="category-door ${currentCategory === cat.id ? 'active' : ''}" onclick="switchCategory('${cat.id}')">
+                    ${cat.icon} ${currentLang === 'hindi' ? cat.name_hindi : cat.name_english}
+                </button>
+            `).join('');
+        }
+
+        function switchCategory(categoryId) {
+            currentCategory = categoryId;
+            renderCategories();
+            renderDoors();
+        }
+
+        function openPDF(url, title) {
+            const modal = document.getElementById('pdfModal');
+            const frame = document.getElementById('pdfFrame');
+            document.getElementById('pdfTitle').textContent = title;
+            frame.src = url;
+            modal.style.display = 'block';
+        }
+
+        function closePDF() {
+            const modal = document.getElementById('pdfModal');
+            const frame = document.getElementById('pdfFrame');
+            modal.style.display = 'none';
+            frame.src = '';
+        }
+
+        function toggleLibrary() {
+            const panel = document.getElementById('libraryPanel');
+            const overlay = document.getElementById('overlay');
+            panel.classList.toggle('open');
+            overlay.classList.toggle('active');
+            if (panel.classList.contains('open')) loadLibraryList();
+        }
+
+        async function loadLibraryList() {
+            const items = await getAllSavedItems();
+            const container = document.getElementById('libraryList');
+            if (items.length === 0) {
+                container.innerHTML = '<div style="padding: 20px; text-align: center; color: #999;">📭 No saved items yet. Click "📥 Save to Library" on any magazine!</div>';
+                return;
+            }
+            container.innerHTML = items.map(item => `
+                <div class="library-item">
+                    <div class="mag-title">${currentLang === 'hindi' ? item.name_hindi : item.name_english}</div>
+                    <div class="mag-description">${currentLang === 'hindi' ? item.description_hindi : item.description_english}</div>
+                    <div class="card-actions">
+                        <button class="action-btn read" onclick="openPDF('${item.pdfLink}', '${item.name_english}')">📖 Read</button>
+                        <button class="action-btn delete" onclick="removeFromLibraryAndRefresh('${item.id}')">🗑️ Remove</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function saveItemToLibrary(item, category) {
+            const itemWithCategory = { ...item, category };
+            const saved = await saveToLibrary(itemWithCategory);
+            if (saved) {
+                alert('✅ Saved to your library! Click "📚 मेरी लाइब्रेरी" to view offline.');
+                renderDoors();
+            }
+        }
+
+        async function removeFromLibraryAndRefresh(id) {
+            await removeFromLibrary(id);
+            loadLibraryList();
+            renderDoors();
+        }
+
+        async function renderDoors() {
+            const data = MAGAZINES_DATA[currentCategory];
+            if (!data) return;
+            const searchInput = document.getElementById('searchBox');
+            searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            const container = document.getElementById('doorsContainer');
+            
+            if (currentCategory === 'stream') {
+                const streams = data.items;
+                let html = '';
+                const streamOrder = ['medical', 'non_medical', 'commerce', 'arts', 'sports', 'agriculture', 'artist', 'designing', 'skilled_trade', 'abroad_studies'];
+                
+                for (const streamKey of streamOrder) {
+                    const streamData = streams[streamKey];
+                    if (!streamData) continue;
+                    
+                    let filteredResources = streamData.resources.filter(res => 
+                        !searchTerm || 
+                        (currentLang === 'hindi' ? res.name_hindi : res.name_english).toLowerCase().includes(searchTerm) ||
+                        (currentLang === 'hindi' ? res.description_hindi : res.description_english).toLowerCase().includes(searchTerm)
+                    );
+                    
+                    if (filteredResources.length === 0 && searchTerm) continue;
+                    
+                    const streamIcons = {
+                        medical: '🩺', non_medical: '🔧', commerce: '📊', arts: '🎭',
+                        sports: '⚽', agriculture: '🌾', artist: '🎨', designing: '✏️',
+                        skilled_trade: '🔨', abroad_studies: '🌍'
+                    };
+                    
+                    html += `
+                        <div class="door-card">
+                            <div class="door-header stream">
+                                <span class="door-icon">${streamIcons[streamKey] || '📖'}</span>
+                                <div class="door-title">${currentLang === 'hindi' ? streamData.name_hindi : streamData.name_english}</div>
+                            </div>
+                            <div class="door-content">
+                                ${filteredResources.map(res => `
+                                    <div class="mag-card">
+                                        <div class="mag-title">${currentLang === 'hindi' ? res.name_hindi : res.name_english}</div>
+                                        <div class="mag-description">${currentLang === 'hindi' ? res.description_hindi : res.description_english}</div>
+                                        <div class="mag-detail">
+                                            <span class="badge pdf">📄 PDF</span>
+                                            ${res.language === 'both' ? '<span class="badge hindi">🇮🇳 हिंदी</span><span class="badge english">🇬🇧 English</span>' : (res.language === 'hindi' ? '<span class="badge hindi">🇮🇳 हिंदी</span>' : '<span class="badge english">🇬🇧 English</span>')}
+                                            <span class="badge free">🎓 निःशुल्क</span>
+                                        </div>
+                                        <div class="card-actions">
+                                            <button class="action-btn read" onclick="openPDF('${res.pdfLink}', '${res.name_english.replace(/'/g, "\\'")}')">📖 Read Online</button>
+                                            <button class="action-btn save" onclick="saveItemToLibrary({
+                                                name_hindi: '${res.name_hindi.replace(/'/g, "\\'")}',
+                                                name_english: '${res.name_english.replace(/'/g, "\\'")}',
+                                                description_hindi: '${res.description_hindi.replace(/'/g, "\\'")}',
+                                                description_english: '${res.description_english.replace(/'/g, "\\'")}',
+                                                pdfLink: '${res.pdfLink}',
+                                                language: '${res.language}'
+                                            }, '${currentCategory}')">📥 Save to Library</button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                container.innerHTML = html || '<div class="empty-state">📭 No matching resources found</div>';
+                return;
+            }
+            
+            // Non-stream categories
+            let filteredItems = data.items.filter(item => 
+                !searchTerm || 
+                (currentLang === 'hindi' ? item.name_hindi : item.name_english).toLowerCase().includes(searchTerm) ||
+                (currentLang === 'hindi' ? item.description_hindi : item.description_english).toLowerCase().includes(searchTerm)
+            );
+            
+            let html = `
+                <div class="door-card">
+                    <div class="door-header ${currentCategory}">
+                        <span class="door-icon">${currentCategory === 'daily' ? '📰' : currentCategory === 'monthly' ? '📖' : currentCategory === 'quarterly' ? '🗓️' : currentCategory === 'yearly' ? '📚' : '🎯'}</span>
+                        <div class="door-title">${currentLang === 'hindi' ? data.name_hindi : data.name_english}</div>
+                    </div>
+                    <div class="door-content">
+                        ${filteredItems.map(item => `
+                            <div class="mag-card">
+                                <div class="mag-title">${currentLang === 'hindi' ? item.name_hindi : item.name_english}</div>
+                                <div class="mag-description">${currentLang === 'hindi' ? item.description_hindi : item.description_english}</div>
+                                <div class="mag-detail">
+                                    <span class="badge pdf">📄 PDF</span>
+                                    ${item.language === 'both' ? '<span class="badge hindi">🇮🇳 हिंदी</span><span class="badge english">🇬🇧 English</span>' : (item.language === 'hindi' ? '<span class="badge hindi">🇮🇳 हिंदी</span>' : '<span class="badge english">🇬🇧 English</span>')}
+                                    <span class="badge free">🎓 निःशुल्क</span>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="action-btn read" onclick="openPDF('${item.pdfLink}', '${item.name_english.replace(/'/g, "\\'")}')">📖 Read Online</button>
+                                    <button class="action-btn save" onclick="saveItemToLibrary({
+                                        name_hindi: '${item.name_hindi.replace(/'/g, "\\'")}',
+                                        name_english: '${item.name_english.replace(/'/g, "\\'")}',
+                                        description_hindi: '${item.description_hindi.replace(/'/g, "\\'")}',
+                                        description_english: '${item.description_english.replace(/'/g, "\\'")}',
+                                        pdfLink: '${item.pdfLink}',
+                                        language: '${item.language}'
+                                    }, '${currentCategory}')">📥 Save to Library</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                        ${filteredItems.length === 0 ? '<div class="empty-state">🔍 No magazines found matching your search</div>' : ''}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'hindi' ? 'english' : 'hindi';
+            const langBtn = document.querySelector('.lang-toggle');
+            langBtn.innerHTML = currentLang === 'hindi' ? '🇬🇧 English' : '🇮🇳 हिंदी';
+            renderCategories();
+            renderDoors();
+        }
+
+        function handleSearch() { renderDoors(); }
+
+        async function init() {
+            await openDatabase();
+            renderCategories();
+            renderDoors();
+            document.getElementById('searchBox').addEventListener('input', handleSearch);
+        }
+        init();
+    </script>
+</body>
+</html>
