@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html lang="hi-IN">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>दिल के अंश Career Saathi - Universal Success Platform</title>
-    <meta name="description" content="100% free, offline-first platform. Jobs from 10th to CEO level. Worldwide job portals. All streams covered.">
+    <title>दिल के अंश Career Saathi - Free Career Guidance Platform</title>
+    <meta name="description" content="100% free, zero-privacy-sharing, offline-first career guidance platform for Indian students. Explore careers, mock tests, e-newspapers, current affairs, and more.">
     <meta name="theme-color" content="#11998e">
     <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', system-ui, sans-serif;
+            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             min-height: 100vh;
-            padding-bottom: 80px;
+            padding-bottom: 30px;
         }
+
         .app-header {
             background: rgba(255,255,255,0.98);
             padding: 12px 20px;
@@ -23,6 +30,7 @@
             z-index: 100;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
+
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
@@ -32,14 +40,54 @@
             flex-wrap: wrap;
             gap: 15px;
         }
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo { font-size: 2rem; }
-        .app-title h1 { font-size: 1.2rem; background: linear-gradient(135deg, #11998e, #38ef7d); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .app-title p { font-size: 0.7rem; color: #666; }
-        .nav-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-        .nav-btn { background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
-        .offline-status { background: #e74c3c; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
-        .offline-status.online { background: #4caf50; }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+        }
+
+        .app-title h1 {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-title p {
+            font-size: 0.65rem;
+            color: #666;
+        }
+
+        .bell-icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .offline-status {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .offline-status.online {
+            background: #4caf50;
+        }
+
         .welcome-banner {
             background: rgba(255,255,255,0.95);
             margin: 20px;
@@ -48,74 +96,104 @@
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
-        .search-ai { display: flex; max-width: 500px; margin: 15px auto 0; gap: 10px; }
-        .search-ai input { flex: 1; padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 30px; }
-        .search-ai button { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; border: none; padding: 0 25px; border-radius: 30px; cursor: pointer; font-weight: bold; }
-        .stats-bar { max-width: 1400px; margin: 0 auto 20px; padding: 0 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-        .stats-item { background: rgba(255,255,255,0.9); padding: 8px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
-        .section { max-width: 1400px; margin: 0 auto 25px; padding: 0 20px; }
-        .section-title { background: rgba(255,255,255,0.9); display: inline-block; padding: 8px 20px; border-radius: 30px; font-weight: bold; margin-bottom: 15px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .grid-6 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        .welcome-banner h2 {
+            color: #11998e;
+            margin-bottom: 5px;
+            font-size: 1.3rem;
         }
-        .card:hover { transform: translateY(-3px); }
-        .card-icon { font-size: 2rem; margin-bottom: 10px; }
-        .card-title { font-weight: bold; margin-bottom: 5px; }
-        .card-desc { font-size: 0.7rem; color: #666; }
-        .card-link { font-size: 0.65rem; color: #11998e; margin-top: 8px; display: inline-block; text-decoration: none; word-break: break-all; }
-        .tiles-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+
+        .welcome-banner p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .search-ai {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .search-ai input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+
+        .search-ai button {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tiles-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
         .tile {
             background: white;
             border-radius: 16px;
-            padding: 15px 10px;
+            padding: 20px 10px;
             text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border: none;
-            width: 100%;
-        }
-        .tile:hover { transform: translateY(-5px); }
-        .tile-icon { font-size: 1.8rem; }
-        .tile-title { font-weight: 600; font-size: 0.8rem; margin-top: 8px; }
-        .tile-badge { background: #ff9800; color: white; font-size: 0.6rem; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 5px; }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 20px;
-            box-shadow: 0 -2px 15px rgba(0,0,0,0.1);
-            z-index: 100;
-        }
-        .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
             cursor: pointer;
-            padding: 5px 15px;
-            border-radius: 30px;
-            background: none;
             border: none;
+            width: 100%;
         }
-        .nav-item.active { background: #11998e; color: white; }
-        .nav-icon { font-size: 1.5rem; color: #666; }
-        .nav-label { font-size: 0.7rem; color: #666; }
+
+        .tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .tile-icon {
+            font-size: 2rem;
+        }
+
+        .tile-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .tile-badge {
+            background: #ff9800;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-top: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px 20px;
+            color: white;
+            font-size: 0.8rem;
+        }
+
         .ai-modal {
             position: fixed;
-            bottom: 100px;
+            bottom: 20px;
             left: 20px;
             right: 20px;
             background: white;
@@ -124,364 +202,306 @@
             z-index: 300;
             display: none;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-height: 400px;
+            max-height: 70vh;
             overflow-y: auto;
         }
         .ai-modal.open { display: block; animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .ai-modal-header { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; color: #11998e; }
         .close-ai { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-        .footer { text-align: center; padding: 20px; color: white; font-size: 0.7rem; }
+        .ai-response-text { line-height: 1.6; font-size: 0.9rem; }
+
         @media (max-width: 768px) {
-            .grid-3, .grid-4, .grid-6 { grid-template-columns: 1fr; }
-            .tiles-container { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+            .tiles-container {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 12px;
+            }
+            .tile {
+                padding: 15px 8px;
+            }
+            .tile-icon {
+                font-size: 1.5rem;
+            }
+            .tile-title {
+                font-size: 0.75rem;
+            }
+            .welcome-banner h2 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="app-header">
         <div class="header-content">
-            <div class="logo-area"><div class="logo">🇮🇳</div><div class="app-title"><h1>दिल के अंश Career Saathi</h1><p>Zero to CEO | Worldwide Jobs | 10th to CEO Level</p></div></div>
-            <div class="nav-buttons"><button class="nav-btn" id="installBtn" style="display:none;">📲 Install</button><div class="offline-status" id="offlineStatus">🟢 Online</div></div>
+            <div class="logo-area">
+                <div class="logo">दिल के अंश</div>
+                <div class="app-title">
+                    <h1>Dil-Ke-AnnS Career Saathi</h1>
+                    <p>Anonymous Padho, Bindas Bano</p>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <div class="bell-icon">🔔</div>
+                <div class="offline-status" id="offlineStatus">🟢 Online</div>
+            </div>
         </div>
     </div>
 
     <div class="welcome-banner">
-        <h2>🚀 10th Pass to CEO - Complete Job Portfolio</h2>
-        <p>दुनिया भर की नौकरियाँ | सभी स्ट्रीम | सभी स्तर | 100% मुफ्त</p>
-        <div class="search-ai"><input type="text" id="aiQuery" placeholder="🔍 AnnS AI से पूछें..."><button onclick="askAI()">पूछें</button></div>
+        <h2 id="welcomeMsg">🌙 👋 Welcome back, Learner!</h2>
+        <p id="welcomeDesc">100% free career guidance | No data sharing | Offline first | 10th to CEO level jobs | Worldwide portals</p>
+        <div class="search-ai">
+            <input type="text" id="aiQuery" placeholder="🔍 Ask AnnS AI">
+            <button onclick="askAI()">Ask</button>
+        </div>
     </div>
 
-    <div class="stats-bar">
-        <div class="stats-item" onclick="scrollToSection('jobPortfolio')">📈 Job Portfolio</div>
-        <div class="stats-item" onclick="scrollToSection('worldJobs')">🌍 Worldwide Jobs</div>
-        <div class="stats-item" onclick="scrollToSection('jobPortals')">🔗 Job Portals</div>
-        <div class="stats-item" onclick="scrollToSection('streamJobs')">🎯 Stream-wise Jobs</div>
-        <div class="stats-item" onclick="scrollToSection('freelance')">💻 Freelance</div>
-    </div>
-
-    <!-- Job Portfolio: 10th to CEO Level -->
-    <div class="section" id="jobPortfolio"><div class="section-title">📈 Job Portfolio - 10th Pass to CEO Level (सभी स्ट्रीम)</div><div class="grid-3" id="jobPortfolioGrid"></div></div>
-
-    <!-- Worldwide Job Portals -->
-    <div class="section" id="worldJobs"><div class="section-title">🌍 Worldwide Job Portals (International Jobs)</div><div class="grid-4" id="worldJobsGrid"></div></div>
-
-    <!-- Indian Job Portals -->
-    <div class="section" id="jobPortals"><div class="section-title">🇮🇳 Indian Job Portals (Government & Private)</div><div class="grid-4" id="indianJobsGrid"></div></div>
-
-    <!-- Company Career Pages -->
-    <div class="section"><div class="section-title">🏢 Direct Company Career Pages (Top Companies)</div><div class="grid-4" id="companyJobsGrid"></div></div>
-
-    <!-- Stream-wise Jobs -->
-    <div class="section" id="streamJobs"><div class="section-title">🎯 Stream-wise Job Portals (सभी 10 स्ट्रीम)</div><div class="grid-4" id="streamJobsGrid"></div></div>
-
-    <!-- Freelancing Platforms -->
-    <div class="section" id="freelance"><div class="section-title">💻 Freelancing & Remote Work Platforms (Global)</div><div class="grid-4" id="freelanceGrid"></div></div>
-
-    <!-- Government Job Alerts -->
-    <div class="section"><div class="section-title">🏛️ Government Job Alerts (Sarkari Naukri)</div><div class="grid-4" id="govtJobsGrid"></div></div>
-
-    <!-- Main Tiles -->
+    <!-- EXACT TILES AS YOUR LIVE SITE - CORRECT ORDER -->
     <div class="tiles-container" id="tilesContainer"></div>
 
-    <div class="footer"><p>🇮🇳 BHARAT | 🌍 Worldwide Jobs | 10th to CEO Level | 100% Free | Offline First</p><p>© 2026 दिल के अंश Career Saathi - Zero to Peak | Empowering Global Careers</p></div>
-
-    <div class="bottom-nav">
-        <button class="nav-item active" onclick="bottomNavClick('home')"><div class="nav-icon">🏠</div><div class="nav-label">होम</div></button>
-        <button class="nav-item" onclick="bottomNavClick('jobs')"><div class="nav-icon">💼</div><div class="nav-label">नौकरियाँ</div></button>
-        <button class="nav-item" onclick="bottomNavClick('library')"><div class="nav-icon">📚</div><div class="nav-label">लाइब्रेरी</div></button>
-        <button class="nav-item" onclick="bottomNavClick('updates')"><div class="nav-icon">📰</div><div class="nav-label">अपडेट्स</div></button>
+    <div class="footer">
+        <p>🇮🇳 BHARAT | Free Career Guidance | No Data Sharing | Offline First</p>
+        <p>© 2026 दिल के अंश Career Saathi - Empowering Rural India</p>
     </div>
 
-    <div class="ai-modal" id="aiModal"><div class="ai-modal-header"><span>🤖 AnnS AI</span><button class="close-ai" onclick="closeAIModal()">✕</button></div><div id="aiResponse"></div></div>
+    <div class="ai-modal" id="aiModal">
+        <div class="ai-modal-header">
+            <span>🤖 AnnS AI</span>
+            <button class="close-ai" onclick="closeAIModal()">✕</button>
+        </div>
+        <div id="aiResponse" class="ai-response-text"></div>
+    </div>
 
     <script>
-        let currentLang = 'hindi';
+        // ============================================
+        // TILES - EXACT MATCH TO YOUR LIVE SITE
+        // ORDER: Education, Business, Jobs & Exams, Study Material, 
+        // Magazines, E-newspapers, Current Affairs, Mock test,
+        // After 10th, After 12th, Something Interesting, Results, App Forms, BHARAT
+        // ============================================
+        const TILES = [
+            { id: "education", icon: "🎓", title: "Education", link: "#", badge: "" },
+            { id: "business", icon: "💼", title: "Business", link: "#", badge: "" },
+            { id: "jobs_exams", icon: "📝", title: "Jobs & Exams", link: "jobs_exams.html", badge: "500+" },
+            { id: "study_material", icon: "📚", title: "Study Material", link: "study_material.html", badge: "400+" },
+            { id: "magazines", icon: "📰", title: "Magazines", link: "magazines.html", badge: "80+" },
+            { id: "enewspapers", icon: "🗞️", title: "E-newspapers", link: "e-newspaper.html", badge: "30+" },
+            { id: "current_affairs", icon: "🌍", title: "Current Affairs", link: "current_affairs.html", badge: "2026" },
+            { id: "mock_test", icon: "✅", title: "Mock test", link: "mock_test.html", badge: "135+" },
+            { id: "after_10th", icon: "📖", title: "After 10th", link: "after_10th.html", badge: "125+" },
+            { id: "after_12th", icon: "🎯", title: "After 12th", link: "#", badge: "SOON" },
+            { id: "something_interesting", icon: "💡", title: "Something Interesting", link: "something_interesting.html", badge: "AI" },
+            { id: "results", icon: "📊", title: "Results", link: "#", badge: "LIVE" },
+            { id: "app_forms", icon: "📋", title: "App Forms", link: "#", badge: "NEW" },
+            { id: "bharat", icon: "🇮🇳", title: "BHARAT", link: "#", badge: "" }
+        ];
+
         let deferredPrompt = null;
-        
-        // ============================================
-        // JOB PORTFOLIO - 10th to CEO LEVEL (ALL LEVELS)
-        // ============================================
-        const JOB_PORTFOLIO = [
-            { level: "10th Pass", title_hindi: "10वीं पास नौकरियाँ", title_english: "10th Pass Jobs", icon: "📘", jobs: "SSC MTS, RRB Group D, Peon, Helper, Security Guard, Sales Assistant", salary: "₹15,000-25,000/माह", link: "jobs_exams.html" },
-            { level: "12th Pass", title_hindi: "12वीं पास नौकरियाँ", title_english: "12th Pass Jobs", icon: "📗", jobs: "SSC CHSL, RRB NTPC, Clerk, Data Entry, Customer Support, Retail", salary: "₹20,000-35,000/माह", link: "jobs_exams.html" },
-            { level: "ITI/Diploma", title_hindi: "ITI/डिप्लोमा नौकरियाँ", title_english: "ITI/Diploma Jobs", icon: "🔧", jobs: "Technician, Fitter, Electrician, JE, Supervisor, Mechanic", salary: "₹25,000-45,000/माह", link: "jobs_exams.html" },
-            { level: "Graduate", title_hindi: "स्नातक नौकरियाँ (B.A/B.Com/B.Sc)", title_english: "Graduate Jobs (BA/BCom/BSc)", icon: "🎓", jobs: "Bank PO, Clerk, SSC CGL, Executive, Analyst, Officer", salary: "₹35,000-60,000/माह", link: "jobs_exams.html" },
-            { level: "Engineering", title_hindi: "इंजीनियरिंग नौकरियाँ", title_english: "Engineering Jobs", icon: "🔬", jobs: "Software Engineer, Civil Engineer, Mechanical, Electrical, IT", salary: "₹4-15 LPA", link: "jobs_exams.html" },
-            { level: "Medical", title_hindi: "मेडिकल नौकरियाँ", title_english: "Medical Jobs", icon: "🩺", jobs: "Doctor, Nurse, Pharmacist, Lab Technician, Radiologist", salary: "₹3-20 LPA", link: "jobs_exams.html" },
-            { level: "MBA/Post Graduate", title_hindi: "MBA/पोस्ट ग्रेजुएट नौकरियाँ", title_english: "MBA/PG Jobs", icon: "📊", jobs: "Manager, Consultant, Business Analyst, Marketing Head", salary: "₹8-25 LPA", link: "jobs_exams.html" },
-            { level: "Senior Level", title_hindi: "सीनियर लेवल (5-10 years)", title_english: "Senior Level (5-10 yrs)", icon: "👔", jobs: "Senior Manager, Team Lead, Project Manager, Architect", salary: "₹15-40 LPA", link: "jobs_exams.html" },
-            { level: "Top Management", title_hindi: "टॉप मैनेजमेंट (Director/VP)", title_english: "Top Management (Director/VP)", icon: "🏢", jobs: "Director, Vice President, Head of Department", salary: "₹30-80 LPA", link: "jobs_exams.html" },
-            { level: "CXO Level", title_hindi: "CXO लेवल (CEO/CTO/CFO)", title_english: "CXO Level (CEO/CTO/CFO)", icon: "👑", jobs: "CEO, CTO, CFO, COO, Managing Director", salary: "₹50 LPA - ₹5 Cr+", link: "jobs_exams.html" }
-        ];
-        
-        // ============================================
-        // WORLDWIDE JOB PORTALS (INTERNATIONAL)
-        // ============================================
-        const WORLDWIDE_JOBS = [
-            { name: "LinkedIn Jobs", icon: "🔗", country: "Global", url: "https://www.linkedin.com/jobs/", type: "Professional" },
-            { name: "Indeed", icon: "🔍", country: "Global", url: "https://www.indeed.com/", type: "General" },
-            { name: "Glassdoor", icon: "🏢", country: "Global", url: "https://www.glassdoor.com/", type: "Reviews+Jobs" },
-            { name: "Monster", icon: "👾", country: "Global", url: "https://www.monster.com/", type: "General" },
-            { name: "CareerBuilder", icon: "🏗️", country: "USA", url: "https://www.careerbuilder.com/", type: "USA" },
-            { name: "ZipRecruiter", icon: "📨", country: "USA", url: "https://www.ziprecruiter.com/", type: "USA" },
-            { name: "SimplyHired", icon: "📊", country: "USA/Canada", url: "https://www.simplyhired.com/", type: "North America" },
-            { name: "Reed", icon: "📖", country: "UK", url: "https://www.reed.co.uk/", type: "UK" },
-            { name: "Totaljobs", icon: "📈", country: "UK", url: "https://www.totaljobs.com/", type: "UK" },
-            { name: "StepStone", icon: "🪨", country: "Europe", url: "https://www.stepstone.com/", type: "Europe" },
-            { name: "Seek", icon: "🔎", country: "Australia", url: "https://www.seek.com.au/", type: "Australia" },
-            { name: "Bayt", icon: "🏠", country: "Middle East", url: "https://www.bayt.com/", type: "Dubai/UAE" },
-            { name: "Naukri Gulf", icon: "🌊", country: "Gulf", url: "https://www.naukrigulf.com/", type: "Dubai/Qatar" },
-            { name: "Robert Half", icon: "👔", country: "Global", url: "https://www.roberthalf.com/", type: "Executive" },
-            { name: "Dice", icon: "🎲", country: "USA", url: "https://www.dice.com/", type: "Tech" },
-            { name: "RemoteOK", icon: "🏠", country: "Global Remote", url: "https://remoteok.com/", type: "Remote" }
-        ];
-        
-        // ============================================
-        // INDIAN JOB PORTALS
-        // ============================================
-        const INDIAN_JOBS = [
-            { name: "Naukri.com", icon: "💼", url: "https://www.naukri.com/", type: "Private" },
-            { name: "TimesJobs", icon: "📰", url: "https://www.timesjobs.com/", type: "Private" },
-            { name: "Shine.com", icon: "✨", url: "https://www.shine.com/", type: "Private" },
-            { name: "Monster India", icon: "👾", url: "https://www.monsterindia.com/", type: "Private" },
-            { name: "Freshersworld", icon: "🎓", url: "https://www.freshersworld.com/", type: "Freshers" },
-            { name: "Indeed India", icon: "🔍", url: "https://in.indeed.com/", type: "General" },
-            { name: "Apna", icon: "🤝", url: "https://apna.co/", type: "Local Jobs" },
-            { name: "Hirist", icon: "💻", url: "https://www.hirist.com/", type: "Tech" },
-            { name: "Cutshort", icon: "✂️", url: "https://cutshort.io/", type: "Startups" },
-            { name: "WorkIndia", icon: "🇮🇳", url: "https://workindia.in/", type: "Blue Collar" },
-            { name: "QuikrJobs", icon: "📱", url: "https://quikrjobs.com/", type: "Local" },
-            { name: "OLX Jobs", icon: "🛒", url: "https://www.olx.in/jobs/", type: "Local" }
-        ];
-        
-        // ============================================
-        // GOVERNMENT JOB PORTALS
-        // ============================================
-        const GOVT_JOBS = [
-            { name: "Sarkari Result", icon: "📊", url: "https://www.sarkariresult.com/", type: "All Govt" },
-            { name: "UPSC", icon: "🇮🇳", url: "https://upsc.gov.in/", type: "Civil Services" },
-            { name: "SSC", icon: "📝", url: "https://ssc.nic.in/", type: "Staff Selection" },
-            { name: "RRB", icon: "🚂", url: "https://rrb.gov.in/", type: "Railway" },
-            { name: "IBPS", icon: "🏦", url: "https://www.ibps.in/", type: "Banking" },
-            { name: "SBI Careers", icon: "💰", url: "https://sbi.co.in/careers", type: "Banking" },
-            { name: "RBI", icon: "₹", url: "https://opportunities.rbi.org.in/", type: "Banking" },
-            { name: "FCI", icon: "🌾", url: "https://fci.gov.in/", type: "Food Corporation" },
-            { name: "BHEL", icon: "⚙️", url: "https://www.bhel.com/", type: "PSU" },
-            { name: "ONGC", icon: "⛽", url: "https://www.ongcindia.com/", type: "PSU" },
-            { name: "NTPC", icon: "⚡", url: "https://www.ntpc.co.in/", type: "PSU" },
-            { name: "Indian Army", icon: "🛡️", url: "https://joinindianarmy.nic.in/", type: "Defence" }
-        ];
-        
-        // ============================================
-        // COMPANY CAREER PAGES (TOP COMPANIES)
-        // ============================================
-        const COMPANY_JOBS = [
-            { name: "Google Careers", icon: "🔍", url: "https://careers.google.com/", industry: "Tech" },
-            { name: "Microsoft Careers", icon: "🪟", url: "https://careers.microsoft.com/", industry: "Tech" },
-            { name: "Amazon Jobs", icon: "📦", url: "https://www.amazon.jobs/", industry: "E-commerce" },
-            { name: "Apple Careers", icon: "🍎", url: "https://www.apple.com/careers/", industry: "Tech" },
-            { name: "Meta Careers", icon: "📘", url: "https://www.metacareers.com/", industry: "Social Media" },
-            { name: "TCS Careers", icon: "💻", url: "https://www.tcs.com/careers", industry: "IT" },
-            { name: "Infosys Careers", icon: "🏢", url: "https://www.infosys.com/careers/", industry: "IT" },
-            { name: "Wipro Careers", icon: "🔄", url: "https://careers.wipro.com/", industry: "IT" },
-            { name: "Reliance Careers", icon: "🏭", url: "https://www.reliance.com/careers", industry: "Conglomerate" },
-            { name: "Tata Group", icon: "🚗", url: "https://www.tata.com/careers", industry: "Conglomerate" },
-            { name: "Aditya Birla", icon: "🏢", url: "https://www.adityabirla.com/careers", industry: "Conglomerate" },
-            { name: "Mahindra", icon: "🚜", url: "https://www.mahindra.com/careers", industry: "Automotive" }
-        ];
-        
-        // ============================================
-        // STREAM-WISE JOB PORTALS (ALL 10 STREAMS)
-        // ============================================
-        const STREAM_JOBS = [
-            { stream: "Medical", icon: "🩺", portals: "Practo, Portea, Medibuddy, Apollo Careers", url: "https://www.practo.com/jobs", desc: "Doctor, Nurse, Pharmacist Jobs" },
-            { stream: "Engineering", icon: "🔧", portals: "HackerEarth, AngelList, WellFound, Cutshort", url: "https://www.hackerearth.com/jobs/", desc: "Software, Civil, Mechanical Jobs" },
-            { stream: "Commerce", icon: "📊", portals: "CA Club, Taxmann, ClearTax Careers", url: "https://www.caclubindia.com/jobs", desc: "CA, CS, CMA, Accountant Jobs" },
-            { stream: "Arts", icon: "🎭", portals: "CreativeGuild, Behance, Dribbble Jobs", url: "https://www.behance.net/joblist", desc: "Designer, Writer, Artist Jobs" },
-            { stream: "Sports", icon: "⚽", portals: "SportsKeeda, Dream11 Careers, Fitternity", url: "https://www.sportskeeda.com/careers", desc: "Coach, Physio, Sports Manager" },
-            { stream: "Agriculture", icon: "🌾", portals: "AgriJobs, FarmGuide, DeHaat Careers", url: "https://agrijobs.in/", desc: "Agriculture Officer, Scientist" },
-            { stream: "Law", icon: "⚖️", portals: "LawBix, BarBench, LegitQuest", url: "https://www.lawbix.com/jobs", desc: "Lawyer, Legal Advisor" },
-            { stream: "Teaching", icon: "📚", portals: "TeacherJobs, EduGorilla, Shiksha", url: "https://teacherjobs.in/", desc: "Teacher, Professor, Trainer" },
-            { stream: "Media", icon: "📺", portals: "MediaNama, ScreenIndia, AnimationXpress", url: "https://www.medianama.com/jobs", desc: "Journalist, Editor, Anchor" },
-            { stream: "Hospitality", icon: "🍽️", portals: "Hcareers, HotelJobsIndia, TimesAscent", url: "https://www.hcareers.com/", desc: "Hotel Manager, Chef, Steward" }
-        ];
-        
-        // ============================================
-        // FREELANCING PLATFORMS
-        // ============================================
-        const FREELANCE_PLATFORMS = [
-            { name: "Upwork", icon: "✍️", url: "https://www.upwork.com/", type: "Global Freelance", rating: "4.5" },
-            { name: "Fiverr", icon: "🎵", url: "https://www.fiverr.com/", type: "Gig Based", rating: "4.5" },
-            { name: "Freelancer", icon: "👨‍💻", url: "https://www.freelancer.com/", type: "Global", rating: "4.0" },
-            { name: "Toptal", icon: "⭐", url: "https://www.toptal.com/", type: "Premium", rating: "4.8" },
-            { name: "Guru", icon: "👨‍🏫", url: "https://www.guru.com/", type: "Freelance", rating: "4.0" },
-            { name: "PeoplePerHour", icon: "⏰", url: "https://www.peopleperhour.com/", type: "Hourly", rating: "4.2" },
-            { name: "99designs", icon: "🎨", url: "https://99designs.com/", type: "Design", rating: "4.6" },
-            { name: "Truelancer", icon: "🎯", url: "https://www.truelancer.com/", type: "Indian", rating: "4.0" },
-            { name: "WorknHire", icon: "🤝", url: "https://www.worknhire.com/", type: "Indian", rating: "3.8" },
-            { name: "RemoteBase", icon: "🏠", url: "https://remotebase.com/", type: "Remote Dev", rating: "4.3" }
-        ];
-        
-        // ============================================
-        // RENDER FUNCTIONS
-        // ============================================
-        
-        function renderJobPortfolio() {
-            const container = document.getElementById('jobPortfolioGrid');
-            container.innerHTML = JOB_PORTFOLIO.map(job => `
-                <div class="card" onclick="navigateTo('${job.link}')">
-                    <div class="card-icon">${job.icon}</div>
-                    <div class="card-title">${currentLang === 'hindi' ? job.title_hindi : job.title_english}</div>
-                    <div class="card-desc">💼 ${job.jobs}</div>
-                    <div class="card-desc">💰 ${job.salary}</div>
-                    <a class="card-link">🔗 देखें →</a>
-                </div>
-            `).join('');
-        }
-        
-        function renderWorldwideJobs() {
-            const container = document.getElementById('worldJobsGrid');
-            container.innerHTML = WORLDWIDE_JOBS.map(job => `
-                <div class="card" onclick="window.open('${job.url}', '_blank')">
-                    <div class="card-icon">${job.icon}</div>
-                    <div class="card-title">${job.name}</div>
-                    <div class="card-desc">🌍 ${job.country} | ${job.type}</div>
-                    <a class="card-link">🔗 जॉब पोर्टल खोलें →</a>
-                </div>
-            `).join('');
-        }
-        
-        function renderIndianJobs() {
-            const container = document.getElementById('indianJobsGrid');
-            container.innerHTML = INDIAN_JOBS.map(job => `
-                <div class="card" onclick="window.open('${job.url}', '_blank')">
-                    <div class="card-icon">${job.icon}</div>
-                    <div class="card-title">${job.name}</div>
-                    <div class="card-desc">🇮🇳 ${job.type}</div>
-                    <a class="card-link">🔗 खोलें →</a>
-                </div>
-            `).join('');
-        }
-        
-        function renderCompanyJobs() {
-            const container = document.getElementById('companyJobsGrid');
-            container.innerHTML = COMPANY_JOBS.map(job => `
-                <div class="card" onclick="window.open('${job.url}', '_blank')">
-                    <div class="card-icon">${job.icon}</div>
-                    <div class="card-title">${job.name}</div>
-                    <div class="card-desc">🏭 ${job.industry}</div>
-                    <a class="card-link">🔗 करियर पेज →</a>
-                </div>
-            `).join('');
-        }
-        
-        function renderStreamJobs() {
-            const container = document.getElementById('streamJobsGrid');
-            container.innerHTML = STREAM_JOBS.map(job => `
-                <div class="card" onclick="window.open('${job.url}', '_blank')">
-                    <div class="card-icon">${job.icon}</div>
-                    <div class="card-title">${job.stream}</div>
-                    <div class="card-desc">📌 ${job.desc}</div>
-                    <a class="card-link">🔗 ${job.portals} →</a>
-                </div>
-            `).join('');
-        }
-        
-        function renderGovtJobs() {
-            const container = document.getElementById('govtJobsGrid');
-            container.innerHTML = GOVT_JOBS.map(job => `
-                <div class="card" onclick="window.open('${job.url}', '_blank')">
-                    <div class="card-icon">${job.icon}</div>
-                    <div class="card-title">${job.name}</div>
-                    <div class="card-desc">🏛️ ${job.type}</div>
-                    <a class="card-link">🔗 सरकारी जॉब →</a>
-                </div>
-            `).join('');
-        }
-        
-        function renderFreelance() {
-            const container = document.getElementById('freelanceGrid');
-            container.innerHTML = FREELANCE_PLATFORMS.map(platform => `
-                <div class="card" onclick="window.open('${platform.url}', '_blank')">
-                    <div class="card-icon">${platform.icon}</div>
-                    <div class="card-title">${platform.name}</div>
-                    <div class="card-desc">💻 ${platform.type} | ⭐ ${platform.rating}</div>
-                    <a class="card-link">🔗 फ्रीलांस करें →</a>
-                </div>
-            `).join('');
-        }
-        
-        // Main Tiles
-        const MAIN_TILES = [
-            { id: "jobs_exams", icon: "📝", title_hindi: "नौकरियाँ & परीक्षाएँ", link: "jobs_exams.html", badge: "500+" },
-            { id: "study_material", icon: "📚", title_hindi: "अध्ययन सामग्री", link: "study_material.html", badge: "400+" },
-            { id: "magazines", icon: "📰", title_hindi: "मैगज़ीन", link: "magazines.html", badge: "80+" },
-            { id: "enewspapers", icon: "📰", title_hindi: "ई-समाचार पत्र", link: "e-newspaper.html", badge: "30+" },
-            { id: "current_affairs", icon: "🌍", title_hindi: "करेंट अफेयर्स", link: "current_affairs.html", badge: "2026" },
-            { id: "mock_test", icon: "🎯", title_hindi: "मॉक टेस्ट", link: "mock_test.html", badge: "135+" },
-            { id: "after_10th", icon: "📖", title_hindi: "10वीं के बाद", link: "after_10th.html", badge: "125+" },
-            { id: "gd_rooms", icon: "💬", title_hindi: "GD रूम्स", link: "gd_rooms.html", badge: "AI" }
-        ];
-        
+
         function renderTiles() {
             const container = document.getElementById('tilesContainer');
-            container.innerHTML = MAIN_TILES.map(tile => `
+            container.innerHTML = TILES.map(tile => `
                 <button class="tile" onclick="navigateTo('${tile.link}')">
                     <div class="tile-icon">${tile.icon}</div>
-                    <div class="tile-title">${currentLang === 'hindi' ? tile.title_hindi : tile.title_english}</div>
+                    <div class="tile-title">${tile.title}</div>
                     ${tile.badge ? `<div class="tile-badge">${tile.badge}</div>` : ''}
                 </button>
             `).join('');
         }
-        
-        // Navigation Functions
+
         function navigateTo(link) {
             if (!link || link === '#') {
-                alert(currentLang === 'hindi' ? 'यह सुविधा जल्द आ रही है!' : 'This feature is coming soon!');
+                alert('This feature is coming soon!');
                 return;
             }
             window.location.href = link;
         }
-        
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function bottomNavClick(action) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            event.target.closest('.nav-item').classList.add('active');
-            if (action === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
-            else if (action === 'jobs') scrollToSection('jobPortfolio');
-            else if (action === 'library') navigateTo('magazines.html');
-            else if (action === 'updates') scrollToSection('jobPortals');
-        }
-        
-        // AI Response
+
+        // ============================================
+        // COMPLETE AnnS AI RESPONSES (Spelling Corrected)
+        // Includes: 10th to CEO Jobs, Worldwide Portals, Freelance, Govt Jobs, Company Careers
+        // ============================================
         function askAI() {
             const query = document.getElementById('aiQuery').value.toLowerCase();
-            let answer = "कृपया अपना प्रश्न पूछें। मैं नौकरियों, करियर, परीक्षाओं में मदद कर सकता हूँ।";
-            
-            if (query.includes('नौकरी') || query.includes('job')) {
-                answer = "🌍 दुनिया भर की नौकरियों के लिए LinkedIn, Indeed, Monster, Naukri.com देखें। सरकारी नौकरियों के लिए Sarkari Result, SSC, RRB, IBPS चेक करें। 10वीं से CEO लेवल तक सभी पोर्टल उपलब्ध हैं।";
-            } else if (query.includes('विदेश') || query.includes('abroad')) {
-                answer = "✈️ विदेशों में नौकरी के लिए: LinkedIn (Global), Indeed USA, Seek (Australia), Bayt (Dubai), Reed (UK), Totaljobs (Europe) - ये पोर्टल उपलब्ध हैं।";
-            } else if (query.includes('फ्रीलांस') || query.includes('freelance')) {
-                answer = "💻 फ्रीलांसिंग के लिए: Upwork, Fiverr, Freelancer, Toptal, Guru, PeoplePerHour - ये प्लेटफॉर्म हैं।";
-            } else if (query.includes('सरकारी') || query.includes('govt')) {
-                answer = "🏛️ सरकारी नौकरियों के लिए: UPSC, SSC, RRB, IBPS, SBI, RBI, FCI, BHEL, ONGC, NTPC, Indian Army - सभी लिंक उपलब्ध हैं।";
-            } else if (query.includes('कंपनी') || query.includes('company')) {
-                answer = "🏢 टॉप कंपनियों के करियर पेज: Google, Microsoft, Amazon, Apple, Meta, TCS, Infosys, Reliance, Tata Group - सीधे आवेदन करें।";
+            let answer = "";
+
+            if (query.includes('job') || query.includes('naukri') || query.includes('career') || query === '') {
+                answer = `
+                <strong>📈 Complete Job Portfolio (10th Pass to CEO Level)</strong><br><br>
+                <strong>🔹 10th Pass Jobs:</strong> SSC MTS, RRB Group D, Peon, Helper | Salary: ₹15,000-25,000/month<br>
+                <strong>🔹 12th Pass Jobs:</strong> SSC CHSL, RRB NTPC, Clerk, Data Entry | Salary: ₹20,000-35,000/month<br>
+                <strong>🔹 ITI/Diploma Jobs:</strong> Technician, Fitter, Electrician, JE | Salary: ₹25,000-45,000/month<br>
+                <strong>🔹 Graduate Jobs (BA/BCom/BSc):</strong> Bank PO, SSC CGL, Executive | Salary: ₹35,000-60,000/month<br>
+                <strong>🔹 Engineering Jobs:</strong> Software, Civil, Mechanical, Electrical | Salary: ₹4-15 LPA<br>
+                <strong>🔹 Medical Jobs:</strong> Doctor, Nurse, Pharmacist, Lab Tech | Salary: ₹3-20 LPA<br>
+                <strong>🔹 MBA/PG Jobs:</strong> Manager, Consultant, Business Analyst | Salary: ₹8-25 LPA<br>
+                <strong>🔹 Senior Level (5-10 yrs):</strong> Senior Manager, Team Lead | Salary: ₹15-40 LPA<br>
+                <strong>🔹 Top Management:</strong> Director, VP, Head of Department | Salary: ₹30-80 LPA<br>
+                <strong>🔹 CXO/CEO Level:</strong> CEO, CTO, CFO, Managing Director | Salary: ₹50 LPA - ₹5 Cr+<br><br>
+                
+                <strong>🌍 Worldwide Job Portals</strong><br>
+                LinkedIn (Global) | Indeed (Global) | Glassdoor | Monster | CareerBuilder (USA) | ZipRecruiter (USA) | Seek (Australia) | Bayt (Dubai/UAE) | Reed (UK) | Totaljobs (Europe) | RemoteOK (Remote)<br><br>
+                
+                <strong>🇮🇳 Indian Job Portals</strong><br>
+                Naukri.com | TimesJobs | Shine.com | Monster India | Freshersworld | Apna | Hirist | WorkIndia | QuikrJobs<br><br>
+                
+                <strong>🏛️ Government Job Portals</strong><br>
+                UPSC | SSC | RRB | IBPS | SBI Careers | RBI | FCI | BHEL | ONGC | NTPC | Indian Army<br><br>
+                
+                <strong>🏢 Top Company Career Pages</strong><br>
+                Google | Microsoft | Amazon | Apple | Meta | TCS | Infosys | Wipro | Reliance | Tata Group | Mahindra<br><br>
+                
+                <strong>💻 Freelance Platforms</strong><br>
+                Upwork | Fiverr | Freelancer | Toptal | Guru | PeoplePerHour | 99designs | Truelancer | RemoteBase<br><br>
+                
+                <strong>📌 Click on "Jobs & Exams" tile for detailed career guidance!</strong>
+                `;
+            }
+            else if (query.includes('exam') || query.includes('परीक्षा') || query.includes('test')) {
+                answer = `
+                <strong>📅 Upcoming Exams 2026</strong><br><br>
+                • UPSC Prelims 2026 - 28 June 2026<br>
+                • SSC CGL 2026 - 15 July 2026<br>
+                • NEET 2026 - 5 May 2026<br>
+                • JEE Main 2026 - 20 April 2026<br>
+                • SBI PO 2026 - 10 March 2026<br>
+                • RRB NTPC 2026 - 25 February 2026<br>
+                • CTET 2026 - 15 December 2026<br>
+                • CLAT 2026 - 1 December 2026<br>
+                • GATE 2026 - 5 February 2026<br>
+                • IBPS PO 2026 - 15 October 2026<br>
+                • NDA 2026 - 10 September 2026<br><br>
+                
+                <strong>📌 Click on "Mock Test" tile for 135+ practice tests with solutions!</strong>
+                `;
+            }
+            else if (query.includes('stream') || query.includes('स्ट्रीम')) {
+                answer = `
+                <strong>🎯 All 10 Educational Streams</strong><br><br>
+                • 🩺 Medical (PCB) - Doctor, Pharmacist, Nurse, NEET<br>
+                • 🔧 Non-Medical (PCM) - Engineer, Architect, JEE<br>
+                • 📊 Commerce - CA, CS, CMA, BBA, Banker<br>
+                • 🎭 Arts (Humanities) - IAS, IPS, PCS, Teacher, Journalist<br>
+                • ⚽ Sports - Coach, Physiotherapist, Athlete<br>
+                • 🌾 Agriculture - Agriculture Officer, ICAR Scientist<br>
+                • 🎨 Fine Arts - Painter, Designer, Art Teacher<br>
+                • ✏️ Designing - Fashion, Interior, Product Designer<br>
+                • 🔨 Skilled Trade - Technician, ITI, Diploma<br>
+                • 🌍 Abroad Studies - IELTS, TOEFL, SAT, Study Abroad<br><br>
+                
+                <strong>📌 Click on "Jobs & Exams" tile for stream-wise job portals!</strong>
+                `;
+            }
+            else if (query.includes('magazine') || query.includes('पत्रिका')) {
+                answer = `
+                <strong>📰 Magazines & Study Resources</strong><br><br>
+                • Yojana Magazine - Government schemes and policies<br>
+                • Kurukshetra Magazine - Rural development<br>
+                • Civils IQ - UPSC current affairs (Hindi)<br>
+                • Pratiyogita Darpan - Competitive exams<br>
+                • Science Reporter - Popular science monthly<br>
+                • Down To Earth - Environment and development<br>
+                • Frontline - Politics, culture, science<br>
+                • Employment News - Government job alerts<br><br>
+                
+                <strong>📌 Click on "Magazines" tile for 80+ resources with PDF download!</strong>
+                `;
+            }
+            else if (query.includes('newspaper') || query.includes('समाचार')) {
+                answer = `
+                <strong>📰 E-Newspapers (30+ in 10 languages)</strong><br><br>
+                • The Hindu | Indian Express | Times of India | Hindustan Times<br>
+                • Dainik Jagran | Dainik Bhaskar | Amar Ujala | Rajasthan Patrika<br>
+                • Dinathanthi (Tamil) | Anandabazar (Bengali) | Lokmat (Marathi)<br>
+                • Gujarat Samachar (Gujarati) | Prajavani (Kannada) | Malayala Manorama<br>
+                • Punjab Kesari (Punjabi) | Eenadu (Telugu)<br><br>
+                
+                <strong>📌 Click on "E-newspapers" tile for direct reading links!</strong>
+                `;
+            }
+            else if (query.includes('current') || query.includes('करेंट')) {
+                answer = `
+                <strong>🌍 Current Affairs 2026</strong><br><br>
+                • Daily Current Affairs - Latest news with exam relevance<br>
+                • Weekly Current Affairs - Complete week compilation<br>
+                • Monthly PDFs - Jan to June 2026 available<br>
+                • Quarterly Compilations - Q1 and Q2 2026<br>
+                • Yearly CA 2025 - Complete year compilation<br>
+                • Thematic CA - Environment, Polity, Science & Tech, Economy, IR<br>
+                • Government Schemes - PM Awas, RKVY, PM SHRI, Startup India<br>
+                • Exam-wise CA - UPSC, SSC, Banking, Railway, State PSC specific<br><br>
+                
+                <strong>📌 Click on "Current Affairs" tile for daily updates!</strong>
+                `;
+            }
+            else if (query.includes('10th') || query.includes('10वीं')) {
+                answer = `
+                <strong>📖 After 10th Career Options (125+ options)</strong><br><br>
+                • 10 Streams: Medical, Non-Medical, Commerce, Arts, Sports, Agriculture, Fine Arts, Designing, Skilled Trade, Abroad<br>
+                • Diploma Courses (3 years): CS, Mechanical, Electrical, Civil, Electronics, Automobile<br>
+                • ITI Trades (1-2 years): Electrician, Fitter, Welder, Motor Mechanic, COPA, Plumber, Carpenter<br>
+                • Paramedical Courses: GNM Nursing, DMLT, Radiography, D.Pharma, Physiotherapy<br>
+                • Vocational Courses: Hospitality, Retail, Beauty & Wellness, Digital Marketing<br>
+                • Short Term Courses: Tally, MS Office, English Speaking, Graphic Design<br>
+                • Scholarships: Pre-Matric, NTSE, Income Support, PMSSS<br>
+                • Defence Career: Army GD, Navy SSR, Air Force Group Y<br>
+                • Skill Development: PMKVY, DDU-GKY, NIELIT<br>
+                • Apprenticeship: NAPS, NATS<br>
+                • Government Jobs: RRB Group D, SSC MTS, RRB NTPC, SSC CHSL, Police<br><br>
+                
+                <strong>📌 Click on "After 10th" tile for complete details!</strong>
+                `;
+            }
+            else if (query.includes('mock') || query.includes('मॉक')) {
+                answer = `
+                <strong>🎯 Mock Test Portal (135+ Tests)</strong><br><br>
+                • UPSC - Prelims, CSAT, Mains GS 1-4, Essay (7 papers)<br>
+                • SSC - CGL Tier I/II, CHSL, MTS, GD, JE (7 papers)<br>
+                • Banking - SBI PO, IBPS PO, IBPS Clerk, RBI Grade B (10 papers)<br>
+                • Railway - RRB NTPC, Group D, ALP, JE (6 papers)<br>
+                • Medical - NEET UG, NEET PG, AIIMS, JIPMER, FMGE (5 papers)<br>
+                • Engineering - JEE Main, JEE Advanced, BITSAT, VITEEE, GATE (8 papers)<br>
+                • Commerce - CA Foundation, CS Foundation, CMA Foundation, CLAT (6 papers)<br>
+                • State PSC - UPPSC, BPSC, MPPSC, RPSC, TNPSC (6 papers)<br>
+                • Teaching - CTET, UPTET, KVS, NVS, REET, UGC NET (7 papers)<br>
+                • Defence - NDA, CDS, AFCAT (5 papers)<br>
+                • School Boards - CBSE 10/12, ICSE, UP Board, Bihar Board (8 papers)<br>
+                • Last 5 Years PYQs - UPSC, SSC, Banking, NEET, JEE, Railway, CTET (35+ papers)<br><br>
+                
+                <strong>📌 Click on "Mock test" tile for free practice with solutions!</strong>
+                `;
+            }
+            else {
+                answer = `
+                <strong>🤖 AnnS AI - Your Career Assistant</strong><br><br>
+                I can help you with:<br>
+                • 💼 Jobs (10th to CEO level, worldwide portals)<br>
+                • 📅 Exams (UPSC, SSC, Banking, Railway, NEET, JEE)<br>
+                • 📚 Study Materials & Magazines<br>
+                • 📰 E-Newspapers (30+ in 10 languages)<br>
+                • 🌍 Current Affairs (Daily/Weekly/Monthly)<br>
+                • 🎯 Mock Tests (135+ with solutions)<br>
+                • 📖 After 10th Career Guide (125+ options)<br>
+                • 🎓 After 12th Career Guide (coming soon)<br>
+                • 💻 Freelance & Remote Work Platforms<br>
+                • 🏛️ Government Job Alerts<br><br>
+                
+                <strong>Please ask me anything about careers, exams, jobs, or education!</strong>
+                `;
             }
             
-            document.getElementById('aiResponse').innerHTML = `<p>🤖 <strong>AnnS AI:</strong></p><p>${answer}</p>`;
+            document.getElementById('aiResponse').innerHTML = answer;
             document.getElementById('aiModal').classList.add('open');
         }
-        
+
         function closeAIModal() {
             document.getElementById('aiModal').classList.remove('open');
         }
-        
-        // Online/Offline Status
+
+        // ============================================
+        // PWA & OFFLINE SUPPORT
+        // ============================================
         function updateOnlineStatus() {
             const statusDiv = document.getElementById('offlineStatus');
             if (navigator.onLine) {
@@ -492,40 +512,34 @@
                 statusDiv.classList.remove('online');
             }
         }
-        
-        // PWA Install
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('installBtn').style.display = 'block';
         });
-        
-        document.getElementById('installBtn')?.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt = null;
-                document.getElementById('installBtn').style.display = 'none';
-            }
-        });
-        
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW failed:', err));
         }
-        
+
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus);
         
+        // Time-based greeting
+        function setGreeting() {
+            const hour = new Date().getHours();
+            let greeting = '';
+            if (hour < 12) greeting = '☀️ Good Morning, Learner!';
+            else if (hour < 17) greeting = '🌤️ Good Afternoon, Learner!';
+            else greeting = '🌙 Good Evening, Learner!';
+            document.getElementById('welcomeMsg').innerHTML = `${greeting} 👋 Welcome back, Learner!`;
+        }
+
         // Initialize
         function init() {
-            renderJobPortfolio();
-            renderWorldwideJobs();
-            renderIndianJobs();
-            renderCompanyJobs();
-            renderStreamJobs();
-            renderGovtJobs();
-            renderFreelance();
             renderTiles();
             updateOnlineStatus();
+            setGreeting();
         }
         
         init();
