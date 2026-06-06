@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="hi-IN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>E-Newspapers - दिल के अंश Career Saathi</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', sans-serif;
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            min-height: 100vh;
+        }
+
+        .app-header {
+            background: rgba(255,255,255,0.98);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.5rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .nav-btn.fav {
+            background: #e74c3c;
+        }
+
+        .lang-toggle {
+            background: #ff9800;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+        }
+
+        /* Language Filter */
+        .lang-filters {
+            max-width: 1400px;
+            margin: 15px auto 0;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .lang-filter {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 6px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-filter.active {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+        }
+
+        /* Category Doors */
+        .categories {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .category-door {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-door.active {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+        }
+
+        /* Main Doors Container */
+        .doors-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .door-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .door-card:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .door-header {
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .door-header.national { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .door-header.hindi { background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #333; }
+        .door-header.regional { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .door-header.business { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333; }
+        .door-header.sports { background: linear-gradient(135deg, #fa709a, #fee140); color: #333; }
+        .door-header.education { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+
+        .door-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+        .door-title { font-size: 1.2rem; }
+
+        .door-content {
+            max-height: 550px;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .door-content::-webkit-scrollbar { width: 6px; }
+        .door-content::-webkit-scrollbar-track { background: #f1f1f1; }
+        .door-content::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+
+        /* Newspaper Card */
+        .news-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            border-left: 4px solid #1a2980;
+        }
+
+        .news-card:hover {
+            background: #e8eaff;
+            transform: translateX(5px);
+        }
+
+        .news-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            padding-right: 80px;
+        }
+
+        .news-description {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-detail {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge.hindi { background: #ff9800; color: white; }
+        .badge.english { background: #2196f3; color: white; }
+        .badge.tamil { background: #d32f2f; color: white; }
+        .badge.kannada { background: #e67e22; color: white; }
+        .badge.telugu { background: #9b59b6; color: white; }
+        .badge.malayalam { background: #2ecc71; color: white; }
+        .badge.marathi { background: #e74c3c; color: white; }
+        .badge.bengali { background: #f39c12; color: white; }
+        .badge.gujarati { background: #1abc9c; color: white; }
+        .badge.punjabi { background: #3498db; color: white; }
+        .badge.free { background: #4caf50; color: white; }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 5px 12px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .action-btn.read { background: #1a2980; color: white; }
+        .action-btn.save { background: #667eea; color: white; }
+        .action-btn.saved { background: #e74c3c; color: white; }
+
+        /* Favorites Panel */
+        .fav-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            z-index: 200;
+            transition: right 0.3s;
+            overflow-y: auto;
+        }
+
+        .fav-panel.open { right: 0; }
+
+        .fav-header {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+        }
+
+        .fav-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 199;
+        }
+
+        .overlay.active { display: block; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .doors-container { grid-template-columns: 1fr; }
+            .fav-panel { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="window.location.href='index.html'">← वापस</button>
+            <h1>📰 ई-समाचार पत्र<br><small style="font-size:0.8rem">E-Newspapers Portal</small></h1>
+            <div class="nav-buttons">
+                <button class="nav-btn fav" onclick="toggleFavPanel()">⭐ मेरे पसंदीदा</button>
+                <button class="nav-btn lang-toggle" onclick="toggleUILanguage()">🇬🇧 English</button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search newspapers...">
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Filter -->
+    <div class="lang-filters" id="langFilters"></div>
+
+    <!-- Category Doors -->
+    <div class="categories" id="categoryDoors"></div>
+
+    <!-- Newspapers Container -->
+    <div id="doorsContainer" class="doors-container"></div>
+
+    <!-- Favorites Panel -->
+    <div id="favPanel" class="fav-panel">
+        <div class="fav-header">
+            <h3>⭐ मेरे पसंदीदा समाचार पत्र</h3>
+            <button onclick="toggleFavPanel()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">✕ Close</button>
+        </div>
+        <div id="favList"></div>
+    </div>
+    <div id="overlay" class="overlay" onclick="toggleFavPanel()"></div>
+
+    <script>
+        // ============================================
+        // INDEXEDDB FOR FAVORITES
+        // ============================================
+        
+        const DB_NAME = 'EpaperFavoritesDB';
+        const DB_VERSION = 1;
+        const STORE_NAME = 'favorites';
+        let db = null;
+        
+        function openDatabase() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => { db = request.result; resolve(db); };
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        const store = db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                        store.createIndex('date', 'date');
+                        store.createIndex('category', 'category');
+                        store.createIndex('language', 'language');
+                    }
+                };
+            });
+        }
+        
+        async function addToFavorites(item) {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readwrite');
+            const store = transaction.objectStore(STORE_NAME);
+            const savedItem = { 
+                id: `${item.category}_${item.name_english.replace(/\s/g, '_')}_${item.language}`, 
+                ...item, 
+                date: new Date().toISOString() 
+            };
+            return new Promise((resolve) => {
+                const request = store.add(savedItem);
+                request.onsuccess = () => resolve(true);
+                request.onerror = () => resolve(false);
+            });
+        }
+        
+        async function removeFromFavorites(id) {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readwrite');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.delete(id);
+                request.onsuccess = () => resolve(true);
+            });
+        }
+        
+        async function getAllFavorites() {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readonly');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.getAll();
+                request.onsuccess = () => resolve(request.result || []);
+            });
+        }
+        
+        async function isItemFavorite(id) {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readonly');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.get(id);
+                request.onsuccess = () => resolve(!!request.result);
+            });
+        }
+
+        // ============================================
+        // COMPLETE E-NEWSPAPERS DATABASE
+        // ============================================
+        
+        let currentUI language = 'hindi';
+        let currentCategory = 'national';
+        let currentLanguageFilter = 'all';
+        let searchTerm = '';
+        
+        const NEWSPAPERS_DATA = {
+            national: {
+                name_hindi: "🇮🇳 राष्ट्रीय समाचार पत्र",
+                name_english: "🇮🇳 National Newspapers",
+                icon: "📰",
+                items: [
+                    { name_hindi: "द हिंदू", name_english: "The Hindu", description_hindi: "भारत का सबसे प्रतिष्ठित अंग्रेजी समाचार पत्र, UPSC/सिविल सेवा के लिए सर्वोत्तम", description_english: "India's most prestigious English newspaper, best for UPSC/Civil Services", link: "https://epaper.thehindu.com/", language: "english", category: "national", region: "all_india", exam_relevance: "UPSC, SSC, Banking" },
+                    { name_hindi: "द टाइम्स ऑफ इंडिया", name_english: "Times of India", description_hindi: "भारत का सबसे अधिक पढ़ा जाने वाला अंग्रेजी समाचार पत्र", description_english: "India's most widely read English newspaper", link: "https://epaper.timesofindia.com/", language: "english", category: "national", region: "all_india", exam_relevance: "General Awareness" },
+                    { name_hindi: "हिंदुस्तान टाइम्स", name_english: "Hindustan Times", description_hindi: "राष्ट्रीय और अंतर्राष्ट्रीय समाचारों का व्यापक कवरेज", description_english: "Comprehensive coverage of national and international news", link: "https://epaper.hindustantimes.com/", language: "english", category: "national", region: "all_india", exam_relevance: "UPSC, SSC" },
+                    { name_hindi: "द इंडियन एक्सप्रेस", name_english: "Indian Express", description_hindi: "गहन विश्लेषण और संपादकीय, यूपीएससी के लिए उपयोगी", description_english: "In-depth analysis and editorials, useful for UPSC", link: "https://indianexpress.com/epaper/", language: "english", category: "national", region: "all_india", exam_relevance: "UPSC, State PSC" },
+                    { name_hindi: "द इकोनॉमिक टाइम्स", name_english: "Economic Times", description_hindi: "व्यापार और अर्थव्यवस्था पर गहन विश्लेषण, RBI/SEBI के लिए आवश्यक", description_english: "Business and economy analysis, essential for RBI/SEBI", link: "https://epaper.economictimes.com/", language: "english", category: "business", region: "all_india", exam_relevance: "RBI Grade B, SEBI, NABARD" },
+                    { name_hindi: "द डेक्कन क्रॉनिकल", name_english: "Deccan Chronicle", description_hindi: "दक्षिण भारत का प्रमुख अंग्रेजी समाचार पत्र", description_english: "Leading English newspaper from South India", link: "https://epaper.deccanchronicle.com/", language: "english", category: "national", region: "south", exam_relevance: "General Awareness" },
+                    { name_hindi: "द ट्रिब्यून", name_english: "The Tribune", description_hindi: "उत्तर भारत का प्रतिष्ठित समाचार पत्र", description_english: "Prestigious newspaper from North India", link: "https://epaper.tribuneindia.com/", language: "english", category: "national", region: "north", exam_relevance: "General Awareness" }
+                ]
+            },
+            hindi: {
+                name_hindi: "🇮🇳 हिंदी समाचार पत्र",
+                name_english: "🇮🇳 Hindi Newspapers",
+                icon: "📰",
+                items: [
+                    { name_hindi: "दैनिक जागरण", name_english: "Dainik Jagran", description_hindi: "भारत का सबसे अधिक पढ़ा जाने वाला हिंदी समाचार पत्र", description_english: "India's most read Hindi newspaper", link: "https://epaper.jagran.com/", language: "hindi", category: "hindi", region: "north", exam_relevance: "UPSC Hindi Medium, State PSC" },
+                    { name_hindi: "दैनिक भास्कर", name_english: "Dainik Bhaskar", description_hindi: "हिंदी का सबसे लोकप्रिय समाचार पत्र", description_english: "Most popular Hindi newspaper", link: "https://epaper.bhaskar.com/", language: "hindi", category: "hindi", region: "central", exam_relevance: "General Awareness" },
+                    { name_hindi: "अमर उजाला", name_english: "Amar Ujala", description_hindi: "हिंदी समाचार पत्र, सामान्य जागरूकता के लिए उपयोगी", description_english: "Hindi newspaper for general awareness", link: "https://epaper.amarujala.com/", language: "hindi", category: "hindi", region: "north", exam_relevance: "UPSC Hindi Medium" },
+                    { name_hindi: "राजस्थान पत्रिका", name_english: "Rajasthan Patrika", description_hindi: "राजस्थान और मध्य प्रदेश का प्रमुख हिंदी समाचार पत्र", description_english: "Leading Hindi newspaper from Rajasthan and MP", link: "https://epaper.patrika.com/", language: "hindi", category: "hindi", region: "rajasthan", exam_relevance: "RPSC, MPSC" },
+                    { name_hindi: "नवभारत टाइम्स", name_english: "Navbharat Times", description_hindi: "दिल्ली-एनसीआर का लोकप्रिय हिंदी समाचार पत्र", description_english: "Popular Hindi newspaper from Delhi-NCR", link: "https://epaper.navbharattimes.com/", language: "hindi", category: "hindi", region: "north", exam_relevance: "General Awareness" },
+                    { name_hindi: "प्रभात खबर", name_english: "Prabhat Khabar", description_hindi: "झारखंड और बिहार का प्रमुख हिंदी समाचार पत्र", description_english: "Leading Hindi newspaper from Jharkhand and Bihar", link: "https://epaper.prabhatkhabar.com/", language: "hindi", category: "hindi", region: "east", exam_relevance: "BPSC, JPSC" },
+                    { name_hindi: "हरिभूमि", name_english: "Haribhoomi", description_hindi: "मध्य प्रदेश, छत्तीसगढ़, दिल्ली का हिंदी समाचार पत्र", description_english: "Hindi newspaper from MP, Chhattisgarh, Delhi", link: "https://epaper.haribhoomi.com/", language: "hindi", category: "hindi", region: "central", exam_relevance: "MPPSC, CGPSC" },
+                    { name_hindi: "अमृत वाणी", name_english: "Amrit Vani", description_hindi: "पूर्वांचल का लोकप्रिय हिंदी समाचार पत्र", description_english: "Popular Hindi newspaper from Poorvanchal", link: "https://epaper.amritvani.com/", language: "hindi", category: "hindi", region: "east", exam_relevance: "UPPSC, BPSC" }
+                ]
+            },
+            regional: {
+                name_hindi: "🗺️ क्षेत्रीय समाचार पत्र",
+                name_english: "🗺️ Regional Newspapers",
+                icon: "🗺️",
+                items: [
+                    // Tamil
+                    { name_hindi: "दिना थंटी (तमिल)", name_english: "Dina Thanthi (Tamil)", description_hindi: "तमिलनाडु का सबसे अधिक पढ़ा जाने वाला तमिल समाचार पत्र", description_english: "Tamil Nadu's most widely read Tamil newspaper", link: "https://epaper.dinathanthi.com/", language: "tamil", category: "regional", region: "tamilnadu", exam_relevance: "TNPSC" },
+                    { name_hindi: "आनंदा बाजार पत्रिका (बंगाली)", name_english: "Anandabazar Patrika (Bengali)", description_hindi: "पश्चिम बंगाल का प्रमुख बंगाली समाचार पत्र", description_english: "Leading Bengali newspaper from West Bengal", link: "https://epaper.anandabazar.com/", language: "bengali", category: "regional", region: "bengal", exam_relevance: "WBPSC" },
+                    { name_hindi: "लोकमत (मराठी)", name_english: "Lokmat (Marathi)", description_hindi: "महाराष्ट्र का सबसे अधिक पढ़ा जाने वाला मराठी समाचार पत्र", description_english: "Maharashtra's most widely read Marathi newspaper", link: "https://epaper.lokmat.com/", language: "marathi", category: "regional", region: "maharashtra", exam_relevance: "MPSC" },
+                    { name_hindi: "गुजरात समाचार (गुजराती)", name_english: "Gujarat Samachar (Gujarati)", description_hindi: "गुजरात का सबसे लोकप्रिय गुजराती समाचार पत्र", description_english: "Gujarat's most popular Gujarati newspaper", link: "https://epaper.gujaratsamachar.com/", language: "gujarati", category: "regional", region: "gujarat", exam_relevance: "GPSC" },
+                    { name_hindi: "प्रजावाणी (कन्नड़)", name_english: "Prajavani (Kannada)", description_hindi: "कर्नाटक का प्रमुख कन्नड़ समाचार पत्र", description_english: "Leading Kannada newspaper from Karnataka", link: "https://epaper.prajavani.net/", language: "kannada", category: "regional", region: "karnataka", exam_relevance: "KPSC" },
+                    { name_hindi: "मलयाला मनोरमा (मलयालम)", name_english: "Malayala Manorama (Malayalam)", description_hindi: "केरल का सबसे अधिक पढ़ा जाने वाला मलयालम समाचार पत्र", description_english: "Kerala's most widely read Malayalam newspaper", link: "https://epaper.malayalamanorama.com/", language: "malayalam", category: "regional", region: "kerala", exam_relevance: "KPSC" },
+                    { name_hindi: "पंजाब केसरी (पंजाबी)", name_english: "Punjab Kesari (Punjabi)", description_hindi: "पंजाब और हरियाणा का प्रमुख पंजाबी समाचार पत्र", description_english: "Leading Punjabi newspaper from Punjab and Haryana", link: "https://epaper.punjabkesari.com/", language: "punjabi", category: "regional", region: "punjab", exam_relevance: "PPSC, HPSC" },
+                    { name_hindi: "ईनाडु (तेलुगू)", name_english: "Eenadu (Telugu)", description_hindi: "तेलंगाना और आंध्र प्रदेश का सबसे बड़ा तेलुगू समाचार पत्र", description_english: "Largest Telugu newspaper from Telangana and Andhra", link: "https://epaper.eenadu.net/", language: "telugu", category: "regional", region: "andhra", exam_relevance: "APPSC, TSPSC" }
+                ]
+            },
+            business: {
+                name_hindi: "💼 व्यापार एवं वित्त",
+                name_english: "💼 Business & Finance",
+                icon: "📊",
+                items: [
+                    { name_hindi: "मिंट", name_english: "Mint", description_hindi: "व्यवसाय, वित्त और अर्थव्यवस्था पर विश्लेषण, RBI/SEBI के लिए", description_english: "Business, finance and economy analysis, for RBI/SEBI", link: "https://www.livemint.com/epaper", language: "english", category: "business", region: "all_india", exam_relevance: "RBI Grade B, SEBI, NABARD, IFSCA" },
+                    { name_hindi: "बिजनेस स्टैंडर्ड", name_english: "Business Standard", description_hindi: "व्यापार समाचार और विश्लेषण", description_english: "Business news and analysis", link: "https://epaper.business-standard.com/", language: "english", category: "business", region: "all_india", exam_relevance: "RBI, SEBI, Banking" },
+                    { name_hindi: "वित्तीय क्रॉनिकल", name_english: "Financial Chronicle", description_hindi: "वित्तीय समाचार और बाजार विश्लेषण", description_english: "Financial news and market analysis", link: "https://epaper.mydigitalfc.com/", language: "english", category: "business", region: "all_india", exam_relevance: "RBI, SEBI, NISM" }
+                ]
+            },
+            sports: {
+                name_hindi: "🏏 खेल समाचार पत्र",
+                name_english: "🏏 Sports Newspapers",
+                icon: "⚽",
+                items: [
+                    { name_hindi: "स्पोर्टस्टार", name_english: "Sportstar", description_hindi: "खेल समाचार और विश्लेषण की साप्ताहिक पत्रिका", description_english: "Weekly sports news and analysis magazine", link: "https://sportstar.thehindu.com/epaper/", language: "english", category: "sports", region: "all_india", exam_relevance: "Sports GK for exams" }
+                ]
+            },
+            education: {
+                name_hindi: "📚 शैक्षिक समाचार पत्र",
+                name_english: "📚 Educational Newspapers",
+                icon: "🎓",
+                items: [
+                    { name_hindi: "रोजगार समाचार", name_english: "Employment News", description_hindi: "सरकारी नौकरी के अवसर और शैक्षिक समाचार, साप्ताहिक", description_english: "Government job opportunities and educational news, weekly", link: "https://employmentnews.gov.in/", language: "both", category: "education", region: "all_india", exam_relevance: "All Government Exams" },
+                    { name_hindi: "यूनिवर्सिटी न्यूज़", name_english: "University News", description_hindi: "उच्च शिक्षा और विश्वविद्यालय समाचार", description_english: "Higher education and university news", link: "https://www.universitynewsindia.com/", language: "english", category: "education", region: "all_india", exam_relevance: "NET, SET, Teaching Exams" }
+                ]
+            }
+        };
+
+        // Language filter options
+        const languageFilters = [
+            { id: 'all', name_hindi: 'सभी भाषाएँ', name_english: 'All Languages', icon: '🌐' },
+            { id: 'hindi', name_hindi: 'हिंदी', name_english: 'Hindi', icon: '🇮🇳' },
+            { id: 'english', name_hindi: 'अंग्रेजी', name_english: 'English', icon: '🇬🇧' },
+            { id: 'regional', name_hindi: 'क्षेत्रीय', name_english: 'Regional', icon: '🗺️' }
+        ];
+
+        // Category list
+        const categoryList = [
+            { id: 'national', icon: '🇮🇳', name_hindi: 'राष्ट्रीय', name_english: 'National' },
+            { id: 'hindi', icon: '📰', name_hindi: 'हिंदी', name_english: 'Hindi' },
+            { id: 'regional', icon: '🗺️', name_hindi: 'क्षेत्रीय', name_english: 'Regional' },
+            { id: 'business', icon: '💼', name_hindi: 'व्यापार', name_english: 'Business' },
+            { id: 'sports', icon: '🏏', name_hindi: 'खेल', name_english: 'Sports' },
+            { id: 'education', icon: '📚', name_hindi: 'शिक्षा', name_english: 'Education' }
+        ];
+
+        function renderLanguageFilters() {
+            const container = document.getElementById('langFilters');
+            container.innerHTML = languageFilters.map(filter => `
+                <button class="lang-filter ${currentLanguageFilter === filter.id ? 'active' : ''}" onclick="setLanguageFilter('${filter.id}')">
+                    ${filter.icon} ${currentUILanguage === 'hindi' ? filter.name_hindi : filter.name_english}
+                </button>
+            `).join('');
+        }
+
+        function setLanguageFilter(langId) {
+            currentLanguageFilter = langId;
+            renderLanguageFilters();
+            renderDoors();
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoryDoors');
+            container.innerHTML = categoryList.map(cat => `
+                <button class="category-door ${currentCategory === cat.id ? 'active' : ''}" onclick="switchCategory('${cat.id}')">
+                    ${cat.icon} ${currentUILanguage === 'hindi' ? cat.name_hindi : cat.name_english}
+                </button>
+            `).join('');
+        }
+
+        function switchCategory(categoryId) {
+            currentCategory = categoryId;
+            renderCategories();
+            renderDoors();
+        }
+
+        function toggleFavPanel() {
+            const panel = document.getElementById('favPanel');
+            const overlay = document.getElementById('overlay');
+            panel.classList.toggle('open');
+            overlay.classList.toggle('active');
+            if (panel.classList.contains('open')) loadFavList();
+        }
+
+        async function loadFavList() {
+            const items = await getAllFavorites();
+            const container = document.getElementById('favList');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state">⭐ No favorites yet. Click "⭐ Save" on any newspaper!</div>';
+                return;
+            }
+            container.innerHTML = items.map(item => `
+                <div class="fav-item">
+                    <div class="news-title">${currentUILanguage === 'hindi' ? item.name_hindi : item.name_english}</div>
+                    <div class="news-description">${currentUILanguage === 'hindi' ? item.description_hindi : item.description_english}</div>
+                    <div class="news-detail">
+                        <span class="badge ${item.language === 'hindi' ? 'hindi' : (item.language === 'english' ? 'english' : item.language)}">${item.language.toUpperCase()}</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-btn read" onclick="window.open('${item.link}', '_blank')">📖 Read</button>
+                        <button class="action-btn save" onclick="removeFavAndRefresh('${item.id}')">🗑️ Remove</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function toggleFavorite(item, category, event) {
+            const id = `${category}_${item.name_english.replace(/\s/g, '_')}_${item.language}`;
+            const isFav = await isItemFavorite(id);
+            
+            if (!isFav) {
+                const itemWithCategory = { ...item, category: category };
+                await addToFavorites(itemWithCategory);
+                if (event && event.target) {
+                    event.target.innerHTML = '⭐ Saved';
+                    event.target.classList.add('saved');
+                    event.target.disabled = true;
+                }
+            } else {
+                await removeFromFavorites(id);
+                if (event && event.target) {
+                    event.target.innerHTML = '⭐ Save';
+                    event.target.classList.remove('saved');
+                }
+            }
+            renderDoors();
+        }
+
+        async function removeFavAndRefresh(id) {
+            await removeFromFavorites(id);
+            loadFavList();
+            renderDoors();
+        }
+
+        function getLanguageBadgeClass(language) {
+            const badges = {
+                'hindi': 'hindi', 'english': 'english', 'tamil': 'tamil',
+                'telugu': 'telugu', 'kannada': 'kannada', 'malayalam': 'malayalam',
+                'bengali': 'bengali', 'marathi': 'marathi', 'gujarati': 'gujarati',
+                'punjabi': 'punjabi', 'both': 'free'
+            };
+            return badges[language] || 'free';
+        }
+
+        async function renderDoors() {
+            const container = document.getElementById('doorsContainer');
+            const searchInput = document.getElementById('searchBox');
+            searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            
+            let categoriesToRender = [currentCategory];
+            
+            if (currentCategory === 'national') categoriesToRender = ['national'];
+            else if (currentCategory === 'hindi') categoriesToRender = ['hindi'];
+            else if (currentCategory === 'regional') categoriesToRender = ['regional'];
+            else if (currentCategory === 'business') categoriesToRender = ['business'];
+            else if (currentCategory === 'sports') categoriesToRender = ['sports'];
+            else if (currentCategory === 'education') categoriesToRender = ['education'];
+            
+            let allHtml = '';
+            
+            for (const cat of categoriesToRender) {
+                const data = NEWSPAPERS_DATA[cat];
+                if (!data) continue;
+                
+                let filteredItems = data.items.filter(item => {
+                    const matchesSearch = !searchTerm || 
+                        (currentUILanguage === 'hindi' ? item.name_hindi : item.name_english).toLowerCase().includes(searchTerm) ||
+                        item.description_hindi.toLowerCase().includes(searchTerm) ||
+                        item.description_english.toLowerCase().includes(searchTerm);
+                    
+                    const matchesLangFilter = currentLanguageFilter === 'all' || 
+                        (currentLanguageFilter === 'regional' && item.language !== 'hindi' && item.language !== 'english') ||
+                        item.language === currentLanguageFilter;
+                    
+                    return matchesSearch && matchesLangFilter;
+                });
+                
+                if (filteredItems.length === 0 && searchTerm) continue;
+                
+                allHtml += `
+                    <div class="door-card">
+                        <div class="door-header ${cat}">
+                            <span class="door-icon">${data.icon}</span>
+                            <div class="door-title">${currentUILanguage === 'hindi' ? data.name_hindi : data.name_english}</div>
+                        </div>
+                        <div class="door-content">
+                            ${filteredItems.map(item => {
+                                const itemId = `${cat}_${item.name_english.replace(/\s/g, '_')}_${item.language}`;
+                                return `
+                                    <div class="news-card">
+                                        <div class="news-title">${currentUILanguage === 'hindi' ? item.name_hindi : item.name_english}</div>
+                                        <div class="news-description">${currentUILanguage === 'hindi' ? item.description_hindi : item.description_english}</div>
+                                        <div class="news-detail">
+                                            <span class="badge ${getLanguageBadgeClass(item.language)}">${item.language.toUpperCase()}</span>
+                                            ${item.exam_relevance ? `<span class="badge free">📚 ${item.exam_relevance}</span>` : ''}
+                                            <span class="badge free">🎓 निःशुल्क</span>
+                                        </div>
+                                        <div class="card-actions">
+                                            <button class="action-btn read" onclick="window.open('${item.link}', '_blank')">📖 पढ़ें / Read</button>
+                                            <button class="action-btn save" onclick="toggleFavorite(${JSON.stringify(item).replace(/"/g, '&quot;')}, '${cat}', event)">⭐ सेव करें</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                            ${filteredItems.length === 0 ? '<div class="empty-state">📭 कोई समाचार पत्र नहीं मिला / No newspapers found</div>' : ''}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = allHtml || '<div class="empty-state">📭 कोई समाचार पत्र नहीं मिला / No newspapers found</div>';
+        }
+
+        function toggleUILanguage() {
+            currentUILanguage = currentUILanguage === 'hindi' ? 'english' : 'hindi';
+            const langBtn = document.querySelector('.lang-toggle');
+            langBtn.innerHTML = currentUILanguage === 'hindi' ? '🇬🇧 English' : '🇮🇳 हिंदी';
+            renderLanguageFilters();
+            renderCategories();
+            renderDoors();
+        }
+
+        function handleSearch() { renderDoors(); }
+
+        async function init() {
+            await openDatabase();
+            renderLanguageFilters();
+            renderCategories();
+            renderDoors();
+            document.getElementById('searchBox').addEventListener('input', handleSearch);
+        }
+        
+        init();
+    </script>
+</body>
+</html>
