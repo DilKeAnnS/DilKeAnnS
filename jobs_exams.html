@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Jobs & Exams - Dil-Ke-AnnS Career Saathi</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .app-header {
+            background: rgba(255,255,255,0.98);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+            margin-left: auto;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102,126,234,0.3);
+        }
+
+        /* Stream Selector */
+        .stream-selector {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .stream-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .stream-door {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stream-door:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .stream-door.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* Main Doors Container */
+        .doors-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        /* Individual Door Card */
+        .door-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .door-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .door-header {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .door-header.govt { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .door-header.private { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .door-header.exam { background: linear-gradient(135deg, #fa709a, #fee140); color: #333; }
+        .door-header.abroad { background: linear-gradient(135deg, #a8edea, #fed6e3); color: #333; }
+
+        .door-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .door-title {
+            font-size: 1.3rem;
+        }
+
+        .door-content {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        /* Custom Scrollbar */
+        .door-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .door-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .door-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        /* Item Cards Inside Doors */
+        .job-card, .exam-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            border-left: 4px solid #667eea;
+        }
+
+        .job-card:hover, .exam-card:hover {
+            background: #e8eaff;
+            transform: translateX(5px);
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .item-description {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .item-detail {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .badge.govt { background: #4caf50; color: white; }
+        .badge.private { background: #2196f3; color: white; }
+        .badge.exam { background: #ff9800; color: white; }
+        .badge.abroad { background: #9c27b0; color: white; }
+
+        .official-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .official-link:hover {
+            text-decoration: underline;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .doors-container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .stream-door {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .door-header {
+                padding: 15px;
+            }
+            
+            .door-icon {
+                font-size: 2rem;
+            }
+            
+            .door-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
+            <h1>📋 Jobs & Exams Portal</h1>
+            <div class="search-container">
+                <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search jobs, exams, companies...">
+            </div>
+        </div>
+    </div>
+
+    <div class="stream-selector">
+        <div class="stream-grid" id="streamGrid"></div>
+    </div>
+
+    <div id="doorsContainer" class="doors-container"></div>
+
+    <script>
+        // ============================================
+        // COMPLETE DATABASE WITH OFFICIAL SOURCES
+        // ============================================
+        
+        const STREAMS_DATA = {
+            medical: {
+                name: "🩺 Medical",
+                exams: [
+                    { name: "NEET (UG)", description: "National Eligibility cum Entrance Test for MBBS/BDS/AYUSH/BVSc & AH", eligibility: "12th PCB with 50% (40% for reserved)", frequency: "Once a year (May)", officialLink: "https://neet.nta.nic.in/" },
+                    { name: "NEET PG", description: "Post Graduate Medical Entrance for MD/MS/PG Diploma", eligibility: "MBBS degree", frequency: "Once a year", officialLink: "https://nbe.edu.in/" },
+                    { name: "NEET SS", description: "Super Specialty Entrance for DM/MCh", eligibility: "MD/MS/DNB", frequency: "Once a year", officialLink: "https://nbe.edu.in/" },
+                    { name: "INI CET", description: "AIIMS, JIPMER, NIMHANS, PGIMER Chandigarh PG Entrance", eligibility: "MBBS", frequency: "Twice a year", officialLink: "https://aiimsexams.ac.in/" },
+                    { name: "FMGE", description: "Foreign Medical Graduate Examination for Indian citizens with foreign MBBS", eligibility: "Foreign MBBS degree", frequency: "Twice a year", officialLink: "https://www.natboard.edu.in/" },
+                    { name: "AIIMS BSc Nursing", description: "BSc Nursing at AIIMS Delhi & across India", eligibility: "12th PCB 55%", frequency: "Once a year", officialLink: "https://www.aiimsexams.ac.in/" },
+                    { name: "JIPMER MBBS", description: "Jawaharlal Institute of Postgraduate Medical Education & Research", eligibility: "12th PCB 50%", frequency: "Once a year", officialLink: "https://jipmer.edu.in/" },
+                    { name: "PGIMER Chandigarh", description: "Postgraduate Institute of Medical Education & Research", eligibility: "MBBS", frequency: "Once a year", officialLink: "http://pgimer.edu.in/" }
+                ],
+                govt_jobs: [
+                    { title: "UPSC CMS", description: "Combined Medical Services Examination for Assistant Divisional Medical Officer", eligibility: "MBBS", salary: "Level-10 (₹56,100 - ₹1,77,500)", officialLink: "https://upsc.gov.in/" },
+                    { title: "AIIMS Senior Resident", description: "Senior Resident positions across all AIIMS", eligibility: "MBBS + MD/MS/DNB", salary: "Level-11 (₹67,700 - ₹2,08,700)", officialLink: "https://www.aiimsexams.ac.in/" },
+                    { title: "ESIC Medical Officer", description: "Employees State Insurance Corporation General Duty Medical Officer", eligibility: "MBBS", salary: "₹56,100 - ₹1,77,500", officialLink: "https://www.esic.nic.in/" },
+                    { title: "CGHS Doctor", description: "Central Government Health Scheme Medical Officer", eligibility: "MBBS", salary: "Level-10", officialLink: "https://cghs.gov.in/" },
+                    { title: "Rural Medical Officer", description: "NHM State Govt Positions across India", eligibility: "MBBS", salary: "₹55,000 - ₹80,000/month", officialLink: "https://www.nhm.gov.in/" },
+                    { title: "Railway Doctor", description: "Indian Railway Medical Service", eligibility: "MBBS", salary: "Level-10", officialLink: "https://rrb.gov.in/" },
+                    { title: "Defence Medical Services", description: "Army/Navy/Air Force Medical Corps", eligibility: "MBBS", salary: "Level-10 + Military benefits", officialLink: "https://amcsscentry.gov.in/" },
+                    { title: "State Health Services", description: "State PSC Medical Officer positions", eligibility: "MBBS", salary: "₹56,100+", officialLink: "https://www.mohfw.gov.in/" }
+                ],
+                private_jobs: [
+                    { title: "Apollo Hospitals", description: "Resident Doctor, Senior Resident, Consultant", eligibility: "MBBS/MD/MS", salary: "₹8-25 LPA", officialLink: "https://careers.apollohospitals.com/" },
+                    { title: "Fortis Healthcare", description: "Medical Officer, Resident, Specialist", eligibility: "MBBS/MD/MS", salary: "₹6-20 LPA", officialLink: "https://www.fortishealthcare.com/careers" },
+                    { title: "Max Healthcare", description: "Consultant, Senior Resident", eligibility: "MD/MS/DNB", salary: "₹12-35 LPA", officialLink: "https://www.maxhealthcare.in/careers" },
+                    { title: "Narayana Health", description: "Resident Doctor, Intensivist", eligibility: "MBBS/MD", salary: "₹7-18 LPA", officialLink: "https://www.narayanahealth.org/careers" },
+                    { title: "Medanta Hospital", description: "Medical Specialist, Associate Consultant", eligibility: "MD/MS/DM/MCh", salary: "₹10-30 LPA", officialLink: "https://www.medanta.org/careers" },
+                    { title: "Manipal Hospitals", description: "Physician, Surgeon, Radiologist", eligibility: "MBBS/MD/MS", salary: "₹8-22 LPA", officialLink: "https://www.manipalhospitals.com/careers/" }
+                ],
+                abroad: [
+                    { title: "USMLE (USA)", description: "United States Medical Licensing Examination - Path to US Residency", eligibility: "MBBS", officialLink: "https://www.usmle.org/" },
+                    { title: "PLAB (UK)", description: "Professional and Linguistic Assessments Board - UK Medical License", eligibility: "MBBS", officialLink: "https://www.gmc-uk.org/registration-and-licensing/plab" },
+                    { title: "AMC (Australia)", description: "Australian Medical Council Certification", eligibility: "MBBS", officialLink: "https://www.amc.org.au/" },
+                    { title: "MCCQE (Canada)", description: "Medical Council of Canada Qualifying Examination", eligibility: "MBBS", officialLink: "https://mcc.ca/" },
+                    { title: "DHA (Dubai)", description: "Dubai Health Authority Licensing", eligibility: "MBBS + Experience", officialLink: "https://www.dha.gov.ae/" },
+                    { title: "MCI Screening Test", description: "For Indian students returning from abroad", eligibility: "Foreign MBBS", officialLink: "https://www.nmc.org.in/" }
+                ]
+            },
+            
+            non_medical: {
+                name: "🔧 Non-Medical",
+                exams: [
+                    { name: "JEE Main", description: "Joint Entrance Examination for NITs, IIITs, GFTIs", eligibility: "12th PCM 75%", frequency: "Twice a year", officialLink: "https://jeemain.nta.nic.in/" },
+                    { name: "JEE Advanced", description: "IITs Entrance Examination", eligibility: "Top 2.5 lakh in JEE Main", frequency: "Once a year", officialLink: "https://jeeadv.ac.in/" },
+                    { name: "BITSAT", description: "Birla Institute of Technology & Science Admission Test", eligibility: "12th PCM 75%", frequency: "Once a year", officialLink: "https://www.bitsadmission.com/" },
+                    { name: "VITEEE", description: "VIT Engineering Entrance Exam", eligibility: "12th PCM 60%", frequency: "Once a year", officialLink: "https://viteee.vit.ac.in/" },
+                    { name: "SRMJEEE", description: "SRM Joint Engineering Entrance Exam", eligibility: "12th PCM 50%", frequency: "Once a year", officialLink: "https://www.srmist.edu.in/admission/" },
+                    { name: "COMEDK", description: "Consortium of Medical, Engineering and Dental Colleges of Karnataka", eligibility: "12th PCM", frequency: "Once a year", officialLink: "https://comedk.org/" },
+                    { name: "WBJEE", description: "West Bengal Joint Entrance Examination", eligibility: "12th PCM", frequency: "Once a year", officialLink: "https://wbjeeb.nic.in/" },
+                    { name: "MHT CET", description: "Maharashtra Common Entrance Test", eligibility: "12th PCM", frequency: "Once a year", officialLink: "https://cetcell.mahacet.org/" }
+                ],
+                govt_jobs: [
+                    { title: "UPSC ESE", description: "Engineering Services Examination for Class-1 Engineer", eligibility: "B.Tech/B.E.", salary: "Level-10 (₹56,100 - ₹1,77,500)", officialLink: "https://upsc.gov.in/" },
+                    { title: "SSC JE", description: "Staff Selection Commission Junior Engineer", eligibility: "Diploma/B.Tech", salary: "Level-6 (₹35,400 - ₹1,12,400)", officialLink: "https://ssc.nic.in/" },
+                    { title: "RRB JE", description: "Railway Recruitment Board Junior Engineer", eligibility: "B.Tech/Diploma", salary: "Level-6", officialLink: "https://rrb.gov.in/" },
+                    { title: "GATE PSU", description: "Recruitment in ONGC, NTPC, BHEL, IOCL, BPCL, HPCL", eligibility: "B.Tech", salary: "₹60,000 - ₹1,80,000/month", officialLink: "https://www.gate.iitd.ac.in/" },
+                    { title: "ISRO Scientist", description: "ISRO Scientist/Engineer 'SC'", eligibility: "B.Tech (65%+)", salary: "Level-10 (₹56,100+)", officialLink: "https://www.isro.gov.in/Careers.html" },
+                    { title: "DRDO Scientist", description: "Defence Research and Development Organisation", eligibility: "B.Tech/M.Tech", salary: "Level-10", officialLink: "https://www.drdo.gov.in/careers" },
+                    { title: "BARC Scientist", description: "Bhabha Atomic Research Centre", eligibility: "B.Tech (60%+)", salary: "Level-10", officialLink: "https://www.barc.gov.in/careers/" },
+                    { title: "NPCIL Executive", description: "Nuclear Power Corporation of India", eligibility: "B.Tech", salary: "₹55,000 - ₹1,80,000", officialLink: "https://www.npcilcareers.co.in/" }
+                ],
+                private_jobs: [
+                    { title: "TCS", description: "Tata Consultancy Services - Software Engineer, System Engineer", eligibility: "B.Tech (60%+)", salary: "₹3.5-12 LPA", officialLink: "https://www.tcs.com/careers" },
+                    { title: "Infosys", description: "Systems Engineer, Power Programmer, Digital Specialist", eligibility: "B.Tech", salary: "₹3.6-10 LPA", officialLink: "https://www.infosys.com/careers/" },
+                    { title: "Google India", description: "Software Developer, SRE, Cloud Engineer", eligibility: "B.Tech/M.Tech (Top colleges)", salary: "₹18-50 LPA", officialLink: "https://careers.google.com/" },
+                    { title: "Microsoft India", description: "Software Development Engineer, Program Manager", eligibility: "B.Tech/MCA", salary: "₹20-60 LPA", officialLink: "https://careers.microsoft.com/" },
+                    { title: "Amazon India", description: "SDE, Cloud Support Associate, Solutions Architect", eligibility: "B.Tech", salary: "₹15-45 LPA", officialLink: "https://www.amazon.jobs/" },
+                    { title: "Flipkart", description: "Software Engineer, Data Scientist, Product Manager", eligibility: "B.Tech", salary: "₹12-35 LPA", officialLink: "https://www.flipkartcareers.com/" },
+                    { title: "Goldman Sachs", description: "Software Engineer, Analyst", eligibility: "B.Tech", salary: "₹15-40 LPA", officialLink: "https://www.goldmansachs.com/careers/" }
+                ],
+                abroad: [
+                    { title: "MS in USA", description: "Masters with OPT (3 years STEM) + H1B sponsorship", eligibility: "B.Tech + GRE + TOEFL/IELTS", officialLink: "https://www.ets.org/gre" },
+                    { title: "MS in Germany", description: "Tuition-free education + 18 months job seeker visa", eligibility: "B.Tech + IELTS", officialLink: "https://www.daad.de/en/" },
+                    { title: "MS in Canada", description: "PGWP (3 years) + Express Entry PR pathway", eligibility: "B.Tech + IELTS", officialLink: "https://www.canada.ca/en/immigration-refugees-citizenship.html" },
+                    { title: "Australia Skilled Migration", description: "Subclass 189/190 visa for engineers", eligibility: "B.Tech + English test", officialLink: "https://immi.homeaffairs.gov.au/" },
+                    { title: "MS in UK", description: "Graduate Route (2 years work visa)", eligibility: "B.Tech + IELTS", officialLink: "https://www.gov.uk/graduate-visa" }
+                ]
+            },
+            
+            commerce: {
+                name: "📊 Commerce",
+                exams: [
+                    { name: "CA Foundation", description: "Chartered Accountancy Foundation Course", eligibility: "12th Pass", frequency: "Twice a year", officialLink: "https://icai.org/" },
+                    { name: "CA Intermediate", description: "CA Intermediate Course", eligibility: "CA Foundation pass", frequency: "Twice a year", officialLink: "https://icai.org/" },
+                    { name: "CS Executive", description: "Company Secretary Executive Programme", eligibility: "12th Pass", frequency: "Twice a year", officialLink: "https://www.icsi.edu/" },
+                    { name: "CMA Foundation", description: "Cost and Management Accountant Foundation", eligibility: "12th Pass", frequency: "Twice a year", officialLink: "https://icmai.in/" },
+                    { name: "CLAT", description: "Common Law Admission Test for B.Com LLB", eligibility: "12th Pass (45%+)", frequency: "Once a year", officialLink: "https://consortiumofnlus.ac.in/" },
+                    { name: "IPMAT", description: "IIM Indore/Nagpur Integrated Programme in Management", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://www.iimidr.ac.in/" },
+                    { name: "NPAT", description: "NMIMS National Test for BBA/B.Com", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://npat.in/" },
+                    { name: "SET", description: "Symbiosis Entrance Test for BBA/BA/B.Sc", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://www.set-test.org/" }
+                ],
+                govt_jobs: [
+                    { title: "RBI Grade B", description: "Reserve Bank of India Officer (General/DEPR/DSIM)", eligibility: "Graduate (60%+)", salary: "₹77,000 - ₹2,15,000/month", officialLink: "https://opportunities.rbi.org.in/" },
+                    { title: "SSC CGL", description: "Combined Graduate Level - Auditor, Accountant, Income Tax Inspector", eligibility: "Graduate", salary: "Level-5 to Level-8 (₹35,400 - ₹1,12,400)", officialLink: "https://ssc.nic.in/" },
+                    { title: "IBPS PO", description: "Institute of Banking Personnel Selection Probationary Officer", eligibility: "Graduate", salary: "₹52,000 - ₹60,000/month", officialLink: "https://www.ibps.in/" },
+                    { title: "IBPS Clerk", description: "Bank Clerk in Public Sector Banks", eligibility: "Graduate", salary: "₹28,000 - ₹35,000/month", officialLink: "https://www.ibps.in/" },
+                    { title: "SBI PO", description: "State Bank of India Probationary Officer", eligibility: "Graduate", salary: "₹52,000 - ₹62,000/month", officialLink: "https://sbi.co.in/careers" },
+                    { title: "RBI Assistant", description: "Reserve Bank of India Assistant", eligibility: "Graduate", salary: "₹35,000 - ₹45,000/month", officialLink: "https://opportunities.rbi.org.in/" },
+                    { title: "UPSC CAPF AC", description: "Assistant Commandant (Accounts/Finance role)", eligibility: "Graduate", salary: "Level-10", officialLink: "https://upsc.gov.in/" },
+                    { title: "State PSC Jobs", description: "State Civil Services (Audit, Finance, Commercial Tax)", eligibility: "Graduate", salary: "₹35,000 - ₹80,000", officialLink: "https://www.upsc.gov.in/" }
+                ],
+                private_jobs: [
+                    { title: "Deloitte", description: "Audit Associate, Tax Consultant, Advisory", eligibility: "CA/CS/CMA/B.Com", salary: "₹6-12 LPA", officialLink: "https://careers.deloitte.com/" },
+                    { title: "KPMG", description: "Audit, Risk Consulting, Deal Advisory", eligibility: "CA/CMA/B.Com", salary: "₹7-15 LPA", officialLink: "https://kpmg.com/careers" },
+                    { title: "EY", description: "Assurance, Tax, Transaction Advisory", eligibility: "CA/CS/CMA", salary: "₹8-16 LPA", officialLink: "https://www.ey.com/en_in/careers" },
+                    { title: "PwC", description: "Audit, Tax, Advisory Services", eligibility: "CA/B.Com/MBA", salary: "₹7-14 LPA", officialLink: "https://www.pwc.com/careers" },
+                    { title: "HDFC Bank", description: "Relationship Manager, Credit Analyst", eligibility: "B.Com/MBA", salary: "₹4-8 LPA", officialLink: "https://careers.hdfcbank.com/" },
+                    { title: "ICICI Bank", description: "PO, Wealth Manager, Credit Officer", eligibility: "Graduate", salary: "₹5-10 LPA", officialLink: "https://www.icicibank.com/careers" },
+                    { title: "Kotak Mahindra", description: "Associate, Relationship Executive", eligibility: "B.Com/MBA", salary: "₹4-8 LPA", officialLink: "https://www.kotak.com/careers" }
+                ],
+                abroad: [
+                    { title: "ACCA (Global)", description: "Association of Chartered Certified Accountants - UK", eligibility: "12th/CA/CMA", officialLink: "https://www.accaglobal.com/" },
+                    { title: "CPA USA", description: "Certified Public Accountant - USA", eligibility: "Graduate (120 credits)", officialLink: "https://www.aicpa-cima.com/" },
+                    { title: "CFA", description: "Chartered Financial Analyst - USA/Global", eligibility: "Graduate/Final year", officialLink: "https://www.cfainstitute.org/" },
+                    { title: "FRM", description: "Financial Risk Manager - Global", eligibility: "Graduate", officialLink: "https://www.garp.org/frm" },
+                    { title: "CMA (US)", description: "Certified Management Accountant - USA", eligibility: "Graduate", officialLink: "https://www.imaa.org/" },
+                    { title: "Masters in Finance", description: "UK/USA/Canada/Australia/Singapore", eligibility: "B.Com + IELTS/GMAT", officialLink: "https://www.ft.com/business-education" }
+                ]
+            },
+            
+            arts: {
+                name: "🎭 Arts",
+                exams: [
+                    { name: "UPSC Civil Services", description: "IAS, IPS, IFS, IRS, DANICS, DANIPS", eligibility: "Graduate", frequency: "Once a year", officialLink: "https://upsc.gov.in/" },
+                    { name: "UGC NET", description: "Assistant Professor & Junior Research Fellowship", eligibility: "Master's (55%+)", frequency: "Twice a year", officialLink: "https://ugcnet.nta.nic.in/" },
+                    { name: "CLAT", description: "Common Law Admission Test for BA LLB", eligibility: "12th (45%+)", frequency: "Once a year", officialLink: "https://consortiumofnlus.ac.in/" },
+                    { name: "DU LLB", description: "Delhi University Law Entrance", eligibility: "Graduate (50%+)", frequency: "Once a year", officialLink: "http://lawfaculty.du.ac.in/" },
+                    { name: "MH CET Law", description: "Maharashtra Law CET for 3-year LLB", eligibility: "Graduate", frequency: "Once a year", officialLink: "https://cetcell.mahacet.org/" },
+                    { name: "TISS NET", description: "Tata Institute of Social Sciences Entrance", eligibility: "Graduate", frequency: "Once a year", officialLink: "https://www.tiss.edu/" },
+                    { name: "JNUEE", description: "Jawaharlal Nehru University Entrance for MA", eligibility: "Graduate", frequency: "Once a year", officialLink: "https://www.jnu.ac.in/" },
+                    { name: "BHU UET", description: "Banaras Hindu University Undergraduate Entrance", eligibility: "12th", frequency: "Once a year", officialLink: "https://bhuonline.in/" }
+                ],
+                govt_jobs: [
+                    { title: "SSC CHSL", description: "LDC, DEO, Postal Assistant, Court Clerk", eligibility: "12th", salary: "Level-3 (₹21,700 - ₹69,100)", officialLink: "https://ssc.nic.in/" },
+                    { title: "SSC CGL", description: "Assistant, Inspector, Auditor, Accountant", eligibility: "Graduate", salary: "Level-5 to Level-8", officialLink: "https://ssc.nic.in/" },
+                    { title: "State PCS", description: "State Civil Services (Deputy Collector, DSP, BDO, Tehsildar)", eligibility: "Graduate", salary: "Level-10", officialLink: "https://www.upsc.gov.in/" },
+                    { title: "Teaching Jobs", description: "KVS, NVS, Army School, State Schools", eligibility: "B.Ed/CTET", salary: "Level-6 (₹35,400+)", officialLink: "https://ctet.nic.in/" },
+                    { title: "Indian Railway", description: "Commercial Apprentice, Traffic Assistant, Station Master", eligibility: "Graduate", salary: "Level-6 to Level-7", officialLink: "https://rrb.gov.in/" },
+                    { title: "Police/SI", description: "State Police Sub-Inspector, DSP", eligibility: "Graduate", salary: "₹35,000 - ₹60,000", officialLink: "https://ssc.nic.in/" },
+                    { title: "Bihar BPSC", description: "Bihar Public Service Commission - Various posts", eligibility: "Graduate", salary: "₹44,900 - ₹1,42,400", officialLink: "https://www.bpsc.bih.nic.in/" },
+                    { title: "UPPSC", description: "Uttar Pradesh Public Service Commission", eligibility: "Graduate", salary: "₹56,100 - ₹1,77,500", officialLink: "https://uppsc.up.nic.in/" }
+                ],
+                private_jobs: [
+                    { title: "The Times of India", description: "Journalist, Reporter, Content Writer", eligibility: "BA Journalism/Mass Comm", salary: "₹3-8 LPA", officialLink: "https://timesgroup.com/careers" },
+                    { title: "Hindustan Times", description: "Sub-editor, Correspondent, Features Writer", eligibility: "Mass Comm/English", salary: "₹3-7 LPA", officialLink: "https://www.hindustantimes.com/careers" },
+                    { title: "Teach For India", description: "Fellowship - Teaching in under-resourced schools", eligibility: "Graduate", salary: "₹4-5 LPA", officialLink: "https://teachforindia.org/" },
+                    { title: "UNICEF India", description: "Program Officer, Communications Associate", eligibility: "MA/BA (Social Work)", salary: "₹8-12 LPA", officialLink: "https://www.unicef.org/careers" },
+                    { title: "BYJU's", description: "Academic Specialist, Business Development Associate", eligibility: "Graduate", salary: "₹6-10 LPA", officialLink: "https://byjus.com/careers/" },
+                    { title: "National Geographic", description: "Researcher, Writer, Editor", eligibility: "BA/MA Geography/Env Sci", salary: "₹5-12 LPA", officialLink: "https://www.nationalgeographic.com/careers" },
+                    { title: "Indian NGOs", description: "Project Manager, Field Officer, Coordinator", eligibility: "BA/BSW/MSW", salary: "₹3-8 LPA", officialLink: "https://www.ngobox.org/" }
+                ],
+                abroad: [
+                    { title: "Fulbright Scholarship", description: "USA - Masters/PhD in Humanities/Social Sciences", eligibility: "Graduate", officialLink: "https://www.usief.org.in/" },
+                    { title: "Chevening Scholarship", description: "UK - One year Masters", eligibility: "Graduate (2+ years exp)", officialLink: "https://www.chevening.org/" },
+                    { title: "Commonwealth Scholarship", description: "UK/Canada/Australia - Masters/PhD", eligibility: "Graduate", officialLink: "https://cscuk.fcdo.gov.uk/" },
+                    { title: "Erasmus Mundus", description: "Europe - Joint Masters Programme", eligibility: "Graduate", officialLink: "https://erasmus-plus.ec.europa.eu/" },
+                    { title: "Inlaks Scholarship", description: "UK/USA/Europe - Visual Arts/Design/ Humanities", eligibility: "BFA/MA", officialLink: "https://www.inlaksfoundation.org/" }
+                ]
+            },
+            
+            sports: {
+                name: "⚽ Sports",
+                exams: [
+                    { name: "BPEd Entrance", description: "Bachelor of Physical Education (2 years)", eligibility: "12th (Sports background)", frequency: "Once a year", officialLink: "https://lakshmibai.du.ac.in/" },
+                    { name: "MPEd Entrance", description: "Master of Physical Education (2 years)", eligibility: "BPEd", frequency: "Once a year", officialLink: "https://www.lnipe.edu.in/" },
+                    { name: "NIS Coaching Diploma", description: "Netaji Subhas National Institute of Sports Coaching", eligibility: "12th/BPEd", frequency: "Twice a year", officialLink: "https://nsnis.org/" },
+                    { name: "UGC NET Physical Education", description: "Assistant Professor in Physical Education", eligibility: "Master's", frequency: "Twice a year", officialLink: "https://ugcnet.nta.nic.in/" },
+                    { name: "SET/SLET", description: "State Eligibility Test for Physical Education", eligibility: "Master's", frequency: "Once a year", officialLink: "https://www.ugc.ac.in/" }
+                ],
+                govt_jobs: [
+                    { title: "SAI Coach", description: "Sports Authority of India Coach/Graduate Coach", eligibility: "NIS/BPEd/Diploma", salary: "Level-6 (₹35,400+)", officialLink: "https://sportsauthorityofindia.nic.in/" },
+                    { title: "Railway Sports Quota", description: "Indian Railways Recruitment through Sports Quota", eligibility: "State/National Level Certificate", salary: "Level-3 to Level-5", officialLink: "https://rrb.gov.in/" },
+                    { title: "Bank Sports Quota", description: "SBI, IBPS Banks Sports Quota Recruitment", eligibility: "State/National Level", salary: "₹30,000 - ₹50,000", officialLink: "https://www.ibps.in/" },
+                    { title: "Army Sports Quota", description: "Indian Army Recruitment through Sports Quota", eligibility: "National Level Medal", salary: "Level-4 to Level-6", officialLink: "https://joinindianarmy.nic.in/" },
+                    { title: "BSF Sports Quota", description: "Border Security Force Sports Constable", eligibility: "State/National Level", salary: "Level-3", officialLink: "https://bsf.gov.in/" },
+                    { title: "State Police Sports", description: "State Police Sports Quota Recruitment", eligibility: "Sports Certificate", salary: "₹35,000 - ₹55,000", officialLink: "https://www.punjabpolice.gov.in/" },
+                    { title: "Physical Education Teacher", description: "Govt Schools (KVS, NVS, State Schools)", eligibility: "BPEd/B.Ed + CTET", salary: "Level-6 (₹35,400+)", officialLink: "https://ctet.nic.in/" }
+                ],
+                private_jobs: [
+                    { title: "Cult.fit", description: "Fitness Trainer, Centre Manager, Group Instructor", eligibility: "BPEd/Diploma/Certification", salary: "₹3-6 LPA", officialLink: "https://www.cult.fit/careers" },
+                    { title: "Decathlon", description: "Sports Leader, Department Manager, Coach", eligibility: "Sports Enthusiast/BPEd", salary: "₹3-5 LPA", officialLink: "https://www.decathlon.in/careers" },
+                    { title: "Sports Academies", description: "Coach, Academy Manager, Talent Scout", eligibility: "NIS/BPEd", salary: "₹4-8 LPA", officialLink: "https://www.sportsauthorityofindia.nic.in/" },
+                    { title: "Gold's Gym", description: "Personal Trainer, Fitness Consultant", eligibility: "Certification/BPEd", salary: "₹3-8 LPA", officialLink: "https://www.goldsgym.com/careers/" },
+                    { title: "IPL Teams", description: "Physiotherapist, Trainer, Performance Analyst", eligibility: "Sports Science/Physio", salary: "₹6-15 LPA", officialLink: "https://www.iplt20.com/" }
+                ],
+                abroad: [
+                    { title: "Sports Scholarships USA", description: "NCAA Division I/II Sports Scholarships", eligibility: "Outstanding sports performance", officialLink: "https://www.ncaa.org/" },
+                    { title: "Sports Science Masters", description: "UK/USA/Australia/Germany", eligibility: "BPEd/MPEd + IELTS", officialLink: "https://www.topuniversities.com/sports-science" },
+                    { title: "Coaching Certification", description: "International Coaching Certification (IAAF, FIFA, FIBA)", eligibility: "NIS/Coaching Exp", officialLink: "https://www.fifa.com/" }
+                ]
+            },
+            
+            agriculture: {
+                name: "🌾 Agriculture",
+                exams: [
+                    { name: "ICAR AIEEA", description: "ICAR All India Entrance for Agriculture (UG/PG)", eligibility: "12th PCB/PCM (50%+)", frequency: "Once a year", officialLink: "https://icar.nta.nic.in/" },
+                    { name: "AICE JRF/SRF", description: "ICAR Junior Research Fellowship", eligibility: "B.Sc Agri (60%+)", frequency: "Once a year", officialLink: "https://www.icar.org.in/" },
+                    { name: "IBPS SO AO", description: "IBPS Specialist Officer Agriculture Officer", eligibility: "B.Sc Agri (60%+)", frequency: "Once a year", officialLink: "https://www.ibps.in/" },
+                    { name: "CUET Agriculture", description: "Central Universities Agriculture Entrance", eligibility: "12th PCB/PCM", frequency: "Once a year", officialLink: "https://cuet.samarth.ac.in/" },
+                    { name: "State Agri Exams", description: "State Agriculture University Entrance Exams", eligibility: "12th Agriculture", frequency: "Once a year", officialLink: "https://www.agriculture.gov.in/" }
+                ],
+                govt_jobs: [
+                    { title: "Agriculture Officer", description: "State Govt Agriculture Development Officer", eligibility: "B.Sc Agri (55%+)", salary: "Level-6 (₹35,400+)", officialLink: "https://www.agriculture.gov.in/" },
+                    { title: "NABARD Grade A", description: "National Bank for Agriculture and Rural Development Assistant Manager", eligibility: "Graduate (50%+)", salary: "Level-10 (₹44,000 - ₹1,05,000)", officialLink: "https://www.nabard.org/" },
+                    { title: "FCI Manager", description: "Food Corporation of India - General/Depot", eligibility: "Graduate", salary: "Level-8 (₹40,000 - ₹1,40,000)", officialLink: "https://fci.gov.in/" },
+                    { title: "IFFCO AGT", description: "Indian Farmers Fertiliser Cooperative - Agriculture Graduate Trainee", eligibility: "B.Sc Agri", salary: "₹35,000 - ₹60,000/month", officialLink: "https://www.iffco.in/" },
+                    { title: "KVK Scientist", description: "Krishi Vigyan Kendra Subject Matter Specialist", eligibility: "M.Sc Agri/PHD", salary: "Level-10 (₹56,100+)", officialLink: "https://kvk.icar.gov.in/" },
+                    { title: "ICAR Scientist", description: "ICAR Research Scientist", eligibility: "M.Sc Agri/NET", salary: "Level-10", officialLink: "https://www.icar.org.in/" },
+                    { title: "Rural Development Officer", description: "State Rural Development Department", eligibility: "B.Sc Agri", salary: "₹35,000 - ₹60,000", officialLink: "https://rural.nic.in/" }
+                ],
+                private_jobs: [
+                    { title: "Bayer CropScience", description: "Agri Officer, Sales Officer, Development Representative", eligibility: "B.Sc Agri", salary: "₹4-8 LPA", officialLink: "https://www.bayer.com/en/careers" },
+                    { title: "Syngenta", description: "Field Officer, Agronomist, Technical Lead", eligibility: "B.Sc Agri/M.Sc", salary: "₹4-7 LPA", officialLink: "https://www.syngenta.com/careers" },
+                    { title: "UPL Limited", description: "Agronomist, Sales Executive, Product Manager", eligibility: "B.Sc Agri", salary: "₹5-10 LPA", officialLink: "https://www.upl-ltd.com/careers" },
+                    { title: "DeHaat", description: "AgriTech - Area Manager, Business Executive", eligibility: "B.Sc Agri", salary: "₹4-8 LPA", officialLink: "https://www.dehaat.com/careers" },
+                    { title: "Ninjacart", description: "Supply Chain, Quality Analyst, Agri Associate", eligibility: "B.Sc Agri", salary: "₹4-7 LPA", officialLink: "https://ninjacart.com/careers" },
+                    { title: "Agrostar", description: "Agri Advisor, Territory Manager", eligibility: "B.Sc Agri", salary: "₹3-6 LPA", officialLink: "https://agrostar.in/careers" }
+                ],
+                abroad: [
+                    { title: "MS in Agriculture", description: "USA/Canada/Germany/Netherlands", eligibility: "B.Sc Agri + GRE/IELTS", officialLink: "https://www.fao.org/" },
+                    { title: "Wageningen University", description: "Netherlands - Top Agri University", eligibility: "B.Sc Agri + IELTS", officialLink: "https://www.wur.nl/en.htm" },
+                    { title: "DAAD Scholarship", description: "Germany - Agri Research Scholarship", eligibility: "B.Sc/M.Sc Agri", officialLink: "https://www.daad.de/en/" }
+                ]
+            },
+            
+            artist: {
+                name: "🎨 Artist",
+                exams: [
+                    { name: "NIFT Entrance", description: "National Institute of Fashion Technology - B.Des/B.F.Tech", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://nift.ac.in/" },
+                    { name: "NID DAT", description: "National Institute of Design - Design Aptitude Test", eligibility: "12th/Graduate", frequency: "Once a year", officialLink: "https://www.nid.edu/" },
+                    { name: "UCEED", description: "IIT Bombay - Undergraduate Common Entrance Exam for Design", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://www.uceed.iitb.ac.in/" },
+                    { name: "CEED", description: "IIT Bombay - Common Entrance Exam for Design (PG)", eligibility: "Graduate", frequency: "Once a year", officialLink: "https://www.ceed.iitb.ac.in/" },
+                    { name: "BFA Entrance", description: "Banaras Hindu University, Jamia, DU, PU Fine Arts", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://bhuonline.in/" },
+                    { name: "MFA Entrance", description: "MS University, Jamia, DU Master of Fine Arts", eligibility: "BFA", frequency: "Once a year", officialLink: "https://www.msubaroda.ac.in/" }
+                ],
+                govt_jobs: [
+                    { title: "NID Assistant", description: "National Institute of Design Assistant Professor/Designer", eligibility: "B.Des/M.Des", salary: "Level-6 to Level-10", officialLink: "https://www.nid.edu/careers" },
+                    { title: "Museum Curator", description: "National Museum, Salar Jung Museum, State Museums", eligibility: "MA Arts/Museum Studies", salary: "Level-7 (₹44,900+)", officialLink: "https://www.nationalmuseumindia.gov.in/" },
+                    { title: "Art Teacher (PGT/TGT)", description: "KVS, NVS, State Schools - Art/Craft Teacher", eligibility: "BFA + B.Ed", salary: "Level-6 (₹35,400+)", officialLink: "https://www.cbse.gov.in/" },
+                    { title: "Designer in Govt", description: "Ministry of Textile, Ministry of Culture, Govt Agencies", eligibility: "NIFT/NID/B.Des", salary: "Level-6", officialLink: "https://www.textiles.gov.in/" }
+                ],
+                private_jobs: [
+                    { title: "Lakmé Fashion", description: "Fashion Designer, Textile Designer, Stylist", eligibility: "NIFT/NID", salary: "₹5-12 LPA", officialLink: "https://www.lakmeindia.com/careers" },
+                    { title: "Asian Paints", description: "Color Consultant, Product Designer", eligibility: "B.Des/M.Des", salary: "₹6-12 LPA", officialLink: "https://www.asianpaints.com/careers" },
+                    { title: "Disney+Hotstar", description: "Animator, Motion Graphics Designer, VFX Artist", eligibility: "Animation Degree", salary: "₹6-15 LPA", officialLink: "https://careers.hotstar.com/" },
+                    { title: "DreamWorks India", description: "VFX Artist, Character Designer, Storyboard Artist", eligibility: "Animation/Design", salary: "₹8-20 LPA", officialLink: "https://www.dreamworks.com/careers" },
+                    { title: "Zomato", description: "Graphic Designer, UI/UX Designer", eligibility: "B.Des", salary: "₹6-15 LPA", officialLink: "https://www.zomato.com/careers" },
+                    { title: "Ola Cabs", description: "Product Designer, Visual Designer", eligibility: "B.Des/M.Des", salary: "₹8-18 LPA", officialLink: "https://ola.careers/" },
+                    { title: "Freelance Platforms", description: "Fiverr, Upwork, 99designs - Independent Artist", eligibility: "Portfolio", salary: "₹5-25 LPA (variable)", officialLink: "https://www.fiverr.com/" }
+                ],
+                abroad: [
+                    { title: "Fulbright for Arts", description: "USA - Fine Arts/Design Scholarship", eligibility: "BFA/MA (Portfolio)", officialLink: "https://www.usief.org.in/" },
+                    { title: "Inlaks Scholarship", description: "UK/USA/Europe - Visual Arts, Design", eligibility: "BFA/Design Degree", officialLink: "https://www.inlaksfoundation.org/" },
+                    { title: "MA Design Abroad", description: "UK/USA/Europe - RCA, Central Saint Martins, Parsons", eligibility: "B.Des + IELTS/TOEFL", officialLink: "https://www.rca.ac.uk/" }
+                ]
+            },
+            
+            designing: {
+                name: "✏️ Designing",
+                exams: [
+                    { name: "NIFT Entrance", description: "National Institute of Fashion Technology", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://nift.ac.in/" },
+                    { name: "NID DAT", description: "National Institute of Design", eligibility: "12th/Graduate", frequency: "Once a year", officialLink: "https://www.nid.edu/" },
+                    { name: "UCEED", description: "IIT Bombay Design Entrance (B.Des)", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://www.uceed.iitb.ac.in/" },
+                    { name: "CEED", description: "IIT Bombay Design Entrance (M.Des)", eligibility: "Graduate", frequency: "Once a year", officialLink: "https://www.ceed.iitb.ac.in/" },
+                    { name: "MIT ID DAT", description: "MIT Institute of Design Admission Test", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://www.mitid.edu.in/" },
+                    { name: "UPES DAT", description: "UPES School of Design Admission Test", eligibility: "12th Pass", frequency: "Once a year", officialLink: "https://www.upes.ac.in/" }
+                ],
+                govt_jobs: [
+                    { title: "NIFT Faculty", description: "Professor/Assistant Professor in Design Institutes", eligibility: "M.Des/PhD", salary: "Level-10 to Level-14", officialLink: "https://nift.ac.in/careers" },
+                    { title: "Govt Web Designer", description: "NIC, State IT Departments", eligibility: "B.Des/M.Des", salary: "Level-6 (₹35,400+)", officialLink: "https://www.nic.in/careers" },
+                    { title: "Design Consultant (Govt)", description: "Ministry of MSME, NID, State Design Cells", eligibility: "B.Des/M.Des", salary: "₹45,000 - ₹80,000", officialLink: "https://www.msme.gov.in/" }
+                ],
+                private_jobs: [
+                    { title: "Apple India", description: "UI/UX Designer, Product Designer", eligibility: "B.Des/M.Des (Portfolio)", salary: "₹15-35 LPA", officialLink: "https://www.apple.com/careers/in/" },
+                    { title: "Microsoft India", description: "Product Designer, UX Researcher", eligibility: "B.Des/M.Des", salary: "₹18-40 LPA", officialLink: "https://careers.microsoft.com/" },
+                    { title: "Google India", description: "UX Designer, Interaction Designer", eligibility: "B.Des/M.Des", salary: "₹20-50 LPA", officialLink: "https://careers.google.com/" },
+                    { title: "Flipkart", description: "UI Designer, UX Designer, Product Designer", eligibility: "B.Des/M.Des", salary: "₹10-25 LPA", officialLink: "https://www.flipkartcareers.com/" },
+                    { title: "Urban Company", description: "Product Designer, Visual Designer", eligibility: "B.Des", salary: "₹8-18 LPA", officialLink: "https://careers.urbancompany.com/" },
+                    { title: "Myntra", description: "Fashion Designer, UI/UX Designer", eligibility: "NIFT/NID", salary: "₹8-20 LPA", officialLink: "https://careers.myntra.com/" },
+                    { title: "Design Studios", description: "Elephant, Human Factors, Tron - Design Consultant", eligibility: "B.Des/M.Des", salary: "₹6-15 LPA", officialLink: "https://www.elephant.design/" }
+                ],
+                abroad: [
+                    { title: "M.Des Abroad", description: "UK/USA/Europe/Germany - Product/Interaction/UIUX", eligibility: "B.Des + IELTS/TOEFL", officialLink: "https://www.rca.ac.uk/" },
+                    { title: "Design Internship", description: "Pixar, IDEO, Frog Design - International", eligibility: "Design Student", officialLink: "https://www.ideo.com/careers" }
+                ]
+            },
+            
+            skilled_trade: {
+                name: "🔨 Skilled Trade",
+                exams: [
+                    { name: "ITI Entrance", description: "State ITI Admission (Electrician, Fitter, Welder, Turner)", eligibility: "10th Pass", frequency: "Once a year", officialLink: "https://ncvt.gov.in/" },
+                    { name: "Polytechnic Diploma", description: "State Diploma in Engineering (Civil, Mech, Electrical)", eligibility: "10th/12th (35%+)", frequency: "Once a year", officialLink: "https://www.aicte-india.org/" },
+                    { name: "NSDC Assessment", description: "National Skill Development Corporation Certification", eligibility: "ITI/Diploma/Experience", frequency: "Ongoing", officialLink: "https://nsdcindia.org/" },
+                    { name: "CITS", description: "Craft Instructor Training Scheme for ITI Teachers", eligibility: "ITI + 3 years exp", frequency: "Twice a year", officialLink: "https://ncvt.gov.in/" }
+                ],
+                govt_jobs: [
+                    { title: "Railway Technician", description: "Indian Railways - Technician Grade III", eligibility: "ITI (relevant trade)", salary: "Level-2 (₹19,900 - ₹63,200)", officialLink: "https://rrb.gov.in/" },
+                    { title: "BSNL JE", description: "Bharat Sanchar Nigam Limited Junior Engineer", eligibility: "Diploma (Elex/Telecom)", salary: "Level-6 (₹35,400+)", officialLink: "https://bsnl.co.in/" },
+                    { title: "State Electricity", description: "Lineman, JE, Technician in State Electricity Boards", eligibility: "ITI/Diploma", salary: "Level-3 (₹21,700 - ₹69,100)", officialLink: "https://www.uppcl.org/" },
+                    { title: "DRDO Technician", description: "Defense Research Organization - Technician 'A'", eligibility: "ITI", salary: "Level-2 to Level-3", officialLink: "https://www.drdo.gov.in/careers" },
+                    { title: "Army Technical", description: "Indian Army - Technical Tradesman", eligibility: "10th + ITI", salary: "Level-3 (₹21,700+)", officialLink: "https://joinindianarmy.nic.in/" },
+                    { title: "Air Force Tech", description: "IAF Technical Trades (Airmen)", eligibility: "10th/12th + ITI", salary: "Level-3", officialLink: "https://airmenselection.cdac.in/" }
+                ],
+                private_jobs: [
+                    { title: "Tata Motors", description: "Technician, Service Engineer, Quality Inspector", eligibility: "ITI/Diploma", salary: "₹2.5-4 LPA", officialLink: "https://www.tatamotors.com/careers" },
+                    { title: "Maruti Suzuki", description: "Service Technician, Production Associate", eligibility: "ITI (Motor Vehicle)", salary: "₹2.5-4.5 LPA", officialLink: "https://www.marutisuzuki.com/careers" },
+                    { title: "Amazon India", description: "Warehouse Supervisor, Area Manager (Ops)", eligibility: "12th/Diploma", salary: "₹3-5 LPA", officialLink: "https://www.amazon.jobs/" },
+                    { title: "L&T Construction", description: "Junior Engineer, Supervisor", eligibility: "Diploma (Civil/Mech)", salary: "₹3-6 LPA", officialLink: "https://www.lntecc.com/careers" },
+                    { title: "Siemens India", description: "Technician, Service Engineer", eligibility: "ITI/Diploma", salary: "₹3-6 LPA", officialLink: "https://new.siemens.com/in/en/company/jobs.html" },
+                    { title: "Bosch India", description: "Production Technician, Quality Assurance", eligibility: "ITI/Diploma", salary: "₹2.5-5 LPA", officialLink: "https://www.bosch.in/careers/" }
+                ],
+                abroad: [
+                    { title: "Skilled Work Visa", description: "Germany/Australia/Canada - Electrician, Welder, Fitter", eligibility: "ITI + Experience + Language", officialLink: "https://www.make-it-in-germany.com/" },
+                    { title: "Gulf Jobs", description: "Dubai, Qatar, Saudi - Technical Trades", eligibility: "ITI + 2-5 years exp", officialLink: "https://www.naukrigulf.com/" }
+                ]
+            },
+            
+            abroad_studies: {
+                name: "🌍 Abroad Studies",
+                exams: [
+                    { name: "IELTS", description: "International English Language Testing System", eligibility: "10+2/Graduate", officialLink: "https://www.ielts.org/" },
+                    { name: "TOEFL iBT", description: "Test of English as a Foreign Language", eligibility: "10+2/Graduate", officialLink: "https://www.ets.org/toefl" },
+                    { name: "GRE", description: "Graduate Record Examination (USA/Canada)", eligibility: "Graduate", officialLink: "https://www.ets.org/gre" },
+                    { name: "GMAT", description: "Graduate Management Admission Test (MBA)", eligibility: "Graduate", officialLink: "https://www.mba.com/" },
+                    { name: "SAT", description: "Scholastic Assessment Test (UG Abroad)", eligibility: "10+2", officialLink: "https://www.collegeboard.org/sat" },
+                    { name: "PTE", description: "Pearson Test of English (UK/Australia)", eligibility: "10+2/Graduate", officialLink: "https://www.pearsonpte.com/" },
+                    { name: "Duolingo Test", description: "Online English Test (Accepted by 4000+ univ)", eligibility: "10+2/Graduate", officialLink: "https://englishtest.duolingo.com/" }
+                ],
+                abroad_jobs: [
+                    { title: "USA OPT/H1B", description: "Optional Practical Training (3 years STEM) + H1B Work Visa", eligibility: "US Degree", officialLink: "https://www.uscis.gov/" },
+                    { title: "UK Graduate Route", description: "2 Years Work Visa after UK degree", eligibility: "UK Bachelor/Masters", officialLink: "https://www.gov.uk/graduate-visa" },
+                    { title: "Canada PGWP", description: "Post-Graduation Work Permit (up to 3 years)", eligibility: "Canadian DLI Degree", officialLink: "https://www.canada.ca/en/immigration-refugees-citizenship.html" },
+                    { title: "Australia 485 Visa", description: "Temporary Graduate Visa (2-4 years work)", eligibility: "Australian Degree", officialLink: "https://immi.homeaffairs.gov.au/" },
+                    { title: "Germany Job Seeker", description: "6-18 months visa to find job after German degree", eligibility: "German University Degree", officialLink: "https://www.make-it-in-germany.com/" },
+                    { title: "Ireland Stay Back", description: "2 years stay back after Masters", eligibility: "Irish Masters Degree", officialLink: "https://www.educationinireland.com/" }
+                ],
+                scholarships: [
+                    { name: "Fulbright-Nehru", description: "USA - Masters/PhD - Full scholarship", eligibility: "Graduate + English", officialLink: "https://www.usief.org.in/" },
+                    { name: "Chevening", description: "UK - 1 year Masters - Full scholarship", eligibility: "Graduate + 2 years exp", officialLink: "https://www.chevening.org/" },
+                    { name: "Commonwealth", description: "UK/Canada - Masters/PhD", eligibility: "Graduate", officialLink: "https://cscuk.fcdo.gov.uk/" },
+                    { name: "Erasmus Mundus", description: "Europe - Joint Masters", eligibility: "Graduate", officialLink: "https://erasmus-plus.ec.europa.eu/" },
+                    { name: "DAAD Scholarship", description: "Germany - Masters/Research", eligibility: "Graduate (55%+)", officialLink: "https://www.daad.de/en/" }
+                ]
+            }
+        };
+
+        // State
+        let currentStream = 'medical';
+        let searchTerm = '';
+
+        // Render stream doors (selector)
+        function renderStreamSelector() {
+            const streamsList = [
+                { id: 'medical', name: '🩺 Medical', emoji: '🩺' },
+                { id: 'non_medical', name: '🔧 Non-Medical', emoji: '🔧' },
+                { id: 'commerce', name: '📊 Commerce', emoji: '📊' },
+                { id: 'arts', name: '🎭 Arts', emoji: '🎭' },
+                { id: 'sports', name: '⚽ Sports', emoji: '⚽' },
+                { id: 'agriculture', name: '🌾 Agriculture', emoji: '🌾' },
+                { id: 'artist', name: '🎨 Artist', emoji: '🎨' },
+                { id: 'designing', name: '✏️ Designing', emoji: '✏️' },
+                { id: 'skilled_trade', name: '🔨 Skilled Trade', emoji: '🔨' },
+                { id: 'abroad_studies', name: '🌍 Abroad Studies', emoji: '🌍' }
+            ];
+
+            const container = document.getElementById('streamGrid');
+            container.innerHTML = streamsList.map(stream => `
+                <button class="stream-door ${currentStream === stream.id ? 'active' : ''}" onclick="switchStream('${stream.id}')">
+                    ${stream.emoji} ${stream.name}
+                </button>
+            `).join('');
+        }
+
+        // Switch stream
+        window.switchStream = function(streamId) {
+            currentStream = streamId;
+            renderStreamSelector();
+            renderDoors();
+        };
+
+        // Filter items based on search
+        function filterItems(items, searchTerm) {
+            if (!searchTerm) return items;
+            const term = searchTerm.toLowerCase();
+            return items.filter(item => 
+                item.title?.toLowerCase().includes(term) || 
+                item.name?.toLowerCase().includes(term) ||
+                item.description?.toLowerCase().includes(term) ||
+                item.eligibility?.toLowerCase().includes(term)
+            );
+        }
+
+        // Render main doors (4 doors: Exams, Govt, Private, Abroad)
+        function renderDoors() {
+            const data = STREAMS_DATA[currentStream];
+            if (!data) return;
+
+            const searchTermInput = document.getElementById('searchBox');
+            searchTerm = searchTermInput ? searchTermInput.value : '';
+
+            // Filter all sections
+            const filteredExams = filterItems(data.exams || [], searchTerm);
+            const filteredGovt = filterItems(data.govt_jobs || [], searchTerm);
+            const filteredPrivate = filterItems(data.private_jobs || [], searchTerm);
+            const filteredAbroad = filterItems(data.abroad || data.abroad_jobs || [], searchTerm);
+            const filteredScholarships = filterItems(data.scholarships || [], searchTerm);
+
+            const container = document.getElementById('doorsContainer');
+            
+            let html = `
+                <!-- Door 1: Important Exams -->
+                <div class="door-card">
+                    <div class="door-header exam">
+                        <span class="door-icon">📝</span>
+                        <div class="door-title">Important Exams</div>
+                    </div>
+                    <div class="door-content">
+                        ${filteredExams.length > 0 ? filteredExams.map(exam => `
+                            <div class="exam-card">
+                                <div class="item-title">📖 ${exam.name}</div>
+                                <div class="item-description">${exam.description}</div>
+                                <div class="item-detail">🎯 Eligibility: ${exam.eligibility || 'Varies'}</div>
+                                ${exam.frequency ? `<div class="item-detail">📅 Frequency: ${exam.frequency}</div>` : ''}
+                                <a href="${exam.officialLink}" target="_blank" class="official-link">🔗 Official Website →</a>
+                            </div>
+                        `).join('') : '<div class="empty-state">🔍 No exams found matching your search</div>'}
+                    </div>
+                </div>
+
+                <!-- Door 2: Government Jobs -->
+                <div class="door-card">
+                    <div class="door-header govt">
+                        <span class="door-icon">🏛️</span>
+                        <div class="door-title">Government Jobs</div>
+                    </div>
+                    <div class="door-content">
+                        ${filteredGovt.length > 0 ? filteredGovt.map(job => `
+                            <div class="job-card">
+                                <div class="item-title">${job.title}</div>
+                                <div class="item-description">${job.description}</div>
+                                <div class="item-detail">✅ Eligibility: ${job.eligibility || 'Varies'}</div>
+                                ${job.salary ? `<div class="item-detail">💰 Salary: ${job.salary}</div>` : ''}
+                                <a href="${job.officialLink}" target="_blank" class="official-link">🔗 Apply/Details →</a>
+                            </div>
+                        `).join('') : '<div class="empty-state">🔍 No government jobs found matching your search</div>'}
+                    </div>
+                </div>
+
+                <!-- Door 3: Private Jobs -->
+                <div class="door-card">
+                    <div class="door-header private">
+                        <span class="door-icon">💼</span>
+                        <div class="door-title">Private Jobs</div>
+                    </div>
+                    <div class="door-content">
+                        ${filteredPrivate.length > 0 ? filteredPrivate.map(job => `
+                            <div class="job-card">
+                                <div class="item-title">${job.title}</div>
+                                <div class="item-description">${job.description}</div>
+                                <div class="item-detail">✅ Eligibility: ${job.eligibility || 'Varies'}</div>
+                                ${job.salary ? `<div class="item-detail">💰 Salary: ${job.salary}</div>` : ''}
+                                <a href="${job.officialLink}" target="_blank" class="official-link">🔗 Careers →</a>
+                            </div>
+                        `).join('') : '<div class="empty-state">🔍 No private jobs found matching your search</div>'}
+                    </div>
+                </div>
+
+                <!-- Door 4: Abroad Opportunities -->
+                <div class="door-card">
+                    <div class="door-header abroad">
+                        <span class="door-icon">🌏</span>
+                        <div class="door-title">Abroad Opportunities</div>
+                    </div>
+                    <div class="door-content">
+                        ${filteredAbroad.length > 0 ? filteredAbroad.map(job => `
+                            <div class="job-card">
+                                <div class="item-title">✈️ ${job.title}</div>
+                                <div class="item-description">${job.description}</div>
+                                <div class="item-detail">✅ Eligibility: ${job.eligibility || 'Varies'}</div>
+                                <a href="${job.officialLink}" target="_blank" class="official-link">🔗 Official Info →</a>
+                            </div>
+                        `).join('') : ''}
+                        ${filteredScholarships.length > 0 ? `<div style="margin-top:15px;"><div class="item-title" style="margin-bottom:10px;">🎓 Scholarships:</div>` + filteredScholarships.map(sch => `
+                            <div class="exam-card">
+                                <div class="item-title">${sch.name}</div>
+                                <div class="item-description">${sch.description}</div>
+                                <div class="item-detail">✅ Eligibility: ${sch.eligibility || 'Varies'}</div>
+                                <a href="${sch.officialLink}" target="_blank" class="official-link">🔗 Apply →</a>
+                            </div>
+                        `).join('') + '</div>' : ''}
+                        ${filteredAbroad.length === 0 && filteredScholarships.length === 0 ? '<div class="empty-state">🔍 No abroad opportunities found matching your search</div>' : ''}
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Search handler
+        function handleSearch() {
+            renderDoors();
+        }
+
+        // Initialize        function init() {
+            renderStreamSelector();
+            renderDoors();
+            document.getElementById('searchBox').addEventListener('input', handleSearch);
+        }
+
+        init();
+    </script>
+</body>
+</html>
