@@ -1,509 +1,543 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi-IN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>After 10th | Dil-Ke-AnnS Career Saathi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>After 10th Complete Guide - दिल के अंश Career Saathi</title>
+    <link rel="manifest" href="manifest.json">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
-        .back-button:hover { background: rgba(255,255,255,0.25); }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo img { height: 45px; width: auto; border-radius: 12px; }
-        .logo h1 { font-size: 18px; font-weight: 700; }
-        .logo p { font-size: 9px; opacity: 0.85; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
-        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
-        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #E67E22; padding-left: 15px; }
-        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
-        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
-        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
-        .door-btn:hover { background: #F0EADF; }
-        .door-btn.active { background: #E67E22; color: white; box-shadow: 0 2px 8px rgba(230,126,34,0.3); }
-        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
-        .door-content { display: none; animation: fadeIn 0.3s ease; }
-        .door-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
-        .accordion-header:hover { background: #F8F4EF; }
-        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
-        .accordion-icon { font-size: 24px; }
-        .accordion-arrow { font-size: 18px; color: #E67E22; transition: transform 0.3s; }
-        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
-        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
-        .accordion-card.active .accordion-content { display: block; }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
-        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #E67E22; }
-        .info-label { font-weight: 800; color: #E67E22; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
-        .info-text { font-size: 13px; line-height: 1.45; }
-        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
-        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #E67E22; padding-left: 12px; }
-        .live-link { color: #E67E22; text-decoration: none; font-weight: 600; }
-        .live-link:hover { text-decoration: underline; }
-        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
-        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
-        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
-        .roadmap-year { background: #E67E22; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
-        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
-        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
-        .nav-item span:first-child { font-size: 22px; }
-        .nav-item span:last-child { font-size: 10px; color: #64748B; }
-        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
+        body {
+            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+        }
+        .app-header {
+            background: rgba(255,255,255,0.98);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        h1 {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1rem;
+        }
+        .nav-buttons { display: flex; gap: 8px; margin-left: auto; }
+        .nav-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+        .lang-toggle { background: #ff9800; }
+        .search-container { flex: 1; max-width: 250px; }
+        .search-box {
+            width: 100%;
+            padding: 8px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 0.8rem;
+        }
+        .hero {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+        .hero h2 { font-size: 1.3rem; margin-bottom: 5px; }
+        .hero p { font-size: 0.85rem; opacity: 0.95; }
+        .stats-bar {
+            max-width: 1400px;
+            margin: 12px auto;
+            padding: 0 20px;
+        }
+        .test-count {
+            background: rgba(255,255,255,0.9);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .categories {
+            max-width: 1400px;
+            margin: 12px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .category-door {
+            background: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 35px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.7rem;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .category-door.active {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+        }
+        .doors-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 18px;
+        }
+        .door-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            animation: fadeInUp 0.3s ease;
+        }
+        .door-card:hover { transform: translateY(-3px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .door-header {
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+        .door-header.streams { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .door-header.diploma { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .door-header.iti { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .door-header.paramedical { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333; }
+        .door-header.vocational { background: linear-gradient(135deg, #fa709a, #fee140); color: #333; }
+        .door-header.shortterm { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+        .door-header.scholarship { background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #333; }
+        .door-header.defence { background: linear-gradient(135deg, #13547a, #80d0c7); }
+        .door-header.skill { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .door-header.apprenticeship { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .door-header.jobs { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .door-header.polytechnic { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .door-header.openschool { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
+        .door-header.sportscareer { background: linear-gradient(135deg, #d35400, #e67e22); }
+        .door-header.entrepreneurship { background: linear-gradient(135deg, #27ae60, #2ecc71); color: #333; }
+        .door-icon { font-size: 1.6rem; display: block; margin-bottom: 5px; }
+        .door-title { font-size: 0.9rem; }
+        .door-content { max-height: 500px; overflow-y: auto; padding: 12px; }
+        .door-content::-webkit-scrollbar { width: 5px; }
+        .door-content::-webkit-scrollbar-track { background: #f1f1f1; }
+        .door-content::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+        .item-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            transition: all 0.2s;
+            border-left: 3px solid #11998e;
+        }
+        .item-card:hover { background: #e8f5e9; transform: translateX(3px); }
+        .item-title { font-weight: bold; color: #333; font-size: 0.85rem; margin-bottom: 4px; }
+        .item-description { font-size: 0.72rem; color: #666; margin-bottom: 6px; line-height: 1.4; }
+        .item-detail { font-size: 0.65rem; color: #888; margin-bottom: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+        .badge {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        .badge-duration { background: #4caf50; color: white; }
+        .badge-exam { background: #ff9800; color: white; }
+        .badge-salary { background: #2196f3; color: white; }
+        .badge-scholarship { background: #9c27b0; color: white; }
+        .official-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #11998e;
+            text-decoration: none;
+            font-size: 0.65rem;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        .official-link:hover { text-decoration: underline; }
+        .empty-state { text-align: center; padding: 30px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 768px) {
+            .doors-container { grid-template-columns: 1fr; padding: 12px; gap: 12px; }
+            .category-door { padding: 5px 10px; font-size: 0.65rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .door-title { font-size: 0.8rem; }
+            .door-icon { font-size: 1.3rem; }
+        }
     </style>
 </head>
 <body>
-<div class="header">
-    <div class="back-button" onclick="goBack()">← Back</div>
-    <div class="logo-section">
-        <div class="logo"><img src="App%20logo.png" alt="Logo"><div><h1>दिल के अंश</h1><p>Career Saathi</p></div></div>
-        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
-        <div style="opacity:0;">🔔</div>
-    </div>
-    <div class="tagline">📖 Complete After 10th Career Guide - 15+ Pathways | 100+ Courses | Complete Roadmap</div>
-</div>
-
-<div class="container">
-    <div class="page-title">🎓 Options After 10th - Complete Career Roadmap</div>
-    <div class="page-subtitle">10 Streams | 15+ Pathways | 100+ Courses | Salary Data | Entrance Exams | Complete Guidance</div>
-    
-    <div class="door-nav">
-        <button class="door-btn active" data-door="science">🔬 <span class="door-label">Science (PCM/PCB)</span></button>
-        <button class="door-btn" data-door="commerce">📊 <span class="door-label">Commerce</span></button>
-        <button class="door-btn" data-door="arts">🎨 <span class="door-label">Arts/Humanities</span></button>
-        <button class="door-btn" data-door="diploma">🔧 <span class="door-label">Diploma (Polytechnic)</span></button>
-        <button class="door-btn" data-door="iti">🛠️ <span class="door-label">ITI - Skill Trades</span></button>
-        <button class="door-btn" data-door="paramedical">🩺 <span class="door-label">Paramedical</span></button>
-        <button class="door-btn" data-door="vocational">💻 <span class="door-label">Vocational Courses</span></button>
-        <button class="door-btn" data-door="sports">🏅 <span class="door-label">Sports Pathway</span></button>
-        <button class="door-btn" data-door="govt">🏛️ <span class="door-label">Govt Jobs After 10th</span></button>
-        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Options</span></button>
-        <button class="door-btn" data-door="tips">💡 <span class="door-label">Tips & Guidance</span></button>
-    </div>
-    
-    <!-- ==================== DOOR 1: SCIENCE STREAM (PCM/PCB) ==================== -->
-    <div id="door-science" class="door-content active">
-        <div class="accordion-card active" id="sciencePCMCard">
-            <div class="accordion-header" onclick="toggleCard('sciencePCMCard')">
-                <div class="accordion-title"><span class="accordion-icon">⚙️</span> Science PCM (Physics, Chemistry, Maths) - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
+    <div class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="window.location.href='index.html'">← वापस</button>
+            <h1>🎓 10वीं के बाद 125+ करियर विकल्प</h1>
+            <div class="nav-buttons">
+                <button class="nav-btn lang-toggle" onclick="toggleLang()">🇬🇧 English</button>
             </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of Physics, Chemistry, Mathematics. Foundation for Engineering, Architecture, Defence, IT, Research, Aviation, Merchant Navy, Data Science, AI/ML, Robotics.<br><span class="salary-text">💰 Starting Salary: ₹4-8 LPA | After B.Tech: ₹8-40 LPA | After MBA: ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Highest paying stream, most career options, gateway to IITs/NITs/BITS, opportunities in PSUs (ISRO, DRDO, BHEL), global job market, work abroad options.</div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 10th results. Choose PCM if you have strong mathematics and logical reasoning skills. Age 15-16 years.</div></div>
-                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAMS after 12th</div><div class="info-text"><a class="live-link" href="https://jeemain.nta.nic.in" target="_blank">JEE Main</a> (for NITs, IIITs) | <a class="live-link" href="https://jeeadv.ac.in" target="_blank">JEE Advanced</a> (for IITs) | <a class="live-link" href="https://www.bitsadmission.com" target="_blank">BITSAT</a> (BITS Pilani) | <a class="live-link" href="https://viteee.vit.ac.in" target="_blank">VITEEE</a> (VIT) | <a class="live-link" href="https://www.srmist.edu.in" target="_blank">SRMJEE</a> (SRM) | NDA | Merchant Navy (IMU CET) | Pilot (DGCA)</div></div>
-                </div>
-                <div class="section-title">📋 Career Options after 12th PCM</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🎓 B.Tech/B.E (4 years)</div><div class="info-text">CSE (₹8-40 LPA), IT (₹7-35 LPA), AI/ML (₹10-50 LPA), Data Science (₹8-45 LPA), Mechanical (₹5-20 LPA), Civil (₹5-18 LPA), Electrical (₹5-22 LPA), ECE (₹6-25 LPA), Aerospace (₹8-25 LPA), Robotics (₹6-25 LPA), Chemical (₹6-22 LPA), Biotechnology (₹4-15 LPA)</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ B.Arch (5 years)</div><div class="info-text">Architecture via NATA/JEE Paper 2 | Salary: ₹6-20 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🛡️ NDA (3 years training)</div><div class="info-text">Army/Navy/Air Force | Salary: ₹70k-1.5L/month + allowances</div></div>
-                    <div class="info-card"><div class="info-label">✈️ Commercial Pilot</div><div class="info-text">DGCA CPL license | First Officer: ₹15-30 LPA | Captain: ₹50 LPA - ₹1.5 Cr</div></div>
-                    <div class="info-card"><div class="info-label">🚢 Merchant Navy</div><div class="info-text">Marine Engineering, Nautical Science | Starting: ₹10-30 LPA (Tax-free)</div></div>
-                    <div class="info-card"><div class="info-label">💻 BCA/B.Sc CS (3 years)</div><div class="info-text">Computer Applications, Data Science, Cyber Security | Salary: ₹4-15 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🔬 B.Sc Pure Science (3 years)</div><div class="info-text">Physics, Chemistry, Mathematics, Statistics | Salary: ₹3-8 LPA | Higher studies: M.Sc → PhD → Scientist (ISRO/DRDO/BARC): ₹10-25 LPA</div></div>
-                </div>
+            <div class="search-container">
+                <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search...">
             </div>
         </div>
+    </div>
+
+    <div class="hero">
+        <h2>📚 10वीं के बाद संपूर्ण करियर मार्गदर्शन</h2>
+        <p>15 कैटेगरी | 125+ विकल्प | स्ट्रीम, डिप्लोमा, ITI, पैरामेडिकल, सरकारी नौकरियाँ, स्कॉलरशिप और भी बहुत कुछ</p>
+    </div>
+
+    <div class="stats-bar">
+        <div class="test-count" id="testCount">📋 लोड हो रहा...</div>
+    </div>
+
+    <div class="categories" id="categoryDoors"></div>
+    <div id="doorsContainer" class="doors-container"></div>
+
+    <script>
+        let currentLang = 'hindi';
+        let currentCategory = 'streams';
+        let searchTerm = '';
         
-        <div class="accordion-card" id="sciencePCBCard">
-            <div class="accordion-header" onclick="toggleCard('sciencePCBCard')">
-                <div class="accordion-title"><span class="accordion-icon">🩺</span> Science PCB (Physics, Chemistry, Biology) - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of Physics, Chemistry, Biology. Foundation for Medical, Paramedical, Pharmacy, Veterinary, Nursing, Biotechnology, Research.<br><span class="salary-text">💰 Starting Salary: ₹4-8 LPA | After MBBS: ₹8-12 LPA | After PG: ₹15-30 LPA | Specialist: ₹30 LPA - ₹2 Cr</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Gateway to medical profession (Doctor, Dentist, Ayurvedic), job security, high social respect, ability to save lives, government jobs in healthcare.</div></div>
-                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAMS after 12th</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET</a> (for MBBS/BDS/BAMS/BHMS/BUMS) | AIIMS PG | JIPMER | State Medical Exams</div></div>
-                </div>
-                <div class="section-title">📋 Career Options after 12th PCB</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🩺 MBBS (5.5 years)</div><div class="info-text">Doctor | Salary: ₹8-12 LPA (Fresher) | ₹15-30 LPA (PG) | ₹50 LPA - ₹2 Cr (Super Specialist)</div></div>
-                    <div class="info-card"><div class="info-label">🦷 BDS (5 years)</div><div class="info-text">Dentist | Salary: ₹6-30 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🌿 BAMS (5.5 years)</div><div class="info-text">Ayurvedic Doctor | Salary: ₹5-20 LPA</div></div>
-                    <div class="info-card"><div class="info-label">💊 B.Pharm (4 years)</div><div class="info-text">Pharmacist | Salary: ₹4-12 LPA</div></div>
-                    <div class="info-card"><div class="info-label">👩‍⚕️ B.Sc Nursing (4 years)</div><div class="info-text">Nurse | Salary: ₹4-8 LPA (India), $60k-100k (Abroad)</div></div>
-                    <div class="info-card"><div class="info-label">🦿 BPT (4.5 years)</div><div class="info-text">Physiotherapist | Salary: ₹4-10 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🐄 BVSc (5.5 years)</div><div class="info-text">Veterinary Doctor | Salary: ₹6-15 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🧬 B.Sc Biotechnology (3 years)</div><div class="info-text">Biotech Scientist | Salary: ₹3-10 LPA | M.Sc: ₹8-20 LPA</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 2: COMMERCE STREAM ==================== -->
-    <div id="door-commerce" class="door-content">
-        <div class="accordion-card" id="commerceCard">
-            <div class="accordion-header" onclick="toggleCard('commerceCard')">
-                <div class="accordion-title"><span class="accordion-icon">📊</span> Commerce Stream - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of Accountancy, Business Studies, Economics, Mathematics/IT, Finance. Foundation for CA, CS, CMA, CFA, B.Com, BBA, MBA, Law, Economics, Banking, Insurance.<br><span class="salary-text">💰 Starting Salary: ₹3-8 LPA | After CA/CS: ₹8-15 LPA | After MBA: ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Gateway to business, finance, banking, accounting careers. Professional courses like CA, CS offer high salary and social respect. Entrepreneurial opportunities.</div></div>
-                    <div class="info-card"><div class="info-label">📋 SUBJECTS</div><div class="info-text">Accountancy, Business Studies, Economics, Mathematics (optional), English, Entrepreneurship, Computer Applications</div></div>
-                    <div class="info-card"><div class="info-label">📋 ENTRANCE EXAMS after 12th</div><div class="info-text"><a class="live-link" href="https://cuet.samarth.ac.in" target="_blank">CUET</a> (for DU, BHU, JNU) | <a class="live-link" href="https://www.iimidr.ac.in" target="_blank">IPMAT</a> (IIM Indore/Rohtak) | DU JAT | NPAT | SET | CA Foundation | CS Foundation | CMA Foundation | <a class="live-link" href="https://consortiumofnlus.ac.in" target="_blank">CLAT</a> (for Law)</div></div>
-                </div>
-                <div class="section-title">📋 Career Options after 12th Commerce</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📜 CA - Chartered Accountant (4-5 years)</div><div class="info-text">Salary: ₹8-15 LPA (Fresher) | ₹20-50 LPA (Experienced) | Partner: ₹50L-2Cr</div></div>
-                    <div class="info-card"><div class="info-label">📋 CS - Company Secretary (3-4 years)</div><div class="info-text">Salary: ₹6-12 LPA (Fresher) | ₹15-30 LPA (Experienced)</div></div>
-                    <div class="info-card"><div class="info-label">📊 CMA - Cost Accountant (3-4 years)</div><div class="info-text">Salary: ₹6-10 LPA (Fresher) | ₹15-25 LPA (Experienced)</div></div>
-                    <div class="info-card"><div class="info-label">📈 CFA - Financial Analyst (2-3 years)</div><div class="info-text">Salary: ₹8-35 LPA (India), $80k-200k (USA)</div></div>
-                    <div class="info-card"><div class="info-label">🎓 B.Com (3 years)</div><div class="info-text">Salary: ₹3-8 LPA | After M.Com: ₹6-12 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🎓 BBA (3 years)</div><div class="info-text">Salary: ₹4-10 LPA | After MBA: ₹15-30 LPA</div></div>
-                    <div class="info-card"><div class="info-label">⚖️ LLB (5 years integrated)</div><div class="info-text">Lawyer | Salary: ₹5-10 LPA (Fresher) | ₹15-30 LPA (Corporate)</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ Civil Services (UPSC)</div><div class="info-text">IAS/IPS/IFS | Salary: ₹70k-2.5L/month</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 3: ARTS/HUMANITIES ==================== -->
-    <div id="door-arts" class="door-content">
-        <div class="accordion-card" id="artsCard">
-            <div class="accordion-header" onclick="toggleCard('artsCard')">
-                <div class="accordion-title"><span class="accordion-icon">🎨</span> Arts/Humanities Stream - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Study of Political Science, History, Geography, Psychology, Sociology, Economics, English, Hindi, Sanskrit, Philosophy, Public Administration.<br><span class="salary-text">💰 Starting Salary: ₹3-7 LPA | After MA: ₹6-12 LPA | IAS Officer: ₹70k-2.5L/month</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Gateway to UPSC Civil Services (IAS/IPS/IFS), Law, Journalism, Psychology, Social Work, Teaching, Research, Public Policy, International Relations.</div></div>
-                    <div class="info-card"><div class="info-label">📋 SUBJECTS</div><div class="info-text">Political Science, History, Geography, Psychology, Sociology, Economics, English, Hindi, Sanskrit, Philosophy, Anthropology, Public Administration</div></div>
-                </div>
-                <div class="section-title">📋 Career Options after 12th Arts</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏛️ UPSC Civil Services</div><div class="info-text">IAS, IPS, IFS, IRS | Salary: ₹70k-2.5L/month | Exam: UPSC CSE</div></div>
-                    <div class="info-card"><div class="info-label">⚖️ LLB (5 years integrated)</div><div class="info-text">BA+LLB | Corporate Lawyer: ₹15-30 LPA | Judge: ₹2-2.5L/month</div></div>
-                    <div class="info-card"><div class="info-label">📰 BJMC (Journalism)</div><div class="info-text">Journalist, News Anchor, Content Creator | Salary: ₹4-15 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🧠 Psychology (BA/B.Sc)</div><div class="info-text">Clinical Psychologist, Counsellor | Salary: ₹4-15 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🎓 B.Ed (2 years)</div><div class="info-text">Teacher | Govt School: ₹5-10 LPA | Private: ₹3-8 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🌍 Foreign Languages</div><div class="info-text">Translator, Interpreter, MNC Jobs | Salary: ₹5-20 LPA</div></div>
-                    <div class="info-card"><div class="info-label">🎭 BFA (Fine Arts)</div><div class="info-text">Artist, Art Director, Gallery Curator | Salary: ₹4-15 LPA</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 4: DIPLOMA (POLYTECHNIC) ==================== -->
-    <div id="door-diploma" class="door-content">
-        <div class="accordion-card" id="diplomaCard">
-            <div class="accordion-header" onclick="toggleCard('diplomaCard')">
-                <div class="accordion-title"><span class="accordion-icon">🔧</span> Diploma in Engineering (Polytechnic) - 3 years</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Technical diploma after 10th. Direct entry to workforce or lateral entry to B.Tech 2nd year. Best for students who want to start earning early.<br><span class="salary-text">💰 Starting Salary: ₹15k-30k/month | After 5 years: ₹30k-60k/month</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Quick job placement, practical skills, opportunity to join B.Tech directly in 2nd year (lateral entry), lower fees than engineering, government job opportunities.</div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 10th results. Admission through state-level polytechnic entrance exams (JEECUP, DCET, TS POLYCET, AP POLYCET, Punjab PET, JEXPO).</div></div>
-                </div>
-                <div class="section-title">📋 Popular Diploma Branches</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">⚙️ Mechanical Engineering</div><div class="info-text">Jobs: Manufacturing, Automobile, Maintenance, PSUs | Salary: ₹20k-50k/month</div></div>
-                    <div class="info-card"><div class="info-label">🏗️ Civil Engineering</div><div class="info-text">Jobs: Construction, Real Estate, Government Projects, PWD | Salary: ₹18k-45k/month</div></div>
-                    <div class="info-card"><div class="info-label">⚡ Electrical Engineering</div><div class="info-text">Jobs: Power plants, Electrical contracting, PSUs (NTPC, Powergrid) | Salary: ₹18k-50k/month</div></div>
-                    <div class="info-card"><div class="info-label">💻 Computer Engineering</div><div class="info-text">Jobs: IT companies, Web development, Networking, Hardware | Salary: ₹20k-60k/month</div></div>
-                    <div class="info-card"><div class="info-label">📡 Electronics & Communication</div><div class="info-text">Jobs: Electronics manufacturing, Mobile repair, Telecom | Salary: ₹18k-45k/month</div></div>
-                    <div class="info-card"><div class="info-label">🚗 Automobile Engineering</div><div class="info-text">Jobs: Automotive industry, Service centers, Manufacturing | Salary: ₹18k-40k/month</div></div>
-                    <div class="info-card"><div class="info-label">🔬 Chemical Engineering</div><div class="info-text">Jobs: Chemical plants, Pharma, Fertilizer industry | Salary: ₹18k-45k/month</div></div>
-                    <div class="info-card"><div class="info-label">🏭 Production Engineering</div><div class="info-text">Jobs: Manufacturing industries, Quality control | Salary: ₹18k-40k/month</div></div>
-                </div>
-                <div class="section-title">🗺️ Career Roadmap after Diploma</div>
-                <div class="roadmap-step"><div class="roadmap-year">Path A</div><div class="roadmap-text">10th → Polytechnic (3 years) → Job (Junior Engineer/Supervisor) → Experience → Senior Engineer (₹40k-80k/month)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Path B</div><div class="roadmap-text">10th → Polytechnic (3 years) → Lateral Entry to B.Tech (2 years) → B.Tech Degree → Higher Salary (₹5-15 LPA) → M.Tech (optional)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Path C</div><div class="roadmap-text">10th → Polytechnic (3 years) → Government Job (RRB JE, SSC JE, State JE exams) → PSU/Government Job (₹40k-80k/month)</div></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 5: ITI - SKILL TRADES ==================== -->
-    <div id="door-iti" class="door-content">
-        <div class="accordion-card" id="itiCard">
-            <div class="accordion-header" onclick="toggleCard('itiCard')">
-                <div class="accordion-title"><span class="accordion-icon">🛠️</span> ITI - Industrial Training Institute (1-2 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Skill-based vocational training for immediate employment. NCVT certification recognized nationwide.<br><span class="salary-text">💰 Starting Salary: ₹12k-25k/month | Experienced: ₹20k-50k/month | Abroad: ₹30k-80k/month</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Quick job placement (6 months to 2 years), government jobs (Railways, Defence, PSUs), high demand in Gulf countries, opportunity to start own business.</div></div>
-                    <div class="info-card"><div class="info-label">📋 ENTRANCE</div><div class="info-text">State ITI Entrance Exam (CET) | Direct admission in private ITIs | 10th pass (for most trades), 8th pass for some trades</div></div>
-                </div>
-                <div class="section-title">📋 Popular ITI Trades</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">⚡ Electrician</div><div class="info-text">Duration: 2 years | Salary: ₹15k-40k/month | Govt Jobs: Railways, Power Dept, PSUs | Self-employment: House wiring, repair shop</div></div>
-                    <div class="info-card"><div class="info-label">🔧 Fitter</div><div class="info-text">Duration: 2 years | Salary: ₹15k-35k/month | Govt Jobs: Railways, Defence, PSUs</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ Welder</div><div class="info-text">Duration: 1-2 years | Salary: ₹12k-30k/month | High demand in Gulf (₹30k-60k/month)</div></div>
-                    <div class="info-card"><div class="info-label">❄️ AC & Refrigeration</div><div class="info-text">Duration: 2 years | Salary: ₹15k-35k/month | Self-employment potential high</div></div>
-                    <div class="info-card"><div class="info-label">💻 Computer Operator (COPA)</div><div class="info-text">Duration: 1 year | Salary: ₹10k-25k/month | Jobs: Data entry, office assistant, BPO</div></div>
-                    <div class="info-card"><div class="info-label">🚗 Diesel Mechanic</div><div class="info-text">Duration: 2 years | Salary: ₹15k-35k/month | Transport, agriculture sector</div></div>
-                    <div class="info-card"><div class="info-label">🔌 Wireman</div><div class="info-text">Duration: 2 years | Salary: ₹12k-30k/month | House wiring, industrial wiring</div></div>
-                    <div class="info-card"><div class="info-label">🚽 Plumber</div><div class="info-text">Duration: 1 year | Salary: ₹12k-30k/month | Self-employment, Gulf demand</div></div>
-                </div>
-                <div class="section-title">🏛️ Government Jobs after ITI</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🚂 Indian Railways</div><div class="info-text">RRB JE, Technician, ALP | Salary: ₹35k-60k/month | 10,000+ vacancies/year</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ PSUs</div><div class="info-text">BHEL, NTPC, GAIL, ONGC, IOCL | Salary: ₹40k-80k/month | Through trade test + interview</div></div>
-                    <div class="info-card"><div class="info-label">🛡️ Defence</div><div class="info-text">Army, Navy, Air Force Technical entries | Salary: ₹30k-60k/month + allowances</div></div>
-                    <div class="info-card"><div class="info-label">🏢 State Govt</div><div class="info-text">Electricity boards, PWD, Water supply, Municipal corporations</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 6: PARAMEDICAL AFTER 10TH ==================== -->
-    <div id="door-paramedical" class="door-content">
-        <div class="accordion-card" id="paramedicalCard">
-            <div class="accordion-header" onclick="toggleCard('paramedicalCard')">
-                <div class="accordion-title"><span class="accordion-icon">🩺</span> Paramedical Courses After 10th - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Diploma and certificate courses in healthcare support roles. Quick entry into medical field.<br><span class="salary-text">💰 Starting Salary: ₹12k-25k/month | Experienced: ₹20k-40k/month</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in hospitals, diagnostic centers, clinics. Can study after 10th, no need for 12th. Lateral entry to degree courses available.</div></div>
-                </div>
-                <div class="section-title">📋 Popular Paramedical Courses</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💊 Diploma in Pharmacy (D.Pharm)</div><div class="info-text">Duration: 2 years | Salary: ₹15k-30k/month | Jobs: Pharmacist in medical stores, hospital pharmacy | After: Lateral entry to B.Pharm (2nd year)</div></div>
-                    <div class="info-card"><div class="info-label">👩‍⚕️ ANM (Auxiliary Nursing Midwifery)</div><div class="info-text">Duration: 2 years | Salary: ₹12k-25k/month | Jobs: Community health worker, Primary health center, Private clinics</div></div>
-                    <div class="info-card"><div class="info-label">🔬 Diploma in Medical Lab Technology (DMLT)</div><div class="info-text">Duration: 2 years | Salary: ₹12k-25k/month | Jobs: Lab technician, Path lab, Hospital lab | After: B.Sc MLT lateral entry</div></div>
-                    <div class="info-card"><div class="info-label">📷 Diploma in X-Ray Technology</div><div class="info-text">Duration: 2 years | Salary: ₹12k-25k/month | Jobs: X-ray technician, Radiology assistant, Diagnostic center</div></div>
-                    <div class="info-card"><div class="info-label">🦷 Dental Assistant</div><div class="info-text">Duration: 1 year | Salary: ₹10k-20k/month | Jobs: Dental clinic assistant, Dental hospital</div></div>
-                    <div class="info-card"><div class="info-label">🚑 Emergency Medical Technician (EMT)</div><div class="info-text">Duration: 1 year | Salary: ₹12k-25k/month | Jobs: Ambulance services (108), Hospital emergency dept, Disaster management</div></div>
-                    <div class="info-card"><div class="info-label">❤️ ECG Technician</div><div class="info-text">Duration: 1 year | Salary: ₹10k-20k/month | Jobs: Cardiology dept, Diagnostic centers, Hospitals</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 7: VOCATIONAL COURSES ==================== -->
-    <div id="door-vocational" class="door-content">
-        <div class="accordion-card" id="vocationalCard">
-            <div class="accordion-header" onclick="toggleCard('vocationalCard')">
-                <div class="accordion-title"><span class="accordion-icon">💻</span> Vocational Courses After 10th (Skill India)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Short-term skill-based courses (3-12 months) for immediate employment. Many courses are free under PMKVY (Skill India).<br><span class="salary-text">💰 Starting Salary: ₹10k-25k/month | Freelance: ₹20k-50k/month</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Quick job placement, low cost/free courses, flexible timing, work-from-home options, freelancing opportunities, can study while working.</div></div>
-                    <div class="info-card"><div class="info-label">📋 FREE COURSES</div><div class="info-text">PMKVY (Skill India) - Free vocational training with placement assistance | <a class="live-link" href="https://www.pmkvyofficial.org" target="_blank">pmkvyofficial.org</a></div></div>
-                </div>
-                <div class="section-title">📋 Popular Vocational Courses</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">💻 Digital Marketing</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-40k/month | Jobs: SEO executive, Social media manager, Google Ads specialist</div></div>
-                    <div class="info-card"><div class="info-label">🎨 Graphic Design</div><div class="info-text">Duration: 6-12 months | Salary: ₹15k-40k/month | Freelance: ₹20k-50k/month | Software: Photoshop, Illustrator, Canva</div></div>
-                    <div class="info-card"><div class="info-label">📱 Web Development</div><div class="info-text">Duration: 6-12 months | Salary: ₹20k-60k/month | Skills: HTML, CSS, JavaScript, WordPress, React</div></div>
-                    <div class="info-card"><div class="info-label">🎬 Video Editing</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-40k/month | Software: Premiere Pro, Final Cut, DaVinci Resolve, After Effects</div></div>
-                    <div class="info-card"><div class="info-label">💄 Beauty & Wellness</div><div class="info-text">Duration: 6-12 months | Salary: ₹10k-30k/month | Jobs: Beauty parlour, Spa, Freelance makeup artist</div></div>
-                    <div class="info-card"><div class="info-label">🍳 Food Processing/Bakery</div><div class="info-text">Duration: 6-12 months | Salary: ₹10k-25k/month | Jobs: Bakery, Food industry, Self-employment</div></div>
-                    <div class="info-card"><div class="info-label">📸 Photography</div><div class="info-text">Duration: 3-6 months | Salary: ₹15k-40k/month | Self-employment: Wedding, Fashion, Product photography</div></div>
-                    <div class="info-card"><div class="info-label">🛒 Retail Management</div><div class="info-text">Duration: 6-12 months | Salary: ₹12k-30k/month | Jobs: Store manager, Sales executive, Showroom in-charge</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 8: SPORTS PATHWAY ==================== -->
-    <div id="door-sports" class="door-content">
-        <div class="accordion-card" id="sportsPathwayCard">
-            <div class="accordion-header" onclick="toggleCard('sportsPathwayCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏅</span> Sports Pathway After 10th - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Career path for students passionate about sports. Choose 11th/12th with Physical Education or join sports academies.<br><span class="salary-text">💰 Starting Salary: ₹3-8 LPA | National Athlete: ₹10-30 LPA | International: ₹50 LPA - ₹10 Cr+</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Opportunity to represent state/country, government jobs through sports quota, high earnings through endorsements, fame and recognition, Khelo India scholarships.</div></div>
-                </div>
-                <div class="section-title">📋 Pathway Options</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">Option 1: 11th/12th with Physical Education</div><div class="info-text">Choose any stream (Arts/Commerce/Science) + Physical Education as a subject. Learn theory + practical sports training. After 12th: B.P.Ed, B.Sc Sports Science, Diploma in Coaching.</div></div>
-                    <div class="info-card"><div class="info-label">Option 2: Sports Academy</div><div class="info-text">Join professional academies: Cricket (NCA, MRF Pace), Football (AIFF Academies), Badminton (Gopichand Academy), Shooting (Dr. Karni Singh Range), Boxing (SAI Academies).</div></div>
-                    <div class="info-card"><div class="info-label">Option 3: SAI/Khelo India</div><div class="info-text">Sports Authority of India academies across India. Free coaching, accommodation, stipend. Khelo India provides ₹5-10 Lakh/year scholarship for identified athletes.</div></div>
-                    <div class="info-card"><div class="info-label">Option 4: Army/Navy Sports Quota</div><div class="info-text">Join Army Sports Company, Navy Sports Quota. Direct recruitment for state/national level players. Job guarantee + training.</div></div>
-                </div>
-                <div class="section-title">🏛️ Government Jobs through Sports Quota</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🚂 Railways</div><div class="info-text">Sports quota recruitment for Group C posts. National/state level medalists eligible. Salary: ₹40k-80k/month</div></div>
-                    <div class="info-card"><div class="info-label">🛡️ Indian Army</div><div class="info-text">Army Sports Quota Entry. Direct recruitment for national/international players. Salary: ₹60k-1.2L/month</div></div>
-                    <div class="info-card"><div class="info-label">🔹 Police</div><div class="info-text">State Police, CISF, BSF, CRPF - sports quota recruitment. Salary: ₹35k-80k/month</div></div>
-                    <div class="info-card"><div class="info-label">🏦 Banking (PSU)</div><div class="info-text">SBI, IBPS recruit sportspersons for clerk/PO posts. Relaxed cutoffs for medalists</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-        <!-- ==================== DOOR 9: GOVERNMENT JOBS AFTER 10TH - FULL DETAIL ==================== -->
-    <div id="door-govt" class="door-content">
-        <div class="accordion-card" id="govtJobs10thCard">
-            <div class="accordion-header" onclick="toggleCard('govtJobs10thCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Government Jobs After 10th - Complete Detailed List</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Direct government job opportunities after 10th without 12th or graduation. Many vacancies in Railways, SSC, Defence, Police, Post Office, Banking (support staff).<br><span class="salary-text">💰 Salary Range: ₹20k-50k/month + allowances + pension benefits</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Job security, pension after retirement, medical benefits, housing allowance, dearness allowance, annual increments, respect in society, work-life balance.</div></div>
-                    <div class="info-card"><div class="info-label">📋 AGE LIMIT</div><div class="info-text">Generally 18-25 years (relaxation for SC/ST/OBC). Some posts have age limit up to 27-30 years for certain categories.</div></div>
-                </div>
-                
-                <div class="section-title">1️⃣ RAILWAY JOBS AFTER 10TH</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🚂 RRB Group D (Railway Recruitment Board)</div><div class="info-text">Posts: Track Maintainer, Helper, Assistant Pointsman, Gateman, Porter<br>Salary: ₹18,000 - ₹35,000/month + allowances<br>Vacancies: 50,000+ per year<br>Exam: CBT (Computer Based Test) + Physical Efficiency Test (PET)<br>Application Fee: ₹500 (General), ₹250 (SC/ST)<br>🔗 <a class="live-link" href="https://indianrailways.gov.in" target="_blank">indianrailways.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🚂 RRB Ticket Collector (TC)</div><div class="info-text">Posts: Ticket Collector, Commercial Apprentice<br>Salary: ₹25,000 - ₹45,000/month<br>Eligibility: 10th pass + age 18-30<br>Exam: CBT + Typing test</div></div>
-                    <div class="info-card"><div class="info-label">🚂 Railway Police Force (RPF) Constable</div><div class="info-text">Posts: RPF Constable, RPF Sub-Inspector (for 10th pass - limited posts)<br>Salary: ₹35,000 - ₹55,000/month<br>Physical: Running, height, chest measurement<br>🔗 <a class="live-link" href="https://rpf.indianrailways.gov.in" target="_blank">rpf.indianrailways.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🚂 Railway Apprentice</div><div class="info-text">Posts: Fitter, Electrician, Welder, Machinist, Turner, Carpenter<br>Salary: Stipend ₹8,000-15,000/month during training → ₹25,000-40,000 after<br>Eligibility: 10th pass with ITI in relevant trade</div></div>
-                </div>
-                
-                <div class="section-title">2️⃣ SSC (STAFF SELECTION COMMISSION) JOBS AFTER 10TH</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📋 SSC MTS (Multi Tasking Staff)</div><div class="info-text">Posts: Peon, Daftary, Jamadar, Mali, Watchman, Cleaning Staff<br>Salary: ₹25,000 - ₹35,000/month<br>Vacancies: 5,000+ per year<br>Exam: Computer Based Test (English, Reasoning, Maths, GK) + Physical<br>🔗 <a class="live-link" href="https://ssc.nic.in" target="_blank">ssc.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📋 SSC GD (General Duty Constable)</div><div class="info-text">Posts: Constable in CAPF (BSF, CISF, CRPF, SSB, ITBP, AR, SSF)<br>Salary: ₹35,000 - ₹45,000/month<br>Vacancies: 20,000+ per year<br>Eligibility: 10th pass, age 18-23, physical standards<br>Exam: CBT + Physical Efficiency Test (PET) + Medical</div></div>
-                    <div class="info-card"><div class="info-label">📋 SSC Stenographer Grade D</div><div class="info-text">Posts: Stenographer in various ministries<br>Salary: ₹30,000 - ₹45,000/month<br>Eligibility: 10th pass + typing speed 80 wpm (shorthand)</div></div>
-                </div>
-                
-                <div class="section-title">3️⃣ DEFENCE JOBS AFTER 10TH</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🛡️ Indian Army - Soldier GD</div><div class="info-text">Posts: Soldier General Duty (all arms)<br>Salary: ₹30,000 - ₹45,000/month + allowances + pension<br>Eligibility: 10th pass, age 17.5-21 years, physical standards<br>Selection: Physical Test + Medical + Written Exam<br>🔗 <a class="live-link" href="https://joinindianarmy.nic.in" target="_blank">joinindianarmy.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🛡️ Indian Army - Soldier Technical</div><div class="info-text">Posts: Technical posts (Electronics, Mechanical, Nursing Assistant)<br>Salary: ₹35,000 - ₹55,000/month<br>Eligibility: 10th pass with 45% marks + ITI in relevant trade</div></div>
-                    <div class="info-card"><div class="info-label">⚓ Indian Navy - MR (Matric Recruit)</div><div class="info-text">Posts: Chef, Steward, Hygienist, Medical Assistant<br>Salary: ₹35,000 - ₹50,000/month<br>Eligibility: 10th pass, age 17-21, medical standards<br>Selection: Written + Physical + Medical<br>🔗 <a class="live-link" href="https://joinindiannavy.gov.in" target="_blank">joinindiannavy.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">✈️ Indian Air Force - Airmen</div><div class="info-text">Posts: Ground Duty, Technical, Medical Assistant<br>Salary: ₹35,000 - ₹50,000/month<br>Eligibility: 10th pass with 50% marks, age 17-21<br>🔗 <a class="live-link" href="https://airmenselection.cdac.in" target="_blank">airmenselection.cdac.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🛡️ Agniveer (Agnipath Scheme)</div><div class="info-text">Posts: Agniveer in Army, Navy, Air Force (4 years service)<br>Salary: ₹30,000 - ₹40,000/month + lump sum at exit (₹11.71 Lakhs)<br>Eligibility: 10th/12th pass, age 17.5-21<br>Selection: Physical + Written + Medical</div></div>
-                </div>
-                
-                <div class="section-title">4️⃣ POLICE & HOME GUARD JOBS AFTER 10TH</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">👮 State Police Constable</div><div class="info-text">Posts: Police Constable, Civil Police, Armed Police<br>Salary: ₹30,000 - ₹50,000/month (varies by state)<br>Eligibility: 10th pass, age 18-25, physical standards<br>Selection: Physical Test + Written + Medical</div></div>
-                    <div class="info-card"><div class="info-label">👮 Home Guard</div><div class="info-text">Posts: Home Guard Volunteer (part-time/ full-time)<br>Salary: ₹20,000 - ₹30,000/month<br>Eligibility: 10th pass, age 18-45, physically fit<br>Duty: Disaster management, law and order, traffic control</div></div>
-                    <div class="info-card"><div class="info-label">🌲 Forest Guard</div><div class="info-text">Posts: Forest Guard, Wildlife Guard<br>Salary: ₹30,000 - ₹45,000/month<br>Eligibility: 10th pass, age 18-27, physical stamina required<br>Selection: Physical + Written + Walking test</div></div>
-                </div>
-                
-                <div class="section-title">5️⃣ POST OFFICE JOBS AFTER 10TH</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📮 Gramin Dak Sevak (GDS)</div><div class="info-text">Posts: Branch Postmaster, Assistant Branch Postmaster, Dak Sevak<br>Salary: ₹12,000 - ₹25,000/month<br>Vacancies: 20,000+ per year<br>Eligibility: 10th pass with passing marks in Maths and English<br>Selection: Merit-based (10th marks), no exam<br>🔗 <a class="live-link" href="https://indiapost.gov.in" target="_blank">indiapost.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📮 Postal Assistant (PA)/ Sorting Assistant (SA)</div><div class="info-text">Salary: ₹25,000 - ₹45,000/month<br>Eligibility: 10th pass, age 18-27<br>Exam: SSC CHSL (for 12th pass) - for 10th pass, limited posts available<br>🔗 <a class="live-link" href="https://ssc.nic.in" target="_blank">ssc.nic.in</a></div></div>
-                </div>
-                
-                <div class="section-title">6️⃣ INDIAN COAST GUARD JOBS AFTER 10TH</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">⚓ Coast Guard Navik (General Duty)</div><div class="info-text">Salary: ₹35,000 - ₹55,000/month<br>Eligibility: 10th pass with 50% marks, age 18-22, physically fit<br>Selection: Written + Physical + Medical<br>🔗 <a class="live-link" href="https://indiancoastguard.gov.in" target="_blank">indiancoastguard.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">⚓ Coast Guard Yantrik (Technical)</div><div class="info-text">Salary: ₹40,000 - ₹60,000/month<br>Eligibility: 10th pass with ITI in relevant trade (Mechanical/ Electrical/ Electronics)</div></div>
-                </div>
-                
-                <div class="section-title">7️⃣ STATE GOVERNMENT JOBS AFTER 10TH</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏢 Patwari/Revenue Department</div><div class="info-text">Salary: ₹30,000 - ₹50,000/month<br>Eligibility: 10th pass, state-specific exam (e.g., Rajasthan Patwari, MP Patwari)<br>Work: Land records, revenue collection, village administration</div></div>
-                    <div class="info-card"><div class="info-label">🏢 Forest Department</div><div class="info-text">Posts: Forest Guard, Wildlife Watcher, Forester<br>Salary: ₹30,000 - ₹50,000/month<br>Selection: Physical + Written + Walking test</div></div>
-                    <div class="info-card"><div class="info-label">🏢 Excise Department</div><div class="info-text">Posts: Excise Constable, Excise Guard<br>Salary: ₹30,000 - ₹45,000/month</div></div>
-                    <div class="info-card"><div class="info-label">🏢 Electricity Board</div><div class="info-text">Posts: Lineman, Junior Lineman, Meter Reader<br>Salary: ₹25,000 - ₹45,000/month<br>Eligibility: 10th pass + ITI in Electrical</div></div>
-                </div>
-                
-                <div class="section-title">8️⃣ BANKING JOBS AFTER 10TH (SUPPORT STAFF)</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏦 PSU Bank Clerk (Limited posts)</div><div class="info-text">Salary: ₹25,000 - ₹40,000/month (for 10th pass with special conditions)<br>Usually requires 12th pass, but some regional rural banks (RRBs) have 10th pass posts<br>🔗 <a class="live-link" href="https://www.ibps.in" target="_blank">ibps.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🏦 Banking Correspondent (BC)/ Business Facilitator</div><div class="info-text">Salary: ₹15,000 - ₹30,000/month + commission<br>Eligibility: 10th pass, age 18-45<br>Work: Banking services in rural areas, customer acquisition, account opening</div></div>
-                    <div class="info-card"><div class="info-label">🏦 Bank Security Guard</div><div class="info-text">Salary: ₹20,000 - ₹35,000/month<br>Eligibility: 10th pass, physically fit, ex-servicemen preferred</div></div>
-                </div>
-                
-                <div class="section-title">9️⃣ OTHER GOVERNMENT JOBS AFTER 10TH</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏛️ BHEL, NTPC, GAIL, ONGC</div><div class="info-text">PSU Jobs: Technician, Helper, Assistant<br>Salary: ₹30,000 - ₹55,000/month<br>Eligibility: 10th pass + ITI in relevant trade<br>Selection: Trade test + Interview</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ Municipal Corporation</div><div class="info-text">Posts: Sanitary Inspector, Junior Assistant, Clerk<br>Salary: ₹20,000 - ₹40,000/month<br>State-level exam conducted by Municipal Service Commission</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ Zila Parishad/Panchayat</div><div class="info-text">Posts: Gram Sevak, Junior Clerk, Data Entry Operator<br>Salary: ₹20,000 - ₹35,000/month<br>District-level recruitment</div></div>
-                </div>
-                
-                <div class="section-title">📋 Exam Preparation Tips for Govt Jobs after 10th</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📚 Syllabus</div><div class="info-text">General English, General Mathematics, General Knowledge, Reasoning, Current Affairs (10th level)</div></div>
-                    <div class="info-card"><div class="info-label">📖 Best Books</div><div class="info-text">Lucents GK, R.S. Aggarwal (Quantitative Aptitude), Arihant Reasoning, NCERT textbooks, Manorama Yearbook</div></div>
-                    <div class="info-card"><div class="info-label">📱 Free Resources</div><div class="info-text">YouTube: Study IQ, Adda247, Unacademy, Rojgar with Ankit; Apps: Gradeup, Testbook</div></div>
-                    <div class="info-card"><div class="info-label">💪 Physical Fitness</div><div class="info-text">For Defence, Police, Railways: Running (1.6 km in 6-7 minutes), Push-ups (10-15), Pull-ups (5-10), Long jump, High jump, Height and chest measurement criteria</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 10: ABROAD OPTIONS AFTER 10TH ==================== -->
-    <div id="door-abroad" class="door-content">
-        <div class="accordion-card" id="abroadAfter10thCard">
-            <div class="accordion-header" onclick="toggleCard('abroadAfter10thCard')">
-                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Options After 10th - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Pathways to study abroad after 10th through foundation programs, high school abroad, or vocational training.<br><span class="salary-text">💰 Cost: ₹15-30 Lakhs/year (with scholarships available)</span></div></div>
-                    <div class="info-card"><div class="info-label">🌏 OPTIONS</div><div class="info-text">High School abroad (USA, Canada, UK, Australia, NZ) | Foundation programs (1 year) leading to Bachelor's | Vocational training in Germany (free), Australia, Canada</div></div>
-                    <div class="info-card"><div class="info-label">📋 REQUIREMENTS</div><div class="info-text">Good academic record (60%+ in 10th), English proficiency (IELTS 5.5-6.0), Financial proof (₹20-30 Lakhs), Parent/guardian consent (for minors)</div></div>
-                </div>
-                <div class="section-title">📋 Country-wise Detailed Guide</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">High school diploma (Grades 11-12) for 2 years → Undergraduate<br>Public school fees: CAD 12k-15k/year<br>Pathways to PR after graduation<br>🔗 <a class="live-link" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html" target="_blank">Canada Study Permit</a></div></div>
-                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">High School Certificate (Years 11-12) → Foundation (1 year) → Bachelor's (3 years)<br>Vocational training (VET/TAFE) available after 10th<br>Fees: AUD 15k-25k/year<br>🔗 <a class="live-link" href="https://www.studyaustralia.gov.au" target="_blank">Study Australia</a></div></div>
-                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">Vocational training (Ausbildung) - 3 years. Free tuition, monthly stipend (€800-1,200)<br>Requirement: German language A2/B1 (Goethe certificate), 10th pass with 50%+<br>Occupations: Nursing, IT, Automotive, Hospitality, Electrical, Mechanical<br>🔗 <a class="live-link" href="https://www.daad.in" target="_blank">DAAD India</a></div></div>
-                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">High School (Grades 9-12) on F-1 visa<br>Private schools: $30k-60k/year<br>Public exchange programs: J-1 visa (1 year only)<br>🔗 <a class="live-link" href="https://educationusa.state.gov" target="_blank">EducationUSA</a></div></div>
-                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">GCSE (2 years) → A-Levels (2 years) → University<br>Boarding schools: £30k-45k/year<br>🔗 <a class="live-link" href="https://www.gov.uk/student-visa" target="_blank">UK Student Visa</a></div></div>
-                    <div class="info-card"><div class="info-label">🇳🇿 New Zealand</div><div class="info-text">High School (Years 11-13) → Foundation → Bachelor's<br>Fees: NZD 15k-25k/year<br>Work allowed 20 hours/week, post-study work visa available</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ==================== DOOR 11: TIPS & GUIDANCE ==================== -->
-    <div id="door-tips" class="door-content">
-        <div class="accordion-card" id="tipsCard">
-            <div class="accordion-header" onclick="toggleCard('tipsCard')">
-                <div class="accordion-title"><span class="accordion-icon">💡</span> Important Tips for After 10th Students</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🎯 Tip 1</div><div class="info-text">Choose stream based on YOUR interest and strengths, not peer or family pressure. Research all options before deciding.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 2</div><div class="info-text">Vocational/Diploma/ITI are excellent for early employment and entrepreneurship. Don't feel pressured to choose Science just because of society.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 3</div><div class="info-text">You can switch streams later – many options exist (PCM to Commerce, Arts to Law, Commerce to Arts, etc.). One decision doesn't lock your entire life.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 4</div><div class="info-text">Keep a backup plan – learn skill courses alongside regular studies (coding, digital marketing, design). This ensures income even during studies.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 5</div><div class="info-text">Start exploring career options from Class 9 itself. Talk to seniors, watch career guidance videos, attend webinars, do internships.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 6</div><div class="info-text">Don't compare your journey with others. Everyone has different strengths, goals, and timelines. Focus on your own growth.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 7</div><div class="info-text">Build skills outside academics - communication, leadership, computer skills, language proficiency. These are equally important for career success.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 8</div><div class="info-text">Take advantage of free resources - NCERT, YouTube, SWAYAM, NPTEL, online certifications, Khan Academy. Education is free if you know where to look.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 9</div><div class="info-text">Start preparing for government exams early (if interested). Railways, SSC, Defence exams have 10th-level eligibility and good salary.</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Tip 10</div><div class="info-text">Learn English and basic computer skills. These are essential for almost every job today. Free courses available on YouTube and government portals.</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        // ============================================
+        // ULTIMATE COMPLETE AFTER 10TH DATABASE
+        // 15 DOORS | 125+ OPTIONS | ZERO SHORTCUTS
+        // ============================================
+        
+        const AFTER_10TH_DATA = {
+            // DOOR 1: ALL 10 EDUCATIONAL STREAMS
+            streams: {
+                name_hindi: "🎯 सभी 10 स्ट्रीम (11वीं-12वीं)",
+                name_english: "🎯 All 10 Streams (11th-12th)",
+                icon: "📚",
+                items: [
+                    { title_hindi: "🩺 मेडिकल (PCB)", title_english: "Medical (PCB)", description_hindi: "भौतिकी, रसायन, जीव विज्ञान - डॉक्टर, फार्मासिस्ट, नर्स, डेंटिस्ट बनने के लिए", description_english: "Physics, Chemistry, Biology - To become Doctor, Pharmacist, Nurse, Dentist", duration: "2 वर्ष", career: "MBBS, BDS, BAMS, BHMS, BPT, B.Sc Nursing", exams: "NEET, AIIMS, JIPMER", officialLink: "https://ncert.nic.in/" },
+                    { title_hindi: "🔧 गैर-चिकित्सा (PCM)", title_english: "Non-Medical (PCM)", description_hindi: "भौतिकी, रसायन, गणित - इंजीनियर, आर्किटेक्ट, वैज्ञानिक बनने के लिए", description_english: "Physics, Chemistry, Mathematics - To become Engineer, Architect, Scientist", duration: "2 वर्ष", career: "B.Tech, B.Arch, B.Sc, NDA", exams: "JEE Main, JEE Advanced, BITSAT", officialLink: "https://ncert.nic.in/" },
+                    { title_hindi: "📊 कॉमर्स", title_english: "Commerce", description_hindi: "लेखाशास्त्र, व्यवसाय अध्ययन, अर्थशास्त्र - CA, CS, CMA, बैंकर बनने के लिए", description_english: "Accountancy, Business Studies, Economics - To become CA, CS, CMA, Banker", duration: "2 वर्ष", career: "CA, CS, CMA, B.Com, BBA, MBA", exams: "CA Foundation, CLAT, IPMAT", officialLink: "https://ncert.nic.in/" },
+                    { title_hindi: "🎭 कला (Humanities)", title_english: "Arts (Humanities)", description_hindi: "इतिहास, भूगोल, राजनीति, समाजशास्त्र, मनोविज्ञान - IAS, IPS, PCS, शिक्षक बनने के लिए", description_english: "History, Geography, Polity, Sociology, Psychology - For IAS, IPS, PCS, Teacher", duration: "2 वर्ष", career: "UPSC, State PSC, LLB, MA, BJMC", exams: "UPSC, CLAT, CUET", officialLink: "https://ncert.nic.in/" },
+                    { title_hindi: "⚽ खेल (Sports)", title_english: "Sports", description_hindi: "शारीरिक शिक्षा, खेल विज्ञान - कोच, फिजियोथेरेपिस्ट, खिलाड़ी बनने के लिए", description_english: "Physical Education, Sports Science - To become Coach, Physiotherapist, Athlete", duration: "2 वर्ष", career: "BPEd, MPEd, NIS Coach", exams: "Sports Quota, BPEd Entrance", officialLink: "https://sportsauthorityofindia.nic.in/" },
+                    { title_hindi: "🌾 कृषि (Agriculture)", title_english: "Agriculture", description_hindi: "कृषि विज्ञान, बागवानी, पशुपालन - कृषि अधिकारी, वैज्ञानिक बनने के लिए", description_english: "Agricultural Science, Horticulture, Animal Husbandry - For Agriculture Officer, Scientist", duration: "2 वर्ष", career: "B.Sc Agri, Agriculture Officer", exams: "ICAR AIEEA", officialLink: "https://icar.org.in/" },
+                    { title_hindi: "🎨 ललित कला (Fine Arts)", title_english: "Fine Arts", description_hindi: "चित्रकला, मूर्तिकला, कला इतिहास - चित्रकार, डिजाइनर, कला शिक्षक बनने के लिए", description_english: "Painting, Sculpture, Art History - To become Painter, Designer, Art Teacher", duration: "2 वर्ष", career: "BFA, MFA, Graphic Designer", exams: "BFA Entrance, NID DAT", officialLink: "https://ncert.nic.in/" },
+                    { title_hindi: "✏️ डिजाइनिंग", title_english: "Designing", description_hindi: "फैशन डिजाइन, इंटीरियर डिजाइन, प्रोडक्ट डिजाइन - डिजाइनर बनने के लिए", description_english: "Fashion Design, Interior Design, Product Design - To become Designer", duration: "2 वर्ष", career: "B.Des, Fashion Designer", exams: "NIFT, NID, UCEED", officialLink: "https://nift.ac.in/" },
+                    { title_hindi: "🔨 कुशल ट्रेड (Vocational)", title_english: "Skilled Trade (Vocational)", description_hindi: "इलेक्ट्रिकल, मैकेनिकल, कंप्यूटर - टेक्नीशियन, सुपरवाइजर बनने के लिए", description_english: "Electrical, Mechanical, Computer - To become Technician, Supervisor", duration: "2 वर्ष", career: "ITI, Diploma, Technician", exams: "ITI Entrance", officialLink: "https://ncvt.gov.in/" },
+                    { title_hindi: "🌍 विदेश अध्ययन", title_english: "Abroad Studies", description_hindi: "इंटरनेशनल स्कूल, फाउंडेशन कोर्स - विदेश में उच्च शिक्षा के लिए", description_english: "International School, Foundation Course - For Higher Education Abroad", duration: "2 वर्ष", career: "Study Abroad", exams: "IELTS, TOEFL, SAT", officialLink: "https://www.studyabroad.com/" }
+                ]
+            },
+            
+            // DOOR 2: DIPLOMA COURSES
+            diploma: {
+                name_hindi: "📜 डिप्लोमा कोर्स (3 वर्ष)",
+                name_english: "📜 Diploma Courses (3 Years)",
+                icon: "📜",
+                items: [
+                    { title_hindi: "डिप्लोमा इन कंप्यूटर साइंस", title_english: "Diploma in Computer Science", description_hindi: "प्रोग्रामिंग, नेटवर्किंग, डेटाबेस - IT क्षेत्र में नौकरी", description_english: "Programming, Networking, Database - IT Sector Jobs", duration: "3 वर्ष", career: "सॉफ्टवेयर डेवलपर", salary: "2.5-5 LPA", officialLink: "https://www.aicte-india.org/" },
+                    { title_hindi: "डिप्लोमा इन मैकेनिकल", title_english: "Diploma in Mechanical", description_hindi: "मशीन डिजाइन, उत्पादन, ऑटोमोबाइल - उद्योग में नौकरी", description_english: "Machine Design, Production, Automobile - Industry Jobs", duration: "3 वर्ष", career: "मैकेनिकल इंजीनियर", salary: "2.5-6 LPA", officialLink: "https://www.aicte-india.org/" },
+                    { title_hindi: "डिप्लोमा इन इलेक्ट्रिकल", title_english: "Diploma in Electrical", description_hindi: "पावर सिस्टम, मोटर, ट्रांसफार्मर - पावर सेक्टर", description_english: "Power Systems, Motors, Transformers - Power Sector", duration: "3 वर्ष", career: "इलेक्ट्रिकल इंजीनियर", salary: "2.5-6 LPA", officialLink: "https://www.aicte-india.org/" },
+                    { title_hindi: "डिप्लोमा इन सिविल", title_english: "Diploma in Civil", description_hindi: "भवन निर्माण, सर्वेक्षण, स्ट्रक्चर - कंस्ट्रक्शन", description_english: "Building Construction, Surveying, Structure - Construction", duration: "3 वर्ष", career: "सिविल इंजीनियर", salary: "2.5-6 LPA", officialLink: "https://www.aicte-india.org/" },
+                    { title_hindi: "डिप्लोमा इन इलेक्ट्रॉनिक्स", title_english: "Diploma in Electronics", description_hindi: "सर्किट डिजाइन, माइक्रोप्रोसेसर - इलेक्ट्रॉनिक्स उद्योग", description_english: "Circuit Design, Microprocessor - Electronics Industry", duration: "3 वर्ष", career: "इलेक्ट्रॉनिक्स इंजीनियर", salary: "2.5-5 LPA", officialLink: "https://www.aicte-india.org/" },
+                    { title_hindi: "डिप्लोमा इन ऑटोमोबाइल", title_english: "Diploma in Automobile", description_hindi: "वाहन डिजाइन, मैन्युफैक्चरिंग - ऑटोमोबाइल कंपनियाँ", description_english: "Vehicle Design, Manufacturing - Automobile Companies", duration: "3 वर्ष", career: "ऑटोमोबाइल इंजीनियर", salary: "2.5-5 LPA", officialLink: "https://www.aicte-india.org/" }
+                ]
+            },
+            
+            // DOOR 3: ITI TRADES
+            iti: {
+                name_hindi: "🔧 ITI ट्रेड (1-2 वर्ष)",
+                name_english: "🔧 ITI Trades (1-2 Years)",
+                icon: "🔧",
+                items: [
+                    { title_hindi: "इलेक्ट्रीशियन", title_english: "Electrician", description_hindi: "विद्युत तारों की फिटिंग, मोटर रिपेयर - सरकारी/प्राइवेट नौकरी", description_english: "Electrical Wiring, Motor Repair - Govt/Private Jobs", duration: "2 वर्ष", career: "इलेक्ट्रीशियन, वायरमैन", salary: "1.5-4 LPA", officialLink: "https://ncvt.gov.in/" },
+                    { title_hindi: "फिटर", title_english: "Fitter", description_hindi: "मशीन पार्ट्स की फिटिंग, असेंबली - उद्योगों में नौकरी", description_english: "Machine Parts Fitting, Assembly - Industry Jobs", duration: "2 वर्ष", career: "फिटर, मशीनिस्ट", salary: "1.5-4 LPA", officialLink: "https://ncvt.gov.in/" },
+                    { title_hindi: "वेल्डर", title_english: "Welder", description_hindi: "धातुओं को जोड़ना, फैब्रिकेशन - निर्माण और उद्योग", description_english: "Metal Joining, Fabrication - Construction & Industry", duration: "1 वर्ष", career: "वेल्डर, फैब्रिकेटर", salary: "1.5-3.5 LPA", officialLink: "https://ncvt.gov.in/" },
+                    { title_hindi: "मोटर मैकेनिक", title_english: "Motor Mechanic", description_hindi: "वाहनों की मरम्मत, सर्विसिंग - ऑटोमोबाइल उद्योग", description_english: "Vehicle Repair, Servicing - Automobile Industry", duration: "2 वर्ष", career: "मैकेनिक, टेक्नीशियन", salary: "1.5-4 LPA", officialLink: "https://ncvt.gov.in/" },
+                    { title_hindi: "कंप्यूटर ऑपरेटर", title_english: "Computer Operator", description_hindi: "कंप्यूटर संचालन, टाइपिंग, डाटा एंट्री - ऑफिस जॉब", description_english: "Computer Operation, Typing, Data Entry - Office Jobs", duration: "1 वर्ष", career: "डाटा एंट्री ऑपरेटर", salary: "1.5-3 LPA", officialLink: "https://ncvt.gov.in/" },
+                    { title_hindi: "प्लंबर", title_english: "Plumber", description_hindi: "पानी की पाइपलाइन, सैनिटरी फिटिंग - निर्माण क्षेत्र", description_english: "Water Pipeline, Sanitary Fitting - Construction Sector", duration: "1 वर्ष", career: "प्लंबर, सुपरवाइजर", salary: "1.5-4 LPA", officialLink: "https://ncvt.gov.in/" },
+                    { title_hindi: "कारपेंटर", title_english: "Carpenter", description_hindi: "लकड़ी का काम, फर्नीचर निर्माण - बिल्डिंग कंस्ट्रक्शन", description_english: "Wood Work, Furniture Making - Building Construction", duration: "1 वर्ष", career: "कारपेंटर", salary: "1.5-4 LPA", officialLink: "https://ncvt.gov.in/" }
+                ]
+            },
+            
+            // DOOR 4: PARAMEDICAL COURSES
+            paramedical: {
+                name_hindi: "🩺 पैरामेडिकल कोर्स",
+                name_english: "🩺 Paramedical Courses",
+                icon: "🩺",
+                items: [
+                    { title_hindi: "जनरल नर्सिंग (GNM)", title_english: "General Nursing (GNM)", description_hindi: "नर्सिंग में 3.5 वर्ष का डिप्लोमा - अस्पतालों में नर्स की नौकरी", description_english: "3.5 years diploma in Nursing - Nurse jobs in hospitals", duration: "3.5 वर्ष", career: "नर्स, स्टाफ नर्स", salary: "2-5 LPA", officialLink: "https://www.indiannursingcouncil.org/" },
+                    { title_hindi: "लेब टेक्नीशियन (DMLT)", title_english: "Lab Technician (DMLT)", description_hindi: "मेडिकल लैब में खून, यूरिन आदि के टेस्ट करना", description_english: "Blood, Urine testing in Medical Labs", duration: "2 वर्ष", career: "लैब टेक्नीशियन", salary: "1.5-4 LPA", officialLink: "https://www.paramedicalcouncil.com/" },
+                    { title_hindi: "रेडियोग्राफी (X-Ray)", title_english: "Radiography (X-Ray)", description_hindi: "एक्स-रे, सीटी स्कैन, एमआरआई ऑपरेटर", description_english: "X-Ray, CT Scan, MRI Operator", duration: "2 वर्ष", career: "रेडियोग्राफर", salary: "2-5 LPA", officialLink: "https://www.paramedicalcouncil.com/" },
+                    { title_hindi: "फार्मेसी (D.Pharma)", title_english: "Pharmacy (D.Pharma)", description_hindi: "दवाओं के बारे में ज्ञान - मेडिकल स्टोर, फार्मासिस्ट", description_english: "Knowledge about medicines - Medical Store, Pharmacist", duration: "2 वर्ष", career: "फार्मासिस्ट", salary: "1.5-4 LPA", officialLink: "https://pci.nic.in/" },
+                    { title_hindi: "फिजियोथेरेपी (DPT)", title_english: "Physiotherapy (DPT)", description_hindi: "शारीरिक उपचार, व्यायाम - चोटों के उपचार में सहायक", description_english: "Physical treatment, exercises - Helps in injury recovery", duration: "3 वर्ष", career: "फिजियोथेरेपिस्ट", salary: "2-6 LPA", officialLink: "https://www.physiotherapycouncil.com/" }
+                ]
+            },
+            
+            // DOOR 5: VOCATIONAL COURSES
+            vocational: {
+                name_hindi: "💼 वोकेशनल कोर्स",
+                name_english: "💼 Vocational Courses",
+                icon: "💼",
+                items: [
+                    { title_hindi: "हॉस्पिटैलिटी (होटल मैनेजमेंट)", title_english: "Hospitality (Hotel Management)", description_hindi: "होटल, रेस्टोरेंट में फ्रंट ऑफिस, हाउसकीपिंग", description_english: "Front Office, Housekeeping in Hotels", duration: "1-2 वर्ष", career: "होटल मैनेजर", salary: "2-5 LPA", officialLink: "https://www.nchmct.ac.in/" },
+                    { title_hindi: "रिटेल मैनेजमेंट", title_english: "Retail Management", description_hindi: "शॉपिंग मॉल, दुकानों में सेल्स, सुपरवाइजर का काम", description_english: "Sales, Supervisor work in Shopping Malls", duration: "6-12 माह", career: "रिटेल मैनेजर", salary: "1.5-4 LPA", officialLink: "https://www.retail.org.in/" },
+                    { title_hindi: "ब्यूटी एंड वेलनेस", title_english: "Beauty & Wellness", description_hindi: "पार्लर, सैलून में मेकअप, हेयर स्टाइलिंग, स्किन केयर", description_english: "Makeup, Hair Styling, Skin Care in Salons", duration: "6-12 माह", career: "ब्यूटीशियन", salary: "1.5-5 LPA", officialLink: "https://www.beautywellnesscouncil.com/" },
+                    { title_hindi: "डिजिटल मार्केटिंग", title_english: "Digital Marketing", description_hindi: "SEO, सोशल मीडिया, ईमेल मार्केटिंग - ऑनलाइन बिजनेस", description_english: "SEO, Social Media, Email Marketing", duration: "3-6 माह", career: "डिजिटल मार्केटर", salary: "2-8 LPA", officialLink: "https://www.google.com/digitalgarage/" }
+                ]
+            },
+            
+            // DOOR 6: SHORT TERM COURSES
+            shortterm: {
+                name_hindi: "📚 शॉर्ट टर्म कोर्स (3-6 माह)",
+                name_english: "📚 Short Term Courses (3-6 Months)",
+                icon: "📚",
+                items: [
+                    { title_hindi: "Tally with GST", title_english: "Tally with GST", description_hindi: "अकाउंटिंग सॉफ्टवेयर - अकाउंटेंट की नौकरी के लिए", description_english: "Accounting Software - For Accountant jobs", duration: "3 माह", career: "अकाउंटेंट", salary: "1.5-3.5 LPA", officialLink: "https://tallysolutions.com/" },
+                    { title_hindi: "MS Office (Excel, Word, PPT)", title_english: "MS Office", description_hindi: "कंप्यूटर के बेसिक कोर्स - ऑफिस जॉब के लिए", description_english: "Basic Computer Course - For Office Jobs", duration: "2 माह", career: "ऑफिस असिस्टेंट", salary: "1.5-3 LPA", officialLink: "https://www.microsoft.com/" },
+                    { title_hindi: "इंग्लिश स्पीकिंग", title_english: "English Speaking", description_hindi: "अंग्रेजी बोलना, लिखना सीखें - BPO, कस्टमर केयर के लिए", description_english: "Learn English speaking - For BPO, Customer Care", duration: "2-3 माह", career: "कस्टमर केयर", salary: "2-4 LPA", officialLink: "https://www.britishcouncil.in/" },
+                    { title_hindi: "ग्राफिक डिजाइनिंग", title_english: "Graphic Designing", description_hindi: "फोटोशॉप, कोरल ड्रा, कैनवा - डिजाइनर बनने के लिए", description_english: "Photoshop, Coral Draw - To become Designer", duration: "3-6 माह", career: "ग्राफिक डिजाइनर", salary: "2-5 LPA", officialLink: "https://www.adobe.com/in/" }
+                ]
+            },
+            
+            // DOOR 7: SCHOLARSHIPS
+            scholarship: {
+                name_hindi: "💰 स्कॉलरशिप (10वीं के बाद)",
+                name_english: "💰 Scholarships (After 10th)",
+                icon: "💰",
+                items: [
+                    { title_hindi: "प्री-मैट्रिक स्कॉलरशिप", title_english: "Pre-Matric Scholarship", description_hindi: "SC/ST/OBC छात्रों के लिए केंद्र सरकार की स्कॉलरशिप", description_english: "Central Government scholarship for SC/ST/OBC", eligibility: "SC/ST/OBC, 50%+", amount: "₹5,000-15,000/वर्ष", officialLink: "https://scholarships.gov.in/" },
+                    { title_hindi: "NTSE स्कॉलरशिप", title_english: "NTSE Scholarship", description_hindi: "राष्ट्रीय प्रतिभा खोज परीक्षा - प्रतिभाशाली छात्रों के लिए", description_english: "National Talent Search Exam - For talented students", eligibility: "10वीं के छात्र", amount: "₹1,250/माह", officialLink: "https://ncert.nic.in/ntse.php" },
+                    { title_hindi: "राष्ट्रीय आय सहायता योजना", title_english: "Income Support Scheme", description_hindi: "गरीब परिवारों के छात्रों के लिए वित्तीय सहायता", description_english: "Financial assistance for poor families", eligibility: "आय ₹2.5 लाख से कम", amount: "₹6,000-12,000/वर्ष", officialLink: "https://www.education.gov.in/" }
+                ]
+            },
+            
+            // DOOR 8: DEFENCE CAREER
+            defence: {
+                name_hindi: "🛡️ डिफेंस करियर (10वीं के बाद)",
+                name_english: "🛡️ Defence Career (After 10th)",
+                icon: "🛡️",
+                items: [
+                    { title_hindi: "सेना जनरल ड्यूटी (GD)", title_english: "Army General Duty (GD)", description_hindi: "भारतीय सेना में सैनिक बनने का अवसर", description_english: "Become Soldier in Indian Army", eligibility: "10वीं पास (45%+), 17.5-21 वर्ष", salary: "₹30,000-45,000/माह", officialLink: "https://joinindianarmy.nic.in/" },
+                    { title_hindi: "नौसेना SSR", title_english: "Navy SSR", description_hindi: "भारतीय नौसेना में सीनियर सेकेंडरी रिक्रूट", description_english: "Senior Secondary Recruit in Indian Navy", eligibility: "10वीं/12वीं, 17-21 वर्ष", salary: "₹35,000-50,000/माह", officialLink: "https://www.joinindiannavy.gov.in/" },
+                    { title_hindi: "वायुसेना ग्रुप Y", title_english: "Air Force Group Y", description_hindi: "भारतीय वायुसेना में तकनीकी और गैर-तकनीकी पद", description_english: "Technical & Non-Technical posts in IAF", eligibility: "10वीं/12वीं, 17-21 वर्ष", salary: "₹35,000-50,000/माह", officialLink: "https://airmenselection.cdac.in/" }
+                ]
+            },
+            
+            // DOOR 9: SKILL DEVELOPMENT
+            skill: {
+                name_hindi: "🎓 स्किल डेवलपमेंट प्रोग्राम",
+                name_english: "🎓 Skill Development Programs",
+                icon: "🎓",
+                items: [
+                    { title_hindi: "PMKVY (प्रधानमंत्री कौशल योजना)", title_english: "PMKVY", description_hindi: "देश का सबसे बड़ा स्किल प्रोग्राम - फ्री प्रशिक्षण", description_english: "India's largest skill program - Free training", duration: "3-6 माह", career: "होटल, रिटेल, IT, हेल्थकेयर", officialLink: "https://www.pmkvyofficial.org/" },
+                    { title_hindi: "DDU-GKY (दीन दयाल योजना)", title_english: "DDU-GKY", description_hindi: "ग्रामीण युवाओं के लिए रोजगार-उन्मुख प्रशिक्षण", description_english: "Employment-oriented training for rural youth", duration: "6-12 माह", career: "बैंकिंग, रिटेल, कंस्ट्रक्शन", officialLink: "https://ddugky.gov.in/" },
+                    { title_hindi: "NIELIT कंप्यूटर कोर्स", title_english: "NIELIT Courses", description_hindi: "सरकारी मान्यता प्राप्त कंप्यूटर कोर्स - CCC, O Level", description_english: "Govt recognized computer courses", duration: "3-12 माह", career: "कंप्यूटर ऑपरेटर", officialLink: "https://www.nielit.gov.in/" }
+                ]
+            },
+            
+            // DOOR 10: APPRENTICESHIP
+            apprenticeship: {
+                name_hindi: "👨‍🔧 अप्रेंटिसशिप (प्रशिक्षुता)",
+                name_english: "👨‍🔧 Apprenticeship",
+                icon: "👨‍🔧",
+                items: [
+                    { title_hindi: "नेशनल अप्रेंटिसशिप (NAPS)", title_english: "National Apprenticeship", description_hindi: "10वीं के बाद प्रशिक्षुता - कंपनियों में ऑन-जॉब ट्रेनिंग", description_english: "Apprenticeship after 10th - On-job training", duration: "6-24 माह", stipend: "₹5,000-10,000/माह", officialLink: "https://naps.gov.in/" },
+                    { title_hindi: "NATS (बोआट)", title_english: "NATS (BOAT)", description_hindi: "डिप्लोमा के बाद अप्रेंटिसशिप - PSU और प्राइवेट कंपनियाँ", description_english: "Apprenticeship after Diploma - PSU and Private", duration: "1 वर्ष", stipend: "₹8,000-15,000/माह", officialLink: "https://nats.education.gov.in/" }
+                ]
+            },
+            
+            // DOOR 11: GOVERNMENT JOBS
+            jobs: {
+                name_hindi: "💼 सरकारी नौकरियाँ (10वीं के बाद)",
+                name_english: "💼 Govt Jobs (After 10th)",
+                icon: "💼",
+                items: [
+                    { title_hindi: "RRB Group D", title_english: "RRB Group D", description_hindi: "भारतीय रेलवे में ट्रैकमैन, हेल्पर, पॉइंट्समैन", description_english: "Trackman, Helper in Indian Railways", eligibility: "10वीं पास", salary: "₹25,000-35,000/माह", officialLink: "https://rrb.gov.in/" },
+                    { title_hindi: "SSC MTS", title_english: "SSC MTS", description_hindi: "सरकारी विभागों में प्यून, दफ्तरी, माली", description_english: "Peon, Office Attendant in Govt Departments", eligibility: "10वीं पास", salary: "₹25,000-35,000/माह", officialLink: "https://ssc.nic.in/" },
+                    { title_hindi: "RRB NTPC", title_english: "RRB NTPC", description_hindi: "रेलवे में क्लर्क, टिकट कलेक्टर, कमर्शियल अप्रेंटिस", description_english: "Clerk, Ticket Collector in Railways", eligibility: "12वीं/स्नातक", salary: "₹30,000-50,000/माह", officialLink: "https://rrb.gov.in/" },
+                    { title_hindi: "SSC CHSL", title_english: "SSC CHSL", description_hindi: "LDC, DEO, पोस्टल असिस्टेंट, कोर्ट क्लर्क", description_english: "LDC, DEO, Postal Assistant, Court Clerk", eligibility: "12वीं पास", salary: "₹30,000-45,000/माह", officialLink: "https://ssc.nic.in/" },
+                    { title_hindi: "पुलिस कांस्टेबल", title_english: "Police Constable", description_hindi: "राज्य पुलिस में कांस्टेबल के पद", description_english: "Constable posts in State Police", eligibility: "10वीं/12वीं", salary: "₹25,000-45,000/माह", officialLink: "https://ssc.nic.in/" }
+                ]
+            },
+            
+            // DOOR 12: POLYTECHNIC
+            polytechnic: {
+                name_hindi: "🏫 पॉलिटेक्निक (3 वर्ष)",
+                name_english: "🏫 Polytechnic (3 Years)",
+                icon: "🏫",
+                items: [
+                    { title_hindi: "पॉलिटेक्निक इन सिविल", title_english: "Polytechnic in Civil", description_hindi: "भवन निर्माण, सर्वेक्षण - JE की तैयारी", description_english: "Building Construction, Surveying - JE preparation", duration: "3 वर्ष", career: "जूनियर इंजीनियर", salary: "3-8 LPA", officialLink: "https://www.aicte-india.org/" },
+                    { title_hindi: "पॉलिटेक्निक इन मैकेनिकल", title_english: "Polytechnic in Mechanical", description_hindi: "मशीन डिजाइन, उत्पादन - उद्योग में नौकरी", description_english: "Machine Design, Production - Industry jobs", duration: "3 वर्ष", career: "जूनियर इंजीनियर", salary: "3-8 LPA", officialLink: "https://www.aicte-india.org/" },
+                    { title_hindi: "पॉलिटेक्निक इन इलेक्ट्रिकल", title_english: "Polytechnic in Electrical", description_hindi: "पावर सिस्टम, मोटर - पावर सेक्टर", description_english: "Power Systems, Motors - Power Sector", duration: "3 वर्ष", career: "जूनियर इंजीनियर", salary: "3-8 LPA", officialLink: "https://www.aicte-india.org/" }
+                ]
+            },
+            
+            // DOOR 13: OPEN SCHOOLING (NIOS)
+            openschool: {
+                name_hindi: "🏫 ओपन स्कूलिंग (NIOS)",
+                name_english: "🏫 Open Schooling (NIOS)",
+                icon: "🏫",
+                items: [
+                    { title_hindi: "NIOS सेकेंडरी (10वीं)", title_english: "NIOS Secondary (10th)", description_hindi: "राष्ट्रीय मुक्त विद्यालयी शिक्षा संस्थान - 10वीं की परीक्षा", description_english: "National Institute of Open Schooling - 10th exam", duration: "न्यूनतम 6 माह", career: "10वीं समकक्ष", officialLink: "https://nios.ac.in/" },
+                    { title_hindi: "NIOS सीनियर सेकेंडरी (12वीं)", title_english: "NIOS Senior Secondary (12th)", description_hindi: "12वीं की परीक्षा - ड्रॉपआउट छात्रों के लिए", description_english: "12th exam - For dropout students", duration: "न्यूनतम 6 माह", career: "12वीं समकक्ष", officialLink: "https://nios.ac.in/" }
+                ]
+            },
+            
+            // DOOR 14: SPORTS CAREER
+            sportscareer: {
+                name_hindi: "⚽ स्पोर्ट्स करियर",
+                name_english: "⚽ Sports Career",
+                icon: "⚽",
+                items: [
+                    { title_hindi: "स्पोर्ट्स कोटा नौकरियाँ", title_english: "Sports Quota Jobs", description_hindi: "रेलवे, बैंक, पुलिस में स्पोर्ट्स कोटा से भर्ती", description_english: "Sports quota recruitment in Railways, Banks, Police", eligibility: "राज्य/राष्ट्रीय स्तर के खिलाड़ी", salary: "₹30,000-60,000/माह", officialLink: "https://rrb.gov.in/" },
+                    { title_hindi: "NIS कोचिंग", title_english: "NIS Coaching", description_hindi: "नेताजी सुभाष इंस्टीट्यूट ऑफ स्पोर्ट्स से कोच बनें", description_english: "Become coach from NIS", duration: "1-2 वर्ष", career: "स्पोर्ट्स कोच", officialLink: "https://nsnis.org/" }
+                ]
+            },
+            
+            // DOOR 15: ENTREPRENEURSHIP
+            entrepreneurship: {
+                name_hindi: "💡 उद्यमिता (Entrepreneurship)",
+                name_english: "💡 Entrepreneurship",
+                icon: "💡",
+                items: [
+                    { title_hindi: "स्टार्टअप इंडिया", title_english: "Startup India", description_hindi: "सरकार की स्टार्टअप योजना - अपना बिजनेस शुरू करें", description_english: "Government's startup scheme - Start your own business", officialLink: "https://www.startupindia.gov.in/" },
+                    { title_hindi: "MSME योजनाएँ", title_english: "MSME Schemes", description_hindi: "लघु एवं मध्यम उद्यमों के लिए सरकारी सहायता", description_english: "Government assistance for small and medium enterprises", officialLink: "https://www.msme.gov.in/" }
+                ]
+            }
+        };
 
-<div class="bottom-bar" id="bottomBar"></div>
+        const categoryList = [
+            { id: 'streams', icon: '🎯', name_hindi: '10 स्ट्रीम', name_english: '10 Streams' },
+            { id: 'diploma', icon: '📜', name_hindi: 'डिप्लोमा', name_english: 'Diploma' },
+            { id: 'iti', icon: '🔧', name_hindi: 'ITI ट्रेड', name_english: 'ITI Trades' },
+            { id: 'paramedical', icon: '🩺', name_hindi: 'पैरामेडिकल', name_english: 'Paramedical' },
+            { id: 'vocational', icon: '💼', name_hindi: 'वोकेशनल', name_english: 'Vocational' },
+            { id: 'shortterm', icon: '📚', name_hindi: 'शॉर्ट टर्म', name_english: 'Short Term' },
+            { id: 'scholarship', icon: '💰', name_hindi: 'स्कॉलरशिप', name_english: 'Scholarship' },
+            { id: 'defence', icon: '🛡️', name_hindi: 'डिफेंस', name_english: 'Defence' },
+            { id: 'skill', icon: '🎓', name_hindi: 'स्किल डेवलपमेंट', name_english: 'Skill Dev' },
+            { id: 'apprenticeship', icon: '👨‍🔧', name_hindi: 'अप्रेंटिसशिप', name_english: 'Apprenticeship' },
+            { id: 'jobs', icon: '💼', name_hindi: 'सरकारी नौकरियाँ', name_english: 'Govt Jobs' },
+            { id: 'polytechnic', icon: '🏫', name_hindi: 'पॉलिटेक्निक', name_english: 'Polytechnic' },
+            { id: 'openschool', icon: '🏫', name_hindi: 'ओपन स्कूल', name_english: 'Open School' },
+            { id: 'sportscareer', icon: '⚽', name_hindi: 'स्पोर्ट्स', name_english: 'Sports' },
+            { id: 'entrepreneurship', icon: '💡', name_hindi: 'उद्यमिता', name_english: 'Entrepreneurship' }
+        ];
 
-<script>
-    function toggleCard(cardId) { document.getElementById(cardId).classList.toggle('active'); }
-    document.querySelectorAll('.door-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`door-${btn.getAttribute('data-door')}`).classList.add('active');
-        });
-    });
-    const bottomNav = [{ name: "Home", icon: "🏠", link: "index.html" }, { name: "Search", icon: "🔍", link: "#" }, { name: "AnnS AI", icon: "🤖", link: "#" }, { name: "Alerts", icon: "🔔", link: "#" }, { name: "Profile", icon: "👤", link: "#" }];
-    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`).join('');
-    document.querySelectorAll('.nav-item').forEach(nav => nav.addEventListener('click', () => { const link = nav.getAttribute('data-link'); if(link && link !== '#') window.location.href = link; else alert('Coming soon'); }));
-    function goBack() { window.location.href = 'index.html'; }
-</script>
+        function renderCategories() {
+            const container = document.getElementById('categoryDoors');
+            container.innerHTML = categoryList.map(cat => `
+                <button class="category-door ${currentCategory === cat.id ? 'active' : ''}" onclick="switchCategory('${cat.id}')">
+                    ${cat.icon} ${currentLang === 'hindi' ? cat.name_hindi : cat.name_english}
+                </button>
+            `).join('');
+        }
+
+        function switchCategory(categoryId) {
+            currentCategory = categoryId;
+            renderCategories();
+            renderDoors();
+        }
+
+        function filterItems(items) {
+            if (!searchTerm) return items;
+            const term = searchTerm.toLowerCase();
+            return items.filter(item => 
+                (item.title_hindi?.toLowerCase().includes(term) ||
+                 item.title_english?.toLowerCase().includes(term) ||
+                 item.description_hindi?.toLowerCase().includes(term) ||
+                 item.description_english?.toLowerCase().includes(term))
+            );
+        }
+
+        function renderDoors() {
+            const data = AFTER_10TH_DATA[currentCategory];
+            if (!data) return;
+            
+            const searchInput = document.getElementById('searchBox');
+            searchTerm = searchInput ? searchInput.value : '';
+            
+            let filteredItems = filterItems(data.items);
+            document.getElementById('testCount').innerHTML = `📋 ${filteredItems.length} ऑप्शन उपलब्ध`;
+            
+            const container = document.getElementById('doorsContainer');
+            let html = `
+                <div class="door-card">
+                    <div class="door-header ${currentCategory}">
+                        <span class="door-icon">${data.icon}</span>
+                        <div class="door-title">${currentLang === 'hindi' ? data.name_hindi : data.name_english}</div>
+                    </div>
+                    <div class="door-content">
+                        ${filteredItems.map(item => `
+                            <div class="item-card">
+                                <div class="item-title">${currentLang === 'hindi' ? item.title_hindi : item.title_english}</div>
+                                <div class="item-description">${currentLang === 'hindi' ? item.description_hindi : item.description_english}</div>
+                                <div class="item-detail">
+                                    ${item.duration ? `<span class="badge badge-duration">⏱️ ${item.duration}</span>` : ''}
+                                    ${item.career ? `<span class="badge badge-salary">💼 ${item.career}</span>` : ''}
+                                    ${item.salary ? `<span class="badge badge-salary">💰 ${item.salary}</span>` : ''}
+                                    ${item.exams ? `<span class="badge badge-exam">📝 ${item.exams}</span>` : ''}
+                                    ${item.eligibility ? `<span class="badge badge-exam">✅ ${item.eligibility}</span>` : ''}
+                                    ${item.amount ? `<span class="badge badge-scholarship">💰 ${item.amount}</span>` : ''}
+                                    ${item.stipend ? `<span class="badge badge-salary">💰 ${item.stipend}</span>` : ''}
+                                </div>
+                                <a href="${item.officialLink}" target="_blank" class="official-link">🔗 आधिकारिक जानकारी →</a>
+                            </div>
+                        `).join('')}
+                        ${filteredItems.length === 0 ? '<div class="empty-state">🔍 कोई परिणाम नहीं मिला</div>' : ''}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'hindi' ? 'english' : 'hindi';
+            document.querySelector('.lang-toggle').innerHTML = currentLang === 'hindi' ? '🇬🇧 English' : '🇮🇳 हिंदी';
+            renderCategories();
+            renderDoors();
+        }
+
+        function handleSearch() { renderDoors(); }
+
+        function init() {
+            renderCategories();
+            renderDoors();
+            document.getElementById('searchBox').addEventListener('input', handleSearch);
+        }
+        init();
+    </script>
 </body>
 </html>
