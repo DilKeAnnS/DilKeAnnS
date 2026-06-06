@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="hi-IN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>सम्पूर्ण करेंट अफेयर्स - दिल के अंश Career Saathi</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', sans-serif;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            min-height: 100vh;
+        }
+        .app-header {
+            background: rgba(255,255,255,0.98);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .back-btn:hover { transform: scale(1.02); }
+        h1 {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.5rem;
+        }
+        .nav-buttons { display: flex; gap: 10px; margin-left: auto; }
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .nav-btn.saved { background: #e74c3c; }
+        .lang-toggle { background: #ff9800; }
+        .search-container { flex: 1; max-width: 300px; }
+        .search-box {
+            width: 100%;
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+        }
+        .categories {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .category-door {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-door.active {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        .doors-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+        }
+        .door-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            animation: fadeInUp 0.5s ease;
+        }
+        .door-card:hover { transform: translateY(-5px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .door-header {
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+        .door-header.daily { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .door-header.weekly { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .door-header.monthly { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333; }
+        .door-header.quarterly { background: linear-gradient(135deg, #fa709a, #fee140); color: #333; }
+        .door-header.yearly { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+        .door-header.state { background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #333; }
+        .door-header.international { background: linear-gradient(135deg, #13547a, #80d0c7); }
+        .door-header.schemes { background: linear-gradient(135deg, #11998e, #38ef7d); color: #333; }
+        .door-header.video { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .door-header.quiz { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .door-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+        .door-title { font-size: 1.1rem; }
+        .door-content { max-height: 600px; overflow-y: auto; padding: 15px; }
+        .door-content::-webkit-scrollbar { width: 6px; }
+        .door-content::-webkit-scrollbar-track { background: #f1f1f1; }
+        .door-content::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+        .news-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            border-left: 4px solid #e74c3c;
+        }
+        .news-card:hover { background: #fff5f5; transform: translateX(5px); }
+        .news-title { font-weight: bold; color: #333; font-size: 0.95rem; margin-bottom: 5px; }
+        .news-description { font-size: 0.8rem; color: #666; margin-bottom: 8px; line-height: 1.4; }
+        .news-detail { font-size: 0.7rem; color: #888; margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+        .badge.date { background: #e74c3c; color: white; }
+        .badge.exam { background: #2196f3; color: white; }
+        .badge.pdf { background: #4caf50; color: white; }
+        .badge.video { background: #ff0000; color: white; }
+        .badge.free { background: #ff9800; color: white; }
+        .card-actions { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+        .action-btn {
+            padding: 5px 12px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .action-btn.read { background: #e74c3c; color: white; }
+        .action-btn.save { background: #667eea; color: white; }
+        .saved-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            z-index: 200;
+            transition: right 0.3s;
+            overflow-y: auto;
+        }
+        .saved-panel.open { right: 0; }
+        .saved-header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+        }
+        .saved-item { padding: 15px; border-bottom: 1px solid #eee; }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 199;
+        }
+        .overlay.active { display: block; }
+        .empty-state { text-align: center; padding: 40px; color: #999; }
+        @media (max-width: 768px) {
+            .doors-container { grid-template-columns: 1fr; }
+            .saved-panel { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="window.location.href='index.html'">← वापस</button>
+            <h1>📰 सम्पूर्ण करेंट अफेयर्स<br><small>Complete Current Affairs 2026</small></h1>
+            <div class="nav-buttons">
+                <button class="nav-btn saved" onclick="toggleSavedPanel()">📚 सेव्ड</button>
+                <button class="nav-btn lang-toggle" onclick="toggleUILanguage()">🇬🇧 English</button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search...">
+            </div>
+        </div>
+    </div>
+
+    <div class="categories" id="categoryDoors"></div>
+    <div id="doorsContainer" class="doors-container"></div>
+
+    <div id="savedPanel" class="saved-panel">
+        <div class="saved-header">
+            <h3>📚 मेरे सेव्ड नोट्स</h3>
+            <button onclick="toggleSavedPanel()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 5px; margin-top: 10px;">✕ Close</button>
+        </div>
+        <div id="savedList"></div>
+    </div>
+    <div id="overlay" class="overlay" onclick="toggleSavedPanel()"></div>
+
+    <script>
+        // ---------- INDEXED DB ----------
+        const DB_NAME = 'CurrentAffairsCompleteDB';
+        const DB_VERSION = 1;
+        const STORE_NAME = 'saved_items';
+        let db = null;
+        
+        function openDatabase() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => { db = request.result; resolve(db); };
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                    }
+                };
+            });
+        }
+        
+        async function addToSaved(item) {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readwrite');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.add({ ...item, savedDate: new Date().toISOString() });
+                request.onsuccess = () => resolve(true);
+                request.onerror = () => resolve(false);
+            });
+        }
+        
+        async function removeFromSaved(id) {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readwrite');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.delete(id);
+                request.onsuccess = () => resolve(true);
+            });
+        }
+        
+        async function getAllSaved() {
+            await openDatabase();
+            const transaction = db.transaction([STORE_NAME], 'readonly');
+            const store = transaction.objectStore(STORE_NAME);
+            return new Promise((resolve) => {
+                const request = store.getAll();
+                request.onsuccess = () => resolve(request.result || []);
+            });
+        }
+
+        // ---------- COMPLETE DATABASE (ALL CATEGORIES) ----------
+        let currentUILanguage = 'hindi';
+        let currentCategory = 'daily';
+        let searchTerm = '';
+        
+        const CURRENT_AFFAIRS_DATA = {
+            daily: {
+                name_hindi: "📅 दैनिक करेंट अफेयर्स",
+                name_english: "📅 Daily Current Affairs",
+                icon: "📅",
+                items: [
+                    { id: "daily_june2", title_hindi: "2 जून 2026 - तेलंगाना स्थापना दिवस", title_english: "June 2, 2026 - Telangana Formation Day", description_hindi: "तेलंगाना 2 जून 2014 को भारत का 29वाँ राज्य बना। के. चंद्रशेखर राव पहले मुख्यमंत्री बने।", description_english: "Telangana became India's 29th state on June 2, 2014.", date: "June 2, 2026", exam: "UPSC, TSPSC, APPSC", pdfLink: "https://www.sakshi.com/", type: "daily" },
+                    { id: "daily_june1", title_hindi: "1 जून 2026 - अंतर्राष्ट्रीय दुग्ध दिवस", title_english: "June 1, 2026 - World Milk Day", description_hindi: "FAO द्वारा स्थापित, डेयरी उद्योग और पोषण पर जागरूकता।", description_english: "Established by UN FAO to raise awareness about dairy industry.", date: "June 1, 2026", exam: "General Awareness", pdfLink: "https://www.fao.org/world-milk-day/", type: "daily" },
+                    { id: "daily_may31", title_hindi: "31 मई 2026 - विश्व तम्बाकू निषेध दिवस", title_english: "May 31, 2026 - World No Tobacco Day", description_hindi: "WHO द्वारा 'तम्बाकू कंपनियों को जवाबदेह ठहराना' थीम पर आयोजित", description_english: "Organized by WHO on theme 'Holding Tobacco Companies Accountable'", date: "May 31, 2026", exam: "UPSC, Health Exams", pdfLink: "https://www.who.int/campaigns/world-no-tobacco-day", type: "daily" }
+                ]
+            },
+            weekly: {
+                name_hindi: "📆 साप्ताहिक करेंट अफेयर्स",
+                name_english: "📆 Weekly Current Affairs",
+                icon: "📆",
+                items: [
+                    { title_hindi: "जून 2026 - पहला सप्ताह (1-7 जून)", title_english: "June 2026 - Week 1", description_hindi: "पहले सप्ताह की सभी महत्वपूर्ण घटनाएँ - राष्ट्रीय, अंतर्राष्ट्रीय, खेल, अर्थव्यवस्था", description_english: "Week 1 events - National, International, Sports, Economy", date: "June 1-7, 2026", exam: "UPSC, SSC, Banking", pdfLink: "https://currentaffairs.adda247.com/", type: "weekly" },
+                    { title_hindi: "मई 2026 - चौथा सप्ताह (25-31 मई)", title_english: "May 2026 - Week 4", description_hindi: "चौथे सप्ताह की करेंट अफेयर्स - बजट अपडेट, सरकारी योजनाएँ", description_english: "Week 4 - Budget updates, Government schemes", date: "May 25-31, 2026", exam: "UPSC, SSC", pdfLink: "https://currentaffairs.adda247.com/", type: "weekly" }
+                ]
+            },
+            monthly: {
+                name_hindi: "📖 मासिक करेंट अफेयर्स",
+                name_english: "📖 Monthly Current Affairs",
+                icon: "📖",
+                items: [
+                    { title_hindi: "जून 2026 मासिक", title_english: "June 2026 Monthly", description_hindi: "जून 2026 के सभी महत्वपूर्ण करेंट अफेयर्स का संकलन - UPSC, SSC, Banking, Railway", description_english: "Complete June 2026 current affairs compilation", date: "June 2026", exam: "All Exams", pdfLink: "https://www.jagranjosh.com/current-affairs", type: "monthly" },
+                    { title_hindi: "मई 2026 मासिक", title_english: "May 2026 Monthly", description_hindi: "बजट सत्र, गर्मी की छुट्टियों के दौरान महत्वपूर्ण घटनाएँ", description_english: "Budget session, important events during summer break", date: "May 2026", exam: "All Exams", pdfLink: "https://www.jagranjosh.com/current-affairs", type: "monthly" }
+                ]
+            },
+            quarterly: {
+                name_hindi: "🗓️ त्रैमासिक करेंट अफेयर्स",
+                name_english: "🗓️ Quarterly Current Affairs",
+                icon: "🗓️",
+                items: [
+                    { title_hindi: "अप्रैल-जून 2026 त्रैमासिक", title_english: "April-June 2026 Quarterly", description_hindi: "दूसरी तिमाही के सभी महत्वपूर्ण करेंट अफेयर्स", description_english: "Q2 current affairs compilation", date: "April-June 2026", exam: "UPSC Prelims 2026", pdfLink: "https://www.drishtiias.com/", type: "quarterly" },
+                    { title_hindi: "जनवरी-मार्च 2026 त्रैमासिक", title_english: "January-March 2026 Quarterly", description_hindi: "पहली तिमाही - बजट सत्र, राष्ट्रीय घटनाएँ", description_english: "Q1 - Budget session, national events", date: "Jan-Mar 2026", exam: "UPSC Prelims 2026", pdfLink: "https://www.drishtiias.com/", type: "quarterly" }
+                ]
+            },
+            yearly: {
+                name_hindi: "📚 वार्षिक करेंट अफेयर्स",
+                name_english: "📚 Yearly Current Affairs",
+                icon: "📚",
+                items: [
+                    { title_hindi: "वर्ष 2025 पूर्ण वार्षिक संकलन", title_english: "Complete Yearly Compilation 2025", description_hindi: "पूरे वर्ष 2025 के सभी करेंट अफेयर्स - राष्ट्रीय, अंतर्राष्ट्रीय, अर्थव्यवस्था, खेल, विज्ञान", description_english: "Complete 2025 current affairs", date: "Jan-Dec 2025", exam: "UPSC 2026, SSC 2026", pdfLink: "https://www.studyiq.com/current-affairs/yearly-compilation/", type: "yearly" }
+                ]
+            },
+            state: {
+                name_hindi: "🗺️ राज्य-वार करेंट अफेयर्स",
+                name_english: "🗺️ State-wise Current Affairs",
+                icon: "🗺️",
+                items: [
+                    { title_hindi: "उत्तर प्रदेश (UPPSC) स्पेशल", title_english: "Uttar Pradesh (UPPSC) Special", description_hindi: "यूपी के करेंट अफेयर्स - नई योजनाएँ, विकास परियोजनाएँ, सरकारी नियुक्तियाँ", description_english: "UP current affairs - New schemes, development projects", date: "2026", exam: "UPPSC, UP RO/ARO", pdfLink: "https://uppsc.up.nic.in/", type: "state" },
+                    { title_hindi: "बिहार (BPSC) स्पेशल", title_english: "Bihar (BPSC) Special", description_hindi: "बिहार के करेंट अफेयर्स - राज्य सरकार की योजनाएँ, नीतियाँ", description_english: "Bihar current affairs - State govt schemes", date: "2026", exam: "BPSC, BSSC", pdfLink: "https://bpsc.bih.nic.in/", type: "state" },
+                    { title_hindi: "राजस्थान (RPSC) स्पेशल", title_english: "Rajasthan (RPSC) Special", description_hindi: "राजस्थान के करेंट अफेयर्स - राज्य बजट, पर्यटन विकास", description_english: "Rajasthan current affairs - State budget, tourism", date: "2026", exam: "RPSC", pdfLink: "https://rpsc.rajasthan.gov.in/", type: "state" },
+                    { title_hindi: "मध्य प्रदेश (MPPSC) स्पेशल", title_english: "Madhya Pradesh (MPPSC) Special", description_hindi: "मध्य प्रदेश के करेंट अफेयर्स - कृषि योजनाएँ, नई परियोजनाएँ", description_english: "MP current affairs - Agriculture schemes, new projects", date: "2026", exam: "MPPSC", pdfLink: "https://mppsc.mp.gov.in/", type: "state" }
+                ]
+            },
+            international: {
+                name_hindi: "🌍 अंतर्राष्ट्रीय करेंट अफेयर्स",
+                name_english: "🌍 International Current Affairs",
+                icon: "🌍",
+                items: [
+                    { title_hindi: "G7 शिखर सम्मेलन 2026", title_english: "G7 Summit 2026", description_hindi: "इटली में आयोजित - जलवायु परिवर्तन, AI नियमन, वैश्विक अर्थव्यवस्था", description_english: "Held in Italy - Climate change, AI regulation, global economy", date: "June 2026", exam: "UPSC Mains", pdfLink: "https://www.g7italy.it/", type: "international" },
+                    { title_hindi: "भारत-यूरोपीय संघ व्यापार समझौता", title_english: "India-EU Trade Agreement", description_hindi: "भारत और EU के बीच मुक्त व्यापार समझौते पर हस्ताक्षर", description_english: "India and EU sign free trade agreement", date: "May 2026", exam: "UPSC Mains", pdfLink: "https://www.mea.gov.in/", type: "international" }
+                ]
+            },
+            schemes: {
+                name_hindi: "🏛️ सरकारी योजनाएँ (2025-26)",
+                name_english: "🏛️ Government Schemes (2025-26)",
+                icon: "🏛️",
+                items: [
+                    { title_hindi: "PM आवास योजना - चरण 3", title_english: "PM Awas Yojana - Phase 3", description_hindi: "2026 में अतिरिक्त 2 करोड़ घरों को मंजूरी", description_english: "Additional 2 crore houses approved in 2026", date: "June 2026", exam: "UPSC, SSC, Banking", pdfLink: "https://pmaymis.gov.in/", type: "scheme" },
+                    { title_hindi: "RKVY 2.0 (कृषि)", title_english: "RKVY 2.0 (Agriculture)", description_hindi: "कृषि क्षेत्र में निवेश के लिए ₹25,000 करोड़", description_english: "₹25,000 crore for agriculture investment", date: "May 2026", exam: "UPSC, Agri Exams", pdfLink: "https://rkvy.nic.in/", type: "scheme" }
+                ]
+            },
+            video: {
+                name_hindi: "🎥 वीडियो लेक्चर",
+                name_english: "🎥 Video Lectures",
+                icon: "🎥",
+                items: [
+                    { title_hindi: "जून 2026 साप्ताहिक करेंट अफेयर्स (वीडियो)", title_english: "June 2026 Weekly CA (Video)", description_hindi: "विस्तृत वीडियो विश्लेषण - UPSC/SSC/Banking के लिए महत्वपूर्ण घटनाएँ", description_english: "Detailed video analysis - Important events for UPSC/SSC/Banking", date: "June 2026", exam: "All Exams", videoLink: "https://youtu.be/example1", type: "video" },
+                    { title_hindi: "भारत-यूरोपीय संघ व्यापार समझौता (विश्लेषण)", title_english: "India-EU Trade Deal Analysis", description_hindi: "व्यापार समझौते का गहन विश्लेषण, UPSC Mains के लिए महत्वपूर्ण", description_english: "In-depth analysis for UPSC Mains", date: "May 2026", exam: "UPSC Mains", videoLink: "https://youtu.be/example2", type: "video" }
+                ]
+            },
+            quiz: {
+                name_hindi: "🎯 करेंट अफेयर्स क्विज़",
+                name_english: "🎯 Current Affairs Quiz",
+                icon: "🎯",
+                items: [
+                    { title_hindi: "जून 2026 साप्ताहिक क्विज़", title_english: "June 2026 Weekly Quiz", description_hindi: "20 प्रश्न - जून 2026 के पहले सप्ताह पर आधारित", description_english: "20 questions based on June 2026 week 1", quizLink: "#", type: "quiz" },
+                    { title_hindi: "मई 2026 मासिक क्विज़", title_english: "May 2026 Monthly Quiz", description_hindi: "50 प्रश्न - पूरे मई 2026 के करेंट अफेयर्स पर", description_english: "50 questions on full May 2026 CA", quizLink: "#", type: "quiz" }
+                ]
+            }
+        };
+
+        // ---------- UI HELPERS ----------
+        const categoryList = [
+            { id: 'daily', icon: '📅', name_hindi: 'दैनिक', name_english: 'Daily' },
+            { id: 'weekly', icon: '📆', name_hindi: 'साप्ताहिक', name_english: 'Weekly' },
+            { id: 'monthly', icon: '📖', name_hindi: 'मासिक', name_english: 'Monthly' },
+            { id: 'quarterly', icon: '🗓️', name_hindi: 'त्रैमासिक', name_english: 'Quarterly' },
+            { id: 'yearly', icon: '📚', name_hindi: 'वार्षिक', name_english: 'Yearly' },
+            { id: 'state', icon: '🗺️', name_hindi: 'राज्य-वार', name_english: 'State-wise' },
+            { id: 'international', icon: '🌍', name_hindi: 'अंतर्राष्ट्रीय', name_english: 'International' },
+            { id: 'schemes', icon: '🏛️', name_hindi: 'योजनाएँ', name_english: 'Schemes' },
+            { id: 'video', icon: '🎥', name_hindi: 'वीडियो', name_english: 'Video' },
+            { id: 'quiz', icon: '🎯', name_hindi: 'क्विज़', name_english: 'Quiz' }
+        ];
+
+        function renderCategories() {
+            const container = document.getElementById('categoryDoors');
+            container.innerHTML = categoryList.map(cat => `
+                <button class="category-door ${currentCategory === cat.id ? 'active' : ''}" onclick="switchCategory('${cat.id}')">
+                    ${cat.icon} ${currentUILanguage === 'hindi' ? cat.name_hindi : cat.name_english}
+                </button>
+            `).join('');
+        }
+
+        function switchCategory(categoryId) {
+            currentCategory = categoryId;
+            renderCategories();
+            renderDoors();
+        }
+
+        async function toggleSave(item, category) {
+            const safeId = `${category}_${item.title_english.replace(/\s/g, '_')}_${Date.now()}`;
+            const savedItem = { ...item, id: safeId, category: category };
+            const success = await addToSaved(savedItem);
+            if (success) alert('✅ सेव हो गया! "📚 सेव्ड" में देखें।');
+            renderDoors();
+        }
+
+        async function renderDoors() {
+            const container = document.getElementById('doorsContainer');
+            const searchInput = document.getElementById('searchBox');
+            searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            const data = CURRENT_AFFAIRS_DATA[currentCategory];
+            if (!data) return;
+            
+            let filteredItems = data.items.filter(item => 
+                !searchTerm || 
+                (currentUILanguage === 'hindi' ? item.title_hindi : item.title_english).toLowerCase().includes(searchTerm) ||
+                (currentUILanguage === 'hindi' ? item.description_hindi : item.description_english).toLowerCase().includes(searchTerm)
+            );
+            
+            let html = `
+                <div class="door-card">
+                    <div class="door-header ${currentCategory}">
+                        <span class="door-icon">${data.icon}</span>
+                        <div class="door-title">${currentUILanguage === 'hindi' ? data.name_hindi : data.name_english}</div>
+                    </div>
+                    <div class="door-content">
+                        ${filteredItems.map(item => `
+                            <div class="news-card">
+                                <div class="news-title">${currentUILanguage === 'hindi' ? item.title_hindi : item.title_english}</div>
+                                <div class="news-description">${currentUILanguage === 'hindi' ? item.description_hindi : item.description_english}</div>
+                                <div class="news-detail">
+                                    ${item.date ? `<span class="badge date">📅 ${item.date}</span>` : ''}
+                                    ${item.exam ? `<span class="badge exam">📚 ${item.exam}</span>` : ''}
+                                    ${item.pdfLink ? `<span class="badge pdf">📄 PDF</span>` : ''}
+                                    ${item.videoLink ? `<span class="badge video">🎥 Video</span>` : ''}
+                                    <span class="badge free">🎓 निःशुल्क</span>
+                                </div>
+                                <div class="card-actions">
+                                    ${item.pdfLink ? `<button class="action-btn read" onclick="window.open('${item.pdfLink}', '_blank')">📖 पढ़ें</button>` : ''}
+                                    ${item.videoLink ? `<button class="action-btn read" onclick="window.open('${item.videoLink}', '_blank')">🎥 देखें</button>` : ''}
+                                    <button class="action-btn save" onclick='toggleSave(${JSON.stringify(item).replace(/'/g, "\\'")}, "${currentCategory}")'>📥 सेव करें</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                        ${filteredItems.length === 0 ? '<div class="empty-state">🔍 कोई परिणाम नहीं मिला / No results found</div>' : ''}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        async function loadSavedList() {
+            const items = await getAllSaved();
+            const container = document.getElementById('savedList');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty-state">📭 कोई सेव्ड आइटम नहीं। "📥 सेव करें" पर क्लिक करें!</div>';
+                return;
+            }
+            container.innerHTML = items.map(item => `
+                <div class="saved-item">
+                    <div class="news-title">${currentUILanguage === 'hindi' ? item.title_hindi : item.title_english}</div>
+                    <div class="news-description">${currentUILanguage === 'hindi' ? item.description_hindi : item.description_english}</div>
+                    <div class="card-actions">
+                        <button class="action-btn read" onclick="window.open('${item.pdfLink || item.videoLink || '#'}', '_blank')">📖 खोलें</button>
+                        <button class="action-btn save" onclick="removeSavedAndRefresh('${item.id}')">🗑️ हटाएँ</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function removeSavedAndRefresh(id) {
+            await removeFromSaved(id);
+            await loadSavedList();
+            renderDoors();
+        }
+
+        function toggleSavedPanel() {
+            const panel = document.getElementById('savedPanel');
+            const overlay = document.getElementById('overlay');
+            panel.classList.toggle('open');
+            overlay.classList.toggle('active');
+            if (panel.classList.contains('open')) loadSavedList();
+        }
+
+        function toggleUILanguage() {
+            currentUILanguage = currentUILanguage === 'hindi' ? 'english' : 'hindi';
+            const btn = document.querySelector('.lang-toggle');
+            btn.innerHTML = currentUILanguage === 'hindi' ? '🇬🇧 English' : '🇮🇳 हिंदी';
+            renderCategories();
+            renderDoors();
+        }
+
+        function handleSearch() { renderDoors(); }
+
+        async function init() {
+            await openDatabase();
+            renderCategories();
+            renderDoors();
+            document.getElementById('searchBox').addEventListener('input', handleSearch);
+        }
+        init();
+    </script>
+</body>
+</html>
