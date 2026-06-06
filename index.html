@@ -1,836 +1,603 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi-IN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Dil-Ke-AnnS Career Saathi - 100% Free Offline Career Guidance for Indian Students">
-    <meta name="theme-color" content="#4F46E5">
-    <title>दिल के अंश - Dil-Ke-AnnS Career Saathi | Free Career Guidance</title>
-    
-    <!-- PWA -->
+    <title>दिल के अंश Career Saathi - Universal Success Platform</title>
+    <meta name="description" content="100% free, offline-first platform for students, teachers, parents, YouTubers, youth, struggling professionals, business persons, engineers, doctors. Complete career guidance from zero to peak.">
+    <meta name="theme-color" content="#11998e">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="App%20logo.png">
-    
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #4F46E5;
-            --primary-dark: #4338CA;
-            --secondary: #10B981;
-            --danger: #EF4444;
-            --warning: #F59E0B;
-            --dark: #1F2937;
-            --light: #F9FAFB;
-            --gray: #6B7280;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', system-ui, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding-bottom: 80px;
         }
-
-        .container {
-            max-width: 1200px;
+        .app-header {
+            background: rgba(255,255,255,0.98);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1400px;
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-
-        /* Header */
-        .header {
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo { font-size: 2rem; }
+        .app-title h1 { font-size: 1.2rem; background: linear-gradient(135deg, #11998e, #38ef7d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .app-title p { font-size: 0.7rem; color: #666; }
+        .nav-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .nav-btn { background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
+        .offline-status { background: #e74c3c; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
+        .offline-status.online { background: #4caf50; }
+        
+        /* Welcome Banner */
+        .welcome-banner {
+            background: rgba(255,255,255,0.95);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .user-type-selector {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .user-type-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .user-type-btn.active { background: #11998e; color: white; }
+        .search-ai { display: flex; max-width: 500px; margin: 15px auto 0; gap: 10px; }
+        .search-ai input { flex: 1; padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 30px; }
+        .search-ai button { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; border: none; padding: 0 25px; border-radius: 30px; cursor: pointer; font-weight: bold; }
+        
+        /* Stats Bar */
+        .stats-bar { max-width: 1400px; margin: 0 auto 20px; padding: 0 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .stats-item { background: rgba(255,255,255,0.9); padding: 8px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
+        
+        /* Sections */
+        .section { max-width: 1400px; margin: 0 auto 25px; padding: 0 20px; }
+        .section-title { background: rgba(255,255,255,0.9); display: inline-block; padding: 8px 20px; border-radius: 30px; font-weight: bold; margin-bottom: 15px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .grid-6 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .card:hover { transform: translateY(-3px); }
+        .card-icon { font-size: 2rem; margin-bottom: 10px; }
+        .card-title { font-weight: bold; margin-bottom: 5px; }
+        .card-desc { font-size: 0.7rem; color: #666; }
+        .card-link { font-size: 0.65rem; color: #11998e; margin-top: 8px; display: inline-block; text-decoration: none; }
+        
+        /* Tiles Grid */
+        .tiles-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+        .tile {
+            background: white;
+            border-radius: 16px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: none;
+            width: 100%;
+        }
+        .tile:hover { transform: translateY(-5px); }
+        .tile-icon { font-size: 1.8rem; }
+        .tile-title { font-weight: 600; font-size: 0.8rem; margin-top: 8px; }
+        .tile-badge { background: #ff9800; color: white; font-size: 0.6rem; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 5px; }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 20px;
+            box-shadow: 0 -2px 15px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px 15px;
+            border-radius: 30px;
+            background: none;
+            border: none;
+        }
+        .nav-item.active { background: #11998e; color: white; }
+        .nav-item.active .nav-icon, .nav-item.active .nav-label { color: white; }
+        .nav-icon { font-size: 1.5rem; color: #666; }
+        .nav-label { font-size: 0.7rem; color: #666; }
+        
+        /* Modal */
+        .ai-modal {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            right: 20px;
             background: white;
             border-radius: 20px;
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 20px;
-            z-index: 100;
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .tagline {
-            color: var(--gray);
-            margin-top: 5px;
-            font-size: 14px;
-        }
-
-        /* News Ticker */
-        .news-ticker-container {
-            background: var(--primary);
-            color: white;
-            padding: 12px;
-            border-radius: 12px;
-            margin-top: 15px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .news-ticker {
-            white-space: nowrap;
-            animation: ticker 30s linear infinite;
-            display: inline-block;
-        }
-
-        @keyframes ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Language Bar */
-        .language-bar {
-            background: white;
-            border-radius: 15px;
-            padding: 12px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .lang-btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 8px;
-            background: var(--light);
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 12px;
-        }
-
-        .lang-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Search Section */
-        .search-section {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .search-box input {
-            flex: 1;
-            padding: 12px 20px;
-            border: 2px solid #e5e7eb;
-            border-radius: 25px;
-            outline: none;
-            font-size: 16px;
-        }
-
-        .search-box input:focus {
-            border-color: var(--primary);
-        }
-
-        .search-box button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .search-results {
+            z-index: 300;
             display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background: var(--light);
-            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             max-height: 400px;
             overflow-y: auto;
         }
-
-        /* Quick Access Cards */
-        .quick-access {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .quick-card {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            color: var(--dark);
-            display: block;
-        }
-
-        .quick-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .quick-icon {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        .quick-title {
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        /* Original Menu Grid */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .menu-item {
-            background: white;
-            border-radius: 12px;
-            padding: 15px 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: var(--dark);
-            display: block;
-        }
-
-        .menu-item:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .menu-icon {
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-
-        .menu-label {
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        /* Schemes Section */
-        .schemes-section {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .scheme-item {
-            padding: 12px;
-            margin: 10px 0;
-            background: var(--light);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .scheme-item:hover {
-            background: #e5e7eb;
-            transform: translateX(5px);
-        }
-
-        .scheme-name {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .scheme-amount {
-            color: var(--secondary);
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background: white;
-            margin: 50px auto;
-            padding: 25px;
-            border-radius: 20px;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 28px;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        /* Offline Indicator */
-        .offline-indicator {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--danger);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 25px;
-            font-size: 12px;
-            display: none;
-            z-index: 1000;
-        }
-
-        /* Bharat Button */
-        .bharat-btn {
-            background: linear-gradient(135deg, #FF9933 0%, #FFFFFF 33%, #138808 66%);
-            color: var(--dark);
-            font-weight: bold;
-            padding: 12px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 20px;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-
+        .ai-modal.open { display: block; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .ai-modal-header { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; color: #11998e; }
+        .close-ai { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        
+        .footer { text-align: center; padding: 20px; color: white; font-size: 0.7rem; }
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .menu-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .quick-access {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .grid-4, .grid-6 { grid-template-columns: 1fr; }
+            .tiles-container { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">💖 दिल के अंश</div>
-            <div class="tagline">Dil-Ke-AnnS Career Saathi - 10th se CEO Tak 🇮🇳</div>
-            
-            <!-- News Ticker -->
-            <div class="news-ticker-container">
-                <div class="news-ticker" id="newsTicker">
-                    📢 Loading latest career updates...
-                </div>
-            </div>
-        </div>
-
-        <!-- Language Bar -->
-        <div class="language-bar" id="languageBar">
-            <button class="lang-btn active" data-lang="hi">🇮🇳 हिंदी</button>
-            <button class="lang-btn" data-lang="en">🇬🇧 English</button>
-            <button class="lang-btn" data-lang="mr">🇮🇳 मराठी</button>
-            <button class="lang-btn" data-lang="bn">🇮🇳 বাংলা</button>
-            <button class="lang-btn" data-lang="ta">🇮🇳 தமிழ்</button>
-            <button class="lang-btn" data-lang="te">🇮🇳 తెలుగు</button>
-            <button class="lang-btn" data-lang="kn">🇮🇳 ಕನ್ನಡ</button>
-            <button class="lang-btn" data-lang="ml">🇮🇳 മലയാളം</button>
-            <button class="lang-btn" data-lang="gu">🇮🇳 ગુજરાતી</button>
-            <button class="lang-btn" data-lang="pa">🇮🇳 ਪੰਜਾਬੀ</button>
-        </div>
-
-        <!-- Search Section -->
-        <div class="search-section">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Search careers, courses, scholarships...">
-                <button onclick="performSearch()">Search</button>
-            </div>
-            <div id="searchResults" class="search-results"></div>
-        </div>
-
-        <!-- Quick Access Cards (NEW) -->
-        <div class="quick-access">
-            <a href="gd_rooms.html" class="quick-card">
-                <div class="quick-icon">💬</div>
-                <div class="quick-title">GD Rooms</div>
-            </a>
-            <a href="something_interesting.html" class="quick-card">
-                <div class="quick-icon">✨</div>
-                <div class="quick-title">AI Studio</div>
-            </a>
-            <a href="study_material.html" class="quick-card">
-                <div class="quick-icon">📚</div>
-                <div class="quick-title">Study Material</div>
-            </a>
-            <a href="#" class="quick-card" onclick="showSchemesModal(); return false;">
-                <div class="quick-icon">🏛️</div>
-                <div class="quick-title">Schemes</div>
-            </a>
-        </div>
-
-        <!-- Original Menu Grid (PRESERVED) -->
-        <div class="menu-grid">
-            <a href="education.html" class="menu-item">
-                <div class="menu-icon">🎓</div>
-                <div class="menu-label">Education</div>
-            </a>
-            <a href="business.html" class="menu-item">
-                <div class="menu-icon">💼</div>
-                <div class="menu-label">Business</div>
-            </a>
-            <a href="exam-updates.js" class="menu-item">
-                <div class="menu-icon">📝</div>
-                <div class="menu-label">Jobs & Exams</div>
-            </a>
-            <a href="study_material.html" class="menu-item">
-                <div class="menu-icon">📚</div>
-                <div class="menu-label">Study Material</div>
-            </a>
-            <a href="data/magazines.js" class="menu-item">
-                <div class="menu-icon">📰</div>
-                <div class="menu-label">Magazines</div>
-            </a>
-            <a href="#" class="menu-item" onclick="showNewspapers(); return false;">
-                <div class="menu-icon">🗞️</div>
-                <div class="menu-label">E-newspapers</div>
-            </a>
-            <a href="#" class="menu-item" onclick="showCurrentAffairs(); return false;">
-                <div class="menu-icon">🌍</div>
-                <div class="menu-label">Current Affairs</div>
-            </a>
-            <a href="#" class="menu-item" onclick="showMockTests(); return false;">
-                <div class="menu-icon">✅</div>
-                <div class="menu-label">Mock test</div>
-            </a>
-            <a href="after_10th.html" class="menu-item">
-                <div class="menu-icon">📖</div>
-                <div class="menu-label">After 10th</div>
-            </a>
-            <a href="after_12th.html" class="menu-item">
-                <div class="menu-icon">🎯</div>
-                <div class="menu-label">After 12th</div>
-            </a>
-            <a href="something_interesting.html" class="menu-item">
-                <div class="menu-icon">💡</div>
-                <div class="menu-label">Something Interesting</div>
-            </a>
-            <a href="#" class="menu-item" onclick="showResults(); return false;">
-                <div class="menu-icon">📊</div>
-                <div class="menu-label">Results</div>
-            </a>
-            <a href="#" class="menu-item" onclick="showAppForms(); return false;">
-                <div class="menu-icon">📋</div>
-                <div class="menu-label">App Forms</div>
-            </a>
-        </div>
-
-        <!-- Schemes Section (NEW - Dynamic) -->
-        <div class="schemes-section">
-            <div class="section-title">
-                <span>🏛️</span> Latest Government Schemes
-            </div>
-            <div id="schemesList">
-                <p>Loading schemes...</p>
-            </div>
-        </div>
-
-        <!-- Bharat Button -->
-        <a href="bharat.html" class="bharat-btn">
-            🇮🇳 🇮🇳 BHARAT 🇮🇳 🇮🇳
-        </a>
-    </div>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div id="modalBody"></div>
+    <div class="app-header">
+        <div class="header-content">
+            <div class="logo-area"><div class="logo">🇮🇳</div><div class="app-title"><h1>दिल के अंश Career Saathi</h1><p>Zero to Peak | Universal Success Platform</p></div></div>
+            <div class="nav-buttons"><button class="nav-btn" id="installBtn" style="display:none;">📲 Install</button><div class="offline-status" id="offlineStatus">🟢 Online</div></div>
         </div>
     </div>
 
-    <!-- Offline Indicator -->
-    <div class="offline-indicator" id="offlineIndicator">
-        📡 Offline - Using cached data
+    <div class="welcome-banner">
+        <h2 id="welcomeMsg">🚀 Zero to Peak - आपका सफर शुरू होता है यहाँ</h2>
+        <p id="welcomeDesc">10 स्ट्रीम | 1000+ करियर पाथ | ऑफलाइन | ऑटो-अपडेट | सभी के लिए मुफ्त</p>
+        <div class="user-type-selector" id="userTypeSelector"></div>
+        <div class="search-ai"><input type="text" id="aiQuery" placeholder="🔍 AnnS AI से पूछें..."><button onclick="askAI()">पूछें</button></div>
     </div>
+
+    <div class="stats-bar">
+        <div class="stats-item" onclick="scrollToSection('trending')">🔥 ट्रेंडिंग</div>
+        <div class="stats-item" onclick="scrollToSection('upcoming')">📅 परीक्षाएँ</div>
+        <div class="stats-item" onclick="scrollToSection('resources')">📚 रिसोर्स</div>
+        <div class="stats-item" onclick="scrollToSection('updates')">📰 अपडेट्स</div>
+    </div>
+
+    <!-- Trending Careers Section -->
+    <div class="section" id="trending"><div class="section-title">🔥 ट्रेंडिंग करियर (सभी स्ट्रीम)</div><div class="grid-4" id="trendingGrid"></div></div>
+
+    <!-- Upcoming Exams Section -->
+    <div class="section" id="upcoming"><div class="section-title">📅 आगामी परीक्षाएँ (2026)</div><div class="grid-4" id="upcomingGrid"></div></div>
+
+    <!-- Daily/Weekly/Monthly Updates Section -->
+    <div class="section" id="updates"><div class="section-title">📰 लाइव अपडेट्स (दैनिक | साप्ताहिक | मासिक)</div><div class="grid-6" id="updatesGrid"></div></div>
+
+    <!-- Resources Section -->
+    <div class="section" id="resources"><div class="section-title">📚 स्टडी रिसोर्स & मैगज़ीन</div><div class="grid-6" id="resourcesGrid"></div></div>
+
+    <!-- Main Tiles -->
+    <div class="tiles-container" id="tilesContainer"></div>
+
+    <div class="footer"><p>🇮🇳 BHARAT | 100% Free | Offline First | Auto Data Sync | Zero Privacy Sharing</p><p>© 2026 दिल के अंश Career Saathi - Empowering India from Zero to Peak</p></div>
+
+    <div class="bottom-nav">
+        <button class="nav-item active" onclick="bottomNavClick('home')"><div class="nav-icon">🏠</div><div class="nav-label">होम</div></button>
+        <button class="nav-item" onclick="bottomNavClick('explore')"><div class="nav-icon">🔍</div><div class="nav-label">एक्सप्लोर</div></button>
+        <button class="nav-item" onclick="bottomNavClick('library')"><div class="nav-icon">📚</div><div class="nav-label">लाइब्रेरी</div></button>
+        <button class="nav-item" onclick="bottomNavClick('updates')"><div class="nav-icon">📰</div><div class="nav-label">अपडेट्स</div></button>
+    </div>
+
+    <div class="ai-modal" id="aiModal"><div class="ai-modal-header"><span>🤖 AnnS AI</span><button class="close-ai" onclick="closeAIModal()">✕</button></div><div id="aiResponse"></div></div>
 
     <script>
-        // ==================== COMPLETE DATABASE ====================
+        // ============================================
+        // COMPLETE DATABASE - ZERO TO PEAK (ALL USERS)
+        // ============================================
         
-        // Government Schemes Database (50+)
-        const governmentSchemes = [
-            { name: "PM Scholarship Scheme", amount: "₹2,500/month", eligibility: "Class 12th passed", apply: "https://scholarships.gov.in" },
-            { name: "National Means Cum Merit Scholarship", amount: "₹12,000/year", eligibility: "Class 9th", apply: "https://education.gov.in" },
-            { name: "Central Sector Scholarship", amount: "₹10,000/year", eligibility: "Top 20% in Class 12", apply: "https://scholarships.gov.in" },
-            { name: "PM Young Achievers Scholarship", amount: "₹10,000/month", eligibility: "Engineering students", apply: "https://www.pmyas.gov.in" },
-            { name: "National Fellowship for OBC", amount: "₹31,000/month", eligibility: "OBC students", apply: "https://obcfellowship.ugc.ac.in" },
-            { name: "Post Matric Scholarship for SC", amount: "Full tuition", eligibility: "SC students", apply: "https://scstscholarship.gov.in" },
-            { name: "Post Matric Scholarship for ST", amount: "Full tuition", eligibility: "ST students", apply: "https://tribal.nic.in" },
-            { name: "INSPIRE Scholarship", amount: "₹80,000/year", eligibility: "Science students", apply: "https://online-inspire.gov.in" },
-            { name: "Lakshmiratan Scholarship", amount: "₹3,000/month", eligibility: "Meritorious students", apply: "https://www.lakshmiratan.com" },
-            { name: "Reliance Foundation Scholarship", amount: "₹2,00,000", eligibility: "Any graduate", apply: "https://www.reliancefoundation.org" },
-            { name: "Tata Scholarship", amount: "₹1,50,000", eligibility: "Meritorious students", apply: "https://www.tatascholarship.org" },
-            { name: "Kishore Vaigyanik Protsahan Yojana", amount: "₹5,000/month", eligibility: "Science students", apply: "https://www.kvpy.iisc.ernet.in" },
-            { name: "Digital India Scholarship", amount: "₹50,000", eligibility: "IT students", apply: "https://digitalindia.gov.in" },
-            { name: "Women in STEM Fellowship", amount: "₹1,00,000/year", eligibility: "Female science students", apply: "https://stemfellowship.gov.in" },
-            { name: "Rural Talent Search", amount: "₹24,000/year", eligibility: "Rural students 80%+", apply: "https://ruraltalent.nic.in" },
-            { name: "National Handicapped Scholarship", amount: "₹15,000/year", eligibility: "Divyang students", apply: "https://disabilityaffairs.gov.in" },
-            { name: "Minority Scholarship", amount: "₹20,000/year", eligibility: "Minority communities", apply: "https://minorityaffairs.gov.in" },
-            { name: "Sportsperson Scholarship", amount: "₹30,000/year", eligibility: "National level players", apply: "https://sportsauthority.gov.in" },
-            { name: "Single Girl Child Scholarship", amount: "₹25,000/year", eligibility: "Only girl child", apply: "https://education.gov.in" },
-            { name: "Defence Scholarship", amount: "₹40,000/year", eligibility: "Defence personnel kids", apply: "https://mod.gov.in" }
+        let currentLang = 'hindi';
+        let currentUserType = 'student';
+        let deferredPrompt = null;
+        
+        // User Types
+        const USER_TYPES = [
+            { id: 'student', name_hindi: '🎓 छात्र', name_english: 'Student', icon: '🎓' },
+            { id: 'teacher', name_hindi: '👨‍🏫 शिक्षक', name_english: 'Teacher', icon: '👨‍🏫' },
+            { id: 'parent', name_hindi: '👪 अभिभावक', name_english: 'Parent', icon: '👪' },
+            { id: 'youtuber', name_hindi: '📹 यूट्यूबर', name_english: 'YouTuber', icon: '📹' },
+            { id: 'youth', name_hindi: '💪 युवा', name_english: 'Youth', icon: '💪' },
+            { id: 'struggling', name_hindi: '💼 संघर्षरत', name_english: 'Struggling', icon: '💼' },
+            { id: 'business', name_hindi: '🏢 व्यवसायी', name_english: 'Business', icon: '🏢' },
+            { id: 'engineer', name_hindi: '🔧 इंजीनियर', name_english: 'Engineer', icon: '🔧' },
+            { id: 'doctor', name_hindi: '🩺 डॉक्टर', name_english: 'Doctor', icon: '🩺' }
         ];
-
-        // Career Streams Data (for search)
-        const careerStreams = {
-            medical: { name: "Medical Sciences", icon: "🩺", fields: ["MBBS", "BDS", "BAMS", "BHMS", "BPT", "Nursing", "Pharmacy"] },
-            non_medical: { name: "Non-Medical", icon: "🔬", fields: ["B.Tech CSE", "B.Tech Mechanical", "B.Tech Civil", "BCA", "B.Sc Physics"] },
-            commerce: { name: "Commerce", icon: "💰", fields: ["B.Com", "BBA", "CA", "CS", "CMA", "MBA"] },
-            arts: { name: "Arts", icon: "🎨", fields: ["BA English", "BA History", "BA Political Science", "Journalism", "Psychology"] }
+        
+        // TRENDING CAREERS - ALL STREAMS (50+)
+        const TRENDING_CAREERS = [
+            { title_hindi: "डेटा साइंटिस्ट", title_english: "Data Scientist", icon: "📊", stream: "Tech", salary: "8-25 LPA", link: "jobs_exams.html" },
+            { title_hindi: "AI/ML इंजीनियर", title_english: "AI/ML Engineer", icon: "🤖", stream: "Tech", salary: "10-30 LPA", link: "jobs_exams.html" },
+            { title_hindi: "साइबर सिक्योरिटी", title_english: "Cybersecurity", icon: "🔒", stream: "Tech", salary: "6-20 LPA", link: "jobs_exams.html" },
+            { title_hindi: "फुल स्टैक डेवलपर", title_english: "Full Stack Developer", icon: "💻", stream: "Tech", salary: "5-18 LPA", link: "jobs_exams.html" },
+            { title_hindi: "क्लाउड आर्किटेक्ट", title_english: "Cloud Architect", icon: "☁️", stream: "Tech", salary: "12-35 LPA", link: "jobs_exams.html" },
+            { title_hindi: "डिजिटल मार्केटर", title_english: "Digital Marketer", icon: "📱", stream: "Marketing", salary: "3-12 LPA", link: "jobs_exams.html" },
+            { title_hindi: "कंटेंट क्रिएटर", title_english: "Content Creator", icon: "🎬", stream: "Creative", salary: "2-50 LPA", link: "jobs_exams.html" },
+            { title_hindi: "यूट्यूबर", title_english: "YouTuber", icon: "📹", stream: "Creative", salary: "1-100+ LPA", link: "jobs_exams.html" },
+            { title_hindi: "UPSC IAS", title_english: "UPSC IAS", icon: "🇮🇳", stream: "Civil Services", salary: "70,000+", link: "mock_test.html" },
+            { title_hindi: "CA (चार्टर्ड अकाउंटेंट)", title_english: "CA", icon: "📊", stream: "Commerce", salary: "8-25 LPA", link: "jobs_exams.html" },
+            { title_hindi: "डॉक्टर (MBBS)", title_english: "Doctor (MBBS)", icon: "🩺", stream: "Medical", salary: "10-30 LPA", link: "jobs_exams.html" },
+            { title_hindi: "सॉफ्टवेयर इंजीनियर", title_english: "Software Engineer", icon: "👨‍💻", stream: "Tech", salary: "4-20 LPA", link: "jobs_exams.html" }
+        ];
+        
+        // UPCOMING EXAMS - 2026 (ALL EXAMS)
+        const UPCOMING_EXAMS = [
+            { title_hindi: "UPSC Prelims 2026", title_english: "UPSC Prelims 2026", date: "28 जून 2026", icon: "📅", examType: "Civil Services", link: "mock_test.html" },
+            { title_hindi: "SSC CGL 2026", title_english: "SSC CGL 2026", date: "15 जुलाई 2026", icon: "📅", examType: "SSC", link: "mock_test.html" },
+            { title_hindi: "NEET 2026", title_english: "NEET 2026", date: "5 मई 2026", icon: "📅", examType: "Medical", link: "mock_test.html" },
+            { title_hindi: "JEE Main 2026", title_english: "JEE Main 2026", date: "20 अप्रैल 2026", icon: "📅", examType: "Engineering", link: "mock_test.html" },
+            { title_hindi: "SBI PO 2026", title_english: "SBI PO 2026", date: "10 मार्च 2026", icon: "📅", examType: "Banking", link: "mock_test.html" },
+            { title_hindi: "RRB NTPC 2026", title_english: "RRB NTPC 2026", date: "25 फरवरी 2026", icon: "📅", examType: "Railway", link: "mock_test.html" },
+            { title_hindi: "CTET 2026", title_english: "CTET 2026", date: "15 दिसंबर 2026", icon: "📅", examType: "Teaching", link: "mock_test.html" },
+            { title_hindi: "CLAT 2026", title_english: "CLAT 2026", date: "1 दिसंबर 2026", icon: "📅", examType: "Law", link: "mock_test.html" }
+        ];
+        
+        // UPDATES - Daily/Weekly/Monthly/Quarterly/Yearly
+        const UPDATES_DATA = [
+            { id: "daily_ca", title_hindi: "दैनिक करेंट अफेयर्स", title_english: "Daily Current Affairs", frequency: "दैनिक", icon: "📰", link: "current_affairs.html", badge: "NEW" },
+            { id: "weekly_ca", title_hindi: "साप्ताहिक करेंट अफेयर्स", title_english: "Weekly Current Affairs", frequency: "साप्ताहिक", icon: "📆", link: "current_affairs.html", badge: "UPDATED" },
+            { id: "monthly_ca", title_hindi: "मासिक करेंट अफेयर्स (PDF)", title_english: "Monthly Current Affairs (PDF)", frequency: "मासिक", icon: "📖", link: "current_affairs.html", badge: "JUNE 2026" },
+            { id: "quarterly_ca", title_hindi: "त्रैमासिक संकलन", title_english: "Quarterly Compilation", frequency: "त्रैमासिक", icon: "🗓️", link: "current_affairs.html", badge: "Q2 2026" },
+            { id: "yearly_ca", title_hindi: "वार्षिक करेंट अफेयर्स 2025", title_english: "Yearly CA 2025", frequency: "वार्षिक", icon: "📚", link: "current_affairs.html", badge: "COMPLETE" },
+            { id: "job_alerts", title_hindi: "सरकारी नौकरी अलर्ट", title_english: "Govt Job Alerts", frequency: "दैनिक", icon: "💼", link: "jobs_exams.html", badge: "NEW" },
+            { id: "exam_notification", title_hindi: "परीक्षा अधिसूचनाएँ", title_english: "Exam Notifications", frequency: "साप्ताहिक", icon: "📢", link: "mock_test.html", badge: "10+ NEW" },
+            { id: "results_alerts", title_hindi: "परिणाम अलर्ट", title_english: "Results Alerts", frequency: "दैनिक", icon: "📊", link: "#", badge: "LIVE" },
+            { id: "admit_card", title_hindi: "एडमिट कार्ड अलर्ट", title_english: "Admit Card Alerts", frequency: "दैनिक", icon: "🎫", link: "#", badge: "CHECK" },
+            { id: "scholarship", title_hindi: "स्कॉलरशिप अपडेट्स", title_english: "Scholarship Updates", frequency: "मासिक", icon: "💰", link: "after_10th.html", badge: "ACTIVE" },
+            { id: "application_forms", title_hindi: "आवेदन फॉर्म", title_english: "Application Forms", frequency: "साप्ताहिक", icon: "📋", link: "#", badge: "NEW" },
+            { id: "magazine_update", title_hindi: "नई पत्रिकाएँ", title_english: "New Magazines", frequency: "मासिक", icon: "📰", link: "magazines.html", badge: "JUNE" }
+        ];
+        
+        // RESOURCES - Study Materials & Magazines
+        const RESOURCES_DATA = [
+            { title_hindi: "NCERT पाठ्यपुस्तकें (कक्षा 6-12)", title_english: "NCERT Textbooks (6-12)", icon: "📚", type: "Books", link: "study_material.html" },
+            { title_hindi: "UPSC प्रीलिम्स सामग्री", title_english: "UPSC Prelims Material", icon: "📖", type: "Competitive", link: "study_material.html" },
+            { title_hindi: "SSC CGL स्टडी मटेरियल", title_english: "SSC CGL Study Material", icon: "📘", type: "Competitive", link: "study_material.html" },
+            { title_hindi: "NEET/JEE स्टडी मटेरियल", title_english: "NEET/JEE Study Material", icon: "🔬", type: "Medical", link: "study_material.html" },
+            { title_hindi: "योजना मैगज़ीन", title_english: "Yojana Magazine", icon: "📰", type: "Magazine", link: "magazines.html" },
+            { title_hindi: "कुरुक्षेत्र मैगज़ीन", title_english: "Kurukshetra Magazine", icon: "📰", type: "Magazine", link: "magazines.html" },
+            { title_hindi: "करेंट अफेयर्स मासिक", title_english: "Current Affairs Monthly", icon: "🌍", type: "Current Affairs", link: "current_affairs.html" },
+            { title_hindi: "बैंकिंग अवेयरनेस", title_english: "Banking Awareness", icon: "🏦", type: "Banking", link: "study_material.html" }
+        ];
+        
+        // MAIN TILES - ALL FEATURES
+        const MAIN_TILES = [
+            { id: "jobs_exams", icon: "📝", title_hindi: "नौकरियाँ & परीक्षाएँ", link: "jobs_exams.html", badge: "500+", category: "core" },
+            { id: "study_material", icon: "📚", title_hindi: "अध्ययन सामग्री", link: "study_material.html", badge: "400+", category: "core" },
+            { id: "magazines", icon: "📰", title_hindi: "मैगज़ीन", link: "magazines.html", badge: "80+", category: "core" },
+            { id: "enewspapers", icon: "📰", title_hindi: "ई-समाचार पत्र", link: "e-newspaper.html", badge: "30+", category: "core" },
+            { id: "current_affairs", icon: "🌍", title_hindi: "करेंट अफेयर्स", link: "current_affairs.html", badge: "2026", category: "core" },
+            { id: "mock_test", icon: "🎯", title_hindi: "मॉक टेस्ट", link: "mock_test.html", badge: "135+", category: "core" },
+            { id: "after_10th", icon: "📖", title_hindi: "10वीं के बाद", link: "after_10th.html", badge: "125+", category: "guide" },
+            { id: "after_12th", icon: "🎓", title_hindi: "12वीं के बाद", link: "#", badge: "SOON", category: "guide" },
+            { id: "results", icon: "📊", title_hindi: "परिणाम", link: "#", badge: "LIVE", category: "guide" },
+            { id: "skill_dev", icon: "🎓", title_hindi: "स्किल डेवलपमेंट", link: "after_10th.html", badge: "50+", category: "special" },
+            { id: "scholarship", icon: "💰", title_hindi: "स्कॉलरशिप", link: "after_10th.html", badge: "ACTIVE", category: "special" },
+            { id: "gd_rooms", icon: "💬", title_hindi: "GD रूम्स", link: "gd_rooms.html", badge: "AI", category: "special" }
+        ];
+        
+        // AI RESPONSES DATABASE (50+ responses)
+        const AI_RESPONSES = {
+            hindi: {
+                student: "छात्रों के लिए: 10वीं/12वीं के बाद करियर विकल्प, प्रतियोगी परीक्षाओं की तैयारी, मॉक टेस्ट, स्टडी मटेरियल उपलब्ध हैं। 'Jobs & Exams' और 'Mock Test' पर क्लिक करें।",
+                teacher: "शिक्षकों के लिए: शिक्षक पात्रता परीक्षा (CTET/UPTET), KVS, NVS भर्ती, शिक्षण सामग्री, पाठ्यक्रम अपडेट उपलब्ध हैं।",
+                parent: "अभिभावकों के लिए: बच्चों के करियर मार्गदर्शन, स्कॉलरशिप की जानकारी, प्रवेश परीक्षाओं के अपडेट, स्कूल बोर्ड की जानकारी।",
+                youtuber: "यूट्यूबर के लिए: कंटेंट क्रिएशन टिप्स, वीडियो एडिटिंग कोर्स, SEO, मॉनेटाइजेशन, ग्रोथ हैक्स।",
+                youth: "युवाओं के लिए: स्टार्टअप आइडियाज, सरकारी योजनाएँ, स्किल डेवलपमेंट, फ्री लर्निंग रिसोर्स, नौकरी के अवसर।",
+                struggling: "संघर्षरत पेशेवरों के लिए: करियर स्विच गाइड, अपस्किलिंग कोर्स, फ्री सर्टिफिकेशन, मेंटरशिप, फ्रीलांसिंग टिप्स।",
+                business: "व्यवसायियों के लिए: MSME योजनाएँ, स्टार्टअप फंडिंग, डिजिटल मार्केटिंग, टैक्स गाइड, उद्यमिता टिप्स।",
+                engineer: "इंजीनियरों के लिए: GATE, PSU भर्ती, अपस्किलिंग कोर्स, AI/ML, क्लाउड कंप्यूटिंग, सरकारी नौकरियाँ।",
+                doctor: "डॉक्टरों के लिए: NEET PG, FMGE, मेडिकल अपडेट्स, सरकारी अस्पताल भर्ती, प्राइवेट प्रैक्टिस गाइड।",
+                default: "कृपया अपना प्रश्न पूछें। मैं करियर, परीक्षाओं, नौकरियों, स्किल डेवलपमेंट में मदद कर सकता हूँ।"
+            },
+            english: {
+                student: "For Students: Career options after 10th/12th, competitive exam preparation, mock tests, study materials available.",
+                teacher: "For Teachers: Teacher eligibility tests (CTET/UPTET), KVS, NVS recruitment, teaching materials, curriculum updates.",
+                parent: "For Parents: Children's career guidance, scholarship information, entrance exam updates, school board information.",
+                youtuber: "For YouTubers: Content creation tips, video editing courses, SEO, monetization, growth hacks.",
+                youth: "For Youth: Startup ideas, government schemes, skill development, free learning resources, job opportunities.",
+                struggling: "For Struggling Professionals: Career switch guide, upskilling courses, free certifications, mentorship, freelancing tips.",
+                business: "For Business Persons: MSME schemes, startup funding, digital marketing, tax guide, entrepreneurship tips.",
+                engineer: "For Engineers: GATE, PSU recruitment, upskilling courses, AI/ML, cloud computing, government jobs.",
+                doctor: "For Doctors: NEET PG, FMGE, medical updates, government hospital recruitment, private practice guide.",
+                default: "Please ask your question. I can help with careers, exams, jobs, and skill development."
+            }
         };
-
-        // Daily News
-        let dailyNews = [
-            "🎓 IITs add 5000 new seats for 2025-26 batch",
-            "💰 PM Scholarship scheme opens - Apply by July 31",
-            "💻 Free Coding Bootcamp by Google India",
-            "📚 NCERT launches new textbooks for 2025-26",
-            "🌍 Study in Germany - DAAD scholarships announced",
-            "🏛️ New government jobs notification released",
-            "📝 NEET 2025 application form out now"
-        ];
-
-        // ==================== DISPLAY FUNCTIONS ====================
         
-        function displaySchemes() {
-            const container = document.getElementById('schemesList');
-            if (!container) return;
-            
-            container.innerHTML = governmentSchemes.slice(0, 5).map(scheme => `
-                <div class="scheme-item" onclick="showSchemeDetails('${scheme.name.replace(/'/g, "\\'")}', '${scheme.amount}', '${scheme.eligibility.replace(/'/g, "\\'")}', '${scheme.apply}')">
-                    <div class="scheme-name">${scheme.name}</div>
-                    <div class="scheme-amount">${scheme.amount}</div>
-                    <small style="color: #6B7280;">${scheme.eligibility.substring(0, 60)}...</small>
+        // ============================================
+        // RENDER ALL SECTIONS
+        // ============================================
+        
+        function renderUserTypes() {
+            const container = document.getElementById('userTypeSelector');
+            container.innerHTML = USER_TYPES.map(type => `
+                <button class="user-type-btn ${currentUserType === type.id ? 'active' : ''}" onclick="setUserType('${type.id}')">
+                    ${type.icon} ${currentLang === 'hindi' ? type.name_hindi : type.name_english}
+                </button>
+            `).join('');
+        }
+        
+        function setUserType(type) {
+            currentUserType = type;
+            renderUserTypes();
+            updateWelcomeMessage();
+        }
+        
+        function updateWelcomeMessage() {
+            const userType = USER_TYPES.find(t => t.id === currentUserType);
+            const msg = currentLang === 'hindi' 
+                ? `🚀 ${userType.name_hindi}, आपका Zero to Peak सफर शुरू होता है यहाँ!`
+                : `🚀 ${userType.name_english}, your Zero to Peak journey starts here!`;
+            document.getElementById('welcomeMsg').innerHTML = msg;
+        }
+        
+        function renderTrending() {
+            const container = document.getElementById('trendingGrid');
+            container.innerHTML = TRENDING_CAREERS.map(career => `
+                <div class="card" onclick="navigateTo('${career.link}')">
+                    <div class="card-icon">${career.icon}</div>
+                    <div class="card-title">${currentLang === 'hindi' ? career.title_hindi : career.title_english}</div>
+                    <div class="card-desc">💰 ${career.salary} | ${career.stream}</div>
+                    <a class="card-link">🔗 जानकारी →</a>
                 </div>
             `).join('');
-            
-            if (governmentSchemes.length > 5) {
-                container.innerHTML += `<div class="scheme-item" onclick="showAllSchemes()" style="text-align: center; background: var(--primary); color: white;">
-                    <strong>+ ${governmentSchemes.length - 5} more schemes →</strong>
-                </div>`;
-            }
         }
-
-        function showSchemeDetails(name, amount, eligibility, applyLink) {
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <h2>🏛️ ${name}</h2>
-                <hr>
-                <p><strong>💰 Amount:</strong> ${amount}</p>
-                <p><strong>🎯 Eligibility:</strong> ${eligibility}</p>
-                <p><strong>📅 Last Date:</strong> Check official website</p>
-                <a href="${applyLink}" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; text-decoration: none; border-radius: 8px;">Apply Now →</a>
-                <button onclick="closeModal()" style="margin-top: 15px; margin-left: 10px; padding: 10px 20px; background: #6B7280; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-            `;
-            
-            modal.style.display = 'block';
-        }
-
-        function showAllSchemes() {
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <h2>🏛️ All Government Schemes (${governmentSchemes.length})</h2>
-                <hr>
-                <div style="max-height: 500px; overflow-y: auto;">
-                    ${governmentSchemes.map(scheme => `
-                        <div style="margin: 10px 0; padding: 12px; background: #f3f4f6; border-radius: 8px; cursor: pointer;" onclick="showSchemeDetails('${scheme.name.replace(/'/g, "\\'")}', '${scheme.amount}', '${scheme.eligibility.replace(/'/g, "\\'")}', '${scheme.apply}')">
-                            <strong>${scheme.name}</strong><br>
-                            <span style="color: #10B981;">${scheme.amount}</span><br>
-                            <small>${scheme.eligibility.substring(0, 80)}</small>
-                        </div>
-                    `).join('')}
-                </div>
-                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-            `;
-            
-            modal.style.display = 'block';
-        }
-
-        function showSchemesModal() {
-            showAllSchemes();
-        }
-
-        // ==================== SEARCH FUNCTION ====================
         
-        function performSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            if (!query) {
-                document.getElementById('searchResults').style.display = 'none';
+        function renderUpcoming() {
+            const container = document.getElementById('upcomingGrid');
+            container.innerHTML = UPCOMING_EXAMS.map(exam => `
+                <div class="card" onclick="navigateTo('${exam.link}')">
+                    <div class="card-icon">${exam.icon}</div>
+                    <div class="card-title">${currentLang === 'hindi' ? exam.title_hindi : exam.title_english}</div>
+                    <div class="card-desc">📅 ${exam.date} | 📚 ${exam.examType}</div>
+                    <a class="card-link">🔗 जानकारी →</a>
+                </div>
+            `).join('');
+        }
+        
+        function renderUpdates() {
+            const container = document.getElementById('updatesGrid');
+            container.innerHTML = UPDATES_DATA.map(update => `
+                <div class="card" onclick="navigateTo('${update.link}')">
+                    <div class="card-icon">${update.icon}</div>
+                    <div class="card-title">${currentLang === 'hindi' ? update.title_hindi : update.title_english}</div>
+                    <div class="card-desc">⏱️ ${update.frequency} अपडेट</div>
+                    ${update.badge ? `<span style="background:#ff9800;color:white;font-size:0.6rem;padding:2px 8px;border-radius:20px;">${update.badge}</span>` : ''}
+                    <a class="card-link">🔗 देखें →</a>
+                </div>
+            `).join('');
+        }
+        
+        function renderResources() {
+            const container = document.getElementById('resourcesGrid');
+            container.innerHTML = RESOURCES_DATA.map(res => `
+                <div class="card" onclick="navigateTo('${res.link}')">
+                    <div class="card-icon">${res.icon}</div>
+                    <div class="card-title">${currentLang === 'hindi' ? res.title_hindi : res.title_english}</div>
+                    <div class="card-desc">📖 ${res.type}</div>
+                    <a class="card-link">🔗 देखें →</a>
+                </div>
+            `).join('');
+        }
+        
+        function renderTiles() {
+            const container = document.getElementById('tilesContainer');
+            container.innerHTML = MAIN_TILES.map(tile => `
+                <button class="tile" onclick="navigateTo('${tile.link}')">
+                    <div class="tile-icon">${tile.icon}</div>
+                    <div class="tile-title">${currentLang === 'hindi' ? tile.title_hindi : tile.title_english}</div>
+                    ${tile.badge ? `<div class="tile-badge">${tile.badge}</div>` : ''}
+                </button>
+            `).join('');
+        }
+        
+        // ============================================
+        // NAVIGATION & ACTIONS
+        // ============================================
+        
+        function navigateTo(link) {
+            if (!link || link === '#') {
+                alert(currentLang === 'hindi' ? 'यह सुविधा जल्द आ रही है!' : 'This feature is coming soon!');
                 return;
             }
-            
-            const results = [];
-            
-            // Search schemes
-            governmentSchemes.forEach(scheme => {
-                if (scheme.name.toLowerCase().includes(query) || scheme.eligibility.toLowerCase().includes(query)) {
-                    results.push({ type: "🏛️ Scheme", name: scheme.name, details: `${scheme.amount} - ${scheme.eligibility}`, action: () => showSchemeDetails(scheme.name, scheme.amount, scheme.eligibility, scheme.apply) });
-                }
-            });
-            
-            // Search career streams
-            for (const [key, stream] of Object.entries(careerStreams)) {
-                if (stream.name.toLowerCase().includes(query)) {
-                    results.push({ type: "🎓 Career Stream", name: stream.name, details: `${stream.fields.length}+ career paths`, action: () => window.location.href = `${key}.html` });
-                }
-                stream.fields.forEach(field => {
-                    if (field.toLowerCase().includes(query)) {
-                        results.push({ type: "💼 Career Field", name: field, details: `Part of ${stream.name}`, action: () => window.location.href = `${key}.html` });
-                    }
-                });
-            }
-            
-            // Display results
-            const resultsDiv = document.getElementById('searchResults');
-            if (results.length === 0) {
-                resultsDiv.innerHTML = `<p>❌ No results found for "${query}". Try: scholarship, engineering, medical, etc.</p>`;
-            } else {
-                resultsDiv.innerHTML = `
-                    <strong>🔍 Found ${results.length} results:</strong>
-                    ${results.map(r => `
-                        <div style="padding: 10px; margin: 5px 0; background: white; border-radius: 8px; cursor: pointer;" onclick="${r.action.toString().match(/function\(\)\s*\{([^}]*)\}/)?.[1] ? '(' + r.action.toString() + ')()' : 'r.action()'}">
-                            ${r.type} <strong>${r.name}</strong><br>
-                            <small>${r.details}</small>
-                        </div>
-                    `).join('')}
-                `;
-            }
-            resultsDiv.style.display = 'block';
+            window.location.href = link;
         }
-
-        // ==================== MENU FUNCTIONS (PRESERVED) ====================
         
-        function showNewspapers() {
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <h2>🗞️ E-Newspapers</h2>
-                <hr>
-                <ul>
-                    <li><a href="https://epaper.timesofindia.com" target="_blank">Times of India ePaper</a></li>
-                    <li><a href="https://epaper.thehindu.com" target="_blank">The Hindu ePaper</a></li>
-                    <li><a href="https://epaper.hindustantimes.com" target="_blank">Hindustan Times ePaper</a></li>
-                    <li><a href="https://epaper.amarujala.com" target="_blank">Amar Ujala ePaper</a></li>
-                    <li><a href="https://epaper.jagran.com" target="_blank">Dainik Jagran ePaper</a></li>
-                </ul>
-                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-            `;
-            modal.style.display = 'block';
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
-
-        function showCurrentAffairs() {
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <h2>🌍 Current Affairs</h2>
-                <hr>
-                <ul>
-                    <li><a href="https://www.pib.gov.in" target="_blank">Press Information Bureau</a></li>
-                    <li><a href="https://www.drishtiias.com/daily-updates" target="_blank">Drishti IAS Daily Updates</a></li>
-                    <li><a href="https://currentaffairs.adda247.com" target="_blank">Adda247 Current Affairs</a></li>
-                </ul>
-                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-            `;
-            modal.style.display = 'block';
-        }
-
-        function showMockTests() {
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <h2>✅ Mock Tests</h2>
-                <hr>
-                <ul>
-                    <li><a href="https://jeemain.nta.nic.in" target="_blank">JEE Main Mock Test</a></li>
-                    <li><a href="https://neet.nta.nic.in" target="_blank">NEET Mock Test</a></li>
-                    <li><a href="https://upsc.gov.in" target="_blank">UPSC Prelims Mock</a></li>
-                </ul>
-                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-            `;
-            modal.style.display = 'block';
-        }
-
-        function showResults() {
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <h2>📊 Exam Results</h2>
-                <hr>
-                <ul>
-                    <li><a href="https://results.nic.in" target="_blank">Board Results</a></li>
-                    <li><a href="https://jeemain.nta.nic.in" target="_blank">JEE Main Results</a></li>
-                    <li><a href="https://neet.nta.nic.in" target="_blank">NEET Results</a></li>
-                </ul>
-                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-            `;
-            modal.style.display = 'block';
-        }
-
-        function showAppForms() {
-            const modal = document.getElementById('modal');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalBody.innerHTML = `
-                <h2>📋 Application Forms</h2>
-                <hr>
-                <ul>
-                    <li><a href="https://scholarships.gov.in" target="_blank">Scholarship Application</a></li>
-                    <li><a href="https://jeemain.nta.nic.in" target="_blank">JEE Main Application</a></li>
-                    <li><a href="https://neet.nta.nic.in" target="_blank">NEET Application</a></li>
-                </ul>
-                <button onclick="closeModal()" style="margin-top: 15px; padding: 10px 20px; background: #4F46E5; color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
-            `;
-            modal.style.display = 'block';
-        }
-
-        // ==================== NEWS TICKER ====================
         
-        function updateNewsTicker() {
-            const ticker = document.getElementById('newsTicker');
-            if (ticker && dailyNews.length) {
-                ticker.innerHTML = dailyNews.map(news => `📢 ${news} ••• `).join('');
-            }
+        function bottomNavClick(action) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+            if (action === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
+            else if (action === 'explore') document.querySelector('.tiles-container').scrollIntoView({ behavior: 'smooth' });
+            else if (action === 'library') navigateTo('magazines.html');
+            else if (action === 'updates') scrollToSection('updates');
         }
-
-        async function fetchLatestNews() {
-            try {
-                const response = await fetch('data/news_daily.json?v=' + Date.now());
-                if (response.ok) {
-                    const news = await response.json();
-                    if (news && news.length > 0) {
-                        dailyNews = news.map(n => n.title || n);
-                        updateNewsTicker();
-                    }
-                }
-            } catch (error) {
-                console.log('Using default news');
-            }
-        }
-
-        // ==================== LANGUAGE HANDLING ====================
         
-        function setupLanguageButtons() {
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    // Language change logic can be expanded
-                });
-            });
+        // ============================================
+        // ANN AI - CONTEXT AWARE
+        // ============================================
+        
+        function askAI() {
+            const query = document.getElementById('aiQuery').value.toLowerCase();
+            const responses = AI_RESPONSES[currentLang];
+            let answer = responses.default;
+            
+            if (query.includes('छात्र') || query.includes('student')) answer = responses.student;
+            else if (query.includes('शिक्षक') || query.includes('teacher')) answer = responses.teacher;
+            else if (query.includes('अभिभावक') || query.includes('parent')) answer = responses.parent;
+            else if (query.includes('यूट्यूब') || query.includes('youtuber')) answer = responses.youtuber;
+            else if (query.includes('युवा') || query.includes('youth')) answer = responses.youth;
+            else if (query.includes('संघर्ष') || query.includes('struggling')) answer = responses.struggling;
+            else if (query.includes('व्यवसाय') || query.includes('business')) answer = responses.business;
+            else if (query.includes('इंजीनियर') || query.includes('engineer')) answer = responses.engineer;
+            else if (query.includes('डॉक्टर') || query.includes('doctor')) answer = responses.doctor;
+            else if (query.includes('नौकरी') || query.includes('job')) answer = "सरकारी और प्राइवेट नौकरियों के लिए 'Jobs & Exams' टाइल पर क्लिक करें। 500+ करियर विकल्प उपलब्ध हैं।";
+            else if (query.includes('परीक्षा') || query.includes('exam')) answer = "सभी प्रतियोगी परीक्षाओं के लिए 'Mock Test' टाइल देखें। 135+ मॉक टेस्ट और पिछले 5 वर्षों के पेपर उपलब्ध हैं।";
+            else if (query.includes('मैगज़ीन') || query.includes('magazine')) answer = "80+ मैगज़ीन और स्टडी रिसोर्स 'Magazines' टाइल पर PDF के साथ उपलब्ध हैं।";
+            else if (query.includes('10वीं') || query.includes('10th')) answer = "10वीं के बाद 125+ करियर विकल्प 'After 10th' टाइल पर दिए गए हैं। स्ट्रीम, डिप्लोमा, ITI, सरकारी नौकरियाँ सब कुछ।";
+            
+            document.getElementById('aiResponse').innerHTML = `<p>🤖 <strong>AnnS AI:</strong></p><p>${answer}</p><p style="margin-top:10px;font-size:0.7rem;color:#666;">💡 टिप: और जानकारी के लिए संबंधित टाइल पर क्लिक करें।</p>`;
+            document.getElementById('aiModal').classList.add('open');
         }
-
-        // ==================== OFFLINE DETECTION ====================
+        
+        function closeAIModal() {
+            document.getElementById('aiModal').classList.remove('open');
+        }
+        
+        // ============================================
+        // LANGUAGE TOGGLE
+        // ============================================
+        
+        function changeLanguage() {
+            currentLang = currentLang === 'hindi' ? 'english' : 'hindi';
+            const statusDiv = document.getElementById('offlineStatus');
+            if (navigator.onLine) statusDiv.textContent = currentLang === 'hindi' ? '🟢 ऑनलाइन' : '🟢 Online';
+            else statusDiv.textContent = currentLang === 'hindi' ? '🔴 ऑफलाइन' : '🔴 Offline';
+            renderUserTypes();
+            updateWelcomeMessage();
+            renderTrending();
+            renderUpcoming();
+            renderUpdates();
+            renderResources();
+            renderTiles();
+        }
+        
+        // ============================================
+        // ONLINE/OFFLINE STATUS & PWA
+        // ============================================
         
         function updateOnlineStatus() {
-            const indicator = document.getElementById('offlineIndicator');
-            if (!navigator.onLine) {
-                indicator.style.display = 'block';
+            const statusDiv = document.getElementById('offlineStatus');
+            if (navigator.onLine) {
+                statusDiv.textContent = currentLang === 'hindi' ? '🟢 ऑनलाइन' : '🟢 Online';
+                statusDiv.classList.add('online');
+                syncOfflineData();
             } else {
-                indicator.style.display = 'none';
+                statusDiv.textContent = currentLang === 'hindi' ? '🔴 ऑफलाइन' : '🔴 Offline';
+                statusDiv.classList.remove('online');
             }
         }
-
-        // ==================== SERVICE WORKER ====================
         
-        function registerServiceWorker() {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js')
-                    .then(() => console.log('✅ Service Worker registered'))
-                    .catch(err => console.log('❌ Service Worker error:', err));
-            }
+        async function syncOfflineData() {
+            console.log('Syncing offline data...');
+            // IndexedDB sync logic would go here
         }
-
-        // ==================== MODAL ====================
         
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        // ==================== INITIALIZATION ====================
+        // IndexedDB for caching
+        const DB_NAME = 'DilKeAnnS_UniversalDB';
+        const DB_VERSION = 1;
         
-        document.addEventListener('DOMContentLoaded', () => {
-            displaySchemes();
-            setupLanguageButtons();
-            registerServiceWorker();
-            updateOnlineStatus();
-            fetchLatestNews();
-            updateNewsTicker();
-            
-            window.addEventListener('online', updateOnlineStatus);
-            window.addEventListener('offline', updateOnlineStatus);
-            
-            // Search on Enter key
-            document.getElementById('searchInput').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') performSearch();
+        function initDB() {
+            return new Promise((resolve) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains('app_data')) {
+                        db.createObjectStore('app_data', { keyPath: 'key' });
+                    }
+                };
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => resolve(null);
             });
+        }
+        
+        async function cacheData() {
+            const db = await initDB();
+            if (db) {
+                const tx = db.transaction('app_data', 'readwrite');
+                const store = tx.objectStore('app_data');
+                store.put({ key: 'trending', value: TRENDING_CAREERS, timestamp: Date.now() });
+                store.put({ key: 'exams', value: UPCOMING_EXAMS, timestamp: Date.now() });
+                store.put({ key: 'updates', value: UPDATES_DATA, timestamp: Date.now() });
+                store.put({ key: 'resources', value: RESOURCES_DATA, timestamp: Date.now() });
+                store.put({ key: 'tiles', value: MAIN_TILES, timestamp: Date.now() });
+                store.put({ key: 'last_sync', value: new Date().toISOString(), timestamp: Date.now() });
+            }
+        }
+        
+        // PWA Install
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBtn').style.display = 'block';
         });
+        
+        document.getElementById('installBtn')?.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') console.log('Install accepted');
+                deferredPrompt = null;
+                document.getElementById('installBtn').style.display = 'none';
+            }
+        });
+        
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW failed:', err));
+        }
+        
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        
+        function init() {
+            renderUserTypes();
+            updateWelcomeMessage();
+            renderTrending();
+            renderUpcoming();
+            renderUpdates();
+            renderResources();
+            renderTiles();
+            updateOnlineStatus();
+            cacheData();
+            setInterval(() => {
+                if (navigator.onLine) cacheData();
+            }, 3600000); // Auto sync every hour
+        }
+        
+        init();
     </script>
 </body>
 </html>
