@@ -219,82 +219,1047 @@
         // ============================================
 
         const BUSINESS_DATA = {
-            // DOOR 1: COMPLETE ROADMAP (FROZEN)
-            roadmap: {
-                name_hindi: "🗺️ रोडमैप (Idea→IPO)",
-                name_english: "🗺️ Roadmap (Idea→IPO)",
-                icon: "🗺️",
-                items: [
-                    { title_hindi: "Phase 1: Ideation & Research", title_english: "Phase 1: Ideation", description_hindi: "बिजनेस आइडिया ढूंढें, मार्केट रिसर्च करें, समस्या पहचानें", detail: "1-3 महीने", officialLink: "https://www.startupindia.gov.in/" },
-                    { title_hindi: "Phase 2: Validation & MVP", title_english: "Phase 2: Validation", description_hindi: "आइडिया को छोटे पैमाने पर टेस्ट करें, न्यूनतम उत्पाद बनाएं", detail: "2-4 महीने", officialLink: "https://www.niti.gov.in/" },
-                    { title_hindi: "Phase 3: Business Plan", title_english: "Phase 3: Plan", description_hindi: "विस्तृत बिजनेस प्लान, SWOT, PESTLE, प्रतिस्पर्धी विश्लेषण", detail: "1-2 महीने", officialLink: "https://www.sba.gov/business-guide/plan-your-business/write-business-plan" },
-                    { title_hindi: "Phase 4: Registration & Legal", title_english: "Phase 4: Legal", description_hindi: "कंपनी रजिस्ट्रेशन, GST, MSME, ट्रेडमार्क, लाइसेंस", detail: "1-3 महीने", officialLink: "https://www.mca.gov.in/" },
-                    { title_hindi: "Phase 5: Funding", title_english: "Phase 5: Funding", description_hindi: "बूटस्ट्रैपिंग, एंजेल, VC, लोन, सरकारी सब्सिडी", detail: "3-6 महीने", officialLink: "https://www.mudra.org.in/" },
-                    { title_hindi: "Phase 6: Launch & Marketing", title_english: "Phase 6: Launch", description_hindi: "प्रोडक्ट लॉन्च करें, डिजिटल मार्केटिंग करें, ब्रांडिंग करें", detail: "1-2 महीने", officialLink: "https://learndigital.withgoogle.com/" },
-                    { title_hindi: "Phase 7: Scale & Growth", title_english: "Phase 7: Scale", description_hindi: "प्रोसेस ऑप्टिमाइज़ेशन, नए मार्केट में विस्तार, फ्रेंचाइजी", detail: "6-12 महीने", officialLink: "https://www.nseindia.com/" },
-                    { title_hindi: "Phase 8: Exit (IPO/Acquisition)", title_english: "Phase 8: Exit", description_hindi: "IPO, एक्विजिशन, मर्जर - सही समय पर निकासी", detail: "3-10 साल", officialLink: "https://www.sebi.gov.in/" }
-                ]
-            },
-            // DOOR 2: GOVERNMENT SCHEMES (FROZEN)
-            schemes: {
-                name_hindi: "🏛️ सरकारी योजनाएँ",
-                name_english: "🏛️ Govt Schemes",
-                icon: "🏛️",
-                items: [
-                    { title_hindi: "PMEGP", title_english: "PMEGP", description_hindi: "प्रधानमंत्री रोजगार सृजन कार्यक्रम - नए उद्यमों के लिए 15-35% सब्सिडी", amount: "₹10L-50L", eligibility: "8वीं पास, 18+ वर्ष", officialLink: "https://www.kviconline.gov.in/pmegp/" },
-                    { title_hindi: "MUDRA Loan", title_english: "MUDRA Loan", description_hindi: "सूक्ष्म उद्यमों के लिए बिना गारंटी लोन - शिशु, किशोर, तरुण", amount: "₹50,000-10L", eligibility: "कोई भी भारतीय नागरिक", officialLink: "https://www.mudra.org.in/" },
-                    { title_hindi: "Startup India", title_english: "Startup India", description_hindi: "स्टार्टअप्स के लिए टैक्स छूट, फंडिंग, मेंटरशिप, सरलीकृत नियम", amount: "₹10Cr तक", eligibility: "पंजीकृत स्टार्टअप", officialLink: "https://www.startupindia.gov.in/" },
-                    { title_hindi: "MSME Schemes", title_english: "MSME Schemes", description_hindi: "लघु एवं मध्यम उद्योगों के लिए सब्सिडी, लोन में आसानी", officialLink: "https://www.msme.gov.in/" },
-                    { title_hindi: "Tejaswini (Women)", title_english: "Tejaswini", description_hindi: "महिला उद्यमियों के लिए विशेष लोन योजना - कम ब्याज दर", amount: "₹5L-25L", eligibility: "महिला उद्यमी", officialLink: "https://www.nabard.org/" },
-                    { title_hindi: "NRLM", title_english: "NRLM", description_hindi: "राष्ट्रीय ग्रामीण आजीविका मिशन - स्वयं सहायता समूहों के लिए लोन", amount: "₹1L-10L", eligibility: "ग्रामीण महिला समूह", officialLink: "https://www.aajeevika.gov.in/" },
-                    { title_hindi: "ASPIRE Scheme", title_english: "ASPIRE", description_hindi: "स्टार्टअप और उद्यमिता को बढ़ावा देने वाली योजना", officialLink: "https://www.msme.gov.in/" },
-                    { title_hindi: "SAMPARK Yojana", title_english: "SAMPARK", description_hindi: "उद्यमियों को मेंटरशिप और नेटवर्किंग प्रदान करना", officialLink: "https://www.startupindia.gov.in/" },
-                    { title_hindi: "CGTMSE", title_english: "CGTMSE", description_hindi: "क्रेडिट गारंटी फंड ट्रस्ट - बिना कोलैटरल के लोन", amount: "₹2Cr तक", officialLink: "https://www.cgtmse.in/" }
-                ]
-            },
-            // DOOR 3: COMMON MISTAKES (FROZEN)
-            mistakes: {
-                name_hindi: "⚠️ कॉमन मिस्टेक्स",
-                name_english: "⚠️ Common Mistakes",
-                icon: "⚠️",
-                items: [
-                    { title_hindi: "मार्केट रिसर्च न करना", title_english: "No Market Research", description_hindi: "बिना मार्केट रिसर्च के बिजनेस शुरू करना", solution: "पहले ग्राहकों की ज़रूरत और प्रतिस्पर्धा समझें", officialLink: "https://www.niti.gov.in/" },
-                    { title_hindi: "बिजनेस प्लान की कमी", title_english: "No Business Plan", description_hindi: "बिना प्लान के बिजनेस करना", solution: "विस्तृत बिजनेस प्लान बनाएँ - 3-5 साल का रोडमैप", officialLink: "https://www.sba.gov/" },
-                    { title_hindi: "ओवर स्पेंडिंग", title_english: "Over Spending", description_hindi: "शुरुआत में ज्यादा खर्च करना", solution: "मिनिमल विएबल प्रोडक्ट (MVP) से शुरू करें", officialLink: "https://www.mudra.org.in/" },
-                    { title_hindi: "सही टीम न होना", title_english: "Wrong Team", description_hindi: "गलत लोगों को टीम में शामिल करना", solution: "स्किल-मैचिंग और कल्चर फिट देखें", officialLink: "https://www.linkedin.com/" },
-                    { title_hindi: "इग्नोरिंग कस्टमर फीडबैक", title_english: "Ignoring Feedback", description_hindi: "ग्राहकों की बात न सुनना", solution: "नियमित फीडबैक लें और प्रोडक्ट में सुधार करें", officialLink: "https://www.startupindia.gov.in/" },
-                    { title_hindi: "प्रॉफिट मार्जिन इग्नोर करना", title_english: "Ignoring Margins", description_hindi: "यूनिट इकोनॉमिक्स पर ध्यान न देना", solution: "हर सेल पर प्रॉफिट मार्जिन कैलकुलेट करें", officialLink: "https://www.score.org/" }
-                ]
-            },
-            // DOOR 4: ALL BUSINESS IDEAS (FROZEN)
-            ideas: {
-                name_hindi: "💡 सभी बिजनेस आइडियाज (5 स्तर)",
-                name_english: "💡 All Business Ideas (5 Levels)",
-                icon: "💡",
-                items: [
-                    { title_hindi: "🥬 सब्जी/फल की ठेला दुकान", title_english: "Vegetable/Fruit Cart", description_hindi: "ताज़ी सब्जियाँ और फल बेचें - कम निवेश, दैनिक नकदी प्रवाह", investment: "₹5,000-10,000", profit: "₹8,000-15,000/माह", level: "गाँव/छोटा कस्बा", officialLink: "https://www.msme.gov.in/" },
-                    { title_hindi: "🧵 सिलाई/कढ़ाई का काम", title_english: "Tailoring/Embroidery", description_hindi: "कपड़े सिलाई, कढ़ाई, उन्नतिकरण - घर बैठे काम", investment: "₹10,000-20,000", profit: "₹10,000-20,000/माह", level: "गाँव/छोटा कस्बा", officialLink: "https://www.msme.gov.in/" },
-                    { title_hindi: "🍽️ घर से टिफिन सर्विस", title_english: "Home Tiffin Service", description_hindi: "घर का बना खाना ऑफिस/कॉलेज जाने वालों को सप्लाई करें", investment: "₹5,000-15,000", profit: "₹12,000-25,000/माह", level: "गाँव/छोटा कस्बा", officialLink: "https://www.fssai.gov.in/" },
-                    { title_hindi: "💄 पार्लर/ब्यूटी सर्विस", title_english: "Beauty Parlor", description_hindi: "महिलाओं के लिए ब्यूटी सर्विस - मेकअप, हेयर, स्किन केयर", investment: "₹20,000-40,000", profit: "₹15,000-30,000/माह", level: "गाँव/छोटा कस्बा", officialLink: "https://www.beautywellnesscouncil.com/" },
-                    { title_hindi: "📱 मोबाइल रिपेयरिंग", title_english: "Mobile Repairing", description_hindi: "मोबाइल, टैबलेट की मरम्मत - बढ़ता हुआ बाजार", investment: "₹15,000-30,000", profit: "₹15,000-25,000/माह", level: "गाँव/छोटा कस्बा", officialLink: "https://www.nielit.gov.in/" },
-                    { title_hindi: "🐔 मुर्गी पालन (100-200 पक्षी)", title_english: "Poultry Farming", description_hindi: "अंडे और मांस के लिए मुर्गी पालन - तेजी से पैसा", investment: "₹25,000-50,000", profit: "₹20,000-40,000/माह", level: "गाँव/छोटा कस्बा", officialLink: "https://nlm.gov.in/" },
-                    { title_hindi: "🌾 बीज/खाद की दुकान", title_english: "Seed/Fertilizer Shop", description_hindi: "किसानों को बीज, खाद, कीटनाशक बेचें", investment: "₹30,000-50,000", profit: "₹15,000-30,000/माह", level: "गाँव/छोटा कस्बा", officialLink: "https://agricoop.nic.in/" },
-                    { title_hindi: "📚 किताबों की दुकान + स्टेशनरी", title_english: "Book Store + Stationery", description_hindi: "स्कूल/कॉलेज की किताबें, स्टेशनरी, प्रिंटिंग सर्विस", investment: "₹50,000-1,00,000", profit: "₹25,000-50,000/माह", level: "जिला स्तर", officialLink: "https://www.msme.gov.in/" },
-                    { title_hindi: "☕ छोटा कैफे/फास्ट फूड", title_english: "Small Cafe", description_hindi: "समोसा, चाय, कॉफी, सैंडविच - कम निवेश, अच्छा मार्जिन", investment: "₹80,000-1,50,000", profit: "₹30,000-60,000/माह", level: "जिला स्तर", officialLink: "https://www.fssai.gov.in/" },
-                    { title_hindi: "🚚 छोटा ट्रांसपोर्ट बिजनेस", title_english: "Small Transport", description_hindi: "1-2 छोटे वाहनों से माल ढुलाई या यात्री सेवा", investment: "₹1,00,000-3,00,000", profit: "₹30,000-60,000/माह", level: "जिला स्तर", officialLink: "https://parivahan.gov.in/" },
-                    { title_hindi: "📸 फोटोग्राफी स्टूडियो", title_english: "Photography Studio", description_hindi: "पासपोर्ट फोटो, वेडिंग फोटोग्राफी, प्रोडक्ट फोटोग्राफी", investment: "₹1,00,000-2,50,000", profit: "₹30,000-80,000/माह", level: "जिला स्तर", officialLink: "https://www.nielit.gov.in/" },
-                    { title_hindi: "🧴 जैविक उत्पाद (वर्मी कम्पोस्ट)", title_english: "Organic Products", description_hindi: "जैविक खाद, नीम उत्पाद, जैविक सब्जियाँ", investment: "₹50,000-1,00,000", profit: "₹25,000-50,000/माह", level: "जिला स्तर", officialLink: "https://agricoop.nic.in/" },
-                    { title_hindi: "🏨 बजट होटल/गेस्ट हाउस", title_english: "Budget Hotel", description_hindi: "यात्रियों के लिए कमरे, ऑनलाइन बुकिंग", investment: "₹10,00,000-30,00,000", profit: "₹70,000-1,50,000/माह", level: "राज्य स्तर", officialLink: "https://www.hotelassociationofindia.com/" },
-                    { title_hindi: "🏭 छोटी मैन्युफैक्चरिंग यूनिट", title_english: "Small Manufacturing", description_hindi: "पापड़, मसाले, आचार, पैकिंग उत्पाद", investment: "₹5,00,000-15,00,000", profit: "₹50,000-1,00,000/माह", level: "राज्य स्तर", officialLink: "https://www.msme.gov.in/" },
-                    { title_hindi: "🌾 कृषि उत्पाद प्रोसेसिंग", title_english: "Agri Processing", description_hindi: "धान पिलिंग, मिर्च पीसना, दाल प्रोसेसिंग", investment: "₹10,00,000-25,00,000", profit: "₹80,000-1,50,000/माह", level: "राज्य स्तर", officialLink: "https://agricoop.nic.in/" },
-                    { title_hindi: "🚜 एग्रीकल्चर टूल्स रेंटल", title_english: "Agri Tools Rental", description_hindi: "ट्रैक्टर, हार्वेस्टर, थ्रेशर किराए पर दें", investment: "₹15,00,000-30,00,000", profit: "₹1,00,000-2,00,000/माह", level: "राज्य स्तर", officialLink: "https://agricoop.nic.in/" },
-                    { title_hindi: "🏭 मैन्युफैक्चरिंग फैक्ट्री", title_english: "Manufacturing Factory", description_hindi: "एफएमसीजी, प्लास्टिक, पैकेजिंग उत्पाद बनाएँ", investment: "₹1,00,00,000-5,00,00,000", profit: "₹10,00,000-50,00,000/माह", level: "देश स्तर", officialLink: "https://www.dpiit.gov.in/" },
-                    { title_hindi: "🛍️ ई-कॉमर्स स्टोर", title_english: "E-commerce Store", description_hindi: "अपना ऑनलाइन स्टोर, पूरे देश में डिलीवरी", investment: "₹20,00,000-50,00,000", profit: "₹3,00,000-15,00,000/माह", level: "देश स्तर", officialLink: "https://seller.flipkart.com/" },
-                    { title_hindi: "🚛 लॉजिस्टिक्स कंपनी", title_english: "Logistics Company", description_hindi: "देश भर में माल ढुलाई, अंतिम मील डिलीवरी", investment: "₹50,00,000-2,00,00,000", profit: "₹5,00,000-20,00,000/माह", level: "देश स्तर", officialLink: "https://www.niti.gov.in/" },
-                    { title_hindi: "🌏 निर्यात व्यवसाय", title_english: "Export Business", description_hindi: "भारतीय उत्पाद दुनिया भर में बेचें", investment: "₹5,00,00,000-50,00,00,000", level: "अंतर्राष्ट्रीय", officialLink: "https://dgft.gov.in/" },
-                    { title_hindi: "🏢 मल्टीनेशनल कंपनी", title_english: "Multinational Company", description_hindi: "कई देशों में ऑफिस, ग्लोबल ब्रांड", investment: "₹100,00,00,000+", level: "अंतर्राष्ट्रीय", officialLink: "https://www.sebi.gov.in/" }
-                ]
-            },
+            // DOOR 1: COMPLETE ROADMAP (EXPANDED - EXPERT LEVEL DETAILS)
+roadmap: {
+    name_hindi: "🗺️ रोडमैप (Idea → IPO) - पूरा बिजनेस प्लेबुक",
+    name_english: "🗺️ Roadmap (Idea → IPO) - Complete Business Playbook",
+    icon: "🗺️",
+    items: [
+        // ============================================
+        // PHASE 1: IDEATION (Month 1-3)
+        // ============================================
+        { 
+            title_hindi: "🔍 Phase 1.1: Idea Generation & Brainstorming", 
+            title_english: "Phase 1.1: Idea Generation", 
+            description_hindi: "बिजनेस आइडिया ढूंढना सबसे पहला और सबसे जरूरी कदम। अपने पैशन, स्किल्स और बाजार की जरूरतों के बीच तालमेल बिठाएँ।", 
+            description_english: "Finding business ideas is the first and most important step. Align your passion, skills, and market needs.",
+            key_activities: "Brainstorming sessions, SCAMPER technique, Design Thinking, Mind Mapping",
+            tools: "MindMeister, Miro, Notion, Evernote",
+            time: "2-4 सप्ताह",
+            officialLink: "https://www.mindtools.com/scamper" 
+        },
+        { 
+            title_hindi: "📊 Phase 1.2: Market Research & Analysis", 
+            title_english: "Phase 1.2: Market Research", 
+            description_hindi: "बाजार का आकार, प्रतिस्पर्धी, ग्राहक की जरूरतें, प्राइसिंग, और ट्रेंड्स को समझना।", 
+            description_english: "Understand market size, competitors, customer needs, pricing, and trends.",
+            key_activities: "TAM/SAM/SOM Analysis, PESTLE Analysis, SWOT Analysis, Porter's 5 Forces, Customer Surveys",
+            tools: "Google Trends, Statista, SurveyMonkey, Typeform, SEMrush",
+            time: "3-6 सप्ताह",
+            officialLink: "https://www.investopedia.com/tam-sam-som/" 
+        },
+        { 
+            title_hindi: "🎯 Phase 1.3: Problem Validation", 
+            title_english: "Phase 1.3: Problem Validation", 
+            description_hindi: "क्या आपकी समस्या वास्तविक है? क्या लोग इसके लिए पैसे देने को तैयार हैं? 100 लोगों से बात करें।", 
+            description_english: "Is your problem real? Are people willing to pay for it? Talk to 100 potential customers.",
+            key_activities: "Customer Interviews, Problem-Solution Fit, Jobs-to-be-Done Framework",
+            tools: "Calendly, Zoom, Loom, Typeform",
+            time: "2-3 सप्ताह",
+            officialLink: "https://hbr.org/2017/06/validate-your-business-model-in-the-right-order" 
+        },
+        
+        // ============================================
+        // PHASE 2: VALIDATION & MVP (Month 4-7)
+        // ============================================
+        { 
+            title_hindi: "🧪 Phase 2.1: MVP (Minimum Viable Product) Development", 
+            title_english: "Phase 2.1: MVP Development", 
+            description_hindi: "कम से कम फीचर्स वाला प्रोडक्ट बनाएँ जो आपके आइडिया को टेस्ट करे। इसमें सिर्फ कोर फंक्शनलिटी होनी चाहिए।", 
+            description_english: "Build a product with minimal features to test your idea. It should have only core functionality.",
+            key_activities: "Feature Prioritization, Wireframing, Prototyping, Agile Development",
+            platforms: "Bubble, Webflow, WordPress, Flutter, React Native",
+            time: "4-8 सप्ताह",
+            officialLink: "https://leanstartup.co/the-lean-startup-methodology/" 
+        },
+        { 
+            title_hindi: "👥 Phase 2.2: Beta Testing & Feedback", 
+            title_english: "Phase 2.2: Beta Testing", 
+            description_hindi: "प्रोडक्ट को 50-100 बीटा टेस्टर्स के बीच लॉन्च करें। उनकी फीडबैक सुनें और सुधार करें।", 
+            description_english: "Launch product to 50-100 beta testers. Listen to their feedback and improve.",
+            key_activities: "User Testing Sessions, Feedback Collection, Iteration Planning",
+            tools: "UserTesting, Hotjar, UsabilityHub, Google Forms",
+            time: "2-4 सप्ताह",
+            officialLink: "https://www.userinterviews.com/blog/how-to-beta-test" 
+        },
+        { 
+            title_hindi: "📈 Phase 2.3: Product-Market Fit", 
+            title_english: "Phase 2.3: Product-Market Fit", 
+            description_hindi: "क्या 40% से अधिक यूजर्स 'बहुत निराश' होंगे अगर आपका प्रोडक्ट बंद हो जाए? यही प्रोडक्ट-मार्केट फिट का पैमाना है।", 
+            description_english: "Would 40%+ users be 'very disappointed' if your product shut down? That's product-market fit.",
+            key_activities: "Sean Ellis Test, Retention Analysis, Net Promoter Score (NPS)",
+            benchmarks: "40%+ NPS, 20%+ MoM Growth, <5% Churn",
+            officialLink: "https://www.sachinrekhi.com/blog/2013/01/28/how-to-measure-product-market-fit" 
+        },
+        
+        // ============================================
+        // PHASE 3: BUSINESS PLAN (Month 8-10)
+        // ============================================
+        { 
+            title_hindi: "📋 Phase 3.1: Executive Summary & Company Overview", 
+            title_english: "Phase 3.1: Executive Summary", 
+            description_hindi: "2 पेज में पूरा बिजनेस: क्या, क्यों, कैसे, कब, कितना। यह आपका बिजनेस कार्ड है।", 
+            description_english: "Complete business in 2 pages: What, Why, How, When, How much. This is your business card.",
+            key_elements: "Mission Statement, Vision, Value Proposition, Key Milestones",
+            template: "Sequoia's Business Plan Template, Y Combinator's 2-pager",
+            officialLink: "https://www.ycombinator.com/library/2g-how-to-write-a-business-plan" 
+        },
+        { 
+            title_hindi: "📊 Phase 3.2: Financial Projections (3-5 Years)", 
+            title_english: "Phase 3.2: Financial Projections", 
+            description_hindi: "P&L स्टेटमेंट, बैलेंस शीट, कैश फ्लो स्टेटमेंट - 3-5 साल के लिए। ये आपके इन्वेस्टर को चाहिए।", 
+            description_english: "P&L Statement, Balance Sheet, Cash Flow Statement - for 3-5 years. Your investor needs these.",
+            key_metrics: "Revenue, COGS, Gross Margin, EBITDA, Net Profit, Burn Rate, Runway, Break-even Analysis",
+            templates: "Score.org Financial Templates, Causal.app, Finmark",
+            officialLink: "https://www.score.org/resource/financial-projections-template" 
+        },
+        { 
+            title_hindi: "📝 Phase 3.3: Operations & Team Plan", 
+            title_english: "Phase 3.3: Operations & Team Plan", 
+            description_hindi: "कंपनी कैसे चलेगी? कितने लोग चाहिए? क्या होगा उनकी ज़िम्मेदारी? संचालन का पूरा खाका।", 
+            description_english: "How will the company run? How many people needed? What will be their responsibilities? Complete operations blueprint.",
+            key_elements: "Organizational Chart, Hiring Plan, Roles & Responsibilities, Key Metrics (KPIs)",
+            tools: "OrgChart, Teamly, Notion, Asana",
+            officialLink: "https://www.score.org/resource/business-operations-plan-template" 
+        },
+        
+        // ============================================
+        // PHASE 4: REGISTRATION & LEGAL (Month 11-14)
+        // ============================================
+        { 
+            title_hindi: "🏢 Phase 4.1: Company Registration & Structure", 
+            title_english: "Phase 4.1: Company Registration", 
+            description_hindi: "Sole Proprietorship, Partnership, LLP, या Private Limited? अपने बिजनेस के लिए सही स्ट्रक्चर चुनें।", 
+            description_english: "Sole Proprietorship, Partnership, LLP, or Private Limited? Choose the right structure for your business.",
+            options: "Sole Prop (₹5k-10k, 7 दिन), LLP (₹15k-20k, 15 दिन), Pvt Ltd (₹25k-30k, 20 दिन)",
+            process: "DSC → DIN → Name Approval → SPICe+ Form → PAN/TAN → Bank Account",
+            officialLink: "https://www.mca.gov.in/" 
+        },
+        { 
+            title_hindi: "⚖️ Phase 4.2: Legal Compliance & Licenses", 
+            title_english: "Phase 4.2: Legal Compliance", 
+            description_hindi: "GST, MSME, FSSAI (खाद्य), IEC (निर्यात), ट्रेड लाइसेंस - आपके बिजनेस को क्या-क्या चाहिए?", 
+            description_english: "GST, MSME, FSSAI (food), IEC (export), trade license - what does your business need?",
+            common_licenses: "GST (₹0-500), MSME (₹0), FSSAI (₹1,000-5,000), Shop & Establishment (₹500-5,000)",
+            timeline: "30-60 दिन",
+            officialLink: "https://www.gst.gov.in/" 
+        },
+        { 
+            title_hindi: "🛡️ Phase 4.3: IP Protection (Trademark/Patent)", 
+            title_english: "Phase 4.3: IP Protection", 
+            description_hindi: "ब्रांड नाम, लोगो, डिज़ाइन, टेक्नोलॉजी को कॉपी होने से बचाएँ। ट्रेडमार्क और पेटेंट कराएँ।", 
+            description_english: "Protect brand name, logo, design, technology from copying. Get trademark and patent.",
+            types: "Trademark (₹4,500-9,000, 6-12 माह), Patent (₹50,000-1,50,000, 2-4 साल), Copyright (₹500-2,000)",
+            officialLink: "https://ipindia.gov.in/" 
+        },
+        
+        // ============================================
+        // PHASE 5: FUNDING (Month 15-20)
+        // ============================================
+        { 
+            title_hindi: "💰 Phase 5.1: Bootstrapping (Level 1)", 
+            title_english: "Phase 5.1: Bootstrapping", 
+            description_hindi: "अपनी बचत, परिवार, दोस्तों से पैसा। इक्विटी न दें। सबसे सुरक्षित तरीका।", 
+            description_english: "Own savings, family, friends' money. No equity given. Safest method.",
+            source: "Personal Savings (₹50k-10L), Family & Friends (₹1L-25L), Credit Cards (₹50k-5L)",
+            advantage: "100% ownership, कोई ब्याज नहीं",
+            officialLink: "https://www.score.org/resource/bootstrapping-your-business" 
+        },
+        { 
+            title_hindi: "🏦 Phase 5.2: Government Schemes & Bank Loans", 
+            title_english: "Phase 5.2: Govt Schemes & Loans", 
+            description_hindi: "PMEGP, MUDRA, CGTMSE, SIDBI से लोन। कम ब्याज, बिना गारंटी।", 
+            description_english: "Loans from PMEGP, MUDRA, CGTMSE, SIDBI. Low interest, no collateral.",
+            schemes: "PMEGP (₹10L-50L, 15-35% subsidy), MUDRA (₹50k-10L), CGTMSE (₹2Cr तक)",
+            interest_rate: "6-12%",
+            officialLink: "https://www.msme.gov.in/" 
+        },
+        { 
+            title_hindi: "👼 Phase 5.3: Angel Investors & HNIs", 
+            title_english: "Phase 5.3: Angel Investors", 
+            description_hindi: "शुरुआती स्टेज में पैसा देने वाले रिच लोग। IAN, Mumbai Angels, ah! Ventures।", 
+            description_english: "Rich individuals who invest in early stage. IAN, Mumbai Angels, ah! Ventures.",
+            amount: "₹25L-5Cr",
+            equity: "10-25%",
+            requirement: "MVP ready, Traction, Scalable model",
+            officialLink: "https://indianangelnetwork.com/" 
+        },
+        { 
+            title_hindi: "🚀 Phase 5.4: Venture Capital (VC)", 
+            title_english: "Phase 5.4: Venture Capital", 
+            description_hindi: "ग्रोथ स्टेज पर बड़ा निवेश। Sequoia, Accel, Blume, Matrix, Nexus।", 
+            description_english: "Large investment at growth stage. Sequoia, Accel, Blume, Matrix, Nexus.",
+            amount: "₹5Cr-500Cr",
+            equity: "15-30%",
+            requirement: "Product-market fit, Strong team, Large market",
+            officialLink: "https://www.sequoia.com/" 
+        },
+        { 
+            title_hindi: "📺 Phase 5.5: Shark Tank India", 
+            title_english: "Phase 5.5: Shark Tank India", 
+            description_hindi: "टीवी पर 5 मिनट की पिच। देश के टॉप बिजनेस लीडर्स से फंडिंग और मेंटरशिप।", 
+            description_english: "5-minute pitch on TV. Funding and mentorship from India's top business leaders.",
+            amount: "₹10L-5Cr",
+            success_rate: "10-15% पिचें सेलेक्ट होती हैं",
+            tips: "Clear problem, unique solution, traction, realistic valuation, passion",
+            officialLink: "https://www.sonyliv.com/shows/shark-tank-india" 
+        },
+        
+        // ============================================
+        // PHASE 6: LAUNCH & MARKETING (Month 21-23)
+        // ============================================
+        { 
+            title_hindi: "🚀 Phase 6.1: Go-to-Market (GTM) Strategy", 
+            title_english: "Phase 6.1: GTM Strategy", 
+            description_hindi: "प्रोडक्ट कैसे, कहाँ, कब लॉन्च करेंगे? कौन से चैनल्स इस्तेमाल करेंगे? पूरा 90-दिन का प्लान बनाएँ।", 
+            description_english: "How, where, when will you launch? Which channels will you use? Create a complete 90-day plan.",
+            key_elements: "Launch Timeline, Channel Mix, Budget Allocation, Success Metrics",
+            channels: "Digital (SEO, Social, Email), Traditional (PR, Events, Partnerships), Referral, Influencer",
+            officialLink: "https://www.productplan.com/glossary/go-to-market-strategy/" 
+        },
+        { 
+            title_hindi: "📢 Phase 6.2: Digital Marketing Setup", 
+            title_english: "Phase 6.2: Digital Marketing", 
+            description_hindi: "वेबसाइट, SEO, Google Ads, सोशल मीडिया, ईमेल मार्केटिंग - पूरा डिजिटल इकोसिस्टम बनाएँ।", 
+            description_english: "Website, SEO, Google Ads, social media, email marketing - build complete digital ecosystem.",
+            platforms: "Google (Ads, Analytics, Search Console), Meta (Facebook, Instagram, WhatsApp), LinkedIn, YouTube",
+            monthly_budget: "₹25,000-1,00,000",
+            officialLink: "https://learndigital.withgoogle.com/" 
+        },
+        { 
+            title_hindi: "🏆 Phase 6.3: Brand Building & PR", 
+            title_english: "Phase 6.3: Brand Building", 
+            description_hindi: "ब्रांड की पहचान बनाएँ। मीडिया में छपवाएँ। पब्लिक रिलेशंस से क्रेडिबिलिटी बढ़ाएँ।", 
+            description_english: "Build brand identity. Get media coverage. Increase credibility through PR.",
+            pr_tools: "Press Release (PRNewswire, PRLog), HARO, Prowly, Meltwater, Media Contacts Database",
+            cost: "₹25,000-2,00,000 प्रति माह (PR एजेंसी)",
+            officialLink: "https://www.cision.com/" 
+        },
+        
+        // ============================================
+        // PHASE 7: SCALE & GROWTH (Month 24-36)
+        // ============================================
+        { 
+            title_hindi: "📈 Phase 7.1: Customer Acquisition & Retention", 
+            title_english: "Phase 7.1: Customer Acquisition", 
+            description_hindi: "ग्राहक कैसे लाएँ? कितने महंगे हैं? कितने बार आते हैं? CAC और LTV पर फोकस करें।", 
+            description_english: "How to get customers? How expensive? How often do they return? Focus on CAC and LTV.",
+            metrics: "CAC (< ₹500-1,000), LTV (> 3x CAC), Churn (< 5% per month), NPS (> 50)",
+            strategies: "Referral programs, Loyalty rewards, Win-back campaigns, Cross-sell & Upsell",
+            officialLink: "https://www.hubspot.com/customer-acquisition" 
+        },
+        { 
+            title_hindi: "🔧 Phase 7.2: Operations & Process Optimization", 
+            title_english: "Phase 7.2: Process Optimization", 
+            description_hindi: "हर काम का SOP (Standard Operating Procedure) बनाएँ। ऑटोमेशन से टीम का टाइम बचाएँ।", 
+            description_english: "Create SOP (Standard Operating Procedure) for every task. Save team time through automation.",
+            tools: "CRM (Salesforce, HubSpot, Zoho), Project Mgmt (Asana, Monday, Trello), Automation (Zapier, Make), Communication (Slack, Teams)",
+            officialLink: "https://www.process.st/sop/" 
+        },
+        { 
+            title_hindi: "🏢 Phase 7.3: Team Building & Culture", 
+            title_english: "Phase 7.3: Team Building", 
+            description_hindi: "सही लोगों को हायर करें। कल्चर बनाएँ। टीम के साथ मिलकर कंपनी को आगे बढ़ाएँ।", 
+            description_english: "Hire the right people. Build culture. Move the company forward with the team.",
+            hiring: "LinkedIn, Naukri, AngelList, IIM Jobs, Internshala",
+            culture: "Values, Mission, Vision, Team Rituals, Learning & Development Budget (10-20k/employee/year)",
+            officialLink: "https://www.greatplacetowork.in/" 
+        },
+        { 
+            title_hindi: "🌏 Phase 7.4: New Market Expansion (Regional/National)", 
+            title_english: "Phase 7.4: Market Expansion", 
+            description_hindi: "अपने शहर से बाहर, दूसरे राज्यों में बिजनेस बढ़ाएँ। नए चैनल्स, नए पार्टनर्स।", 
+            description_english: "Expand business outside your city, into other states. New channels, new partners.",
+            strategies: "Franchise (₹5L-50L), Distribution Partners (₹1L-10L), Direct Branches (₹10L-2Cr), Online Marketplace (₹50k-2L)",
+            officialLink: "https://www.franchiseindia.com/" 
+        },
+        { 
+            title_hindi: "🏪 Phase 7.5: Franchise Model (if applicable)", 
+            title_english: "Phase 7.5: Franchise Model", 
+            description_hindi: "अपने बिजनेस मॉडल को फ्रेंचाइजी दें। दूसरों को आपके ब्रांड के साथ बिजनेस करने दें।", 
+            description_english: "Franchise your business model. Let others do business with your brand.",
+            requirements: "Proven model (3+ years), High margin (30%+), Strong brand, Standardized operations",
+            costs: "Franchise fee (₹5L-50L), Royalty (5-10% of revenue), Marketing fee (2-5% of revenue)",
+            officialLink: "https://www.franchiseindia.com/" 
+        },
+        
+        // ============================================
+        // PHASE 8: EXIT (IPO/ACQUISITION) (Year 3-10)
+        // ============================================
+        { 
+            title_hindi: "🎯 Phase 8.1: IPO Preparation (Year 3-5)", 
+            title_english: "Phase 8.1: IPO Prep", 
+            description_hindi: "कंपनी को IPO के लिए तैयार करें। 3 साल का प्रॉफिट, गवर्नेंस, कॉरपोरेट स्ट्रक्चर।", 
+            description_english: "Prepare company for IPO. 3 years of profit, governance, corporate structure.",
+            requirements: "₹50Cr+ turnover, ₹5Cr+ PAT, ₹50Cr+ net worth, 3 years of profitability",
+            timeline: "6-12 महीने",
+            cost: "₹1-3 करोड़ (SEBI fees + advisors)",
+            officialLink: "https://www.sebi.gov.in/" 
+        },
+        { 
+            title_hindi: "📄 Phase 8.2: DRHP Filing & SEBI Approval", 
+            title_english: "Phase 8.2: DRHP Filing", 
+            description_hindi: "Draft Red Herring Prospectus फाइल करें। SEBI से अप्रूवल लें। 21 दिन में फीडबैक मिलता है।", 
+            description_english: "File Draft Red Herring Prospectus. Get SEBI approval. Feedback received in 21 days.",
+            process: "Draft DRHP → SEBI Review (21 days) → ROC Filing → Stock Exchange Application (21 days) → IPO Launch",
+            officialLink: "https://www.sebi.gov.in/" 
+        },
+        { 
+            title_hindi: "📈 Phase 8.3: Stock Exchange Listing (IPO Day)", 
+            title_english: "Phase 8.3: Stock Exchange Listing", 
+            description_hindi: "NSE या BSE पर कंपनी लिस्ट कराएँ। अब जनता आपकी कंपनी में निवेश कर सकती है।", 
+            description_english: "List company on NSE or BSE. Now the public can invest in your company.",
+            exchanges: "NSE (₹25Cr+ net worth), BSE (₹10Cr+ net worth), SME (₹1Cr+ net worth)",
+            timeline: "3-4 महीने",
+            officialLink: "https://www.nseindia.com/" 
+        },
+        { 
+            title_hindi: "🤝 Phase 8.4: Acquisition / Merger (Alternative Exit)", 
+            title_english: "Phase 8.4: Acquisition/Merger", 
+            description_hindi: "IPO नहीं करना है? किसी बड़ी कंपनी को अपना बिजनेस बेच दें। 2-10x valuation मिल सकती है।", 
+            description_english: "Don't want to do IPO? Sell your business to a larger company. Can get 2-10x valuation.",
+            valuation: "2-10x EBITDA, 1-3x Annual Revenue",
+            process: "Teaser → Term Sheet → Due Diligence → SPA → Closing (6-12 months)",
+            officialLink: "https://www.mergersindia.com/" 
+        },
+        
+    // DOOR 2: GOVERNMENT SCHEMES (EXPANDED - COMPLETE LIST WITH FULL DETAILS)
+schemes: {
+    name_hindi: "🏛️ सरकारी योजनाएँ (पूरी लिस्ट - केंद्र + राज्य)",
+    name_english: "🏛️ Government Schemes (Complete List - Central + State)",
+    icon: "🏛️",
+    items: [
+        // ============================================
+    // ============================================
+    // SECTION 1: CENTRAL SCHEMES FOR ALL BUSINESSES
+    // ============================================
+    { title_hindi: "🏭 PMEGP (प्रधानमंत्री रोजगार सृजन कार्यक्रम)", title_english: "PMEGP", description_hindi: "नए उद्यम शुरू करने के लिए 15-35% सब्सिडी। KVIC द्वारा संचालित।", description_english: "15-35% subsidy for new enterprises. Operated by KVIC.", amount: "₹10L - ₹50L", subsidy: "15% (शहर) / 25% (गाँव) / 35% (SC/ST/महिलाएँ)", officialLink: "https://www.kviconline.gov.in/pmegp/" },
+    { title_hindi: "💰 MUDRA Loan (शिशु / किशोर / तरुण)", title_english: "MUDRA Loan", description_hindi: "सूक्ष्म उद्यमों के लिए बिना गारंटी लोन। तीन श्रेणियाँ।", description_english: "Collateral-free loan for micro enterprises. Three categories.", amount: "₹50,000 - ₹10L", interest: "8-12%", officialLink: "https://www.mudra.org.in/" },
+    { title_hindi: "🚀 Startup India Scheme", title_english: "Startup India", description_hindi: "DPIIT पंजीकृत स्टार्टअप्स के लिए 3 साल टैक्स छूट, ₹10Cr तक फंड।", description_english: "3 years tax exemption, up to ₹10Cr funding for DPIIT-registered startups.", benefits: "Income Tax exemption, Patent fast-track, Self-certification", officialLink: "https://www.startupindia.gov.in/" },
+    { title_hindi: "🏢 MSME Schemes (Udyam Registration)", title_english: "MSME Schemes", description_hindi: "लघु एवं मध्यम उद्योगों के लिए उद्यम पंजीकरण। कोलैटरल फ्री लोन।", description_english: "Enterprise registration for small and medium industries. Collateral-free loan.", benefits: "Collateral-free loan (₹5Cr तक), Interest subsidy (5-7%)", officialLink: "https://www.msme.gov.in/" },
+    { title_hindi: "👩 Tejaswini (Mahila Udyamita Yojana)", title_english: "Tejaswini", description_hindi: "महिला उद्यमियों के लिए विशेष लोन योजना। कम ब्याज दर, बिना गारंटी।", description_english: "Special loan scheme for women entrepreneurs. Low interest, no collateral.", amount: "₹5L - ₹25L", interest: "7-9%", officialLink: "https://www.nabard.org/" },
+    { title_hindi: "🌾 NRLM (National Rural Livelihood Mission)", title_english: "NRLM", description_hindi: "ग्रामीण महिला स्वयं सहायता समूहों के लिए लोन, स्किल ट्रेनिंग।", description_english: "Loans, skill training for rural women self-help groups.", amount: "₹1L - ₹10L", officialLink: "https://www.aajeevika.gov.in/" },
+    { title_hindi: "🧪 ASPIRE (Scheme for Incubation)", title_english: "ASPIRE", description_hindi: "स्टार्टअप और उद्यमिता को बढ़ावा। लिविंग लैब्स, इन्क्यूबेटर।", description_english: "Promote startups and entrepreneurship. Living labs, incubators.", officialLink: "https://www.msme.gov.in/" },
+    { title_hindi: "🛡️ CGTMSE (Credit Guarantee Fund)", title_english: "CGTMSE", description_hindi: "MSME को बिना कोलैटरल के लोन। सरकार 85% तक गारंटी।", description_english: "Collateral-free loan for MSMEs. Government guarantees up to 85%.", amount: "₹2Cr तक", officialLink: "https://www.cgtmse.in/" },
+    { title_hindi: "🤝 Stand-Up India (SC/ST/Women)", title_english: "Stand-Up India", description_hindi: "SC, ST और महिला उद्यमियों के लिए ₹10L-1Cr लोन।", description_english: "Loan of ₹10L-1Cr for SC, ST, and women entrepreneurs.", amount: "₹10L - ₹1Cr", officialLink: "https://www.standupmitra.in/" },
+    { title_hindi: "🌿 SAMPARK (Mentorship Scheme)", title_english: "SAMPARK", description_hindi: "उद्यमियों को मेंटरशिप और नेटवर्किंग। सफल उद्यमी गाइड करते हैं।", description_english: "Mentorship and networking for entrepreneurs.", officialLink: "https://www.startupindia.gov.in/" },
+    // ============================================
+    // SECTION 2: SECTOR-SPECIFIC SCHEMES
+    // ============================================
+    { title_hindi: "🏥 Ayushman Sahakar (Healthcare)", title_english: "Ayushman Sahakar", description_hindi: "हेल्थकेयर और आयुष सेक्टर में स्टार्टअप्स के लिए लोन।", description_english: "Loans for startups in healthcare and AYUSH sectors.", amount: "₹10L - ₹10Cr", officialLink: "https://www.ncui.co.in/" },
+    { title_hindi: "🌾 Agriculture Infrastructure Fund", title_english: "Agriculture Fund", description_hindi: "कृषि इंफ्रास्ट्रक्चर के लिए ₹1 लाख करोड़ फंड।", description_english: "₹1 lakh crore fund for agriculture infrastructure.", amount: "₹25L - ₹2Cr", officialLink: "https://agriinfra.dac.gov.in/" },
+    { title_hindi: "💻 Digital India - BPO Scheme", title_english: "Digital India BPO", description_hindi: "छोटे शहरों में BPO स्थापित करने के लिए सब्सिडी।", description_english: "Subsidy to set up BPOs in small cities.", amount: "₹1Cr - ₹10Cr", officialLink: "https://www.meity.gov.in/" },
+    // ============================================
+    // SECTION 3: EXPORT-RELATED SCHEMES
+    // ============================================
+    { title_hindi: "📦 MEIS / RoDTEP (Export Subsidies)", title_english: "MEIS / RoDTEP", description_hindi: "निर्यात पर 2-5% सब्सिडी। RoDTEP से टैक्स रिफंड।", description_english: "2-5% subsidy on exports. RoDTEP gives tax refund.", officialLink: "https://dgciskol.gov.in/" },
+    { title_hindi: "🏦 EPCG (Export Promotion)", title_english: "EPCG", description_hindi: "मशीनरी आयात पर 0% कस्टम ड्यूटी, निर्यात की शर्त के साथ।", description_english: "0% customs duty on machinery import, with export obligation.", officialLink: "https://dgft.gov.in/" },
+    // ============================================
+    // SECTION 4: STATE-SPECIFIC SCHEMES (UP, Bihar, MP, Rajasthan, Maharashtra)
+    // ============================================
+    { title_hindi: "📚 CM Yuva Swarozgar Yojana (UP)", title_english: "CM Yuva (UP)", description_hindi: "UP में युवा उद्यमियों के लिए 15-25% सब्सिडी।", description_english: "15-25% subsidy for young entrepreneurs in UP.", amount: "₹5L - ₹25L", officialLink: "https://msme.gov.in/" },
+    { title_hindi: "🏭 Mukhyamantri Udyami Yojana (Bihar)", title_english: "Mukhyamantri Udyami (Bihar)", description_hindi: "बिहार में नए उद्यम स्थापित करने के लिए 10-20% सब्सिडी।", description_english: "10-20% subsidy for new enterprises in Bihar.", amount: "₹10L - ₹50L", officialLink: "https://industries.bih.nic.in/" },
+    { title_hindi: "🌟 Udyog Shri Yojana (MP)", title_english: "Udyog Shri (MP)", description_hindi: "MP में MSME को सब्सिडी, लोन, टेक्नोलॉजी सपोर्ट।", description_english: "Subsidy, loan, technology support for MSMEs in MP.", officialLink: "https://m.mpmsme.in/" },
+    { title_hindi: "🚜 Rajasthan Investment Promotion Scheme (RIPS)", title_english: "RIPS (Rajasthan)", description_hindi: "राजस्थान में बड़े निवेश पर सब्सिडी, टैक्स छूट।", description_english: "Subsidy, tax exemption for large investments in Rajasthan.", officialLink: "https://invest.rajasthan.gov.in/" },
+    { title_hindi: "💡 Maharashtra State MSME Scheme", title_english: "Maharashtra MSME", description_hindi: "महाराष्ट्र में MSME को पावर सब्सिडी, सेटअप में आसानी।", description_english: "Power subsidy, ease of setup for MSMEs in Maharashtra.", officialLink: "https://msme.maharashtra.gov.in/" },
+    // ============================================
+    // SECTION 5: HARYANA STATE SCHEMES (NEW)
+    // ============================================
+    { title_hindi: "🚜 Haryana Enterprises Promotion Centre (HEPC)", title_english: "HEPC (Haryana)", description_hindi: "हरियाणा में नए उद्यम स्थापित करने के लिए एकल खिड़की सुविधा।", description_english: "Single-window facility for setting up new enterprises in Haryana.", benefits: "48 घंटे में NOC, 15 दिन में औद्योगिक लाइसेंस", officialLink: "https://hepc.haryana.gov.in/" },
+    { title_hindi: "🏭 Haryana MSME Policy 2025", title_english: "Haryana MSME Policy", description_hindi: "हरियाणा में MSME उद्यमों के लिए विशेष प्रोत्साहन।", description_english: "Special incentives for MSMEs in Haryana.", benefits: "पावर कनेक्शन पर 50% सब्सिडी (₹25L तक), SGST में 50-100% छूट", officialLink: "https://msme.haryana.gov.in/" },
+    { title_hindi: "💡 Haryana Start-up Policy", title_english: "Haryana Start-up Policy", description_hindi: "हरियाणा में स्टार्टअप्स के लिए ₹500 करोड़ का कोष।", description_english: "₹500 crore fund for startups in Haryana.", benefits: "सीड फंडिंग (₹25L), इन्क्यूबेटर सपोर्ट (₹5L)", officialLink: "https://startupharyana.gov.in/" },
+    { title_hindi: "🌾 Haryana Agri-Business Policy", title_english: "Haryana Agri-Business", description_hindi: "कृषि-व्यवसाय, फूड प्रोसेसिंग के लिए सब्सिडी।", description_english: "Subsidies for agri-business, food processing in Haryana.", benefits: "कोल्ड स्टोरेज पर 35% सब्सिडी (₹1Cr तक)", officialLink: "https://agriharyana.gov.in/" },
+    { title_hindi: "👩 Haryana Mahila Udyamita Yojana", title_english: "Haryana Mahila Udyamita", description_hindi: "हरियाणा में महिला उद्यमियों के लिए विशेष लोन और सब्सिडी।", description_english: "Special loan and subsidy for women entrepreneurs in Haryana.", amount: "₹2L - ₹20L", interest: "6-8%", officialLink: "https://hareda.gov.in/" },
+    { title_hindi: "🖥️ Haryana IT & ITES Policy", title_english: "Haryana IT Policy", description_hindi: "गुरुग्राम, फरीदाबाद, पंचकूला, हिसार में IT कंपनियों के लिए प्रोत्साहन।", description_english: "Incentives for IT companies in Gurugram, Faridabad, Panchkula, Hisar.", benefits: "स्टैम्प ड्यूटी में 100% छूट, बिजली पर 20% सब्सिडी", officialLink: "https://itharyana.gov.in/" },
+    { title_hindi: "🏭 Haryana Enterprises Promotion Policy (HEPP)", title_english: "HEPP (Haryana)", description_hindi: "हरियाणा में बड़े निवेश (₹50Cr+) पर कैपिटल सब्सिडी, SGST रिफंड।", description_english: "Capital subsidy, SGST refund for large investments (₹50Cr+) in Haryana.", benefits: "कैपिटल सब्सिडी 15% (₹50Cr तक), SGST रिफंड 100%", officialLink: "https://hsiidc.org.in/" },
+    { title_hindi: "📦 Haryana Export Promotion Scheme", title_english: "Haryana Export", description_hindi: "हरियाणा से निर्यात करने वाली MSME कंपनियों के लिए सब्सिडी।", description_english: "Export subsidy for MSMEs exporting from Haryana.", benefits: "निर्यात मूल्य का 5% सब्सिडी (₹25L तक)", officialLink: "https://haryana.gov.in/" },
+    // ============================================
+    // SECTION 6: ADDITIONAL SCHEMES (All India)
+    // ============================================
+    { title_hindi: "💼 Pradhan Mantri Formalization of Micro Food Processing (PMFME)", title_english: "PMFME", description_hindi: "फूड प्रोसेसिंग उद्योगों के लिए ₹35,000 करोड़ की योजना।", description_english: "₹35,000 crore scheme for food processing industries.", amount: "₹1L - ₹10Cr", subsidy: "35% तक", officialLink: "https://pmfme.mofpi.gov.in/" },
+    { title_hindi: "🖨️ National SC-ST Hub", title_english: "National SC-ST Hub", description_hindi: "SC/ST उद्यमियों के लिए सरकारी टेंडर में प्राथमिकता, लोन सब्सिडी।", description_english: "Priority in govt tenders, loan subsidy for SC/ST entrepreneurs.", officialLink: "https://scsthub.msme.gov.in/" },
+    { title_hindi: "📱 NIDHI (National Initiative for Developing and Harnessing Innovations)", title_english: "NIDHI", description_hindi: "टेक्नोलॉजी स्टार्टअप्स के लिए अवार्ड, सीड फंड, पेटेंट सहायता।", description_english: "Award, seed fund, patent assistance for technology startups.", officialLink: "https://nidhi.dst.gov.in/" }
+]
+            // DOOR 3: COMMON MISTAKES (EXPANDED - 20+ MISTAKES WITH SOLUTIONS)
+mistakes: {
+    name_hindi: "⚠️ कॉमन मिस्टेक्स (सीखें, समझें, और बचें)",
+    name_english: "⚠️ Common Mistakes (Learn, Understand, and Avoid)",
+    icon: "⚠️",
+    items: [
+        // ============================================
+        // SECTION 1: IDEATION & PLANNING MISTAKES
+        // ============================================
+        { 
+            title_hindi: "❌ मार्केट रिसर्च न करना", 
+            title_english: "Skipping Market Research", 
+            description_hindi: "बिना मार्केट रिसर्च के बिजनेस शुरू करना 90% स्टार्टअप्स की विफलता का कारण है। लोग क्या चाहते हैं, यह जाने बिना प्रोडक्ट बनाना।", 
+            description_english: "Starting a business without market research is the cause of 90% startup failures. Building products without knowing what people want.",
+            example: "कोलगेट ने लॉन्च किया 'कोलगेट किचन एन्ट्री' नामक फ्रोजन फूड - बिना रिसर्च के, और फेल हो गया।",
+            solution: "कम से कम 100 संभावित ग्राहकों का सर्वे करें। उनकी समस्या, बजट, प्राथमिकताएँ समझें।", 
+            prevention: "हर क्वार्टर में मार्केट रिसर्च करें। ग्राहकों से सीधे बात करें।",
+            officialLink: "https://www.niti.gov.in/" 
+        },
+        { 
+            title_hindi: "❌ बिजनेस प्लान की कमी", 
+            title_english: "No Business Plan", 
+            description_hindi: "बिना प्लान के बिजनेस करना बिना नक्शे के जंगल में चलने जैसा है। 5 साल का रोडमैप जरूरी है।", 
+            description_english: "Running a business without a plan is like walking in a jungle without a map. A 5-year roadmap is essential.",
+            example: "पेटीएम ने शुरुआत में मोबाइल रिचार्ज से शुरू किया, लेकिन उनके पास क्लियर रोडमैप था - आज पेमेंट्स, बैंकिंग, इन्वेस्टमेंट सब कुछ।",
+            solution: "विस्तृत बिजनेस प्लान बनाएँ - SWOT, PESTLE, फाइनेंशियल, ऑपरेशन, मार्केटिंग, प्रोडक्ट रोडमैप।", 
+            prevention: "हर साल बिजनेस प्लान रिवाइज़ करें। बाजार के हिसाब से बदलें।",
+            officialLink: "https://www.sba.gov/business-guide/plan-your-business/write-business-plan" 
+        },
+        { 
+            title_hindi: "❌ गलत बिजनेस मॉडल चुनना", 
+            title_english: "Wrong Business Model", 
+            description_hindi: "प्रोडक्ट तो अच्छा है, लेकिन पैसे कैसे कमाएँ? यह तय न करना। फ्रीमियम, सब्सक्रिप्शन, एड-बेस्ड - कौन सा सही है?", 
+            description_english: "The product is good, but how to make money? Not deciding. Freemium, subscription, ad-based - which is right?",
+            example: "क्विकर ने फ्री में सर्विस दी, पैसे नहीं कमाए। बाद में मॉडल बदला, लेकिन तब तक बहुत नुकसान हो चुका था।",
+            solution: "कम से कम 3 बिजनेस मॉडल पर रिसर्च करें। अपने प्रोडक्ट के लिए सबसे सही मॉडल चुनें।", 
+            prevention: "हर साल रेवेन्यू मॉडल की समीक्षा करें। नए मॉडल ट्राई करें।",
+            officialLink: "https://www.ycombinator.com/library/5m-business-models" 
+        },
+        // ============================================
+        // SECTION 2: FINANCIAL MISTAKES
+        // ============================================
+        { 
+            title_hindi: "❌ ओवर स्पेंडिंग (ज्यादा खर्च)", 
+            title_english: "Over Spending", 
+            description_hindi: "शुरुआत में ही बड़े ऑफिस, ब्रांडिंग, महंगे उपकरणों पर पैसा खर्च कर देना। 40% स्टार्टअप्स कैश रन आउट होने से बंद हो जाते हैं।", 
+            description_english: "Spending too much on big offices, branding, expensive equipment at the start. 40% startups shut down due to cash run out.",
+            example: "वीमो ने शुरुआत में ऑफिस, कर्मचारियों पर करोड़ों खर्च किए, लेकिन रेवेन्यू नहीं आया। कंपनी बंद हो गई।",
+            solution: "मिनिमल विएबल प्रोडक्ट (MVP) से शुरू करें। पहले कमाई करें, फिर खर्च करें। लीन स्टार्टअप अपनाएँ।", 
+            prevention: "हर महीने बजट बनाएँ और उसी में रहें। अनावश्यक खर्चों को काटें।",
+            officialLink: "https://www.mudra.org.in/" 
+        },
+        { 
+            title_hindi: "❌ प्रॉफिट मार्जिन इग्नोर करना", 
+            title_english: "Ignoring Profit Margins", 
+            description_hindi: "यूनिट इकोनॉमिक्स पर ध्यान न देना। बिना प्रॉफिट के बिजनेस लंबे समय तक नहीं चलता। ग्रोथ के चक्कर में मार्जिन भूल जाना।", 
+            description_english: "Not focusing on unit economics. A business without profit doesn't last long. Forgetting margins in the race for growth.",
+            example: "जोमैटो ने शुरुआत में हर ऑर्डर पर ₹50-100 का नुकसान उठाया। बाद में मार्जिन सुधारा, तब जाकर प्रॉफिटेबल हुआ।",
+            solution: "हर सेल पर प्रॉफिट मार्जिन कैलकुलेट करें। 20%+ मार्जिन का लक्ष्य रखें। अगर मार्जिन कम है, तो स्केल मत करो।", 
+            prevention: "हर महीने P&L स्टेटमेंट बनाएँ। कम मार्जिन वाले प्रोडक्ट्स को सुधारें या बंद करें।",
+            officialLink: "https://www.score.org/resource/calculating-profit-margin" 
+        },
+        { 
+            title_hindi: "❌ कैश फ्लो मैनेजमेंट न करना", 
+            title_english: "Poor Cash Flow Management", 
+            description_hindi: "पैसा आ रहा है, लेकिन समय पर नहीं। ग्राहकों से देर से पेमेंट आना, सप्लायर्स को समय पर न चुकाना।", 
+            description_english: "Money is coming, but not on time. Late payments from customers, not paying suppliers on time.",
+            example: "गोफर ने कस्टमर्स को 60 दिन की क्रेडिट दी, लेकिन सप्लायर्स को 30 दिन में पे करना था। कैश फ्लो मिसमैच से कंपनी बंद हो गई।",
+            solution: "30 दिन से ज्यादा की क्रेडिट न दें। कैश फ्लो स्टेटमेंट हर हफ्ते बनाएँ। 3-6 महीने का रनवे हमेशा रखें।", 
+            prevention: "हर महीने कैश फ्लो प्रोजेक्ट करें। ग्राहकों से एडवांस लेने की कोशिश करें।",
+            officialLink: "https://www.score.org/resource/cash-flow-management" 
+        },
+        // ============================================
+        // SECTION 3: TEAM & PEOPLE MISTAKES
+        // ============================================
+        { 
+            title_hindi: "❌ सही टीम न होना", 
+            title_english: "Wrong Team", 
+            description_hindi: "गलत लोगों को टीम में शामिल करना। स्किल्स, कल्चर, वैल्यू का mismatch होना। 23% स्टार्टअप्स टीम के झगड़े से बंद होते हैं।", 
+            description_english: "Including wrong people in the team. Mismatch of skills, culture, and values. 23% startups shut down due to team conflicts.",
+            example: "उबर के फाउंडर ट्रैविस कलानिक को टीम के विवादों के कारण कंपनी छोड़नी पड़ी।",
+            solution: "स्किल-मैचिंग और कल्चर फिट देखें। रेफरेंस चेक जरूर करें। ट्रायल पीरियड रखें (1-3 महीने)।", 
+            prevention: "हर 3 महीने में 1-1 मीटिंग करें। टीम के मुद्दों को जल्दी सॉल्व करें।",
+            officialLink: "https://www.linkedin.com/business/talent" 
+        },
+        { 
+            title_hindi: "❌ एकाउंटेबिलिटी की कमी", 
+            title_english: "Lack of Accountability", 
+            description_hindi: "कौन क्या कर रहा है? कब करेगा? किसे रिपोर्ट करेगा? यह साफ न होना। टीम में जवाबदेही का भाव न होना।", 
+            description_english: "Not clear who is doing what, when, and to whom they report. Lack of accountability in the team.",
+            example: "थेरेसा, एक मार्केटिंग हेड, ने 6 महीने में कोई रिजल्ट नहीं दिया। कोई उनसे पूछने वाला नहीं था।",
+            solution: "हर रोल के लिए स्पष्ट KRAs (Key Result Areas) बनाएँ। हर हफ्ते स्टेटस मीटिंग करें। OKRs (Objectives and Key Results) अपनाएँ।", 
+            prevention: "हर कर्मचारी की साप्ताहिक/मासिक समीक्षा करें। टास्क मैनेजमेंट टूल (Asana, Trello) का उपयोग करें।",
+            officialLink: "https://www.whatmatters.com/" 
+        },
+        // ============================================
+        // SECTION 4: CUSTOMER & PRODUCT MISTAKES
+        // ============================================
+        { 
+            title_hindi: "❌ इग्नोरिंग कस्टमर फीडबैक", 
+            title_english: "Ignoring Customer Feedback", 
+            description_hindi: "ग्राहकों की बात न सुनना और अपने आइडिया पर अड़े रहना। बाजार बदलता है, लेकिन आप नहीं बदलते।", 
+            description_english: "Not listening to customers and sticking to your own idea. The market changes, but you don't.",
+            example: "ब्लैकबेरी ने टचस्क्रीन फोन के ट्रेंड को इग्नोर किया। आज ब्लैकबेरी का नामोनिशान नहीं है।",
+            solution: "नियमित फीडबैक लें, सर्वे करें, कस्टमर सपोर्ट कॉल सुनें। हर महीने कस्टमर टीम से 1 घंटे की मीटिंग करें।", 
+            prevention: "हर क्वार्टर में NPS (Net Promoter Score) सर्वे करें। फीडबैक के आधार पर प्रोडक्ट सुधारें।",
+            officialLink: "https://www.startupindia.gov.in/" 
+        },
+        { 
+            title_hindi: "❌ स्केलिंग के लिए अपर्याप्त प्रक्रियाएँ", 
+            title_english: "Poor Scaling Processes", 
+            description_hindi: "बिना प्रोसेस के बिजनेस बढ़ाने पर क्वालिटी और कस्टमर सर्विस गिर जाती है। 35% स्टार्टअप्स स्केलिंग के दौरान फेल होते हैं।", 
+            description_english: "Growing business without processes leads to a drop in quality and customer service. 35% startups fail during scaling.",
+            example: "कॉफी डे ने बहुत तेजी से ब्रांचेज़ खोली, लेकिन प्रोसेस नहीं थीं। क्वालिटी गिरी, कस्टमर गए, और कंपनी डूब गई।",
+            solution: "हर काम का SOP (Standard Operating Procedure) बनाएँ। CRM, ERP, ऑटोमेशन टूल्स अपनाएँ। पहले प्रोसेस बनाएँ, फिर स्केल करें।", 
+            prevention: "हर नए फंक्शन के लिए पहले SOP बनाएँ। टीम को ट्रेनिंग दें।",
+            officialLink: "https://www.process.st/sop/" 
+        },
+        { 
+            title_hindi: "❌ प्रोडक्ट-मार्केट फिट से पहले स्केल करना", 
+            title_english: "Scaling Without Product-Market Fit", 
+            description_hindi: "लोगों को प्रोडक्ट पसंद है भी या नहीं, यह जाने बिना बिजनेस बढ़ाना। बहुत सारा पैसा, प्रयास, समय बर्बाद होता है।", 
+            description_english: "Growing the business without knowing if people even like the product. A lot of money, effort, and time is wasted.",
+            example: "क्विबी ने $50M जुटाए, पर प्रोडक्ट-मार्केट फिट नहीं था। सारा पैसा बर्बाद हो गया, कंपनी बंद हो गई।",
+            solution: "40% से अधिक यूजर्स को 'बहुत निराश' होना चाहिए अगर प्रोडक्ट बंद हो जाए। तभी स्केल करें। Sean Ellis Test अपनाएँ।", 
+            prevention: "हर 3 महीने में PMF (Product-Market Fit) सर्वे करें। फिट नहीं है तो स्केल मत करो।",
+            officialLink: "https://www.sachinrekhi.com/blog/2013/01/28/how-to-measure-product-market-fit" 
+        },
+        // ============================================
+        // SECTION 5: MARKETING & SALES MISTAKES
+        // ============================================
+        { 
+            title_hindi: "❌ गलत मार्केटिंग चैनल चुनना", 
+            title_english: "Wrong Marketing Channels", 
+            description_hindi: "बिना यह जाने कि आपके ग्राहक कहाँ हैं, वहाँ मार्केटिंग करना। पैसे तो खर्च होते हैं, लेकिन ROI नहीं आता।", 
+            description_english: "Marketing without knowing where your customers are. Money is spent, but ROI doesn't come.",
+            example: "एक बी2बी सॉफ्टवेयर कंपनी ने इंस्टाग्राम पर लाखों खर्च किए, जबकि उनके ग्राहक लिंक्डइन पर थे। पूरा पैसा बर्बाद।",
+            solution: "ग्राहक के पर्सन (Buyer Persona) बनाएँ। पता करें कि वे कहाँ समय बिताते हैं। वहीं मार्केटिंग करें। छोटे बजट से शुरू करें, फिर स्केल करें।", 
+            prevention: "हर क्वार्टर में मार्केटिंग चैनल्स का ROI कैलकुलेट करें। जो चैनल काम नहीं कर रहा, उसे बंद करें।",
+            officialLink: "https://learndigital.withgoogle.com/" 
+        },
+        // ============================================
+        // SECTION 6: LEGAL & COMPLIANCE MISTAKES
+        // ============================================
+        { 
+            title_hindi: "❌ कानूनी और टैक्स कंप्लायंस न करना", 
+            title_english: "Ignoring Legal Compliance", 
+            description_hindi: "GST, ITR, MSME, ट्रेड लाइसेंस, शाप एंड एस्टेब्लिशमेंट - समय पर न करना भारी पड़ता है। बाद में जुर्माना, मुकदमा, और प्रतिष्ठा का नुकसान।", 
+            description_english: "Not doing GST, ITR, MSME, trade license, shop & establishment on time can be costly. Later fines, lawsuits, and reputational damage.",
+            example: "एक ई-कॉमर्स स्टार्टअप ने GST रिटर्न समय पर नहीं भरा। 2 करोड़ का जुर्माना लगा और कंपनी बंद हो गई।",
+            solution: "हर महीने कंप्लायंस की समीक्षा करें। एक CA (चार्टर्ड अकाउंटेंट) और लीगल एडवाइजर रखें। ऑटोमेटेड कंप्लायंस टूल्स का उपयोग करें।", 
+            prevention: "हर रजिस्ट्रेशन की समय सीमा का कैलेंडर बनाएँ। रिमाइंडर सेट करें।",
+            officialLink: "https://www.gst.gov.in/" 
+        },
+        { 
+            title_hindi: "❌ IP (Trademark/Patent) प्रोटेक्ट न करना", 
+            title_english: "Not Protecting IP", 
+            description_hindi: "ब्रांड नाम, लोगो, टेक्नोलॉजी, डिज़ाइन का ट्रेडमार्क या पेटेंट न कराना। बाद में कोई और आपका नाम, आपका प्रोडक्ट कॉपी कर लेता है।", 
+            description_english: "Not trademarking or patenting brand name, logo, technology, design. Later someone copies your name, your product.",
+            example: "बर्गर किंग का नाम एक छोटे रेस्टोरेंट ने पहले ट्रेडमार्क कर लिया, तो बर्गर किंग को कोर्ट जाना पड़ा।",
+            solution: "पहले दिन से अपना ब्रांड नाम ट्रेडमार्क कराएँ। अगर टेक्नोलॉजी है तो पेटेंट कराएँ। आवश्यकता अनुसार IP विशेषज्ञ रखें।", 
+            prevention: "हर नए प्रोडक्ट/ब्रांड का पहले IP सर्च करवाएँ। फिर रजिस्ट्रेशन कराएँ।",
+            officialLink: "https://ipindia.gov.in/" 
+        },
+        // ============================================
+        // SECTION 7: GROWTH & SCALING MISTAKES
+        // ============================================
+        { 
+            title_hindi: "❌ डाइवर्सिफिकेशन जल्दी करना", 
+            title_english: "Early Diversification", 
+            description_hindi: "एक प्रोडक्ट में मास्टरी नहीं हुई, उससे पहले दूसरे प्रोडक्ट में कूद जाना। फोकस की कमी, संसाधन बंट जाते हैं।", 
+            description_english: "Jumping into other products before mastering one product. Lack of focus, resources get divided.",
+            example: "पेटीएम ने पहले मोबाइल रिचार्ज पर फोकस किया। उसमें मार्केट लीडर बने, फिर बैंकिंग, पेमेंट्स, इन्वेस्टमेंट में गए।",
+            solution: "एक चीज़ पर फोकस करें। उसमें नंबर 1 बनें। फिर दूसरी चीज़ में जाएँ।", 
+            prevention: "हर साल केवल 1-2 नए प्रोडक्ट लॉन्च करें। पहले वाले को सफल बनाएँ।",
+            officialLink: "https://www.ycombinator.com/library/4p-how-to-focus" 
+        }
+    ]
+},
+            // DOOR 4: ALL BUSINESS IDEAS (EXPANDED - 50+ IDEAS ACROSS 5 LEVELS)
+ideas: {
+    name_hindi: "💡 बिजनेस आइडियाज (5 स्तर: गाँव → ग्लोबल)",
+    name_english: "💡 Business Ideas (5 Levels: Village → Global)",
+    icon: "💡",
+    items: [
+        // ============================================
+        // LEVEL 1: VILLAGE / SMALL TOWN (₹5,000 - ₹50,000)
+        // ============================================
+        { 
+            title_hindi: "🥬 सब्जी/फल की ठेला दुकान", 
+            title_english: "Vegetable/Fruit Cart", 
+            description_hindi: "ताज़ी सब्जियाँ और फल बेचें। घूम-घूमकर बेचने से ज्यादा ग्राहक मिलते हैं। कम निवेश, दैनिक नकदी प्रवाह।", 
+            description_english: "Sell fresh vegetables and fruits. Mobile cart reaches more customers. Low investment, daily cash flow.",
+            investment: "₹5,000-10,000", 
+            profit: "₹8,000-15,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "बातचीत, नगदी प्रबंधन, सब्जियों की पहचान",
+            officialLink: "https://www.msme.gov.in/" 
+        },
+        { 
+            title_hindi: "🧵 सिलाई/कढ़ाई का काम", 
+            title_english: "Tailoring/Embroidery", 
+            description_hindi: "कपड़े सिलाई, कढ़ाई, उन्नतिकरण (alteration) - घर बैठे काम। कस्टम ड्रेस, स्कूल यूनिफॉर्म, बुटीक आइटम्स।", 
+            description_english: "Sewing, embroidery, alteration - work from home. Custom dresses, school uniforms, boutique items.",
+            investment: "₹10,000-20,000", 
+            profit: "₹10,000-20,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "सिलाई मशीन चलाना, डिजाइनिंग, ग्राहक प्रबंधन",
+            officialLink: "https://www.msme.gov.in/" 
+        },
+        { 
+            title_hindi: "🍽️ घर से टिफिन सर्विस", 
+            title_english: "Home Tiffin Service", 
+            description_hindi: "घर का बना खाना ऑफिस/कॉलेज जाने वालों को सप्लाई करें। सब्सक्रिप्शन मॉडल, व्हाट्सएप ऑर्डर।", 
+            description_english: "Supply home-cooked food to office/college goers. Subscription model, WhatsApp orders.",
+            investment: "₹5,000-15,000", 
+            profit: "₹12,000-25,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "खाना बनाना, समय प्रबंधन, कस्टमर सर्विस",
+            officialLink: "https://www.fssai.gov.in/" 
+        },
+        { 
+            title_hindi: "💄 पार्लर/ब्यूटी सर्विस", 
+            title_english: "Beauty Parlor", 
+            description_hindi: "महिलाओं के लिए ब्यूटी सर्विस - मेकअप, हेयर, स्किन केयर, मेंहदी, ब्राइडल पैकेज।", 
+            description_english: "Beauty services for women - makeup, hair, skincare, mehendi, bridal packages.",
+            investment: "₹20,000-40,000", 
+            profit: "₹15,000-30,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "ब्यूटी ट्रेनिंग, ग्राहक संबंध, ब्रांडिंग",
+            officialLink: "https://www.beautywellnesscouncil.com/" 
+        },
+        { 
+            title_hindi: "📱 मोबाइल रिपेयरिंग", 
+            title_english: "Mobile Repairing", 
+            description_hindi: "मोबाइल, टैबलेट, स्मार्टवॉच की मरम्मत। स्क्रीन, बैटरी, चार्जिंग पोर्ट, सॉफ्टवेयर इश्यू। बढ़ता हुआ बाजार।", 
+            description_english: "Repair mobiles, tablets, smartwatches. Screen, battery, charging port, software issues. Growing market.",
+            investment: "₹15,000-30,000", 
+            profit: "₹15,000-25,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "इलेक्ट्रॉनिक्स ज्ञान, सोल्डरिंग, समस्या निवारण",
+            officialLink: "https://www.nielit.gov.in/" 
+        },
+        { 
+            title_hindi: "🐔 मुर्गी पालन (100-200 पक्षी)", 
+            title_english: "Poultry Farming (100-200 birds)", 
+            description_hindi: "अंडे और मांस के लिए मुर्गी पालन। 45 दिनों में मुर्गी तैयार, तेजी से पैसा। सरकारी सब्सिडी भी।", 
+            description_english: "Poultry farming for eggs and meat. Birds ready in 45 days, quick returns. Government subsidy also available.",
+            investment: "₹25,000-50,000", 
+            profit: "₹20,000-40,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "पशु पालन, बीमारी पहचान, बाजार लिंकेज",
+            officialLink: "https://nlm.gov.in/" 
+        },
+        { 
+            title_hindi: "🌾 बीज/खाद की दुकान", 
+            title_english: "Seed/Fertilizer Shop", 
+            description_hindi: "किसानों को बीज, खाद, कीटनाशक, कृषि उपकरण बेचें। खेती के मौसम में अच्छा मुनाफा।", 
+            description_english: "Sell seeds, fertilizers, pesticides, agricultural tools to farmers. Good profit during farming seasons.",
+            investment: "₹30,000-50,000", 
+            profit: "₹15,000-30,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "कृषि ज्ञान, इन्वेंट्री मैनेजमेंट, स्टोरकीपिंग",
+            officialLink: "https://agricoop.nic.in/" 
+        },
+        { 
+            title_hindi: "🛵 छोटा डिलीवरी बिजनेस", 
+            title_english: "Small Delivery Business", 
+            description_hindi: "दुकानों से घर तक सामान पहुँचाना। Zomato, Swiggy, Amazon, Flipkart के लिए डिलीवरी पार्टनर बनें।", 
+            description_english: "Deliver goods from shops to homes. Become delivery partner for Zomato, Swiggy, Amazon, Flipkart.",
+            investment: "₹40,000-60,000 (स्कूटी/बाइक)", 
+            profit: "₹20,000-35,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "ड्राइविंग, रूट प्लानिंग, टाइम मैनेजमेंट",
+            officialLink: "https://www.amazon.in/b?node=23853785031" 
+        },
+        // ==================== SPORTS & TEACHING - LEVEL 1 (ADDED) ====================
+        { 
+            title_hindi: "⚽ खेल प्रशिक्षण (बच्चों को)", 
+            title_english: "Sports Training for Kids", 
+            description_hindi: "बच्चों को क्रिकेट, फुटबॉल, कबड्डी, खो-खो, बैडमिंटन, एथलेटिक्स का प्रशिक्षण दें। शाम के समय, सप्ताहांत पर।", 
+            description_english: "Train kids in cricket, football, kabaddi, kho-kho, badminton, athletics. Evening time, weekends.",
+            investment: "₹10,000-25,000", 
+            profit: "₹8,000-15,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "खेल ज्ञान, कोचिंग सर्टिफिकेशन, बच्चों से जुड़ने की क्षमता",
+            officialLink: "https://sportsauthorityofindia.nic.in/" 
+        },
+        { 
+            title_hindi: "📚 होम ट्यूशन / टीचिंग", 
+            title_english: "Home Tuition / Teaching", 
+            description_hindi: "घर-घर जाकर या अपने घर पर स्कूल के बच्चों को पढ़ाएँ। मैथ्स, साइंस, इंग्लिश, हिंदी, SST।", 
+            description_english: "Go to homes or teach at your home. Maths, Science, English, Hindi, SST.",
+            investment: "₹2,000-5,000 (स्टेशनरी, किताबें)", 
+            profit: "₹8,000-20,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "विषय ज्ञान, बच्चों को पढ़ाने की क्षमता, धैर्य",
+            officialLink: "https://ctet.nic.in/" 
+        },
+        { 
+            title_hindi: "🩰 योग और फिटनेस क्लासेस", 
+            title_english: "Yoga & Fitness Classes", 
+            description_hindi: "सुबह-शाम योग, प्राणायाम, ज़ुम्बा, एरोबिक्स, वेट लॉस क्लासेस। सभी उम्र के लिए।", 
+            description_english: "Morning-evening yoga, pranayama, zumba, aerobics, weight loss classes. For all ages.",
+            investment: "₹5,000-10,000", 
+            profit: "₹10,000-20,000/माह", 
+            level: "गाँव/छोटा कस्बा",
+            skills: "योग सर्टिफिकेशन, फिटनेस ट्रेनिंग, कम्युनिकेशन",
+            officialLink: "https://www.yogacertificationboard.nic.in/" 
+        },
+        // ============================================
+        // LEVEL 2: DISTRICT LEVEL (₹50,000 - ₹5 लाख)
+        // ============================================
+        { 
+            title_hindi: "📚 किताबों की दुकान + स्टेशनरी", 
+            title_english: "Book Store + Stationery", 
+            description_hindi: "स्कूल/कॉलेज की किताबें, स्टेशनरी, प्रिंटिंग, फोटोकॉपी, लैमिनेशन, बाइंडिंग।", 
+            description_english: "School/college books, stationery, printing, photocopy, lamination, binding.",
+            investment: "₹50,000-1,00,000", 
+            profit: "₹25,000-50,000/माह", 
+            level: "जिला स्तर",
+            skills: "इन्वेंट्री मैनेजमेंट, कस्टमर सर्विस, बेसिक कंप्यूटर",
+            officialLink: "https://www.msme.gov.in/" 
+        },
+        { 
+            title_hindi: "☕ छोटा कैफे/फास्ट फूड", 
+            title_english: "Small Cafe/Fast Food", 
+            description_hindi: "समोसा, चाय, कॉफी, सैंडविच, मोमोज, पकोड़े, कटलेट - कम निवेश, अच्छा मार्जिन।", 
+            description_english: "Samosa, tea, coffee, sandwiches, momos, pakoras, cutlets - low investment, good margin.",
+            investment: "₹80,000-1,50,000", 
+            profit: "₹30,000-60,000/माह", 
+            level: "जिला स्तर",
+            skills: "खाना बनाना, कस्टमर सर्विस, लोकेशन चयन",
+            officialLink: "https://www.fssai.gov.in/" 
+        },
+        { 
+            title_hindi: "🚚 छोटा ट्रांसपोर्ट बिजनेस", 
+            title_english: "Small Transport Business", 
+            description_hindi: "1-2 छोटे वाहनों (पिकअप, टेम्पो) से माल ढुलाई या यात्री सेवा। स्थानीय कंट्रैक्ट्स।", 
+            description_english: "Cargo or passenger service with 1-2 small vehicles (pickup, tempo). Local contracts.",
+            investment: "₹1,00,000-3,00,000", 
+            profit: "₹30,000-60,000/माह", 
+            level: "जिला स्तर",
+            skills: "ड्राइविंग, रूट प्लानिंग, कंट्रैक्ट नेगोशिएशन",
+            officialLink: "https://parivahan.gov.in/" 
+        },
+        { 
+            title_hindi: "📸 फोटोग्राफी स्टूडियो", 
+            title_english: "Photography Studio", 
+            description_hindi: "पासपोर्ट फोटो, वेडिंग फोटोग्राफी, प्रोडक्ट फोटोग्राफी, वीडियोग्राफी, एल्बम डिजाइन।", 
+            description_english: "Passport photos, wedding photography, product photography, videography, album design.",
+            investment: "₹1,00,000-2,50,000", 
+            profit: "₹30,000-80,000/माह", 
+            level: "जिला स्तर",
+            skills: "फोटोग्राफी, एडोब फोटोशॉप, लाइटिंग, कस्टमर हैंडलिंग",
+            officialLink: "https://www.nielit.gov.in/" 
+        },
+        { 
+            title_hindi: "🧴 जैविक उत्पाद (वर्मी कम्पोस्ट)", 
+            title_english: "Organic Products (Vermi Compost)", 
+            description_hindi: "जैविक खाद, नीम उत्पाद, जैविक सब्जियाँ, केले का फाइबर, गोबर के उत्पाद।", 
+            description_english: "Organic fertilizer, neem products, organic vegetables, banana fiber, cow dung products.",
+            investment: "₹50,000-1,00,000", 
+            profit: "₹25,000-50,000/माह", 
+            level: "जिला स्तर",
+            skills: "जैविक खेती, वर्मी कम्पोस्ट बनाना, बाजार लिंकेज",
+            officialLink: "https://agricoop.nic.in/" 
+        },
+        { 
+            title_hindi: "🏠 जनरल स्टोर/किराना दुकान", 
+            title_english: "General Store/Kirana Shop", 
+            description_hindi: "दैनिक उपयोग की वस्तुएँ - चावल, दाल, तेल, चीनी, साबुन, कॉस्मेटिक्स, होम केयर।", 
+            description_english: "Daily use items - rice, dal, oil, sugar, soap, cosmetics, home care.",
+            investment: "₹1,50,000-3,00,000", 
+            profit: "₹25,000-50,000/माह", 
+            level: "जिला स्तर",
+            skills: "इन्वेंट्री मैनेजमेंट, खरीदारी, कस्टमर सर्विस",
+            officialLink: "https://www.msme.gov.in/" 
+        },
+        // ==================== SPORTS & TEACHING - LEVEL 2 (ADDED) ====================
+        { 
+            title_hindi: "🏏 क्रिकेट/फुटबॉल अकादमी", 
+            title_english: "Cricket/Football Academy", 
+            description_hindi: "नेट्स, ग्राउंड, कोचिंग स्टाफ के साथ स्पोर्ट्स अकादमी। जिला स्तरीय टूर्नामेंट में बच्चों को तैयार करें।", 
+            description_english: "Sports academy with nets, ground, coaching staff. Prepare kids for district-level tournaments.",
+            investment: "₹2,00,000-5,00,000", 
+            profit: "₹30,000-80,000/माह", 
+            level: "जिला स्तर",
+            skills: "कोचिंग, टूर्नामेंट मैनेजमेंट, स्पोर्ट्स मैनेजमेंट",
+            officialLink: "https://sportsauthorityofindia.nic.in/" 
+        },
+        { 
+            title_hindi: "📚 कोचिंग सेंटर (JEE/NEET फाउंडेशन)", 
+            title_english: "Coaching Center (JEE/NEET Foundation)", 
+            description_hindi: "8वीं, 9वीं, 10वीं कक्षा के बच्चों के लिए प्रतियोगी परीक्षाओं की फाउंडेशन कोचिंग।", 
+            description_english: "Foundation coaching for competitive exams for 8th, 9th, 10th grade students.",
+            investment: "₹3,00,000-8,00,000", 
+            profit: "₹50,000-1,20,000/माह", 
+            level: "जिला स्तर",
+            skills: "टीचिंग, करिकुलम डिजाइन, स्टूडेंट मैनेजमेंट",
+            officialLink: "https://ncert.nic.in/" 
+        },
+        { 
+            title_hindi: "🏋️ जिम और फिटनेस सेंटर", 
+            title_english: "Gym & Fitness Center", 
+            description_hindi: "जिम उपकरण, ज़ुम्बा, योग, स्पिनिंग, क्रॉसफिट। 24x7 मॉडल या सदस्यता।", 
+            description_english: "Gym equipment, zumba, yoga, spinning, crossfit. 24x7 model or membership.",
+            investment: "₹8,00,000-15,00,000", 
+            profit: "₹40,000-1,00,000/माह", 
+            level: "जिला स्तर",
+            skills: "फिटनेस ट्रेनिंग, जिम उपकरण ज्ञान, सदस्यता बिक्री",
+            officialLink: "https://www.fitnesscouncil.com/" 
+        },
+        // ============================================
+        // LEVEL 3: STATE LEVEL (₹5 लाख - ₹50 लाख)
+        // ============================================
+        { 
+            title_hindi: "🏨 बजट होटल/गेस्ट हाउस", 
+            title_english: "Budget Hotel/Guest House", 
+            description_hindi: "यात्रियों के लिए कमरे, ऑनलाइन बुकिंग (Booking.com, Agoda, Goibibo), आयीश्वी रेस्टोरेंट।", 
+            description_english: "Rooms for travelers, online booking, attached restaurant.",
+            investment: "₹10,00,000-30,00,000", 
+            profit: "₹70,000-1,50,000/माह", 
+            level: "राज्य स्तर",
+            skills: "होटल मैनेजमेंट, कस्टमर सर्विस, ऑनलाइन मार्केटिंग",
+            officialLink: "https://www.hotelassociationofindia.com/" 
+        },
+        { 
+            title_hindi: "🏭 छोटी मैन्युफैक्चरिंग यूनिट", 
+            title_english: "Small Manufacturing Unit", 
+            description_hindi: "पापड़, मसाले, आचार, चिप्स, साबुन, फीनाइल, अगरबत्ती, पेपर प्लेट, कॉपी पेन।", 
+            description_english: "Papad, spices, pickles, chips, soap, phenyl, agarbatti, paper plate, copy pen.",
+            investment: "₹5,00,000-15,00,000", 
+            profit: "₹50,000-1,00,000/माह", 
+            level: "राज्य स्तर",
+            skills: "उत्पादन प्रक्रिया, क्वालिटी कंट्रोल, मार्केटिंग",
+            officialLink: "https://www.msme.gov.in/" 
+        },
+        { 
+            title_hindi: "🌾 कृषि उत्पाद प्रोसेसिंग", 
+            title_english: "Agri Product Processing", 
+            description_hindi: "धान पिलिंग, मिर्च पीसना, दाल प्रोसेसिंग, बेसन पीसना, मसाला पीसना, तेल निकालना।", 
+            description_english: "Rice milling, chili grinding, dal processing, besan grinding, spice grinding, oil extraction.",
+            investment: "₹10,00,000-25,00,000", 
+            profit: "₹80,000-1,50,000/माह", 
+            level: "राज्य स्तर",
+            skills: "फूड प्रोसेसिंग, मशीनरी ऑपरेशन, क्वालिटी टेस्टिंग",
+            officialLink: "https://agricoop.nic.in/" 
+        },
+        { 
+            title_hindi: "📱 ऑनलाइन ट्यूशन प्लेटफॉर्म", 
+            title_english: "Online Tutoring Platform", 
+            description_hindi: "स्थानीय स्तर पर ऑनलाइन पढ़ाई का प्लेटफॉर्म। जूम, गूगल मीट पर कक्षाएँ। सब्सक्रिप्शन मॉडल।", 
+            description_english: "Online learning platform at the local level. Classes on Zoom, Google Meet. Subscription model.",
+            investment: "₹3,00,000-8,00,000", 
+            profit: "₹50,000-1,20,000/माह", 
+            level: "राज्य स्तर",
+            skills: "टीचिंग, टेक्नोलॉजी, मार्केटिंग, सब्सक्रिप्शन मैनेजमेंट",
+            officialLink: "https://www.startupindia.gov.in/" 
+        },
+        { 
+            title_hindi: "🚜 एग्रीकल्चर टूल्स रेंटल", 
+            title_english: "Agri Tools Rental", 
+            description_hindi: "ट्रैक्टर, हार्वेस्टर, थ्रेशर, स्प्रे मशीन, कल्टीवेटर किराए पर दें। किसानों को महंगे उपकरण न खरीदने दें।", 
+            description_english: "Rent tractors, harvesters, threshers, spray machines, cultivators. Save farmers from buying expensive equipment.",
+            investment: "₹15,00,000-30,00,000", 
+            profit: "₹1,00,000-2,00,000/माह", 
+            level: "राज्य स्तर",
+            skills: "एग्री मशीनरी, मेंटेनेंस, लोकल मार्केटिंग",
+            officialLink: "https://agricoop.nic.in/" 
+        },
+        // ==================== SPORTS & TEACHING - LEVEL 3 (ADDED) ====================
+        { 
+            title_hindi: "🏆 स्पोर्ट्स इंफ्रास्ट्रक्चर (स्टेडियम/ग्राउंड)", 
+            title_english: "Sports Infrastructure (Stadium/Ground)", 
+            description_hindi: "कृत्रिम टर्फ, सिंथेटिक ट्रैक, बास्केटबॉल कोर्ट, स्विमिंग पूल। राज्य सरकार को लीज पर दें।", 
+            description_english: "Artificial turf, synthetic track, basketball court, swimming pool. Lease to state government.",
+            investment: "₹50,00,000-2,00,00,000", 
+            profit: "₹3,00,000-10,00,000/माह", 
+            level: "राज्य स्तर",
+            skills: "इंफ्रास्ट्रक्चर डेवलपमेंट, सरकारी काम, मैनेजमेंट",
+            officialLink: "https://sportsauthorityofindia.nic.in/" 
+        },
+        { 
+            title_hindi: "📖 स्पर्धा कोचिंग (NEET/JEE/UPSC)", 
+            title_english: "Competitive Coaching (NEET/JEE/UPSC)", 
+            description_hindi: "NEET, JEE, UPSC, SSC, बैंकिंग, रेलवे परीक्षाओं की राज्य स्तरीय कोचिंग।", 
+            description_english: "State-level coaching for NEET, JEE, UPSC, SSC, Banking, Railway exams.",
+            investment: "₹20,00,000-50,00,000", 
+            profit: "₹2,00,000-8,00,000/माह", 
+            level: "राज्य स्तर",
+            skills: "टीचिंग, करिकुलम डिजाइन, स्टूडेंट अक्विजिशन",
+            officialLink: "https://www.upsc.gov.in/" 
+        },
+        { 
+            title_hindi: "⚾ स्पोर्ट्स एकेडमी (बोर्डिंग)", 
+            title_english: "Sports Academy (Boarding)", 
+            description_hindi: "हॉस्टल सुविधा के साथ स्पोर्ट्स एकेडमी। खिलाड़ियों को रहना, खाना, प्रशिक्षण सब एक जगह।", 
+            description_english: "Sports academy with hostel facility. Stay, food, training all at one place for players.",
+            investment: "₹1,00,00,000-3,00,00,000", 
+            profit: "₹5,00,000-15,00,000/माह", 
+            level: "राज्य स्तर",
+            skills: "स्पोर्ट्स कोचिंग, हॉस्टल मैनेजमेंट, स्टूडेंट केयर",
+            officialLink: "https://nsnis.org/" 
+        },
+        // ============================================
+        // LEVEL 4: COUNTRY LEVEL (₹50 लाख - ₹50 करोड़)
+        // ============================================
+        { 
+            title_hindi: "🏭 मैन्युफैक्चरिंग फैक्ट्री (FMCG)", 
+            title_english: "Manufacturing Factory (FMCG)", 
+            description_hindi: "एफएमसीजी, प्लास्टिक, पैकेजिंग, चमड़ा, टेक्सटाइल, फर्नीचर, इलेक्ट्रॉनिक्स उत्पाद। B2B और B2C दोनों।", 
+            description_english: "FMCG, plastic, packaging, leather, textile, furniture, electronics products. Both B2B and B2C.",
+            investment: "₹1,00,00,000-5,00,00,000", 
+            profit: "₹10,00,000-50,00,000/माह", 
+            level: "देश स्तर",
+            skills: "मैन्युफैक्चरिंग, सप्लाई चेन, ब्रांड बिल्डिंग, एग्जीक्यूटिव मैनेजमेंट",
+            officialLink: "https://www.dpiit.gov.in/" 
+        },
+        { 
+            title_hindi: "🛍️ ई-कॉमर्स स्टोर (राष्ट्रीय)", 
+            title_english: "E-commerce Store (National)", 
+            description_hindi: "अपना ऑनलाइन स्टोर, पूरे देश में डिलीवरी। Shopify, WooCommerce पर स्टोर। Flipkart, Amazon पर भी बेचें।", 
+            description_english: "Your own online store, delivery across India. Store on Shopify, WooCommerce. Also sell on Flipkart, Amazon.",
+            investment: "₹20,00,000-50,00,000", 
+            profit: "₹3,00,000-15,00,000/माह", 
+            level: "देश स्तर",
+            skills: "ई-कॉमर्स, डिजिटल मार्केटिंग, लॉजिस्टिक्स, कस्टमर सर्विस",
+            officialLink: "https://seller.flipkart.com/" 
+        },
+        { 
+            title_hindi: "🚛 लॉजिस्टिक्स कंपनी", 
+            title_english: "Logistics Company", 
+            description_hindi: "देश भर में माल ढुलाई, अंतिम मील डिलीवरी, कोल्ड स्टोरेज चेन, 3PL सर्विसेज।", 
+            description_english: "Cargo transport across India, last-mile delivery, cold storage chain, 3PL services.",
+            investment: "₹50,00,000-2,00,00,000", 
+            profit: "₹5,00,000-20,00,000/माह", 
+            level: "देश स्तर",
+            skills: "लॉजिस्टिक्स, फ्लीट मैनेजमेंट, रूट प्लानिंग, कंट्रैक्ट नेगोशिएशन",
+            officialLink: "https://www.niti.gov.in/" 
+        },
+        { 
+            title_hindi: "🏥 मल्टी-स्पेशलिटी क्लिनिक", 
+            title_english: "Multi-Specialty Clinic", 
+            description_hindi: "डॉक्टरों की टीम के साथ हेल्थकेयर सेंटर। 24x7 इमरजेंसी, फार्मेसी, डायग्नोस्टिक्स, फिजियोथेरेपी।", 
+            description_english: "Healthcare center with a team of doctors. 24x7 emergency, pharmacy, diagnostics, physiotherapy.",
+            investment: "₹50,00,000-1,00,00,000", 
+            profit: "₹5,00,000-15,00,000/माह", 
+            level: "देश स्तर",
+            skills: "हेल्थकेयर मैनेजमेंट, डॉक्टर रिक्रूटमेंट, नाभ मान्यता, क्वालिटी केयर",
+            officialLink: "https://www.nabh.co.in/" 
+        },
+        { 
+            title_hindi: "📱 सॉफ्टवेयर कंपनी", 
+            title_english: "Software Company", 
+            description_hindi: "ऐप, वेबसाइट, सॉफ्टवेयर, क्लाउड सर्विस, AI समाधान, एंटरप्राइज़ प्रोडक्ट्स विकास।", 
+            description_english: "App, website, software, cloud services, AI solutions, enterprise product development.",
+            investment: "₹25,00,000-1,00,00,000", 
+            profit: "₹3,00,000-15,00,000/माह", 
+            level: "देश स्तर",
+            skills: "प्रोग्रामिंग, सेल्स, प्रोजेक्ट मैनेजमेंट, टेक स्टैक",
+            officialLink: "https://www.startupindia.gov.in/" 
+        },
+        // ==================== SPORTS & TEACHING - LEVEL 4 (ADDED) ====================
+        { 
+            title_hindi: "🏀 प्रोफेशनल स्पोर्ट्स लीग टीम", 
+            title_english: "Professional Sports League Team", 
+            description_hindi: "आईपीएल, आईएसएल, प्रो कबड्डी, प्रीमियर बैडमिंटन लीग में टीम खरीदें और चलाएँ।", 
+            description_english: "Buy and run a team in IPL, ISL, Pro Kabaddi, Premier Badminton League.",
+            investment: "₹50,00,00,000-500,00,00,000", 
+            profit: "₹10,00,00,000-50,00,00,000/माह", 
+            level: "देश स्तर",
+            skills: "स्पोर्ट्स मैनेजमेंट, खिलाड़ी रिक्रूटमेंट, स्पॉन्सरशिप, मार्केटिंग",
+            officialLink: "https://www.iplt20.com/" 
+        },
+        { 
+            title_hindi: "🎓 एडटेक प्लेटफॉर्म (EdTech Unicorn)", 
+            title_english: "EdTech Platform (Unicorn)", 
+            description_hindi: "BYJU'S, Unacademy, PhysicsWallah जैसा ऑनलाइन लर्निंग प्लेटफॉर्म। वीडियो, लाइव क्लासेस, टेस्ट सीरीज।", 
+            description_english: "Online learning platform like BYJU'S, Unacademy, PhysicsWallah. Videos, live classes, test series.",
+            investment: "₹5,00,00,000-50,00,00,000", 
+            profit: "₹5,00,00,000-25,00,00,000/माह", 
+            level: "देश स्तर",
+            skills: "टेक्नोलॉजी, कंटेंट क्रिएशन, मार्केटिंग, सेल्स",
+            officialLink: "https://www.startupindia.gov.in/" 
+        },
+        { 
+            title_hindi: "🏅 स्पोर्ट्स मार्केटिंग और मैनेजमेंट", 
+            title_english: "Sports Marketing & Management", 
+            description_hindi: "स्पोर्ट्स एजेंसी - खिलाड़ियों का मैनेजमेंट, इवेंट ऑर्गनाइज़ेशन, स्पॉन्सरशिप ब्रोकरेज।", 
+            description_english: "Sports agency - player management, event organization, sponsorship brokerage.",
+            investment: "₹1,00,00,000-10,00,00,000", 
+            profit: "₹2,00,00,000-10,00,00,000/माह", 
+            level: "देश स्तर",
+            skills: "स्पोर्ट्स मार्केटिंग, पब्लिक रिलेशंस, नेटवर्किंग",
+            officialLink: "https://www.sportskeeda.com/" 
+        },
+        // ============================================
+        // LEVEL 5: INTERNATIONAL / GLOBAL (₹50 करोड़+)
+        // ============================================
+        { 
+            title_hindi: "🌏 निर्यात व्यवसाय (Export)", 
+            title_english: "Export Business", 
+            description_hindi: "भारतीय उत्पाद (हस्तशिल्प, मसाले, कपड़ा, आयुर्वेदिक, जड़ी-बूटियाँ) दुनिया भर में बेचें।", 
+            description_english: "Sell Indian products (handicrafts, spices, textiles, ayurvedic, herbs) worldwide.",
+            investment: "₹5,00,00,000-50,00,00,000", 
+            profit: "₹1,00,00,000-10,00,00,000/माह", 
+            level: "अंतर्राष्ट्रीय",
+            skills: "निर्यात प्रक्रिया, अंतर्राष्ट्रीय मार्केटिंग, सप्लाई चेन, रेगुलेटरी कंप्लायंस",
+            officialLink: "https://dgft.gov.in/" 
+        },
+        { 
+            title_hindi: "🏢 मल्टीनेशनल कंपनी (MNC)", 
+            title_english: "Multinational Company (MNC)", 
+            description_hindi: "कई देशों में ऑफिस, ग्लोबल ब्रांड, विभिन्न देशों में बिक्री, बहु-भाषी टीम।", 
+            description_english: "Offices in multiple countries, global brand, sales in different countries, multi-lingual team.",
+            investment: "₹100,00,00,000+", 
+            profit: "₹10,00,00,000+/माह", 
+            level: "अंतर्राष्ट्रीय",
+            skills: "ग्लोबल स्ट्रैटेजी, क्रॉस-कल्चरल मैनेजमेंट, इंटरनेशनल लॉ",
+            officialLink: "https://www.sebi.gov.in/" 
+        },
+        { 
+            title_hindi: "🏦 IPO / पब्लिक लिस्टिंग", 
+            title_english: "IPO / Public Listing", 
+            description_hindi: "स्टॉक एक्सचेंज (NSE/BSE) पर कंपनी लिस्ट कराएँ। जनता से पूंजी जुटाएँ। कंपनी को पब्लिक बनाएँ।", 
+            description_english: "List company on stock exchange (NSE/BSE). Raise capital from public. Make company public.",
+            investment: "₹500,00,00,000+", 
+            profit: "असीमित", 
+            level: "अंतर्राष्ट्रीय",
+            skills: "कॉर्पोरेट वित्त, लीगल कंप्लायंस, निवेशक संबंध, SEBI नियम",
+            officialLink: "https://www.nseindia.com/" 
+        },
+        { 
+            title_hindi: "🤖 एआई / डीपटेक स्टार्टअप", 
+            title_english: "AI / DeepTech Startup", 
+            description_hindi: "आर्टिफिशियल इंटेलिजेंस, मशीन लर्निंग, रोबोटिक्स, सेमीकंडक्टर, IoT, ब्लॉकचेन।", 
+            description_english: "Artificial Intelligence, Machine Learning, Robotics, Semiconductor, IoT, Blockchain.",
+            investment: "₹50,00,00,000-500,00,00,000", 
+            profit: "उच्च वृद्धि (High Growth)", 
+            level: "अंतर्राष्ट्रीय",
+            skills: "डीपटेक, रिसर्च एंड डेवलपमेंट, इनोवेशन, पेटेंट",
+            officialLink: "https://www.startupindia.gov.in/" 
+        },
+        // ==================== SPORTS & TEACHING - LEVEL 5 (ADDED) ====================
+        { 
+            title_hindi: "🌍 ग्लोबल स्पोर्ट्स फ्रेंचाइजी", 
+            title_english: "Global Sports Franchise", 
+            description_hindi: "प्रीमियर लीग (UK), एनबीए (USA), ला लीगा (Spain) जैसी अंतर्राष्ट्रीय लीगों में फ्रेंचाइजी लें।", 
+            description_english: "Take a franchise in international leagues like Premier League (UK), NBA (USA), La Liga (Spain).",
+            investment: "$50M - $500M+", 
+            profit: "$10M - $100M+/माह", 
+            level: "अंतर्राष्ट्रीय",
+            skills: "ग्लोबल स्पोर्ट्स मैनेजमेंट, क्रॉस-कल्चरल लीडरशिप",
+            officialLink: "https://www.premierleague.com/" 
+        },
+        { 
+            title_hindi: "🌏 अंतर्राष्ट्रीय एडटेक प्लेटफॉर्म", 
+            title_english: "International EdTech Platform", 
+            description_hindi: "दुनिया भर के छात्रों के लिए ऑनलाइन शिक्षा। Coursera, Udemy, Khan Academy जैसा ग्लोबल प्लेटफॉर्म।", 
+            description_english: "Online education for students worldwide. Global platform like Coursera, Udemy, Khan Academy.",
+            investment: "$10M - $100M+", 
+            profit: "$5M - $50M+/माह", 
+            level: "अंतर्राष्ट्रीय",
+            skills: "ग्लोबल मार्केटिंग, स्केलेबल टेक्नोलॉजी, कंटेंट क्रिएशन",
+            officialLink: "https://www.coursera.org/" 
+        },
+        { 
+            title_hindi: "🏆 अंतर्राष्ट्रीय स्पोर्ट्स एकेडमी", 
+            title_english: "International Sports Academy", 
+            description_hindi: "दुनिया भर के खिलाड़ियों के लिए विश्व स्तरीय स्पोर्ट्स एकेडमी। IMG Academy, La Masia जैसा।", 
+            description_english: "World-class sports academy for players from around the world. Like IMG Academy, La Masia.",
+            investment: "$10M - $200M+", 
+            profit: "$2M - $20M+/माह", 
+            level: "अंतर्राष्ट्रीय",
+            skills: "विश्व स्तरीय कोचिंग, खिलाड़ी विकास, स्पोर्ट्स साइंस",
+            officialLink: "https://www.imgacademy.com/" 
+        }
+    ]
+},
             // DOOR 5: ONLINE BUSINESS IDEAS (FROZEN)
             onlineideas: {
                 name_hindi: "💻 ऑनलाइन बिजनेस आइडियाज",
