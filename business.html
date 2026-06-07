@@ -382,33 +382,508 @@
                     { title_hindi: "प्रोजेक्ट मैनेजमेंट", title_english: "Project Management", description_hindi: "Trello, Asana, Monday.com - टीम को मैनेज करें", officialLink: "https://trello.com/" }
                 ]
             },
-            // DOOR 11: GLOBAL BUSINESS (FROZEN)
-            global: {
-                name_hindi: "🌍 ग्लोबल बिजनेस",
-                name_english: "🌍 Global Business",
-                icon: "🌍",
-                items: [
-                    { title_hindi: "निर्यात (IEC Code)", title_english: "Export (IEC)", description_hindi: "आयात-निर्यात कोड - विदेशों में प्रोडक्ट बेचें", officialLink: "https://dgft.gov.in/" },
-                    { title_hindi: "Amazon Global Selling", title_english: "Amazon Global", description_hindi: "अमेज़न पर दुनिया भर में बेचें", officialLink: "https://sell.amazon.in/global-selling" },
-                    { title_hindi: "Etsy (हैंडीक्राफ्ट)", title_english: "Etsy", description_hindi: "हस्तशिल्प, आर्ट, डिजाइन उत्पाद बेचें", officialLink: "https://www.etsy.com/" },
-                    { title_hindi: "फ्रेंचाइजी बिजनेस", title_english: "Franchise", description_hindi: "बड़े ब्रांड की फ्रेंचाइजी लें", officialLink: "https://www.franchiseindia.com/" }
-                ]
-            },
-            // DOOR 12: SUCCESS STORIES (FROZEN - WITH CORRECTED SPELLINGS)
+            /
+        { 
+            title_hindi: "🇬🇧 UK (यूनाइटेड किंगडम)", 
+            title_english: "UK Business Opportunities", 
+            description_hindi: "टी-शर्ट, कॉटन कपड़े, चाय, मसाले, फुटवियर की बहुत डिमांड। भारतीय मूल के लोगों की बड़ी संख्या।", 
+            description_english: "High demand for T-shirts, cotton fabrics, tea, spices, footwear. Large Indian-origin population.",
+            platforms: "Amazon.co.uk, eBay UK, OnBuy",
+            officialLink: "https://www.gov.uk/government/organisations/uk-trade-investment" 
+        },
+        { 
+            title_hindi: "🇦🇪 Dubai / UAE (दुबई)", 
+            title_english: "Dubai / UAE Business", 
+            description_hindi: "सोना, आभूषण, चमड़े के उत्पाद, हैंडीक्राफ्ट, खजूर, मसालों का बड़ा बाजार। कर मुक्त व्यापार जोन।", 
+            description_english: "Big market for gold, jewelry, leather products, handicrafts, dates, spices. Tax-free trade zones.",
+            platforms: "Amazon.ae, Noon.com, Dubizzle",
+            officialLink: "https://www.dubaided.ae/" 
+        },
+        { 
+            title_hindi: "🇨🇦 Canada (कनाडा)", 
+            title_english: "Canada Business", 
+            description_hindi: "कपड़ा, फर्नीचर, कृषि उत्पाद, सॉफ्टवेयर सेवाओं की डिमांड। भारतीय स्टार्टअप्स के लिए अच्छे अवसर।", 
+            description_english: "Demand for textiles, furniture, agricultural products, software services. Good opportunities for Indian startups.",
+            platforms: "Amazon.ca, Walmart Canada, Etsy",
+            officialLink: "https://www.tradecommissioner.gc.ca/" 
+        },
+        { 
+            title_hindi: "🇦🇺 Australia (ऑस्ट्रेलिया)", 
+            title_english: "Australia Business", 
+            description_hindi: "आयुर्वेदिक, टी-शर्ट, बिचवियर, स्पोर्ट्स गियर, फिटनेस प्रोडक्ट्स की डिमांड।", 
+            description_english: "Demand for ayurvedic, T-shirts, beachwear, sports gear, fitness products.",
+            platforms: "Amazon.com.au, eBay Australia, Catch.com.au",
+            officialLink: "https://www.austrade.gov.au/" 
+        },
+        
+        // ============================================
+        // SECTION 4: PRODUCTS IN DEMAND GLOBALLY
+        // ============================================
+        { 
+            title_hindi: "🏺 भारतीय हस्तशिल्प", 
+            title_english: "Indian Handicrafts", 
+            description_hindi: "विदेशों में भारतीय हस्तशिल्प (वस्त्र, लकड़ी का काम, पीतल, चांदी, जरी) की बहुत डिमांड।", 
+            description_english: "High global demand for Indian handicrafts (textiles, woodwork, brass, silver, zari).",
+            profit_margin: "50-300%",
+            platforms: "Etsy, Amazon Handmade, eBay",
+            officialLink: "https://epch.in/" 
+        },
+        { 
+            title_hindi: "🌿 आयुर्वेदिक और हर्बल उत्पाद", 
+            title_english: "Ayurvedic & Herbal Products", 
+            description_hindi: "विदेशों में आयुर्वेदिक दवाएं, स्किन केयर, तेल, सप्लीमेंट्स की बहुत मांग। विश्वास बढ़ रहा है।", 
+            description_english: "High demand for ayurvedic medicines, skin care, oils, supplements globally. Trust is increasing.",
+            certifications: "AYUSH लाइसेंस, USDA Organic",
+            platforms: "Amazon Global, iHerb, Vitacost",
+            officialLink: "https://ayush.gov.in/" 
+        },
+        { 
+            title_hindi: "👔 टेक्सटाइल और गारमेंट्स", 
+            title_english: "Textiles & Garments", 
+            description_hindi: "भारतीय सूती कपड़ा, सिल्क, कश्मीरी, ब्लॉक प्रिंट, बंदनी, लहंगा, साड़ी की वैश्विक डिमांड।", 
+            description_english: "Global demand for Indian cotton fabric, silk, cashmere, block print, bandhani, lehenga, saree.",
+            profit_margin: "40-150%",
+            platforms: "Amazon, Etsy, Shopify",
+            officialLink: "https://texmin.nic.in/" 
+        },
+        { 
+            title_hindi: "🍛 भारतीय मसाले और खाद्य पदार्थ", 
+            title_english: "Indian Spices & Food", 
+            description_hindi: "हल्दी, लाल मिर्च, धनिया, गरम मसाला, चाय, आमचूर, आचार, पापड़ की अंतर्राष्ट्रीय डिमांड।", 
+            description_english: "International demand for turmeric, red chili, coriander, garam masala, tea, mango powder, pickles, papad.",
+            certifications: "FSSAI, USDA Organic, EU Organic",
+            platforms: "Amazon Global, Walmart, Whole Foods",
+            officialLink: "https://www.indianspices.com/" 
+        },
+        { 
+            title_hindi: "💎 ज्वैलरी और आभूषण", 
+            title_english: "Jewelry & Ornaments", 
+            description_hindi: "भारतीय चांदी, कुंदन, मीनाकारी, स्टोन ज्वैलरी, टेम्पल ज्वैलरी की दुनिया भर में क्रेज।", 
+            description_english: "Global craze for Indian silver, kundan, meenakari, stone jewelry, temple jewelry.",
+            certifications: "BIS हॉलमार्क",
+            platforms: "Etsy, Amazon, Shop LC",
+            officialLink: "https://gjepc.org/" 
+        },
+        
+        // ============================================
+        // SECTION 5: SHIPPING & LOGISTICS
+        // ============================================
+        { 
+            title_hindi: "📦 International Shipping - DHL/FedEx/UPS", 
+            title_english: "International Shipping - DHL/FedEx/UPS", 
+            description_hindi: "विदेशों में तेज डिलीवरी। DHL, FedEx, UPS, Aramex, DTDC International सेवा प्रदान करते हैं।", 
+            description_english: "Fast delivery abroad. DHL, FedEx, UPS, Aramex, DTDC International provide services.",
+            cost: "₹1,000-10,000 प्रति किलो (देश और वजन पर निर्भर)",
+            time: "2-7 दिन",
+            officialLink: "https://www.dhl.co.in/" 
+        },
+        { 
+            title_hindi: "🚢 Sea Freight (समुद्री माल ढुलाई)", 
+            title_english: "Sea Freight", 
+            description_hindi: "बड़े कार्गो (500kg+) के लिए सबसे सस्ता तरीका। 20ft/40ft कंटेनर उपलब्ध।", 
+            description_english: "Cheapest method for large cargo (500kg+). 20ft/40ft containers available.",
+            cost: "₹30,000-3,00,000 प्रति कंटेनर",
+            time: "15-45 दिन",
+            officialLink: "https://www.concorindia.com/" 
+        },
+        { 
+            title_hindi: "🏠 Freight Forwarders (फ्रेट फारवर्डर)", 
+            title_english: "Freight Forwarders", 
+            description_hindi: "शिपिंग, कस्टम्स क्लियरेंस, डॉक्यूमेंटेशन का पूरा काम संभालने वाली कंपनियाँ। शुरुआत में बहुत मददगार।", 
+            description_english: "Companies that handle shipping, customs clearance, documentation. Very helpful for beginners.",
+            companies: "Kuehne+Nagel, DB Schenker, Agility, Allcargo, TCI",
+            officialLink: "https://www.kuehne-nagel.com/" 
+        },
+        // DOOR 11: GLOBAL BUSINESS (COMPLETELY EXPANDED - FULL DETAILS)
+        global: {
+            name_hindi: "🌍 ग्लोबल बिजनेस (अंतर्राष्ट्रीय व्यापार)",
+            name_english: "🌍 Global Business (International Trade)",
+            icon: "🌍",
+            items: [
+                   // ============================================
+                   // SECTION 1: GETTING STARTED WITH EXPORT
+                   // ============================================
+                   { 
+                       title_hindi: "📜 IEC Code (आयात-निर्यात कोड)", 
+                       title_english: "IEC Code (Import-Export Code)", 
+                       description_hindi: "विदेशों में प्रोडक्ट बेचने या विदेश से माल मंगाने के लिए सबसे जरूरी कोड। बिना IEC कोड के निर्यात/आयात अवैध है।", 
+                       description_english: "Most important code to sell products abroad or import goods. Without IEC code, export/import is illegal.",
+                       process_hindi: "DGFT पोर्टल पर ऑनलाइन आवेदन। PAN, बैंक डिटेल, एड्रेस प्रूफ चाहिए।",
+                       cost: "₹500 (एक बार का शुल्क)",
+                       validity: "जीवन भर",
+                       time: "5-7 कार्य दिवस",
+                       officialLink: "https://dgft.gov.in/" 
+                  },
+                  { 
+                       title_hindi: "📋 GST for Export (निर्यात में GST)", 
+                       title_english: "GST for Export", 
+                       description_hindi: "निर्यात पर GST शून्य है। LUT (Letter of Undertaking) फाइल करके बिना GST भरे निर्यात कर सकते हैं।", 
+                       description_english: "GST is zero on exports. File LUT (Letter of Undertaking) to export without paying GST.",
+                       process_hindi: "GST पोर्टल पर LUT फाइल करें। हर साल रिन्यू करना होता है।",
+                       benefit: "इनपुट टैक्स क्रेडिट मिलता है",
+                       officialLink: "https://www.gst.gov.in/" 
+                  },
+                  { 
+                       title_hindi: "🌐 International Bank Account", 
+                       title_english: "International Bank Account", 
+                       description_hindi: "विदेशी मुद्रा में भुगतान लेने के लिए। एक्सपोर्ट और इम्पोर्ट के लिए अलग बैंक अकाउंट जरूरी।", 
+                       description_english: "To receive payments in foreign currency. Separate bank account needed for export and import.",
+                       banks: "SBI, HDFC, ICICI, Axis, Yes Bank में एक्सपोर्ट अकाउंट खुलता है",
+                       required: "IEC कोड, GST, व्यापार पंजीकरण",
+                       officialLink: "https://www.rbi.org.in/" 
+                  },
+        
+                 // ============================================
+                 // SECTION 2: E-COMMERCE PLATFORMS FOR GLOBAL SELLING
+                 // ============================================
+                 { 
+                       title_hindi: "📦 Amazon Global Selling", 
+                       title_english: "Amazon Global Selling", 
+                       description_hindi: "अमेज़न के 18+ देशों (USA, UK, Canada, Germany, France, Italy, Spain, Japan, Australia, UAE, etc.) में अपने प्रोडक्ट बेचें।", 
+                       description_english: "Sell your products on Amazon's 18+ countries (USA, UK, Canada, Germany, France, Italy, Spain, Japan, Australia, UAE, etc.).",
+                       process_hindi: "Amazon Seller Central पर रजिस्टर करें। प्रोडक्ट अपलोड करें। Amazon शिपिंग और कस्टम्स हैंडल करता है।",
+                       fees: "₹7,000-30,000 प्रति माह (प्रो प्लान)",
+                       support: "हिंदी में सपोर्ट उपलब्ध",
+                       officialLink: "https://sell.amazon.in/global-selling" 
+                  },
+                  { 
+                       title_hindi: "🛍️ eBay International Selling", 
+                       title_english: "eBay International Selling", 
+                       description_hindi: "190+ देशों में बेचें। नीलामी और फिक्स्ड प्राइस दोनों तरीके। प्राचीन वस्तुएँ, हस्तशिल्प, कलेक्टेबल्स के लिए बेस्ट।", 
+                       description_english: "Sell in 190+ countries. Both auction and fixed price. Best for antiques, handicrafts, collectibles.",
+                       process_hindi: "eBay.com पर अकाउंट बनाएँ। पेपैल से जोड़ें। इंटरनेशनल शिपिंग सेट करें।",
+                       fees: "10-15% प्रति सेल",
+                       officialLink: "https://www.ebay.com/" 
+                  },
+                  { 
+                       title_hindi: "🎨 Etsy (हैंडीक्राफ्ट / हस्तशिल्प)", 
+                       title_english: "Etsy (Handicraft / Handmade)", 
+                       description_hindi: "हस्तनिर्मित उत्पाद, ज्वैलरी, कला, कपड़े, विंटेज आइटम्स के लिए सबसे बड़ा ग्लोबल प्लेटफॉर्म। भारतीय हैंडीक्राफ्ट की बहुत डिमांड।", 
+                       description_english: "Largest global platform for handmade products, jewelry, art, clothing, vintage items. High demand for Indian handicrafts.",
+                       process_hindi: "Etsy.com पर दुकान खोलें। प्रोडक्ट की अच्छी फोटो अपलोड करें।",
+                       fees: "$0.20 प्रति लिस्टिंग + 6.5% ट्रांजेक्शन फीस",
+                       officialLink: "https://www.etsy.com/" 
+                  },
+                  { 
+                       title_hindi: "🖼️ Shopify (अपना ब्रांड)", 
+                       title_english: "Shopify (Own Brand Store)", 
+                       description_hindi: "अपनी खुद की वेबसाइट बनाकर दुनिया भर में बेचें। कस्टम डोमेन, ड्रॉपशिपिंग, मार्केटिंग टूल्स।", 
+                       description_english: "Create your own website and sell worldwide. Custom domain, dropshipping, marketing tools.",
+                       process_hindi: "Shopify पर साइनअप करें। अपना डोमेन कनेक्ट करें। प्रोडक्ट जोड़ें। इंटरनेशनल पेमेंट गेटवे सेट करें।",
+                       fees: "$29-299 प्रति माह",
+                       officialLink: "https://www.shopify.com/" 
+                  },
+                  // ============================================
+                  // SECTION 3: SPECIFIC COUNTRY OPPORTUNITIES
+                  // ============================================
+                  { 
+            title_hindi: "🇺🇸 USA (अमेरिका) बिजनेस", 
+            title_english: "USA Business Opportunities", 
+            description_hindi: "दुनिया की सबसे बड़ी अर्थव्यवस्था। टेक्सटाइल, ज्वैलरी, आयुर्वेदिक, सॉफ्टवेयर, इंजीनियरिंग प्रोडक्ट्स की भारी डिमांड।", 
+            description_english: "World's largest economy. High demand for textiles, jewelry, ayurvedic, software, engineering products.",
+            platforms: "Amazon.com, Walmart Marketplace, Etsy, eBay",
+            requirements: "US का GST नहीं, IEC कोड काफी है।",
+            officialLink: "https://www.usitc.gov/" 
+        },
+        { 
+            title_hindi: "🇬🇧 UK (यूनाइटेड किंगडम)", 
+            title_english: "UK Business Opportunities", 
+            description_hindi: "टी-शर्ट, कॉटन कपड़े, चाय, मसाले, फुटवियर की बहुत डिमांड। भारतीय मूल के लोगों की बड़ी संख्या।", 
+            description_english: "High demand for T-shirts, cotton fabrics, tea, spices, footwear. Large Indian-origin population.",
+            platforms: "Amazon.co.uk, eBay UK, OnBuy",
+            officialLink: "https://www.gov.uk/government/organisations/uk-trade-investment" 
+        },
+        { 
+            title_hindi: "🇦🇪 Dubai / UAE (दुबई)", 
+            title_english: "Dubai / UAE Business", 
+            description_hindi: "सोना, आभूषण, चमड़े के उत्पाद, हैंडीक्राफ्ट, खजूर, मसालों का बड़ा बाजार। कर मुक्त व्यापार जोन।", 
+            description_english: "Big market for gold, jewelry, leather products, handicrafts, dates, spices. Tax-free trade zones.",
+            platforms: "Amazon.ae, Noon.com, Dubizzle",
+            officialLink: "https://www.dubaided.ae/" 
+        },
+        { 
+            title_hindi: "🇨🇦 Canada (कनाडा)", 
+            title_english: "Canada Business", 
+            description_hindi: "कपड़ा, फर्नीचर, कृषि उत्पाद, सॉफ्टवेयर सेवाओं की डिमांड। भारतीय स्टार्टअप्स के लिए अच्छे अवसर।", 
+            description_english: "Demand for textiles, furniture, agricultural products, software services. Good opportunities for Indian startups.",
+            platforms: "Amazon.ca, Walmart Canada, Etsy",
+            officialLink: "https://www.tradecommissioner.gc.ca/" 
+        },
+        { 
+            title_hindi: "🇦🇺 Australia (ऑस्ट्रेलिया)", 
+            title_english: "Australia Business", 
+            description_hindi: "आयुर्वेदिक, टी-शर्ट, बिचवियर, स्पोर्ट्स गियर, फिटनेस प्रोडक्ट्स की डिमांड।", 
+            description_english: "Demand for ayurvedic, T-shirts, beachwear, sports gear, fitness products.",
+            platforms: "Amazon.com.au, eBay Australia, Catch.com.au",
+            officialLink: "https://www.austrade.gov.au/" 
+        },
+        
+        // ============================================
+        // SECTION 4: PRODUCTS IN DEMAND GLOBALLY
+        // ============================================
+        { 
+            title_hindi: "🏺 भारतीय हस्तशिल्प", 
+            title_english: "Indian Handicrafts", 
+            description_hindi: "विदेशों में भारतीय हस्तशिल्प (वस्त्र, लकड़ी का काम, पीतल, चांदी, जरी) की बहुत डिमांड।", 
+            description_english: "High global demand for Indian handicrafts (textiles, woodwork, brass, silver, zari).",
+            profit_margin: "50-300%",
+            platforms: "Etsy, Amazon Handmade, eBay",
+            officialLink: "https://epch.in/" 
+        },
+        { 
+            title_hindi: "🌿 आयुर्वेदिक और हर्बल उत्पाद", 
+            title_english: "Ayurvedic & Herbal Products", 
+            description_hindi: "विदेशों में आयुर्वेदिक दवाएं, स्किन केयर, तेल, सप्लीमेंट्स की बहुत मांग। विश्वास बढ़ रहा है।", 
+            description_english: "High demand for ayurvedic medicines, skin care, oils, supplements globally. Trust is increasing.",
+            certifications: "AYUSH लाइसेंस, USDA Organic",
+            platforms: "Amazon Global, iHerb, Vitacost",
+            officialLink: "https://ayush.gov.in/" 
+        },
+        { 
+            title_hindi: "👔 टेक्सटाइल और गारमेंट्स", 
+            title_english: "Textiles & Garments", 
+            description_hindi: "भारतीय सूती कपड़ा, सिल्क, कश्मीरी, ब्लॉक प्रिंट, बंदनी, लहंगा, साड़ी की वैश्विक डिमांड।", 
+            description_english: "Global demand for Indian cotton fabric, silk, cashmere, block print, bandhani, lehenga, saree.",
+            profit_margin: "40-150%",
+            platforms: "Amazon, Etsy, Shopify",
+            officialLink: "https://texmin.nic.in/" 
+        },
+        { 
+            title_hindi: "🍛 भारतीय मसाले और खाद्य पदार्थ", 
+            title_english: "Indian Spices & Food", 
+            description_hindi: "हल्दी, लाल मिर्च, धनिया, गरम मसाला, चाय, आमचूर, आचार, पापड़ की अंतर्राष्ट्रीय डिमांड।", 
+            description_english: "International demand for turmeric, red chili, coriander, garam masala, tea, mango powder, pickles, papad.",
+            certifications: "FSSAI, USDA Organic, EU Organic",
+            platforms: "Amazon Global, Walmart, Whole Foods",
+            officialLink: "https://www.indianspices.com/" 
+        },
+        { 
+            title_hindi: "💎 ज्वैलरी और आभूषण", 
+            title_english: "Jewelry & Ornaments", 
+            description_hindi: "भारतीय चांदी, कुंदन, मीनाकारी, स्टोन ज्वैलरी, टेम्पल ज्वैलरी की दुनिया भर में क्रेज।", 
+            description_english: "Global craze for Indian silver, kundan, meenakari, stone jewelry, temple jewelry.",
+            certifications: "BIS हॉलमार्क",
+            platforms: "Etsy, Amazon, Shop LC",
+            officialLink: "https://gjepc.org/" 
+        },
+        
+        // ============================================
+        // SECTION 5: SHIPPING & LOGISTICS
+        // ============================================
+        { 
+            title_hindi: "📦 International Shipping - DHL/FedEx/UPS", 
+            title_english: "International Shipping - DHL/FedEx/UPS", 
+            description_hindi: "विदेशों में तेज डिलीवरी। DHL, FedEx, UPS, Aramex, DTDC International सेवा प्रदान करते हैं।", 
+            description_english: "Fast delivery abroad. DHL, FedEx, UPS, Aramex, DTDC International provide services.",
+            cost: "₹1,000-10,000 प्रति किलो (देश और वजन पर निर्भर)",
+            time: "2-7 दिन",
+            officialLink: "https://www.dhl.co.in/" 
+        },
+        { 
+            title_hindi: "🚢 Sea Freight (समुद्री माल ढुलाई)", 
+            title_english: "Sea Freight", 
+            description_hindi: "बड़े कार्गो (500kg+) के लिए सबसे सस्ता तरीका। 20ft/40ft कंटेनर उपलब्ध।", 
+            description_english: "Cheapest method for large cargo (500kg+). 20ft/40ft containers available.",
+            cost: "₹30,000-3,00,000 प्रति कंटेनर",
+            time: "15-45 दिन",
+            officialLink: "https://www.concorindia.com/" 
+        },
+        { 
+            title_hindi: "🏠 Freight Forwarders (फ्रेट फारवर्डर)", 
+            title_english: "Freight Forwarders", 
+            description_hindi: "शिपिंग, कस्टम्स क्लियरेंस, डॉक्यूमेंटेशन का पूरा काम संभालने वाली कंपनियाँ। शुरुआत में बहुत मददगार।", 
+            description_english: "Companies that handle shipping, customs clearance, documentation. Very helpful for beginners.",
+            companies: "Kuehne+Nagel, DB Schenker, Agility, Allcargo, TCI",
+            officialLink: "https://www.kuehne-nagel.com/" 
+        },
+        
+        // ============================================
+        // SECTION 6: PAYMENT PROCESSING
+        // ============================================
+        { 
+            title_hindi: "💳 PayPal International", 
+            title_english: "PayPal International", 
+            description_hindi: "विदेशी ग्राहकों से भुगतान लेने का सबसे आसान तरीका। 200+ देशों में स्वीकार किया जाता है।", 
+            description_english: "Easiest way to receive payments from foreign customers. Accepted in 200+ countries.",
+            fees: "4.4% + ₹20 प्रति ट्रांजेक्शन",
+            settlement: "2-5 दिनों में बैंक में",
+            officialLink: "https://www.paypal.com/in/" 
+        },
+        { 
+            title_hindi: "💰 Wise (TransferWise) for International Payments", 
+            title_english: "Wise (TransferWise)", 
+            description_hindi: "कम फीस में विदेशी भुगतान लेने और भेजने के लिए। असली एक्सचेंज रेट देता है।", 
+            description_english: "Low-fee international payments and transfers. Gives real exchange rate.",
+            fees: "0.5-1.5% प्रति ट्रांजेक्शन",
+            settlement: "1-2 दिन",
+            officialLink: "https://wise.com/in/" 
+        },
+        { 
+            title_hindi: "🌏 Stripe - Global Payment Gateway", 
+            title_english: "Stripe Global Gateway", 
+            description_hindi: "वेबसाइट पर इंटरनेशनल पेमेंट गेटवे लगाने के लिए सबसे बेस्ट। 47+ देशों में कस्टमाइज़ कर सकते हैं।", 
+            description_english: "Best international payment gateway for websites. Can customize for 47+ countries.",
+            fees: "2.9% + $0.30 प्रति ट्रांजेक्शन",
+            officialLink: "https://stripe.com/in" 
+        },
+        
+        // ============================================
+        // SECTION 7: FRANCHISE BUSINESS (Indian Brands Going Global)
+        // ============================================
+        { 
+            title_hindi: "🌏 Indian Franchise Brands Going Global", 
+            title_english: "Indian Franchise Brands Going Global", 
+            description_hindi: "भारतीय ब्रांड अब दुनिया में फ्रेंचाइजी दे रहे हैं। आप उनकी फ्रेंचाइजी ले सकते हैं।", 
+            description_english: "Indian brands are now offering franchises globally. You can take their franchise.",
+            brands: "Chai Point (USA, UK), Bikanervala (UAE, USA, NZ), Sagar Ratna (UAE, UK), Lalit (UAE)",
+            investment: "$50,000-500,000",
+            officialLink: "https://www.franchiseindia.com/" 
+        },
+        { 
+            title_hindi: "🤝 International Franchise Opportunities", 
+            title_english: "International Franchise", 
+            description_hindi: "विदेशी फ्रेंचाइजी भारत में लाने का बिजनेस। KFC, McDonald's, Starbucks, Subway, Domino's भारत में फ्रेंचाइजी देते हैं।", 
+            description_english: "Business of bringing foreign franchises to India. KFC, McDonald's, Starbucks, Subway, Domino's offer franchises in India.",
+            investment: "₹50 लाख - ₹10 करोड़",
+            officialLink: "https://www.franchiseindia.com/international-franchises" 
+        },
+        
+        // ============================================
+        // SECTION 8: EXPORT FINANCING & SCHEMES
+        // ============================================
+        { 
+            title_hindi: "🏦 EXIM Bank (Export-Import Bank of India)", 
+            title_english: "EXIM Bank", 
+            description_hindi: "निर्यातकों के लिए लोन, क्रेडिट, और सलाहकार सेवाएँ। निर्यात का बोझ कम करता है।", 
+            description_english: "Loans, credit, and advisory services for exporters. Reduces export burden.",
+            schemes: "एक्सपोर्ट क्रेडिट, पीईसी, मीडियम टर्म फंडिंग",
+            officialLink: "https://www.eximbankindia.in/" 
+        },
+        { 
+            title_hindi: "📜 MEIS / RoDTEP (Export Subsidies)", 
+            title_english: "MEIS / RoDTEP", 
+            description_hindi: "सरकार निर्यात पर सब्सिडी (2-5%) देती है। RoDTEP स्कीम से टैक्स रिफंड मिलता है।", 
+            description_english: "Government gives subsidy (2-5%) on exports. RoDTEP scheme gives tax refund.",
+            benefit: "कुल निर्यात मूल्य का 2-5% अतिरिक्त आय",
+            officialLink: "https://dgciskol.gov.in/" 
+        },
+        { 
+            title_hindi: "🛡️ ECGC (Export Credit Guarantee Corporation)", 
+            title_english: "ECGC", 
+            description_hindi: "विदेशी ग्राहक के भुगतान न करने पर बीमा। निर्यात से जुड़ा ऋण जोखिम कवर करता है।", 
+            description_english: "Insurance if foreign customer doesn't pay. Covers export credit risk.",
+            premium: "निर्यात मूल्य का 0.5-2%",
+            officialLink: "https://www.ecgc.in/" 
+        },
+        
+        // ============================================
+        // SECTION 9: FREE TRADE AGREEMENTS
+        // ============================================
+        { 
+            title_hindi: "🇮🇳🇦🇪 UAE CEPA Agreement", 
+            title_english: "UAE CEPA Agreement", 
+            description_hindi: "भारत और UAE के बीच फ्री ट्रेड। 90% प्रोडक्ट्स पर कोई टैक्स नहीं। सबसे फायदेमंद समझौता।", 
+            description_english: "Free trade between India and UAE. Zero tax on 90% products. Most beneficial agreement.",
+            benefit: "0% कस्टम ड्यूटी",
+            effective_from: "1 मई 2022",
+            officialLink: "https://commerce.gov.in/" 
+        },
+        { 
+            title_hindi: "🇮🇳🇦🇺 Ind-Aus ECTA", 
+            title_english: "Ind-Aus ECTA", 
+            description_hindi: "भारत-ऑस्ट्रेलिया मुक्त व्यापार समझौता। टेक्सटाइल, लेदर, स्पोर्ट्स गियर पर टैक्स में कमी।", 
+            description_english: "India-Australia free trade agreement. Tax reduction on textiles, leather, sports gear.",
+            benefit: "कई प्रोडक्ट्स पर 0-5% टैक्स",
+            effective_from: "29 दिसंबर 2022",
+            officialLink: "https://commerce.gov.in/" 
+        }
+    ]
+},
+        // DOOR 12: SUCCESS STORIES (FULLY DETAILED - REAL INDIAN ENTREPRENEUR JOURNEYS)
             success: {
-                name_hindi: "🏆 सक्सेस स्टोरीज",
-                name_english: "🏆 Success Stories",
-                icon: "🏆",
-                items: [
-                    { title_hindi: "अमित अग्रवाल (BOAT)", title_english: "Amit Agarwal (BOAT)", description_hindi: "इंजीनियरिंग छोड़ी, ₹1,500 करोड़+ की कंपनी बनाई", lesson: "सही ट्रेंड की पहचान, सही टीम", officialLink: "https://www.boat-lifestyle.com/" },
-                    { title_hindi: "विनीता सिंह (SUGAR)", title_english: "Vineeta Singh (SUGAR)", description_hindi: "IIT से पढ़ाई, ₹500 करोड़+ का कॉस्मेटिक ब्रांड", lesson: "प्रॉब्लम समझो, सॉल्यूशन लाओ", officialLink: "https://www.sugarcosmetics.com/" },
-                    { title_hindi: "दीपिंदर गोयल (Zomato)", title_english: "Deepinder Goyal (Zomato)", description_hindi: "रेस्टोरेंट्स को ऑनलाइन लाने का आइडिया", lesson: "बड़ा सोचो, छोटे से शुरू करो", officialLink: "https://www.zomato.com/" },
-                    { title_hindi: "फाल्गुनी नायर (Nykaa)", title_english: "Falguni Nayar (Nykaa)", description_hindi: "50 साल में स्टार्टअप, अरबों की कंपनी", lesson: "उम्र सिर्फ एक संख्या है", officialLink: "https://www.nykaa.com/" },
-                    { title_hindi: "बिजॉय दास (Bikayi)", title_english: "Bijoy Das (Bikayi)", description_hindi: "छोटे शहर से ई-कॉमर्स प्लेटफॉर्म बनाया", lesson: "सही समस्या पहचानो", officialLink: "https://bikayi.com/" },
-                    { title_hindi: "राधिका गुप्ता (Snitch)", title_english: "Radhika Gupta (Snitch)", description_hindi: "फैशन ब्रांड बनाकर सफलता हासिल की", lesson: "ब्रांडिंग पावर", officialLink: "https://snitch.co.in/" }
-                ]
+                 name_hindi: "🏆 सक्सेस स्टोरीज",
+                 name_english: "🏆 Success Stories",
+                 icon: "🏆",
+                 items: [
+                     { 
+                          title_hindi: "अमित अग्रवाल (BOAT)", 
+                          title_english: "Amit Agarwal (BOAT)", 
+                          description_hindi: "इंजीनियरिंग छोड़ी, ₹1,500 करोड़+ की कंपनी बनाई। 2013 में लॉन्च, आज India का No.1 ऑडियो ब्रांड।", 
+                          description_english: "Left engineering, built ₹1,500 Cr+ company. Launched in 2013, now India's No.1 audio brand.",
+                          journey_hindi: "अमित अग्रवाल ने IIT से पढ़ाई की। BOAT से पहले एक फेल स्टार्टअप किया। 2013 में ₹30 लाख से शुरुआत।",
+                          investment: "₹30 लाख",
+                          struggle: "शुरुआत में कोई इन्वेस्टर तैयार नहीं था। 2 साल तक बिना सैलरी के काम किया।",
+                          lesson: "सही ट्रेंड की पहचान (हेडफोन का बढ़ता बाजार), सही टीम, सही टाइमिंग, कम कीमत पर गुणवत्ता।", 
+                          officialLink: "https://www.boat-lifestyle.com/" 
+                     },
+                     { 
+                          title_hindi: "विनीता सिंह (SUGAR)", 
+                          title_english: "Vineeta Singh (SUGAR)", 
+                          description_hindi: "IIT मद्रास से पढ़ाई, ₹500 करोड़+ का कॉस्मेटिक ब्रांड। Shark Tank India की शार्क।", 
+                          description_english: "IIT Madras graduate, built ₹500 Cr+ cosmetic brand. Shark on Shark Tank India.",
+                          journey_hindi: "पहले एक क्विज़ ब्रांड शुरू किया जो फेल हो गया। 2012 में SUGAR शुरू किया।",
+                          investment: "₹50 लाख (बूटस्ट्रैप)",
+                          struggle: "7 साल तक प्रॉफिट नहीं हुआ। बैंक बैलेंस एक समय ₹40,000 था।",
+                          lesson: "प्रॉब्लम समझो (मेकअप में गैप), सॉल्यूशन लाओ, लगातार बने रहो। कोई शॉर्टकट नहीं।", 
+                          officialLink: "https://www.sugarcosmetics.com/" 
+                    },
+                    { 
+                          title_hindi: "दीपिंदर गोयल (Zomato)", 
+                          title_english: "Deepinder Goyal (Zomato)", 
+                          description_hindi: "रेस्टोरेंट मेन्यू ऑनलाइन लाने का आइडिया। आज ₹1 लाख करोड़+ मार्केट कैप।", 
+                          description_english: "Idea to put restaurant menus online. Today ₹1 lakh Cr+ market cap.",
+                          journey_hindi: "IIT दिल्ली से सिविल इंजीनियरिंग। Foodiebay नाम से शुरू किया।",
+                          investment: "₹5 लाख",
+                          struggle: "शुरुआत में लोग नहीं समझे। रेस्टोरेंट वाले साइन नहीं करना चाहते थे।",
+                          lesson: "बड़ा सोचो, छोटे से शुरू करो, लगातार सीखो और पिवट करो। कस्टमर फीडबैक सबसे जरूरी।", 
+                          officialLink: "https://www.zomato.com/" 
+                   },
+                   { 
+                          title_hindi: "फाल्गुनी नायर (Nykaa)", 
+                          title_english: "Falguni Nayar (Nykaa)", 
+                          description_hindi: "50 साल में स्टार्टअप किया, अरबों की कंपनी बनाई। India की सबसे उम्रदराज महिला यूनिकॉर्न फाउंडर।", 
+                          description_english: "Started a startup at 50, built a billion-dollar company. India's oldest woman unicorn founder.",
+                          journey_hindi: "Kotak Mahindra Bank में MD थीं। 2012 में Nykaa शुरू किया।",
+                          investment: "₹2 करोड़",
+                          struggle: "50 की उम्र में नया क्षेत्र। ई-कॉमर्स में Amazon, Flipkart जैसे दिग्गजों से मुकाबला।",
+                          lesson: "उम्र सिर्फ एक संख्या है। एक्सपीरियंस को अपनी ताकत बनाओ। निचे में फोकस करो (ब्यूटी)।", 
+                          officialLink: "https://www.nykaa.com/" 
+                  },
+                  { 
+                          title_hindi: "बिजॉय दास (Bikayi)", 
+                          title_english: "Bijoy Das (Bikayi)", 
+                          description_hindi: "छोटे शहर से ई-कॉमर्स प्लेटफॉर्म बनाया। 2020 में लॉन्च, आज लाखों उपयोगकर्ता।", 
+                          description_english: "Built e-commerce platform from a small town. Launched in 2020, now millions of users.",
+                          journey_hindi: "छोटे शहर के लड़के ने छोटे व्यापारियों के लिए ऐप बनाया।",
+                          investment: "₹15 लाख (बूटस्ट्रैप)",
+                          struggle: "इन्वेस्टर्स स्मॉल सिटी स्टार्टअप पर भरोसा नहीं करते थे।",
+                          lesson: "अपने इलाके की समस्या समझो। छोटे व्यापारियों को डिजिटल बनाने का बड़ा अवसर।", 
+                          officialLink: "https://bikayi.com/" 
+                  },
+                  { 
+                          title_hindi: "राधिका गुप्ता (Snitch)", 
+                          title_english: "Radhika Gupta (Snitch)", 
+                          description_hindi: "फैशन ब्रांड बनाकर सफलता हासिल की। बिना फिजिकल स्टोर के पूरे देश में बिक्री।", 
+                          description_english: "Built a fashion brand. Selling across India without any physical store.",
+                          journey_hindi: "डिजिटल-फर्स्ट फैशन ब्रांड। सोशल मीडिया पर ब्रांड बिल्ड किया।",
+                          investment: "₹25 लाख",
+                          struggle: "जब बड़े ब्रांड पहले से मौजूद थे, तब नया ब्रांड खड़ा करना।",
+                          lesson: "ब्रांडिंग की पावर। युवाओं को समझो। डिजिटल मार्केटिंग में महारत हासिल करो।", 
+                          officialLink: "https://snitch.co.in/" 
+                  },
+                  { 
+                          title_hindi: "वरुण अलघ (PeeSafe)", 
+                          title_english: "Varun Alagh (PeeSafe)", 
+                          description_hindi: "महिलाओं के लिए हेल्थ और हाइजीन प्रोडक्ट। Honey Bunny Planet के फाउंडर।", 
+                          description_english: "Health and hygiene products for women. Founder of Honasa Consumer (Mamaearth, PeeSafe).",
+                          journey_hindi: "पहले एफएमसीजी कंपनी में काम किया। गलत प्रोडक्ट के कारण 1 करोड़ का नुकसान। ममाअर्थ से सफलता मिली।",
+                          investment: "₹30 लाख",
+                          struggle: "पहला प्रोडक्ट फेल। लोग 'केमिकल फ्री' पर भरोसा नहीं करते थे।",
+                          lesson: "असफलता से सीखो, पिवट करो। कस्टमर्स को एजुकेट करो। ट्रस्ट बनाने में समय लगता है।", 
+                          officialLink: "https://peesafe.com/" 
+                  }
+               ]
             },
-
             // ============================================
             // DOORS 13 TO 25 - FULL DATA ADDED
             // ============================================
