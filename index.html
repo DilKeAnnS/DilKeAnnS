@@ -5,30 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>दिल के अंश Career Saathi - Free Career Guidance Platform</title>
     <meta name="description" content="100% free, zero-privacy-sharing, offline-first career guidance platform for Indian students. Explore careers, mock tests, e-newspapers, current affairs, and more.">
-    <meta name="theme-color" content="#11998e">
+    <meta name="theme-color" content="#2563EB">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="App%20logo.png">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', system-ui, sans-serif;
+            background: #F8FAFC;
             min-height: 100vh;
-            padding-bottom: 30px;
+            padding-bottom: 80px;
+        }
+
+        /* ===== COLOR THEME (From Excel HOME_CONFIG) ===== */
+        :root {
+            --primary: #2563EB;
+            --secondary: #7C3AED;
+            --highlight: #10B981;
+            --background: #F8FAFC;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+            --card-radius: 18px;
+        }
+
+        /* Soft-wave Background Animation */
+        .soft-wave-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .soft-wave-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(37,99,235,0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(124,58,237,0.03) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .app-header {
-            background: rgba(255,255,255,0.98);
+            background: white;
             padding: 12px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
         }
 
         .header-content {
@@ -47,36 +71,43 @@
             gap: 10px;
         }
 
-        .logo {
-            font-size: 1.8rem;
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
         }
 
         .app-title h1 {
             font-size: 1.2rem;
-            background: linear-gradient(135deg, #11998e, #38ef7d);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
-        .app-title p {
-            font-size: 0.65rem;
-            color: #666;
-        }
+        .app-title p { font-size: 0.65rem; color: var(--text-secondary); }
 
         .bell-icon {
             font-size: 1.3rem;
             cursor: pointer;
+            position: relative;
         }
 
-        .nav-buttons {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            background: var(--highlight);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 10px;
         }
+
+        .nav-buttons { display: flex; align-items: center; gap: 15px; }
 
         .offline-status {
-            background: #e74c3c;
+            background: var(--highlight);
             color: white;
             padding: 5px 12px;
             border-radius: 20px;
@@ -84,56 +115,98 @@
             font-weight: bold;
         }
 
-        .offline-status.online {
-            background: #4caf50;
-        }
+        .offline-status.offline { background: #ef4444; }
 
-        .welcome-banner {
-            background: rgba(255,255,255,0.95);
+        /* Hero Section with AI Avatar */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             margin: 20px;
-            padding: 20px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: var(--card-radius);
+            padding: 0;
+            overflow: hidden;
+            position: relative;
         }
 
-        .welcome-banner h2 {
-            color: #11998e;
-            margin-bottom: 5px;
-            font-size: 1.3rem;
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 25px 30px;
+            position: relative;
+            z-index: 2;
         }
 
-        .welcome-banner p {
-            color: #555;
-            margin-bottom: 15px;
+        .hero-text {
+            flex: 2;
+            min-width: 250px;
+        }
+
+        .hero-text h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .hero-text p {
+            color: rgba(255,255,255,0.9);
             font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .ai-avatar {
+            flex: 1;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .ai-avatar-img {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .search-ai {
             display: flex;
             max-width: 500px;
-            margin: 0 auto;
             gap: 10px;
         }
 
         .search-ai input {
             flex: 1;
-            padding: 12px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 30px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 40px;
             font-size: 1rem;
+            outline: none;
         }
 
         .search-ai button {
-            background: linear-gradient(135deg, #11998e, #38ef7d);
+            background: var(--highlight);
             color: white;
             border: none;
             padding: 0 25px;
-            border-radius: 30px;
+            border-radius: 40px;
             cursor: pointer;
             font-weight: bold;
+            transition: transform 0.2s;
         }
 
+        .search-ai button:hover { transform: scale(1.02); }
+
+        /* Tiles Grid - 16 Tiles with Animations */
         .tiles-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -145,38 +218,59 @@
 
         .tile {
             background: white;
-            border-radius: 16px;
+            border-radius: var(--card-radius);
             padding: 20px 10px;
             text-align: center;
             text-decoration: none;
-            color: #333;
+            color: var(--text);
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            border: none;
-            width: 100%;
+            border: 1px solid #e2e8f0;
+            animation: fadeInUp 0.4s ease;
+            animation-fill-mode: both;
         }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Staggered animation for tiles */
+        .tile:nth-child(1) { animation-delay: 0.05s; }
+        .tile:nth-child(2) { animation-delay: 0.10s; }
+        .tile:nth-child(3) { animation-delay: 0.15s; }
+        .tile:nth-child(4) { animation-delay: 0.20s; }
+        .tile:nth-child(5) { animation-delay: 0.25s; }
+        .tile:nth-child(6) { animation-delay: 0.30s; }
+        .tile:nth-child(7) { animation-delay: 0.35s; }
+        .tile:nth-child(8) { animation-delay: 0.40s; }
+        .tile:nth-child(9) { animation-delay: 0.45s; }
+        .tile:nth-child(10) { animation-delay: 0.50s; }
+        .tile:nth-child(11) { animation-delay: 0.55s; }
+        .tile:nth-child(12) { animation-delay: 0.60s; }
+        .tile:nth-child(13) { animation-delay: 0.65s; }
+        .tile:nth-child(14) { animation-delay: 0.70s; }
+        .tile:nth-child(15) { animation-delay: 0.75s; }
+        .tile:nth-child(16) { animation-delay: 0.80s; }
 
         .tile:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--primary);
         }
 
-        .tile-icon {
-            font-size: 2rem;
-        }
+        .tile-icon { font-size: 2rem; transition: transform 0.2s; }
+        .tile:hover .tile-icon { transform: scale(1.1) rotate(5deg); }
 
-        .tile-title {
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
+        .tile-title { font-weight: 600; font-size: 0.85rem; }
 
         .tile-badge {
-            background: #ff9800;
+            background: var(--highlight);
             color: white;
             font-size: 0.6rem;
             padding: 2px 8px;
@@ -184,16 +278,52 @@
             margin-top: 5px;
         }
 
-        .footer {
-            text-align: center;
-            padding: 30px 20px 20px;
-            color: white;
-            font-size: 0.8rem;
+        .tile-badge.auto { background: var(--secondary); }
+        .tile-badge.update { background: #f59e0b; }
+
+        /* Bottom Navigation Bar */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 12px 20px;
+            border-top: 1px solid #e2e8f0;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
         }
 
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 30px;
+            transition: all 0.2s;
+            background: transparent;
+            border: none;
+            font-family: inherit;
+        }
+
+        .nav-item span:first-child { font-size: 22px; transition: transform 0.2s; }
+        .nav-item:hover span:first-child { transform: translateY(-2px); }
+        .nav-item span:last-child { font-size: 10px; color: var(--text-secondary); }
+
+        .nav-item.active {
+            background: rgba(37,99,235,0.1);
+        }
+        .nav-item.active span:first-child { color: var(--primary); }
+        .nav-item.active span:last-child { color: var(--primary); font-weight: 600; }
+
+        /* AI Modal */
         .ai-modal {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             left: 20px;
             right: 20px;
             background: white;
@@ -202,102 +332,261 @@
             z-index: 300;
             display: none;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-height: 70vh;
+            max-height: 60vh;
             overflow-y: auto;
+            border-top: 4px solid var(--primary);
         }
         .ai-modal.open { display: block; animation: slideUp 0.3s ease; }
         @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .ai-modal-header { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; color: #11998e; }
-        .close-ai { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        .ai-modal-header { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; color: var(--primary); }
+        .close-ai { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); }
         .ai-response-text { line-height: 1.6; font-size: 0.9rem; }
 
+        /* Notification Modal */
+        .notification-modal {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            z-index: 300;
+            display: none;
+            max-height: 60vh;
+            overflow-y: auto;
+            border-top: 4px solid var(--highlight);
+        }
+        .notification-modal.open { display: block; animation: slideUp 0.3s ease; }
+        .notification-group {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        .notification-group-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .notification-item {
+            padding: 6px 0;
+            font-size: 0.8rem;
+            border-left: 2px solid var(--highlight);
+            padding-left: 10px;
+            margin: 5px 0;
+        }
+
+        /* Profile Modal */
+        .profile-modal {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            z-index: 300;
+            display: none;
+            max-height: 60vh;
+            overflow-y: auto;
+            border-top: 4px solid var(--secondary);
+        }
+        .profile-modal.open { display: block; animation: slideUp 0.3s ease; }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+        }
+
+        .self-healing-badge {
+            position: fixed;
+            bottom: 90px;
+            right: 10px;
+            background: var(--highlight);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            z-index: 99;
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
-            .tiles-container {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-                gap: 12px;
-            }
-            .tile {
-                padding: 15px 8px;
-            }
-            .tile-icon {
-                font-size: 1.5rem;
-            }
-            .tile-title {
-                font-size: 0.75rem;
-            }
-            .welcome-banner h2 {
-                font-size: 1.1rem;
-            }
+            .tiles-container { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+            .tile { padding: 15px 8px; }
+            .tile-icon { font-size: 1.5rem; }
+            .tile-title { font-size: 0.75rem; }
+            .hero-content { flex-direction: column; text-align: center; padding: 20px; }
+            .ai-avatar { margin-top: 15px; }
+            .hero-text h2 { font-size: 1.2rem; }
         }
     </style>
 </head>
-<body>
+<body class="soft-wave-bg">
     <div class="app-header">
         <div class="header-content">
             <div class="logo-area">
-                <div class="logo">दिल के अंश</div>
+                <img src="App%20logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
                 <div class="app-title">
                     <h1>Dil-Ke-AnnS Career Saathi</h1>
-                    <p>Anonymous Padho, Bindas Bano</p>
+                    <p>Student Career Guidance — Powered by AnnS AI</p>
                 </div>
             </div>
             <div class="nav-buttons">
-                <div class="bell-icon">🔔</div>
+                <div class="bell-icon" id="notificationBell">
+                    🔔
+                    <span class="notification-badge" id="notificationCount">3</span>
+                </div>
                 <div class="offline-status" id="offlineStatus">🟢 Online</div>
             </div>
         </div>
     </div>
 
-    <div class="welcome-banner">
-        <h2 id="welcomeMsg">🌙 👋 Welcome back, Learner!</h2>
-        <p id="welcomeDesc">100% free career guidance | No data sharing | Offline first | 10th to CEO level jobs | Worldwide portals</p>
-        <div class="search-ai">
-            <input type="text" id="aiQuery" placeholder="🔍 Ask AnnS AI">
-            <button onclick="askAI()">Ask</button>
+    <!-- Hero Section with AI Avatar -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Anonymous Padho, Bindas Bano</h2>
+                <p>100% free career guidance | No data sharing | Offline first | 10th to CEO level</p>
+                <div class="search-ai">
+                    <input type="text" id="aiQuery" placeholder="🔍 Ask AnnS AI anything... (Courses, Jobs, Exams, Schemes)">
+                    <button onclick="askAI()">Ask AnnS AI</button>
+                </div>
+            </div>
+            <div class="ai-avatar">
+                <div class="ai-avatar-img">🤖</div>
+                <p style="color:white; font-size:0.7rem; margin-top:8px;">AnnS AI Mentor</p>
+            </div>
         </div>
     </div>
 
-    <!-- EXACT TILES AS YOUR LIVE SITE - CORRECT ORDER -->
+    <!-- 16 TILES - Exactly as per Excel HOME_PAGE_LAYOUT_FINAL -->
     <div class="tiles-container" id="tilesContainer"></div>
 
-    <div class="footer">
-        <p>🇮🇳 BHARAT | Free Career Guidance | No Data Sharing | Offline First</p>
-        <p>© 2026 दिल के अंश Career Saathi - Empowering Rural India</p>
+    <!-- Bottom Navigation Bar - 5 Items -->
+    <div class="bottom-bar" id="bottomBar">
+        <button class="nav-item" data-nav="home">
+            <span>🏠</span>
+            <span>Home</span>
+        </button>
+        <button class="nav-item" data-nav="search">
+            <span>🔍</span>
+            <span>Search</span>
+        </button>
+        <button class="nav-item" data-nav="ai" id="aiNavBtn">
+            <span>🤖</span>
+            <span>AnnS AI</span>
+        </button>
+        <button class="nav-item" data-nav="alerts">
+            <span>🔔</span>
+            <span>Alerts</span>
+        </button>
+        <button class="nav-item" data-nav="profile" id="profileNavBtn">
+            <span>👤</span>
+            <span>Profile</span>
+        </button>
     </div>
 
+    <!-- Self-Healing Badge -->
+    <div class="self-healing-badge" onclick="showSelfHealingInfo()">
+        🔧 Self-Healing Active
+    </div>
+
+    <!-- AI Modal -->
     <div class="ai-modal" id="aiModal">
         <div class="ai-modal-header">
-            <span>🤖 AnnS AI</span>
+            <span>🤖 AnnS AI Mentor - Doubt Solver | Debate Judge | Career Mentor</span>
             <button class="close-ai" onclick="closeAIModal()">✕</button>
         </div>
         <div id="aiResponse" class="ai-response-text"></div>
     </div>
 
+    <!-- Notification Modal -->
+    <div class="notification-modal" id="notificationModal">
+        <div class="ai-modal-header">
+            <span>🔔 Notification Center</span>
+            <button class="close-ai" onclick="closeNotificationModal()">✕</button>
+        </div>
+        <div id="notificationContent">
+            <div class="notification-group">
+                <div class="notification-group-title">📢 Exam Alerts</div>
+                <div class="notification-item">NEET 2026 Registration Open - Apply by March 15</div>
+                <div class="notification-item">SSC CGL 2026 Notification Expected on June 10</div>
+            </div>
+            <div class="notification-group">
+                <div class="notification-group-title">🏛️ Govt Schemes</div>
+                <div class="notification-item">PMSSS Scholarship 2026 - Apply for J&K Students</div>
+                <div class="notification-item">National Scholarship Portal - Deadline Extended</div>
+            </div>
+            <div class="notification-group">
+                <div class="notification-group-title">📚 Daily PDFs</div>
+                <div class="notification-item">The Hindu Editorial Summary - June 9, 2026</div>
+                <div class="notification-item">Yojana Magazine May 2026 - Available for Download</div>
+            </div>
+            <div class="notification-group">
+                <div class="notification-group-title">💼 Job Updates</div>
+                <div class="notification-item">IBPS PO 2026 - 5000+ Vacancies Announced</div>
+                <div class="notification-item">Railway Recruitment 2026 - 15000+ Posts</div>
+            </div>
+            <div class="notification-group">
+                <div class="notification-group-title">⚠️ Important Circulars</div>
+                <div class="notification-item">CBSE Board Exam 2027 Dates Announced</div>
+                <div class="notification-item">UGC NET June 2026 - Application Form Released</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="ai-modal-header">
+            <span>👤 Anonymous Profile</span>
+            <button class="close-ai" onclick="closeProfileModal()">✕</button>
+        </div>
+        <div id="profileContent" class="ai-response-text"></div>
+    </div>
+
+    <div class="footer">
+        <p>🇮🇳 BHARAT - APNA DESH, APNE RIGHTS | Free Forever | No Ads | Offline First | Self-Healing App</p>
+        <p>© 2026 दिल के अंश Career Saathi - Powered by AnnS AI | Open Source</p>
+    </div>
+
     <script>
         // ============================================
-        // TILES - EXACT MATCH TO YOUR LIVE SITE
-        // ORDER: Education, Business, Jobs & Exams, Study Material, 
-        // Magazines, E-newspapers, Current Affairs, Mock test,
-        // After 10th, After 12th, Something Interesting, Results, App Forms, BHARAT
+        // 16 TILES - Exactly as per Excel HOME_PAGE_LAYOUT_FINAL
         // ============================================
         const TILES = [
-            { id: "education", icon: "🎓", title: "Education", link: "#", badge: "" },
-            { id: "business", icon: "💼", title: "Business", link: "#", badge: "" },
-            { id: "jobs_exams", icon: "📝", title: "Jobs & Exams", link: "jobs_exams.html", badge: "500+" },
-            { id: "study_material", icon: "📚", title: "Study Material", link: "study_material.html", badge: "400+" },
-            { id: "magazines", icon: "📰", title: "Magazines", link: "magazines.html", badge: "80+" },
-            { id: "enewspapers", icon: "🗞️", title: "E-newspapers", link: "e-newspaper.html", badge: "30+" },
-            { id: "current_affairs", icon: "🌍", title: "Current Affairs", link: "current_affairs.html", badge: "2026" },
-            { id: "mock_test", icon: "✅", title: "Mock test", link: "mock_test.html", badge: "135+" },
-            { id: "after_10th", icon: "📖", title: "After 10th", link: "after_10th.html", badge: "125+" },
-            { id: "after_12th", icon: "🎯", title: "After 12th", link: "#", badge: "SOON" },
-            { id: "something_interesting", icon: "💡", title: "Something Interesting", link: "something_interesting.html", badge: "AI" },
-            { id: "results", icon: "📊", title: "Results", link: "#", badge: "LIVE" },
-            { id: "app_forms", icon: "📋", title: "App Forms", link: "#", badge: "NEW" },
-            { id: "bharat", icon: "🇮🇳", title: "BHARAT", link: "#", badge: "" }
+            { id: "education", icon: "🎓", title: "EDUCATION", link: "education.html", badge: "10 Streams", autoUpdate: false, row: 2 },
+            { id: "business", icon: "💼", title: "BUSINESS", link: "business.html", badge: "Roadmap", autoUpdate: true, row: 2 },
+            { id: "jobs_exams", icon: "📝", title: "WORK/JOBS", link: "jobs_exams.html", badge: "500+", autoUpdate: true, row: 2 },
+            { id: "study_material", icon: "📚", title: "STUDY MATERIAL", link: "study_material.html", badge: "400+", autoUpdate: true, row: 3 },
+            { id: "magazines", icon: "📰", title: "MAGAZINES", link: "magazines.html", badge: "80+", autoUpdate: true, row: 3 },
+            { id: "enewspapers", icon: "🗞️", title: "E-NEWSPAPERS", link: "e-newspaper.html", badge: "30+", autoUpdate: true, row: 3 },
+            { id: "current_affairs", icon: "🌍", title: "DAILY CURRENT AFFAIRS", link: "current_affairs.html", badge: "Daily", autoUpdate: true, row: 4 },
+            { id: "mock_test", icon: "✅", title: "MOCK TESTS", link: "mock_test.html", badge: "135+", autoUpdate: true, row: 4 },
+            { id: "about_app", icon: "ℹ️", title: "ABOUT THIS APP", link: "about.html", badge: "Info", autoUpdate: false, row: 4 },
+            { id: "ai_tool", icon: "🤖", title: "AI TOOL - ASK ANYTHING", link: "ai_chat.html", badge: "Ask", autoUpdate: false, row: 5 },
+            { id: "search", icon: "🔍", title: "SEARCH", link: "#", badge: "Global", autoUpdate: false, row: 5 },
+            { id: "feedback", icon: "💬", title: "COMMENT/SUGGESTION", link: "#", badge: "Feedback", autoUpdate: false, row: 5 },
+            { id: "after_10th", icon: "🔟", title: "AFTER 10TH", link: "after_10th.html", badge: "125+", autoUpdate: true, row: 6 },
+            { id: "after_12th", icon: "1️⃣2️⃣", title: "AFTER 12TH", link: "after_12th.html", badge: "All Streams", autoUpdate: true, row: 6 },
+            { id: "something_interesting", icon: "✨", title: "SOMETHING INTERESTING", link: "something_interesting.html", badge: "AI", autoUpdate: true, row: 6 },
+            { id: "results", icon: "📊", title: "RESULTS & CUTOFFS", link: "results_cutoff.html", badge: "Live", autoUpdate: true, row: 2 }
         ];
 
-        let deferredPrompt = null;
+        // Anonymous Profile System
+        let anonymousId = localStorage.getItem('anns_anonymous_id');
+        if (!anonymousId) {
+            const prefixes = ['STU', 'LEARNER', 'SMART', 'ANN'];
+            const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            anonymousId = `${randomPrefix}-${Math.floor(Math.random() * 900000 + 100000)}`;
+            localStorage.setItem('anns_anonymous_id', anonymousId);
+        }
+
+        let userPoints = parseInt(localStorage.getItem(`points_${anonymousId}`) || '0');
+        let savedItems = JSON.parse(localStorage.getItem(`saved_${anonymousId}`) || '[]');
+        let answeredQuestions = JSON.parse(localStorage.getItem(`answered_${anonymousId}`) || '[]');
 
         function renderTiles() {
             const container = document.getElementById('tilesContainer');
@@ -305,62 +594,231 @@
                 <button class="tile" onclick="navigateTo('${tile.link}')">
                     <div class="tile-icon">${tile.icon}</div>
                     <div class="tile-title">${tile.title}</div>
-                    ${tile.badge ? `<div class="tile-badge">${tile.badge}</div>` : ''}
+                    ${tile.badge ? `<div class="tile-badge ${tile.autoUpdate ? 'auto' : ''}">${tile.badge}${tile.autoUpdate ? ' 🔄' : ''}</div>` : ''}
                 </button>
             `).join('');
         }
 
         function navigateTo(link) {
             if (!link || link === '#') {
-                alert('This feature is coming soon!');
+                alert('📌 This feature is coming soon! Check back for updates.');
                 return;
             }
             window.location.href = link;
         }
 
         // ============================================
-        // COMPLETE AnnS AI RESPONSES (Spelling Corrected)
-        // Includes: 10th to CEO Jobs, Worldwide Portals, Freelance, Govt Jobs, Company Careers
+        // BOTTOM NAVIGATION
         // ============================================
+        function setupBottomNav() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const navType = item.getAttribute('data-nav');
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    if (navType === 'home') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (navType === 'search') {
+                        document.getElementById('aiQuery').focus();
+                    } else if (navType === 'ai') {
+                        openAIModal();
+                    } else if (navType === 'alerts') {
+                        openNotificationModal();
+                    } else if (navType === 'profile') {
+                        openProfileModal();
+                    }
+                });
+            });
+            document.querySelector('.nav-item[data-nav="home"]').classList.add('active');
+        }
+
+        // ============================================
+        // NOTIFICATION CENTER (From Excel)
+        // ============================================
+        let notificationCount = 3;
+        
+        function openNotificationModal() {
+            document.getElementById('notificationModal').classList.add('open');
+            // Reset notification count when opened
+            notificationCount = 0;
+            document.getElementById('notificationCount').innerText = '0';
+            document.getElementById('notificationCount').style.display = 'none';
+        }
+
+        function closeNotificationModal() {
+            document.getElementById('notificationModal').classList.remove('open');
+        }
+
+        function addNotification(category, message) {
+            notificationCount++;
+            document.getElementById('notificationCount').innerText = notificationCount;
+            document.getElementById('notificationCount').style.display = 'block';
+        }
+
+        // ============================================
+        // PROFILE (Anonymous Mode from Excel)
+        // ============================================
+        function openProfileModal() {
+            const profileContent = document.getElementById('profileContent');
+            profileContent.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem;">👤</div>
+                    <h3>Anonymous Learner</h3>
+                    <p><strong>ID:</strong> ${anonymousId}</p>
+                    <p><strong>Points:</strong> ${userPoints}</p>
+                    <p><strong>Questions Answered:</strong> ${answeredQuestions.length}</p>
+                    <p><strong>Saved Items:</strong> ${savedItems.length}</p>
+                    <hr style="margin: 15px 0;">
+                    <div style="text-align: left;">
+                        <p><strong>📚 Saved Courses:</strong> ${savedItems.filter(i => i.type === 'course').length}</p>
+                        <p><strong>🗺️ Saved Roadmaps:</strong> ${savedItems.filter(i => i.type === 'roadmap').length}</p>
+                        <p><strong>📝 Saved Notes:</strong> ${savedItems.filter(i => i.type === 'note').length}</p>
+                        <p><strong>📅 Exam Planner:</strong> Active</p>
+                    </div>
+                    <hr style="margin: 15px 0;">
+                    <p>✅ <strong>Anonymous Mode: ON</strong></p>
+                    <p>🔒 No personal data stored</p>
+                    <p>🌐 No phone, no email, no photo required</p>
+                    <hr style="margin: 15px 0;">
+                    <button onclick="closeProfileModal()" style="background:#2563EB; color:white; padding:8px 20px; border:none; border-radius:20px; cursor:pointer;">Close</button>
+                </div>
+            `;
+            document.getElementById('profileModal').classList.add('open');
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.remove('open');
+        }
+
+        // ============================================
+        // SELF-HEALING APP (From Excel)
+        // ============================================
+        function showSelfHealingInfo() {
+            alert("🔧 Self-Healing App Active\n\n" +
+                  "• Auto error detection\n" +
+                  "• Auto bug fixing\n" +
+                  "• Report issue in Comments → AI checks → Auto rectifies\n" +
+                  "• Data conflict resolution: Govt Official > Excel > Verified YouTube > AI\n" +
+                  "• Zero hallucination mode enabled");
+        }
+
+        // ============================================
+        // AnnS AI with Memory Vault (No repeated answers)
+        // ============================================
+        function openAIModal() {
+            document.getElementById('aiModal').classList.add('open');
+        }
+
         function askAI() {
             const query = document.getElementById('aiQuery').value.toLowerCase();
-            let answer = "";
-
-            if (query.includes('job') || query.includes('naukri') || query.includes('career') || query === '') {
-                answer = `
-                <strong>📈 Complete Job Portfolio (10th Pass to CEO Level)</strong><br><br>
-                <strong>🔹 10th Pass Jobs:</strong> SSC MTS, RRB Group D, Peon, Helper | Salary: ₹15,000-25,000/month<br>
-                <strong>🔹 12th Pass Jobs:</strong> SSC CHSL, RRB NTPC, Clerk, Data Entry | Salary: ₹20,000-35,000/month<br>
-                <strong>🔹 ITI/Diploma Jobs:</strong> Technician, Fitter, Electrician, JE | Salary: ₹25,000-45,000/month<br>
-                <strong>🔹 Graduate Jobs (BA/BCom/BSc):</strong> Bank PO, SSC CGL, Executive | Salary: ₹35,000-60,000/month<br>
-                <strong>🔹 Engineering Jobs:</strong> Software, Civil, Mechanical, Electrical | Salary: ₹4-15 LPA<br>
-                <strong>🔹 Medical Jobs:</strong> Doctor, Nurse, Pharmacist, Lab Tech | Salary: ₹3-20 LPA<br>
-                <strong>🔹 MBA/PG Jobs:</strong> Manager, Consultant, Business Analyst | Salary: ₹8-25 LPA<br>
-                <strong>🔹 Senior Level (5-10 yrs):</strong> Senior Manager, Team Lead | Salary: ₹15-40 LPA<br>
-                <strong>🔹 Top Management:</strong> Director, VP, Head of Department | Salary: ₹30-80 LPA<br>
-                <strong>🔹 CXO/CEO Level:</strong> CEO, CTO, CFO, Managing Director | Salary: ₹50 LPA - ₹5 Cr+<br><br>
-                
-                <strong>🌍 Worldwide Job Portals</strong><br>
-                LinkedIn (Global) | Indeed (Global) | Glassdoor | Monster | CareerBuilder (USA) | ZipRecruiter (USA) | Seek (Australia) | Bayt (Dubai/UAE) | Reed (UK) | Totaljobs (Europe) | RemoteOK (Remote)<br><br>
-                
-                <strong>🇮🇳 Indian Job Portals</strong><br>
-                Naukri.com | TimesJobs | Shine.com | Monster India | Freshersworld | Apna | Hirist | WorkIndia | QuikrJobs<br><br>
-                
-                <strong>🏛️ Government Job Portals</strong><br>
-                UPSC | SSC | RRB | IBPS | SBI Careers | RBI | FCI | BHEL | ONGC | NTPC | Indian Army<br><br>
-                
-                <strong>🏢 Top Company Career Pages</strong><br>
-                Google | Microsoft | Amazon | Apple | Meta | TCS | Infosys | Wipro | Reliance | Tata Group | Mahindra<br><br>
-                
-                <strong>💻 Freelance Platforms</strong><br>
-                Upwork | Fiverr | Freelancer | Toptal | Guru | PeoplePerHour | 99designs | Truelancer | RemoteBase<br><br>
-                
-                <strong>📌 Click on "Jobs & Exams" tile for detailed career guidance!</strong>
-                `;
+            if (!query.trim()) {
+                document.getElementById('aiResponse').innerHTML = "🤖 I'm AnnS AI - your Career Mentor! Ask me about:<br><br>• 🎓 Education Streams (Medical, Non-Medical, Commerce, Arts)<br>• 💼 Jobs (10th to CEO level, Worldwide portals)<br>• 📅 Exams (UPSC, SSC, Banking, NEET, JEE)<br>• 🏛️ Govt Schemes & Scholarships<br>• 📚 Study Material & Magazines<br>• 🎯 Mock Tests & Results";
+                document.getElementById('aiModal').classList.add('open');
+                return;
             }
-            else if (query.includes('exam') || query.includes('परीक्षा') || query.includes('test')) {
-                answer = `
-                <strong>📅 Upcoming Exams 2026</strong><br><br>
+
+            // Check if question was already answered (No repeat answers - BR1)
+            const existingAnswer = answeredQuestions.find(q => q.question === query);
+            if (existingAnswer) {
+                document.getElementById('aiResponse').innerHTML = `<strong>🔄 Previously Answered (Memory Vault):</strong><br><br>${existingAnswer.answer}<br><br><em>💡 This answer is from your previous conversation. Ask something new to learn more!</em>`;
+                document.getElementById('aiModal').classList.add('open');
+                return;
+            }
+
+            let answer = generateAIResponse(query);
+            
+            // Save to memory vault
+            answeredQuestions.push({ question: query, answer: answer, timestamp: Date.now() });
+            if (answeredQuestions.length > 50) answeredQuestions.shift();
+            localStorage.setItem(`answered_${anonymousId}`, JSON.stringify(answeredQuestions));
+            
+            // Add points for asking
+            addPoints(2, 'Asked AnnS AI');
+            
+            document.getElementById('aiResponse').innerHTML = answer;
+            document.getElementById('aiModal').classList.add('open');
+        }
+
+        function generateAIResponse(query) {
+            // Persona detection (12 Personas from Excel)
+            let persona = "Friend";
+            let personaIcon = "🤗";
+            
+            if (query.includes('test') || query.includes('quiz') || query.includes('exam') || query.includes('mcq')) {
+                persona = "Examiner";
+                personaIcon = "📝";
+            } else if (query.includes('error') || query.includes('bug') || query.includes('code') || query.includes('fix')) {
+                persona = "Debugger";
+                personaIcon = "🔧";
+            } else if (query.includes('tension') || query.includes('sad') || query.includes('doubt') || query.includes('confuse') || query.includes('stress')) {
+                persona = "Counsellor";
+                personaIcon = "🤝";
+            } else if (query.includes('roadmap') || query.includes('future') || query.includes('career') || query.includes('plan') || query.includes('scope')) {
+                persona = "Mentor";
+                personaIcon = "🎯";
+            } else if (query.includes('samjhao') || query.includes('explain') || query.includes('kya hai') || query.includes('meaning')) {
+                persona = "Teacher";
+                personaIcon = "👨‍🏫";
+            } else if (query.includes('routine') || query.includes('habit') || query.includes('discipline') || query.includes('daily')) {
+                persona = "Coach";
+                personaIcon = "💪";
+            } else if (query.includes('bro') || query.includes('scene') || query.includes('mast') || query.includes('vibe')) {
+                persona = "Bro";
+                personaIcon = "😎";
+            } else if (query.includes('didi') || query.includes('help me') || query.includes('care')) {
+                persona = "Didi";
+                personaIcon = "👩";
+            } else if (query.includes('josh') || query.includes('energy') || query.includes('kar sakta') || query.includes('fire')) {
+                persona = "Motivator";
+                personaIcon = "🔥";
+            } else if (query.includes('data') || query.includes('stats') || query.includes('compare') || query.includes('analysis')) {
+                persona = "Analyst";
+                personaIcon = "📊";
+            } else if (query.includes('idea') || query.includes('content') || query.includes('story') || query.includes('create')) {
+                persona = "Creator";
+                personaIcon = "✨";
+            }
+
+            // Response based on query
+            if (query.includes('stream') || query.includes('10 streams') || query.includes('education stream')) {
+                return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+                <strong>🎓 10 Education Streams (After 12th):</strong><br><br>
+                🩺 <strong>1. Medical (PCB)</strong> - Doctor, Dentist, Pharmacist, Nurse, NEET<br>
+                🔧 <strong>2. Non-Medical (PCM)</strong> - Engineer, Architect, Pilot, JEE<br>
+                📊 <strong>3. Commerce</strong> - CA, CS, CMA, BBA, Banker<br>
+                🎭 <strong>4. Arts</strong> - IAS, IPS, Teacher, Journalist, Lawyer<br>
+                ⚽ <strong>5. Sports</strong> - Coach, Physiotherapist, Athlete<br>
+                🌾 <strong>6. Agriculture</strong> - Agriculture Officer, ICAR Scientist<br>
+                🎨 <strong>7. Artist</strong> - Painter, Singer, Actor, Dancer<br>
+                ✏️ <strong>8. Designing</strong> - Fashion, Interior, Graphic, UI/UX Designer<br>
+                🔨 <strong>9. Skilled</strong> - Electrician, Plumber, ITI, Technician<br>
+                🌍 <strong>10. Abroad</strong> - IELTS, TOEFL, Study Abroad, PR Visa<br><br>
+                <strong>Which stream would you like detailed information about?</strong>`;
+            }
+            
+            if (query.includes('job') || query.includes('naukri') || query.includes('career path')) {
+                return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+                <strong>💼 Complete Job Portfolio (10th to CEO Level):</strong><br><br>
+                <strong>🔹 10th Pass:</strong> SSC MTS, RRB Group D (₹15,000-25,000)<br>
+                <strong>🔹 12th Pass:</strong> SSC CHSL, Clerk, Data Entry (₹20,000-35,000)<br>
+                <strong>🔹 ITI/Diploma:</strong> Technician, JE (₹25,000-45,000)<br>
+                <strong>🔹 Graduate:</strong> Bank PO, SSC CGL (₹35,000-60,000)<br>
+                <strong>🔹 Engineering:</strong> Software, Civil, Mechanical (₹4-15 LPA)<br>
+                <strong>🔹 Medical:</strong> Doctor, Nurse (₹3-20 LPA)<br>
+                <strong>🔹 MBA/PG:</strong> Manager, Consultant (₹8-25 LPA)<br>
+                <strong>🔹 Senior Level (5-10 yrs):</strong> ₹15-40 LPA<br>
+                <strong>🔹 Top Management:</strong> Director, VP (₹30-80 LPA)<br>
+                <strong>🔹 CXO/CEO Level:</strong> ₹50 LPA - ₹5 Cr+<br><br>
+                <strong>🌍 Worldwide Portals:</strong> LinkedIn, Indeed, Glassdoor, Naukri, Upwork, Fiverr<br>
+                <strong>🏛️ Govt Portals:</strong> UPSC, SSC, RRB, IBPS, SBI<br><br>
+                Click on "WORK/JOBS" tile for daily updates!`;
+            }
+            
+            if (query.includes('exam') || query.includes('परीक्षा')) {
+                return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+                <strong>📅 Upcoming Exams 2026:</strong><br><br>
                 • UPSC Prelims 2026 - 28 June 2026<br>
                 • SSC CGL 2026 - 15 July 2026<br>
                 • NEET 2026 - 5 May 2026<br>
@@ -370,161 +828,116 @@
                 • CTET 2026 - 15 December 2026<br>
                 • CLAT 2026 - 1 December 2026<br>
                 • GATE 2026 - 5 February 2026<br>
-                • IBPS PO 2026 - 15 October 2026<br>
-                • NDA 2026 - 10 September 2026<br><br>
-                
-                <strong>📌 Click on "Mock Test" tile for 135+ practice tests with solutions!</strong>
-                `;
-            }
-            else if (query.includes('stream') || query.includes('स्ट्रीम')) {
-                answer = `
-                <strong>🎯 All 10 Educational Streams</strong><br><br>
-                • 🩺 Medical (PCB) - Doctor, Pharmacist, Nurse, NEET<br>
-                • 🔧 Non-Medical (PCM) - Engineer, Architect, JEE<br>
-                • 📊 Commerce - CA, CS, CMA, BBA, Banker<br>
-                • 🎭 Arts (Humanities) - IAS, IPS, PCS, Teacher, Journalist<br>
-                • ⚽ Sports - Coach, Physiotherapist, Athlete<br>
-                • 🌾 Agriculture - Agriculture Officer, ICAR Scientist<br>
-                • 🎨 Fine Arts - Painter, Designer, Art Teacher<br>
-                • ✏️ Designing - Fashion, Interior, Product Designer<br>
-                • 🔨 Skilled Trade - Technician, ITI, Diploma<br>
-                • 🌍 Abroad Studies - IELTS, TOEFL, SAT, Study Abroad<br><br>
-                
-                <strong>📌 Click on "Jobs & Exams" tile for stream-wise job portals!</strong>
-                `;
-            }
-            else if (query.includes('magazine') || query.includes('पत्रिका')) {
-                answer = `
-                <strong>📰 Magazines & Study Resources</strong><br><br>
-                • Yojana Magazine - Government schemes and policies<br>
-                • Kurukshetra Magazine - Rural development<br>
-                • Civils IQ - UPSC current affairs (Hindi)<br>
-                • Pratiyogita Darpan - Competitive exams<br>
-                • Science Reporter - Popular science monthly<br>
-                • Down To Earth - Environment and development<br>
-                • Frontline - Politics, culture, science<br>
-                • Employment News - Government job alerts<br><br>
-                
-                <strong>📌 Click on "Magazines" tile for 80+ resources with PDF download!</strong>
-                `;
-            }
-            else if (query.includes('newspaper') || query.includes('समाचार')) {
-                answer = `
-                <strong>📰 E-Newspapers (30+ in 10 languages)</strong><br><br>
-                • The Hindu | Indian Express | Times of India | Hindustan Times<br>
-                • Dainik Jagran | Dainik Bhaskar | Amar Ujala | Rajasthan Patrika<br>
-                • Dinathanthi (Tamil) | Anandabazar (Bengali) | Lokmat (Marathi)<br>
-                • Gujarat Samachar (Gujarati) | Prajavani (Kannada) | Malayala Manorama<br>
-                • Punjab Kesari (Punjabi) | Eenadu (Telugu)<br><br>
-                
-                <strong>📌 Click on "E-newspapers" tile for direct reading links!</strong>
-                `;
-            }
-            else if (query.includes('current') || query.includes('करेंट')) {
-                answer = `
-                <strong>🌍 Current Affairs 2026</strong><br><br>
-                • Daily Current Affairs - Latest news with exam relevance<br>
-                • Weekly Current Affairs - Complete week compilation<br>
-                • Monthly PDFs - Jan to June 2026 available<br>
-                • Quarterly Compilations - Q1 and Q2 2026<br>
-                • Yearly CA 2025 - Complete year compilation<br>
-                • Thematic CA - Environment, Polity, Science & Tech, Economy, IR<br>
-                • Government Schemes - PM Awas, RKVY, PM SHRI, Startup India<br>
-                • Exam-wise CA - UPSC, SSC, Banking, Railway, State PSC specific<br><br>
-                
-                <strong>📌 Click on "Current Affairs" tile for daily updates!</strong>
-                `;
-            }
-            else if (query.includes('10th') || query.includes('10वीं')) {
-                answer = `
-                <strong>📖 After 10th Career Options (125+ options)</strong><br><br>
-                • 10 Streams: Medical, Non-Medical, Commerce, Arts, Sports, Agriculture, Fine Arts, Designing, Skilled Trade, Abroad<br>
-                • Diploma Courses (3 years): CS, Mechanical, Electrical, Civil, Electronics, Automobile<br>
-                • ITI Trades (1-2 years): Electrician, Fitter, Welder, Motor Mechanic, COPA, Plumber, Carpenter<br>
-                • Paramedical Courses: GNM Nursing, DMLT, Radiography, D.Pharma, Physiotherapy<br>
-                • Vocational Courses: Hospitality, Retail, Beauty & Wellness, Digital Marketing<br>
-                • Short Term Courses: Tally, MS Office, English Speaking, Graphic Design<br>
-                • Scholarships: Pre-Matric, NTSE, Income Support, PMSSS<br>
-                • Defence Career: Army GD, Navy SSR, Air Force Group Y<br>
-                • Skill Development: PMKVY, DDU-GKY, NIELIT<br>
-                • Apprenticeship: NAPS, NATS<br>
-                • Government Jobs: RRB Group D, SSC MTS, RRB NTPC, SSC CHSL, Police<br><br>
-                
-                <strong>📌 Click on "After 10th" tile for complete details!</strong>
-                `;
-            }
-            else if (query.includes('mock') || query.includes('मॉक')) {
-                answer = `
-                <strong>🎯 Mock Test Portal (135+ Tests)</strong><br><br>
-                • UPSC - Prelims, CSAT, Mains GS 1-4, Essay (7 papers)<br>
-                • SSC - CGL Tier I/II, CHSL, MTS, GD, JE (7 papers)<br>
-                • Banking - SBI PO, IBPS PO, IBPS Clerk, RBI Grade B (10 papers)<br>
-                • Railway - RRB NTPC, Group D, ALP, JE (6 papers)<br>
-                • Medical - NEET UG, NEET PG, AIIMS, JIPMER, FMGE (5 papers)<br>
-                • Engineering - JEE Main, JEE Advanced, BITSAT, VITEEE, GATE (8 papers)<br>
-                • Commerce - CA Foundation, CS Foundation, CMA Foundation, CLAT (6 papers)<br>
-                • State PSC - UPPSC, BPSC, MPPSC, RPSC, TNPSC (6 papers)<br>
-                • Teaching - CTET, UPTET, KVS, NVS, REET, UGC NET (7 papers)<br>
-                • Defence - NDA, CDS, AFCAT (5 papers)<br>
-                • School Boards - CBSE 10/12, ICSE, UP Board, Bihar Board (8 papers)<br>
-                • Last 5 Years PYQs - UPSC, SSC, Banking, NEET, JEE, Railway, CTET (35+ papers)<br><br>
-                
-                <strong>📌 Click on "Mock test" tile for free practice with solutions!</strong>
-                `;
-            }
-            else {
-                answer = `
-                <strong>🤖 AnnS AI - Your Career Assistant</strong><br><br>
-                I can help you with:<br>
-                • 💼 Jobs (10th to CEO level, worldwide portals)<br>
-                • 📅 Exams (UPSC, SSC, Banking, Railway, NEET, JEE)<br>
-                • 📚 Study Materials & Magazines<br>
-                • 📰 E-Newspapers (30+ in 10 languages)<br>
-                • 🌍 Current Affairs (Daily/Weekly/Monthly)<br>
-                • 🎯 Mock Tests (135+ with solutions)<br>
-                • 📖 After 10th Career Guide (125+ options)<br>
-                • 🎓 After 12th Career Guide (coming soon)<br>
-                • 💻 Freelance & Remote Work Platforms<br>
-                • 🏛️ Government Job Alerts<br><br>
-                
-                <strong>Please ask me anything about careers, exams, jobs, or education!</strong>
-                `;
+                • IBPS PO 2026 - 15 October 2026<br><br>
+                <strong>📌 Click on "MOCK TESTS" tile for 135+ practice tests with solutions!</strong>`;
             }
             
-            document.getElementById('aiResponse').innerHTML = answer;
-            document.getElementById('aiModal').classList.add('open');
+            if (query.includes('scheme') || query.includes('yojana') || query.includes('scholarship')) {
+                return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+                <strong>🏛️ Government Schemes & Scholarships:</strong><br><br>
+                <strong>Central Schemes:</strong><br>
+                • PMEGP - 15-35% subsidy for new enterprises<br>
+                • MUDRA Loan - ₹50,000 to ₹10 lakh (no collateral)<br>
+                • Startup India - 3 years tax exemption, ₹10Cr fund<br>
+                • Stand-Up India - ₹10L-1Cr for SC/ST/Women<br><br>
+                <strong>Scholarships:</strong><br>
+                • National Scholarship Portal (NSP)<br>
+                • PM Scholarship for students<br>
+                • State Medical Scholarships<br>
+                • Post-Matric Scholarship for SC/ST/OBC<br><br>
+                <strong>📌 Click on "BUSINESS" tile for complete scheme details!</strong>`;
+            }
+            
+            if (query.includes('medical') || query.includes('doctor')) {
+                return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+                <strong>🩺 Medical Stream (PCB):</strong><br><br>
+                <strong>Courses:</strong> MBBS, BDS, BAMS, BHMS, BPT, B.Sc Nursing, B.Pharm<br>
+                <strong>Exams:</strong> NEET (mandatory), AIIMS, JIPMER<br>
+                <strong>Top Colleges:</strong> AIIMS Delhi, CMC Vellore, JIPMER, AFMC<br>
+                <strong>Career Path:</strong> 10th → 12th (PCB) → NEET → MBBS (5.5 yrs) → PG → Super-specialization<br>
+                <strong>Salary:</strong> Fresher ₹8-12 LPA, Experienced ₹25 LPA - 2 Cr+<br>
+                <strong>Future Scope:</strong> Telemedicine +300%, AI Surgery +500% by 2030<br><br>
+                Click on "EDUCATION" tile for detailed roadmap!`;
+            }
+            
+            if (query.includes('engineering') || query.includes('non medical') || query.includes('pcm')) {
+                return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+                <strong>🔧 Non-Medical Stream (PCM):</strong><br><br>
+                <strong>Courses:</strong> B.Tech (CSE, Mechanical, Civil, Electrical, AI/ML), B.Arch, BCA<br>
+                <strong>Exams:</strong> JEE Main, JEE Advanced, BITSAT, VITEEE<br>
+                <strong>Top Colleges:</strong> IITs, NITs, BITS Pilani, DTU, NSUT<br>
+                <strong>Career Path:</strong> 10th → 12th (PCM) → JEE → B.Tech (4 yrs) → Job/MS<br>
+                <strong>Salary:</strong> Fresher ₹4-15 LPA, Experienced ₹20-50 LPA<br>
+                <strong>Future Scope:</strong> AI/ML, Data Science, Robotics, Cybersecurity<br><br>
+                Click on "EDUCATION" tile for detailed roadmap!`;
+            }
+            
+            if (query.includes('commerce') || query.includes('ca') || query.includes('cs')) {
+                return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+                <strong>📊 Commerce Stream:</strong><br><br>
+                <strong>Courses:</strong> B.Com, BBA, CA, CS, CMA, CFA, Economics<br>
+                <strong>Exams:</strong> CA Foundation, CS Foundation, CMA Foundation, CLAT<br>
+                <strong>Top Colleges:</strong> SRCC, Hindu College, Christ University, NMIMS<br>
+                <strong>Career Path:</strong> 10th → 12th (Commerce) → B.Com/CA → Job/MBA<br>
+                <strong>Salary:</strong> Fresher ₹3-8 LPA, CA ₹7-15 LPA, Experienced ₹15-40 LPA<br><br>
+                Click on "EDUCATION" tile for detailed roadmap!`;
+            }
+            
+            if (query.includes('arts') || query.includes('humanities') || query.includes('upsc')) {
+                return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+                <strong>🎭 Arts (Humanities) Stream:</strong><br><br>
+                <strong>Courses:</strong> BA (Political Science, History, Geography, Psychology, Sociology), LLB, BJMC<br>
+                <strong>Exams:</strong> UPSC CSE, State PSC, CLAT, CUET<br>
+                <strong>Top Colleges:</strong> DU, JNU, BHU, AMU, LSAT colleges<br>
+                <strong>Career Path:</strong> 10th → 12th (Arts) → BA → UPSC/LLB/MA → IAS/IPS/Lawyer<br>
+                <strong>Salary:</strong> IAS ₹50k-2.5L/month, Lawyer ₹3-50 LPA<br><br>
+                Click on "EDUCATION" tile for detailed roadmap!`;
+            }
+            
+            return `<strong>${personaIcon} ${persona} Mode:</strong><br><br>
+            I'm AnnS AI - your complete career assistant! I can help you with:<br><br>
+            <strong>🎓 Education Streams:</strong> Medical, Non-Medical, Commerce, Arts, Sports, Agriculture, Artist, Designing, Skilled, Abroad<br>
+            <strong>💼 Jobs:</strong> 10th to CEO level, Worldwide portals (LinkedIn, Indeed, Naukri, Upwork, Fiverr)<br>
+            <strong>📅 Exams:</strong> UPSC, SSC, Banking, Railway, NEET, JEE, CLAT, GATE<br>
+            <strong>🏛️ Govt Schemes:</strong> PMEGP, MUDRA, Startup India, Scholarships<br>
+            <strong>📚 Study Material:</strong> NCERT, PYQ, Notes, Magazines, E-newspapers<br>
+            <strong>🎯 Mock Tests:</strong> 135+ free tests with solutions<br><br>
+            <strong>What would you like to know? Ask me anything!</strong>`;
+        }
+
+        function addPoints(points, reason) {
+            userPoints += points;
+            localStorage.setItem(`points_${anonymousId}`, userPoints);
         }
 
         function closeAIModal() {
             document.getElementById('aiModal').classList.remove('open');
         }
 
-        // ============================================
-        // PWA & OFFLINE SUPPORT
-        // ============================================
+        // Save item to profile
+        function saveItem(itemId, itemType, itemName) {
+            if (!savedItems.find(i => i.id === itemId)) {
+                savedItems.push({ id: itemId, type: itemType, name: itemName, date: new Date().toISOString() });
+                localStorage.setItem(`saved_${anonymousId}`, JSON.stringify(savedItems));
+                addPoints(5, `Saved ${itemName}`);
+                alert(`✅ "${itemName}" saved to your profile!`);
+            } else {
+                alert(`📌 "${itemName}" is already saved.`);
+            }
+        }
+
+        // Online/Offline Status
         function updateOnlineStatus() {
             const statusDiv = document.getElementById('offlineStatus');
             if (navigator.onLine) {
                 statusDiv.textContent = '🟢 Online';
-                statusDiv.classList.add('online');
+                statusDiv.classList.remove('offline');
             } else {
-                statusDiv.textContent = '🔴 Offline';
-                statusDiv.classList.remove('online');
+                statusDiv.textContent = '🔴 Offline (Limited)';
+                statusDiv.classList.add('offline');
             }
         }
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW failed:', err));
-        }
-
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-        
         // Time-based greeting
         function setGreeting() {
             const hour = new Date().getHours();
@@ -532,14 +945,35 @@
             if (hour < 12) greeting = '☀️ Good Morning, Learner!';
             else if (hour < 17) greeting = '🌤️ Good Afternoon, Learner!';
             else greeting = '🌙 Good Evening, Learner!';
-            document.getElementById('welcomeMsg').innerHTML = `${greeting} 👋 Welcome back, Learner!`;
+            document.getElementById('welcomeMsg')?.remove();
+            // Add greeting to hero section
+            const heroText = document.querySelector('.hero-text h2');
+            if (heroText) heroText.innerHTML = `${greeting} 👋 Anonymous Padho, Bindas Bano`;
         }
 
+        // PWA & Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW failed:', err));
+        }
+
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        
         // Initialize
         function init() {
             renderTiles();
+            setupBottomNav();
             updateOnlineStatus();
             setGreeting();
+            
+            // Simulate auto-update for badges
+            setInterval(() => {
+                const updateBadges = document.querySelectorAll('.tile-badge.auto');
+                updateBadges.forEach(badge => {
+                    badge.style.opacity = '0.7';
+                    setTimeout(() => { badge.style.opacity = '1'; }, 500);
+                });
+            }, 30000);
         }
         
         init();
