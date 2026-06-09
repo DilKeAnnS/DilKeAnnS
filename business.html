@@ -108,7 +108,7 @@
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .door-header { padding: 12px; text-align: center; font-weight: bold; color: white; }
+        .door-header { padding: 12px; text-align: center; font-weight: bold; color: white; cursor: pointer; }
         .door-header.roadmap { background: linear-gradient(135deg, #667eea, #764ba2); }
         .door-header.schemes { background: linear-gradient(135deg, #11998e, #38ef7d); }
         .door-header.mistakes { background: linear-gradient(135deg, #e74c3c, #c0392b); }
@@ -141,12 +141,12 @@
         .door-header.lessons { background: linear-gradient(135deg, #2d3436, #636e72); }
         .door-icon { font-size: 1.6rem; display: block; margin-bottom: 5px; }
         .door-title { font-size: 0.85rem; }
-        door-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #f8f9fa; }
+        .door-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #f8f9fa; }
         .door-card.open .door-content { max-height: 2000px; transition: max-height 0.6s ease-in; }
         .door-content-inner { padding: 15px; max-height: 500px; overflow-y: auto; }
-        .door-content::-webkit-scrollbar { width: 5px; }
-        .door-content::-webkit-scrollbar-track { background: #f1f1f1; }
-        .door-content::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+        .door-content-inner::-webkit-scrollbar { width: 5px; }
+        .door-content-inner::-webkit-scrollbar-track { background: #f1f1f1; }
+        .door-content-inner::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
         .item-card {
             background: #f8f9fa;
             border-radius: 10px;
@@ -202,24 +202,21 @@
             </div>
         </div>
     </div>
-
     <div class="hero">
         <h2>🇮🇳 हर भारतीय के लिए बिजनेस गाइड</h2>
         <p>₹5,000 से ₹500 करोड़ तक | 25 विशेषज्ञ डोर | ऑफलाइन + ऑनलाइन बिजनेस | पूरा रोडमैप</p>
     </div>
-
     <div class="categories" id="categoryDoors"></div>
-    <div id="doorsContainer" class="doors-container"></div>
+    <div id="doorsContainer" class="doors-container"></div
 
     <script>
         let currentLang = 'hindi';
         let currentCategory = 'ideas';
         let searchTerm = '';
 
-        // ============================================
-        // DOORS 1 TO 12 - EXACTLY AS LAST WORKING CODE (FROZEN - NO CHANGES)
-        // ============================================
-
+       // ============================================
+        // Total DOORS: 25
+        // ============================================ 
         const BUSINESS_DATA = {
             // DOOR 1: COMPLETE ROADMAP (EXPANDED - EXPERT LEVEL DETAILS)
 roadmap: {
@@ -6581,6 +6578,15 @@ financial: {
         }
     ]
 },
+        // ---------- GLOBALS ----------
+        let currentLang = 'hindi';
+        let currentCategory = 'ideas';
+        let searchTerm = '';
+        const categoryList = [
+            { id: 'roadmap', icon: '🗺️', name_hindi: 'रोडमैप (Idea→IPO)', name_english: 'Roadmap (Idea→IPO)' },
+            { id: 'schemes', icon: '🏛️', name_hindi: 'सरकारी योजनाएँ', name_english: 'Govt Schemes' },
+            { id: 'mistakes', icon: '⚠️', name_hindi: 'कॉमन मिस्टेक्स', name_english: 'Common Mistakes' },
+            { id: 'ideas', icon: '💡', name_hindi: 'बिजनेस आइडियाज', name_english: 'Business Ideas' }
         <!-- Add to business.html - after door section -->
 <div class="premium-offers">
     <h2>📊 Premium Business Resources - ₹99 only</h2>
@@ -6656,111 +6662,101 @@ financial: {
         ];
 
         function renderCategories() {
-            const container = document.getElementById('categoryDoors');
-            container.innerHTML = categoryList.map(cat => `
-                <button class="category-door ${currentCategory === cat.id ? 'active' : ''}" onclick="switchCategory('${cat.id}')">
-                    ${cat.icon} ${currentLang === 'hindi' ? cat.name_hindi : cat.name_english}
-                </button>
-            `).join('');
-        }
-
-        function switchCategory(categoryId) {
-            currentCategory = categoryId;
-            renderCategories();
-            renderDoors();
-        }
-
-        function filterItems(items) {
-            if (!searchTerm) return items;
-            const term = searchTerm.toLowerCase();
-            return items.filter(item => 
-                (item.title_hindi?.toLowerCase().includes(term) ||
-                 item.title_english?.toLowerCase().includes(term) ||
-                 item.description_hindi?.toLowerCase().includes(term))
-            );
-        }
-
-        function getLevelBadge(level) {
-            if (!level) return '';
-            return `<span class="badge badge-level" style="background:#2196f3;">📍 ${level}</span>`;
-        }
-
-        function renderDoors() {
-            const data = BUSINESS_DATA[currentCategory];
-            if (!data) {
-                document.getElementById('doorsContainer').innerHTML = '<div class="empty-state">📭 Please select a category from above.</div>';
-                return;
-            }
-            
-            const searchInput = document.getElementById('searchBox');
-            searchTerm = searchInput ? searchInput.value : '';
-            
-            let filteredItems = filterItems(data.items);
-            
-            const container = document.getElementById('doorsContainer');
-            
-            let html = `
-                <div class="door-card">
-                    <div class="door-header ${currentCategory}" onclick="toggleDoor(this)">
-                        <span class="door-icon">${data.icon}</span>
-                        <div class="door-title">${currentLang === 'hindi' ? data.name_hindi : data.name_english}</div>
-                    </div>
-                    <div class="door-content">
-                        ${filteredItems.map(item => `
-                            <div class="item-card">
-                                <div class="item-title">${currentLang === 'hindi' ? item.title_hindi : item.title_english}</div>
-                                <div class="item-description">${currentLang === 'hindi' ? item.description_hindi : item.description_english}</div>
-                                <div class="item-detail">
-                                    ${item.investment ? `<span class="badge badge-amount">💰 निवेश: ${item.investment}</span>` : ''}
-                                    ${item.profit ? `<span class="badge badge-benefit">📈 मुनाफा: ${item.profit}</span>` : ''}
-                                    ${item.amount ? `<span class="badge badge-amount">💰 ${item.amount}</span>` : ''}
-                                    ${item.level ? getLevelBadge(item.level) : ''}
-                                    ${item.platform ? `<span class="badge badge-online">🖥️ ${item.platform}</span>` : ''}
-                                    ${item.eligibility ? `<span class="badge badge-stage">✅ पात्रता: ${item.eligibility}</span>` : ''}
-                                    ${item.frequency ? `<span class="badge badge-stage">📅 ${item.frequency}</span>` : ''}
-                                </div>
-                                <a href="${item.officialLink}" target="_blank" class="official-link">🔗 विस्तृत जानकारी / Official Info →</a>
-                            </div>
-                        `).join('')}
-                        ${filteredItems.length === 0 ? '<div class="empty-state">🔍 कोई परिणाम नहीं मिला / No results found</div>' : ''}
-                    </div>
-                </div>
-            `;
-            container.innerHTML = html;
-        }
-
-        function handleSearch() {
-            renderDoors();
-        }
-
-        function init() {
-            renderCategories();
-            renderDoors();
-            document.getElementById('searchBox').addEventListener('input', handleSearch);
-        }
-        function showAlerts() {
-    alert("🔔 Business Alerts:\n\n📢 New PMEGP scheme applications open\n📢 MUDRA loan interest rates reduced\n📢 Startup India registration now free\n📢 6,650+ business resources available!");
-}
-
-function showProfile() {
-    let id = localStorage.getItem('business_id') || ('BIZ-' + Math.floor(Math.random() * 900000 + 100000));
-    localStorage.setItem('business_id', id);
-    alert("👤 Profile\nID: " + id + "\n\n📊 6,650+ resources accessed\n🔒 Anonymous mode ON");
-}
-
-function toggleDoor(element) {
-    const card = element.closest('.door-card');
-    if (card) {
-        card.classList.toggle('open');
-    }
-}
-
-// Make functions global for onclick
-window.toggleDoor = toggleDoor;
-window.showAlerts = showAlerts;
-window.showProfile = showProfile;
-                    
-        init();
-    </script>
+            const container = document.getElementById('categoryDoors');
+            if (!container) return;
+            container.innerHTML = categoryList.map(cat => `
+                <button class="category-door ${currentCategory === cat.id ? 'active' : ''}" 
+                        onclick="switchCategory('${cat.id}')">
+                    ${cat.icon} ${currentLang === 'hindi' ? cat.name_hindi : cat.name_english}
+                </button>
+            `).join('');
+        }
+        function switchCategory(categoryId) {
+            currentCategory = categoryId;
+            renderCategories();
+            renderDoors();
+        }
+        function filterItems(items) {
+            if (!searchTerm) return items;
+            const term = searchTerm.toLowerCase();
+            return items.filter(item => 
+                (item.title_hindi?.toLowerCase().includes(term) ||
+                 item.title_english?.toLowerCase().includes(term) ||
+                 item.description_hindi?.toLowerCase().includes(term))
+            );
+        }
+        function getLevelBadge(level) {
+            if (!level) return '';
+            return `<span class="badge badge-level">📍 ${level}</span>`;
+        }
+        function renderDoors() {
+            const data = BUSINESS_DATA[currentCategory];
+            const container = document.getElementById('doorsContainer');
+            if (!data || !data.items) {
+                container.innerHTML = '<div class="empty-state">📭 Please select a category from above.</div>';
+                return;
+            }
+            const searchInput = document.getElementById('searchBox');
+            searchTerm = searchInput ? searchInput.value : '';
+            let filteredItems = filterItems(data.items);
+            const isHindi = currentLang === 'hindi';
+            let html = `
+                <div class="door-card">
+                    <div class="door-header ${currentCategory}" onclick="toggleDoor(this)">
+                        <span class="door-icon">${data.icon}</span>
+                        <div class="door-title">${isHindi ? data.name_hindi : data.name_english}</div>
+                    </div>
+                    <div class="door-content">
+                        <div class="door-content-inner">
+            `;
+            if (filteredItems.length === 0) {
+                html += '<div class="empty-state">❌ No results found. Try a different search.</div>';
+            } else {
+                filteredItems.forEach(item => {
+                    const title = isHindi ? item.title_hindi : item.title_english;
+                    const desc = isHindi ? item.description_hindi : item.description_english;
+                    html += `
+                        <div class="item-card">
+                            <div class="item-title">${title || ''}</div>
+                            <div class="item-description">${desc || ''}</div>
+                            <div class="item-detail">
+                                ${item.investment ? `<span class="badge badge-amount">💰 ${item.investment}</span>` : ''}
+                                ${item.profit ? `<span class="badge badge-benefit">📈 ${item.profit}</span>` : ''}
+                                ${item.amount ? `<span class="badge badge-amount">${item.amount}</span>` : ''}
+                                ${getLevelBadge(item.level)}
+                                ${item.platform ? `<span class="badge badge-online">💻 ${item.platform}</span>` : ''}
+                                ${item.eligibility ? `<span class="badge badge-stage">📋 ${item.eligibility}</span>` : ''}
+                                ${item.frequency ? `<span class="badge badge-stage">🕒 ${item.frequency}</span>` : ''}
+                            </div>
+                            ${item.officialLink ? `<a href="${item.officialLink}" target="_blank" class="official-link">🔗 Official Info →</a>` : ''}
+                        </div>
+                    `;
+                });
+            }
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+        function toggleDoor(headerElement) {
+            const card = headerElement.closest('.door-card');
+            if (card) card.classList.toggle('open');
+        }
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategories();
+            renderDoors();
+            const searchBox = document.getElementById('searchBox');
+            if (searchBox) {
+                searchBox.addEventListener('input', () => {
+                    renderDoors();
+                });
+            }
+        });
+        window.toggleDoor = toggleDoor;
+        window.switchCategory = switchCategory;
+    </script>
 </body>
 </html>
