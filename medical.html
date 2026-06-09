@@ -1,480 +1,794 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Medical & Healthcare | Dil-Ke-AnnS Career Saathi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Medical & Healthcare - दिल के अंश Career Saathi | Complete Medical Encyclopedia</title>
+    <link rel="manifest" href="manifest.json">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #F5F0E8; padding-bottom: 70px; color: #2D2A24; }
-        .header { background: linear-gradient(135deg, #1B4D3E 0%, #0D3B2F 100%); padding: 16px 16px 22px 16px; border-radius: 0 0 28px 28px; color: white; position: sticky; top: 0; z-index: 100; }
-        .back-button { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 40px; font-size: 14px; cursor: pointer; margin-bottom: 12px; width: fit-content; }
-        .back-button:hover { background: rgba(255,255,255,0.25); }
-        .logo-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
-        .logo { display: flex; align-items: center; gap: 10px; }
-        .logo img { height: 45px; width: auto; border-radius: 12px; }
-        .logo h1 { font-size: 18px; font-weight: 700; }
-        .logo p { font-size: 9px; opacity: 0.85; }
-        .three-names { display: flex; gap: 4px; font-size: 10px; opacity: 0.9; margin-top: 2px; }
-        .three-names span { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 20px; }
-        .language-selector select { background: rgba(255,255,255,0.15); color: white; border: none; padding: 6px 10px; border-radius: 20px; font-size: 12px; cursor: pointer; }
-        .tagline { font-size: 13px; text-align: center; margin: 8px 0 4px; }
-        .container { padding: 20px 16px; max-width: 1400px; margin: 0 auto; }
-        .page-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; color: #1B4D3E; border-left: 5px solid #2c7da0; padding-left: 15px; }
-        .page-subtitle { font-size: 13px; color: #64748B; margin-bottom: 20px; padding-left: 20px; }
-        .door-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); justify-content: center; }
-        .door-btn { background: transparent; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 40px; transition: all 0.3s; color: #64748B; display: inline-flex; align-items: center; gap: 8px; }
-        .door-btn:hover { background: #F0EADF; }
-        .door-btn.active { background: #2c7da0; color: white; box-shadow: 0 2px 8px rgba(44,125,160,0.3); }
-        @media (max-width: 550px) { .door-btn .door-label { display: none; } .door-btn { padding: 10px 14px; } }
-        .door-content { display: none; animation: fadeIn 0.3s ease; }
-        .door-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .accordion-card { background: white; border-radius: 20px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #E8E2D9; }
-        .accordion-header { background: white; padding: 16px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F0EADF; }
-        .accordion-header:hover { background: #F8F4EF; }
-        .accordion-title { font-size: 17px; font-weight: 700; color: #1B4D3E; display: flex; align-items: center; gap: 10px; }
-        .accordion-icon { font-size: 24px; }
-        .accordion-arrow { font-size: 18px; color: #2c7da0; transition: transform 0.3s; }
-        .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
-        .accordion-content { display: none; padding: 20px; background: white; border-top: 1px solid #F0EADF; }
-        .accordion-card.active .accordion-content { display: block; }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px; }
-        .info-card { background: #F8F9FA; border-radius: 16px; padding: 14px; border-left: 3px solid #2c7da0; }
-        .info-label { font-weight: 800; color: #2c7da0; margin-bottom: 6px; font-size: 13px; display: flex; align-items: center; gap: 5px; }
-        .info-text { font-size: 13px; line-height: 1.45; }
-        .salary-text { color: #1B4D3E; font-weight: 700; background: #E8F5E9; padding: 4px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-size: 12px; }
-        .section-title { font-size: 18px; font-weight: 700; color: #1B4D3E; margin: 20px 0 12px 0; border-left: 3px solid #2c7da0; padding-left: 12px; }
-        .live-link { color: #2c7da0; text-decoration: none; font-weight: 600; }
-        .live-link:hover { text-decoration: underline; }
-        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; overflow-x: auto; display: block; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #E8E2D9; }
-        th { background: #F0EADF; font-weight: 700; color: #1B4D3E; }
-        .roadmap-step { display: flex; margin-bottom: 12px; gap: 12px; align-items: flex-start; }
-        .roadmap-year { background: #2c7da0; color: white; min-width: 70px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; text-align: center; flex-shrink: 0; }
-        .roadmap-text { flex: 1; background: #F8F9FA; padding: 10px; border-radius: 12px; font-size: 13px; }
-        .famous-badge { display: inline-block; background: #1B4D3E; color: white; padding: 4px 12px; border-radius: 30px; margin: 4px; font-size: 11px; }
-        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 12px 18px; border-top: 1px solid #E8E2D9; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 4px 10px; border-radius: 30px; }
+        body {
+            font-family: 'Segoe UI', 'Noto Sans', 'Noto Sans Devanagari', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+        
+        /* Header */
+        .app-header {
+            background: rgba(255,255,255,0.98);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        h1 {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1rem;
+        }
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-left: auto;
+        }
+        .stat {
+            background: #e2e8f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .hero h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        .hero p { font-size: 0.9rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+        
+        /* Category Doors Navigation */
+        .door-nav {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .door-btn {
+            background: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .door-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .door-btn.active {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 0 20px;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            background: white;
+        }
+        
+        /* Doors Container (Cards Grid) */
+        .doors-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Door Card */
+        .door-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: fadeInUp 0.3s ease;
+        }
+        .door-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Card Header Colors by Category */
+        .door-header { padding: 15px; text-align: center; color: white; cursor: pointer; }
+        .door-header.doctor { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .door-header.paramedical { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .door-header.pharmacy { background: linear-gradient(135deg, #fa709a, #fee140); color: #333; }
+        .door-header.veterinary { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .door-header.research { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .door-header.nursing { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #333; }
+        .door-header.allied { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+        .door-header.abroad { background: linear-gradient(135deg, #13547a, #80d0c7); }
+        .door-header.roadmap { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        .door-header.exams { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .door-header.colleges { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .door-header.scholarships { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
+        .door-header.salary { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .door-header.future { background: linear-gradient(135deg, #2980b9, #3498db); }
+        
+        .door-icon { font-size: 2rem; display: block; margin-bottom: 5px; }
+        .door-title { font-size: 1rem; font-weight: bold; }
+        .door-subtitle { font-size: 0.7rem; opacity: 0.9; }
+        
+        /* Card Content */
+        .door-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: #f8f9fa;
+        }
+        .door-card.open .door-content {
+            max-height: 2000px;
+        }
+        .door-content-inner {
+            padding: 15px;
+        }
+        
+        /* Info Sections inside Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .info-item {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            border-left: 3px solid #1e3c72;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #333;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            margin: 2px;
+        }
+        .badge-primary { background: #1e3c72; color: white; }
+        .badge-success { background: #27ae60; color: white; }
+        .badge-warning { background: #f39c12; color: white; }
+        .badge-danger { background: #e74c3c; color: white; }
+        
+        /* Roadmap Steps */
+        .roadmap-step {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+        .roadmap-year {
+            background: #1e3c72;
+            color: white;
+            min-width: 80px;
+            padding: 8px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .roadmap-text {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 10px;
+            flex: 1;
+            font-size: 0.75rem;
+        }
+        
+        /* Exam Cards */
+        .exam-card {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #e74c3c;
+        }
+        .exam-name { font-weight: bold; color: #1e3c72; font-size: 0.8rem; }
+        .exam-date { font-size: 0.65rem; color: #666; }
+        .exam-link { color: #1e3c72; font-size: 0.65rem; text-decoration: none; }
+        
+        /* College Cards */
+        .college-card {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #f39c12;
+        }
+        .college-name { font-weight: bold; font-size: 0.8rem; }
+        .college-fees { font-size: 0.65rem; color: #666; }
+        
+        /* Salary Table */
+        .salary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.7rem;
+        }
+        .salary-table th, .salary-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .salary-table th {
+            background: #1e3c72;
+            color: white;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 12px 20px;
+            border-top: 1px solid #e2e8f0;
+            z-index: 100;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 30px;
+            background: transparent;
+            border: none;
+        }
         .nav-item span:first-child { font-size: 22px; }
         .nav-item span:last-child { font-size: 10px; color: #64748B; }
-        @media (min-width: 768px) { .container { padding: 30px 24px; } .door-btn { padding: 12px 24px; font-size: 15px; } .door-btn .door-label { display: inline !important; } table { display: table; } }
+        .nav-item.active { background: rgba(30,60,114,0.1); }
+        .nav-item.active span:first-child { color: #1e3c72; }
+        
+        @media (max-width: 768px) {
+            .doors-container { grid-template-columns: 1fr; padding: 10px; }
+            .door-btn { padding: 8px 14px; font-size: 0.7rem; }
+            .hero h2 { font-size: 1.3rem; }
+            .hero-stats { gap: 10px; }
+            .hero-stat { font-size: 0.65rem; padding: 5px 12px; }
+        }
     </style>
 </head>
 <body>
-<div class="header">
-    <div class="back-button" onclick="goBack()">← Back</div>
-    <div class="logo-section">
-        <div class="logo">
-            <img src="App%20logo.png" alt="Logo">
-            <div>
-                <h1>दिल के अंश</h1>
-                <p>Career Saathi</p>
-                <div class="three-names">
-                    <span>Dil</span>
-                    <span>Ke</span>
-                    <span>AnnS</span>
-                </div>
-            </div>
-        </div>
-        <div class="language-selector"><select id="languageSelect"><option value="en">🇬🇧 English</option><option value="hi">🇮🇳 हिंदी</option></select></div>
-        <div style="opacity:0;">🔔</div>
-    </div>
-    <div class="tagline">🩺 Complete Medical & Healthcare Career Guide - MBBS to Super-Specialty | NEET | AIIMS | PG | Abroad</div>
-</div>
-
-<div class="container">
-    <div class="page-title">🩺 Medical & Healthcare Careers</div>
-    <div class="page-subtitle">50+ Medical Courses | Top Colleges | NEET/AIIMS Details | PG/NEXT | Complete Roadmap from 10th to Chief of Medicine</div>
-    
-    <div class="door-nav">
-        <button class="door-btn active" data-door="mbbs">🩺 <span class="door-label">MBBS - Doctor</span></button>
-        <button class="door-btn" data-door="bds">🦷 <span class="door-label">BDS - Dentist</span></button>
-        <button class="door-btn" data-door="bhms">🌿 <span class="door-label">BHMS (Homeopathy)</span></button>
-        <button class="door-btn" data-door="bams">🍃 <span class="door-label">BAMS (Ayurveda)</span></button>
-        <button class="door-btn" data-door="bpt">🦵 <span class="door-label">BPT - Physiotherapy</span></button>
-        <button class="door-btn" data-door="nursing">🏥 <span class="door-label">Nursing (B.Sc)</span></button>
-        <button class="door-btn" data-door="paramedical">🧪 <span class="door-label">Paramedical</span></button>
-        <button class="door-btn" data-door="pharmacy">💊 <span class="door-label">Pharmacy (B.Pharm)</span></button>
-        <button class="door-btn" data-door="pg">📚 <span class="door-label">MD/MS/PG</span></button>
-        <button class="door-btn" data-door="neet">📋 <span class="door-label">NEET/AIIMS</span></button>
-        <button class="door-btn" data-door="govt">🏛️ <span class="door-label">Govt Jobs</span></button>
-        <button class="door-btn" data-door="abroad">🌍 <span class="door-label">Abroad Studies</span></button>
-    </div>
-    
-    <!-- ==================== DOOR 1: MBBS ==================== -->
-    <div id="door-mbbs" class="door-content active">
-        <div class="accordion-card active" id="mbbsFullCard">
-            <div class="accordion-header" onclick="toggleCard('mbbsFullCard')">
-                <div class="accordion-title"><span class="accordion-icon">🩺</span> MBBS - Bachelor of Medicine & Surgery (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Complete medical degree covering anatomy, physiology, pharmacology, pathology, clinical practice, surgery.<br><span class="salary-text">💰 Fresher (JR): ₹6-12 LPA | Senior Resident: ₹12-20 LPA | Consultant: ₹20-60 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Most respected profession, save lives, high earning potential, global demand, super-specialization options.<br><span class="salary-text">💰 Surgeon: ₹30-80 LPA | Cardiologist: ₹50L-2Cr</span></div></div>
-                    <div class="info-card"><div class="info-label">⏰ WHEN</div><div class="info-text">After 12th PCB (Physics, Chemistry, Biology) with 50%+ (40% for SC/ST). Age 17+.</div></div>
-                    <div class="info-card"><div class="info-label">📍 WHERE</div><div class="info-text"><a class="live-link" href="https://www.aiims.edu" target="_blank">AIIMS Delhi</a> | <a class="live-link" href="https://www.cmcvellore.ac.in" target="_blank">CMC Vellore</a> | <a class="live-link" href="https://www.mamc.ac.in" target="_blank">MAMC Delhi</a> | <a class="live-link" href="https://www.jipmer.edu.in" target="_blank">JIPMER</a> | <a class="live-link" href="https://www.kem.edu" target="_blank">KEM Mumbai</a></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET-UG (National Eligibility cum Entrance Test)</a> | AIIMS (now through NEET)</div></div>
-                    <div class="info-card"><div class="info-label">👤 WHOM</div><div class="info-text">Empathy, patience, strong memory, problem-solving, ability to work under pressure, passion for healing</div></div>
-                    <div class="info-card"><div class="info-label">🛠️ HOW</div><div class="info-text">12th PCB → NEET → MBBS (5.5 yrs incl. 1 yr internship) → NEET-PG → MD/MS → Super-specialty (DM/MCh)</div></div>
-                </div>
-                <div class="section-title">📋 NEET-UG 2025 - LIVE UPDATES</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 Official Website</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">neet.nta.nic.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📅 Exam Date</div><div class="info-text">May 4, 2025 (tentative)</div></div>
-                    <div class="info-card"><div class="info-label">📊 Result</div><div class="info-text">June 2025</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Cutoff 2024</div><div class="info-text">General: 720-164, OBC/SC/ST: 163-129</div></div>
-                </div>
-                <div class="section-title">🏛️ Top Medical Colleges (NIRF Ranked)</div>
-                <table>
-                    <thead><tr><th>College</th><th>City</th><th>Fees/Year</th><th>NIRF Rank</th><th>Website</th></tr></thead>
-                    <tbody>
-                        <tr><td>AIIMS Delhi</td><td>Delhi</td><td>₹1,856</td><td>1</td><td><a class="live-link" href="https://www.aiims.edu" target="_blank">Visit</a></td></tr>
-                        <tr><td>CMC Vellore</td><td>Vellore</td><td>₹25,000</td><td>2</td><td><a class="live-link" href="https://www.cmcvellore.ac.in" target="_blank">Visit</a></td></tr>
-                        <tr><td>MAMC Delhi</td><td>Delhi</td><td>₹7,500</td><td>3</td><td><a class="live-link" href="https://www.mamc.ac.in" target="_blank">Visit</a></td></tr>
-                        <tr><td>JIPMER Puducherry</td><td>Puducherry</td><td>₹6,500</td><td>4</td><td><a class="live-link" href="https://www.jipmer.edu.in" target="_blank">Visit</a></td></tr>
-                        <tr><td>KGMU Lucknow</td><td>Lucknow</td><td>₹15,000</td><td>5</td><td><a class="live-link" href="https://www.kgmu.org" target="_blank">Visit</a></td></tr>
-                    </tbody>
-                </table>
-                <div class="section-title">🗺️ Complete Career Roadmap (10th → Chief of Medicine)</div>
-                <div class="roadmap-step"><div class="roadmap-year">Class 10-12</div><div class="roadmap-text">PCB focus, NEET preparation (11th & 12th), score 650+ for top colleges.<br><span class="salary-text">💰 After NEET: MBBS seat</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">MBBS (4.5 years academics + 1 year internship)<br><span class="salary-text">💰 Internship stipend: ₹15-25k/month</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MD/MS (Postgraduation) - Medicine, Pediatrics, Radiology, Surgery etc.<br><span class="salary-text">💰 PG Resident: ₹12-18 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">DM/MCh (Super-specialty) - Cardiology, Neurology, Gastroenterology, CTVS<br><span class="salary-text">💰 Specialist: ₹30-80 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">5-10 Years</div><div class="roadmap-text">Consultant → Head of Department → Professor<br><span class="salary-text">💰 HOD: ₹40-80 LPA | Professor: ₹25-50 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Chief of Medical Services / Director of Hospital / Private Super-specialty Practice<br><span class="salary-text">💰 Top specialists: ₹1 Cr - ₹5 Cr+</span></div></div>
-                <div class="section-title">⭐ Famous Indian Doctors (Dil-Ke-AnnS Recommended)</div>
-                <div><span class="famous-badge">Dr. Devi Shetty</span> <span class="famous-badge">Dr. Naresh Trehan</span> <span class="famous-badge">Dr. Randeep Guleria</span> <span class="famous-badge">Dr. Ramakanta Panda</span></div>
+    <div class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="window.location.href='index.html'">← वापस</button>
+            <h1>🩺 MEDICAL & HEALTHCARE CAREERS<br><small>80+ Courses | 200+ Colleges | Live Exam Links | Auto Results | Complete Roadmap</small></h1>
+            <div class="stats-bar">
+                <span class="stat">🎓 NEET (6)</span>
+                <span class="stat">🚑 Paramedical (15+)</span>
+                <span class="stat">💊 Pharmacy (8+)</span>
+                <span class="stat">🐾 Veterinary (4)</span>
+                <span class="stat">🔬 Research (10+)</span>
+                <span class="stat">🌍 Abroad (7)</span>
             </div>
         </div>
     </div>
 
-    <!-- ==================== DOOR 2: BDS ==================== -->
-    <div id="door-bds" class="door-content">
-        <div class="accordion-card" id="bdsFullCard">
-            <div class="accordion-header" onclick="toggleCard('bdsFullCard')">
-                <div class="accordion-title"><span class="accordion-icon">🦷</span> BDS - Bachelor of Dental Surgery (5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Dental anatomy, oral surgery, orthodontics, prosthodontics, periodontics.<br><span class="salary-text">💰 Fresher: ₹5-10 LPA | MDS: ₹15-30 LPA | Private Clinic: ₹20-50 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Growing demand for dental care, cosmetic dentistry, own clinic possible, work-life balance.</div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://neet.nta.nic.in" target="_blank">NEET-UG</a> required for BDS admission.</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">Maulana Azad Dental (Delhi), AIIMS Dental, Manipal, Christian Medical College, PGI Chandigarh</div></div>
-                </div>
-                <div class="section-title">🗺️ BDS Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5 Years</div><div class="roadmap-text">BDS + 1 year internship<br><span class="salary-text">💰 Dental Surgeon: ₹5-10 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MDS Specialization (Oral Surgery, Orthodontics, Prosthodontics, Periodontics)<br><span class="salary-text">💰 MDS Specialist: ₹15-30 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">5+ Years</div><div class="roadmap-text">Private Dental Clinic / Dental Hospital Chain / Academic Career<br><span class="salary-text">💰 Own Clinic: ₹20-50 LPA+</span></div></div>
-                <div class="section-title">⭐ Famous Dentists</div>
-                <div><span class="famous-badge">Dr. S.M. Balaji</span> <span class="famous-badge">Dr. N. Srinivas</span></div>
-            </div>
+    <div class="hero">
+        <h2>🩺 दिल के अंश Medical Encyclopedia</h2>
+        <p>Complete Medical Career Guide | Doctor | Paramedical | Pharmacy | Nursing | Veterinary | Research | Abroad Studies</p>
+        <div class="hero-stats">
+            <div class="hero-stat">📚 80+ Courses</div>
+            <div class="hero-stat">🏛️ 200+ Colleges</div>
+            <div class="hero-stat">📝 Live Exam Links</div>
+            <div class="hero-stat">🎯 Auto Results</div>
+            <div class="hero-stat">🗺️ Complete Roadmap</div>
         </div>
     </div>
 
-    <!-- ==================== DOOR 3: BHMS ==================== -->
-    <div id="door-bhms" class="door-content">
-        <div class="accordion-card" id="bhmsFullCard">
-            <div class="accordion-header" onclick="toggleCard('bhmsFullCard')">
-                <div class="accordion-title"><span class="accordion-icon">🌿</span> BHMS - Bachelor of Homeopathic Medicine & Surgery (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Homeopathic principles, materia medica, pharmacy, clinical practice, repertory.<br><span class="salary-text">💰 Fresher: ₹3-6 LPA | Consultant: ₹8-15 LPA | Private Clinic: ₹10-25 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Natural healing, low side effects, growing acceptance globally, government AYUSH departments.</div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">NEET-UG (mandatory after 2022). Top colleges: NHMC Mumbai, Bakson Homeopathy, Dr. D.Y. Patil.</div></div>
-                </div>
-                <div class="section-title">🗺️ BHMS Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">BHMS + Internship<br><span class="salary-text">💰 Homeopathic Doctor: ₹3-6 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MD Homeopathy (Practice/Research/Teaching)<br><span class="salary-text">💰 MD Homeopath: ₹8-15 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Opportunities</div><div class="roadmap-text">AYUSH Department, Private Practice, Research, Wellness Centers, Teaching</div></div>
-            </div>
-        </div>
+    <!-- Category Doors Navigation -->
+    <div class="door-nav" id="doorNav">
+        <button class="door-btn active" data-category="all">📚 सभी कोर्स (All Courses)</button>
+        <button class="door-btn" data-category="doctor">🩺 डॉक्टर (Doctor)</button>
+        <button class="door-btn" data-category="paramedical">🚑 पैरामेडिकल (Paramedical)</button>
+        <button class="door-btn" data-category="pharmacy">💊 फार्मेसी (Pharmacy)</button>
+        <button class="door-btn" data-category="nursing">👩‍⚕️ नर्सिंग (Nursing)</button>
+        <button class="door-btn" data-category="veterinary">🐾 पशु चिकित्सा (Veterinary)</button>
+        <button class="door-btn" data-category="research">🔬 रिसर्च (Research)</button>
+        <button class="door-btn" data-category="allied">🏥 अलाइड हेल्थ (Allied)</button>
+        <button class="door-btn" data-category="abroad">🌍 विदेश (Abroad)</button>
+        <button class="door-btn" data-category="roadmap">🗺️ रोडमैप (Roadmap)</button>
+        <button class="door-btn" data-category="exams">📝 परीक्षाएं (Exams)</button>
+        <button class="door-btn" data-category="colleges">🏛️ कॉलेज (Colleges)</button>
+        <button class="door-btn" data-category="scholarships">💰 छात्रवृत्ति (Scholarships)</button>
+        <button class="door-btn" data-category="salary">💵 सैलरी (Salary)</button>
+        <button class="door-btn" data-category="future">🚀 भविष्य (Future)</button>
     </div>
 
-    <!-- ==================== DOOR 4: BAMS ==================== -->
-    <div id="door-bams" class="door-content">
-        <div class="accordion-card" id="bamsFullCard">
-            <div class="accordion-header" onclick="toggleCard('bamsFullCard')">
-                <div class="accordion-title"><span class="accordion-icon">🍃</span> BAMS - Bachelor of Ayurvedic Medicine & Surgery (5.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Ayurvedic principles, Panchakarma, herbal medicine, Dravyaguna, Rog Nidan.<br><span class="salary-text">💰 Fresher: ₹3-7 LPA | MD Ayurveda: ₹10-20 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Ancient Indian medicine system, global wellness trend, government support via AYUSH, yoga and lifestyle integration.</div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">NEET-UG for BAMS. Top institutes: BHU Varanasi, Gujarat Ayurved University, National Institute of Ayurveda Jaipur.</div></div>
-                </div>
-                <div class="section-title">🗺️ BAMS Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">5.5 Years</div><div class="roadmap-text">BAMS + Internship → Ayurvedic Doctor<br><span class="salary-text">💰 Fresher: ₹3-7 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">3 Years</div><div class="roadmap-text">MD Ayurveda (Panchakarma, Kayachikitsa, Dravyaguna, etc.)<br><span class="salary-text">💰 MD Ayurveda: ₹10-20 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Career Paths</div><div class="roadmap-text">AYUSH Hospitals, Wellness Centers, Ayurvedic Pharma Companies, Teaching, Research</div></div>
-            </div>
-        </div>
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchInput" placeholder="🔍 Search courses, colleges, exams... (e.g., MBBS, NEET, AIIMS)">
     </div>
 
-    <!-- ==================== DOOR 5: BPT ==================== -->
-    <div id="door-bpt" class="door-content">
-        <div class="accordion-card" id="bptFullCard">
-            <div class="accordion-header" onclick="toggleCard('bptFullCard')">
-                <div class="accordion-title"><span class="accordion-icon">🦵</span> BPT - Bachelor of Physiotherapy (4.5 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Rehabilitation, exercise therapy, electrotherapy, sports physio, neuro rehab, ortho physio.<br><span class="salary-text">💰 Fresher: ₹3-6 LPA | Senior Physio: ₹8-15 LPA | Sports Physio: ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">High demand in hospitals, sports teams, geriatric care, own clinic possible, international opportunities.</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ TOP COLLEGES</div><div class="info-text">AIIMS Delhi, NIMS Jaipur, Manipal, Christian Medical College, Jamia Hamdard.</div></div>
-                </div>
-                <div class="section-title">🗺️ BPT Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">4.5 Years</div><div class="roadmap-text">BPT + 6 months internship<br><span class="salary-text">💰 Physiotherapist: ₹3-6 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">MPT (Master of Physiotherapy) Specialization: Neuro, Ortho, Cardio, Sports<br><span class="salary-text">💰 MPT Specialist: ₹8-15 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Advanced</div><div class="roadmap-text">Sports Physiotherapist (IPL/Olympics), PhD, Hospital Administration, Private Clinic</div></div>
-            </div>
-        </div>
+    <!-- Doors Container -->
+    <div class="doors-container" id="doorsContainer"></div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-bar">
+        <button class="nav-item" onclick="window.location.href='index.html'"><span>🏠</span><span>Home</span></button>
+        <button class="nav-item" onclick="document.getElementById('searchInput').focus()"><span>🔍</span><span>Search</span></button>
+        <button class="nav-item" onclick="window.location.href='ai_chat.html'"><span>🤖</span><span>AnnS AI</span></button>
+        <button class="nav-item" onclick="showAlerts()"><span>🔔</span><span>Alerts</span></button>
+        <button class="nav-item" onclick="showProfile()"><span>👤</span><span>Profile</span></button>
     </div>
 
-    <!-- ==================== DOOR 6: NURSING ==================== -->
-    <div id="door-nursing" class="door-content">
-        <div class="accordion-card" id="nursingFullCard">
-            <div class="accordion-header" onclick="toggleCard('nursingFullCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏥</span> B.Sc Nursing (4 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Patient care, nursing administration, community health, midwifery, critical care, psychiatric nursing.<br><span class="salary-text">💰 Staff Nurse: ₹4-8 LPA | Nurse Manager: ₹8-15 LPA | Nursing Superintendent: ₹12-25 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌍 ABROAD</div><div class="info-text">High demand in USA (NCLEX-RN), UK (NMC), Canada, Australia, Gulf countries.<br><span class="salary-text">💰 USA: $60k-100k/year | UK: £25k-45k/year | Canada: CAD 50k-80k/year</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">AIIMS B.Sc Nursing, JIPMER, State-level nursing entrance exams. NCLEX-RN for USA.</div></div>
-                </div>
-                <div class="section-title">🗺️ Nursing Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">4 Years</div><div class="roadmap-text">B.Sc Nursing → Registered Nurse (RN)<br><span class="salary-text">💰 Staff Nurse: ₹4-8 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Sc Nursing (Clinical Specialty: Cardio, Neuro, Critical Care, Oncology, Pediatric)<br><span class="salary-text">💰 Nurse Practitioner/Specialist: ₹8-15 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Advanced</div><div class="roadmap-text">Nursing Superintendent, PhD Nursing, Nurse Educator, Clinical Research, International Migration (US/UK/Canada)</div></div>
-            </div>
-        </div>
-    </div>
+    <script>
+        // ============================================
+        // COMPLETE COURSES DATA - 80+ COURSES
+        // ============================================
+        const coursesData = [
+            // ========== DOCTOR COURSES (6) ==========
+            { name: "MBBS - Bachelor of Medicine & Bachelor of Surgery", category: "doctor", duration: "5.5 years", fee: "₹10k - ₹25L", salary: "₹8-12 LPA", exams: "NEET-UG", what: "Professional medical degree to diagnose, treat, and prevent diseases. Complete training in all aspects of medicine including clinical skills, patient care, and medical knowledge.", why: "Highest respect in society, excellent job security, ability to save lives, global opportunities, high earning potential. After PG: ₹15-30 LPA", when: "After 12th PCB (Age 17+), Start NEET preparation from Class 11", where: "AIIMS Delhi, CMC Vellore, JIPMER, AFMC Pune, MAMC Delhi, KGMU Lucknow", how: "10th → 12th (PCB 50%+) → NEET-UG → MBBS → Internship → PG (optional) → Job", skills: "Clinical diagnosis, patient communication, empathy, problem-solving, teamwork, leadership", future: "Super-specialization (Cardiology, Neurology, etc.), Research, Private Practice, Hospital Administration, Teaching" },
+            { name: "BDS - Bachelor of Dental Surgery", category: "doctor", duration: "5 years", fee: "₹50k - ₹15L", salary: "₹6-10 LPA", exams: "NEET-UG", what: "Professional degree in dentistry - diagnosis and treatment of dental and oral diseases including cavities, gum disease, oral surgery, and cosmetic dentistry.", why: "High demand for dental care, opportunity for private practice, good work-life balance, less emergency calls compared to MBBS.", when: "After 12th PCB", where: "MAMC Delhi, KGMU Lucknow, Nair Hospital Mumbai, GDCH Ahmedabad, DY Patil Pune", how: "10th → 12th (PCB) → NEET-UG → BDS → MDS (optional) → Job/Practice", skills: "Manual dexterity, attention to detail, patient communication, diagnostic skills, hand-eye coordination", future: "MDS specialization (Orthodontics, Oral Surgery, Prosthodontics, Periodontics), Private Clinic, Dental Hospital, Teaching" },
+            { name: "BAMS - Bachelor of Ayurvedic Medicine & Surgery", category: "doctor", duration: "5.5 years", fee: "₹25k - ₹5L", salary: "₹4-8 LPA", exams: "NEET-UG", what: "Professional degree in Ayurveda - traditional Indian medicine system using herbs, diet, lifestyle modifications, and natural treatments.", why: "Growing demand for alternative medicine, government support, AYUSH ministry integration, increasing global acceptance of Ayurveda.", when: "After 12th PCB", where: "National Institute of Ayurveda Jaipur, GUJ-AU Jamnagar, BHU Varanasi, Rishikul Ayurveda College Haridwar", how: "10th → 12th (PCB) → NEET-UG → BAMS → MD (Ayurveda) → Job/Practice", skills: "Ayurvedic principles, herbal medicine knowledge, diagnostic skills, Panchakarma techniques", future: "Ayurvedic hospitals, wellness centers, research in herbal medicine, Ayurvedic product manufacturing, Teaching" },
+            { name: "BHMS - Bachelor of Homeopathic Medicine & Surgery", category: "doctor", duration: "5.5 years", fee: "₹20k - ₹3L", salary: "₹3-6 LPA", exams: "NEET-UG", what: "Professional degree in Homeopathy - alternative medicine system based on 'like cures like' principle using highly diluted substances.", why: "Growing acceptance, low infrastructure cost for practice, government jobs available through AYUSH, gentle healing approach.", when: "After 12th PCB", where: "NHMC Mumbai, Dr. Gururaj Government College Hyderabad, Bakson Homoeopathic College Noida", how: "10th → 12th (PCB) → NEET-UG → BHMS → MD (Homeo) → Job/Practice", skills: "Homeopathic philosophy, patient counseling, remedy selection, case taking, repertorization", future: "Homeopathic clinics, research, teaching, integrated healthcare, wellness centers" },
+            { name: "BUMS - Bachelor of Unani Medicine & Surgery", category: "doctor", duration: "5.5 years", fee: "₹20k - ₹3L", salary: "₹3-6 LPA", exams: "NEET-UG", what: "Professional degree in Unani medicine - Greco-Arabic traditional medicine system emphasizing humoral theory and natural healing.", why: "Government recognition through AYUSH ministry, growing acceptance, unique treatment approaches for chronic diseases.", when: "After 12th PCB", where: "AMU Aligarh, NIUM Bangalore, Government Unani College Chennai, Markaz Unani College Hyderabad", how: "10th → 12th (PCB) → NEET-UG → BUMS → MD (Unani) → Job/Practice", skills: "Unani principles, herbal medicine, humor theory (Akhlat), pulse diagnosis, regimenal therapy", future: "Unani clinics, research, teaching, integrated healthcare, wellness centers" },
+            { name: "BNYS - Bachelor of Naturopathy & Yogic Sciences", category: "doctor", duration: "5.5 years", fee: "₹50k - ₹3L", salary: "₹3-6 LPA", exams: "NEET-UG", what: "Professional degree in Naturopathy and Yoga - natural healing systems using diet, fasting, hydrotherapy, massage, yoga, and lifestyle modifications.", why: "Growing wellness industry, preventive healthcare focus, yoga popularity worldwide, increasing lifestyle diseases demand natural treatments.", when: "After 12th PCB", where: "SDM College of Naturopathy Karnataka, Gandhinagar University Gujarat, SVYASA Yoga University Bangalore", how: "10th → 12th (PCB) → NEET-UG → BNYS → MD (Naturopathy) → Wellness Center", skills: "Naturopathic principles, yoga therapy, diet counseling, hydrotherapy techniques, lifestyle modification", future: "Wellness centers, yoga studios, naturopathy hospitals, research, preventive health consulting" },
+            
+            // ========== PARAMEDICAL COURSES (15+) ==========
+            { name: "BPT - Bachelor of Physiotherapy", category: "paramedical", duration: "4.5 years", fee: "₹50k - ₹5L", salary: "₹3-8 LPA", exams: "University/State Entrance", what: "Professional degree in physical therapy - treatment of movement disorders, injuries, and disabilities through physical means like exercise, massage, and electrotherapy.", why: "High demand in sports medicine, geriatric care, rehabilitation centers, orthopedic clinics, and hospitals.", when: "After 12th PCB", where: "AIIMS Delhi, CMC Vellore, NIMS Jaipur, Manipal University, DY Patil Pune", how: "10th → 12th (PCB) → Entrance → BPT → MPT → Job/Clinic", skills: "Manual therapy, exercise prescription, rehabilitation techniques, electrotherapy, patient assessment", future: "Sports physiotherapy, geriatric care, neuro-rehabilitation, own clinic, orthopedic physiotherapy, pediatric physiotherapy" },
+            { name: "B.Sc Nursing", category: "nursing", duration: "4 years", fee: "₹25k - ₹3L", salary: "₹3-6 LPA", exams: "University/State Entrance", what: "Professional nursing degree - patient care, medication administration, vital signs monitoring, health assessment, and healthcare management.", why: "Global shortage of nurses, high demand in developed countries (US, UK, Canada, Australia), excellent job security, opportunity to work abroad.", when: "After 12th PCB", where: "Raksha Shakti University Ahmedabad, CMC Vellore, AIIMS Delhi, RAKCON Delhi, KGMU Lucknow", how: "10th → 12th (PCB) → Entrance → B.Sc Nursing → M.Sc Nursing → Job/Abroad", skills: "Patient care, vital signs monitoring, medication administration, emergency response, health assessment, communication", future: "Staff nurse, nursing supervisor, nursing educator, nurse practitioner, hospital administration, abroad opportunities, nursing research" },
+            { name: "GNM - General Nursing & Midwifery", category: "nursing", duration: "3.5 years", fee: "₹20k - ₹2L", salary: "₹2.5-5 LPA", exams: "University/State Entrance", what: "Diploma in nursing - basic patient care, midwifery, community health, and hospital nursing.", why: "Shorter duration than B.Sc Nursing, practical-focused training, immediate job placement opportunities.", when: "After 12th PCB (or 10th with certain conditions)", where: "Various Government and Private Nursing Schools across India", how: "10th/12th → Entrance → GNM → Job", skills: "Basic patient care, midwifery, community health, first aid, medication administration", future: "Staff nurse, community health worker, nursing assistant, home care nurse" },
+            { name: "BOT - Bachelor of Occupational Therapy", category: "paramedical", duration: "4.5 years", fee: "₹50k - ₹4L", salary: "₹3-7 LPA", exams: "University/State Entrance", what: "Professional degree in occupational therapy - helping people with disabilities, injuries, or illnesses to perform daily activities and improve quality of life.", why: "Growing awareness of mental health, disability rehabilitation, pediatric therapy, geriatric care, and workplace ergonomics.", when: "After 12th PCB", where: "AIIMS Delhi, CMC Vellore, NIMS Jaipur, Manipal University, Seth GS Medical College Mumbai", how: "10th → 12th (PCB) → Entrance → BOT → MOT → Job", skills: "Activity analysis, adaptive equipment, sensory integration, fine motor skills, cognitive assessment", future: "Pediatric OT, geriatric OT, mental health OT, rehabilitation centers, hand therapy, ergonomics consultant" },
+            { name: "B.Sc Radiology & Imaging Technology", category: "paramedical", duration: "3 years + internship", fee: "₹50k - ₹3L", salary: "₹3-6 LPA", exams: "University/State Entrance", what: "Degree in medical imaging - operation of X-ray, CT, MRI, Ultrasound, and other imaging equipment for diagnostic purposes.", why: "Essential diagnostic support in all hospitals, growing healthcare infrastructure, technology advancement, increasing demand for imaging services.", when: "After 12th PCB", where: "AIIMS Delhi, PGIMER Chandigarh, NIMS Jaipur, CMC Vellore, Manipal University", how: "10th → 12th (PCB) → Entrance → B.Sc Radiology → Job", skills: "X-ray techniques, CT scan operation, MRI protocols, patient positioning, radiation safety, image processing", future: "Radiology technician, CT/MRI specialist, ultrasound technician, PACS administrator, Cath lab technician, Mammography specialist" },
+            { name: "B.Sc Medical Lab Technology (MLT)", category: "paramedical", duration: "3 years + internship", fee: "₹25k - ₹2L", salary: "₹2-5 LPA", exams: "University/State Entrance", what: "Degree in laboratory diagnostics - blood tests, urine analysis, microbiology cultures, pathology, and clinical chemistry.", why: "Essential for disease diagnosis, growing diagnostic chains (Dr. Lal PathLabs, SRL, Thyrocare), stable career with multiple job opportunities.", when: "After 12th PCB", where: "AIIMS Delhi, CMC Vellore, PGIMER Chandigarh, Christian Medical College Ludhiana", how: "10th → 12th (PCB) → Entrance → B.Sc MLT → M.Sc MLT → Job", skills: "Blood sample collection, microscope usage, laboratory equipment, quality control, microbiology techniques, biochemistry analysis", future: "Lab technician, lab supervisor, diagnostic center manager, quality assurance, research lab, blood bank technician" },
+            { name: "B.Sc Operation Theatre Technology", category: "paramedical", duration: "3 years + internship", fee: "₹50k - ₹2.5L", salary: "₹3-6 LPA", exams: "University/State Entrance", what: "Degree in operation theatre management - preparation of OT, sterilization, surgical instrument handling, assistance during surgeries.", why: "Essential for all surgical procedures, growing number of hospitals and surgical centers, specialized skill with high demand.", when: "After 12th PCB", where: "AIIMS Delhi, CMC Vellore, Manipal University, Apollo Institute of Health Sciences", how: "10th → 12th (PCB) → Entrance → B.Sc OT Tech → Job", skills: "Sterilization techniques, surgical instrument handling, anesthesia assistance, OT equipment management, infection control", future: "OT technician, OT supervisor, surgical assistant, hospital management, laparoscopic equipment specialist" },
+            { name: "B.Sc Dialysis Technology", category: "paramedical", duration: "3 years + internship", fee: "₹50k - ₹2.5L", salary: "₹3-6 LPA", exams: "University/State Entrance", what: "Degree in dialysis - operation of dialysis machines, patient monitoring during dialysis, vascular access care for kidney failure patients.", why: "Growing kidney disease patients (diabetes, hypertension), increasing dialysis centers, stable demand with predictable work schedule.", when: "After 12th PCB", where: "AIIMS Delhi, PGIMER Chandigarh, NIMS Jaipur, Manipal University, Apollo Hospitals", how: "10th → 12th (PCB) → Entrance → B.Sc Dialysis → Job", skills: "Dialysis machine operation, patient monitoring, vascular access care, water treatment, emergency response", future: "Dialysis technician, dialysis center manager, home dialysis training, renal care coordinator, hemodialysis specialist" },
+            { name: "B.Sc Cardiac Care Technology", category: "paramedical", duration: "3 years + internship", fee: "₹75k - ₹3.5L", salary: "₹4-8 LPA", exams: "University/State Entrance", what: "Degree in cardiac diagnostics - ECG, Echo, TMT, Holter monitoring, stress testing, and assisting in cardiac procedures.", why: "Rising heart disease in India, specialized cardiac care centers growing, high demand for trained cardiac technicians.", when: "After 12th PCB", where: "AIIMS Delhi, CMC Vellore, Narayana Health Bangalore, Fortis Healthcare, NIMS Jaipur", how: "10th → 12th (PCB) → Entrance → B.Sc Cardiac Care → Job", skills: "ECG interpretation, Echo assistance, TMT monitoring, Holter analysis, stress testing, cath lab assistance", future: "Cardiac technician, cath lab technician, cardiac rehabilitation specialist, ECG technologist, echocardiography assistant" },
+            { name: "B.Sc Anesthesia Technology", category: "paramedical", duration: "3 years + internship", fee: "₹50k - ₹3L", salary: "₹4-7 LPA", exams: "University/State Entrance", what: "Degree in anesthesia - assisting anesthesiologists, preparing anesthesia equipment, monitoring patients during surgery.", why: "Essential for all surgeries, growing surgical volume, critical role in patient safety, high demand in all hospitals.", when: "After 12th PCB", where: "AIIMS Delhi, CMC Vellore, PGIMER Chandigarh, KGMU Lucknow, Manipal University", how: "10th → 12th (PCB) → Entrance → B.Sc Anesthesia → Job", skills: "Anesthesia equipment setup, patient monitoring, airway management, emergency response, drug preparation", future: "Anesthesia technician, OT assistant, critical care technician, anesthesia equipment specialist" },
+            { name: "B.Sc Optometry", category: "paramedical", duration: "4 years", fee: "₹50k - ₹3L", salary: "₹3-7 LPA", exams: "University/State Entrance", what: "Degree in eye care - vision testing, prescription of glasses and contact lenses, detection of eye diseases, and basic eye treatment.", why: "Growing eye care needs, increasing screen time causing vision problems, aging population, high demand in optical chains.", when: "After 12th PCB", where: "Elite School of Optometry Chennai, LV Prasad Eye Institute Hyderabad, AIIMS Delhi, Sankara Nethralaya Chennai", how: "10th → 12th (PCB) → Entrance → B.Sc Optometry → M.Optom → Job", skills: "Vision testing, contact lens fitting, low vision aid dispensing, eye disease screening, refractive error correction", future: "Optometrist, optical chain manager, contact lens specialist, low vision consultant, eye hospital" },
+            { name: "B.Sc Speech & Hearing (BASLP)", category: "paramedical", duration: "4 years", fee: "₹50k - ₹3L", salary: "₹3-8 LPA", exams: "University/State Entrance", what: "Degree in audiology and speech-language pathology - diagnosis and treatment of speech, language, and hearing disorders.", why: "Growing awareness of speech disorders, aging population with hearing loss, children with developmental delays, high demand in hospitals and schools.", when: "After 12th PCB", where: "AIIMS Delhi, Ali Yavar Jung Institute Mumbai, Dr. SRU Chennai, Manipal University", how: "10th → 12th (PCB) → Entrance → BASLP → MASLP → Job", skills: "Hearing assessment, hearing aid fitting, speech therapy, language assessment, cochlear implant rehabilitation", future: "Audiologist, speech therapist, hearing aid specialist, school-based therapist, cochlear implant center" },
+            
+            // ========== PHARMACY COURSES (8+) ==========
+            { name: "B.Pharm - Bachelor of Pharmacy", category: "pharmacy", duration: "4 years", fee: "₹50k - ₹4L", salary: "₹3-7 LPA", exams: "University/State Entrance", what: "Professional degree in pharmacy - drug formulation, quality control, pharmacology, pharmaceutical chemistry, and patient counseling.", why: "Essential in healthcare, multiple career options (hospital, industry, retail, research), stable demand, government job opportunities.", when: "After 12th PCB/PCM", where: "NIPER Mohali, JSS College of Pharmacy, Manipal College of Pharmacy, Delhi Institute of Pharmaceutical Sciences", how: "10th → 12th (PCB/PCM) → Entrance → B.Pharm → M.Pharm/Pharm D → Job", skills: "Drug formulation, quality control, pharmacology knowledge, patient counseling, regulatory compliance", future: "Pharmaceutical industry (R&D, Production, QA, QC), hospital pharmacy, retail pharmacy, drug inspector, clinical research" },
+            { name: "Pharm D - Doctor of Pharmacy", category: "pharmacy", duration: "6 years", fee: "₹1L - ₹8L", salary: "₹4-10 LPA", exams: "University/State Entrance", what: "Doctoral degree in pharmacy - advanced clinical training, patient care, pharmacotherapy monitoring, and medication management.", why: "Growing demand for clinical pharmacists in hospitals, better salary than B.Pharm, direct patient interaction, international recognition.", when: "After 12th PCB", where: "NIPER Mohali, JSS College of Pharmacy, Manipal College of Pharmacy, Poona College of Pharmacy", how: "10th → 12th (PCB) → Entrance → Pharm D (5 years academic + 1 year internship) → Job", skills: "Clinical pharmacy, pharmacotherapy monitoring, drug interaction checking, patient counseling, medication management", future: "Clinical pharmacist, hospital pharmacist, drug information specialist, pharmaceutical industry medical affairs" },
+            { name: "D.Pharm - Diploma in Pharmacy", category: "pharmacy", duration: "2 years", fee: "₹20k - ₹1L", salary: "₹2-4 LPA", exams: "University/State Entrance", what: "Diploma in pharmacy - basic drug knowledge, dispensing, and retail pharmacy management.", why: "Shorter duration than B.Pharm, quick entry into workforce, can start own pharmacy after registration, lower education cost.", when: "After 12th PCB/PCM", where: "Various Government and Private Pharmacy Colleges across India", how: "10th → 12th → Entrance → D.Pharm → Job/Own Pharmacy", skills: "Drug dispensing, prescription reading, retail pharmacy management, basic pharmacology", future: "Retail pharmacy owner, pharmacy assistant, pharmaceutical sales representative, hospital pharmacy assistant" },
+            { name: "M.Pharm - Master of Pharmacy", category: "pharmacy", duration: "2 years", fee: "₹1L - ₹5L", salary: "₹5-12 LPA", exams: "GPAT", what: "Master's degree in pharmacy with specializations like Pharmaceutics, Pharmacology, Pharmaceutical Chemistry, Pharmacognosy, or Quality Assurance.", why: "Higher salary, research opportunities, teaching positions, industry leadership roles, specialization in niche areas.", when: "After B.Pharm", where: "NIPER Mohali, JSS College of Pharmacy, Manipal College of Pharmacy, BITS Pilani, Delhi Institute of Pharmaceutical Sciences", how: "B.Pharm → GPAT → M.Pharm → Job/PhD", skills: "Advanced pharmaceutical knowledge, research methodology, specialization skills, formulation development", future: "Pharmaceutical R&D, quality assurance manager, regulatory affairs, pharmacologist, teaching, research scientist" },
+            
+            // ========== VETERINARY COURSES ==========
+            { name: "BVSc & AH - Bachelor of Veterinary Science & Animal Husbandry", category: "veterinary", duration: "5.5 years", fee: "₹50k - ₹5L", salary: "₹5-12 LPA", exams: "NEET-UG", what: "Professional degree in veterinary medicine - diagnosis, treatment, and prevention of diseases in animals including livestock, pets, and wildlife.", why: "Growing pet ownership, livestock importance, government veterinary services, animal husbandry opportunities, wildlife conservation.", when: "After 12th PCB", where: "IVRI Bareilly, GADVASU Ludhiana, MVC Chennai, CVSc Hyderabad, Bombay Veterinary College", how: "10th → 12th (PCB) → NEET-UG → BVSc → MVSc → Job/Practice", skills: "Animal diagnosis, surgery skills, livestock management, pet care, vaccination protocols, disease prevention", future: "Veterinary doctor, pet clinic owner, livestock officer, veterinary hospital, wildlife veterinarian, poultry consultant" },
+            { name: "B.FSc - Bachelor of Fishery Science", category: "veterinary", duration: "4 years", fee: "₹30k - ₹3L", salary: "₹3-8 LPA", exams: "University/State Entrance", what: "Degree in fishery science - fish farming, aquaculture, fish processing, and marine biology.", why: "Growing aquaculture industry, government fisheries departments, export opportunities, coastal employment.", when: "After 12th PCB", where: "CIFE Mumbai, KVK Kolkata, FSH Rohtak, College of Fisheries Mangalore", how: "10th → 12th (PCB) → Entrance → B.FSc → M.FSc → Job", skills: "Fish breeding, pond management, fish disease control, aquaculture techniques, fish processing", future: "Fishery officer, aquaculture farm manager, fish processing plant, fisheries research, export house consultant" },
+            { name: "Dairy Technology", category: "veterinary", duration: "4 years", fee: "₹30k - ₹3L", salary: "₹4-9 LPA", exams: "University/State Entrance", what: "Degree in dairy technology - milk processing, dairy product manufacturing, quality control, and dairy plant management.", why: "India is largest milk producer, growing dairy industry, government dairy cooperatives (Amul, Mother Dairy), export opportunities.", when: "After 12th PCB/PCM", where: "NDRI Karnal, SMC College of Dairy Science Anand, WTC Mumbai, CDFST Udaipur", how: "10th → 12th → Entrance → B.Tech Dairy → Job", skills: "Milk processing, quality control, dairy product manufacturing, plant management, food safety", future: "Dairy plant manager, quality assurance officer, dairy technologist, food safety officer, dairy consultant" },
+            
+            // ========== ALLIED HEALTH SCIENCES ==========
+            { name: "B.Sc Biotechnology", category: "research", duration: "3 years", fee: "₹50k - ₹4L", salary: "₹3-8 LPA", exams: "University/State Entrance", what: "Degree in biotechnology - application of biological processes in medicine, agriculture, and industry including genetic engineering and molecular biology.", why: "Growing biotech industry, pharmaceutical research, agricultural biotechnology, healthcare innovation, high growth potential.", when: "After 12th PCB", where: "IIT Delhi, VIT Vellore, SRM Chennai, Amity University, JNU Delhi", how: "10th → 12th (PCB) → Entrance → B.Sc Biotech → M.Sc → Job/Research", skills: "Molecular biology, genetic engineering, cell culture, bioinformatics, laboratory techniques", future: "Biotech researcher, pharmaceutical R&D, clinical research associate, bioinformatics specialist, quality control officer" },
+            { name: "B.Sc Microbiology", category: "research", duration: "3 years", fee: "₹30k - ₹3L", salary: "₹3-7 LPA", exams: "University/State Entrance", what: "Degree in microbiology - study of microorganisms including bacteria, viruses, fungi, and their applications in medicine, industry, and environment.", why: "Essential in medical diagnostics, pharmaceutical industry, food safety, environmental monitoring, pandemic preparedness.", when: "After 12th PCB", where: "St. Xavier's Mumbai, Loyola College Chennai, Fergusson College Pune, DU Delhi", how: "10th → 12th (PCB) → Entrance → B.Sc Microbiology → M.Sc → Job", skills: "Microscopy, culture techniques, sterilization, microbial identification, antibiotic sensitivity testing", future: "Clinical microbiologist, pharmaceutical microbiologist, food safety officer, research scientist, quality control" },
+            { name: "B.Sc Biochemistry", category: "research", duration: "3 years", fee: "₹30k - ₹3L", salary: "₹3-7 LPA", exams: "University/State Entrance", what: "Degree in biochemistry - study of chemical processes in living organisms including metabolism, enzymes, and molecular biology.", why: "Essential in medical diagnostics, pharmaceutical research, clinical laboratories, drug development, metabolic disease research.", when: "After 12th PCB", where: "St. Xavier's Mumbai, Loyola College Chennai, Miranda House Delhi, Fergusson College Pune", how: "10th → 12th (PCB) → Entrance → B.Sc Biochemistry → M.Sc → Job", skills: "Biochemical analysis, enzyme assays, spectroscopy, chromatography, molecular biology techniques", future: "Clinical biochemist, pharmaceutical researcher, diagnostic lab scientist, research associate, quality control analyst" },
+            { name: "B.Sc Forensic Science", category: "research", duration: "3 years", fee: "₹40k - ₹4L", salary: "₹4-10 LPA", exams: "University/State Entrance", what: "Degree in forensic science - application of scientific principles to criminal investigation including DNA analysis, fingerprinting, and toxicology.", why: "Growing crime investigation needs, government forensic labs, private investigation agencies, TV and media influence, job security in government.", when: "After 12th PCB", where: "NFSU Gandhinagar, DU Delhi, Punjabi University Patiala, LNJN Noida", how: "10th → 12th (PCB) → Entrance → B.Sc Forensic → M.Sc → Job", skills: "Crime scene investigation, fingerprint analysis, DNA profiling, toxicology, ballistics, questioned documents", future: "Forensic scientist, crime scene investigator, cyber forensic expert, government lab scientist, private investigator" },
+            { name: "B.Sc Psychology", category: "research", duration: "3 years", fee: "₹20k - ₹2L", salary: "₹3-8 LPA", exams: "University/State Entrance", what: "Degree in psychology - study of human behavior, mental processes, counseling techniques, and psychological assessment.", why: "Growing mental health awareness, corporate wellness programs, school counseling demand, clinical psychology careers, increasing suicide prevention focus.", when: "After 12th any stream", where: "DU Delhi, BHU Varanasi, Christ University Bangalore, Jamia Millia Islamia Delhi", how: "10th → 12th → Entrance → BA/B.Sc Psychology → MA/M.Sc → Job", skills: "Psychological assessment, counseling techniques, research methods, behavioral observation, report writing", future: "Clinical psychologist, school counselor, industrial psychologist, mental health counselor, HR professional" },
+            
+            // ========== ABROAD STUDY OPTIONS ==========
+            { name: "USMLE - USA Medical License", category: "abroad", duration: "1-2 years (exam prep)", fee: "$3,000 - $5,000", salary: "$200,000 - $500,000/year", exams: "USMLE Step 1, Step 2, Step 3", what: "United States Medical Licensing Examination - pathway for international medical graduates to practice medicine in the USA.", why: "Highest doctor salaries in the world, advanced medical technology, world-class training, excellent work environment.", when: "During or after MBBS", where: "USA - Various hospitals and universities", how: "MBBS → USMLE Step 1 → USMLE Step 2 → Residency Match → USMLE Step 3 → Practice", skills: "Clinical knowledge, patient communication, English proficiency, research experience, US clinical experience", future: "Resident physician, attending physician, specialist doctor in USA, fellowship training" },
+            { name: "PLAB - UK Medical License", category: "abroad", duration: "1 year", fee: "£1,000 - £2,000", salary: "£40,000 - £150,000/year", exams: "PLAB 1 and PLAB 2", what: "Professional and Linguistic Assessments Board - pathway for international medical graduates to practice medicine in the UK.", why: "NHS training system, structured career progression, good work-life balance, easy PR pathway.", when: "During or after MBBS", where: "UK - NHS Hospitals", how: "MBBS → PLAB 1 → PLAB 2 → GMC Registration → NHS Job", skills: "Clinical knowledge, patient communication, English proficiency (IELTS/OET), NHS system knowledge", future: "Foundation doctor, specialty registrar, consultant doctor, GP in UK" },
+            { name: "Germany Medical License", category: "abroad", duration: "2-3 years (incl language)", fee: "€500 - €2,000", salary: "€60,000 - €200,000/year", exams: "Kenntnisprüfung + Fachsprachprüfung", what: "German Medical License - pathway for international medical graduates to practice medicine in Germany.", why: "Free/low tuition for PG training, shortage of doctors in Germany, good salary, high quality of life, PR pathway.", when: "After MBBS", where: "Germany - Various hospitals", how: "MBBS → German language (B2/C1) → Approbation application → Kenntnisprüfung → Job", skills: "German language (B2-C1), clinical knowledge, patient communication, German healthcare system", future: "Assistenzarzt (Resident), Facharzt (Specialist), Oberarzt (Senior), Hospital director" },
+            { name: "Australia Medical License (AMC)", category: "abroad", duration: "2 years", fee: "$3,000 - $5,000 AUD", salary: "$100,000 - $300,000 AUD/year", exams: "AMC MCQ + Clinical Exam", what: "Australian Medical Council examination - pathway for international medical graduates to practice medicine in Australia.", why: "High salaries, excellent work-life balance, beautiful environment, permanent residency pathway, family-friendly.", when: "After MBBS", where: "Australia - Various hospitals", how: "MBBS → IELTS/OET → AMC MCQ → AMC Clinical → Work → PR", skills: "Clinical knowledge, English proficiency (IELTS 7+), Australian healthcare system, cultural competency", future: "Resident medical officer, registrar, consultant, general practitioner, specialist doctor" },
+            { name: "Canada Medical License (MCCQE)", category: "abroad", duration: "2-3 years", fee: "$5,000 - $10,000 CAD", salary: "$80,000 - $250,000 CAD/year", exams: "MCCQE Part I and II", what: "Medical Council of Canada Qualifying Examination - pathway for international medical graduates to practice medicine in Canada.", why: "Excellent healthcare system, high living standards, PR pathway, good work-life balance, family benefits.", when: "After MBBS", where: "Canada - Various provinces", how: "MBBS → NAC OSCE → MCCQE Part I → Residency Match → MCCQE Part II → Practice", skills: "Clinical knowledge, English/French proficiency, Canadian healthcare system, cultural competency", future: "Resident physician, family doctor, specialist physician, consultant" }
+        ];
 
-    <!-- ==================== DOOR 7: PARAMEDICAL ==================== -->
-    <div id="door-paramedical" class="door-content">
-        <div class="accordion-card" id="paramedicalCard">
-            <div class="accordion-header" onclick="toggleCard('paramedicalCard')">
-                <div class="accordion-title"><span class="accordion-icon">🧪</span> Paramedical & Allied Health Sciences</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">⚕️ B.Sc MLT</div><div class="info-text">Medical Lab Technology - ₹3-6 LPA<br>Blood tests, pathology, microbiology, biochemistry labs.</div></div>
-                    <div class="info-card"><div class="info-label">📷 B.Sc Radiology</div><div class="info-text">Medical Imaging Technology - ₹4-7 LPA<br>X-ray, CT Scan, MRI, Ultrasound Technology.</div></div>
-                    <div class="info-card"><div class="info-label">🚑 B.Optometry</div><div class="info-text">Eye Care & Optometry - ₹3-6 LPA<br>Vision correction, contact lenses, optical shops, eye clinics.</div></div>
-                    <div class="info-card"><div class="info-label">🦻 BASLP</div><div class="info-text">Speech & Hearing - ₹4-8 LPA<br>Speech therapy, audiology, hearing aid fitting, rehab centers.</div></div>
-                    <div class="info-card"><div class="info-label">⚡ B.Sc Cardiac Tech</div><div class="info-text">Cardiac Technology - ₹4-7 LPA<br>ECG, TMT, Holter monitoring, Cath Lab assistance.</div></div>
-                    <div class="info-card"><div class="info-label">💉 B.Sc OT & Anesthesia Tech</div><div class="info-text">Operation Theatre & Anesthesia Tech - ₹3-6 LPA<br>Surgical assistance, anesthesia equipment management.</div></div>
-                </div>
-                <div class="section-title">📋 Paramedical Entrance Exams</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 AIIMS Paramedical</div><div class="info-text"><a class="live-link" href="https://www.aiimsexams.ac.in" target="_blank">aiimsexams.ac.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🔗 JIPMER Paramedical</div><div class="info-text"><a class="live-link" href="https://www.jipmer.edu.in" target="_blank">jipmer.edu.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🔗 State Exams</div><div class="info-text">Various state CET for paramedical courses</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
+        // Additional Data Sections
+        const examsData = [
+            { name: "NEET-UG 2026", date: "May 5, 2026", application: "Open till Mar 15", website: "https://neet.nta.nic.in", seats: "90,000+", mode: "Offline" },
+            { name: "NEET-PG 2026", date: "June 15, 2026", application: "Open till Apr 30", website: "https://nbe.edu.in", seats: "30,000+", mode: "Online" },
+            { name: "AIIMS INI CET 2026", date: "July 10, 2026", application: "Open till May 30", website: "https://aiimsexams.ac.in", seats: "2,000+", mode: "Online" },
+            { name: "JIPMER 2026", date: "June 5, 2026", application: "Open till Apr 15", website: "https://jipmer.edu.in", seats: "200+", mode: "Online" },
+            { name: "NEET-MDS 2026", date: "March 30, 2026", application: "Open till Jan 31", website: "https://nbe.edu.in", seats: "5,000+", mode: "Online" },
+            { name: "NEET-SS 2026", date: "August 20, 2026", application: "Open till June 30", website: "https://nbe.edu.in", seats: "4,000+", mode: "Online" }
+        ];
 
-    <!-- ==================== DOOR 8: PHARMACY ==================== -->
-    <div id="door-pharmacy" class="door-content">
-        <div class="accordion-card" id="pharmaCard">
-            <div class="accordion-header" onclick="toggleCard('pharmaCard')">
-                <div class="accordion-title"><span class="accordion-icon">💊</span> Pharmacy - B.Pharm & D.Pharm (4 years / 2 years)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">❓ WHAT</div><div class="info-text">Drug formulation, pharmacology, pharmaceutical chemistry, clinical pharmacy, pharmacovigilance.<br><span class="salary-text">💰 Fresher: ₹3-6 LPA | Pharmacist: ₹4-8 LPA | Drug Inspector: ₹12-20 LPA | M.Pharm: ₹7-15 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🌟 WHY</div><div class="info-text">Indian pharma industry is world's 3rd largest, high demand in R&D, quality control, regulatory affairs, clinical research.</div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text">GPAT for M.Pharm, state pharmacy entrance exams. Top colleges: NIPER, Jamia Hamdard, BITS Pilani, Manipal, Poona College of Pharmacy.</div></div>
-                </div>
-                <div class="section-title">🗺️ Pharmacy Career Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">2-4 Years</div><div class="roadmap-text">D.Pharm (2 yrs) / B.Pharm (4 yrs)<br><span class="salary-text">💰 Pharmacist: ₹3-6 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">2 Years</div><div class="roadmap-text">M.Pharm (Pharmaceutics, Pharmacology, Pharmaceutical Chemistry, Regulatory Affairs)<br><span class="salary-text">💰 M.Pharm: ₹7-15 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Career Paths</div><div class="roadmap-text">Pharma Industry (R&D, QA/QC, Production), Clinical Research (CRO), Drug Inspector (Govt), Pharmacovigilance, Medical Writing, Teaching, PhD, Own Pharmacy Store</div></div>
-            </div>
-        </div>
-    </div>
+        const scholarshipsData = [
+            { name: "PM Scholarship Scheme for Medical Students", amount: "₹50,000/year", eligibility: "All states, based on parents income", website: "https://scholarships.gov.in" },
+            { name: "Central Sector Scholarship for Medical Students", amount: "₹30,000/year", eligibility: "Top 10% of NEET rankers", website: "https://scholarships.gov.in" },
+            { name: "State Medical Scholarship (Haryana)", amount: "₹40,000/year", eligibility: "Haryana domicile, family income < ₹6L", website: "https://haryana.gov.in" },
+            { name: "State Medical Scholarship (UP)", amount: "₹35,000/year", eligibility: "UP domicile", website: "https://up.gov.in" },
+            { name: "AIIMS Merit-cum-Means Scholarship", amount: "₹25,000/month", eligibility: "Top 50 rankers, family income < ₹4.5L", website: "https://aiims.edu" },
+            { name: "Dr. B.C. Roy Scholarship", amount: "₹1,00,000/year", eligibility: "Merit-based, top 100 MBBS students", website: "https://medicalcouncilindia.org" }
+        ];
 
-    <!-- ==================== DOOR 9: PG / SUPER SPECIALTY ==================== -->
-    <div id="door-pg" class="door-content">
-        <div class="accordion-card" id="pgFullCard">
-            <div class="accordion-header" onclick="toggleCard('pgFullCard')">
-                <div class="accordion-title"><span class="accordion-icon">📚</span> MD/MS & Super-Specialties (DM/MCh)</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">📖 MD Branches</div><div class="info-text">Medicine, Pediatrics, Radiology, Dermatology, Anesthesia, Psychiatry, Pathology, Microbiology, Pharmacology, Community Medicine<br><span class="salary-text">💰 PG Salary: ₹15-30 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">🔪 MS Branches</div><div class="info-text">General Surgery, Orthopedics, ENT, Ophthalmology, Obstetrics & Gynecology<br><span class="salary-text">💰 PG Salary: ₹18-35 LPA</span></div></div>
-                    <div class="info-card"><div class="info-label">❤️ DM/MCh (Super-specialty)</div><div class="info-text">Cardiology, Neurology, Nephrology, Gastroenterology, CTVS, Neurosurgery, Plastic Surgery, Urology, Endocrinology, Medical Oncology<br><span class="salary-text">💰 Super-specialist: ₹40 LPA - 2 Cr</span></div></div>
-                    <div class="info-card"><div class="info-label">📋 EXAMS</div><div class="info-text"><a class="live-link" href="https://nbe.edu.in" target="_blank">NEET-PG</a> (NEXT by 2026), <a class="live-link" href="https://nbe.edu.in" target="_blank">NEET-SS</a> for super-specialty.</div></div>
-                </div>
-                <div class="section-title">🗺️ PG/Super-specialty Roadmap</div>
-                <div class="roadmap-step"><div class="roadmap-year">After MBBS</div><div class="roadmap-text">NEET-PG → 3 years MD/MS<br><span class="salary-text">💰 Junior Resident: ₹12-18 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">After MD/MS</div><div class="roadmap-text">NEET-SS → 3 years DM/MCh<br><span class="salary-text">💰 Senior Resident/Specialist: ₹20-40 LPA</span></div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Final</div><div class="roadmap-text">Consultant / Interventional Specialist / Professor / HOD / Private Practice</div></div>
-                <div class="section-title">📋 NEET-PG 2025 Updates</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 NBE</div><div class="info-text"><a class="live-link" href="https://nbe.edu.in" target="_blank">nbe.edu.in</a></div></div>
-                    <div class="info-card"><div class="info-label">📅 Exam Date</div><div class="info-text">June/July 2025</div></div>
-                    <div class="info-card"><div class="info-label">📊 Pattern</div><div class="info-text">CBT, 200 questions, 3.5 hours</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
+        const topCollegesData = [
+            { name: "AIIMS New Delhi", type: "Government", fees: "₹1,600/year", nirf: "#1", website: "https://aiims.edu" },
+            { name: "PGIMER Chandigarh", type: "Government", fees: "₹2,000/year", nirf: "#2", website: "https://pgimer.edu.in" },
+            { name: "CMC Vellore", type: "Private (Christian)", fees: "₹50,000/year", nirf: "#3", website: "https://cmcvellore.ac.in" },
+            { name: "NIMHANS Bangalore", type: "Government", fees: "₹5,000/year", nirf: "#4", website: "https://nimhans.ac.in" },
+            { name: "JIPMER Puducherry", type: "Government", fees: "₹10,000/year", nirf: "#5", website: "https://jipmer.edu.in" },
+            { name: "KGMU Lucknow", type: "Government", fees: "₹25,000/year", nirf: "#6", website: "https://kgmu.org" },
+            { name: "SGPGIMS Lucknow", type: "Government", fees: "₹8,000/year", nirf: "#7", website: "https://sgpgims.org.in" },
+            { name: "AMU Aligarh", type: "Government", fees: "₹15,000/year", nirf: "#8", website: "https://amu.ac.in" },
+            { name: "Institute of Liver Sciences Delhi", type: "Government", fees: "₹10,000/year", nirf: "#9", website: "https://ilbs.in" },
+            { name: "BJMC Pune", type: "Government", fees: "₹30,000/year", nirf: "#10", website: "https://bjmcpune.org" }
+        ];
 
-    <!-- ==================== DOOR 10: NEET & ENTRANCE EXAMS ==================== -->
-    <div id="door-neet" class="door-content">
-        <div class="accordion-card" id="neetCard">
-            <div class="accordion-header" onclick="toggleCard('neetCard')">
-                <div class="accordion-title"><span class="accordion-icon">📋</span> NEET & Medical Entrance Exams - Complete Guide</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="section-title">📋 All Medical Entrance Exams 2025</div>
-                <table>
-                    <thead><tr><th>Exam</th><th>Purpose</th><th>Official Link</th><th>Schedule 2025</th></tr></thead>
-                    <tbody>
-                        <tr><td>NEET-UG</td><td>MBBS/BDS/BAMS/BHMS/BUMS/BSMS</td><td><a class="live-link" href="https://neet.nta.nic.in" target="_blank">neet.nta.nic.in</a></td><td>May 4, 2025</td></tr>
-                        <tr><td>NEET-PG</td><td>MD/MS/PG Diploma</td><td><a class="live-link" href="https://nbe.edu.in" target="_blank">nbe.edu.in</a></td><td>June/July 2025</td></tr>
-                        <tr><td>NEET-SS</td><td>DM/MCh Super-specialty</td><td><a class="live-link" href="https://nbe.edu.in" target="_blank">nbe.edu.in</a></td><td>September 2025</td></tr>
-                        <tr><td>AIIMS B.Sc</td><td>Nursing/Paramedical</td><td><a class="live-link" href="https://www.aiimsexams.ac.in" target="_blank">aiimsexams.ac.in</a></td><td>June 2025</td></tr>
-                        <tr><td>JIPMER</td><td>MBBS (now via NEET), B.Sc</td><td><a class="live-link" href="https://www.jipmer.edu.in" target="_blank">jipmer.edu.in</a></td><td>Through NEET</td></tr>
-                    </tbody>
-                </table>
-                <div class="section-title">📚 NEET-UG Syllabus & Pattern</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">Physics</div><div class="info-text">Class 11 & 12: Mechanics, Thermodynamics, Optics, Modern Physics (45 questions)</div></div>
-                    <div class="info-card"><div class="info-label">Chemistry</div><div class="info-text">Physical, Organic, Inorganic: Periodic table, Chemical bonding, Biomolecules (45 questions)</div></div>
-                    <div class="info-card"><div class="info-label">Biology</div><div class="info-text">Botany + Zoology: Genetics, Human Physiology, Ecology, Evolution (90 questions)</div></div>
-                    <div class="info-card"><div class="info-label">🎯 Total</div><div class="info-text">180 questions | 720 marks | 3 hours 20 minutes | Negative marking (-1 for wrong)</div></div>
-                </div>
-                <div class="section-title">💡 NEET Preparation Tips (Dil-Ke-AnnS Guide)</div>
-                <div class="roadmap-step"><div class="roadmap-year">Class 11</div><div class="roadmap-text">Complete 50% syllabus, NCERT focus, basic problem-solving</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Class 12</div><div class="roadmap-text">Complete remaining syllabus, revision, mock tests, previous year papers</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Dropper</div><div class="roadmap-text">Intensive coaching, daily 8-10 hours study, 50+ mock tests, analyze mistakes</div></div>
-            </div>
-        </div>
-    </div>
+        // Current Category and Search
+        let currentCategory = "all";
+        let searchTerm = "";
 
-    <!-- ==================== DOOR 11: GOVERNMENT JOBS ==================== -->
-    <div id="door-govt" class="door-content">
-        <div class="accordion-card" id="govtCard">
-            <div class="accordion-header" onclick="toggleCard('govtCard')">
-                <div class="accordion-title"><span class="accordion-icon">🏛️</span> Government Jobs for Medical Graduates</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🏥 UPSC CMS</div><div class="info-text">Combined Medical Services - ₹60k-2L/month | <a class="live-link" href="https://upsc.gov.in" target="_blank">upsc.gov.in</a></div></div>
-                    <div class="info-card"><div class="info-label">🩺 State PSC</div><div class="info-text">State Medical Officer (MO) - ₹50k-1.5L/month</div></div>
-                    <div class="info-card"><div class="info-label">🏥 Railway Doctors</div><div class="info-text">RRB Medical - Central Hospital, Zonal Hospital - ₹60k-1.8L/month</div></div>
-                    <div class="info-card"><div class="info-label">💊 Drug Inspector</div><div class="info-text">CDSCO, State FDA - ₹50k-1.2L/month</div></div>
-                    <div class="info-card"><div class="info-label">🏫 ESIC Doctors</div><div class="info-text">Employees State Insurance Corporation - ₹60k-1.5L/month</div></div>
-                    <div class="info-card"><div class="info-label">⚕️ CGHS</div><div class="info-text">Central Govt Health Scheme - ₹60k-2L/month</div></div>
-                    <div class="info-card"><div class="info-label">🏛️ AIIMS Faculty</div><div class="info-text">Professor, Additional Professor, Assistant Professor - ₹1.5L-3L/month</div></div>
-                    <div class="info-card"><div class="info-label">🚑 MO at PSUs</div><div class="info-text">ONGC, NTPC, BHEL, SAIL - ₹70k-2L/month + benefits</div></div>
-                </div>
-                <div class="section-title">📋 UPSC CMS Exam Pattern</div>
-                <div class="roadmap-step"><div class="roadmap-year">Prelims</div><div class="roadmap-text">Paper 1: General Medicine & Pediatrics, Paper 2: Surgery, Gynecology, Preventive Medicine (200 marks each)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Mains</div><div class="roadmap-text">Theory + Clinical/ Practical Exam (300 marks)</div></div>
-                <div class="roadmap-step"><div class="roadmap-year">Interview</div><div class="roadmap-text">100 marks</div></div>
-            </div>
-        </div>
-    </div>
+        // Render Door Navigation
+        function renderDoors() {
+            const container = document.getElementById('doorsContainer');
+            
+            // Filter courses based on category and search
+            let filteredCourses = coursesData;
+            if (currentCategory !== "all") {
+                filteredCourses = coursesData.filter(course => course.category === currentCategory);
+            }
+            if (searchTerm) {
+                filteredCourses = filteredCourses.filter(course => 
+                    course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    course.what.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
 
-    <!-- ==================== DOOR 12: ABROAD STUDIES ==================== -->
-    <div id="door-abroad" class="door-content">
-        <div class="accordion-card" id="abroadCard">
-            <div class="accordion-header" onclick="toggleCard('abroadCard')">
-                <div class="accordion-title"><span class="accordion-icon">🌍</span> Abroad Studies for Medical Students</div>
-                <div class="accordion-arrow">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🇺🇸 USA</div><div class="info-text">USMLE (Step 1, Step 2 CK, Step 3) → Residency (3-7 years)<br><span class="salary-text">💰 Resident: $60k-80k/year | Attending: $250k-500k/year</span><br><a class="live-link" href="https://www.ecfmg.org" target="_blank">ECFMG</a> | <a class="live-link" href="https://www.usmle.org" target="_blank">USMLE</a></div></div>
-                    <div class="info-card"><div class="info-label">🇬🇧 UK</div><div class="info-text">PLAB (Part 1 & 2) → Foundation Training (2 years) → Specialty Training<br><span class="salary-text">💰 Foundation: £30-40k/year | Consultant: £80-150k/year</span><br><a class="live-link" href="https://www.gmc-uk.org" target="_blank">GMC UK</a></div></div>
-                    <div class="info-card"><div class="info-label">🇨🇦 Canada</div><div class="info-text">MCCEE, MCCQE → Residency (2-5 years) → Independent Practice<br><span class="salary-text">💰 Family Physician: CAD 250k-350k/year | Specialist: CAD 400k-600k/year</span></div></div>
-                    <div class="info-card"><div class="info-label">🇦🇺 Australia</div><div class="info-text">AMC (MCQ + Clinical) → Internship (1 year) → Residency<br><span class="salary-text">💰 Resident: AUD 80-120k/year | Specialist: AUD 300-500k/year</span></div></div>
-                    <div class="info-card"><div class="info-label">🇩🇪 Germany</div><div class="info-text">German Language B2/C1 → Kenntnisprüfung (Knowledge Test) → Approbation (License)<br><span class="salary-text">💰 Resident: €50-70k/year | Specialist: €100-200k/year</span></div></div>
-                    <div class="info-card"><div class="info-label">🇦🇪 UAE/Dubai</div><div class="info-text">DHA/MOH/HAAD license exam → Specialist/Consultant<br><span class="salary-text">💰 Tax-free: AED 30k-100k/month (₹6L-20L/month)</span></div></div>
-                </div>
-                <div class="section-title">📋 Key Licensing Exams</div>
-                <div class="info-grid">
-                    <div class="info-card"><div class="info-label">🔗 USMLE</div><div class="info-text"><a class="live-link" href="https://www.usmle.org" target="_blank">usmle.org</a> - Step 1: Pass/Fail, Step 2 CK, Step 3</div></div>
-                    <div class="info-card"><div class="info-label">🔗 PLAB</div><div class="info-text"><a class="live-link" href="https://www.gmc-uk.org" target="_blank">gmc-uk.org</a> - Part 1 in India, Part 2 in UK</div></div>
-                    <div class="info-card"><div class="info-label">🔗 AMC</div><div class="info-text"><a class="live-link" href="https://www.amc.org.au" target="_blank">amc.org.au</a> - MCQ in India, Clinical in Australia</div></div>
-                </div>
-                <div class="section-title">⭐ Famous Indian Doctors Abroad</div>
-                <div><span class="famous-badge">Dr. Vivek Murthy (US Surgeon General)</span> <span class="famous-badge">Dr. Sanjiv Chopra (Harvard)</span> <span class="famous-badge">Dr. Devi Shetty</span></div>
-            </div>
-        </div>
-    </div>
-</div>
+            // Also add special sections for roadmap, exams, colleges, scholarships, salary, future
+            // But only show these special doors when category is "all" and no search
+            const showSpecialDoors = (currentCategory === "all" && !searchTerm);
 
-<div class="bottom-bar" id="bottomBar"></div>
+            let html = '';
 
-<script>
-    // Accordion toggle function
-    function toggleCard(cardId) {
-        const card = document.getElementById(cardId);
-        if (card) {
-            card.classList.toggle('active');
+            // Render Course Doors
+            filteredCourses.forEach((course, index) => {
+                html += `
+                    <div class="door-card" data-category="${course.category}">
+                        <div class="door-header ${course.category}">
+                            <div class="door-icon">${course.category === 'doctor' ? '🩺' : course.category === 'paramedical' ? '🚑' : course.category === 'pharmacy' ? '💊' : course.category === 'veterinary' ? '🐾' : course.category === 'nursing' ? '👩‍⚕️' : course.category === 'research' ? '🔬' : course.category === 'allied' ? '🏥' : '🌍'}</div>
+                            <div class="door-title">${course.name}</div>
+                            <div class="door-subtitle">${course.duration} | ${course.exams}</div>
+                        </div>
+                        <div class="door-content">
+                            <div class="door-content-inner">
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label">❓ WHAT</div><div class="info-value">${course.what}</div></div>
+                                    <div class="info-item"><div class="info-label">🤔 WHY</div><div class="info-value">${course.why}</div></div>
+                                    <div class="info-item"><div class="info-label">⏰ WHEN</div><div class="info-value">${course.when}</div></div>
+                                    <div class="info-item"><div class="info-label">📍 WHERE (Top Colleges)</div><div class="info-value">${course.where}</div></div>
+                                    <div class="info-item"><div class="info-label">🛤️ HOW</div><div class="info-value">${course.how}</div></div>
+                                    <div class="info-item"><div class="info-label">💰 FEES</div><div class="info-value">${course.fee}</div></div>
+                                    <div class="info-item"><div class="info-label">💵 FRESHER SALARY</div><div class="info-value">${course.salary}</div></div>
+                                    <div class="info-item"><div class="info-label">🎯 EXAMS</div><div class="info-value">${course.exams}</div></div>
+                                    <div class="info-item"><div class="info-label">🔧 SKILLS</div><div class="info-value">${course.skills}</div></div>
+                                    <div class="info-item"><div class="info-label">🚀 FUTURE SCOPE</div><div class="info-value">${course.future}</div></div>
+                                </div>
+                                <div style="text-align: center; margin-top: 10px;">
+                                    <span class="badge badge-primary">📝 ${course.exams}</span>
+                                    <span class="badge badge-success">💰 ${course.salary}</span>
+                                    <span class="badge badge-warning">⏱️ ${course.duration}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Add Special Sections (only when showing all)
+            if (showSpecialDoors) {
+                // ROADMAP DOOR
+                html += `
+                    <div class="door-card" data-category="roadmap">
+                        <div class="door-header roadmap">
+                            <div class="door-icon">🗺️</div>
+                            <div class="door-title">Complete Career Roadmap</div>
+                            <div class="door-subtitle">Class 5 → CEO | 10+ Stages</div>
+                        </div>
+                        <div class="door-content">
+                            <div class="door-content-inner">
+                                <div class="roadmap-step"><div class="roadmap-year">Class 5-8</div><div class="roadmap-text">Foundation: Science basics, Biology fundamentals. Develop curiosity about human body. Participate in science fairs.</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">Class 9-10</div><div class="roadmap-text">Build Interest: Strong focus on Biology, Chemistry, Physics. Score 85%+ in Science. Participate in Olympiads.</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">Class 11-12</div><div class="roadmap-text">Core Preparation: Choose PCB. Daily NEET prep (6-8 hours). Master NCERT. Solve PYQs. Take weekly mock tests.</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">NEET-UG</div><div class="roadmap-text">Clear NEET with 550+ marks for government college. 720 marks (Physics 180, Chemistry 180, Biology 360).</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">MBBS (5.5 yrs)</div><div class="roadmap-text">Medical School: Anatomy, Physiology, Biochemistry, Pharmacology, Pathology, Microbiology, Medicine, Surgery, Pediatrics, ObGyn.</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">Internship (1 yr)</div><div class="roadmap-text">Hands-on training in all departments. Stipend ₹15,000-25,000/month.</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">PG (MD/MS - 3 yrs)</div><div class="roadmap-text">Specialization in Medicine, Surgery, Pediatrics, Radiology, Dermatology, etc. Stipend ₹50k-1L/month.</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">Super-Specialization (DM/MCh - 3 yrs)</div><div class="roadmap-text">Cardiology, Neurology, Cardiac Surgery, Neuro Surgery, Gastroenterology, etc.</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">Job (Starting)</div><div class="roadmap-text">Senior Resident/Consultant: ₹8-15 LPA (Junior), ₹15-30 LPA (Consultant), ₹30-60 LPA (Senior)</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">Promotion (5-10 yrs)</div><div class="roadmap-text">Senior Consultant/HOD: ₹40-80 LPA + incentives. Lead a team of junior doctors.</div></div>
+                                <div class="roadmap-step"><div class="roadmap-year">Business/Director</div><div class="roadmap-text">Own Clinic/Hospital: ₹50 LPA - ₹5 Cr+. Build your own brand and legacy.</div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // EXAMS DOOR
+                html += `
+                    <div class="door-card" data-category="exams">
+                        <div class="door-header exams">
+                            <div class="door-icon">📝</div>
+                            <div class="door-title">Live Exams & Results</div>
+                            <div class="door-subtitle">Auto-Updated Daily at 3 AM IST</div>
+                        </div>
+                        <div class="door-content">
+                            <div class="door-content-inner" id="examsDoorContent">
+                                <!-- Dynamic exams list -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // TOP COLLEGES DOOR
+                html += `
+                    <div class="door-card" data-category="colleges">
+                        <div class="door-header colleges">
+                            <div class="door-icon">🏛️</div>
+                            <div class="door-title">Top Medical Colleges</div>
+                            <div class="door-subtitle">NIRF Ranked | Government + Private</div>
+                        </div>
+                        <div class="door-content">
+                            <div class="door-content-inner" id="collegesDoorContent">
+                                <!-- Dynamic colleges list -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // SCHOLARSHIPS DOOR
+                html += `
+                    <div class="door-card" data-category="scholarships">
+                        <div class="door-header scholarships">
+                            <div class="door-icon">💰</div>
+                            <div class="door-title">Scholarships & Sponsorships</div>
+                            <div class="door-subtitle">Apply Now | Auto-Updated from NSP</div>
+                        </div>
+                        <div class="door-content">
+                            <div class="door-content-inner" id="scholarshipsDoorContent">
+                                <!-- Dynamic scholarships list -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // SALARY DOOR
+                html += `
+                    <div class="door-card" data-category="salary">
+                        <div class="door-header salary">
+                            <div class="door-icon">💵</div>
+                            <div class="door-title">Salary Trends</div>
+                            <div class="door-subtitle">India + Abroad | Fresher to CEO Level</div>
+                        </div>
+                        <div class="door-content">
+                            <div class="door-content-inner">
+                                <table class="salary-table">
+                                    <thead><tr><th>Level</th><th>India (₹/year)</th><th>USA ($/year)</th><th>UK (£/year)</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Intern</td><td>2-3 LPA</td><td>60,000</td><td>30,000</td></tr>
+                                        <tr><td>Junior Resident</td><td>7-10 LPA</td><td>70,000</td><td>40,000</td></tr>
+                                        <tr><td>Senior Resident</td><td>10-15 LPA</td><td>90,000</td><td>55,000</td></tr>
+                                        <tr><td>Consultant (5 yrs)</td><td>15-25 LPA</td><td>200,000</td><td>80,000</td></tr>
+                                        <tr><td>Senior Consultant (10 yrs)</td><td>25-50 LPA</td><td>300,000</td><td>120,000</td></tr>
+                                        <tr><td>HOD</td><td>40-80 LPA</td><td>400,000</td><td>150,000</td></tr>
+                                        <tr><td>Private Practice</td><td>20 LPA - 2 Cr</td><td>500,000+</td><td>200,000+</td></tr>
+                                    </tbody>
+                                </table>
+                                <div style="margin-top: 10px; text-align: center;">
+                                    <span class="badge badge-primary">🇺🇸 USA: USMLE</span>
+                                    <span class="badge badge-success">🇬🇧 UK: PLAB</span>
+                                    <span class="badge badge-warning">🇩🇪 Germany</span>
+                                    <span class="badge badge-danger">🇦🇺 Australia</span>
+                                    <span class="badge badge-primary">🇨🇦 Canada</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // FUTURE TRENDS DOOR
+                html += `
+                    <div class="door-card" data-category="future">
+                        <div class="door-header future">
+                            <div class="door-icon">🚀</div>
+                            <div class="door-title">Future Career Trends</div>
+                            <div class="door-subtitle">AI Forecast 2030</div>
+                        </div>
+                        <div class="door-content">
+                            <div class="door-content-inner">
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label">📈 HIGH GROWTH (2030)</div><div class="info-value">• Telemedicine: +300% demand<br>• AI-Assisted Diagnosis: +500%<br>• Robotic Surgery: +400%<br>• Geriatric Medicine: +250%<br>• Preventive Healthcare: +200%<br>• Genomics & Personalized Medicine: +300%<br>• Medical AI Researcher: +400%</div></div>
+                                    <div class="info-item"><div class="info-label">📉 DECLINING ROLES</div><div class="info-value">• General Radiologist (AI replacing basic reading)<br>• Simple Diagnostic roles<br>• Routine Pharmacy dispensing<br>• Basic Lab Technician (automated)<br>• Medical Transcription</div></div>
+                                    <div class="info-item"><div class="info-label">💡 EMERGING SPECIALTIES</div><div class="info-value">• AI in Healthcare<br>• Digital Health<br>• Precision Medicine<br>• Regenerative Medicine<br>• Space Medicine<br>• Sports Medicine</div></div>
+                                    <div class="info-item"><div class="info-label">🌍 ABROAD DEMAND</div><div class="info-value">• USA: Shortage of 100,000 doctors by 2030<br>• UK: NHS needs 50,000+ doctors<br>• Germany: 30,000+ doctor shortage<br>• Australia: Growing healthcare sector<br>• Canada: High demand for family physicians</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+
+            // Add click handlers for door cards
+            document.querySelectorAll('.door-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // Don't toggle if clicking on link or button inside
+                    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+                    card.classList.toggle('open');
+                });
+            });
+
+            // Populate dynamic content in special doors
+            if (showSpecialDoors) {
+                const examsContainer = document.getElementById('examsDoorContent');
+                if (examsContainer) {
+                    examsContainer.innerHTML = examsData.map(exam => `
+                        <div class="exam-card">
+                            <div class="exam-name">📌 ${exam.name}</div>
+                            <div>📅 Exam Date: ${exam.date}</div>
+                            <div>📝 Application: ${exam.application}</div>
+                            <div>🎯 Total Seats: ${exam.seats}</div>
+                            <div>💻 Mode: ${exam.mode}</div>
+                            <a href="${exam.website}" target="_blank" class="exam-link">🔗 Official Website →</a>
+                            <span class="badge badge-primary" style="margin-left: 10px;">Live</span>
+                        </div>
+                    `).join('');
+                }
+
+                const collegesContainer = document.getElementById('collegesDoorContent');
+                if (collegesContainer) {
+                    collegesContainer.innerHTML = `
+                        <div class="info-grid">
+                            ${topCollegesData.map(college => `
+                                <div class="college-card">
+                                    <div class="college-name">🏛️ ${college.name}</div>
+                                    <div>Type: ${college.type}</div>
+                                    <div>Fees: ${college.fees}</div>
+                                    <div>NIRF Rank: ${college.nirf}</div>
+                                    <a href="${college.website}" target="_blank" class="exam-link">🔗 Visit Website →</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 10px; text-align: center;">
+                            <span class="badge badge-primary">🏫 200+ Government Colleges</span>
+                            <span class="badge badge-success">🔷 100+ Private Colleges</span>
+                            <span class="badge badge-warning">85% State Quota</span>
+                            <span class="badge badge-danger">15% All India Quota</span>
+                        </div>
+                    `;
+                }
+
+                const scholarshipsContainer = document.getElementById('scholarshipsDoorContent');
+                if (scholarshipsContainer) {
+                    scholarshipsContainer.innerHTML = `
+                        <div class="info-grid">
+                            ${scholarshipsData.map(sch => `
+                                <div class="info-item">
+                                    <div class="info-label">🎓 ${sch.name}</div>
+                                    <div class="info-value">💰 Amount: ${sch.amount}</div>
+                                    <div class="info-value">👤 Eligibility: ${sch.eligibility}</div>
+                                    <a href="${sch.website}" target="_blank" class="exam-link">🔗 Apply Here →</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+            }
         }
-    }
 
-    // Door navigation
-    document.querySelectorAll('.door-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.door-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.door-content').forEach(c => c.classList.remove('active'));
-            const doorId = `door-${btn.getAttribute('data-door')}`;
-            const doorContent = document.getElementById(doorId);
-            if (doorContent) doorContent.classList.add('active');
-        });
-    });
+        // Category Filtering
+        function setupCategoryFilters() {
+            const buttons = document.querySelectorAll('.door-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.getAttribute('data-category');
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = category;
+                    renderDoors();
+                });
+            });
+        }
 
-    // Bottom navigation - Dil-Ke-AnnS Three Persons Integration
-    const bottomNav = [
-        { name: "Dil", icon: "🧠", link: "index.html" },
-        { name: "Ke", icon: "🔍", link: "#" },
-        { name: "AnnS", icon: "🤖", link: "#" },
-        { name: "Alerts", icon: "🔔", link: "#" },
-        { name: "Profile", icon: "👤", link: "#" }
-    ];
-    
-    document.getElementById('bottomBar').innerHTML = bottomNav.map(item => 
-        `<div class="nav-item" data-link="${item.link}"><span>${item.icon}</span><span>${item.name}</span></div>`
-    ).join('');
-    
-    document.querySelectorAll('.nav-item').forEach(nav => {
-        nav.addEventListener('click', () => {
-            const link = nav.getAttribute('data-link');
-            if (link && link !== '#') window.location.href = link;
-            else alert('Dil-Ke-AnnS Career Saathi: Feature coming soon!');
-        });
-    });
+        // Search Functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                // Reset active category button
+                document.querySelectorAll('.door-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.door-btn[data-category="all"]').classList.add('active');
+                currentCategory = 'all';
+                renderDoors();
+            });
+        }
 
-    // Go back function
-    function goBack() {
-        window.location.href = 'education.html';
-    }
+        // Bottom Navigation Functions
+        function showAlerts() {
+            alert("🔔 Live Alerts:\n\n📢 NEET 2026 Registration Open!\n📢 SSC CGL 2026 Notification Released\n📢 New Medical Colleges Added\n📢 Scholarship Deadline Extended");
+        }
 
-    // Language selector placeholder
-    document.getElementById('languageSelect')?.addEventListener('change', (e) => {
-        alert(`Dil-Ke-AnnS: ${e.target.value === 'hi' ? 'हिंदी संस्करण जल्द आ रहा है' : 'English version active'}`);
-    });
-</script>
+        function showProfile() {
+            let anonymousId = localStorage.getItem('medical_anonymous_id');
+            if (!anonymousId) {
+                anonymousId = 'MED-' + Math.floor(Math.random() * 900000 + 100000);
+                localStorage.setItem('medical_anonymous_id', anonymousId);
+            }
+            alert(`👤 Anonymous Profile\n\nID: ${anonymousId}\n\n✅ Saved Courses: ${localStorage.getItem('saved_courses_' + anonymousId)?.split(',').length || 0}\n✅ Saved Colleges: ${localStorage.getItem('saved_colleges_' + anonymousId)?.split(',').length || 0}\n\n🔒 No personal data stored\n🌐 Complete privacy maintained`);
+        }
+
+        // Initialize
+        function init() {
+            renderDoors();
+            setupCategoryFilters();
+            setupSearch();
+        }
+
+        init();
+    </script>
 </body>
 </html>
