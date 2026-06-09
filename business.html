@@ -207,11 +207,11 @@
         <p>₹5,000 से ₹500 करोड़ तक | 25 विशेषज्ञ डोर | ऑफलाइन + ऑनलाइन बिजनेस | पूरा रोडमैप</p>
     </div>
     <div class="categories" id="categoryDoors"></div>
-    <div id="doorsContainer" class="doors-container"></div
+    <div id="doorsContainer" class="doors-container"></div>
 
     <script>
         let currentLang = 'hindi';
-        let currentCategory = 'ideas';
+        let currentCategory = 'roadmap'; // Default to first door
         let searchTerm = '';
 
        // ============================================
@@ -219,11 +219,11 @@
         // ============================================ 
         const BUSINESS_DATA = {
             // DOOR 1: COMPLETE ROADMAP (EXPANDED - EXPERT LEVEL DETAILS)
-roadmap: {
-    name_hindi: "🗺️ रोडमैप (Idea → IPO) - पूरा बिजनेस प्लेबुक",
-    name_english: "🗺️ Roadmap (Idea → IPO) - Complete Business Playbook",
-    icon: "🗺️",
-    items: [
+        roadmap: {
+            name_hindi: "🗺️ रोडमैप (Idea → IPO) - पूरा बिजनेस प्लेबुक",
+            name_english: "🗺️ Roadmap (Idea → IPO) - Complete Business Playbook",
+            icon: "🗺️",
+            items: [
         // ============================================
         // PHASE 1: IDEATION (Month 1-3)
         // ============================================
@@ -5348,11 +5348,11 @@ licenses: {
     ]
 },
             // DOOR 20: HR & PAYROLL (EXPANDED - 50+ HR RESOURCES)
-hr: {
-    name_hindi: "👥 HR & पेरोल (मानव संसाधन और वेतन प्रबंधन)",
-    name_english: "👥 HR & Payroll (Human Resources and Salary Management)",
-    icon: "👥",
-    items: [
+        hr: {
+            name_hindi: "👥 HR & पेरोल (मानव संसाधन और वेतन प्रबंधन)",
+            name_english: "👥 HR & Payroll (Human Resources and Salary Management)",
+            icon: "👥",
+            items: [
         // ============================================
         // SECTION 1: EMPLOYEE BENEFITS (STATUTORY)
         // ============================================
@@ -5716,11 +5716,11 @@ insurance: {
     ]
 },
             // DOOR 22: EXIT STRATEGIES (EXPANDED - 45+ EXIT RESOURCES)
-exit: {
-    name_hindi: "🚪 एग्जिट स्ट्रैटेजीज (व्यवसाय से बाहर निकलने के तरीके)",
-    name_english: "🚪 Exit Strategies (Ways to Exit Your Business)",
-    icon: "🚪",
-    items: [
+            exit: {
+                name_hindi: "🚪 एग्जिट स्ट्रैटेजीज (व्यवसाय से बाहर निकलने के तरीके)",
+                name_english: "🚪 Exit Strategies (Ways to Exit Your Business)",
+                icon: "🚪",
+                items: [
         // ============================================
         // SECTION 1: TYPES OF EXIT STRATEGIES
         // ============================================
@@ -5908,11 +5908,11 @@ exit: {
     ]
 },
             // DOOR 23: BUSINESS VALUATION (EXPANDED - 50+ VALUATION RESOURCES)
-valuation: {
-    name_hindi: "💰 बिजनेस वैल्यूएशन (कंपनी के मूल्य का पूरा आकलन)",
-    name_english: "💰 Business Valuation (Complete Assessment of Company Value)",
-    icon: "💰",
-    items: [
+            valuation: {
+                name_hindi: "💰 बिजनेस वैल्यूएशन (कंपनी के मूल्य का पूरा आकलन)",
+                name_english: "💰 Business Valuation (Complete Assessment of Company Value)",
+                icon: "💰",
+                items: [
         // ============================================
         // SECTION 1: INCOME-BASED VALUATION METHODS
         // ============================================
@@ -6123,11 +6123,11 @@ valuation: {
     ]
 },
             // DOOR 24: LEGAL AGREEMENTS (EXPANDED - 55+ LEGAL AGREEMENT RESOURCES)
-agreements: {
-    name_hindi: "⚖️ कानूनी समझौते (सभी आवश्यक कानूनी दस्तावेज)",
-    name_english: "⚖️ Legal Agreements (All Essential Legal Documents)",
-    icon: "⚖️",
-    items: [
+            agreements: {
+                name_hindi: "⚖️ कानूनी समझौते (सभी आवश्यक कानूनी दस्तावेज)",
+                name_english: "⚖️ Legal Agreements (All Essential Legal Documents)",
+                icon: "⚖️",
+                items: [
         // ============================================
         // SECTION 1: FOUNDER & SHAREHOLDER AGREEMENTS
         // ============================================
@@ -6348,11 +6348,11 @@ agreements: {
     ]
 },
             // DOOR 25: FINANCIAL CONTROLS (EXPANDED - 55+ FINANCIAL CONTROL RESOURCES)
-financial: {
-    name_hindi: "📊 वित्तीय नियंत्रण (व्यवसाय की वित्तीय सुरक्षा)",
-    name_english: "📊 Financial Controls (Financial Security of Business)",
-    icon: "📊",
-    items: [
+            financial: {
+                name_hindi: "📊 वित्तीय नियंत्रण (व्यवसाय की वित्तीय सुरक्षा)",
+                name_english: "📊 Financial Controls (Financial Security of Business)",
+                icon: "📊",
+                items: [
         // ============================================
         // SECTION 1: DAILY FINANCIAL CONTROLS
         // ============================================
@@ -6634,129 +6634,139 @@ financial: {
 </div>
         // Complete category list - 25 doors
         const categoryList = [
-            { id: 'roadmap', icon: '🗺️', name_hindi: 'रोडमैप', name_english: 'Roadmap' },
+            { id: 'roadmap', icon: '🗺️', name_hindi: 'रोडमैप (Idea→IPO)', name_english: 'Roadmap' },
             { id: 'schemes', icon: '🏛️', name_hindi: 'सरकारी योजनाएँ', name_english: 'Govt Schemes' },
-            { id: 'mistakes', icon: '⚠️', name_hindi: 'कॉमन मिस्टेक्स', name_english: 'Common Mistakes' },
+            { id: 'mistakes', icon: '⚠️', name_hindi: 'कॉमन मिस्टेक्स', name_english: 'Mistakes' },
             { id: 'ideas', icon: '💡', name_hindi: 'बिजनेस आइडियाज', name_english: 'Business Ideas' },
-            { id: 'onlineideas', icon: '💻', name_hindi: 'ऑनलाइन बिजनेस', name_english: 'Online Business' },
-            { id: 'skills', icon: '🎯', name_hindi: 'जरूरी स्किल्स', name_english: 'Essential Skills' },
-            { id: 'funding', icon: '💰', name_hindi: 'फंडिंग स्रोत', name_english: 'Funding Sources' },
-            { id: 'marketing', icon: '📢', name_hindi: 'मार्केटिंग गाइड', name_english: 'Marketing Guide' },
+            { id: 'onlineideas', icon: '💻', name_hindi: 'ऑनलाइन आइडियाज', name_english: 'Online Ideas' },
+            { id: 'skills', icon: '🎯', name_hindi: 'जरूरी स्किल्स', name_english: 'Skills' },
+            { id: 'funding', icon: '💰', name_hindi: 'फंडिंग स्रोत', name_english: 'Funding' },
+            { id: 'marketing', icon: '📢', name_hindi: 'मार्केटिंग', name_english: 'Marketing' },
             { id: 'legal', icon: '📋', name_hindi: 'रजिस्ट्रेशन', name_english: 'Registration' },
-            { id: 'online', icon: '💻', name_hindi: 'ऑनलाइन टूल्स', name_english: 'Online Tools' },
-            { id: 'global', icon: '🌍', name_hindi: 'ग्लोबल बिजनेस', name_english: 'Global Business' },
+            { id: 'global', icon: '🌍', name_hindi: 'ग्लोबल बिजनेस', name_english: 'Global' },
             { id: 'success', icon: '🏆', name_hindi: 'सक्सेस स्टोरीज', name_english: 'Success Stories' },
-            { id: 'sales', icon: '📈', name_hindi: 'सेल्स गाइड', name_english: 'Sales Guide' },
+            { id: 'sales', icon: '📈', name_hindi: 'सेल्स गाइड', name_english: 'Sales' },
             { id: 'scaling', icon: '📈', name_hindi: 'स्केलिंग', name_english: 'Scaling' },
-            { id: 'ipo', icon: '📊', name_hindi: 'IPO गाइड', name_english: 'IPO Guide' },
-            { id: 'structure', icon: '🏢', name_hindi: 'बिजनेस स्ट्रक्चर', name_english: 'Business Structure' },
-            { id: 'registration', icon: '📝', name_hindi: 'रजिस्ट्रेशन प्रोसेस', name_english: 'Registration Process' },
-            { id: 'tax', icon: '💰', name_hindi: 'टैक्स गाइड', name_english: 'Tax Guide' },
+            { id: 'ipo', icon: '📊', name_hindi: 'IPO गाइड', name_english: 'IPO' },
+            { id: 'structure', icon: '🏢', name_hindi: 'बिजनेस स्ट्रक्चर', name_english: 'Structure' },
+            { id: 'registration', icon: '📝', name_hindi: 'रजिस्ट्रेशन प्रोसेस', name_english: 'Reg. Process' },
+            { id: 'tax', icon: '💰', name_hindi: 'टैक्स गाइड', name_english: 'Tax' },
             { id: 'licenses', icon: '📜', name_hindi: 'लाइसेंस', name_english: 'Licenses' },
             { id: 'hr', icon: '👥', name_hindi: 'HR & पेरोल', name_english: 'HR & Payroll' },
             { id: 'insurance', icon: '🛡️', name_hindi: 'बीमा', name_english: 'Insurance' },
             { id: 'exit', icon: '🚪', name_hindi: 'एग्जिट स्ट्रैटेजी', name_english: 'Exit Strategy' },
             { id: 'valuation', icon: '💰', name_hindi: 'वैल्यूएशन', name_english: 'Valuation' },
-            { id: 'agreements', icon: '⚖️', name_hindi: 'कानूनी समझौते', name_english: 'Legal Agreements' },
+            { id: 'agreements', icon: '⚖️', name_hindi: 'कानूनी समझौते', name_english: 'Agreements' },
+            { id: 'lowinvestment', icon: '💰', name_hindi: 'लो इन्वेस्टमेंट', name_english: 'Low Investment' },
             { id: 'financial', icon: '📊', name_hindi: 'वित्तीय नियंत्रण', name_english: 'Financial Controls' }
-        ];
-
+    ];
+        // ============================================
+        // RENDERING FUNCTIONS
+        // ============================================
         function renderCategories() {
-            const container = document.getElementById('categoryDoors');
-            if (!container) return;
-            container.innerHTML = categoryList.map(cat => `
-                <button class="category-door ${currentCategory === cat.id ? 'active' : ''}" 
-                        onclick="switchCategory('${cat.id}')">
-                    ${cat.icon} ${currentLang === 'hindi' ? cat.name_hindi : cat.name_english}
-                </button>
-            `).join('');
-        }
-        function switchCategory(categoryId) {
-            currentCategory = categoryId;
-            renderCategories();
-            renderDoors();
-        }
-        function filterItems(items) {
-            if (!searchTerm) return items;
-            const term = searchTerm.toLowerCase();
-            return items.filter(item => 
-                (item.title_hindi?.toLowerCase().includes(term) ||
-                 item.title_english?.toLowerCase().includes(term) ||
-                 item.description_hindi?.toLowerCase().includes(term))
-            );
-        }
-        function getLevelBadge(level) {
-            if (!level) return '';
-            return `<span class="badge badge-level">📍 ${level}</span>`;
-        }
-        function renderDoors() {
-            const data = BUSINESS_DATA[currentCategory];
-            const container = document.getElementById('doorsContainer');
-            if (!data || !data.items) {
-                container.innerHTML = '<div class="empty-state">📭 Please select a category from above.</div>';
-                return;
-            }
-            const searchInput = document.getElementById('searchBox');
-            searchTerm = searchInput ? searchInput.value : '';
-            let filteredItems = filterItems(data.items);
-            const isHindi = currentLang === 'hindi';
-            let html = `
-                <div class="door-card">
-                    <div class="door-header ${currentCategory}" onclick="toggleDoor(this)">
-                        <span class="door-icon">${data.icon}</span>
-                        <div class="door-title">${isHindi ? data.name_hindi : data.name_english}</div>
-                    </div>
-                    <div class="door-content">
-                        <div class="door-content-inner">
-            `;
-            if (filteredItems.length === 0) {
-                html += '<div class="empty-state">❌ No results found. Try a different search.</div>';
-            } else {
-                filteredItems.forEach(item => {
-                    const title = isHindi ? item.title_hindi : item.title_english;
-                    const desc = isHindi ? item.description_hindi : item.description_english;
-                    html += `
-                        <div class="item-card">
-                            <div class="item-title">${title || ''}</div>
-                            <div class="item-description">${desc || ''}</div>
-                            <div class="item-detail">
-                                ${item.investment ? `<span class="badge badge-amount">💰 ${item.investment}</span>` : ''}
-                                ${item.profit ? `<span class="badge badge-benefit">📈 ${item.profit}</span>` : ''}
-                                ${item.amount ? `<span class="badge badge-amount">${item.amount}</span>` : ''}
-                                ${getLevelBadge(item.level)}
-                                ${item.platform ? `<span class="badge badge-online">💻 ${item.platform}</span>` : ''}
-                                ${item.eligibility ? `<span class="badge badge-stage">📋 ${item.eligibility}</span>` : ''}
-                                ${item.frequency ? `<span class="badge badge-stage">🕒 ${item.frequency}</span>` : ''}
-                            </div>
-                            ${item.officialLink ? `<a href="${item.officialLink}" target="_blank" class="official-link">🔗 Official Info →</a>` : ''}
-                        </div>
-                    `;
-                });
-            }
-            html += `
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.innerHTML = html;
-        }
-        function toggleDoor(headerElement) {
-            const card = headerElement.closest('.door-card');
-            if (card) card.classList.toggle('open');
-        }
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCategories();
-            renderDoors();
-            const searchBox = document.getElementById('searchBox');
-            if (searchBox) {
-                searchBox.addEventListener('input', () => {
-                    renderDoors();
-                });
-            }
-        });
-        window.toggleDoor = toggleDoor;
-        window.switchCategory = switchCategory;
+            const container = document.getElementById('categoryDoors');
+            if (!container) return;
+            container.innerHTML = categoryList.map(cat => `
+                <button class="category-door ${currentCategory === cat.id ? 'active' : ''}"
+                    onclick="switchCategory('${cat.id}')">
+                  ${cat.icon} ${currentLang === 'hindi' ? cat.name_hindi : cat.name_english}
+                </button>
+            `).join('');
+        }
+        
+        function switchCategory(categoryId) {
+            currentCategory = categoryId;
+            renderCategories();
+            renderDoors();
+        }
+            
+        function filterItems(items) {
+            if (!searchTerm) return items;
+            const term = searchTerm.toLowerCase();
+            return items.filter(item =>
+                (item.title_hindi?.toLowerCase().includes(term) ||
+                 item.title_english?.toLowerCase().includes(term) ||
+                 item.description_hindi?.toLowerCase().includes(term))
+            );
+        }
+        function getLevelBadge(level) {
+            if (!level) return '';
+            return `<span class="badge badge-level">📍 ${level}</span>`;
+        }
+        function renderDoors() {
+            const data = BUSINESS_DATA[currentCategory];
+            const container = document.getElementById('doorsContainer');
+            if (!data || !data.items) {
+                container.innerHTML = '<div class="empty-state">📭 Please select a category from above.</div>';
+                return;
+        }
+            
+        const searchInput = document.getElementById('searchBox');
+        searchTerm = searchInput ? searchInput.value : '';
+        let filteredItems = filterItems(data.items);
+        const isHindi = currentLang === 'hindi';
+        
+        let html = `
+            <div class="door-card">
+                <div class="door-header ${currentCategory}" onclick="toggleDoor(this)">
+                    <span class="door-icon">${data.icon}</span>
+                    <div class="door-title">${isHindi ? data.name_hindi : data.name_english}</div>
+                </div>
+                <div class="door-content">
+                    <div class="door-content-inner">
+        `;
+        if (filteredItems.length === 0) {
+            html += '<div class="empty-state">❌ No results found. Try a different search.</div>';
+        } else {
+            filteredItems.forEach(item => {
+                const title = isHindi ? item.title_hindi : item.title_english;
+                const desc = isHindi ? item.description_hindi : item.description_english;
+                html += `
+                    <div class="item-card">
+                        <div class="item-title">${title || ''}</div>
+                        <div class="item-description">${desc || ''}</div>
+                        <div class="item-detail">
+                            ${item.investment ? `<span class="badge badge-amount">💰 ${item.investment}</span>` : ''}
+                            ${item.profit ? `<span class="badge badge-benefit">📈 ${item.profit}</span>` : ''}
+                            ${item.amount ? `<span class="badge badge-amount">${item.amount}</span>` : ''}
+                            ${getLevelBadge(item.level)}
+                            ${item.platform ? `<span class="badge badge-online">💻 ${item.platform}</span>` : ''}
+                            ${item.eligibility ? `<span class="badge badge-stage">📋 ${item.eligibility}</span>` : ''}
+                            ${item.frequency ? `<span class="badge badge-stage">🕒 ${item.frequency}</span>` : ''}
+                        </div>
+                        ${item.officialLink ? `<a href="${item.officialLink}" target="_blank" class="official-link">🔗 Official Info →</a>` : ''}
+                    </div>
+                `;
+            });
+        }
+        html += `
+                    </div>
+                </div>
+            </div>
+        `;
+        container.innerHTML = html;
+        }
+        function toggleDoor(headerElement) {
+            const card = headerElement.closest('.door-card');
+            if (card) card.classList.toggle('open');
+        }
+        // ============================================
+        // INITIALIZATION & EVENT LISTENERS
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategories();
+            renderDoors();
+            const searchBox = document.getElementById('searchBox');
+            if (searchBox) {
+                searchBox.addEventListener('input', () => {
+                    renderDoors();
+                });
+            }
+        });
+        
+        // Make functions global for onclick events
+        window.toggleDoor = toggleDoor;
+        window.switchCategory = switchCategory;
     </script>
 </body>
 </html>
