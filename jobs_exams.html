@@ -1,940 +1,410 @@
 <!DOCTYPE html>
-<html lang="hi-IN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Jobs & Exams Portal - Dil-Ke-AnnS | 15 Lakh+ Jobs | 5,000+ Exams</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            min-height: 100vh;
-        }
-        .app-header {
-            background: rgba(255,255,255,0.98);
-            padding: 12px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .back-btn {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo svg { width: 40px; height: 40px; }
-        .logo h1 {
-            font-size: 1rem;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .search-container { flex: 1; max-width: 300px; margin-left: auto; }
-        .search-box {
-            width: 100%;
-            padding: 8px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            font-size: 0.85rem;
-        }
-        .notification-bell { position: relative; cursor: pointer; font-size: 1.5rem; }
-        .notification-count {
-            position: absolute;
-            top: -8px;
-            right: -12px;
-            background: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.6rem;
-            min-width: 18px;
-            text-align: center;
-        }
-        .scam-alert {
-            background: #e74c3c;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .hero {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-        }
-        .hero h2 { font-size: 1.5rem; margin-bottom: 10px; }
-        .hero p { font-size: 0.9rem; opacity: 0.9; max-width: 800px; margin: 0 auto; }
-        .last-updated { font-size: 0.75rem; opacity: 0.7; margin-top: 8px; }
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .stat { text-align: center; }
-        .stat-number { font-size: 1.8rem; font-weight: bold; color: #ffd700; }
-        .stat-label { font-size: 0.7rem; opacity: 0.8; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        .door-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .door-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-        .door-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-        .door-header {
-            padding: 15px;
-            color: white;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .door-header .icon { font-size: 1.8rem; }
-        .door-header .title { flex: 1; font-size: 1rem; }
-        .door-header .count {
-            background: rgba(255,255,255,0.3);
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-        }
-        .door-content {
-            padding: 15px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .door-content::-webkit-scrollbar { width: 5px; }
-        .door-content::-webkit-scrollbar-track { background: #f1f1f1; }
-        .door-content::-webkit-scrollbar-thumb { background: #1e3c72; border-radius: 10px; }
-        .job-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            transition: background 0.2s;
-        }
-        .job-item:hover { background: #f0f4ff; }
-        .job-title { font-weight: bold; color: #1e3c72; font-size: 0.85rem; }
-        .job-details {
-            font-size: 0.7rem;
-            color: #666;
-            margin-top: 5px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .deadline { color: #e74c3c; font-weight: bold; }
-        .salary { color: #27ae60; font-weight: bold; }
-        .apply-btn-group {
-            margin-top: 8px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .apply-link, .apply-form-link {
-            display: inline-block;
-            background: #1e3c72;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            text-decoration: none;
-            font-size: 0.7rem;
-            cursor: pointer;
-        }
-        .apply-form-link { background: #FFC107; color: #0A3D91; font-weight: 600; }
-        .section { margin-bottom: 40px; }
-        .section-title {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 20px;
-            padding-left: 15px;
-            border-left: 4px solid #ffd700;
-        }
-        .partner-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .partner-card {
-            background: white;
-            border-radius: 16px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: transform 0.3s;
-            cursor: pointer;
-            border: 1px solid #e0e0e0;
-        }
-        .partner-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .partner-icon { font-size: 2rem; }
-        .partner-info { flex: 1; }
-        .partner-name { font-weight: bold; color: #1e3c72; font-size: 0.9rem; }
-        .partner-meta { font-size: 0.7rem; color: #666; margin-top: 3px; }
-        .partner-earn { font-size: 0.65rem; color: #27ae60; font-weight: bold; }
-        .state-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .state-card {
-            background: linear-gradient(135deg, #f8f9fa, #fff);
-            border-radius: 16px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid #e0e0e0;
-            text-align: center;
-        }
-        .state-card:hover {
-            transform: translateY(-3px);
-            border-color: #1e3c72;
-            background: linear-gradient(135deg, #e8f0fe, #fff);
-        }
-        .state-icon { font-size: 2rem; }
-        .state-name { font-weight: bold; margin: 8px 0; }
-        .state-jobs { font-size: 0.7rem; color: #666; }
-        .exam-card {
-            background: white;
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid #ffd700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .exam-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .exam-name { font-weight: bold; font-size: 1rem; color: #1e3c72; }
-        .exam-details { font-size: 0.7rem; color: #666; margin-top: 5px; }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        .modal-header {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #1e3c72;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .close-modal { cursor: pointer; font-size: 1.5rem; color: #999; }
-        .alert-buttons {
-            text-align: center;
-            padding: 20px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .whatsapp-btn, .telegram-btn, .post-job-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.9rem;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .whatsapp-btn { background: #25D366; color: white; }
-        .telegram-btn { background: #0088cc; color: white; }
-        .post-job-btn { background: linear-gradient(135deg, #FFC107, #FF9800); color: #0A3D91; }
-        .footer {
-            background: #0f172a;
-            color: #888;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.7rem;
-            margin-top: 30px;
-        }
-        .footer a { color: #ffd700; text-decoration: none; margin: 0 5px; }
-        .footer p { margin: 5px 0; }
-        @media (max-width: 768px) {
-            .door-grid, .partner-grid, .state-grid { grid-template-columns: 1fr; }
-            .hero h2 { font-size: 1.1rem; }
-            .stats { gap: 15px; }
-            .stat-number { font-size: 1.2rem; }
-            .section-title { font-size: 1.2rem; }
-            .logo h1 { font-size: 0.85rem; }
-            .apply-btn-group { flex-direction: column; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dil-Ke-AnnS CareerSathi - Jobs & Exams</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:20px;
+    background:#f5f7fa;
+    font-family:Arial,sans-serif;
+}
+
+.page-title{
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#003366;
+    margin-bottom:20px;
+}
+
+.section{
+    background:#fff;
+    border-radius:12px;
+    margin-bottom:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    overflow:hidden;
+}
+
+.section-header{
+    padding:16px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#003366;
+    color:white;
+}
+
+.section-content{
+    display:none;
+    padding:15px;
+}
+
+.sub-item{
+    padding:10px;
+    border-bottom:1px solid #eee;
+    cursor:pointer;
+}
+
+.sub-item:hover{
+    background:#f0f6ff;
+}
+
+.career-level{
+    margin-left:20px;
+    display:none;
+}
+
+.career-level li{
+    padding:5px;
+}
+
+.search-box{
+    width:100%;
+    padding:12px;
+    margin-bottom:20px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+</style>
 </head>
+
 <body>
-    <div class="app-header">
-        <div class="header-content">
-            <button class="back-btn" onclick="window.location.href='index.html'">← वापस</button>
-            <div class="logo">
-                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100 175C100 175 25 125 25 75C25 50 45 30 70 30C85 30 100 40 100 55C100 40 115 30 130 30C155 30 175 50 175 75C175 125 100 175 100 175Z" stroke="#FFC107" stroke-width="8" fill="none"/>
-                    <g stroke="#0A3D91" stroke-width="10" stroke-linecap="round" fill="none">
-                        <path d="M85 60C85 55 90 50 95 50H105C110 50 115 55 115 60C115 65 110 70 100 70C90 70 85 75 85 80C85 85 90 90 95 90H105"/>
-                        <path d="M70 140L100 70L130 140M80 115H120"/>
-                        <path d="M125 140V70L155 140V70"/>
-                    </g>
-                </svg>
-                <h1>Jobs & Exams Portal<br><small>15 लाख+ Jobs | 5,000+ Exams</small></h1>
-            </div>
-            <div class="search-container">
-                <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search jobs or exams...">
-            </div>
-            <div class="notification-bell" onclick="showNotifications()">
-                🔔
-                <span class="notification-count" id="notificationCount">48</span>
-            </div>
-        </div>
-    </div>
-    <div class="scam-alert">
-        ⚠️ Alert: Dil-Ke-AnnS kabhi job ke liye paisa nahi maangta. Kisi bhi fraud call/SMS se bachein. Sabhi services 100% FREE hain.
-    </div>
-    <div class="hero">
-        <h2>🇮🇳 भारत का सबसे बड़ा जॉब + एग्जाम प्लेटफॉर्म</h2>
-        <p>15 लाख+ Jobs | 5,000+ Exams | 10 Education Streams | Defence | Central | State Wise | Private | Global | Merchant Navy | SPORTS</p>
-        <p class="last-updated">Last Updated: 10 June 2026 | Data Source: Official Govt Portals + Partner APIs</p>
-        <div class="stats">
-            <div class="stat"><div class="stat-number" id="totalJobs">0</div><div class="stat-label">Total Jobs</div></div>
-            <div class="stat"><div class="stat-number" id="totalExams">0</div><div class="stat-label">Total Exams</div></div>
-            <div class="stat"><div class="stat-number">36+</div><div class="stat-label">States/UTs</div></div>
-            <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Auto Updates</div></div>
-        </div>
-    </div>
-    <div class="alert-buttons">
-        <button class="whatsapp-btn" onclick="joinWhatsAppChannel()">📱 Join WhatsApp Channel (FREE) - Dil-Ke-AnnS</button>
-        <button class="telegram-btn" onclick="joinTelegramChannel()">✈️ Join Telegram Channel (FREE) - Dil-Ke-AnnS</button>
-        <a href="mailto:jobs@dilkeanns.com?subject=Post Job FREE on Dil-Ke-AnnS&body=Company Name:%0D%0AJob Title:%0D%0ALocation:%0D%0ASalary:%0D%0AApply Link:" class="post-job-btn">🏢 Post Job FREE - For Companies</a>
-    </div>
-    <div class="container" id="mainContainer"></div>
-    <div id="stateModal" class="modal"><div class="modal-content"><div class="modal-header"><span id="modalStateName">State Name</span><span class="close-modal" onclick="closeStateModal()">&times;</span></div><div id="modalJobsList"></div></div></div>
-    <div id="notificationModal" class="modal"><div class="modal-content"><div class="modal-header"><span>🔔 New Job Alerts (Last 24 Hours)</span><span class="close-modal" onclick="closeNotificationModal()">&times;</span></div><div id="notificationList"></div></div></div>
-    <div id="doorModal" class="modal"><div class="modal-content"><div class="modal-header"><span id="doorModalTitle">Jobs</span><span class="close-modal" onclick="closeDoorModal()">&times;</span></div><div id="doorJobsList"></div></div></div>
-    <div id="examModal" class="modal"><div class="modal-content"><div class="modal-header"><span id="examModalTitle">Exams</span><span class="close-modal" onclick="closeExamModal()">&times;</span></div><div id="examList"></div></div></div>
-    <div class="footer">
-        <p>🔒 All services are 100% FREE for job seekers. We earn through affiliate partnerships with trusted platforms (4.5+ rating).</p>
-        <p>📢 Companies: Post your jobs for FREE | Contact: jobs@dilkeanns.com</p>
-        <p>🎯 Vision: 5-15 Crore Jobs for Indians | Total Jobs: 15,00,000+ | Total Exams: 5,000+ | Made with ❤️ for Bharat</p>
-        <p>📱 Follow us on: WhatsApp: Dil-Ke-AnnS | Telegram: Dil-Ke-AnnS</p>
-        <p>Data sourced from official portals: upsc.gov.in, ssc.nic.in, ibps.in, state govt sites. We aggregate public data only.</p>
-        <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms & Conditions</a> | <a href="#disclaimer">Disclaimer</a> | <a href="mailto:contact@dilkeanns.com">Contact Us</a></p>
-    </div>
-    <script>
-        // ============================================
-        // COMPLETE EXPANDED DATABASE - FROZEN - NO CHANGES
-        // TOTAL JOBS: 15,00,000+ | TOTAL EXAMS: 5,000+
-        // ALL 10 STREAMS FULLY EXPANDED (15+ JOBS EACH)
-        // HARYANA: 60+ JOBS (MAXIMUM)
-        // ALL 36 STATES: 4-5 JOBS EACH
-        // SPORTS: 5 CATEGORIES, 50+ JOBS
-        // ============================================
-        
-        let totalJobsCount = 1500000;
-        let totalExamsCount = 5000;
-        document.getElementById('totalJobs').innerText = totalJobsCount.toLocaleString('en-IN') + '+';
-        document.getElementById('totalExams').innerText = totalExamsCount.toLocaleString('en-IN') + '+';
-        
-        // ============================================
-        // NOTIFICATIONS DATA
-        // ============================================
-        const notificationsList = [
-            "🔔 New: SSC CGL 2024 Notification Out - 2 hours ago",
-            "🔔 Haryana Police Constable - Last Date Extended - 5 hours ago",
-            "🔔 TCS Hiring Freshers - Apply Now - 1 day ago",
-            "🔔 UPSC Civil Services 2025 Application Started - 1 day ago",
-            "🔔 IBPS PO 2024 Admit Card Released - 2 days ago",
-            "🔔 New: 10,000+ Railway Jobs Announced - 2 days ago",
-            "🔔 Haryana HSSC Group C Notification - 3 days ago",
-            "🔔 Sports Authority of India Coach Recruitment - 3 days ago",
-            "🔔 5,000+ Banking Jobs Released by IBPS - 4 days ago",
-            "🔔 Indian Army Agniveer Recruitment 2025 - 5 days ago"
-        ];
-        
-        // ============================================
-        // SPORTS JOBS - FULLY EXPANDED (5 CATEGORIES, 50+ JOBS)
-        // ============================================
-        const sportsJobs = {
-            "Government Sports Jobs": {
-                icon: "🏛️", color: "#1e3c72",
-                jobs: [
-                    "SAI Coach - National Level | 500+ vacancies | Salary: ₹56,100-1,77,500 | Apply: sportsauthorityofindia.nic.in",
-                    "State Sports Coach - State Level | 2,000+ vacancies | Salary: ₹35,400-1,12,400 | Apply: Respective State Portals",
-                    "Physical Education Teacher - KVS/NVS | 5,000+ vacancies | Salary: ₹44,900-1,42,400 | Apply: kvsangathan.nic.in",
-                    "Sports Officer - Universities/PSUs | 1,000+ vacancies | Salary: ₹35,400-1,12,400 | Apply: upsc.gov.in",
-                    "Assistant Director (Sports) - State | 500+ vacancies | Salary: ₹56,100-1,77,500 | Apply: State PSC Portals",
-                    "Sports Scientist - SAI/NIS | 200+ vacancies | Salary: ₹44,900-1,42,400 | Apply: sportsauthorityofindia.nic.in",
-                    "Sports Physiotherapist - SAI/NIS | 300+ vacancies | Salary: ₹35,400-1,12,400 | Apply: sportsauthorityofindia.nic.in",
-                    "Sports Nutritionist - SAI/NIS | 150+ vacancies | Salary: ₹44,900-1,42,400 | Apply: sportsauthorityofindia.nic.in",
-                    "Sports Psychologist - SAI/NIS | 100+ vacancies | Salary: ₹44,900-1,42,400 | Apply: sportsauthorityofindia.nic.in",
-                    "National Referee/Umpire - BCCI/AIFF | 1,000+ vacancies | Salary: ₹50,000-1,00,000/match | Apply: bcci.tv"
-                ]
-            },
-            "Private Sports Jobs": {
-                icon: "💼", color: "#e67e22",
-                jobs: [
-                    "IPL Cricket Coach - IPL Teams | 100+ vacancies | Salary: ₹25 Lakh - 5 Crore/year | Apply: iplt20.com",
-                    "ISL Football Coach - ISL Teams | 50+ vacancies | Salary: ₹20 Lakh - 3 Crore/year | Apply: indiansuperleague.com",
-                    "Fitness Trainer - Professional Clubs | 2,000+ vacancies | Salary: ₹5-15 Lakh/year | Apply: naukri.com",
-                    "Sports Commentator - Star Sports/Sony | 200+ vacancies | Salary: ₹50,000-2,00,000/match | Apply: hotstar.com",
-                    "Sports Journalist - ESPN/Cricbuzz | 500+ vacancies | Salary: ₹4-12 Lakh/year | Apply: espn.com/careers",
-                    "Sports Photographer - BCCI/IPL | 300+ vacancies | Salary: ₹3-10 Lakh/year | Apply: bcci.tv",
-                    "Groundsman/Pitch Curator - Stadiums | 500+ vacancies | Salary: ₹3-8 Lakh/year | Apply: bcci.tv",
-                    "Sports Event Manager - IMG/SportzLive | 200+ vacancies | Salary: ₹5-15 Lakh/year | Apply: img.com",
-                    "Sports Marketing Executive - Various | 1,000+ vacancies | Salary: ₹4-10 Lakh/year | Apply: naukri.com",
-                    "Sports Analytics Specialist - Franchises | 300+ vacancies | Salary: ₹6-18 Lakh/year | Apply: linkedin.com"
-                ]
-            },
-            "Sports Leagues & Teams": {
-                icon: "🏆", color: "#f39c12",
-                jobs: [
-                    "IPL Team - Player Recruitment | 500+ players | Salary: ₹20 Lakh - 15 Crore | Apply: iplt20.com",
-                    "ISL Team - Player Recruitment | 300+ players | Salary: ₹10 Lakh - 2 Crore | Apply: indiansuperleague.com",
-                    "Pro Kabaddi League - Player | 200+ players | Salary: ₹5-50 Lakh | Apply: prokabaddi.com",
-                    "Prime Volleyball League - Player | 150+ players | Salary: ₹3-20 Lakh | Apply: primevolleyballleague.com",
-                    "Ultimate Table Tennis - Player | 100+ players | Salary: ₹2-15 Lakh | Apply: ultimatetabletennis.com",
-                    "Premier Badminton League - Player | 100+ players | Salary: ₹3-25 Lakh | Apply: premierbadmintonleague.com",
-                    "Hockey India League - Player | 200+ players | Salary: ₹5-40 Lakh | Apply: hockeyindialeague.com"
-                ]
-            },
-            "Sports Coaching Certifications": {
-                icon: "📜", color: "#3498db",
-                jobs: [
-                    "NIS Diploma - Netaji Subhas National Institute of Sports | 1 year | Apply: nispatiala.gov.in",
-                    "BPEd - Bachelor of Physical Education | 2 years | Apply: ugc.ac.in",
-                    "MPEd - Master of Physical Education | 2 years | Apply: ugc.ac.in",
-                    "PhD in Physical Education | 3-5 years | Apply: ugc.ac.in",
-                    "Sports Medicine Fellowship - SAI | 2 years | Apply: sportsauthorityofindia.nic.in",
-                    "UEFA Coaching License - International | Varies | Apply: uefa.com",
-                    "AFC Coaching License - Asian Football | Varies | Apply: the-afc.com",
-                    "BCCI Level A/B/C Coaching - Cricket | Varies | Apply: bcci.tv"
-                ]
-            },
-            "Sports Recruitment Boards": {
-                icon: "🏛️", color: "#2ecc71",
-                jobs: [
-                    "Sports Authority of India - Coach, Officer, Medical | Apply: sportsauthorityofindia.nic.in",
-                    "Netaji Subhas National Institute of Sports - Faculty | Apply: nispatiala.gov.in",
-                    "Indian Olympic Association - Administrative | Apply: olympic.ind.in",
-                    "BCCI - Various Positions | Apply: bcci.tv",
-                    "AIFF - Various Positions | Apply: the-aiff.com",
-                    "KVS Sports Department - Physical Education Teacher | Apply: kvsangathan.nic.in",
-                    "Railways Sports Board - Sports Quota | Apply: rcf.indianrailways.gov.in"
-                ]
-            }
-        };
-        
-        // ============================================
-        // HARYANA - MAXIMUM EXPANDED (60+ JOBS WITH FULL FEATURES)
-        // ============================================
-        const haryanaJobsFull = [
-            // GOVERNMENT JOBS - HARYANA (30+)
-            "HSSC Group C & D Recruitment 2024 - 25,000 posts | Last Date: 31 Dec 2024 | Salary: ₹25,000-81,000 | Eligibility: 10th/12th/Graduate | Apply: hssc.gov.in",
-            "Haryana Police Constable Recruitment 2024 - 12,000 posts | Last Date: 15 Dec 2024 | Salary: ₹30,000-45,000 | Eligibility: 10+2 | Apply: haryanapolice.gov.in",
-            "HSSC Gram Sachiv Recruitment 2024 - 2,500 posts | Last Date: 20 Dec 2024 | Salary: ₹35,000-50,000 | Eligibility: Graduate | Apply: hssc.gov.in",
-            "Haryana Patwari Recruitment 2024 - 1,800 posts | Last Date: 10 Dec 2024 | Salary: ₹35,400-1,12,400 | Eligibility: Graduate | Apply: haryanarevenue.gov.in",
-            "HTET Teacher Recruitment 2024 - 15,000 posts | Last Date: 15 Jan 2025 | Salary: ₹44,900-1,42,400 | Eligibility: B.Ed | Apply: bseh.org.in",
-            "HSSC DEO Recruitment 2024 - 3,500 posts | Last Date: 25 Dec 2024 | Salary: ₹25,500-81,100 | Eligibility: Graduate with Computer | Apply: hssc.gov.in",
-            "Haryana Forest Guard Recruitment 2024 - 800 posts | Last Date: 18 Dec 2024 | Salary: ₹21,700-69,100 | Eligibility: 10+2 | Apply: haryanaforest.gov.in",
-            "HSSC Junior Engineer Recruitment 2024 - 1,200 posts | Last Date: 28 Dec 2024 | Salary: ₹35,400-1,12,400 | Eligibility: Diploma/B.Tech | Apply: hssc.gov.in",
-            "HSSC Clerk Recruitment 2024 - 4,000 posts | Last Date: 30 Dec 2024 | Salary: ₹25,500-81,100 | Eligibility: 12th/Graduate | Apply: hssc.gov.in",
-            "Haryana Excise Inspector Recruitment 2024 - 500 posts | Last Date: 22 Dec 2024 | Salary: ₹35,400-1,12,400 | Eligibility: Graduate | Apply: haryanatax.gov.in",
-            "Haryana Sub Inspector (SI) Recruitment - 1,500 posts | Last Date: 05 Jan 2025 | Salary: ₹35,400-1,12,400 | Eligibility: Graduate | Apply: haryanapolice.gov.in",
-            "HSSC Assistant Town Planner - 200 posts | Last Date: 10 Jan 2025 | Salary: ₹35,400-1,12,400 | Eligibility: B.Arch/B.Plan | Apply: hssc.gov.in",
-            "Haryana Agriculture Officer - 300 posts | Last Date: 12 Jan 2025 | Salary: ₹35,400-1,12,400 | Eligibility: B.Sc Agri | Apply: hagri.gov.in",
-            "HSSC Block Development Officer - 150 posts | Last Date: 15 Jan 2025 | Salary: ₹47,600-1,51,100 | Eligibility: Graduate | Apply: hssc.gov.in",
-            "Haryana Canal Patwari - 400 posts | Last Date: 18 Jan 2025 | Salary: ₹35,400-1,12,400 | Eligibility: 10+2 | Apply: haryana-irrigation.gov.in",
-            "HSSC Animal Husbandry Officer - 250 posts | Last Date: 20 Jan 2025 | Salary: ₹35,400-1,12,400 | Eligibility: B.V.Sc | Apply: hssc.gov.in",
-            "Haryana Food Supply Officer - 300 posts | Last Date: 22 Jan 2025 | Salary: ₹35,400-1,12,400 | Eligibility: Graduate | Apply: haryanafood.gov.in",
-            "HSSC Cooperative Bank Manager - 150 posts | Last Date: 25 Jan 2025 | Salary: ₹35,400-1,12,400 | Eligibility: Graduate | Apply: hssc.gov.in",
-            "Haryana Mining Officer - 100 posts | Last Date: 28 Jan 2025 | Salary: ₹35,400-1,12,400 | Eligibility: Graduate | Apply: haryanamining.gov.in",
-            "HSSC Lab Assistant - 500 posts | Last Date: 30 Jan 2025 | Salary: ₹25,500-81,100 | Eligibility: 10+2 with Science | Apply: hssc.gov.in",
-            "Haryana Staff Nurse Recruitment - 800 posts | Last Date: 01 Feb 2025 | Salary: ₹35,400-1,12,400 | Eligibility: B.Sc Nursing | Apply: haryanahealth.gov.in",
-            "HSSC Pharmacist Recruitment - 400 posts | Last Date: 05 Feb 2025 | Salary: ₹25,500-81,100 | Eligibility: D.Pharm/B.Pharm | Apply: hssc.gov.in",
-            "Haryana Veterinary Officer - 200 posts | Last Date: 10 Feb 2025 | Salary: ₹35,400-1,12,400 | Eligibility: B.V.Sc | Apply: haryanavet.gov.in",
-            "HSSC Scientific Assistant - 150 posts | Last Date: 15 Feb 2025 | Salary: ₹35,400-1,12,400 | Eligibility: M.Sc | Apply: hssc.gov.in",
-            "Haryana Fire Officer - 300 posts | Last Date: 20 Feb 2025 | Salary: ₹35,400-1,12,400 | Eligibility: Graduate | Apply: haryanafire.gov.in",
-            "HSSC Draftsman Recruitment - 250 posts | Last Date: 25 Feb 2025 | Salary: ₹25,500-81,100 | Eligibility: Diploma | Apply: hssc.gov.in",
-            "Haryana Jail Warden - 400 posts | Last Date: 28 Feb 2025 | Salary: ₹25,500-81,100 | Eligibility: 10+2 | Apply: haryanajail.gov.in",
-            "HSSC Inspector (Legal) - 100 posts | Last Date: 05 Mar 2025 | Salary: ₹35,400-1,12,400 | Eligibility: LLB | Apply: hssc.gov.in",
-            "Haryana Transport Inspector - 150 posts | Last Date: 10 Mar 2025 | Salary: ₹35,400-1,12,400 | Eligibility: Graduate | Apply: haryanatransport.gov.in",
-            "HSSC Audit Officer - 200 posts | Last Date: 15 Mar 2025 | Salary: ₹47,600-1,51,100 | Eligibility: Graduate | Apply: hssc.gov.in",
-            // PRIVATE JOBS - HARYANA (30+)
-            "Maruti Suzuki - Production Engineer - 500 vacancies | Location: Gurugram, Manesar | Salary: ₹4-8 LPA | Experience: Fresher | Apply: maruti.com/careers",
-            "Amazon - Operations Associate - 1,000 vacancies | Location: Gurugram | Salary: ₹3-5 LPA | Experience: Fresher | Apply: amazon.jobs",
-            "BYJU'S - Business Development Associate - 500 vacancies | Location: Gurugram | Salary: ₹5-8 LPA | Experience: 0-2 years | Apply: byjus.com/careers",
-            "Google - Software Engineer - 100 vacancies | Location: Gurugram | Salary: ₹30-50 LPA | Experience: 2+ years | Apply: careers.google.com",
-            "Microsoft - Technical Support Engineer - 150 vacancies | Location: Gurugram | Salary: ₹8-12 LPA | Experience: 1-3 years | Apply: careers.microsoft.com",
-            "Flipkart - Operations Executive - 400 vacancies | Location: Gurugram | Salary: ₹3-5 LPA | Experience: Fresher | Apply: flipkartcareers.com",
-            "HCL Technologies - Graduate Engineer Trainee - 600 vacancies | Location: Gurugram, Noida | Salary: ₹3.5-4.5 LPA | Experience: Fresher | Apply: hcltech.com/careers",
-            "Paytm - Customer Support Executive - 300 vacancies | Location: Gurugram | Salary: ₹2.5-4 LPA | Experience: Fresher | Apply: paytm.com/careers",
-            "Zomato - Delivery Partner - 2,000 vacancies | Location: Gurugram, Faridabad | Salary: ₹20,000-30,000 | Experience: Fresher | Apply: zomato.com/careers",
-            "Swiggy - Delivery Executive - 2,000 vacancies | Location: Gurugram, Faridabad | Salary: ₹20,000-30,000 | Experience: Fresher | Apply: swiggy.com/careers",
-            "Tata Motors - Junior Engineer - 200 vacancies | Location: Faridabad | Salary: ₹3-5 LPA | Experience: Fresher | Apply: tatamotors.com/careers",
-            "Hero MotoCorp - Production Trainee - 300 vacancies | Location: Gurugram | Salary: ₹2.5-4 LPA | Experience: ITI/Diploma | Apply: heromotocorp.com/careers",
-            "JCB - Service Engineer - 150 vacancies | Location: Ballabgarh | Salary: ₹3-5 LPA | Experience: 1-3 years | Apply: jcb.com/careers",
-            "Whirlpool - Management Trainee - 100 vacancies | Location: Faridabad | Salary: ₹4-6 LPA | Experience: MBA | Apply: whirlpool.com/careers",
-            "Havells - Sales Executive - 200 vacancies | Location: Gurugram | Salary: ₹3-5 LPA | Experience: 0-2 years | Apply: havells.com/careers",
-            "Bata India - Store Manager - 150 vacancies | Location: Multiple Haryana Cities | Salary: ₹3-4.5 LPA | Experience: 1-3 years | Apply: bata.com/careers",
-            "DLF - Property Manager - 100 vacancies | Location: Gurugram | Salary: ₹5-8 LPA | Experience: 2-5 years | Apply: dlf.com/careers",
-            "Oyo Rooms - Business Development - 200 vacancies | Location: Gurugram | Salary: ₹4-6 LPA | Experience: 0-2 years | Apply: oyorooms.com/careers",
-            "Urban Company - Service Professional - 500 vacancies | Location: Gurugram | Salary: ₹20,000-40,000 | Experience: Fresher | Apply: urbancompany.com/careers",
-            "PolicyBazaar - Sales Executive - 300 vacancies | Location: Gurugram | Salary: ₹3-5 LPA | Experience: Fresher | Apply: policybazaar.com/careers"
-        ];
-        
-        // ============================================
-        // 10 EDUCATION STREAMS - FULLY EXPANDED (15+ JOBS EACH)
-        // ============================================
-        const educationStreams = {
-            "Science (PCM/PCB)": { icon: "🔬", color: "#3498db", totalJobs: "25,000+", jobs: [
-                "Lab Assistant - 1,000+ | ₹15,000-35,000 | naukri.com",
-                "Research Assistant - 2,000+ | ₹20,000-50,000 | icmr.gov.in",
-                "Science Teacher (PGT) - 5,000+ | ₹40,000-80,000 | kvsangathan.nic.in",
-                "Science Teacher (TGT) - 8,000+ | ₹35,000-60,000 | navodaya.gov.in",
-                "Data Scientist - 2,000+ | ₹8-30 LPA | linkedin.com",
-                "Biotech Analyst - 1,000+ | ₹3-12 LPA | biocon.com",
-                "Clinical Research Associate - 2,000+ | ₹4-18 LPA | syngene.com",
-                "Pharmacist - 5,000+ | ₹20,000-50,000 | dsssb.delhi.gov.in",
-                "Quality Control Officer - 2,000+ | ₹3-10 LPA | drreddys.com",
-                "Environmental Scientist - 1,000+ | ₹4-12 LPA | moef.gov.in",
-                "Forensic Scientist - 500+ | ₹4-15 LPA | cfsl.gov.in",
-                "Microbiologist - 1,500+ | ₹3-10 LPA | naukri.com",
-                "Chemist (Analytical) - 2,000+ | ₹3-8 LPA | naukri.com",
-                "Food Technologist - 1,000+ | ₹3-10 LPA | fssai.gov.in",
-                "Geneticist - 300+ | ₹5-15 LPA | naukri.com"
-            ] },
-            "Commerce": { icon: "📊", color: "#e67e22", totalJobs: "1,50,000+", jobs: [
-                "Junior Accountant - 15,000+ | ₹15,000-35,000 | naukri.com",
-                "Accounts Executive - 8,000+ | ₹2.5-6 LPA | linkedin.com",
-                "Tax Assistant - 3,000+ | ₹2.5-5 LPA | incometaxindia.gov.in",
-                "Banking PO - 25,000+ | ₹8-18 LPA | ibps.in",
-                "Financial Analyst - 5,000+ | ₹5-20 LPA | naukri.com",
-                "CA (Chartered Accountant) - 10,000+ | ₹8-40 LPA | icai.org",
-                "CMA (Cost Accountant) - 5,000+ | ₹6-25 LPA | icmai.in",
-                "Company Secretary (CS) - 3,000+ | ₹6-30 LPA | icsi.edu",
-                "Investment Banker - 1,000+ | ₹20-60 LPA | naukri.com",
-                "Auditor - 8,000+ | ₹3-15 LPA | icai.org",
-                "GST Practitioner - 3,000+ | ₹3-12 LPA | gst.gov.in",
-                "TDS Consultant - 2,000+ | ₹3-10 LPA | incometaxindia.gov.in",
-                "Risk Analyst - 1,500+ | ₹5-20 LPA | naukri.com",
-                "Credit Analyst - 2,000+ | ₹4-15 LPA | naukri.com",
-                "Treasury Manager - 500+ | ₹10-35 LPA | naukri.com"
-            ] },
-            "Arts/Humanities": { icon: "🎨", color: "#9b59b6", totalJobs: "1,00,000+", jobs: [
-                "Teacher (PGT/TGT) - 15,000+ | ₹35,000-70,000 | navodaya.gov.in",
-                "Content Writer - 8,000+ | ₹2-10 LPA | naukri.com",
-                "Customer Support Executive - 20,000+ | ₹2-6 LPA | amazon.jobs",
-                "Govt Clerk (SSC) - 30,000+ | ₹25,000-50,000 | ssc.nic.in",
-                "HR Executive - 5,000+ | ₹3-12 LPA | naukri.com",
-                "Social Worker - 3,000+ | ₹2-8 LPA | ngos.net",
-                "Journalist - 2,000+ | ₹3-15 LPA | timesjobs.com",
-                "Public Relations Officer - 1,500+ | ₹4-12 LPA | naukri.com",
-                "Civil Services (IAS/IPS) - 1,000+ | ₹56,100-2,50,000 | upsc.gov.in",
-                "Corporate Communications - 1,000+ | ₹6-20 LPA | linkedin.com",
-                "Event Manager - 2,000+ | ₹3-12 LPA | naukri.com",
-                "NGO Coordinator - 1,500+ | ₹3-10 LPA | ngos.net",
-                "Psychologist - 1,000+ | ₹3-12 LPA | naukri.com",
-                "Librarian - 3,000+ | ₹25,000-50,000 | kvsangathan.nic.in",
-                "Translator - 1,500+ | ₹3-10 LPA | naukri.com"
-            ] },
-            "Engineering": { icon: "⚙️", color: "#2ecc71", totalJobs: "5,00,000+", jobs: [
-                "Graduate Engineer Trainee - 50,000+ | ₹3.5-8 LPA | tcs.com",
-                "Junior Engineer - 60,000+ | ₹35,000-70,000 | ssc.nic.in",
-                "Software Engineer - 1,00,000+ | ₹5-35 LPA | linkedin.com",
-                "Project Engineer - 10,000+ | ₹8-20 LPA | naukri.com",
-                "Site Engineer - 20,000+ | ₹3-12 LPA | naukri.com",
-                "Data Engineer - 8,000+ | ₹10-35 LPA | linkedin.com",
-                "Cloud Architect - 3,000+ | ₹20-50 LPA | linkedin.com",
-                "Technical Lead - 15,000+ | ₹15-40 LPA | naukri.com",
-                "Engineering Manager - 5,000+ | ₹30-70 LPA | linkedin.com",
-                "R&D Engineer - 4,000+ | ₹5-25 LPA | naukri.com",
-                "DevOps Engineer - 8,000+ | ₹8-35 LPA | linkedin.com",
-                "Cybersecurity Analyst - 5,000+ | ₹6-30 LPA | naukri.com",
-                "AI/ML Engineer - 3,000+ | ₹10-50 LPA | linkedin.com",
-                "Network Engineer - 8,000+ | ₹3-15 LPA | naukri.com",
-                "Hardware Engineer - 4,000+ | ₹3-12 LPA | naukri.com"
-            ] },
-            "Medical": { icon: "🩺", color: "#e74c3c", totalJobs: "3,00,000+", jobs: [
-                "Intern Doctor - 30,000+ | ₹50,000-80,000 | aiims.edu",
-                "Junior Resident - 20,000+ | ₹60,000-1,20,000 | aiims.edu",
-                "Staff Nurse - 60,000+ | ₹25,000-55,000 | aiims.edu",
-                "Medical Officer - 15,000+ | ₹60,000-1,50,000 | upsc.gov.in",
-                "Specialist Doctor (MD/MS) - 10,000+ | ₹1.5-5 LPA | aiims.edu",
-                "Surgeon - 5,000+ | ₹3-15 LPA | aiims.edu",
-                "Dentist - 8,000+ | ₹30,000-1.5 LPA | dciindia.gov.in",
-                "Physiotherapist - 6,000+ | ₹25,000-80,000 | naukri.com",
-                "Hospital Administrator - 2,000+ | ₹5-20 LPA | linkedin.com",
-                "Public Health Officer - 4,000+ | ₹50,000-1.5 LPA | nhm.gov.in",
-                "Radiologist - 2,000+ | ₹1.5-6 LPA | naukri.com",
-                "Pathologist - 2,000+ | ₹1.5-5 LPA | naukri.com",
-                "Pharmacist - 15,000+ | ₹20,000-45,000 | dsssb.delhi.gov.in",
-                "Lab Technician - 12,000+ | ₹15,000-30,000 | naukri.com",
-                "Medical Coder - 8,000+ | ₹2.5-7 LPA | naukri.com"
-            ] },
-            "Law": { icon: "⚖️", color: "#1abc9c", totalJobs: "75,000+", jobs: [
-                "Junior Advocate - 25,000+ | ₹15,000-45,000 | barcouncilofindia.org",
-                "Legal Assistant - 5,000+ | ₹2-7 LPA | naukri.com",
-                "Paralegal - 4,000+ | ₹2.5-8 LPA | naukri.com",
-                "Corporate Lawyer - 4,000+ | ₹8-35 LPA | linkedin.com",
-                "Legal Advisor - 3,000+ | ₹10-40 LPA | naukri.com",
-                "Public Prosecutor - 2,000+ | ₹50,000-1.5 LPA | upsc.gov.in",
-                "Judge (Judicial Services) - 2,000+ | ₹77,000-2.5 LPA | districtcourts.gov.in",
-                "Legal Consultant - 1,500+ | ₹8-30 LPA | naukri.com",
-                "Compliance Officer - 4,000+ | ₹5-20 LPA | naukri.com",
-                "Law Professor - 2,500+ | ₹50,000-1.5 LPA | ugc.ac.in"
-            ] },
-            "Agriculture": { icon: "🌾", color: "#27ae60", totalJobs: "40,000+", jobs: [
-                "Field Officer - 5,000+ | ₹25,000-45,000 | nabard.org",
-                "Research Assistant - 3,000+ | ₹20,000-40,000 | icar.org.in",
-                "Farm Manager - 3,000+ | ₹3-8 LPA | naukri.com",
-                "Agri-Business Executive - 2,000+ | ₹3-12 LPA | naukri.com",
-                "Food Processing Officer - 2,000+ | ₹4-12 LPA | naukri.com",
-                "Export Coordinator - 1,000+ | ₹3-10 LPA | naukri.com",
-                "Soil Scientist - 800+ | ₹4-12 LPA | icar.org.in",
-                "Horticulturist - 2,000+ | ₹3-10 LPA | naukri.com",
-                "Agricultural Officer - 3,000+ | ₹35,000-60,000 | upsc.gov.in",
-                "NABARD Officer - 1,500+ | ₹8-15 LPA | nabard.org"
-            ] },
-            "Computer Applications": { icon: "💻", color: "#3498db", totalJobs: "3,00,000+", jobs: [
-                "Software Developer - 80,000+ | ₹4-25 LPA | linkedin.com",
-                "Web Designer - 15,000+ | ₹3-12 LPA | naukri.com",
-                "App Developer - 15,000+ | ₹4-15 LPA | naukri.com",
-                "Full Stack Developer - 25,000+ | ₹8-30 LPA | linkedin.com",
-                "Data Scientist - 5,000+ | ₹10-40 LPA | linkedin.com",
-                "Cloud Engineer - 4,000+ | ₹12-35 LPA | linkedin.com",
-                "DevOps Engineer - 5,000+ | ₹8-30 LPA | linkedin.com",
-                "Cybersecurity Analyst - 4,000+ | ₹6-25 LPA | naukri.com",
-                "IT Consultant - 3,000+ | ₹10-40 LPA | linkedin.com",
-                "AI/ML Engineer - 3,000+ | ₹15-50 LPA | linkedin.com",
-                "Database Administrator - 6,000+ | ₹4-18 LPA | naukri.com",
-                "System Administrator - 8,000+ | ₹3-12 LPA | naukri.com"
-            ] },
-            "Management": { icon: "📈", color: "#f39c12", totalJobs: "1,50,000+", jobs: [
-                "Management Trainee - 25,000+ | ₹6-15 LPA | naukri.com",
-                "Executive Assistant - 5,000+ | ₹3-10 LPA | naukri.com",
-                "Sales Associate - 30,000+ | ₹3-12 LPA | naukri.com",
-                "Business Analyst - 8,000+ | ₹6-20 LPA | linkedin.com",
-                "Operations Manager - 6,000+ | ₹12-30 LPA | naukri.com",
-                "Marketing Manager - 5,000+ | ₹10-35 LPA | linkedin.com",
-                "Product Manager - 3,000+ | ₹15-45 LPA | linkedin.com",
-                "HR Manager - 4,000+ | ₹8-25 LPA | naukri.com",
-                "Finance Manager - 3,000+ | ₹12-35 LPA | linkedin.com",
-                "Strategy Consultant - 2,000+ | ₹15-50 LPA | linkedin.com"
-            ] },
-            "Vocational/Diploma": { icon: "🛠️", color: "#e67e22", totalJobs: "1,50,000+", jobs: [
-                "Electrician - 25,000+ | ₹15,000-30,000 | naukri.com",
-                "Plumber - 15,000+ | ₹15,000-30,000 | naukri.com",
-                "ITI Technician - 40,000+ | ₹12,000-25,000 | naukri.com",
-                "Welder - 15,000+ | ₹15,000-28,000 | naukri.com",
-                "Driver (Heavy/Light) - 20,000+ | ₹15,000-35,000 | naukri.com",
-                "Security Supervisor - 12,000+ | ₹15,000-30,000 | naukri.com",
-                "AC Technician - 8,000+ | ₹15,000-32,000 | naukri.com",
-                "Beautician - 10,000+ | ₹10,000-25,000 | naukri.com",
-                "Mobile Repair Technician - 8,000+ | ₹15,000-35,000 | naukri.com",
-                "Entrepreneur (Self-employed) - 15,000+ | ₹20,000-80,000 | startupindia.gov.in"
-            ] }
-        };
-        
-        // ============================================
-        // DEFENCE JOBS
-        // ============================================
-        const defenceJobs = [
-            "Indian Army - Agniveer (General Duty) - 40,000 posts | Last Date: 31 Dec 2024 | Salary: ₹30,000-40,000 | Apply: joinindianarmy.nic.in",
-            "Indian Army - Agniveer (Technical) - 15,000 posts | Last Date: 31 Dec 2024 | Salary: ₹30,000-40,000 | Apply: joinindianarmy.nic.in",
-            "Indian Navy - SSR/AA - 2,500 posts | Last Date: 20 Dec 2024 | Salary: ₹30,000-40,000 | Apply: joinindiannavy.gov.in",
-            "Indian Air Force - Agniveer Vayu - 3,500 posts | Last Date: 25 Dec 2024 | Salary: ₹30,000-40,000 | Apply: agnipathvayu.cdac.in",
-            "NDA 2024 - 154th Course - 400 posts | Last Date: 31 Dec 2024 | Apply: upsc.gov.in",
-            "CDS 2024 (I) Exam - 400 posts | Last Date: 01 Jan 2025 | Salary: ₹56,100-1,77,500 | Apply: upsc.gov.in",
-            "AFCAT 2024 - 300 posts | Last Date: 15 Jan 2025 | Salary: ₹56,100-1,77,500 | Apply: afcat.cdac.in",
-            "Indian Coast Guard - Navik (GD/DB) - 1,000 posts | Last Date: 10 Jan 2025 | Apply: joinindiancoastguard.gov.in",
-            "Indian Coast Guard - Yantrik - 300 posts | Last Date: 10 Jan 2025 | Apply: joinindiancoastguard.gov.in",
-            "Army Nursing Assistant - 2,000 posts | Last Date: 28 Dec 2024 | Apply: joinindianarmy.nic.in"
-        ];
-        
-        // ============================================
-        // CENTRAL GOVT JOBS
-        // ============================================
-        const centralJobs = [
-            "SSC CGL 2024 - 15,000+ posts | Last Date: 15 Dec 2024 | Salary: ₹35,000-1,12,000 | Apply: ssc.nic.in",
-            "SSC CHSL 2024 - 5,000+ posts | Last Date: 20 Dec 2024 | Salary: ₹25,000-45,000 | Apply: ssc.nic.in",
-            "SSC MTS 2024 - 10,000+ posts | Last Date: 30 Dec 2024 | Salary: ₹18,000-22,000 | Apply: ssc.nic.in",
-            "SSC CPO 2024 - 4,000+ posts | Last Date: 25 Dec 2024 | Salary: ₹35,000-45,000 | Apply: ssc.nic.in",
-            "IBPS PO 2024 - 4,000+ posts | Last Date: 10 Dec 2024 | Salary: ₹52,000-55,000 | Apply: ibps.in",
-            "IBPS Clerk 2024 - 6,000+ posts | Last Date: 18 Dec 2024 | Salary: ₹28,000-30,000 | Apply: ibps.in",
-            "IBPS SO 2024 - 1,500+ posts | Last Date: 22 Dec 2024 | Salary: ₹55,000-60,000 | Apply: ibps.in",
-            "IBPS RRB PO 2024 - 8,000+ posts | Last Date: 28 Dec 2024 | Salary: ₹50,000-55,000 | Apply: ibps.in",
-            "RBI Grade B 2024 - 300+ posts | Last Date: 30 Dec 2024 | Salary: ₹77,000-1,20,000 | Apply: rbi.org.in",
-            "RBI Assistant 2024 - 1,000+ posts | Last Date: 15 Jan 2025 | Salary: ₹36,000-45,000 | Apply: rbi.org.in",
-            "UPSC Civil Services 2025 - 1,000+ posts | Last Date: 15 Feb 2025 | Salary: ₹56,100-2,50,000 | Apply: upsc.gov.in",
-            "UPSC NDA 2025 - 400+ posts | Last Date: 31 Dec 2024 | Apply: upsc.gov.in",
-            "UPSC CDS 2025 - 400+ posts | Last Date: 01 Jan 2025 | Apply: upsc.gov.in",
-            "Railways RRB NTPC 2024 - 25,000+ posts | Last Date: 25 Dec 2024 | Salary: ₹25,000-55,000 | Apply: rrbcdg.gov.in",
-            "Railways RRB ALP 2024 - 10,000+ posts | Last Date: 28 Dec 2024 | Salary: ₹30,000-45,000 | Apply: rrbald.gov.in",
-            "Railways RRB JE 2024 - 8,000+ posts | Last Date: 30 Dec 2024 | Salary: ₹35,000-50,000 | Apply: rrbsecunderabad.gov.in",
-            "India Post GDS 2024 - 30,000+ posts | Last Date: 20 Dec 2024 | Salary: ₹10,000-15,000 | Apply: indiapost.gov.in",
-            "India Post MTS 2024 - 5,000+ posts | Last Date: 30 Dec 2024 | Salary: ₹18,000-22,000 | Apply: indiapost.gov.in",
-            "India Post PA/SA 2024 - 3,000+ posts | Last Date: 25 Dec 2024 | Salary: ₹25,500-81,100 | Apply: indiapost.gov.in"
-        ];
-        
-        // ============================================
-        // ALL 36 STATES - EACH WITH 4-5 JOBS
-        // ============================================
-        const allStatesData = [
-            { name: "Haryana", icon: "🚜", jobCount: "60+", jobs: haryanaJobsFull, color: "#e67e22", portal: "hssc.gov.in" },
-            { name: "Uttar Pradesh", icon: "🕌", jobCount: "1,00,000+", jobs: [
-                "UP Police Constable Recruitment - 52,478 posts | Last Date: 20 Dec 2024 | Salary: ₹30,000-45,000 | Apply: uppbpb.gov.in",
-                "UPSSSC PET 2024 - 50,000+ posts | Last Date: 15 Dec 2024 | Apply: upsssc.gov.in",
-                "UPPSC RO/ARO - 500 posts | Last Date: 10 Jan 2025 | Salary: ₹47,600-1,51,100 | Apply: uppsc.up.nic.in",
-                "UP TET 2024 - 1,50,000 posts | Last Date: 30 Dec 2024 | Salary: ₹35,000-45,000 | Apply: updeled.gov.in",
-                "UP Police SI Recruitment - 5,000 posts | Last Date: 05 Jan 2025 | Apply: uppbpb.gov.in"
-            ], color: "#9b59b6", portal: "uppsc.up.nic.in" },
-            { name: "Delhi", icon: "🏛️", jobCount: "30,000+", jobs: [
-                "DSSSB Various Posts - 15,000+ posts | Last Date: 25 Dec 2024 | Salary: ₹25,000-1,12,000 | Apply: dsssb.delhi.gov.in",
-                "Delhi Police Constable - 12,000+ posts | Last Date: 20 Dec 2024 | Salary: ₹30,000-45,000 | Apply: delhipolice.gov.in",
-                "Delhi District Court Recruitment - 2,000+ posts | Last Date: 15 Jan 2025 | Apply: delhidistrictcourts.nic.in",
-                "MCD Teacher Recruitment - 5,000+ posts | Last Date: 10 Jan 2025 | Apply: mcd.nic.in"
-            ], color: "#3498db", portal: "dsssb.delhi.gov.in" },
-            { name: "Bihar", icon: "📚", jobCount: "20,000+", jobs: [
-                "BPSC 69th Combined Exam - 500 posts | Last Date: 18 Dec 2024 | Salary: ₹47,600-1,51,100 | Apply: bpsc.bih.nic.in",
-                "Bihar Police SI - 2,000 posts | Last Date: 22 Dec 2024 | Salary: ₹35,400-1,12,400 | Apply: csbc.bih.nic.in",
-                "Bihar Teacher Recruitment - 1,00,000+ posts | Last Date: 31 Dec 2024 | Apply: biharboardonline.bihar.gov.in",
-                "Bihar Police Constable - 8,000 posts | Last Date: 15 Jan 2025 | Apply: csbc.bih.nic.in"
-            ], color: "#e74c3c", portal: "bpsc.bih.nic.in" },
-            { name: "Rajasthan", icon: "🏜️", jobCount: "25,000+", jobs: [
-                "Rajasthan Police Constable - 5,000+ posts | Last Date: 28 Dec 2024 | Apply: police.rajasthan.gov.in",
-                "RSMSSB Various Posts - 10,000+ posts | Last Date: 15 Jan 2025 | Apply: rsmssb.rajasthan.gov.in",
-                "RPSC School Lecturer - 3,000+ posts | Last Date: 20 Jan 2025 | Apply: rpsc.rajasthan.gov.in",
-                "REET 2024 - 50,000+ posts | Last Date: 31 Dec 2024 | Apply: rajeduboard.rajasthan.gov.in"
-            ], color: "#f39c12", portal: "rsmssb.rajasthan.gov.in" },
-            { name: "Madhya Pradesh", icon: "🌳", jobCount: "20,000+", jobs: [
-                "MP Police Constable - 7,000+ posts | Last Date: 25 Dec 2024 | Apply: mppolice.gov.in",
-                "MPPSC State Service Exam - 500+ posts | Last Date: 10 Jan 2025 | Apply: mppsc.mp.gov.in",
-                "MP Teacher Recruitment - 50,000+ posts | Last Date: 31 Dec 2024 | Apply: peb.mp.gov.in",
-                "MP Jail Prahari - 2,000+ posts | Last Date: 15 Jan 2025 | Apply: mppolice.gov.in"
-            ], color: "#2ecc71", portal: "mppsc.mp.gov.in" },
-            { name: "Maharashtra", icon: "🌊", jobCount: "30,000+", jobs: [
-                "Maharashtra Police Bharti - 15,000+ posts | Last Date: 30 Dec 2024 | Apply: mahapolice.gov.in",
-                "MPSC Rajyaseva Exam - 500+ posts | Last Date: 15 Jan 2025 | Apply: mpsc.gov.in",
-                "MAHA TET - 50,000+ posts | Last Date: 31 Dec 2024 | Apply: mahatet.in",
-                "Maharashtra ZP Bharti - 10,000+ posts | Last Date: 20 Jan 2025 | Apply: maharashtra.gov.in"
-            ], color: "#e67e22", portal: "mpsc.gov.in" },
-            { name: "Punjab", icon: "🌾", jobCount: "15,000+", jobs: [
-                "Punjab Police Recruitment - 4,000+ posts | Last Date: 20 Dec 2024 | Apply: punjabpolice.gov.in",
-                "PPSC Various Posts - 2,000+ posts | Last Date: 10 Jan 2025 | Apply: ppsc.gov.in",
-                "Punjab Teacher Recruitment - 10,000+ posts | Last Date: 31 Dec 2024 | Apply: pseb.ac.in",
-                "Punjab Patwari Recruitment - 1,000+ posts | Last Date: 15 Jan 2025 | Apply: revenue.punjab.gov.in"
-            ], color: "#1abc9c", portal: "ppsc.gov.in" },
-            { name: "Gujarat", icon: "🦁", jobCount: "20,000+", jobs: [
-                "Gujarat Police Constable - 8,000+ posts | Last Date: 22 Dec 2024 | Apply: police.gujarat.gov.in",
-                "GPSC Various Posts - 3,000+ posts | Last Date: 15 Jan 2025 | Apply: gpsc.gujarat.gov.in",
-                "Gujarat Teacher Recruitment - 15,000+ posts | Last Date: 31 Dec 2024 | Apply: gseb.org",
-                "Gujarat TET - 10,000+ posts | Last Date: 10 Jan 2025 | Apply: gseb.org"
-            ], color: "#e74c3c", portal: "gpsc.gujarat.gov.in" },
-            { name: "Tamil Nadu", icon: "🏛️", jobCount: "25,000+", jobs: [
-                "TNPSC Group 4 - 6,000+ posts | Last Date: 28 Dec 2024 | Apply: tnpsc.gov.in",
-                "Tamil Nadu Police Recruitment - 10,000+ posts | Last Date: 20 Dec 2024 | Apply: tnpolice.gov.in",
-                "TNTET - 20,000+ posts | Last Date: 31 Dec 2024 | Apply: trb.tn.nic.in",
-                "TNUSRB SI Recruitment - 2,000+ posts | Last Date: 15 Jan 2025 | Apply: tnusrb.tn.gov.in"
-            ], color: "#3498db", portal: "tnpsc.gov.in" },
-            { name: "West Bengal", icon: "🐅", jobCount: "15,000+", jobs: [
-                "WBCS 2024 - 500+ posts | Last Date: 25 Dec 2024 | Apply: wbpsc.gov.in",
-                "West Bengal Police Recruitment - 8,000+ posts | Last Date: 20 Dec 2024 | Apply: wbpolice.gov.in",
-                "WBTET - 20,000+ posts | Last Date: 31 Dec 2024 | Apply: wbbpe.org",
-                "WB School Service Commission - 10,000+ posts | Last Date: 10 Jan 2025 | Apply: wbssc.gov.in"
-            ], color: "#e74c3c", portal: "wbpsc.gov.in" },
-            { name: "Karnataka", icon: "🐘", jobCount: "20,000+", jobs: [
-                "KPSC Various Posts - 3,000+ posts | Last Date: 30 Dec 2024 | Apply: kpsc.kar.nic.in",
-                "Karnataka Police Recruitment - 8,000+ posts | Last Date: 20 Dec 2024 | Apply: ksp.gov.in",
-                "KARTET - 15,000+ posts | Last Date: 31 Dec 2024 | Apply: kartet.cag.gov.in",
-                "Karnataka PDO Recruitment - 2,000+ posts | Last Date: 15 Jan 2025 | Apply: kpsc.kar.nic.in"
-            ], color: "#f39c12", portal: "kpsc.kar.nic.in" },
-            { name: "Telangana", icon: "🕌", jobCount: "15,000+", jobs: [
-                "TSPSC Group 1 - 500+ posts | Last Date: 15 Jan 2025 | Apply: tspsc.gov.in",
-                "Telangana Police Recruitment - 5,000+ posts | Last Date: 20 Dec 2024 | Apply: tspolice.gov.in",
-                "TS TET - 10,000+ posts | Last Date: 31 Dec 2024 | Apply: tstet.cgg.gov.in",
-                "TSPSC Group 2 - 1,000+ posts | Last Date: 10 Jan 2025 | Apply: tspsc.gov.in"
-            ], color: "#9b59b6", portal: "tspsc.gov.in" }
-        ];
-        
-        // ============================================
-        // PARTNER SITES (4.5+ RATING)
-        // ============================================
-        const partnerSites = [
-            { name: "Naukri.com", rating: "4.5", category: "Job Portal", earn: "₹40-200/resume", icon: "👔", link: "https://www.naukri.com" },
-            { name: "Internshala", rating: "4.6", category: "Internships", earn: "₹60-120/signup", icon: "💼", link: "https://internshala.com" },
-            { name: "LinkedIn", rating: "4.7", category: "Professional", earn: "₹100-500/signup", icon: "🔗", link: "https://linkedin.com" },
-            { name: "Indeed", rating: "4.5", category: "Job Portal", earn: "₹50-150/apply", icon: "🔍", link: "https://indeed.com" },
-            { name: "Monster India", rating: "4.4", category: "Job Portal", earn: "₹40-100/resume", icon: "👹", link: "https://monsterindia.com" },
-            { name: "Testbook", rating: "4.5", category: "Exam Prep", earn: "₹100-250/test", icon: "📚", link: "https://testbook.com" },
-            { name: "Unacademy", rating: "4.6", category: "Exam Prep", earn: "₹300-500/sub", icon: "🎓", link: "https://unacademy.com" },
-            { name: "UpGrad", rating: "4.5", category: "Upskilling", earn: "₹1,000-5,000/course", icon: "📖", link: "https://upgrad.com" },
-            { name: "Physics Wallah", rating: "4.7", category: "Exam Prep", earn: "₹200-500/batch", icon: "📐", link: "https://pw.live" },
-            { name: "BYJU'S", rating: "4.4", category: "Exam Prep", earn: "₹500-2,000/course", icon: "🎯", link: "https://byjus.com" }
-        ];
-        
-        // ============================================
-        // EXAM DATABASE (5,000+ EXAMS)
-        // ============================================
-        const examCategories = {
-            "School Level Exams (10th/12th)": { icon: "📚", color: "#3498db", count: "50+", exams: ["CBSE Board Exam - Class 10th, 12th | Annual | cbse.gov.in","ICSE Board Exam - Class 10th, 12th | Annual | cisce.org","UP Board Exam - Class 10th, 12th | Annual | upmsp.edu.in","Bihar Board Exam - Class 10th, 12th | Annual | biharboardonline.bihar.gov.in","Haryana Board Exam - Class 10th, 12th | Annual | bseh.org.in"] },
-            "Undergraduate Entrance Exams": { icon: "🎓", color: "#e67e22", count: "100+", exams: ["JEE Main - Engineering | Twice a year | jeemain.nta.nic.in","JEE Advanced - IITs | Once a year | jeeadv.ac.in","NEET UG - Medical | Once a year | neet.nta.nic.in","CUET UG - Central Universities | Once a year | cuet.samarth.ac.in","CLAT - Law (NLUs) | Once a year | consortiumofnlus.ac.in"] },
-            "Postgraduate Entrance Exams": { icon: "📖", color: "#2ecc71", count: "100+", exams: ["GATE - M.Tech/PhD | Once a year | gate.iitm.ac.in","CAT - MBA (IIMs) | Once a year | iimcat.ac.in","NEET PG - MD/MS | Once a year | nbe.edu.in","UGC NET - Assistant Professor | Twice a year | ugcnet.nta.nic.in","CSIR NET - JRF | Twice a year | csirnet.nta.nic.in"] },
-            "Government Job Recruitment Exams": { icon: "🏛️", color: "#e74c3c", count: "500+", exams: ["SSC CGL - Group B & C | Annual | ssc.nic.in","UPSC Civil Services - IAS, IPS | Annual | upsc.gov.in","IBPS PO - Probationary Officer | Annual | ibps.in","RBI Grade B - Officer | Annual | rbi.org.in","Railways NTPC - Non Technical | Annual | rrbcdg.gov.in"] },
-            "Teaching Eligibility Exams": { icon: "👨‍🏫", color: "#f39c12", count: "50+", exams: ["CTET - Central TET | Twice a year | ctet.nic.in","HTET - Haryana TET | Once a year | bseh.org.in","UPTET - UP TET | Once a year | updeled.gov.in","REET - Rajasthan TET | Once a year | rajeduboard.rajasthan.gov.in","MPTET - MP TET | Once a year | peb.mp.gov.in"] },
-            "Banking & Insurance Exams": { icon: "🏦", color: "#1abc9c", count: "100+", exams: ["SBI PO - Probationary Officer | Annual | sbi.co.in","IBPS PO - PO in Banks | Annual | ibps.in","RBI Grade B - Officer | Annual | rbi.org.in","LIC AAO - Assistant Officer | Annual | licindia.in","NABARD Grade A - Assistant | Annual | nabard.org"] },
-            "Defence Exams": { icon: "🎖️", color: "#e74c3c", count: "100+", exams: ["NDA - Army, Navy, Air Force | Twice a year | upsc.gov.in","CDS - IMA, INA, AFA, OTA | Twice a year | upsc.gov.in","AFCAT - Flying, Technical | Twice a year | afcat.cdac.in","Indian Army Agniveer | Twice a year | joinindianarmy.nic.in","Indian Navy SSR/AA | Twice a year | joinindiannavy.gov.in"] },
-            "Merchant Navy Exams": { icon: "🚢", color: "#3498db", count: "50+", exams: ["IMU CET - B.Tech Marine, DNS | Twice a year | imu.edu.in","MEO Class IV - 4th Engineer | Institute based | dgshipping.gov.in","DNS Entrance - Diploma | Once a year | imu.edu.in","GP Rating Exam - Rating | Twice a year | imu.edu.in","ETO COC - Electrical Officer | Institute based | dgshipping.gov.in"] },
-            "International Exams": { icon: "🌍", color: "#9b59b6", count: "50+", exams: ["IELTS - Study/Work Abroad | Multiple times | ielts.org","TOEFL - Study Abroad (USA) | Multiple times | ets.org/toefl","GRE - Graduate Studies | Multiple times | ets.org/gre","GMAT - MBA Abroad | Multiple times | mba.com","SAT - Undergraduate (USA) | Multiple times | collegeboard.org"] }
-        };
-        
-        // ============================================
-        // RENDER FUNCTIONS
-        // ============================================
-        
-        function renderDoors() {
-            const container = document.getElementById('mainContainer');
-            
-            // Education Streams Door
-            let educationHtml = '<div class="section"><h2 class="section-title">🎓 10 Education Streams - 15 Lakh+ Jobs</h2><div class="door-grid">';
-            for (const [stream, data] of Object.entries(educationStreams)) {
-                educationHtml += `<div class="door-card" onclick="showJobs('${stream}', 'education')"><div class="door-header" style="background: linear-gradient(135deg, ${data.color}, ${data.color}dd);"><span class="icon">${data.icon}</span><span class="title">${stream}</span><span class="count">${data.totalJobs}</span></div><div class="door-content">${data.jobs.slice(0, 4).map(job => `<div class="job-item"><div class="job-title">${job.substring(0, 55)}...</div></div>`).join('')}</div></div>`;
-            }
-            educationHtml += '</div></div>';
-            
-            // Sports Jobs Door
-            let sportsHtml = '<div class="section"><h2 class="section-title">🏆 Sports Jobs - 50,000+ Opportunities</h2><div class="door-grid">';
-            for (const [category, data] of Object.entries(sportsJobs)) {
-                sportsHtml += `<div class="door-card" onclick="showJobs('${category}', 'sports')"><div class="door-header" style="background: linear-gradient(135deg, ${data.color}, ${data.color}dd);"><span class="icon">${data.icon}</span><span class="title">${category}</span><span class="count">${data.jobs.length}+</span></div><div class="door-content">${data.jobs.slice(0, 4).map(job => `<div class="job-item"><div class="job-title">${job.substring(0, 55)}...</div></div>`).join('')}</div></div>`;
-            }
-            sportsHtml += '</div></div>';
-            
-            // Defence Jobs Door
-            let defenceHtml = `<div class="section"><h2 class="section-title">🎖️ Defence Jobs</h2><div class="door-grid"><div class="door-card" onclick="showJobs('defence','defence')"><div class="door-header" style="background:linear-gradient(135deg,#e74c3c,#c0392b);"><span class="icon">🎖️</span><span class="title">Indian Armed Forces</span><span class="count">${defenceJobs.length}+</span></div><div class="door-content">${defenceJobs.slice(0,4).map(job => `<div class="job-item"><div class="job-title">${job.substring(0,55)}...</div></div>`).join('')}</div></div></div></div>`;
-            
-            // Central Govt Jobs Door
-            let centralHtml = `<div class="section"><h2 class="section-title">🏛️ Central Govt Jobs</h2><div class="door-grid"><div class="door-card" onclick="showJobs('central','central')"><div class="door-header" style="background:linear-gradient(135deg,#3498db,#2980b9);"><span class="icon">🏛️</span><span class="title">SSC | UPSC | IBPS | Railways</span><span class="count">${centralJobs.length}+</span></div><div class="door-content">${centralJobs.slice(0,4).map(job => `<div class="job-item"><div class="job-title">${job.substring(0,55)}...</div></div>`).join('')}</div></div></div></div>`;
-            
-            // State Wise Jobs Grid
-            let stateHtml = `<div class="section"><h2 class="section-title">🗺️ State Wise Jobs (All 36 States/UTs)</h2><div class="state-grid">`;
-            for (const state of allStatesData) {
-                stateHtml += `<div class="state-card" onclick="showStateJobs('${state.name}')" style="border-top:3px solid ${state.color}"><div class="state-icon">${state.icon}</div><div class="state-name">${state.name}</div><div class="state-jobs">${state.jobCount} Jobs</div></div>`;
-            }
-            stateHtml += `</div></div>`;
-            
-            // Exams Section
-            let examHtml = '<div class="section"><h2 class="section-title">📚 Exams - 5,000+ Exams for Every Stream</h2><div class="door-grid">';
-            for (const [category, data] of Object.entries(examCategories)) {
-                examHtml += `<div class="door-card" onclick="showExams('${category}')"><div class="door-header" style="background: linear-gradient(135deg, ${data.color}, ${data.color}dd);"><span class="icon">${data.icon}</span><span class="title">${category}</span><span class="count">${data.count}</span></div><div class="door-content">${data.exams.slice(0, 3).map(exam => `<div class="job-item"><div class="job-title">${exam.substring(0, 55)}...</div></div>`).join('')}</div></div>`;
-            }
-            examHtml += '</div></div>';
-            
-            // Partner Sites
-            let partnerHtml = `<div class="section"><h2 class="section-title">🤝 Trusted Partners (4.5+ Rating) - 100% FREE</h2><div class="partner-grid">${partnerSites.map(site => `<div class="partner-card" onclick="trackAffiliateClick('${site.name}','${site.link}')"><div class="partner-icon">${site.icon}</div><div class="partner-info"><div class="partner-name">${site.name}</div><div class="partner-meta">⭐ ${site.rating} (${site.category})</div><div class="partner-earn">App earns: ${site.earn} | You pay: ₹0</div></div></div>`).join('')}</div></div>`;
-            
-            container.innerHTML = educationHtml + sportsHtml + defenceHtml + centralHtml + stateHtml + examHtml + partnerHtml;
-        }
-        
-        function showJobs(type, category) {
-            let jobs = [], title = "";
-            if (category === 'education') { jobs = educationStreams[type].jobs; title = `${type} - ${educationStreams[type].totalJobs} Jobs`; }
-            else if (category === 'sports') { jobs = sportsJobs[type].jobs; title = `${type} - ${sportsJobs[type].jobs.length}+ Jobs`; }
-            else if (category === 'defence') { jobs = defenceJobs; title = "Defence Jobs"; }
-            else if (category === 'central') { jobs = centralJobs; title = "Central Govt Jobs"; }
-            document.getElementById('doorModalTitle').innerText = title;
-            document.getElementById('doorJobsList').innerHTML = jobs.map(job => `<div class="job-item"><div class="job-title">${job}</div><a href="#" class="apply-link" onclick="trackAffiliateClick('${job.substring(0,30)}','')">Apply Now →</a></div>`).join('');
-            document.getElementById('doorModal').style.display = 'flex';
-        }
-        
-        function showExams(category) {
-            let exams = examCategories[category].exams;
-            document.getElementById('examModalTitle').innerText = category;
-            document.getElementById('examList').innerHTML = exams.map(exam => `<div class="exam-card"><div class="exam-name">${exam}</div><a href="#" class="apply-link" onclick="trackAffiliateClick('${exam.substring(0,30)}','')">View Details →</a></div>`).join('');
-            document.getElementById('examModal').style.display = 'flex';
-        }
-        
-        function showStateJobs(state) {
-            const stateData = allStatesData.find(s => s.name === state);
-            if (!stateData) return;
-            document.getElementById('modalStateName').innerText = `${state} Jobs`;
-            document.getElementById('modalJobsList').innerHTML = stateData.jobs.map(job => `<div class="job-item"><div class="job-title">${job}</div><a href="#" class="apply-link" onclick="trackAffiliateClick('${job.substring(0,30)}','')">Apply Now →</a></div>`).join('');
-            document.getElementById('stateModal').style.display = 'flex';
-        }
-        
-        function trackAffiliateClick(platform, link) {
-            let clicks = JSON.parse(localStorage.getItem('affiliateClicks') || '[]');
-            clicks.push({ platform: platform, timestamp: new Date().toISOString() });
-            localStorage.setItem('affiliateClicks', JSON.stringify(clicks));
-            alert(`Thank you! This helps us keep the app 100% FREE for you.`);
-        }
-        
-        function joinWhatsAppChannel() { window.open('https://whatsapp.com/channel/0029VaDilKeAnnS', '_blank'); }
-        function joinTelegramChannel() { window.open('https://t.me/DilKeAnnS', '_blank'); }
-        
-        function showNotifications() {
-            document.getElementById('notificationList').innerHTML = notificationsList.map(n => `<div class="job-item"><div class="job-title">${n}</div></div>`).join('');
-            document.getElementById('notificationModal').style.display = 'flex';
-        }
-        
-        function closeStateModal() { document.getElementById('stateModal').style.display = 'none'; }
-        function closeNotificationModal() { document.getElementById('notificationModal').style.display = 'none'; }
-        function closeDoorModal() { document.getElementById('doorModal').style.display = 'none'; }
-        function closeExamModal() { document.getElementById('examModal').style.display = 'none'; }
-        
-        document.getElementById('searchBox').addEventListener('input', function(e) {
-            if(e.target.value.length > 2) console.log("Searching:", e.target.value);
-        });
-        
-        renderDoors();
-    </script>
+
+<h1 class="page-title">
+🚀 Dil-Ke-AnnS CareerSathi
+</h1>
+
+<input
+type="text"
+class="search-box"
+placeholder="Search Jobs, Exams, Streams..."
+id="searchInput">
+
+<!-- SECTION 1 -->
+
+<div class="section">
+
+<div class="section-header"
+onclick="toggleSection(this)">
+📚 SECTION 1 : EDUCATION STREAMS
+</div>
+
+<div class="section-content">
+
+<div class="sub-item"
+onclick="toggleCareer(this)">
+🔬 Science (PCM)
+<ul class="career-level">
+<li>No Qualification</li>
+<li>5th Pass</li>
+<li>8th Pass</li>
+<li>10th Pass</li>
+<li>ITI</li>
+<li>Diploma</li>
+<li>12th Pass</li>
+<li>B.Sc</li>
+<li>M.Sc</li>
+<li>Research Scientist</li>
+<li>Manager</li>
+<li>Director</li>
+<li>CEO</li>
+</ul>
+</div>
+
+<div class="sub-item">🧬 Science (PCB)</div>
+<div class="sub-item">💰 Commerce</div>
+<div class="sub-item">🎨 Arts & Humanities</div>
+<div class="sub-item">⚙ Engineering</div>
+<div class="sub-item">🏥 Medical</div>
+<div class="sub-item">⚖ Law</div>
+<div class="sub-item">🌾 Agriculture</div>
+<div class="sub-item">💻 Computer Applications</div>
+<div class="sub-item">📈 Management</div>
+<div class="sub-item">🛠 Vocational & Diploma</div>
+
+</div>
+</div>
+
+<!-- SECTION 2 -->
+
+<div class="section">
+
+<div class="section-header"
+onclick="toggleSection(this)">
+🪖 SECTION 2 : DEFENCE JOBS
+</div>
+
+<div class="section-content">
+
+<div class="sub-item">Indian Army</div>
+<div class="sub-item">Indian Navy</div>
+<div class="sub-item">Indian Air Force</div>
+<div class="sub-item">Coast Guard</div>
+<div class="sub-item">DRDO</div>
+<div class="sub-item">ISRO</div>
+<div class="sub-item">BSF</div>
+<div class="sub-item">CRPF</div>
+<div class="sub-item">CISF</div>
+<div class="sub-item">ITBP</div>
+
+</div>
+</div>
+
+<!-- SECTION 3 -->
+
+<div class="section">
+
+<div class="section-header"
+onclick="toggleSection(this)">
+🏛 SECTION 3 : CENTRAL GOVT JOBS
+</div>
+
+<div class="section-content">
+
+<div class="sub-item">UPSC</div>
+<div class="sub-item">SSC</div>
+<div class="sub-item">Railway</div>
+<div class="sub-item">Banking</div>
+<div class="sub-item">PSU</div>
+<div class="sub-item">Income Tax</div>
+<div class="sub-item">CBI</div>
+<div class="sub-item">NIA</div>
+<div class="sub-item">EPFO</div>
+<div class="sub-item">ESIC</div>
+
+</div>
+</div>
+
+<!-- SECTION 4 -->
+
+<div class="section">
+
+<div class="section-header"
+onclick="toggleSection(this)">
+🗺 SECTION 4 : STATE WISE JOBS
+</div>
+
+<div class="section-content">
+
+<div class="sub-item">Haryana</div>
+<div class="sub-item">Punjab</div>
+<div class="sub-item">Rajasthan</div>
+<div class="sub-item">Delhi</div>
+<div class="sub-item">Uttar Pradesh</div>
+<div class="sub-item">Maharashtra</div>
+<div class="sub-item">Gujarat</div>
+<div class="sub-item">Tamil Nadu</div>
+<div class="sub-item">Karnataka</div>
+<div class="sub-item">Kerala</div>
+
+</div>
+</div>
+
+<!-- SECTION 5 -->
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+🏢 SECTION 5 : PRIVATE SECTOR JOBS
+</div>
+
+<div class="section-content">
+
+<div class="sub-item">IT</div>
+<div class="sub-item">Software</div>
+<div class="sub-item">AI & Machine Learning</div>
+<div class="sub-item">Data Science</div>
+<div class="sub-item">Manufacturing</div>
+<div class="sub-item">Automobile</div>
+<div class="sub-item">Telecom</div>
+<div class="sub-item">Healthcare</div>
+<div class="sub-item">Retail</div>
+<div class="sub-item">MNC Companies</div>
+
+</div>
+</div>
+
+<!-- SECTION 6 -->
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+🌎 SECTION 6 : GLOBAL JOBS
+</div>
+
+<div class="section-content">
+
+<div class="sub-item">USA</div>
+<div class="sub-item">Canada</div>
+<div class="sub-item">UK</div>
+<div class="sub-item">Germany</div>
+<div class="sub-item">Australia</div>
+<div class="sub-item">UAE</div>
+<div class="sub-item">Singapore</div>
+<div class="sub-item">Japan</div>
+
+</div>
+</div>
+
+<!-- SECTION 7 -->
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+🚢 SECTION 7 : MERCHANT NAVY
+</div>
+
+<div class="section-content">
+<div class="sub-item">Deck Cadet</div>
+<div class="sub-item">Marine Engineer</div>
+<div class="sub-item">Captain</div>
+<div class="sub-item">ETO</div>
+<div class="sub-item">GP Rating</div>
+</div>
+</div>
+
+<!-- SECTION 8 -->
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+🏅 SECTION 8 : SPORTS CAREERS
+</div>
+
+<div class="section-content">
+<div class="sub-item">Athlete</div>
+<div class="sub-item">Coach</div>
+<div class="sub-item">Trainer</div>
+<div class="sub-item">Analyst</div>
+<div class="sub-item">Sports Quota Jobs</div>
+</div>
+</div>
+
+<!-- SECTION 9 -->
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+📝 SECTION 9 : EXAMS DATABASE
+</div>
+
+<div class="section-content">
+
+<div class="sub-item">Class 10 Exams</div>
+<div class="sub-item">Class 12 Exams</div>
+<div class="sub-item">UG Entrance Exams</div>
+<div class="sub-item">PG Entrance Exams</div>
+<div class="sub-item">Defence Exams</div>
+<div class="sub-item">Bank Exams</div>
+<div class="sub-item">Railway Exams</div>
+
+</div>
+</div>
+
+<!-- SECTION 10-16 -->
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+📢 SECTION 10 : ROZGAR PATRIKA
+</div>
+<div class="section-content">
+Employment News
+</div>
+</div>
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+🛒 SECTION 11 : SHOPPING PARTNERS
+</div>
+<div class="section-content">
+Books, Laptops, Courses, Exam Materials
+</div>
+</div>
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+✈ SECTION 12 : TRAVEL PARTNERS
+</div>
+<div class="section-content">
+Flight, Train, Bus, Hotel, Taxi
+</div>
+</div>
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+🤝 SECTION 13 : BUSINESS PARTNERS
+</div>
+<div class="section-content">
+Internships, Recruiters, MSME
+</div>
+</div>
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+🏭 SECTION 14 : INDUSTRIAL PARTNERS
+</div>
+<div class="section-content">
+Automation, Pharma, Design, Robotics
+</div>
+</div>
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+💰 SECTION 15 : CASHBACK & REWARDS
+</div>
+<div class="section-content">
+Referral, Cashback, Rewards
+</div>
+</div>
+
+<div class="section">
+<div class="section-header"
+onclick="toggleSection(this)">
+⭐ SECTION 16 : SPONSORSHIP PROGRAM
+</div>
+<div class="section-content">
+Bronze • Silver • Gold • Platinum
+</div>
+</div>
+
+<script>
+
+function toggleSection(el){
+    const content=el.nextElementSibling;
+
+    if(content.style.display==="block"){
+        content.style.display="none";
+    }else{
+        content.style.display="block";
+    }
+}
+
+function toggleCareer(el){
+
+    const career=
+    el.querySelector(".career-level");
+
+    if(career.style.display==="block"){
+        career.style.display="none";
+    }else{
+        career.style.display="block";
+    }
+}
+
+</script>
+
 </body>
 </html>
