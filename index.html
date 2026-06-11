@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>दिल के अंश - Career Saathi</title>
+    <title>दिल के अंश - Career Saathi (All Files)</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -66,6 +66,8 @@
         }
         .content {
             padding: 30px;
+            max-height: 600px;
+            overflow-y: auto;
         }
         .folder-item, .file-item {
             display: block;
@@ -114,6 +116,54 @@
             color: #555;
             border-top: 1px solid #dee2e6;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+        .page-btn {
+            padding: 8px 15px;
+            background: #ee5a24;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .page-btn:hover {
+            background: #cc4a1a;
+        }
+        .page-btn.active {
+            background: #333;
+        }
+        .page-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .view-toggle {
+            text-align: right;
+            padding: 10px 30px;
+        }
+        .toggle-btn {
+            padding: 5px 15px;
+            margin-left: 10px;
+            background: #ee5a24;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .grid-view {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .grid-view .folder-item, .grid-view .file-item {
+            margin: 0;
+            text-align: center;
+        }
         @media (max-width: 768px) {
             .header h1 { font-size: 1.8rem; }
             .content { padding: 15px; }
@@ -132,14 +182,19 @@
         <input type="text" id="searchInput" placeholder="🔍 Search files or folders...">
     </div>
 
+    <div class="view-toggle">
+        <button class="toggle-btn" onclick="toggleView()">Switch to Grid View</button>
+    </div>
+
     <div class="breadcrumb" id="breadcrumb">
         <a href="#" onclick="loadPath(''); return false;">🏠 Root</a>
     </div>
 
     <div class="content" id="fileList">
-        <div class="loading">⏳ Loading your files from GitHub...</div>
+        <div class="loading">⏳ Loading all your files from GitHub...</div>
     </div>
 
+    <div class="pagination" id="pagination"></div>
     <div class="stats" id="stats">
         Connecting to repository...
     </div>
@@ -150,67 +205,129 @@
     const USERNAME = 'DilKeAnnS';
     const REPO = 'DilKeAnnS';
     const BRANCH = 'main';
-    const API_URL = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/`;
-
+    
     let currentPath = '';
+    let allItems = [];
+    let currentPage = 1;
+    const itemsPerPage = 100; // Show 100 items per page
+    let isGridView = false;
 
     async function loadPath(path = '') {
         currentPath = path;
-        document.getElementById('fileList').innerHTML = '<div class="loading">📂 Loading...</div>';
+        currentPage = 1;
+        document.getElementById('fileList').innerHTML = '<div class="loading">📂 Loading all files (this may take a moment for 1000+ files)...</div>';
         
         try {
-            const url = API_URL + encodeURIComponent(path);
-            const response = await fetch(url);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            
-            const items = await response.json();
-            displayItems(items, path);
+            allItems = await fetchAllItems(path);
+            displayCurrentPage();
             updateBreadcrumb(path);
-            updateStats(items.length);
+            updateStats(allItems.length);
         } catch (error) {
             document.getElementById('fileList').innerHTML = 
                 '<div style="color: red; padding: 20px;">❌ Error loading files. Make sure your repository is public.<br><br>' +
-                '📌 Fix: Go to GitHub → Your Repo → Settings → Change visibility to PUBLIC (if private).</div>';
+                '📌 Fix: Go to GitHub → Your Repo → Settings → Change visibility to PUBLIC.</div>';
             console.error('Error:', error);
         }
     }
 
-    function displayItems(items, path) {
-        if (!items || items.length === 0) {
+    async function fetchAllItems(path, page = 1) {
+        const perPage = 1000; // GitHub max per request
+        const url = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${encodeURIComponent(path)}?per_page=${perPage}&page=${page}`;
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        
+        const items = await response.json();
+        
+        // Check if there are more pages (Link header)
+        const linkHeader = response.headers.get('Link');
+        if (linkHeader && linkHeader.includes('rel="next"')) {
+            const nextItems = await fetchAllItems(path, page + 1);
+            return [...items, ...nextItems];
+        }
+        
+        return items;
+    }
+
+    function displayCurrentPage() {
+        if (!allItems || allItems.length === 0) {
             document.getElementById('fileList').innerHTML = 
                 '<div style="padding: 40px; text-align: center; color: #666;">📭 This folder is empty</div>';
+            document.getElementById('pagination').innerHTML = '';
             return;
         }
 
         // Separate folders and files
-        const folders = items.filter(item => item.type === 'dir');
-        const files = items.filter(item => item.type === 'file');
-
+        const folders = allItems.filter(item => item.type === 'dir');
+        const files = allItems.filter(item => item.type === 'file');
+        const sortedItems = [...folders, ...files];
+        
+        const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageItems = sortedItems.slice(start, end);
+        
         let html = '';
+        const containerClass = isGridView ? 'grid-view' : '';
+        html += `<div class="${containerClass}">`;
         
-        // Show folders first
-        folders.forEach(folder => {
-            html += `
-                <a href="#" class="folder-item" onclick="loadPath('${folder.path}'); return false;">
-                    ${folder.name}
-                </a>
-            `;
+        pageItems.forEach(item => {
+            if (item.type === 'dir') {
+                html += `
+                    <a href="#" class="folder-item" onclick="loadPath('${item.path}'); return false;">
+                        ${item.name}
+                    </a>
+                `;
+            } else {
+                const fileUrl = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${item.path}`;
+                html += `
+                    <a href="${fileUrl}" class="file-item" target="_blank">
+                        ${item.name}
+                    </a>
+                `;
+            }
         });
         
-        // Show files
-        files.forEach(file => {
-            const fileUrl = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${file.path}`;
-            html += `
-                <a href="${fileUrl}" class="file-item" target="_blank">
-                    ${file.name}
-                </a>
-            `;
-        });
-        
+        html += `</div>`;
         document.getElementById('fileList').innerHTML = html;
+        
+        // Update pagination
+        updatePagination(totalPages);
+        
+        // Apply search filter
+        applySearchFilter();
+    }
+
+    function updatePagination(totalPages) {
+        const paginationDiv = document.getElementById('pagination');
+        if (totalPages <= 1) {
+            paginationDiv.innerHTML = '';
+            return;
+        }
+        
+        let paginationHtml = `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>◀ Previous</button>`;
+        
+        // Show page numbers
+        const startPage = Math.max(1, currentPage - 2);
+        const endPage = Math.min(totalPages, currentPage + 2);
+        
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+        }
+        
+        paginationHtml += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next ▶</button>`;
+        paginationHtml += `<span style="margin-left: 15px;">Page ${currentPage} of ${totalPages} (Total: ${allItems.length} items)</span>`;
+        
+        paginationDiv.innerHTML = paginationHtml;
+    }
+
+    function changePage(page) {
+        currentPage = page;
+        displayCurrentPage();
+        document.getElementById('fileList').scrollTop = 0;
     }
 
     function updateBreadcrumb(path) {
@@ -235,21 +352,24 @@
     function updateStats(count) {
         const statsDiv = document.getElementById('stats');
         if (currentPath === '') {
-            statsDiv.innerHTML = `📊 Total ${count} items in root folder | Click on any folder to explore`;
+            statsDiv.innerHTML = `📊 Total ${count} files/folders in root folder | ${Math.ceil(count / itemsPerPage)} pages | Click on any folder to explore`;
         } else {
-            statsDiv.innerHTML = `📁 ${count} items in "${currentPath}" | Click on files to view/download`;
+            statsDiv.innerHTML = `📁 ${count} items in "${currentPath}" (${Math.ceil(count / itemsPerPage)} pages) | Click on files to view/download`;
         }
     }
 
-    // Load root folder on page start
-    loadPath('');
-    
-    // Search filter functionality
-    document.getElementById('searchInput').addEventListener('keyup', function(e) {
-        const searchTerm = e.target.value.toLowerCase();
-        const allItems = document.querySelectorAll('.folder-item, .file-item');
+    function toggleView() {
+        isGridView = !isGridView;
+        const btn = document.querySelector('.toggle-btn');
+        btn.textContent = isGridView ? 'Switch to List View' : 'Switch to Grid View';
+        displayCurrentPage();
+    }
+
+    function applySearchFilter() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const allItemsList = document.querySelectorAll('.folder-item, .file-item');
         
-        allItems.forEach(item => {
+        allItemsList.forEach(item => {
             const text = item.textContent.toLowerCase();
             if (text.includes(searchTerm)) {
                 item.style.display = 'block';
@@ -257,7 +377,12 @@
                 item.style.display = 'none';
             }
         });
-    });
+    }
+
+    document.getElementById('searchInput').addEventListener('keyup', applySearchFilter);
+    
+    // Load root folder on page start
+    loadPath('');
 </script>
 </body>
 </html>
